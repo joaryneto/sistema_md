@@ -15,20 +15,20 @@ session_start();
 
 $pesquisa = $_GET['pesquisa'];
 
-//$returns = array();
+$returns = array();
 $SQL = "SELECT codigo,nome FROM clientes where nome like '%".$pesquisa."%';";
 $RES = mysqli_query($db3,$SQL);
 while($row = mysqli_fetch_array($RES))
 {
-	//$returns[] =  $row['name'];
+	$returns[] =  $row['name'];
 	
 	//if($_GET['ap'] == "1")
 	//{
-		echo '<option value="'.$row['codigo'].'">'.$row['nome'].'</option>';
+		//echo '<option value="'.$row['codigo'].'">'.$row['nome'].'</option>';
 	//}
 }
 
-//echo json_encode($returns);
+echo json_encode($returns);
 
 ?>
 
