@@ -37,6 +37,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
         for($i = 0; $i < 35; $i++){
         $hora = date('H:i:s', strtotime('+30 minute', strtotime($hora)));
         echo "<option value=''>$hora</option>";
+		}
 		?>
 		</select>					  
 <div class="container pt-5">
