@@ -39,7 +39,6 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 				$RES = mysqli_query($db3,$SQL);
 				while($row = mysqli_fetch_array($RES))
 				{
-					echo "teste";
 				?><div class="col-6 col-md-4 col-lg-3 mb-4">
                     <div class="mb-3 h-100px rounded overflow-hidden position-relative">
                         <div class="background">
