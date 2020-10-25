@@ -64,6 +64,7 @@ function revertedata($data){
     <link href="template/vendor/calendar/dist/fullcalendar.css" rel="stylesheet" />
 	
 	<script type="text/javascript" src="template/js/AjaxScript.js.php"></script>
+	<script type="text/javascript" src="template/js/perso.js.php"></script>
 <style>
 .fab{
   position: fixed;
@@ -331,7 +332,7 @@ function revertedata($data){
 									<div class="row">
 									<div class="col-12">
 									<div class="form-group col-md-4 m-t-20">
-									<select name="situacao" class="form-control" style="width: 100%; height:36px;" required="required">
+									<select name="situacao" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required">
 										<option>Selecionar Horario</option>
 										<?
 											$hora = '06:30:00';
@@ -343,15 +344,13 @@ function revertedata($data){
 										</select>
 									</div>
 									<div class="form-group col-md-12 m-t-20"><label>Pesquisar Cliente:</label>
-									    <input name="user" type="text" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','situacao','GET');" />
+									    <input name="user" type="text" autocomplete="off" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','situacao','GET');" />
 									</div>
 									<div class="form-group col-md-12 m-t-20">
-									<select name="situacao" id="situacao" class="form-control" style="width: 100%; height:36px;" required="required">
+									<select name="situacao" id="situacao" autocomplete="off" class="form-control" style="width: 100%; height:36px;" required="required">
 										<option></option>
 										</select>
-									</div>		
-									<div class="form-group col-md-12 m-t-20" id="">											 
-								</div>
+									</div>
 							</div>
 						</div>
                     </div>
