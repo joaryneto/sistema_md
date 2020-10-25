@@ -318,7 +318,9 @@ function revertedata($data){
       <i class="fa fa-calendar"></i>
    </button>
   </div>
-<div id="agenda" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+</div>
+
+	<div id="agenda" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -394,10 +396,7 @@ function revertedata($data){
                                     </div>
 									
                                     <!-- /.modal-dialog -->
-                                </div>
-</div>
-
-		
+                                </div>	
     <!-- wrapper ends -->
 
     <!-- color chooser menu start -->
