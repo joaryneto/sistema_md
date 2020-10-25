@@ -344,10 +344,10 @@ function revertedata($data){
 										</select>
 									</div>
 									<div class="form-group col-md-12 m-t-20"><label>Pesquisar Cliente:</label>
-									    <input name="user" type="text" autocomplete="off" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','situacao','GET');" />
+									    <input name="user" type="text" autocomplete="off" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','situacao','GET');" required="required" />
 									</div>
 									<div class="form-group col-md-12 m-t-20">
-									<select name="situacao" id="situacao" autocomplete="off" class="form-control" style="width: 100%; height:36px;" required="required">
+									<select name="situacao" id="situacao" autocomplete="off" class="form-control" style="width: 100%; height:36px;" required="required" />
 										<option></option>
 										</select>
 									</div>
