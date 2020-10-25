@@ -30,6 +30,15 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
                 </div>
             </div>
         </div>   
+		<select name="situacao" class="form-control" style="width: 100%; height:36px;" required="required">
+        <option>Selecionar Horario</option>
+		<?
+		$hora = '06:30:00';
+        for($i = 0; $i < 35; $i++){
+        $hora = date('H:i:s', strtotime('+30 minute', strtotime($hora)));
+        echo "<option value=''>$hora</option>";
+		?>
+		</select>					  
 <div class="container pt-5">
             <div class="row">
 			
@@ -48,7 +57,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
                         </div>
                     </div>
                     <h6 class="font-weight-normal mb-1" style="font-size: 95%;"><? echo $row['nome'];?></h6>
-					<p><span>Hora: 15:00hs</span></p>
+					<p><span>Hora: <? echo formatohora(row['inicio']);?>hs</span></p>
                     <p><span class="dot-notification mr-1"></span> <span class="text-mute">Marcado no dia: <? echo formatodatahora($row['inicio']);?></span></p>
                 </div>
 			  <?}?>

@@ -10,6 +10,10 @@ function formatodatahora($data){
     return date("d/m/Y", strtotime($data));
 }
 
+function formatohora($hora){
+    return date("H:i:s", strtotime($hora));
+}
+
 date_default_timezone_set('America/Cuiaba');
 $data = date('Y-m-d');
 $hora = date('H:i:s');
