@@ -16,7 +16,7 @@ session_start();
 $pesquisa = $_GET['pesquisa'];
 
 //$returns = array();
-$SQL = "SELECT codigo,nome FROM clientes where nome like '%".$pesquisa."%';";
+$SQL = "SELECT codigo,nome FROM clientes where nome like '%".$pesquisa."%' LIMIT 10;";
 $RES = mysqli_query($db3,$SQL);
 while($row = mysqli_fetch_array($RES))
 {
