@@ -29,8 +29,6 @@ if(!$db = mysqli_connect("mysql669.umbler.com", "sistemasge", "I_Jt{4|p6u"))
 //mysqli_close($db);
 
 }
-else if($_SESSION['tipo'] == "3")
-{
 
 	
 if(!$db3 = mysqli_connect("mysql669.umbler.com", "sistemasl", "I_Jt{4|p6u"))
@@ -44,7 +42,7 @@ if(!$db3 = mysqli_connect("mysql669.umbler.com", "sistemasl", "I_Jt{4|p6u"))
 
 //mysqli_close($db3);
 
-}
+
 
 if(!$db2 = mysqli_connect("mysql669.umbler.com","sistemaec","I_Jt{4|p6u"))
 {

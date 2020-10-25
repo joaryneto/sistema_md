@@ -593,7 +593,7 @@ function auto()
 											   <tbody>
 											   <?
 											   $data = date('Y');
-										       $sql = "select * from produtos ";
+										       $sql = "select * from produtos";
 											   $res = mysqli_query($db3,$sql); 
 											   $x = 0;
 											   while($row = mysqli_fetch_array($res))
