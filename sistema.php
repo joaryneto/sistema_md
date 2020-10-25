@@ -309,33 +309,16 @@ function revertedata($data){
                 </div>
             </div>
         </div>
-        <!-- footer ends -->
-		<div class="fab">
-  <button class="main">
-  <i class="fa fa-calendar"></i>
-  </button>
-    <ul>
-    <li>
-      <label for="opcao1">Opção 1</label>
-      <button id="opcao1">
-      ⎈
-      </button>
-    </li>
-    <li>
-      <label for="opcao2">Opção 2</label>
-      <button id="opcao2">
-      ⎗
-      </button>
-    </li>
-    <li>
-      <label for="opcao3">Opção 3</label>
-      <button id="opcao3">
-      ☏
-      </button>
-    </li>
-  </ul>
+<!-- footer ends -->
+<script>
+
+</script>
+<div class="fab">
+   <button type="button" data-toggle="modal" data-target="#agenda" class="main">
+      <i class="fa fa-calendar"></i>
+   </button>
+  </div>
 </div>
-    </div>
 
 		
     <!-- wrapper ends -->
