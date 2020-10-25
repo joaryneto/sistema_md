@@ -44,76 +44,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 					<p><span>Hora: 14:30hs</span></p>
                     <p><span class="dot-notification mr-1"></span> <span class="text-mute">Marcado no dia: 19/10/2020</span></p>
                 </div>
-				<div class="col-6 col-md-4 col-lg-3 mb-4">
-                    <div class="mb-3 h-100px rounded overflow-hidden position-relative">
-                        <div class="background">
-                            <img src="images/weightless-60632_640%402x.png" alt="">
-                        </div>
-                        <div>
-                            <button class="btn btn-rounded-34 btn-info button-fab-right-bottom">
-                                <i class="material-icons md-16">share</i>
-                            </button>
-                        </div>
-                    </div>
-                    <h6 class="font-weight-normal mb-1">Arts and Science</h6>
-                    <p><span class="dot-notification mr-1"></span> <span class="text-mute">3 Updates</span></p>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3 mb-4">
-                    <div class="mb-3 h-100px rounded overflow-hidden position-relative">
-                        <div class="background">
-                            <img src="images/fruit-2305192_640%402x.png" alt="">
-                        </div>
-                        <div>
-                            <button class="btn btn-rounded-34 btn-info button-fab-right-bottom">
-                                <i class="material-icons md-16">share</i>
-                            </button>
-                        </div>
-                    </div>
-                    <h6 class="font-weight-normal mb-1">Agriculture Farming</h6>
-                    <p><span class="dot-notification mr-1"></span> <span class="text-mute">3 Updates</span></p>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3 mb-4">
-                    <div class="mb-3 h-100px rounded overflow-hidden position-relative">
-                        <div class="background">
-                            <img src="images/ipad-820272_640%402x.png" alt="">
-                        </div>
-                        <div>
-                            <button class="btn btn-rounded-34 btn-info button-fab-right-bottom">
-                                <i class="material-icons md-16">share</i>
-                            </button>
-                        </div>
-                    </div>
-                    <h6 class="font-weight-normal mb-1">Information Technology</h6>
-                    <p><span class="dot-notification mr-1"></span> <span class="text-mute">3 Updates</span></p>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3 mb-4">
-                    <div class="mb-3 h-100px rounded overflow-hidden position-relative">
-                        <div class="background">
-                            <img src="images/weightless-60632_640%402x.png" alt="">
-                        </div>
-                        <div>
-                            <button class="btn btn-rounded-34 btn-info button-fab-right-bottom">
-                                <i class="material-icons md-16">share</i>
-                            </button>
-                        </div>
-                    </div>
-                    <h6 class="font-weight-normal mb-1">Arts and Science</h6>
-                    <p><span class="dot-notification mr-1"></span> <span class="text-mute">3 Updates</span></p>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3 mb-4">
-                    <div class="mb-3 h-100px rounded overflow-hidden position-relative">
-                        <div class="background">
-                            <img src="images/fruit-2305192_640%402x.png" alt="">
-                        </div>
-                        <div>
-                            <button class="btn btn-rounded-34 btn-info button-fab-right-bottom">
-                                <i class="material-icons md-16">share</i>
-                            </button>
-                        </div>
-                    </div>
-                    <h6 class="font-weight-normal mb-1">Agriculture Farming</h6>
-                    <p><span class="dot-notification mr-1"></span> <span class="text-mute">3 Updates</span></p>
-                </div>
+				
             </div>
 
         </div>
