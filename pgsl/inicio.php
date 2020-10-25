@@ -33,9 +33,6 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 				  
 <div class="container pt-5">
             <div class="row">
-             <div class="card">
-              <div class="card-body">	
-		       </div></div>
                 <?
 				
 				$SQL = "SELECT clientes.nome,agendamento.inicio FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente";
