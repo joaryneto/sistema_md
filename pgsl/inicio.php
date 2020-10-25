@@ -30,19 +30,22 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
                 </div>
             </div>
         </div>   
-		<select name="situacao" class="form-control" style="width: 100%; height:36px;" required="required">
+				  
+<div class="container pt-5">
+            <div class="row">
+             <div class="card">
+              <div class="card-body">
+					<select name="situacao" class="form-control" style="width: 100%; height:36px;" required="required">
         <option>Selecionar Horario</option>
 		<?
 		$hora = '06:30:00';
-        for($i = 0; $i < 35; $i++){
+        for($i = 0; $i < 30; $i++){
         $hora = date('H:i:s', strtotime('+30 minute', strtotime($hora)));
         echo "<option value=''>$hora</option>";
 		}
 		?>
-		</select>					  
-<div class="container pt-5">
-            <div class="row">
-			
+		</select>	
+		       </div></div>
                 <?
 				
 				$SQL = "SELECT clientes.nome,agendamento.inicio FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente";
