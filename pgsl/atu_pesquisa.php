@@ -16,7 +16,7 @@ session_start();
 $pesquisa = $_GET['pesquisa'];
 
 //$returns = array();
-$SQL = "SELECT * FROM clientes where nome like '%".$pesquisa."%';";
+$SQL = "SELECT codigo,name FROM clientes where nome like '%".$pesquisa."%';";
 $RES = mysqli_query($db3,$SQL);
 while($row = mysqli_fetch_array($RES))
 {
@@ -24,7 +24,7 @@ while($row = mysqli_fetch_array($RES))
 	
 	//if($_GET['ap'] == "1")
 	//{
-		echo "<option value='".$row['name']."'>".$row['name']."</option>";
+		echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
 	//}
 }
 
