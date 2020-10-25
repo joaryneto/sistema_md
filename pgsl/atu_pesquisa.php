@@ -16,8 +16,8 @@ session_start();
 $pesquisa = $_GET['pesquisa'];
 
 $returns = array();
-echo $SQL = "SELECT * FROM clientes where nome like '%".$pesquisa."%';";
-$RES = mysqli_query();
+$SQL = "SELECT * FROM clientes where nome like '%".$pesquisa."%';";
+$RES = mysqli_query($db3,$SQL);
 while($row = mysqli_fetch_array($RES))
 {
 	$returns[] =  $row['name'];
