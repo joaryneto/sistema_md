@@ -32,7 +32,12 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
         </div>   
 <div class="container pt-5">
             <div class="row">
-                <div class="col-6 col-md-4 col-lg-3 mb-4">
+                <?
+				$SQL = "SELECT cliente.nome,agendamento.inicio FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente";
+				$RES = mysqli_query($db3,$SQL);
+				while($row = mysqli_fetch_array($RES))
+				{
+				?><div class="col-6 col-md-4 col-lg-3 mb-4">
                     <div class="mb-3 h-100px rounded overflow-hidden position-relative">
                         <div class="background">
                             <img src="template/images/escova-inteligente.jpg" alt="">
@@ -40,10 +45,11 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
                         <div>
                         </div>
                     </div>
-                    <h6 class="font-weight-normal mb-1" style="font-size: 95%;">Joary Taques Figueiredo Neto</h6>
-					<p><span>Hora: 14:30hs</span></p>
-                    <p><span class="dot-notification mr-1"></span> <span class="text-mute">Marcado no dia: 19/10/2020</span></p>
+                    <h6 class="font-weight-normal mb-1" style="font-size: 95%;"><?=$row['nome'];?></h6>
+					<p><span>Hora: 15:00hs</span></p>
+                    <p><span class="dot-notification mr-1"></span> <span class="text-mute">Marcado no dia: <?=formatodatahora($row['inicio']);?></span></p>
                 </div>
+			  <?}?>
 				
             </div>
 
