@@ -13,6 +13,8 @@ session_start();
 //}
 //require_once("../load/class/mysql.php");
 
+$pesquisa = $_GET['pesquisa'];
+
 $returns = array();
 echo $SQL = "SELECT * FROM clientes where nome like '%".$pesquisa."%';";
 $RES = mysqli_query();
