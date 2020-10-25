@@ -64,8 +64,6 @@ function revertedata($data){
     <link href="template/vendor/calendar/dist/fullcalendar.css" rel="stylesheet" />
 	
 	<script type="text/javascript" src="template/js/AjaxScript.js.php"></script>
-	
-	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" /> 
 <style>
 .fab{
   position: fixed;
@@ -345,10 +343,9 @@ function revertedata($data){
 										</select>
 									</div>
 									<div class="form-group col-md-12 m-t-20"><label>Pesquisar Cliente:</label>
-                                        <input name="auto" id="auto" type="text" class="form-control" />
 									    <input name="user" type="text" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','situacao','GET');" />
 									</div>
-									<div class="form-group col-md-4 m-t-20">
+									<div class="form-group col-md-6 m-t-20">
 									<select name="situacao" id="situacao" class="form-control" style="width: 100%; height:36px;" required="required">
 										<option></option>
 										</select>
@@ -653,19 +650,6 @@ function onCalendarDayClick(date, allDay, jsEvent, view) {
   });
    
   </script>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>    
-<script type="text/javascript">
-$(function() {
-    
-    //autocomplete
-    $("#auto").autocomplete({
-        source: "pgsl/atu_pesquisa.php",
-        minLength: 1
-    });                
-
-});
-</script>
 </body>
 
 </html>

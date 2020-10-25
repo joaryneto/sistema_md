@@ -28,6 +28,8 @@ while($row = mysqli_fetch_array($RES))
 	//}
 }
 
+mysqli_close($db3);
+
 //echo json_encode($returns);
 
 ?>
