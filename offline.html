@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" class="color-theme-blue">
+
+
+<!-- Mirrored from maxartkiller.com/website/Lemux/lemux-HTML/introduction.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Dec 2019 13:56:31 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="Maxartkiller">
+
+    <title>Lemux Network</title>
+
+    <!-- Material design icons CSS -->
+    <link rel="stylesheet" href="template/vendor/materializeicon/material-icons.css">
+
+    <!-- Roboto fonts CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="template/vendor/bootstrap-4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Swiper CSS -->
+    <link href="template/vendor/swiper/css/swiper.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="template/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Loader -->
+    <div class="row no-gutters vh-100 loader-screen">
+        <div class="bg-template background-overlay"></div>
+        <div class="col align-self-center text-white text-center">
+            <img style="height:70px" src="template/images/logo.png" alt="logo">
+            <h1 class="mb-0 mt-3">EC </h1>
+            <p class="text-mute subtitle"> Tecnologia</p>
+            <div class="loader-ractangls">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <!-- Loader ends -->
+
+    <!-- wrapper starts -->
+    <div class="wrapper bg-template">
+        <!-- header -->
+        <div class="header">
+            <div class="row no-gutters">
+                <div class="col-auto">
+                </div>
+                <div class="col text-center"></div>
+                <div class="col-auto">
+                    <!--<a href="register.html" class="btn btn-link">Register</a>-->
+                </div>
+            </div>
+        </div>
+        <!-- header ends -->
+        
+        <div class="swiper-container introduction vh-100">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide overflow-hidden bg-gradient-cyan text-white">
+                    <div class="row no-gutters h-100">
+                        <div class="col align-self-center text-center">
+                            <img src="template/images/turtle.png" alt="" class="mw-100 mx-auto mb-4">
+                            <br><br>
+                            <h2 class="text-uppercase font-weight-light">Discover life underwater</h2>
+                            <p class="text-mute">Lorem ipsum dolor sit amet, consect etur adipiscing elit. Sndisse conv allis.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide overflow-hidden bg-gradient-purple text-white">
+                    <div class="row no-gutters h-100">
+                        <div class="col align-self-center text-center">
+                            <img src="template/images/weightless.png" alt="" class="mw-100 mx-auto mb-4">
+                            <br><br>
+                            <h2 class="text-uppercase font-weight-light">Get into the sky far away so far</h2>
+                            <p class="text-mute">Lorem ipsum dolor sit amet, consect etur adipiscing elit. Sndisse conv allis.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide overflow-hidden bg-gradient-red text-white">
+                    <div class="row no-gutters h-100">
+                        <div class="col align-self-center text-center">
+                            <img src="template/images/fruits.png" alt="" class="mw-100 mx-auto mb-4">
+                            <br><br>
+                            <h2 class="text-uppercase font-weight-light">Health is wealth! your presence</h2>
+                            <p class="text-mute">Lorem ipsum dolor sit amet, consect etur adipiscing elit. Sndisse conv allis.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination bullets-white text-left"></div>
+        </div>
+        <a href="login.html" class="btn btn-light btn-lg button-fab right-bottom text-uppercase">Login <i class="material-icons vm">arrow_forward</i></a>
+    </div>
+    <!-- wrapper ends -->
+
+
+    <!-- jquery, popper and bootstrap js -->
+    <script src="template/js/jquery-3.3.1.min.js"></script>
+    <script src="template/js/popper.min.js"></script>
+    <script src="template/vendor/bootstrap-4.4.1/js/bootstrap.min.js"></script>
+
+    <!-- cookie js -->
+    <script src="template/vendor/cookie/jquery.cookie.js"></script>
+
+    <!-- swiper js -->
+    <script src="template/vendor/swiper/js/swiper.min.js"></script>
+
+    <!-- template custom js -->
+    <script src="template/js/main.js"></script>
+
+    <!-- page level script -->
+    <script>
+        $(window).on('load', function() {
+            var swiper = new Swiper('.introduction', {
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+            });
+        })
+
+    </script>
+	<script src="scripts/luxon-1.11.4.js"></script>
+    <script src="scripts/app.js"></script>
+    <!-- CODELAB: Add the install script here -->
+    <script src="scripts/install.js"></script>
+    <script>
+         // CODELAB: Register service worker.
+     	if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+           navigator.serviceWorker.register('/service-worker.js')
+            .then((reg) => {
+          console.log('Service worker registered.', reg);
+        });
+       });
+     }
+   </script>
+</body>
+
+
+<!-- Mirrored from maxartkiller.com/website/Lemux/lemux-HTML/introduction.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Dec 2019 13:56:32 GMT -->
+</html>
