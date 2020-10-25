@@ -26,7 +26,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
                 <div class="container align-self-end">
                     <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Agenda";?></h2>
                     <p class="text-mute mb-2"><? echo $_SESSION["DESCRICAOPG2"] = "Lista";?></p>
-                    <input type="text" Onclick="" class="form-control form-control-lg search bottom-25 position-relative border-0" placeholder="Search">
+                    <input type="text" Onclick="" class="form-control form-control-lg search bottom-25 position-relative border-0" placeholder="Pesquisa">
                 </div>
             </div>
         </div>   
