@@ -64,6 +64,8 @@ function revertedata($data){
     <link href="template/vendor/calendar/dist/fullcalendar.css" rel="stylesheet" />
 	
 	<script type="text/javascript" src="template/js/AjaxScript.js.php"></script>
+	
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" /> 
 <style>
 .fab{
   position: fixed;
@@ -320,83 +322,51 @@ function revertedata($data){
   </div>
 </div>
 
-	<div id="agenda" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="myLargeModalLabel"><b>Lista de Produtos : </h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            </div>
-                                            <div class="modal-body">
-											<div class="row">
-											<div class="col-12">
-											<div class="form-group col-md-12 m-t-20">
-											<select name="situacao" class="form-control" style="width: 100%; height:36px;" required="required">
-											<option>Selecionar Horario</option>
-											<?
+<div id="agenda" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myLargeModalLabel"><b>Lista de Produtos : </h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                </div>
+                                    <div class="modal-body">
+									<div class="row">
+									<div class="col-12">
+									<div class="form-group col-md-4 m-t-20">
+									<select name="situacao" class="form-control" style="width: 100%; height:36px;" required="required">
+										<option>Selecionar Horario</option>
+										<?
 											$hora = '06:30:00';
 											for($i = 0; $i < 30; $i++){
 											$hora = date('H:i:s', strtotime('+30 minute', strtotime($hora)));
 											echo "<option value=''>$hora</option>";
 											}
-											?>
-											</select>
-											</div>
-											<div class="form-group col-md-12 m-t-20"><label>Busca:</label>
-                                             <input name="user" type="text" class="form-control" onkeyup="javascript: ajaxLoader('?br=listusuarios&pesquisa='+ this.value +'&ap=2','listusuarios','GET');" />
-											</div>
-											
-											<div class="form-group col-md-12 m-t-20" id="">
-											<table class="display nowrap table table-hover table-striped table-bordered">
-											<thead>
-											  <tr>
-											<th>Codigo</th>
-											<th>Descrição</th>
-											<th>Preço R$</th>
-											<th>Estoque</th>
-											</tr>
-											 </thead>
-											   <tbody>
-											   <?
-											   $data = date('Y');
-										       $sql = "select * from produtos";
-											   $res = mysqli_query($db3,$sql); 
-											   $x = 0;
-											   while($row = mysqli_fetch_array($res))
-											   {
-											   ?>
-											   <tr style="cursor: pointer;" onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'" onclick="itens('<? echo $row['descricao'];?>',<? echo $row['codigo'];?>,'<? echo number_format($row['preco'],2,",",".");?>');">
-											   <td><? echo $row['codigo'];?></td>
-											   <td><? echo $row['descricao'];?></td>
-											   <td><? echo $row['preco'];?></td>
-											   <td><? echo $row['b'];?></td>
-											   </tr>
-											   <? $x = 1;
-											   }
-
- 											    if($x == 0)
- 											    {
-											   	 echo "<tr><td colspan='4'>Nenhum resultado encontrado.</td></tr>";
- 											   
- 											   }
-											   ?>
-											 </tbody>
-											
-                                            </table>											 
-											</div>
-											</div>
-											</div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="mb-2 btn btn-sm btn-danger" data-dismiss="modal">Fechar</button>
-                                            </div>
-                                        </div>
+										?>
+										</select>
+									</div>
+									<div class="form-group col-md-12 m-t-20"><label>Pesquisar Cliente:</label>
+                                        <input name="auto" type="text" class="form-control" />
+									    <input name="user" type="text" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'','listusuarios','GET');" />
+									</div>
+									<div class="form-group col-md-4 m-t-20">
+									<select name="situacao" class="form-control" style="width: 100%; height:36px;" required="required">
+										<option></option>
+										</select>
+									</div>		
+									<div class="form-group col-md-12 m-t-20" id="">											 
+								</div>
+							</div>
+						</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="mb-2 btn btn-sm btn-danger" data-dismiss="modal">Fechar</button>
+                    </div>
+                 </div>
 										
-                                        <!-- /.modal-content -->
-                                    </div>
-									
-                                    <!-- /.modal-dialog -->
-                                </div>	
+                <!-- /.modal-content -->
+            </div>						
+        <!-- /.modal-dialog -->
+    </div>	
     <!-- wrapper ends -->
 
     <!-- color chooser menu start -->
@@ -683,6 +653,19 @@ function onCalendarDayClick(date, allDay, jsEvent, view) {
   });
    
   </script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>    
+<script type="text/javascript">
+$(function() {
+    
+    //autocomplete
+    $(".auto").autocomplete({
+        source: "pgsl/atu_pesquisa.php",
+        minLength: 1
+    });                
+
+});
+</script>
 </body>
 
 </html>
