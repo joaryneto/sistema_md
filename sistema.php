@@ -346,10 +346,10 @@ function revertedata($data){
 									</div>
 									<div class="form-group col-md-12 m-t-20"><label>Pesquisar Cliente:</label>
                                         <input name="auto" type="text" class="form-control" />
-									    <input name="user" type="text" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'','listusuarios','GET');" />
+									    <input name="user" type="text" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','situacao','GET');" />
 									</div>
 									<div class="form-group col-md-4 m-t-20">
-									<select name="situacao" class="form-control" style="width: 100%; height:36px;" required="required">
+									<select name="situacao" id="situacao" class="form-control" style="width: 100%; height:36px;" required="required">
 										<option></option>
 										</select>
 									</div>		
@@ -659,7 +659,7 @@ function onCalendarDayClick(date, allDay, jsEvent, view) {
 $(function() {
     
     //autocomplete
-    $(".auto").autocomplete({
+    $("#auto").autocomplete({
         source: "pgsl/atu_pesquisa.php",
         minLength: 1
     });                
