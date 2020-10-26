@@ -356,7 +356,7 @@ function revertedata($data){
 
       <div class="col-xs-4">
         <h3>With<br>Ajax-Bootstrap-Select</h3>
-        <select id="ajax-select" class="selectpicker with-ajax" data-live-search="true"></select>
+        <select id="ajax-select" id="pesquisa" class="selectpicker with-ajax" data-live-search="true"></select>
       </div>
 
       <div class="col-xs-4">
@@ -367,7 +367,7 @@ function revertedata($data){
     <div class="row">
       <div class="col-xs-4">
         <h3>Cached Options<br>Ajax-Bootstrap-Select</h3>
-        <select class="selectpicker with-ajax" data-live-search="true" multiple>
+        <select class="selectpicker with-ajax" id="pesquisa" data-live-search="true" multiple>
           <option value="neque.venenatis.lacus@neque.com" data-subtext="neque.venenatis.lacus@neque.com" selected>
             Chancellor
           </option>
@@ -459,12 +459,13 @@ function revertedata($data){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ajax-bootstrap-select/1.3.8/js/ajax-bootstrap-select.min.js" type="text/javascript"></script>
 	
 	<script>
+	var pesquisa = document.getElementById('pesquisa').value;
 	var options = {
-  values: "a, b, c",
-  ajax: {
-    url: "ajax.php",
-    type: "POST",
-    dataType: "json",
+    values: "a, b, c",
+    ajax: {
+      url: "pgsl/pesquisa.php?pesquisa="+ pesquisa +"",
+      type: "POST",
+      dataType: "json",
     // Use "{{{q}}}" as a placeholder and Ajax Bootstrap Select will
     // automatically replace it with the value of the search query.
     data: {
