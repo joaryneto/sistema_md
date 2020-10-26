@@ -344,37 +344,12 @@ function revertedata($data){
 									<div class="row">
 									<div class="col-12">
 									  <div class="container">
-    <div class="row">
-      <div class="col-xs-4">
-        <h3>Without<br>Ajax-Bootstrap-Select</h3>
-        <select id="selectpicker" class="selectpicker" data-live-search="true">
+
+        <select id="selectpicker" class="select2 " data-live-search="true">
           <option>Mustard</option>
           <option>Ketchup</option>
           <option>Relish</option>
         </select>
-      </div>
-
-      <div class="col-xs-4">
-        <h3>With<br>Ajax-Bootstrap-Select</h3>
-        <select id="ajax-select" id="pesquisa" class="selectpicker with-ajax" data-live-search="true"></select>
-      </div>
-
-      <div class="col-xs-4">
-        <h3>Multiple<br>Ajax-Bootstrap-Select</h3>
-        <select id="ajax-select-multiple" class="selectpicker with-ajax" multiple data-live-search="true"></select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-4">
-        <h3>Cached Options<br>Ajax-Bootstrap-Select</h3>
-        <select class="selectpicker with-ajax" id="pesquisa" data-live-search="true" multiple>
-          <option value="neque.venenatis.lacus@neque.com" data-subtext="neque.venenatis.lacus@neque.com" selected>
-            Chancellor
-          </option>
-        </select>
-      </div>
-    </div>
-  </div>
 						</div>
                     </div>
                     <div class="modal-footer">
@@ -458,58 +433,113 @@ function revertedata($data){
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ajax-bootstrap-select/1.3.8/js/ajax-bootstrap-select.min.js" type="text/javascript"></script>
 	
-	<script>
-	var pesquisa = document.getElementById('pesquisa').value;
-	var options = {
-    values: "a, b, c",
-    ajax: {
-      url: "pgsl/pesquisa.php?pesquisa="+ pesquisa +"",
-      type: "POST",
-      dataType: "json",
-    // Use "{{{q}}}" as a placeholder and Ajax Bootstrap Select will
-    // automatically replace it with the value of the search query.
-    data: {
-      q: "{{{q}}}"
-    }
-  },
-  locale: {
-    emptyTitle: "Select and Begin Typing"
-  },
-  log: 3,
-  preprocessData: function(data) {
-    var i,
-      l = data.length,
-      array = [];
-    if (l) {
-      for (i = 0; i < l; i++) {
-        array.push(
-          $.extend(true, data[i], {
-            text: data[i].Name,
-            value: data[i].Email,
-            data: {
-              subtext: data[i].Email
-            }
-          })
-        );
-      }
-    }
-    // You must always return a valid array when processing data. The
-    // data argument passed is a clone and cannot be modified directly.
-    return array;
-  }
-};
-
-$(".selectpicker")
-  .selectpicker()
-  .filter(".with-ajax")
-  .ajaxSelectPicker(options);
-$("select").trigger("change");
-
-function chooseSelectpicker(index, selectpicker) {
-  $(selectpicker).val(index);
-  $(selectpicker).selectpicker('refresh');
-}
-	</script>
+    <script>
+    $(function() {
+        // Switchery
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        $('.js-switch').each(function() {
+            new Switchery($(this)[0], $(this).data());
+        });
+        // For select 2
+        $(".select2").select2();
+        $('.selectpicker').selectpicker();
+        //Bootstrap-TouchSpin
+        $(".vertical-spin").TouchSpin({
+            verticalbuttons: true,
+            verticalupclass: 'ti-plus',
+            verticaldownclass: 'ti-minus'
+        });
+        var vspinTrue = $(".vertical-spin").TouchSpin({
+            verticalbuttons: true
+        });
+        if (vspinTrue) {
+            $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
+        }
+        $("input[name='tch1']").TouchSpin({
+            min: 0,
+            max: 100,
+            step: 0.1,
+            decimals: 2,
+            boostat: 5,
+            maxboostedstep: 10,
+            postfix: '%'
+        });
+        $("input[name='tch2']").TouchSpin({
+            min: -1000000000,
+            max: 1000000000,
+            stepinterval: 50,
+            maxboostedstep: 10000000,
+            prefix: '$'
+        });
+        $("input[name='tch3']").TouchSpin();
+        $("input[name='tch3_22']").TouchSpin({
+            initval: 40
+        });
+        $("input[name='tch5']").TouchSpin({
+            prefix: "pre",
+            postfix: "post"
+        });
+        // For multiselect
+        $('#pre-selected-options').multiSelect();
+        $('#optgroup').multiSelect({
+            selectableOptgroup: true
+        });
+        $('#public-methods').multiSelect();
+        $('#select-all').on('click', function() {
+            $('#public-methods').multiSelect('select_all');
+            return false;
+        });
+        $('#deselect-all').on('click', function() {
+            $('#public-methods').multiSelect('deselect_all');
+            return false;
+        });
+        $('#refresh').on('click', function() {
+            $('#public-methods').multiSelect('refresh');
+            return false;
+        });
+        $('#add-option').on('click', function() {
+            $('#public-methods').multiSelect('addOption', {
+                value: 42,
+                text: 'test 42',
+                index: 0
+            });
+            return false;
+        });
+        $(".ajax").select2({
+            ajax: {
+                url: "https://api.github.com/search/repositories",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function(data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function(markup) {
+                return markup;
+            }, // let our custom formatter work
+            minimumInputLength: 1,
+            templateResult: formatRepo, // omitted for brevity, see the source of this page
+            templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+        });
+    });
+    </script>
 	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
     <!-- template custom js -->
