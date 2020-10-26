@@ -353,7 +353,7 @@ function revertedata($data){
 									<div class="col-12">
 									<div class="form-group col-md-4 m-t-20">
 									<div class="container">
-									<select name="situacao" id="situacao" class="select2 form-control"  style="width: 100%; height:36px;" required="required">
+									<select name="situacao" id="situacao" class="form-control"  style="width: 100%; height:36px;" required="required">
 										<option>Selecionar Horario</option>
 										<?
 											$hora = '06:30:00';
@@ -368,7 +368,7 @@ function revertedata($data){
 									    <input name="user" type="text" autocomplete="off" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','situacao','GET');" required="required" />
 									</div>
 									<div class="form-group col-md-12 m-t-20"><label>Cliente: </label>
-									<select name="sio" id="sio" class="js-data-example-ajax form-control custom-select" style="width: 100%; height:36px;" required="required" />
+									<select name="sio" id="sio" class="form-control" style="width: 100%; height:36px;" required="required" />
 										  <option>Selecione o Cliente</option>
 										</select>
 									</div>
