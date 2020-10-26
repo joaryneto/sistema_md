@@ -352,7 +352,7 @@ function revertedata($data){
 									<div class="col-12">
 									<div class="form-group col-md-4 m-t-20">
 									<div class="container">
-									<select name="situacao" class="select2 form-control custom-select" autocomplete="off"  style="width: 100%; height:36px;" required="required">
+									<select name="situacao" id="tags" class="select2 form-control custom-select"  style="width: 100%; height:36px;" required="required">
 										<option>Selecionar Horario</option>
 										<?
 											$hora = '06:30:00';
@@ -467,7 +467,36 @@ function revertedata($data){
     <script src="template/vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js" type="text/javascript"></script>
     <script type="text/javascript" src="template/vendor/multiselect/js/jquery.multi-select.js"></script>
     <script>
-	
+	$(function() {
+  var availableTags = [
+    "ActionScript",
+    "AppleScript",
+    "Asp",
+    "BASIC",
+    "C",
+    "C++",
+    "Clojure",
+    "COBOL",
+    "ColdFusion",
+    "Erlang",
+    "Fortran",
+    "Groovy",
+    "Haskell",
+    "Java",
+    "JavaScript",
+    "Lisp",
+    "Perl",
+    "PHP",
+    "Python",
+    "Ruby",
+    "Scala",
+    "Scheme"
+  ];
+  $("#tags").autocomplete({
+    source: availableTags
+  });
+});
+
     $(function() {
         // Switchery
         var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
