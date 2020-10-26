@@ -50,8 +50,7 @@ function revertedata($data){
 
     <!-- Bootstrap core CSS -->
     <link href="template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" rel="stylesheet" />
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/ajax-bootstrap-select/1.3.8/css/ajax-bootstrap-select.min.css" rel="stylesheet" />
+	<link href="template/vendor/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
 	
     <!-- Page plugins css -->
     <link href="template/vendor/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
@@ -345,7 +344,7 @@ function revertedata($data){
 									<div class="col-12">
 									  <div class="container">
 
-        <select id="selectpicker" class="select2 " data-live-search="true">
+        <select id="selectpicker" class="selectpicker" data-live-search="true">
           <option>Mustard</option>
           <option>Ketchup</option>
           <option>Relish</option>
@@ -430,8 +429,7 @@ function revertedata($data){
     <script src="template/js/popper.min.js"></script>
     <script src="template/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ajax-bootstrap-select/1.3.8/js/ajax-bootstrap-select.min.js" type="text/javascript"></script>
+	<script src="template/vendor/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
 	
     <script>
     $(function() {
