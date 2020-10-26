@@ -368,7 +368,7 @@ function revertedata($data){
 									    <input name="user" type="text" autocomplete="off" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','situacao','GET');" required="required" />
 									</div>
 									<div class="form-group col-md-12 m-t-20"><label>Cliente: </label>
-									<select name="situacao" id="situacao" autocomplete="off" class="select2 form-control custom-select" style="width: 100%; height:36px;" required="required" />
+									<select name="sio" id="sio" class="js-data-example-ajax form-control custom-select" style="width: 100%; height:36px;" required="required" />
 										  <option>Selecione o Cliente</option>
 										</select>
 									</div>
@@ -490,6 +490,13 @@ function revertedata($data){
             maxboostedstep: 10,
             postfix: '%'
         });
+		$('.js-data-example-ajax').select2({
+ 		 ajax: {
+ 		   url: 'https://api.github.com/search/repositories',
+ 		   dataType: 'json'
+		    // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+		  }
+		});
         $("input[name='tch2']").TouchSpin({
             min: -1000000000,
             max: 1000000000,
