@@ -22,7 +22,7 @@ $SQL = "SELECT codigo,nome FROM clientes where nome like '%".$pesquisa."%' LIMIT
 $RES = mysqli_query($db3,$SQL);
 while($row = mysqli_fetch_array($RES))
 {
-	$returns[] =  $row['name'];
+	$returns[] =  $row['nome'];
 	
 }
 
