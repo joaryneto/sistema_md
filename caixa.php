@@ -509,6 +509,8 @@ function revertedata($data){
     <!-- template custom js -->
     <script src="template/js/main.js"></script>
 
+	<script src="template/js/perso.js"></script>
+	
     <!-- Sweet-Alert  -->
     <script src="template/vendor/sweetalert/sweetalert.min.js"></script>
     <script src="template/vendor/sweetalert/jquery.sweet-alert.custom.js"></script>
