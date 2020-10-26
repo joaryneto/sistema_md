@@ -2,7 +2,11 @@
 ob_start();
 session_start();
 
+
+if(!Empty($_GET['pesquisa']))
+{
 ?>
+
 <div class="tableFixHead"> <table class="table table-hover">
                                             <thead>
                                                 <tr>
@@ -33,8 +37,7 @@ mysqli_close($db3);
  </table>
 </div>
 
-
-
+<?}?>
 
 
 
