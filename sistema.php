@@ -355,7 +355,7 @@ function revertedata($data){
 									    <input name="user" type="text" autocomplete="off" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','situacao','GET');" required="required" />
 									</div>
 									<div class="form-group col-md-12 m-t-20"><label>Cliente: </label>
-									<select name="situacao" id="situacao" autocomplete="off" class="select2 form-control custom-select" style="width: 100%; height:36px;" required="required" />
+									<select name="situacao" id="situacao" autocomplete="off" class="ajax form-control custom-select" style="width: 100%; height:36px;" required="required" />
 										  <option>Selecione o Cliente</option>
 										</select>
 									</div>
@@ -454,6 +454,7 @@ function revertedata($data){
     <script src="template/vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js" type="text/javascript"></script>
     <script type="text/javascript" src="template/vendor/multiselect/js/jquery.multi-select.js"></script>
     <script>
+	
     $(function() {
         // Switchery
         var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
