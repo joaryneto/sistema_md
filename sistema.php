@@ -331,7 +331,22 @@ function revertedata($data){
    </button>
   </div>
 </div>
+<script>
+function selectcliente(codigo,nome)
+{
+	localStorage.setItem("codigo",codigo);
+	localStorage.setItem("nome",nome);
+	$('#dinheiro').val(codigo);
+	$('#dinheiro').val(nome);
+}
 
+function auto()
+{
+	var codigo = localStorage.getItem('codigo');
+	var nome = localStorage.getItem('nome');
+    $('#dinheiro').val('');;
+}
+</script>
 <div id="agenda" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -356,7 +371,8 @@ function revertedata($data){
 									</div>
 									<div class="form-group col-md-12 m-t-20">
 									<label>Pesquisar Cliente:</label>
-									    <input name="user" type="text" autocomplete="off" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','pesquisacliente','GET');" required="required" />
+										<input name="codigo" id="codigo" type="hidden" autocomplete="off" class="form-control" required="required" />
+									    <input name="nome" id="nome" type="text" onMouseOver="auto();" autocomplete="off" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','pesquisacliente','GET');" required="required" />
 									</div>
 									<div class="form-group col-md-12 m-t-20">
 									<div id="pesquisacliente"></div>
