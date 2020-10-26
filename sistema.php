@@ -50,6 +50,7 @@ function revertedata($data){
 
     <!-- Bootstrap core CSS -->
     <link href="template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="template/vendor/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
 	
     <link href="template/vendor/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
     <link href="template/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
