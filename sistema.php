@@ -50,9 +50,6 @@ function revertedata($data){
 
     <!-- Bootstrap core CSS -->
     <link href="template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="template/vendor/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
-	
-	<link href="template/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
 	
     <!-- Page plugins css -->
     <link href="template/vendor/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
@@ -346,10 +343,11 @@ function revertedata($data){
 									<div class="col-12">
 									  <div class="container">
 
-                                  <select class="select2 form-control" data-live-search="true">
-          <option>Mustard</option>
-          <option>Ketchup</option>
-          <option>Relish</option>
+                                  <select class="form-control complex" 
+        name="simple_select" 
+        placeholder="Type to search..." 
+        autocomplete="off">
+</select>
         </select>
 						</div>
                     </div>
@@ -431,51 +429,31 @@ function revertedata($data){
     <script src="template/js/popper.min.js"></script>
     <script src="template/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <script src="template/vendor/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
-	<script src="template/vendor/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="template/vendor/bootstrap-autocomplete/dist/bootstrap-autocomplete.js" type="text/javascript"></script>
 	
-    <script>
-    $(function() {
-        // For select 2
-        $(".select2").select2();
-        $('.selectpicker').selectpicker();
+	<script>
+	$('.basic').autoComplete({
+  resolverSettings: {
+    url: 'input.json'
+  }
+});
 
-        $(".ajax").select2({
-            ajax: {
-                url: "https://api.github.com/search/repositories",
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    return {
-                        q: params.term, // search term
-                        page: params.page
-                    };
-                },
-                processResults: function(data, params) {
-                    // parse the results into the format expected by Select2
-                    // since we are using custom formatting functions we do not need to
-                    // alter the remote JSON data, except to indicate that infinite
-                    // scrolling can be used
-                    params.page = params.page || 1;
-                    return {
-                        results: data.items,
-                        pagination: {
-                            more: (params.page * 30) < data.total_count
-                        }
-                    };
-                },
-                cache: true
-            },
-            escapeMarkup: function(markup) {
-                return markup;
-            }, // let our custom formatter work
-            minimumInputLength: 1,
-            templateResult: formatRepo, // omitted for brevity, see the source of this page
-            templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
-        });
-    });
-    </script>
-	
+$('.complex').autoComplete({
+  resolver: 'custom',
+  events: {
+    search: function (qry, callback) {
+      $.ajax(
+        'input-object.json',
+        {
+          data: { 'qry': qry}
+        }
+      ).done(function (res) {
+        callback(res.results)
+      });
+    }
+  }
+});
+	</script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
     <!-- template custom js -->
     <script src="template/js/main.js"></script>
