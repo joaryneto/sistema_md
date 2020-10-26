@@ -332,6 +332,14 @@ function revertedata($data){
 									<div class="row">
 									<div class="col-12">
 									<div class="form-group col-md-4 m-t-20">
+									<input type="text" class="form-control" id="modalTest_input" autocomplete="off">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right" role="menu"></ul>
+                        </div>      </div>
+									<div class="form-group col-md-4 m-t-20">
 									<div class="container">
 									<select name="situacao" class="select2 form-control custom-select" autocomplete="off"  style="width: 100%; height:36px;" required="required">
 										<option>Selecionar Horario</option>
@@ -364,6 +372,72 @@ function revertedata($data){
             </div>						
         <!-- /.modal-dialog -->
     </div>	
+	
+   <script src="bootstrap-suggest.js"></script>
+    <script type="text/javascript">
+    var testBsSuggest = $("#test").bsSuggest({
+        //url: "/rest/sys/getuserlist?keyword=",
+        url: "data.json",
+        /*effectiveFields: ["userName", "shortAccount"],
+        searchFields: [ "shortAccount"],
+        effectiveFieldsAlias:{userName: "姓名"},*/
+        idField: "userId",
+        keyField: "userName"
+    }).on('onDataRequestSuccess', function (e, result) {
+        console.log('onDataRequestSuccess: ', result);
+    }).on('onSetSelectValue', function (e, keyword, data) {
+        console.log('onSetSelectValue: ', keyword, data);
+    }).on('onUnsetSelectValue', function (e) {
+        console.log("onUnsetSelectValue");
+    });
+
+    /**
+     * 不显示下拉按钮
+     */
+    var testBsSuggest = $("#testNoBtn, #modalTest_input").bsSuggest({
+        //url: "/rest/sys/getuserlist?keyword=",
+        url: "data.json",
+        /*effectiveFields: ["userName", "shortAccount"],
+        searchFields: [ "shortAccount"],
+        effectiveFieldsAlias:{userName: "姓名"},*/
+        showBtn: false,
+        idField: "userId",
+        keyField: "userName"
+    }).on('onDataRequestSuccess', function (e, result) {
+        console.log('onDataRequestSuccess: ', result);
+    }).on('onSetSelectValue', function (e, keyword, data) {
+        console.log('onSetSelectValue: ', keyword, data);
+    }).on('onUnsetSelectValue', function (e) {
+        console.log("onUnsetSelectValue");
+    });
+
+    /**
+     * 从 data参数中过滤数据
+     */
+    var testdataBsSuggest = $("#test_data").bsSuggest({
+        indexId: 2,  //data.value 的第几个数据，作为input输入框的内容
+        indexKey: 1, //data.value 的第几个数据，作为input输入框的内容
+        data: {
+            'value':[
+                {'id':'0','word':'Mark','description':'http://www.1.com'},
+                {'id':'1','word':'Jacob','description':'http://www.2.com'},
+                {'id':'2','word':'Larry','description':'http://www.3.com'},
+                {'id':'3','word':'Thornton','description':'http://www.4.com'}
+            ],
+            'defaults':'http://www.1.com'
+        }
+    }).on('onDataRequestSuccess', function (e, result) {
+        console.log('onDataRequestSuccess: ', result);
+    }).on('onSetSelectValue', function (e, keyword, data) {
+        console.log('onSetSelectValue: ', keyword, data);
+    }).on('onUnsetSelectValue', function (e) {
+        console.log("onUnsetSelectValue");
+    });
+
+    $("form").submit(function(e) {
+        return false;
+    });
+    </script>
     <!-- wrapper ends -->
 
     <!-- color chooser menu start -->
