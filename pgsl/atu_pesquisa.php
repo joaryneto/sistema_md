@@ -3,40 +3,35 @@ ob_start();
 session_start();
 
 ?>
+<div class="tableFixHead"> <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">Descrição</th>
+                                                    <th class="text-right">Qtd/C. Uni.</th>
+                                                    <th class="text-right">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="itenss">
 <?
 
-//if($_SESSION['menu3'] == false)
-//{
-//   print("<script>window.alert('Erro: Você não tem permissão.')</script>");
-//   print("<script>window.location.href='iniciado.php';</script>");
-//   //exit("<strong> Erro: Você não tem permissão. </strong>");
-//}
 //require_once("../load/class/mysql.php");
 
 $pesquisa = $_GET['pesquisa'];
-
-//$returns = array();
-echo "<option>Selecione o Cliente</option>";
 
 $SQL = "SELECT codigo,nome FROM clientes where nome like '%".$pesquisa."%' LIMIT 10;";
 $RES = mysqli_query($db3,$SQL);
 while($row = mysqli_fetch_array($RES))
 {
-	//$returns[] =  $row['name'];
-	
-	//if($_GET['ap'] == "1")
-	//{
-		echo '<option value="'.$row['codigo'].'">'.$row['nome'].'</option>';
-	//}
+	echo '<td colspan="3">'.$row['nome'].'</td>';
 }
 
 mysqli_close($db3);
 
-//echo json_encode($returns);
 
 ?>
-
-
+   </tbody>
+ </table>
+</div>
 
 
 

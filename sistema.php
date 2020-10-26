@@ -181,6 +181,17 @@ function revertedata($data){
   opacity: 1;
 }
 </style>
+<style>
+.tableFixHead          { 
+  overflow-y: auto; 
+  height: 200px;
+  border: 1px solid;
+  border-color: lightgray;
+  border-radius: 14px 14px 14px;  
+  }
+.tableFixHead thead th { position: sticky; top: 0; }
+.tableFixHead thead th { background:#fff; }
+</style>
 </head>
 
 <body>
@@ -325,7 +336,7 @@ function revertedata($data){
     <div class="modal-dialog modal-lg">
             <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="myLargeModalLabel"><b>Lista de Produtos : </h4>
+                                <h4 class="modal-title" id="myLargeModalLabel"><b>Agendar Horario : </h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                 </div>
                                     <div class="modal-body">
@@ -343,13 +354,12 @@ function revertedata($data){
 										?>
 										</select>
 									</div>
-									<div class="form-group col-md-12 m-t-20"><label>Pesquisar Cliente:</label>
-									    <input name="user" type="text" autocomplete="off" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','situacao','GET');" required="required" />
+									<div class="form-group col-md-12 m-t-20">
+									<label>Pesquisar Cliente:</label>
+									    <input name="user" type="text" autocomplete="off" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','pesquisacliente','GET');" required="required" />
 									</div>
 									<div class="form-group col-md-12 m-t-20"><label>Cliente: </label>
-									<select name="situacao" id="situacao" autocomplete="off" class="ajax form-control custom-select" style="width: 100%; height:36px;" required="required" />
-										  <option>Selecione o Cliente</option>
-										</select>
+									<div id="pesquisacliente"></div>
 									</div>
 							</div>
 						</div>
