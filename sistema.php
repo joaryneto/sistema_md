@@ -184,7 +184,7 @@ function revertedata($data){
 <style>
 .tableFixHead          { 
   overflow-y: auto; 
-  height: 200px;
+  height: autopx;
   border: 1px solid;
   border-color: lightgray;
   border-radius: 14px 14px 14px;  
