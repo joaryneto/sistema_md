@@ -358,7 +358,7 @@ function revertedata($data){
 									<label>Pesquisar Cliente:</label>
 									    <input name="user" type="text" autocomplete="off" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','pesquisacliente','GET');" required="required" />
 									</div>
-									<div class="form-group col-md-12 m-t-20"><label>Cliente: </label>
+									<div class="form-group col-md-12 m-t-20">
 									<div id="pesquisacliente"></div>
 									</div>
 							</div>
