@@ -338,7 +338,7 @@ function revertedata($data){
 											$hora = '06:30:00';
 											for($i = 0; $i < 30; $i++){
 											$hora = date('H:i:s', strtotime('+30 minute', strtotime($hora)));
-											echo "<option value=''>$hora</option>";
+											echo "<option value='$hora'>$hora</option>";
 											}
 										?>
 										</select>
@@ -346,9 +346,9 @@ function revertedata($data){
 									<div class="form-group col-md-12 m-t-20"><label>Pesquisar Cliente:</label>
 									    <input name="user" type="text" autocomplete="off" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','situacao','GET');" required="required" />
 									</div>
-									<div class="form-group col-md-12 m-t-20">
+									<div class="form-group col-md-12 m-t-20"><label>Cliente: </label>
 									<select name="situacao" id="situacao" autocomplete="off" class="form-control" style="width: 100%; height:36px;" required="required" />
-										<option></option>
+										  <option>Selecione o Cliente</option>
 										</select>
 									</div>
 							</div>

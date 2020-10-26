@@ -223,16 +223,16 @@ function excluir2(produto)
 	else
 	{
 		
-    var codigos = [];
-	$.each($("input[name='check[]']:checked"),function()
-    {
-		  codigos.push($(this).val());
-	});
+        var codigos = [];
+	    $.each($("input[name='check[]']:checked"),function()
+        {
+		     codigos.push($(this).val());
+	    });
 	   
-	var codigo = codigos.join(", ");
+	    var codigo = codigos.join(", ");
 	
-	ajaxLoader('?br=atu_caixa&codigo='+ codigo +'&excluir=1&ap=1','itenss','GET');
-	ajaxLoader('?br=atu_caixa&produto='+ produto +'&ap=2','quantidaeitem','GET');
+	    ajaxLoader('?br=atu_caixa&codigo='+ codigo +'&excluir=1&ap=1','itenss','GET');
+	    ajaxLoader('?br=atu_caixa&produto='+ produto +'&ap=2','quantidaeitem','GET');
 	
 	}
 }
@@ -240,4 +240,12 @@ function excluir2(produto)
 function auto()
 {
   document.getElementById("codigo").focus();
+}
+
+function globo()
+{
+   if()
+   {
+	   
+   }
 }
