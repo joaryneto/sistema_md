@@ -564,6 +564,7 @@ function revertedata($data){
     });
     </script>
 	
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
     <!-- template custom js -->
     <script src="template/js/main.js"></script>
 
