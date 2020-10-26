@@ -48,6 +48,7 @@ function revertedata($data){
     <!-- Roboto fonts CSS -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
 
+    <link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.css" rel="stylesheet"/>
     <!-- Bootstrap core CSS -->
     <link href="template/vendor/bootstrap-4.4.1/css/bootstrap.min.css" rel="stylesheet">
 
@@ -320,7 +321,20 @@ function revertedata($data){
    </button>
   </div>
 </div>
-
+<script>
+$(function() {
+  var availableTags = [
+    "ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++",
+    "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran",
+    "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl",
+    "PHP", "Python", "Ruby", "Scala", "Scheme"
+  ];
+  
+  $(".autocomplete").autocomplete({
+    source: availableTags
+  });
+});
+</script>
 <div id="agenda" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -332,6 +346,17 @@ function revertedata($data){
 									<div class="row">
 									<div class="col-12">
 									<div class="form-group col-md-4 m-t-20">
+									<div class="container">
+  <div class="form-group">
+    <label>Languages</label>
+    <input class="form-control autocomplete" placeholder="Enter A" />
+  </div>
+  
+  <div class="form-group">
+    <label >Another Field</label>
+    <input class="form-control">
+  </div>
+</div>
 									<select name="situacao" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required">
 										<option>Selecionar Horario</option>
 										<?
@@ -649,6 +674,11 @@ function onCalendarDayClick(date, allDay, jsEvent, view) {
   });
    
   </script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
+
+
 </body>
 
 </html>
