@@ -58,6 +58,17 @@ function revertedata($data){
     <link href="template/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" rel="stylesheet" />
     <link href="template/vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
     <link href="template/vendor/multiselect/css/multi-select.css" rel="stylesheet" type="text/css" />
+
+
+    <!-- Page plugins css -->
+    <link href="template/vendor/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
+    <!-- Color picker plugins css -->
+    <link href="template/vendor/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
+    <!-- Date picker plugins css -->
+    <link href="template/vendor/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <!-- Daterange picker plugins css -->
+    <link href="template/vendor/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="template/vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 	
     <!-- Swiper CSS -->
     <link href="template/vendor/swiper/css/swiper.min.css" rel="stylesheet">
