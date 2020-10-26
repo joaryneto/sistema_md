@@ -51,6 +51,7 @@ function revertedata($data){
     <!-- Bootstrap core CSS -->
     <link href="template/vendor/bootstrap-4.4.1/css/bootstrap.min.css" rel="stylesheet">
 
+    <link href="template/assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
     <link href="template/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="template/vendor/switchery/dist/switchery.min.css" rel="stylesheet" />
     <link href="template/vendor/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
