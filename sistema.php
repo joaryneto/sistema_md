@@ -49,17 +49,7 @@ function revertedata($data){
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/minty/bootstrap.min.css">
-	
-    <!-- Page plugins css -->
-    <link href="template/vendor/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
-    <!-- Color picker plugins css -->
-    <link href="template/vendor/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
-    <!-- Date picker plugins css -->
-    <link href="template/vendor/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-    <!-- Daterange picker plugins css -->
-    <link href="template/vendor/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
-    <link href="template/vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="template/vendor/bootstrap-4.4.1/css/bootstrap.min.css" rel="stylesheet">
 	
     <!-- Swiper CSS -->
     <link href="template/vendor/swiper/css/swiper.min.css" rel="stylesheet">
@@ -341,9 +331,28 @@ function revertedata($data){
                                     <div class="modal-body">
 									<div class="row">
 									<div class="col-12">
-									  <div class="container">
-<input class="form-control advanced2AutoComplete" type="text" autocomplete="off">
-        </select>
+									<div class="form-group col-md-4 m-t-20">
+									<div class="container">
+									<select name="situacao" class="select2 form-control custom-select" autocomplete="off"  style="width: 100%; height:36px;" required="required">
+										<option>Selecionar Horario</option>
+										<?
+											$hora = '06:30:00';
+											for($i = 0; $i < 30; $i++){
+											$hora = date('H:i:s', strtotime('+30 minute', strtotime($hora)));
+											echo "<option value='$hora'>$hora</option>";
+											}
+										?>
+										</select>
+									</div>
+									<div class="form-group col-md-12 m-t-20"><label>Pesquisar Cliente:</label>
+									    <input name="user" type="text" autocomplete="off" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','situacao','GET');" required="required" />
+									</div>
+									<div class="form-group col-md-12 m-t-20"><label>Cliente: </label>
+									<select name="situacao" id="situacao" autocomplete="off" class="ajax form-control custom-select" style="width: 100%; height:36px;" required="required" />
+										  <option>Selecione o Cliente</option>
+										</select>
+									</div>
+							</div>
 						</div>
                     </div>
                     <div class="modal-footer">
@@ -418,138 +427,23 @@ function revertedata($data){
 
 
 
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-		<script src="bootstrap-autocomplete.js"></script>
-		<script>
-			$(function () {
-				// Basic
-				$('.basicAutoComplete').autoComplete({
-					resolverSettings: {
-						url: 'testdata/test-list.json'
-					}
-				});
+    <!-- jquery, popper and bootstrap js -->
+    <script src="template/js/jquery-3.3.1.min.js"></script>
+    <script src="template/js/popper.min.js"></script>
+    <script src="template/vendor/bootstrap-4.4.1/js/bootstrap.min.js"></script>
 
-				$('.basicAutoComplete').on('change', function (e) {
-					console.log('change');
-				});
+    <!-- cookie js -->
+    <script src="template/vendor/cookie/jquery.cookie.js"></script>
 
-				$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
-					$('.basicAutoCompleteSelected').html(JSON.stringify(item));
-					$('.basicAutoCompleteCustom').html('');
-				});
+    <!-- swiper js -->
+    <script src="template/vendor/swiper/js/swiper.min.js"></script>
 
-				$('.basicAutoComplete').on('autocomplete.freevalue', function (evt, value) {
-					$('.basicAutoCompleteCustom').html(JSON.stringify(value));
-					$('.basicAutoCompleteSelected').html('');
-				});
-
-				// Advanced 1
-				$('.advancedAutoComplete').autoComplete({
-					resolver: 'custom',
-					events: {
-						search: function (qry, callback) {
-							// let's do a custom ajax call
-							$.ajax(
-								'testdata/test-dict.json',
-								{
-									data: { 'qry': qry}
-								}
-							).done(function (res) {
-								callback(res.results)
-							});
-						}
-					}
-				});
-
-				// Advanced 2
-				$('.advanced2AutoComplete').autoComplete({
-					resolver: 'custom',
-					formatResult: function (item) {
-						return {
-							value: item.id,
-							text: "[" + item.id + "] " + item.text,
-							html: [
-									$('<img>').attr('src', item.icon).css("height", 18), ' ',
-									item.text
-								]
-						};
-					},
-					events: {
-						search: function (qry, callback) {
-							// let's do a custom ajax call
-							$.ajax(
-								'testdata/test-dict.json',
-								{
-									data: { 'qry': qry}
-								}
-							).done(function (res) {
-								callback(res.results)
-							});
-						}
-					}
-				});
-
-				// Basic Select
-				$('.basicAutoSelect').autoComplete();
-				$('.basicAutoSelect').on('autocomplete.select', function (evt, item) {
-					console.log('select');
-					$('.basicAutoSelectSelected').html(JSON.stringify(item));
-				});
-
-				// Default Select
-				$('.defaultAutoSelect').autoComplete();
-				$('#dAS').on('autocomplete.select', function (e, i) {
-					console.log('selected');
-				});
-
-				// Empty Select
-				$('.emptyAutoSelect').autoComplete();
-
-				// Modal
-				$('.basicModalAutoSelect').autoComplete();
-				$('.basicModalAutoSelect').on('autocomplete.select', function (evt, item) {
-					console.log('select');
-					$('.basicModalAutoSelectSelected').html(JSON.stringify(item));
-				});
-
-				// Change default value programmatically.
-				// Let's simulate a real world example.
-				// Some point in time we initialize the autocomplete with a default value (defined by markup)
-				$('.changeAutoSelect').autoComplete();
-				// user then clicks on some button and we need to change that default value
-				$('.btnChangeAutoSelect').on('click', function () {
-					var e = $(this);
-					$('.changeAutoSelect').autoComplete('set', { value: e.data('value'), text: e.data('text')});
-				});
-
-				// Events
-				var eventsCodeContainer = $('#eventsCodeContainer');
-
-				$('.eventsAutoComplete').autoComplete({
-					resolverSettings: {
-						url: 'testdata/test-list.json'
-					}
-				});
-				$('.eventsAutoComplete').on('change', function() {
-					console.log('eventsAutoComplete change');
-					eventsCodeContainer.text(eventsCodeContainer.text() + 'fired change. value: ' + $(this).val() + '\n');
-				});
-				$('.eventsAutoComplete').on('autocomplete.select', function(evt, item) {
-					console.log('eventsAutoComplete autocomplete.select');
-					eventsCodeContainer.text(eventsCodeContainer.text() + 'fired autocomplete.select. item: ' + item + ' value: ' + $(this).val() + '\n');
-				});
-				$('.eventsAutoComplete').on('autocomplete.freevalue', function(evt, item) {
-					console.log('eventsAutoComplete autocomplete.freevalue');
-					eventsCodeContainer.text(eventsCodeContainer.text() + 'fired autocomplete.freevalue. item: ' + item + ' value: ' + $(this).val() + '\n');
-				});
-			});
-		</script>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <!-- swiper js -->
+    <script src="template/vendor/sparklines/jquery.sparkline.min.js"></script>
+	
     <!-- template custom js -->
     <script src="template/js/main.js"></script>
-    
+
     <!-- page level script -->
     <script>
         $(window).on('load', function() {
@@ -597,113 +491,6 @@ function revertedata($data){
 
     </script>
 
-   <!-- Plugin JavaScript -->
-    <script src="template/vendor/moment/moment.js"></script>
-    <script src="template/vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
-    <!-- Clock Plugin JavaScript -->
-    <script src="template/vendor/clockpicker/dist/jquery-clockpicker.min.js"></script>
-    <!-- Color Picker Plugin JavaScript -->
-    <script src="template/vendor/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
-    <script src="template/vendor/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
-    <script src="template/vendor/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
-    <!-- Date Picker Plugin JavaScript -->
-    <script src="template/vendor/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-    <!-- Date range Plugin JavaScript -->
-    <script src="template/vendor/timepicker/bootstrap-timepicker.min.js"></script>
-    <script src="template/vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script>
-    // MAterial Date picker    
-    $('#mdate').bootstrapMaterialDatePicker({ weekStart: 0, time: false });
-    $('#timepicker').bootstrapMaterialDatePicker({ format: 'HH:mm', time: true, date: false });
-    $('#date-format').bootstrapMaterialDatePicker({ format: 'dddd DD MMMM YYYY - HH:mm' });
-
-    $('#min-date').bootstrapMaterialDatePicker({ format: 'DD/MM/YYYY HH:mm', minDate: new Date() });
-    // Clock pickers
-    $('#single-input').clockpicker({
-        placement: 'bottom',
-        align: 'left',
-        autoclose: true,
-        'default': 'now'
-    });
-    $('.clockpicker').clockpicker({
-        donetext: 'Done',
-    }).find('input').change(function() {
-        console.log(this.value);
-    });
-    $('#check-minutes').on('click', function(e) {
-        // Have to stop propagation here
-        e.stopPropagation();
-        input.clockpicker('show').clockpicker('toggleView', 'minutes');
-    });
-    if (/mobile/i.test(navigator.userAgent)) {
-        $('input').prop('readOnly', true);
-    }
-    // Colorpicker
-    $(".colorpicker").asColorPicker();
-    $(".complex-colorpicker").asColorPicker({
-        mode: 'complex'
-    });
-    $(".gradient-colorpicker").asColorPicker({
-        mode: 'gradient'
-    });
-    // Date Picker
-    jQuery('.mydatepicker, #datepicker').datepicker();
-    jQuery('#txtNascimento').datepicker({
-		format: 'dd/mm/yyyy',
-        autoclose: true,
-        todayHighlight: true
-    });
-	jQuery('#relmedico').datepicker({
-		format: 'dd/mm/yyyy',
-        autoclose: true,
-        todayHighlight: true
-    });
-
-    jQuery('#inicio').datepicker({
-		format: 'dd/mm/yyyy',
-        autoclose: true,
-        todayHighlight: true
-    });
-	jQuery('#termino').datepicker({
-		format: 'dd/mm/yyyy',
-        autoclose: true,
-        todayHighlight: true
-    });
-    jQuery('#date-range').datepicker({
-        toggleActive: true
-    });
-    jQuery('#datepicker-inline').datepicker({
-        todayHighlight: true
-    });
-    // Daterange picker
-    $('.input-daterange-datepicker').daterangepicker({
-        buttonClasses: ['btn', 'btn-sm'],
-        applyClass: 'btn-danger',
-        cancelClass: 'btn-inverse'
-    });
-    $('.input-daterange-timepicker').daterangepicker({
-        timePicker: true,
-        format: 'MM/DD/YYYY h:mm A',
-        timePickerIncrement: 30,
-        timePicker12Hour: true,
-        timePickerSeconds: false,
-        buttonClasses: ['btn', 'btn-sm'],
-        applyClass: 'btn-danger',
-        cancelClass: 'btn-inverse'
-    });
-    $('.input-limit-datepicker').daterangepicker({
-        format: 'MM/DD/YYYY',
-        minDate: '06/01/2015',
-        maxDate: '06/30/2015',
-        buttonClasses: ['btn', 'btn-sm'],
-        applyClass: 'btn-danger',
-        cancelClass: 'btn-inverse',
-        dateLimit: {
-            days: 6
-        }
-    });
-    </script>
-	
     <!-- Sweet-Alert  -->
     <script src="template/vendor/sweetalert/sweetalert.min.js"></script>
     <script src="template/vendor/sweetalert/jquery.sweet-alert.custom.js"></script>
