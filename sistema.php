@@ -372,8 +372,8 @@ function revertedata($data){
             </div>						
         <!-- /.modal-dialog -->
     </div>	
-	
-   <script src="bootstrap-suggest.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+   <script src="template/vendor/bootstrap-search/bootstrap-search.js"></script>
     <script type="text/javascript">
     var testBsSuggest = $("#test").bsSuggest({
         //url: "/rest/sys/getuserlist?keyword=",
