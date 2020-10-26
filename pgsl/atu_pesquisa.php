@@ -11,22 +11,28 @@ session_start();
 //   print("<script>window.location.href='iniciado.php';</script>");
 //   //exit("<strong> Erro: Você não tem permissão. </strong>");
 //}
-
-require_once("../load/class/mysql.php");
+//require_once("../load/class/mysql.php");
 
 $pesquisa = $_GET['pesquisa'];
 
-$returns = array();
+//$returns = array();
+echo "<option>Selecione o Cliente</option>";
 
 $SQL = "SELECT codigo,nome FROM clientes where nome like '%".$pesquisa."%' LIMIT 10;";
 $RES = mysqli_query($db3,$SQL);
 while($row = mysqli_fetch_array($RES))
 {
-	$returns[] =  $row['nome'];
+	//$returns[] =  $row['name'];
 	
+	//if($_GET['ap'] == "1")
+	//{
+		echo '<option value="'.$row['codigo'].'">'.$row['nome'].'</option>';
+	//}
 }
 
-echo json_encode($returns);
+mysqli_close($db3);
+
+//echo json_encode($returns);
 
 ?>
 
