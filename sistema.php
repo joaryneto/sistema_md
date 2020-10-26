@@ -52,6 +52,8 @@ function revertedata($data){
     <link href="template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="template/vendor/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
 	
+	<link href="template/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
+	
     <!-- Page plugins css -->
     <link href="template/vendor/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
     <!-- Color picker plugins css -->
@@ -344,7 +346,7 @@ function revertedata($data){
 									<div class="col-12">
 									  <div class="container">
 
-        <select id="selectpicker" class="selectpicker" data-live-search="true">
+                                  <select class="select2 form-control" data-live-search="true">
           <option>Mustard</option>
           <option>Ketchup</option>
           <option>Relish</option>
@@ -429,6 +431,7 @@ function revertedata($data){
     <script src="template/js/popper.min.js"></script>
     <script src="template/vendor/bootstrap/js/bootstrap.min.js"></script>
 
+    <script src="template/vendor/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
 	<script src="template/vendor/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
 	
     <script>
