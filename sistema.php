@@ -321,20 +321,7 @@ function revertedata($data){
    </button>
   </div>
 </div>
-<script>
-$(function() {
-  var availableTags = [
-    "ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++",
-    "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran",
-    "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl",
-    "PHP", "Python", "Ruby", "Scala", "Scheme"
-  ];
-  
-  $(".autocomplete").autocomplete({
-    source: availableTags
-  });
-});
-</script>
+
 <div id="agenda" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -674,8 +661,24 @@ function onCalendarDayClick(date, allDay, jsEvent, view) {
   });
    
   </script>
-
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
+<script>
+$(function() {
+  var availableTags = [
+    "ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++",
+    "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran",
+    "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl",
+    "PHP", "Python", "Ruby", "Scala", "Scheme"
+  ];
+  
+  $(".autocomplete").autocomplete({
+    source: availableTags
+  });
+});
+</script>
+
 </body>
 
 </html>
