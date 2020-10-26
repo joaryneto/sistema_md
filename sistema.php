@@ -345,7 +345,7 @@ $(function() {
                                     <div class="modal-body">
 									<div class="row">
 									<div class="col-12">
-									  <div class="form-group">
+									  <div class="form-group col-md-4 m-t-20">
     <label>Languages</label>
     <input class="form-control autocomplete" placeholder="Enter A" />
   </div>
