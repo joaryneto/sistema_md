@@ -338,7 +338,6 @@ function revertedata($data){
                                     <div class="modal-body">
 									<div class="row">
 									<div class="col-12">
-									  <div class="form-group col-md-4 m-t-20">
 									<div class="form-group col-md-4 m-t-20">
 									<div class="container">
 									<select name="situacao" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required">
