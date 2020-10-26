@@ -342,12 +342,7 @@ function revertedata($data){
 									<div class="row">
 									<div class="col-12">
 									  <div class="container">
-
-                                  <select class="form-control complex" 
-        name="simple_select" 
-        placeholder="Type to search..." 
-        autocomplete="off">
-</select>
+<input class="form-control advanced2AutoComplete" type="text" autocomplete="off">
         </select>
 						</div>
                     </div>
