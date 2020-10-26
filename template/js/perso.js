@@ -240,11 +240,3 @@ function auto()
 {
   document.getElementById("codigo").focus();
 }
-
-function globo()
-{
-   if()
-   {
-	   
-   }
-}
