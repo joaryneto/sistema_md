@@ -49,7 +49,7 @@ function revertedata($data){
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
-    <link href="template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/minty/bootstrap.min.css">
 	
     <!-- Page plugins css -->
     <link href="template/vendor/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
@@ -423,37 +423,134 @@ function revertedata($data){
 
 
 
-    <!-- jquery, popper and bootstrap js -->
-	<script src="template/vendor/jquery/jquery.min.js"></script>
-    <!--<script src="template/js/jquery-3.3.1.min.js"></script> -->
-    <script src="template/js/popper.min.js"></script>
-    <script src="template/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+		<script src="bootstrap-autocomplete.js"></script>
+		<script>
+			$(function () {
+				// Basic
+				$('.basicAutoComplete').autoComplete({
+					resolverSettings: {
+						url: 'testdata/test-list.json'
+					}
+				});
 
-    <script src="template/vendor/bootstrap-autocomplete/dist/bootstrap-autocomplete.js" type="text/javascript"></script>
-	
-	<script>
-	$('.basic').autoComplete({
-  resolverSettings: {
-    url: 'input.json'
-  }
-});
+				$('.basicAutoComplete').on('change', function (e) {
+					console.log('change');
+				});
 
-$('.complex').autoComplete({
-  resolver: 'custom',
-  events: {
-    search: function (qry, callback) {
-      $.ajax(
-        'input-object.json',
-        {
-          data: { 'qry': qry}
-        }
-      ).done(function (res) {
-        callback(res.results)
-      });
-    }
-  }
-});
-	</script>
+				$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
+					$('.basicAutoCompleteSelected').html(JSON.stringify(item));
+					$('.basicAutoCompleteCustom').html('');
+				});
+
+				$('.basicAutoComplete').on('autocomplete.freevalue', function (evt, value) {
+					$('.basicAutoCompleteCustom').html(JSON.stringify(value));
+					$('.basicAutoCompleteSelected').html('');
+				});
+
+				// Advanced 1
+				$('.advancedAutoComplete').autoComplete({
+					resolver: 'custom',
+					events: {
+						search: function (qry, callback) {
+							// let's do a custom ajax call
+							$.ajax(
+								'testdata/test-dict.json',
+								{
+									data: { 'qry': qry}
+								}
+							).done(function (res) {
+								callback(res.results)
+							});
+						}
+					}
+				});
+
+				// Advanced 2
+				$('.advanced2AutoComplete').autoComplete({
+					resolver: 'custom',
+					formatResult: function (item) {
+						return {
+							value: item.id,
+							text: "[" + item.id + "] " + item.text,
+							html: [
+									$('<img>').attr('src', item.icon).css("height", 18), ' ',
+									item.text
+								]
+						};
+					},
+					events: {
+						search: function (qry, callback) {
+							// let's do a custom ajax call
+							$.ajax(
+								'testdata/test-dict.json',
+								{
+									data: { 'qry': qry}
+								}
+							).done(function (res) {
+								callback(res.results)
+							});
+						}
+					}
+				});
+
+				// Basic Select
+				$('.basicAutoSelect').autoComplete();
+				$('.basicAutoSelect').on('autocomplete.select', function (evt, item) {
+					console.log('select');
+					$('.basicAutoSelectSelected').html(JSON.stringify(item));
+				});
+
+				// Default Select
+				$('.defaultAutoSelect').autoComplete();
+				$('#dAS').on('autocomplete.select', function (e, i) {
+					console.log('selected');
+				});
+
+				// Empty Select
+				$('.emptyAutoSelect').autoComplete();
+
+				// Modal
+				$('.basicModalAutoSelect').autoComplete();
+				$('.basicModalAutoSelect').on('autocomplete.select', function (evt, item) {
+					console.log('select');
+					$('.basicModalAutoSelectSelected').html(JSON.stringify(item));
+				});
+
+				// Change default value programmatically.
+				// Let's simulate a real world example.
+				// Some point in time we initialize the autocomplete with a default value (defined by markup)
+				$('.changeAutoSelect').autoComplete();
+				// user then clicks on some button and we need to change that default value
+				$('.btnChangeAutoSelect').on('click', function () {
+					var e = $(this);
+					$('.changeAutoSelect').autoComplete('set', { value: e.data('value'), text: e.data('text')});
+				});
+
+				// Events
+				var eventsCodeContainer = $('#eventsCodeContainer');
+
+				$('.eventsAutoComplete').autoComplete({
+					resolverSettings: {
+						url: 'testdata/test-list.json'
+					}
+				});
+				$('.eventsAutoComplete').on('change', function() {
+					console.log('eventsAutoComplete change');
+					eventsCodeContainer.text(eventsCodeContainer.text() + 'fired change. value: ' + $(this).val() + '\n');
+				});
+				$('.eventsAutoComplete').on('autocomplete.select', function(evt, item) {
+					console.log('eventsAutoComplete autocomplete.select');
+					eventsCodeContainer.text(eventsCodeContainer.text() + 'fired autocomplete.select. item: ' + item + ' value: ' + $(this).val() + '\n');
+				});
+				$('.eventsAutoComplete').on('autocomplete.freevalue', function(evt, item) {
+					console.log('eventsAutoComplete autocomplete.freevalue');
+					eventsCodeContainer.text(eventsCodeContainer.text() + 'fired autocomplete.freevalue. item: ' + item + ' value: ' + $(this).val() + '\n');
+				});
+			});
+		</script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
     <!-- template custom js -->
     <script src="template/js/main.js"></script>
