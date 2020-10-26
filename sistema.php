@@ -345,9 +345,7 @@ $(function() {
                                     <div class="modal-body">
 									<div class="row">
 									<div class="col-12">
-									<div class="form-group col-md-4 m-t-20">
-									<div class="container">
-  <div class="form-group">
+									  <div class="form-group">
     <label>Languages</label>
     <input class="form-control autocomplete" placeholder="Enter A" />
   </div>
@@ -357,6 +355,8 @@ $(function() {
     <input class="form-control">
   </div>
 </div>
+									<div class="form-group col-md-4 m-t-20">
+									<div class="container">
 									<select name="situacao" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required">
 										<option>Selecionar Horario</option>
 										<?
