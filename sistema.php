@@ -187,7 +187,7 @@ function revertedata($data){
   height: auto;
   border: 1px solid;
   border-color: lightgray;
-  border-radius: 14px 14px 14px;  
+  border-radius: 0px 0px 14px 14px;
   }
 .tableFixHead thead th { position: sticky; top: 0; }
 .tableFixHead thead th { background:#fff; }

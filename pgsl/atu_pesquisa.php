@@ -7,14 +7,7 @@ if(!Empty($_GET['pesquisa']))
 {
 ?>
 
-<div class="tableFixHead"> <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center">Descrição</th>
-                                                    <th class="text-right">Qtd/C. Uni.</th>
-                                                    <th class="text-right">Total</th>
-                                                </tr>
-                                            </thead>
+<div class="tableFixHead" style="position: absolute;top: -21px;background-color: white;"> <table class="table table-hover">
                                             <tbody id="itenss">
 <?
 
