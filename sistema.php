@@ -49,8 +49,8 @@ function revertedata($data){
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
-    <link href="template/vendor/bootstrap-4.4.1/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
     <link href="template/vendor/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
     <link href="template/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="template/vendor/switchery/dist/switchery.min.css" rel="stylesheet" />
@@ -436,9 +436,10 @@ function revertedata($data){
 
 
     <!-- jquery, popper and bootstrap js -->
-    <script src="template/js/jquery-3.3.1.min.js"></script>
+	<script src="template/vendor/jquery/jquery.min.js"></script>
+    <!--<script src="template/js/jquery-3.3.1.min.js"></script> -->
     <script src="template/js/popper.min.js"></script>
-    <script src="template/vendor/bootstrap-4.4.1/js/bootstrap.min.js"></script>
+    <script src="template/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- cookie js -->
     <script src="template/vendor/cookie/jquery.cookie.js"></script>
