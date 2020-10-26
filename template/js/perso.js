@@ -232,8 +232,7 @@ function excluir2(produto)
 	    var codigo = codigos.join(", ");
 	
 	    ajaxLoader('?br=atu_caixa&codigo='+ codigo +'&excluir=1&ap=1','itenss','GET');
-	    ajaxLoader('?br=atu_caixa&produto='+ produto +'&ap=2','quantidaeitem','GET');
-	
+	    ajaxLoader('?br=atu_caixa&produto='+ produto +'&ap=2','quantidaeitem','GET'); 
 	}
 }
 
