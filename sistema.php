@@ -50,7 +50,7 @@ function revertedata($data){
 
     <!-- Bootstrap core CSS -->
     <link href="template/vendor/bootstrap-4.4.1/css/bootstrap.min.css" rel="stylesheet">
-	
+
     <!-- Swiper CSS -->
     <link href="template/vendor/swiper/css/swiper.min.css" rel="stylesheet">
 
@@ -58,136 +58,19 @@ function revertedata($data){
     <link href="template/css/style.css" rel="stylesheet">
 	
 	<!--alerts CSS -->
-    <link href="template/vendor/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">	
+    <link href="template/vendor/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
 	
 	<!-- Calendar CSS -->
     <link href="template/vendor/calendar/dist/fullcalendar.css" rel="stylesheet" />
 	
 	<script type="text/javascript" src="template/js/AjaxScript.js.php"></script>
-	<script type="text/javascript" src="template/js/perso.js.php"></script>
-<style>
-.fab{
-  position: fixed;
-  bottom:90px;
-  right:10px;
-}
-
-.fab button{
-  cursor: pointer;
-  width: 48px;
-  height: 48px;
-  border-radius: 30px;
-  background-color: #3355b4;
-  border: none;
-  box-shadow: 0 1px 5px rgba(0,0,0,.4);
-  font-size: 24px;
-  color: white;
-    
-  -webkit-transition: .2s ease-out;
-  -moz-transition: .2s ease-out;
-  transition: .2s ease-out;
-}
-
-.fab button:focus{
-  outline: none;
-}
-
-.fab button.main{
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
-  background-color: #3355b4;
-  right: 0;
-  bottom: 0;
-  z-index: 20;
-}
-
-.fab button.main:before{
-  content: '⏚';
-}
-
-.fab ul{
-  position:absolute;
-  bottom: 0;
-  right: 0;
-  padding:0;
-  padding-right:5px;
-  margin:0;
-  list-style:none;
-  z-index:10;
-  
-  -webkit-transition: .2s ease-out;
-  -moz-transition: .2s ease-out;
-  transition: .2s ease-out;
-}
-
-.fab ul li{
-  display: flex;
-  justify-content: flex-start;
-  position: relative;
-  margin-bottom: -10%;
-  opacity: 0;
-  
-  -webkit-transition: .3s ease-out;
-  -moz-transition: .3s ease-out;
-  transition: .3s ease-out;
-}
-
-.fab ul li label{
-  margin-right:10px;
-  white-space: nowrap;
-  display: block;
-  margin-top: 10px;
-  padding: 5px 8px;
-  background-color: white;
-  box-shadow: 0 1px 3px rgba(0,0,0,.2);
-  border-radius:3px;
-  height: 18px;
-  font-size: 16px;
-  pointer-events: none;
-  opacity:0;
-  
-  -webkit-transition: .2s ease-out;
-  -moz-transition: .2s ease-out;
-  transition: .2s ease-out;
-}
-
-.fab.show button.main,
-.fab.show button.main{
-  outline: none;
-  background-color: #3355b4;
-  box-shadow: 0 3px 8px rgba(0,0,0,.5);
- }
- 
-.fab.show button.main:before,
-.fab.show button.main:before{
-  content: '↑';
-}
-
-.fab.show button.main + ul,
-.fab.show button.main + ul{
-  bottom: 70px;
-}
-
-.fab.show button.main + ul li,
-.fab.show button.main + ul li{
-  margin-bottom: 10px;
-  opacity: 1;
-}
-
-.fab.show button.main + ul li:hover label,
-.fab.show button.main + ul li:hover label{
-  opacity: 1;
-}
-</style>
 <style>
 .tableFixHead          { 
   overflow-y: auto; 
   height: auto;
   border: 1px solid;
   border-color: lightgray;
-  border-radius: 0px 0px 14px 14px;
+  border-radius: 14px 14px 14px 14px;
   }
 .tableFixHead thead th { position: sticky; top: 0; }
 .tableFixHead thead th { background:#fff; }
@@ -332,20 +215,26 @@ function revertedata($data){
   </div>
 </div>
 <script>
+
+function buscarcliente(nome)
+{
+	$('#codigo').val('');
+	ajaxLoader('?br=atu_pesquisa&pesquisa='+ nome +'&ap=1','pesquisacliente','GET');
+}
+
 function selectcliente(codigo,nome)
 {
-	localStorage.setItem("codigo",codigo);
-	localStorage.setItem("nome",nome);
-	$('#dinheiro').val(codigo);
-	$('#dinheiro').val(nome);
+	document.getElementById('pcliente').style.display = 'none';
+	$('#codigo').val('codigo');
+	$('#nome').val('nome');
+	//ajaxLoader('?br=atu_pesquisa&codigo='+ codigo +'&nome='+ nome +'&ap=2','inputcliente','GET');
 }
 
 function auto()
 {
-	var codigo = localStorage.getItem('codigo');
-	var nome = localStorage.getItem('nome');
-    $('#dinheiro').val('');;
+	document.getElementById('pcliente').style.display = 'none';
 }
+
 </script>
 <div id="agenda" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
@@ -367,14 +256,11 @@ function auto()
 											echo "<option value='$hora'>$hora</option>";
 											}
 										?>
-										</select>
+									</select>
 									</div>
-									<div class="form-group col-md-12 m-t-20">
-									<label>Pesquisar Cliente:</label>
+									<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Pesquisar Cliente:</label>
 										<input name="codigo" id="codigo" type="hidden" autocomplete="off" class="form-control" required="required" />
-									    <input name="nome" id="nome" type="text" onMouseOver="auto();" autocomplete="off" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_pesquisa&pesquisa='+ this.value +'&ap=1','pesquisacliente','GET');" required="required" />
-									</div>
-									<div class="form-group col-md-12 m-t-20">
+									    <input name="nome" id="nome" type="text" onkeyup="buscarcliente(this.value);" autocomplete="off" class="form-control" required="required" />
 									<div id="pesquisacliente"></div>
 									</div>
 							</div>
@@ -453,9 +339,12 @@ function auto()
 
 
     <!-- jquery, popper and bootstrap js -->
-    <script src="template/js/jquery-3.3.1.min.js"></script>
+    <script src="template/vendor/jquery/jquery.min.js"></script>
     <script src="template/js/popper.min.js"></script>
     <script src="template/vendor/bootstrap-4.4.1/js/bootstrap.min.js"></script>
+
+    <!-- swiper js -->
+    <script src="template/vendor/swiper/js/swiper.min.js"></script>
 
     <!-- cookie js -->
     <script src="template/vendor/cookie/jquery.cookie.js"></script>
@@ -463,59 +352,12 @@ function auto()
     <!-- swiper js -->
     <script src="template/vendor/swiper/js/swiper.min.js"></script>
 
-    <!-- swiper js -->
-    <script src="template/vendor/sparklines/jquery.sparkline.min.js"></script>
-	
     <!-- template custom js -->
     <script src="template/js/main.js"></script>
 
-    <!-- page level script -->
-    <script>
-        $(window).on('load', function() {
-            $(".sparklinechart").sparkline([5, 6, -7, 2, 0, -4, -2, 4], {
-                type: 'bar',
-                zeroAxis: false,
-                barColor: '#00bf00',
-                height: '30',
-            });
-            $(".sparklinechart2").sparkline([-5, -6, 4, -2, 0, 4, 2, -4], {
-                type: 'bar',
-                zeroAxis: false,
-                barColor: '#00bf00',
-                height: '30',
-            });
-
-            /* Swiper slider */
-            var swiper = new Swiper('.swiper-prices', {
-                slidesPerView: 'auto',
-                spaceBetween: 0,
-                pagination: false,
-            });
-            var swiper = new Swiper('.swiper-categories', {
-                slidesPerView: 'auto',
-                spaceBetween: 20,
-                pagination: false,
-            });
-            var swiper = new Swiper('.swiper-shares', {
-                slidesPerView: 5,
-                spaceBetween: 0,
-                pagination: false,
-                breakpoints: {
-                    640: {
-                        slidesPerView: 2,
-                    },
-                    768: {
-                        slidesPerView: 2,
-                    },
-                    1024: {
-                        slidesPerView: 3,
-                    },
-                }
-            });
-        })
-
-    </script>
-
+	<script src="template/js/perso.js"></script>
+	
+	
     <!-- Sweet-Alert  -->
     <script src="template/vendor/sweetalert/sweetalert.min.js"></script>
     <script src="template/vendor/sweetalert/jquery.sweet-alert.custom.js"></script>
@@ -529,153 +371,6 @@ function auto()
         $("#ted").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
         $("#desc").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
     </script>
-      <script src="template/vendor/calendar/jquery-ui.min.js"></script>
-    <script src="template/vendor/moment/moment.js"></script>
-    <script src='template/vendor/calendar/dist/fullcalendar.js'></script>
-	<script src="template/vendor/calendar/dist/lang/pt-br.js"></script>
-	<script>
-   
-
-function onCalendarDayClick(date, allDay, jsEvent, view) {
-    // Check to see whether the mouse was hovering over our day corner overlay 
-    // that is itself applied to the fullCalendar's selection overlay div.
-    // If it is, then we know we clicked on the day number and not some other 
-    // part of the cell.
-    if ($('.my-cell-overlay-day-corner').is(':hover')) {
-        alert('Click!');
-    }
-}
-
-  $(document).ready(function() 
-  {
-	  
-	  
-   var calendar = $('#calendar').fullCalendar({
-	defaultView: 'agendaDay',
-	ignoreTimezone: false,
-    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'],
-    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-    editable:true,
-	locale: 'pt-br',
-      timeFormat: 'HH:mm',
-      editable: true,
-      eventLimit: false,
-      displayEventTime: this.displayEventTime,
-      slotLabelFormat: 'HH:mm',
-      allDayText: '24 horas',
-      columnFormat: 'dddd',
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'agendaDay,agendaWeek,month'
-      },
-      buttonText: {
-        today: 'Hoje',
-		day: 'Hoje',
-        month: 'Mês',
-        week: 'Semana'
-      },
-	eventRender: function(event, element) {
-
-        // To append if is description in next line
-        if(event.description != '' && typeof event.description  !== "undefined")
-        {  
-            element.find(".fc-title").append("<br/><b>"+event.description+"</b>");
-        }
-    }, 
-    events: 'pgsl/atu_agendamento_load.php?load=1',
-    selectable:true,
-    selectHelper:true,
-
-    select: function(start, end, allDay, view)
-    {
-       var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
-       var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
-			
-	   sessionStorage.setItem("inicio", start);
-	   sessionStorage.setItem("termino", end);
-			
-       if (view.name === "agendaDay" || view.name === "agendaWeek" ) 
-	   {
-		  $('#ModalAdd').modal('show'); 
-	   }
-		
-    },
-	
-    editable:false,
-    /*eventResize:function(event)
-    {
-     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
-     var title = event.title;
-     var id = event.id;
-     $.ajax({
-      url:"pgsl/atu_agendamento_load.php?&ap=2",
-      type:"POST",
-      data:{title:title, start:start, end:end, id:id},
-      success:function(){
-       calendar.fullCalendar('refetchEvents');
-	   swal('Atenção', 'Agendamento atualizado');
-      }
-     })
-    },*/
-
-    eventDrop:function(event)
-    {
-     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
-     var title = event.title;
-     var id = event.id;
-     $.ajax({
-      url:"pgsl/atu_agendamento_load.php?&ap=2",
-      type:"POST",
-      data:{title:title, start:start, end:end, id:id},
-      success:function()
-      {
-       calendar.fullCalendar('refetchEvents');
-	   swal('Atenção', 'Agendamento atualizado');
-      }
-     });
-    },
-
-    eventClick:function(event)
-    {
-     
-	 swal({   
-            title: "Atenção!",   
-            text: "Tem certeza que deseja removê-lo? ?",   
-            type: "warning",   
-            showCancelButton: true,   
-            //confirmButtonColor: "#DD6B55",   
-            confirmButtonText: "Sim, Excluir!",
-            cancelButtonText: "Não, Cancelar!", 			
-            closeOnConfirm: true 
-        }, function()
-		{   
-		
-		var id = event.id;
-		$.ajax({
-  		     url:"pgsl/atu_agendamento_load.php?&ap=3",
-  		     type:"POST",
-  		     data:{id:id},
- 		      success:function()
- 		      {
- 		       calendar.fullCalendar('refetchEvents');
-				swal('Atenção', 'Agendamento Removido');
- 		      }
- 		     })
-			
-        });
-    },
-
-   });
-  });
-   
-  </script>
-
-
 </body>
 
 </html>

@@ -49,7 +49,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
                         </div>
                     </div>
                     <h6 class="font-weight-normal mb-1" style="font-size: 95%;"><? echo $row['nome'];?></h6>
-					<p><span>Hora: <? echo formatohora(row['inicio']);?>hs</span></p>
+					<p><span>Hora: <? //echo formatohora(row['inicio']);?>hs</span></p>
                     <p><span class="dot-notification mr-1"></span> <span class="text-mute">Marcado no dia: <? echo formatodatahora($row['inicio']);?></span></p>
                 </div>
 			  <?}?>

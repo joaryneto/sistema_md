@@ -226,6 +226,9 @@ else if($_GET['ap'] == 2)
 	    print("<script>window.location.href='caixa.php';</script>");
 	}
 }
+
+
+mysqli_close($db3);
 ?>	
 
 

@@ -17,7 +17,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 
 if($_SESSION['tipo'] == "2")
 {
-if(!$db = mysqli_connect("mysql669.umbler.com", "sistemasge", "I_Jt{4|p6u"))
+if(!$db = mysqli_connect("mysql669.umbler.com:41890", "sistemasge", "I_Jt{4|p6u"))
 {
     //print("<script>window.alert('Não conectou com banco...')</script>");
 	echo "Não conectou com banco 1";
@@ -31,7 +31,7 @@ if(!$db = mysqli_connect("mysql669.umbler.com", "sistemasge", "I_Jt{4|p6u"))
 }
 
 	
-if(!$db3 = mysqli_connect("mysql669.umbler.com", "sistemasl", "I_Jt{4|p6u"))
+if(!$db3 = mysqli_connect("mysql669.umbler.com:41890", "sistemasl", "I_Jt{4|p6u"))
 {
     //print("<script>window.alert('Não conectou com banco...')</script>");
 	echo "Não conectou com banco 3";
@@ -44,7 +44,7 @@ if(!$db3 = mysqli_connect("mysql669.umbler.com", "sistemasl", "I_Jt{4|p6u"))
 
 
 
-if(!$db2 = mysqli_connect("mysql669.umbler.com","sistemaec","I_Jt{4|p6u"))
+if(!$db2 = mysqli_connect("mysql669.umbler.com:41890","sistemaec","I_Jt{4|p6u"))
 {
    //print("<script>window.alert('Não conectou com banco...')</script>");
 	echo "Não conectou com banco 2";

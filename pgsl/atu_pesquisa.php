@@ -3,11 +3,11 @@ ob_start();
 session_start();
 
 
-if(!Empty($_GET['pesquisa']))
+if(!Empty($_GET['pesquisa']) and $_GET['ap'] == 1)
 {
 ?>
 
-<div class="tableFixHead" style="position: absolute;top: -21px;background-color: white;"> <table class="table table-hover">
+<div class="tableFixHead" id="pcliente"> <table class="table table-hover">
                                             <tbody id="itenss">
 <?
 
@@ -19,10 +19,13 @@ $SQL = "SELECT codigo,nome FROM clientes where nome like '%".$pesquisa."%' LIMIT
 $RES = mysqli_query($db3,$SQL);
 while($row = mysqli_fetch_array($RES))
 {
-	echo '<tr Onclick="selectcliente('.$row['codigo'].','.$row['nome'].');"><td colspan="3">'.$row['nome'].'</td></tr>';
+	?>
+	<tr Onclick="selectcliente('<?=$row['codigo'];?>','<?=$row['nome'];?>');"><td colspan="3"><?=$row['nome']?></td></tr>
+	
+	<?
 }
 
-mysqli_close($db3);
+
 
 
 ?>
@@ -30,7 +33,21 @@ mysqli_close($db3);
  </table>
 </div>
 
-<?}?>
+<?
+}
+else if($_GET['ap'] == 2)
+{
+   	?>
+	<label>Cliente :</label>
+	<input name="codigo" id="codigo" type="hidden" value="<?=$_GET['nome'];?>" autocomplete="off" class="form-control" required="required" />
+	<input name="nome" id="nome" type="text" onkeyup="buscarcliente(this.value);" value="<?=$_GET['nome'];?>" autocomplete="off" class="form-control" required="required" />
+	<div id="pesquisacliente"></div>
+	<?
+}
+
+mysqli_close($db3);
+
+?>
 
 
 
