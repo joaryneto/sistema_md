@@ -225,8 +225,8 @@ function buscarcliente(nome)
 function selectcliente(codigo,nome)
 {
 	document.getElementById('pcliente').style.display = 'none';
-	$('#codigo').val('codigo');
-	$('#nome').val('nome');
+	$('#codigo').val(codigo);
+	$('#nome').val(nome);
 	//ajaxLoader('?br=atu_pesquisa&codigo='+ codigo +'&nome='+ nome +'&ap=2','inputcliente','GET');
 }
 
