@@ -33,6 +33,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 				  
 <div class="container pt-5">
             <div class="row" id="load">
+			
                 <?
 				
 				$SQL = "SELECT agendamento.codigo,agendamento.cliente,clientes.nome,agendamento.data,agendamento.hora FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente where agendamento.sistema='".$_SESSION['sistema']."' ORDER BY agendamento.codigo desc";
@@ -40,16 +41,24 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 				while($row = mysqli_fetch_array($RES))
 				{
 				?>
-				<div class="col-6 col-md-4 col-lg-3 mb-4">
-                    <div class="mb-3 h-100px rounded overflow-hidden position-relative" onclick="editar('<?=$row['codigo'];?>','<?=$row['cliente'];?>','<?=$row['data'];?>','<?=$row['hora'];?>','<?=$row['nome'];?>');">
-                        <div class="background" style='background-image: url("template/images/escova-inteligente.jpg");'>
+				
+				<div class="col-12 col-md-6 mb-4">
+                    <div class="row">
+                        <div class="col-4">
+                            <figure class="m-0 h-150 w-100 rounded overflow-hidden">
+                                <div class="background" style='background-image: url("template/images/escova-inteligente.jpg");'>
+                                    
+                                </div>
+                            </figure>
                         </div>
-                        <div>
+                        <div class="col pl-0">
+                            <b class="h4 mb-3 font-weight-normal"><? echo $row['nome'];?></b>
+                            <p class="large text-mute" style="font-size: initial;">Dia: <? echo formatodatahora($row['data']);?> às Hora: <? echo $row['hora'];?>hs</p>
+							<button type="button" onclick="agenda(1);" class="shadow mr-2 btn btn-success rounded mb-2">Iniciar</button>
+                            <button type="button" onclick="agenda(2);" class="shadow mr-2 btn btn-primary rounded mb-2">Editar</button>
+							<button type="button" onclick="agenda(3);" class="shadow mr-2 btn btn-danger rounded mb-2">Excluir</button>
                         </div>
                     </div>
-                    <h6 class="font-weight-normal mb-1" style="font-size: 95%;"><? echo $row['nome'];?></h6>
-					<p><span>Hora: <? echo $row['hora'];?>hs</span></p>
-                    <p><span class="dot-notification mr-1"></span> <span class="text-mute">Marcado no dia: <? echo formatodatahora($row['data']);?></span></p>
                 </div>
 			  <?}?>
 				

@@ -52,13 +52,7 @@ function revertedata($data){
     <link href="template/vendor/bootstrap-4.4.1/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- page CSS -->
-    <link href="template/vendor/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-    <link href="template/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="template/vendor/switchery/dist/switchery.min.css" rel="stylesheet" />
-    <link href="template/vendor/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
-    <link href="template/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" rel="stylesheet" />
-    <link href="template/vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
-    <link href="template/vendor/multiselect/css/multi-select.css" rel="stylesheet" type="text/css" />
 	
     <!-- Swiper CSS -->
     <link href="template/vendor/swiper/css/swiper.min.css" rel="stylesheet">
@@ -131,7 +125,7 @@ function revertedata($data){
                 <p class="text-mute my-0 small">
 				<?
 				
-				switch($_SESSION['nome'])
+				switch($_SESSION['tipo'])
 			    {
 					case 1:
 					{
@@ -165,10 +159,7 @@ function revertedata($data){
             <a href="sistema.php?url=cad_agendamento" class="list-group-item list-group-item-action active"><i class="material-icons">home</i>Agendamento</a>
             <a href="latestnews.html" class="list-group-item list-group-item-action"><i class="material-icons">view_day</i>Latest news</a>
             <a href="subscribed.html" class="list-group-item list-group-item-action"><i class="material-icons">library_books</i>Subscribed</a>
-            <a href="notification.html" class="list-group-item list-group-item-action"><i class="material-icons">notifications</i>Notification <span class="badge badge-dark text-white">2</span></a>
-            <a href="myprofile.html" class="list-group-item list-group-item-action"><i class="material-icons">account_circle</i>My Profile</a>
-            <a href="pagescontrols.html" class="list-group-item list-group-item-action"><i class="material-icons">class</i>Pages Controls <span class="badge badge-light ml-2">Check</span></a>
-            <a href="javascript:void(0)" class="list-group-item list-group-item-action mt-4" data-toggle="modal" data-target="#colorscheme"><i class="material-icons">color_lens_outline</i>Change Color</a>
+            <a href="notification.html" class="list-group-item list-group-item-action"><i class="material-icons">notifications</i>Notification <span class="badge badge-dark text-white">2</span></a></a>
         </div>
     </div>
     <!-- sidebar ends -->
@@ -223,33 +214,15 @@ function revertedata($data){
                 <div class="col-auto mx-auto">
                     <div class="row no-gutters justify-content-center">
                         <div class="col-auto">
-                            <a href="caixa.php" class="btn btn-link-default active">
+                            <a href="sistema.php" class="btn btn-link-default active">
+                                <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
+                                <span class="text-name">Agenda</span>
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <a href="caixa.php" class="btn btn-link-default">
                                 <span class="icon-text"><i class="material-icons">store_mall_directory</i></span>
                                 <span class="text-name">Vendas</span>
-                            </a>
-                        </div>
-                        <div class="col-auto">
-                            <a href="categories.html" class="btn btn-link-default">
-                                <span class="icon-text"><i class="material-icons">inbox</i></span>
-                                <span class="text-name">Categories</span>
-                            </a>
-                        </div>
-                        <div class="col-auto">
-                            <a href="profile-author.html" class="btn btn-link-default">
-                                <span class="icon-text"><i class="material-icons">account_circle</i></span>
-                                <span class="text-name">Profile</span>
-                            </a>
-                        </div>
-                        <div class="col-auto">
-                            <a href="bookmarks.html" class="btn btn-link-default">
-                                <span class="icon-text"><i class="material-icons">bookmarks</i></span>
-                                <span class="text-name">Bookmarks</span>
-                            </a>
-                        </div>
-                        <div class="col-auto">
-                            <a href="messages.html" class="btn btn-link-default">
-                                <span class="icon-text"><i class="material-icons">send</i></span>
-                                <span class="text-name">Messages</span>
                             </a>
                         </div>
                     </div>
@@ -445,118 +418,6 @@ function auto()
     <script src="template/vendor/bootstrap-4.4.1/js/bootstrap.min.js"></script>
 
     <script src="template/vendor/switchery/dist/switchery.min.js"></script>
-    <script src="template/vendor/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
-    <script src="template/vendor/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
-    <script src="template/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
-    <script src="template/vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js" type="text/javascript"></script>
-    <script type="text/javascript" src="template/vendor/multiselect/js/jquery.multi-select.js"></script>
-    <script>
-    $(function() {
-        // Switchery
-        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-        $('.js-switch').each(function() {
-            new Switchery($(this)[0], $(this).data());
-        });
-        // For select 2
-        $(".select2").select2();
-        $('.selectpicker').selectpicker();
-        //Bootstrap-TouchSpin
-        $(".vertical-spin").TouchSpin({
-            verticalbuttons: true,
-            verticalupclass: 'ti-plus',
-            verticaldownclass: 'ti-minus'
-        });
-        var vspinTrue = $(".vertical-spin").TouchSpin({
-            verticalbuttons: true
-        });
-        if (vspinTrue) {
-            $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
-        }
-        $("input[name='tch1']").TouchSpin({
-            min: 0,
-            max: 100,
-            step: 0.1,
-            decimals: 2,
-            boostat: 5,
-            maxboostedstep: 10,
-            postfix: '%'
-        });
-        $("input[name='tch2']").TouchSpin({
-            min: -1000000000,
-            max: 1000000000,
-            stepinterval: 50,
-            maxboostedstep: 10000000,
-            prefix: '$'
-        });
-        $("input[name='tch3']").TouchSpin();
-        $("input[name='tch3_22']").TouchSpin({
-            initval: 40
-        });
-        $("input[name='tch5']").TouchSpin({
-            prefix: "pre",
-            postfix: "post"
-        });
-        // For multiselect
-        $('#pre-selected-options').multiSelect();
-        $('#optgroup').multiSelect({
-            selectableOptgroup: true
-        });
-        $('#public-methods').multiSelect();
-        $('#select-all').on('click', function() {
-            $('#public-methods').multiSelect('select_all');
-            return false;
-        });
-        $('#deselect-all').on('click', function() {
-            $('#public-methods').multiSelect('deselect_all');
-            return false;
-        });
-        $('#refresh').on('click', function() {
-            $('#public-methods').multiSelect('refresh');
-            return false;
-        });
-        $('#add-option').on('click', function() {
-            $('#public-methods').multiSelect('addOption', {
-                value: 42,
-                text: 'test 42',
-                index: 0
-            });
-            return false;
-        });
-        $(".ajax").select2({
-            ajax: {
-                url: "https://api.github.com/search/repositories",
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    return {
-                        q: params.term, // search term
-                        page: params.page
-                    };
-                },
-                processResults: function(data, params) {
-                    // parse the results into the format expected by Select2
-                    // since we are using custom formatting functions we do not need to
-                    // alter the remote JSON data, except to indicate that infinite
-                    // scrolling can be used
-                    params.page = params.page || 1;
-                    return {
-                        results: data.items,
-                        pagination: {
-                            more: (params.page * 30) < data.total_count
-                        }
-                    };
-                },
-                cache: true
-            },
-            escapeMarkup: function(markup) {
-                return markup;
-            }, // let our custom formatter work
-            minimumInputLength: 1,
-            templateResult: formatRepo, // omitted for brevity, see the source of this page
-            templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
-        });
-    });
-    </script>
 
     <!-- swiper js -->
     <script src="template/vendor/swiper/js/swiper.min.js"></script>

@@ -73,13 +73,14 @@ if(isset($_GET["codigo"]) and $_GET['ap'] == 1)
 else if($_GET['ap'] == 2)
 {
 
-   $SQL = "UPDATE agendamento SET data='".$_GET['data']."', hora='".$_GET['hora']."' WHERE codigo='".$_GET['codigo']."'";
+   $SQL = "UPDATE agendamento SET data='".revertedata($_GET['data'])."', hora='".$_GET['hora']."' WHERE codigo='".$_GET['codigo']."'";
    mysqli_query($db3,$SQL);
  ?>
  
   <script> 
   swal("Atenção", "Reagendado com sucesso."); 
   $('#editaagenda').modal('hide');
+  window.location.href='sistema.php';
   </script>
  
  <?
@@ -88,6 +89,14 @@ else if($_GET['ap'] == 3)
 {
    $SQL = "DELETE from agendamento WHERE codigo='".$_GET['codigo']."'";
    mysqli_query($db3,$SQL);
+ ?>
+ 
+  <script> 
+  swal("Atenção", "Excluido com sucesso."); 
+  window.location.href='sistema.php';
+  </script>
+ 
+ <?
 }
 
 

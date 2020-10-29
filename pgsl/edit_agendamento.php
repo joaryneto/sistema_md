@@ -32,22 +32,31 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 									</div>
 									<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Data:</label>
 										<input name="codagenda" id="codagenda" type="hidden" autocomplete="off" value="<?=$_GET['codigo'];?>" class="form-control" required="required">
-									    <input name="dataagenda2"  id="dataagenda2" onChange="changedata(this.value);" value="<?=formatodatahora($_GET['data']);?>" type="text" autocomplete="off" class="form-control">
+									    <input name="dataagenda2"  id="dataagenda2" value="" type="text" autocomplete="off" class="form-control">
 										<script>
 										jQuery('#dataagenda2').datepicker({
 												format: 'dd/mm/yyyy',
- 										       autoclose: true,
+ 										        autoclose: true,
 										        todayHighlight: true,
 												language: "pt-BR",
 												orientation: "bottom left"
 										});
 										
-										function changedata(datavv)
-									    {
+										//function changedata(datavv)
+									    //{
 											//var datav = document.getElementById('dataagenda2').value;
 											
-											requestPage2('?br=atu_pesquisa&data='+ datavv +'&ap=3','horario2','GET');
-										}
+										//	requestPage2('?br=atu_pesquisa&data='+ datavv +'&ap=3','horario2','GET');
+										//}
+										
+										$('#dataagenda2').on('change', function() 
+										{
+											jQuery('#dataagenda2').datepicker({autoclose: true});
+											var datav = document.getElementById('dataagenda2').value;
+										    requestPage2('?br=atu_pesquisa&data='+ datav +'&ap=3','horario2','GET');
+										});
+										
+										
 										</script>
 									</div>
 									<div class="form-group col-md-4 m-t-20">
@@ -55,37 +64,6 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 									    <div id="horario2">
 										<select name="hora2" id="hora2" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required">
 										<option>Selecionar Horario</option>
-		<?
-		
-											$data = revertedata($_GET['data']);
-		
-											$SQL1 = "SELECT hora FROM horarios where sistema='".$_SESSION['sistema']."'";
-											$RES1 = mysqli_query($db3,$SQL1);
-											while($row1 = mysqli_fetch_array($RES1))
-											{
-											  $x = 0;
-											  $SQL2 = "SELECT hora FROM agendamento where data='".$_GET['data']."' and hora='".$row1['hora']."' and hora NOT LIKE '".$_GET['hora']."%'";
-											  $RES2 = mysqli_query($db3,$SQL2);
-											  while($row2 = mysqli_fetch_array($RES2))
-											  {
-											     //$rhora = formatohora($row['inicio']);
-												 $x = 1;
-											  }
-		  
-											  if($x == 1)
-											  {
-			  
-											  }
-											  else
-											  {
-												  ?>
-												  <option value="<?=$row1['hora'];?>" <? if($_GET['hora'] == $row1['hora']){ echo "selected";} ?>><?=$row1['hora'];?></option>
-												  <?
-											  }
-											}
-											
-									
-											?>
 										</select>
 										</div>
 									</div>

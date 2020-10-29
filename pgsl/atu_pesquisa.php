@@ -151,16 +151,22 @@ else if($_GET['ap'] == 4)
 	while($row = mysqli_fetch_array($RES))
 	{
 				?>
-				<div class="col-6 col-md-4 col-lg-3 mb-4" onclick="editar('<?=$row['cliente'];?>','<?=$row['data'];?>','<?=$row['hora'];?>','<?=$row['nome'];?>');">
-                    <div class="mb-3 h-100px rounded overflow-hidden position-relative">
-                        <div class="background" style='background-image: url("template/images/escova-inteligente.jpg");'>
+				<div class="col-12 col-md-6 mb-4">
+                    <div class="row">
+                        <div class="col-4">
+                            <figure class="m-0 h-150 w-100 rounded overflow-hidden">
+                                <div class="background" style='background-image: url("template/images/escova-inteligente.jpg");'>
+                                    
+                                </div>
+                            </figure>
                         </div>
-                        <div>
+                        <div class="col pl-0">
+                            <b href="newsdetails.html" class="h4 mb-3 font-weight-normal"><? echo $row['nome'];?></b>
+                            <p class="large text-mute" style="font-size: initial;">Dia: <? echo formatodatahora($row['data']);?> às Hora: <? echo $row['hora'];?>hs</p>
+                            <a class="text-dark"><button type="button" class="shadow mr-2 btn btn-primary rounded mb-2">Editar</button></a>
+							<button type="button" class="shadow mr-2 btn btn-danger rounded mb-2">Excluir</button>
                         </div>
                     </div>
-                    <h6 class="font-weight-normal mb-1" style="font-size: 95%;"><? echo $row['nome'];?></h6>
-					<p><span>Hora: <? echo $row['hora'];?>hs</span></p>
-                    <p><span class="dot-notification mr-1"></span> <span class="text-mute">Marcado no dia: <? echo formatodatahora($row['data']);?></span></p>
                 </div>
 			  <?
 			  
