@@ -14,3 +14,7 @@ function logar()
 	}		
 }
 
+function pesquisar(pesquisa)
+{
+	requestPage2('?br=atu_login&pesquisa='+ pesquisa +'','load','GET');
+}

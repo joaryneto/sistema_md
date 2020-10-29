@@ -62,9 +62,9 @@ while($res = mysqli_fetch_array($ress))
 else
 {
 
-  $SQL = "select usuarios.cliente,usuarios.codigo from usuarios inner join clientes on clientes.cnpj=usuarios.cliente where clientes.cpf='".$_SESSION['login']."' and usuarios.senha='".$_SESSION['senha']."' or clientes.email='".$_SESSION['login']."' and usuarios.senha='".$_SESSION['senha']."' or usuarios.login='".$_SESSION['login']."' and usuarios.senha='".$_SESSION['senha']."'";
+  $SQL = "select usuarios.sistema,usuarios.codigo,usuarios.nome,usuarios.tipo from usuarios where usuarios.cpf='".$_SESSION['login']."' and usuarios.senha='".$_SESSION['senha']."' or usuarios.email='".$_SESSION['login']."' and usuarios.senha='".$_SESSION['senha']."' or usuarios.login='".$_SESSION['login']."' and usuarios.senha='".$_SESSION['senha']."'";
 
-  $ress = mysqli_query($db2,$SQL);
+  $ress = mysqli_query($db3,$SQL);
 
   while($res = mysqli_fetch_array($ress))
   {
@@ -72,7 +72,9 @@ else
 	
 	$x = 1;
     $_SESSION['usuario'] = $res['codigo'];
-	$_SESSION['sistema'] = $res['cliente'];
+	$_SESSION['sistema'] = $res['sistema'];
+	$_SESSION['nome'] = $res['nome'];
+	$_SESSION['tipo'] = $res['tipo'];
 	
 	$_SESSION['menu'] = 3;
 	$_SESSION['pages'] = 3;
