@@ -3158,6 +3158,97 @@ html.theme-dark .form-control.search,
     background: rgba(230, 230, 230, 0.4);
 }
 
+/*============================================================== 
+Form addons page
+============================================================== */
+/*Bootstrap select*/
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+  width: 100%; }
+
+.bootstrap-select .dropdown-menu li a {
+  display: block;
+  padding: 7px 20px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857143;
+  color: #67757c;
+  white-space: nowrap; }
+  .bootstrap-select .dropdown-menu li a:hover, .bootstrap-select .dropdown-menu li a:focus {
+    color: #20aee3;
+    background: #e9edf2; }
+
+.bootstrap-select .show > .dropdown-menu {
+  display: block; }
+
+.bootstrap-touchspin .input-group-btn-vertical > .btn {
+  padding: 9px 10px; }
+
+.select2-container--default .select2-selection--single {
+  border-color: #b1b8bb;
+  height: 38px; }
+  .select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 38px; }
+  .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 33px; }
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  float: right;
+  color: #ffffff;
+  margin-right: 0px;
+  margin-left: 4px; }
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background: #20aee3;
+  color: #ffffff;
+  border-color: #20aee3; }
+
+.input-form .btn {
+  padding: 8px 12px; }
+  
+  
+/* FIM SELECT */
+
+/*******************
+Form Pickers
+******************/
+.asColorPicker-dropdown {
+  max-width: 260px; }
+
+.asColorPicker-trigger {
+  position: absolute;
+  top: 0;
+  right: -35px;
+  height: 38px;
+  width: 37px;
+  border: 0; }
+
+.asColorPicker-clear {
+  display: none;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  text-decoration: none; }
+
+table th {
+  font-weight: 400; }
+
+.daterangepicker td.active,
+.daterangepicker td.active:hover {
+  background-color: #20aee3; }
+
+.datepicker table tr td.today,
+.datepicker table tr td.today.disabled,
+.datepicker table tr td.today.disabled:hover,
+.datepicker table tr td.today:hover {
+  background: #20aee3;
+  color: #ffffff; }
+
+.datepicker td,
+.datepicker th {
+  padding: 5px 10px; }
+  
+ /* FIM DATAPICKERS */
+
 .fab{
   position: fixed;
   bottom:90px;
