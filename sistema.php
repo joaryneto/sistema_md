@@ -127,11 +127,38 @@ function revertedata($data){
                 </figure>
             </div>
             <div class="col pl-3 align-self-center">
-                <p class="my-0">Maxartkiller</p>
-                <p class="text-mute my-0 small">United States</p>
+                <p class="my-0"><?=$_SESSION['nome']?></p>
+                <p class="text-mute my-0 small">
+				<?
+				
+				switch($_SESSION['nome'])
+			    {
+					case 1:
+					{
+						echo "Atendente";
+					}
+					break;
+					case 2:
+					{
+						echo "Profissional";
+					}
+					break;
+					case 3:
+					{
+						echo "Administrador";
+					}
+					break;
+					default:
+				    {
+						echo "Não definido";
+					}
+					break;
+				}
+				
+				?></p>
             </div>
             <div class="col-auto align-self-center">
-                <a href="login.html" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
+                <a href="login.php" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
             </div>
         </div>
         <div class="list-group main-menu my-5">
