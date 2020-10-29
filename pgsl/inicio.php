@@ -35,7 +35,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
             <div class="row">
                 <?
 				
-				$SQL = "SELECT clientes.nome,agendamento.inicio FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente";
+				$SQL = "SELECT clientes.nome,agendamento.data,agendamento.hora FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente where agendamento.sistema='".$_SESSION['sistema']."'";
 				$RES = mysqli_query($db3,$SQL);
 				while($row = mysqli_fetch_array($RES))
 				{
@@ -49,8 +49,8 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
                         </div>
                     </div>
                     <h6 class="font-weight-normal mb-1" style="font-size: 95%;"><? echo $row['nome'];?></h6>
-					<p><span>Hora: <? //echo formatohora(row['inicio']);?>hs</span></p>
-                    <p><span class="dot-notification mr-1"></span> <span class="text-mute">Marcado no dia: <? echo formatodatahora($row['inicio']);?></span></p>
+					<p><span>Hora: <? echo $row['hora'];?>hs</span></p>
+                    <p><span class="dot-notification mr-1"></span> <span class="text-mute">Marcado no dia: <? echo formatodatahora($row['data']);?></span></p>
                 </div>
 			  <?}?>
 				

@@ -42,11 +42,11 @@ echo json_encode($data);
 
 }
 
-if(isset($_GET["cliente"]) and $_GET['ap'] == 1)
+if(isset($_GET["codigo"]) and $_GET['ap'] == 1)
 {
 
- $hora = date('H:i:s');
- $query = "INSERT INTO agendamento (cliente,produto, inicio, termino, descricao) VALUES ('".$_GET['cliente']."','".$_GET['produto']."', '".$_GET['start']."', '".$_GET['end']."','".$_GET['descricao']."')";
+ //$hora = date('H:i:s');
+ $query = "INSERT INTO agendamento (sistema,cliente, data, hora, nome) VALUES ('".$_SESSION['sistema']."','".$_GET['codigo']."', '".revertedata($_GET['data'])."','".$_GET['hora']."','".$_GET['nome']."')";
  $sucesso = mysqli_query($db3,$query);
  
  if($sucesso == true)

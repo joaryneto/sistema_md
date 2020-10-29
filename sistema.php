@@ -10,8 +10,8 @@ function formatodatahora($data){
     return date("d/m/Y", strtotime($data));
 }
 
-function formatohora($hora){
-    return date("H:i:s", strtotime($hora));
+function formatohora($horas){
+    return date("H:i", $horas);
 }
 
 date_default_timezone_set('America/Cuiaba');
@@ -51,9 +51,33 @@ function revertedata($data){
     <!-- Bootstrap core CSS -->
     <link href="template/vendor/bootstrap-4.4.1/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- page CSS -->
+    <link href="template/vendor/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="template/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="template/vendor/switchery/dist/switchery.min.css" rel="stylesheet" />
+    <link href="template/vendor/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="template/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="template/vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+    <link href="template/vendor/multiselect/css/multi-select.css" rel="stylesheet" type="text/css" />
+	
     <!-- Swiper CSS -->
     <link href="template/vendor/swiper/css/swiper.min.css" rel="stylesheet">
 
+    <!-- Input Select Seach css -->
+    <link href="template/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="template/vendor/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+	
+    <link href="template/vendor/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <!-- Page plugins css -->
+    <link href="template/vendor/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
+    <!-- Color picker plugins css -->
+    <link href="template/vendor/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
+    <!-- Date picker plugins css -->
+    <link href="template/vendor/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <!-- Daterange picker plugins css -->
+    <link href="template/vendor/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="template/vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+	
     <!-- Custom styles for this template -->
     <link href="template/css/style.css" rel="stylesheet">
 	
@@ -64,6 +88,7 @@ function revertedata($data){
     <link href="template/vendor/calendar/dist/fullcalendar.css" rel="stylesheet" />
 	
 	<script type="text/javascript" src="template/js/AjaxScript.js.php"></script>
+	
 <style>
 .tableFixHead          { 
   overflow-y: auto; 
@@ -216,18 +241,35 @@ function revertedata($data){
 </div>
 <script>
 
+function alteradata()
+{
+	$('#nome').val('');
+}
+
 function buscarcliente(nome)
 {
-	$('#codigo').val('');
-	ajaxLoader('?br=atu_pesquisa&pesquisa='+ nome +'&ap=1','pesquisacliente','GET');
+	if(event.key === 'Enter') 
+	{
+	   $('#codigo').val('');
+	   requestPage2('?br=atu_pesquisa&pesquisa='+ nome +'&ap=1','pesquisacliente','GET');
+	}
 }
 
 function selectcliente(codigo,nome)
-{
-	document.getElementById('pcliente').style.display = 'none';
-	$('#codigo').val(codigo);
-	$('#nome').val(nome);
-	//ajaxLoader('?br=atu_pesquisa&codigo='+ codigo +'&nome='+ nome +'&ap=2','inputcliente','GET');
+{	
+	var datav = document.getElementById('dataagenda').value;
+	
+	if(datav == "")
+	{
+		swal('Atenção', 'Selecione uma data.');
+	}
+	else
+	{
+	   document.getElementById('pcliente').style.display = 'none';
+	   $('#codigo').val(codigo);
+	   $('#nome').val(nome);
+	   requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&nome='+ nome +'&data='+ datav +'&ap=2','horario','GET');
+	}
 }
 
 function auto()
@@ -246,28 +288,26 @@ function auto()
                                     <div class="modal-body">
 									<div class="row">
 									<div class="col-12">
-									<div class="form-group col-md-4 m-t-20">
-									<select name="situacao" class="select2 form-control custom-select" autocomplete="off"  style="width: 100%; height:36px;" required="required">
-										<option>Selecionar Horario</option>
-										<?
-											$hora = '06:30:00';
-											for($i = 0; $i < 30; $i++){
-											$hora = date('H:i:s', strtotime('+30 minute', strtotime($hora)));
-											echo "<option value='$hora'>$hora</option>";
-											}
-										?>
-									</select>
+									<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Data:</label>
+									    <input name="dataagenda" id="dataagenda" OnChange="alteradata();" type="text" autocomplete="off" class="form-control" required="required" />
 									</div>
 									<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Pesquisar Cliente:</label>
 										<input name="codigo" id="codigo" type="hidden" autocomplete="off" class="form-control" required="required" />
 									    <input name="nome" id="nome" type="text" onkeyup="buscarcliente(this.value);" autocomplete="off" class="form-control" required="required" />
 									<div id="pesquisacliente"></div>
 									</div>
+									<div class="form-group col-md-4 m-t-20" id="horario">
+									    <input name="hora" id="hora" type="hidden" autocomplete="off" class="form-control" required="required" />
+									</div>
 							</div>
 						</div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="mb-2 btn btn-sm btn-danger" data-dismiss="modal">Fechar</button>
+						<div class="row">
+                         <div class="col">
+						 <button type="button" onclick="agendar();"  class="mb-2 btn btn-sm btn-primary">Confirmar pagamento</button>
+                         <button type="button" class="mb-2 btn btn-sm btn-danger" data-dismiss="modal">Sair</button>
+					   </div></div>
                     </div>
                  </div>
 										
@@ -343,6 +383,120 @@ function auto()
     <script src="template/js/popper.min.js"></script>
     <script src="template/vendor/bootstrap-4.4.1/js/bootstrap.min.js"></script>
 
+    <script src="template/vendor/switchery/dist/switchery.min.js"></script>
+    <script src="template/vendor/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
+    <script src="template/vendor/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="template/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+    <script src="template/vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js" type="text/javascript"></script>
+    <script type="text/javascript" src="template/vendor/multiselect/js/jquery.multi-select.js"></script>
+    <script>
+    $(function() {
+        // Switchery
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        $('.js-switch').each(function() {
+            new Switchery($(this)[0], $(this).data());
+        });
+        // For select 2
+        $(".select2").select2();
+        $('.selectpicker').selectpicker();
+        //Bootstrap-TouchSpin
+        $(".vertical-spin").TouchSpin({
+            verticalbuttons: true,
+            verticalupclass: 'ti-plus',
+            verticaldownclass: 'ti-minus'
+        });
+        var vspinTrue = $(".vertical-spin").TouchSpin({
+            verticalbuttons: true
+        });
+        if (vspinTrue) {
+            $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
+        }
+        $("input[name='tch1']").TouchSpin({
+            min: 0,
+            max: 100,
+            step: 0.1,
+            decimals: 2,
+            boostat: 5,
+            maxboostedstep: 10,
+            postfix: '%'
+        });
+        $("input[name='tch2']").TouchSpin({
+            min: -1000000000,
+            max: 1000000000,
+            stepinterval: 50,
+            maxboostedstep: 10000000,
+            prefix: '$'
+        });
+        $("input[name='tch3']").TouchSpin();
+        $("input[name='tch3_22']").TouchSpin({
+            initval: 40
+        });
+        $("input[name='tch5']").TouchSpin({
+            prefix: "pre",
+            postfix: "post"
+        });
+        // For multiselect
+        $('#pre-selected-options').multiSelect();
+        $('#optgroup').multiSelect({
+            selectableOptgroup: true
+        });
+        $('#public-methods').multiSelect();
+        $('#select-all').on('click', function() {
+            $('#public-methods').multiSelect('select_all');
+            return false;
+        });
+        $('#deselect-all').on('click', function() {
+            $('#public-methods').multiSelect('deselect_all');
+            return false;
+        });
+        $('#refresh').on('click', function() {
+            $('#public-methods').multiSelect('refresh');
+            return false;
+        });
+        $('#add-option').on('click', function() {
+            $('#public-methods').multiSelect('addOption', {
+                value: 42,
+                text: 'test 42',
+                index: 0
+            });
+            return false;
+        });
+        $(".ajax").select2({
+            ajax: {
+                url: "https://api.github.com/search/repositories",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function(data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function(markup) {
+                return markup;
+            }, // let our custom formatter work
+            minimumInputLength: 1,
+            templateResult: formatRepo, // omitted for brevity, see the source of this page
+            templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+        });
+    });
+    </script>
+
     <!-- swiper js -->
     <script src="template/vendor/swiper/js/swiper.min.js"></script>
 
@@ -356,8 +510,31 @@ function auto()
     <script src="template/js/main.js"></script>
 
 	<script src="template/js/perso.js"></script>
-	
-	
+
+	<!-- Plugin JavaScript -->
+    <script src="template/vendor/moment/moment.js"></script>
+    <script src="template/vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- Clock Plugin JavaScript -->
+    <script src="template/vendor/clockpicker/dist/jquery-clockpicker.min.js"></script>
+    <!-- Color Picker Plugin JavaScript -->
+    <script src="template/vendor/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
+    <script src="template/vendor/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
+    <script src="template/vendor/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="template/vendor/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- Date range Plugin JavaScript -->
+    <script src="template/vendor/timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="template/vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
+	<script src="template/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+    <script>
+	jQuery('#dataagenda').datepicker({
+		format: 'dd/mm/yyyy',
+        autoclose: true,
+        todayHighlight: true,
+		language: "pt-BR",
+		orientation: "bottom left"
+    });
+    </script>
     <!-- Sweet-Alert  -->
     <script src="template/vendor/sweetalert/sweetalert.min.js"></script>
     <script src="template/vendor/sweetalert/jquery.sweet-alert.custom.js"></script>
@@ -371,6 +548,7 @@ function auto()
         $("#ted").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
         $("#desc").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
     </script>
+	
 </body>
 
 </html>
