@@ -26,24 +26,23 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
                 <div class="container align-self-end">
                     <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Agenda";?></h2>
                     <p class="text-mute mb-2"><? echo $_SESSION["DESCRICAOPG2"] = "Lista";?></p>
-                    <input type="text" Onclick="pesquisar(this.value);" class="form-control form-control-lg search bottom-25 position-relative border-0" placeholder="Pesquisa">
+                    <input type="text" Onkeyup="pesquisar(this.value);" class="form-control form-control-lg search bottom-25 position-relative border-0" placeholder="Pesquisa">
                 </div>
             </div>
         </div>   
 				  
 <div class="container pt-5">
-            <div class="row">
+            <div class="row" id="load">
                 <?
 				
-				$SQL = "SELECT clientes.nome,agendamento.data,agendamento.hora FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente where agendamento.sistema='".$_SESSION['sistema']."'";
+				$SQL = "SELECT agendamento.codigo,agendamento.cliente,clientes.nome,agendamento.data,agendamento.hora FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente where agendamento.sistema='".$_SESSION['sistema']."' ORDER BY agendamento.codigo desc";
 				$RES = mysqli_query($db3,$SQL);
 				while($row = mysqli_fetch_array($RES))
 				{
 				?>
 				<div class="col-6 col-md-4 col-lg-3 mb-4">
-                    <div class="mb-3 h-100px rounded overflow-hidden position-relative">
-                        <div class="background">
-                            <img src="template/images/escova-inteligente.jpg" alt="">
+                    <div class="mb-3 h-100px rounded overflow-hidden position-relative" onclick="editar('<?=$row['codigo'];?>','<?=$row['cliente'];?>','<?=$row['data'];?>','<?=$row['hora'];?>','<?=$row['nome'];?>');">
+                        <div class="background" style='background-image: url("template/images/escova-inteligente.jpg");'>
                         </div>
                         <div>
                         </div>

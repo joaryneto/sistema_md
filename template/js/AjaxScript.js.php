@@ -245,7 +245,7 @@ function requestPage2(url, div, tipo, campos, hideLoading)
      		  	}
 				else if(ajax.readyState == 0)
 					//$(".loader-screen").fadeIn();
-					document.getElementById(div).innerHTML = '<div style="text-align: center;"><img src="template/images/loading_2.gif" /></div>';
+					document.getElementById(div).innerHTML = '<div style="text-align: center;"><img src="template/images/loading_1.gif" /></div>';
                 else if(ajax.readyState == 3)
 					//$(".loader-screen").fadeIn();
                     document.getElementById(div).innerHTML = '<div style="text-align: center;"><img src="template/images/loading_1.gif" /></div>';

@@ -56,8 +56,7 @@ if(isset($_GET["codigo"]) and $_GET['ap'] == 1)
  <script> 
  
  swal("Atenção", "Agendado com sucesso."); 
- $("#calendar").fullCalendar("refetchEvents");
- $('#ModalAdd').modal('hide');   
+ $('#agenda').modal('hide');
  </script>
  
  <?
@@ -66,24 +65,28 @@ if(isset($_GET["codigo"]) and $_GET['ap'] == 1)
  {
 	?>
  <script> 
- 
- swal("Atenção", "Não foi agendado, verifique os campos."); 
- $("#calendar").fullCalendar("refetchEvents");
- $('#ModalAdd').modal('hide');   
+ swal("Atenção", "Não foi agendado, verifique os campos.");  
  </script>
 <?	
  }
 }
-else if(isset($_POST["id"]) and $_GET['ap'] == 2)
+else if($_GET['ap'] == 2)
 {
 
-   $SQL = "UPDATE agendamento SET titulo='".$_POST['title']."', inicio='".$_POST['start']."', termino='".$_POST['end']."' WHERE codigo='".$_POST['id']."'";
+   $SQL = "UPDATE agendamento SET data='".$_GET['data']."', hora='".$_GET['hora']."' WHERE codigo='".$_GET['codigo']."'";
    mysqli_query($db3,$SQL);
-
+ ?>
+ 
+  <script> 
+  swal("Atenção", "Reagendado com sucesso."); 
+  $('#editaagenda').modal('hide');
+  </script>
+ 
+ <?
 }
-else if(isset($_POST["id"]) and $_GET['ap'] == 3)
+else if($_GET['ap'] == 3)
 {
-   $SQL = "DELETE from agendamento WHERE codigo='".$_POST['id']."'";
+   $SQL = "DELETE from agendamento WHERE codigo='".$_GET['codigo']."'";
    mysqli_query($db3,$SQL);
 }
 

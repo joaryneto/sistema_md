@@ -83,12 +83,12 @@ $(document).ready(function () {
 
 
     /* background image to cover */
-    $('.background').each(function () {
+    /*$('.background').each(function () {
         var imagewrap = $(this);
         var imagecurrent = $(this).find('img').attr('src');
         imagewrap.css('background-image', 'url("' + imagecurrent + '")');
         $(this).find('img').remove();
-    });
+    });*/
 
 
     /* theme color cookie */

@@ -71,40 +71,11 @@ else if($_GET['ap'] == 2)
 			  echo "<option value='".$row1['hora']."'>".$row1['hora']."</option>";
 		  }
 		}
-		
-		//$hora = '06:30:00';
-		//for($i = 0; $i < 31; $i++)
-		//{
-		  
-		  //$hora = date('H:i:s', strtotime('+30 minute', strtotime($hora)));
-		  //echo "<option value='$hora'>$hora - ".$rhora."</option>";
-		  
-		  //echo $SQL = "INSERT horarios (hora,sistema) values('".$hora."','".$_SESSION['sistema']."');";
-		  //$RES = mysqli_query($db3,$SQL);
-		  
-		  /*$x = 0;
-		  echo $SQL = "SELECT inicio FROM agendamento where inicio='".$data." ".$hora."'";
-		  $RES = mysqli_query($db3,$SQL);
-		  while($row = mysqli_fetch_array($RES))
-		  {
-		     $rhora = formatohora($row['inicio']);
-			 $x = 1;
-		  }
-		  
-		  if($x == 1)
-		  {
-			  
-		  }
-		  else
-		  {
-			  
-		  }*/
-        //}
 
 		?>
 	</select>
-	<script>
-	function agendar()
+<script>
+function agendar()
 {	
 	var datav = document.getElementById('dataagenda').value;
 	var horav = document.getElementById('hora').value;
@@ -138,8 +109,63 @@ else if($_GET['ap'] == 2)
 	</script>
 	<?
 }
+else if($_GET['ap'] == 3)
+{
+   	?>
+	<select name="hora2" id="hora2" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required">
+	<option>Selecionar Horario</option>
+		<?
+		
+		$SQL1 = "SELECT hora FROM horarios where sistema='".$_SESSION['sistema']."'";
+		$RES1 = mysqli_query($db3,$SQL1);
+		while($row1 = mysqli_fetch_array($RES1))
+		{
+		  $x = 0;
+		  $SQL2 = "SELECT hora FROM agendamento where data='".revertedata($_GET['data'])."' and hora='".$row1['hora']."'";
+		  $RES2 = mysqli_query($db3,$SQL2);
+		  while($row2 = mysqli_fetch_array($RES2))
+		  {
+		     //$rhora = formatohora($row['inicio']);
+			 $x = 1;
+		  }
+		  
+		  if($x == 1)
+		  {
+			  
+		  }
+		  else
+		  {
+			  echo "<option value='".$row1['hora']."'>".$row1['hora']."</option>";
+		  }
+		}
+     ?>
+	 </select>
 
-
+	<?
+}
+else if($_GET['ap'] == 4)
+{
+	            
+	$SQL = "SELECT agendamento.cliente,clientes.nome,agendamento.data,agendamento.hora FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente where agendamento.sistema='".$_SESSION['sistema']."' and clientes.nome like '%".$_GET['pesquisa']."%' ORDER BY agendamento.codigo asc";
+	$RES = mysqli_query($db3,$SQL);
+	while($row = mysqli_fetch_array($RES))
+	{
+				?>
+				<div class="col-6 col-md-4 col-lg-3 mb-4" onclick="editar('<?=$row['cliente'];?>','<?=$row['data'];?>','<?=$row['hora'];?>','<?=$row['nome'];?>');">
+                    <div class="mb-3 h-100px rounded overflow-hidden position-relative">
+                        <div class="background" style='background-image: url("template/images/escova-inteligente.jpg");'>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                    <h6 class="font-weight-normal mb-1" style="font-size: 95%;"><? echo $row['nome'];?></h6>
+					<p><span>Hora: <? echo $row['hora'];?>hs</span></p>
+                    <p><span class="dot-notification mr-1"></span> <span class="text-mute">Marcado no dia: <? echo formatodatahora($row['data']);?></span></p>
+                </div>
+			  <?
+			  
+	}
+}
 
 ?>
 

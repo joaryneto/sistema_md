@@ -313,6 +313,7 @@ function auto()
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                 </div>
                                     <div class="modal-body">
+									
 									<div class="row">
 									<div class="col-12">
 									<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Data:</label>
@@ -326,16 +327,49 @@ function auto()
 									<div class="form-group col-md-4 m-t-20" id="horario">
 									    <input name="hora" id="hora" type="hidden" autocomplete="off" class="form-control" required="required" />
 									</div>
+									
 							</div>
 						</div>
-                    </div>
+                    
                     <div class="modal-footer">
 						<div class="row">
                          <div class="col">
-						 <button type="button" onclick="agendar();"  class="mb-2 btn btn-sm btn-primary">Confirmar pagamento</button>
+						 <button type="button" onclick="agendar();"  class="mb-2 btn btn-sm btn-primary">Gravar</button>
                          <button type="button" class="mb-2 btn btn-sm btn-danger" data-dismiss="modal">Sair</button>
 					   </div></div>
                     </div>
+					</div>
+                 </div>
+										
+                <!-- /.modal-content -->
+            </div>						
+        <!-- /.modal-dialog -->
+    </div>	
+   <div id="editaagenda" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+			
+			
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myLargeModalLabel"><b>Reagendar : </h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                </div>
+                                    <div class="modal-body">
+									<div id="loadagenda">
+									<div class="row">
+									<div class="col-12">
+									</div>
+							</div>
+						</div>
+                    
+                    <div class="modal-footer">
+						<div class="row">
+                         <div class="col">
+						 <button type="button" onclick="reagendar();"  class="mb-2 btn btn-sm btn-primary">Gravar</button>
+                         <button type="button" class="mb-2 btn btn-sm btn-danger" data-dismiss="modal">Sair</button>
+					   </div></div>
+                    </div>
+					</div>
                  </div>
 										
                 <!-- /.modal-content -->
@@ -530,8 +564,6 @@ function auto()
     <!-- cookie js -->
     <script src="template/vendor/cookie/jquery.cookie.js"></script>
 
-    <!-- swiper js -->
-    <script src="template/vendor/swiper/js/swiper.min.js"></script>
 
     <!-- template custom js -->
     <script src="template/js/main.js"></script>
