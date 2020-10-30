@@ -146,7 +146,7 @@ else if($_GET['ap'] == 3)
 else if($_GET['ap'] == 4)
 {
 	            
-	$SQL = "SELECT agendamento.cliente,clientes.nome,agendamento.data,agendamento.hora FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente where agendamento.sistema='".$_SESSION['sistema']."' and clientes.nome like '%".$_GET['pesquisa']."%' ORDER BY agendamento.codigo asc";
+	$SQL = "SELECT agendamento.cliente,clientes.nome,agendamento.data, clientes.celular, agendamento.hora FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente where agendamento.sistema='".$_SESSION['sistema']."' and clientes.nome like '%".$_GET['pesquisa']."%' ORDER BY agendamento.codigo asc";
 	$RES = mysqli_query($db3,$SQL);
 	while($row = mysqli_fetch_array($RES))
 	{
@@ -162,8 +162,8 @@ else if($_GET['ap'] == 4)
                         </div>
                         <div class="col pl-0">
                             <b class="h4 mb-3 font-weight-normal"><? echo $row['nome'];?></b>
-                            <p class="large text-mute" style="font-size: initial;">Dia: <? echo formatodatahora($row['data']);?> às Hora: <? echo $row['hora'];?>hs</p>
-							<button type="button" onclick="agenda(1);" class="mb-2 btn btn-outline-success  rounded-0">Atender</button>
+                            <p class="large text-mute" style="font-size: initial;">Dia: <? echo formatodatahora($row['data']);?> às Hora: <? echo formatohora($row['hora']);?>hs</p>
+							<button type="button" onclick="whats('<? echo str_replace("(","", str_replace(")","", str_replace("-","",$row['celular'])));?>','Bom dia *<? echo $row['nome'];?>*! Passando para lembrar que você tem horário agendado hoje as *<? echo formatohora($row['hora']);?>hs*. Studio KA');" class="mb-2 btn btn-outline-success  rounded-0">Whats <i class="fa fa-whatsapp" aria-hidden="true"></i></button>
                             <button type="button" onclick="agenda(2,'<? echo $row['codigo'];?>','<? echo $row['cliente'];?>','<? echo $row['data'];?>','<? echo $row['hora'];?>','<? echo $row['nome'];?>');" class="mb-2 btn btn-outline-primary rounded-0">Editar</button>
 							<button type="button" id="" class="mb-2 btn btn-outline-danger rounded-0">Excluir</button>
                         </div>
