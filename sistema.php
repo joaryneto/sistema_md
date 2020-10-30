@@ -338,7 +338,7 @@ function auto()
                     <div class="modal-footer">
 						<div class="row">
                          <div class="col">
-						 <button type="button" onclick="reagendar();"  class="mb-2 btn btn-sm btn-primary">Gravar</button>
+						 <button type="button" id="agenda" class="mb-2 btn btn-sm btn-primary">Gravar</button>
                          <button type="button" class="mb-2 btn btn-sm btn-danger" data-dismiss="modal">Sair</button>
 					   </div></div>
                     </div>

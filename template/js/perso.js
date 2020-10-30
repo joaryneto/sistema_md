@@ -19,15 +19,18 @@ function pesquisar(pesquisa)
 	requestPage2('?br=atu_pesquisa&pesquisa='+ pesquisa +'&ap=4','load','GET');
 }
 
-function editar(codigo,cliente,data,hora,nome)
+function agenda(tipo,codigo,cliente,data,hora,nome)
 {
-	$('#editaagenda').modal('show');
-	requestPage2('?br=edit_agendamento&codigo='+ codigo +'&cliente='+ cliente +'&data='+ data +'&hora='+ hora +'&nome='+ nome +'&ap=3','loadagenda','GET');
+	//if(tipo == 2)
+	//{
+	    $('#editaagenda').modal('show');
+	    requestPage2('?br=edit_agendamento&codigo='+ codigo +'&cliente='+ cliente +'&data='+ data +'&hora='+ hora +'&nome='+ nome +'&ap=3','loadagenda','GET');
+	//}
 }
 
-function reagendar()
+$( "#agenda" ).click(function() 
 {	
-	var datav = document.getElementById('dataagenda2').value;
+    var datav = document.getElementById('dataagenda2').value;
 	var horav = document.getElementById('hora2').value;
 	var codigo = document.getElementById('codagenda').value;
 	
@@ -47,4 +50,4 @@ function reagendar()
 	{
 	   requestPage2('?br=atu_agendamento&codigo='+ codigo +'&data='+ datav +'&hora='+ horav +'&ap=2','horario2','GET');
 	}
-}
+});
