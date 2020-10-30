@@ -25,9 +25,9 @@ function agenda(tipo,codigo,cliente,data,hora,nome)
    requestPage2('?br=edit_agendamento&codigo='+ codigo +'&cliente='+ cliente +'&data='+ data +'&hora='+ hora +'&nome='+ nome +'&ap=3','loadagenda','GET');
 }
 
-function whats(numero)
+function whats(numero,texto)
 {
-   window.open("https://api.whatsapp.com/send?phone=55"+ numero +"&text=Ol%C3%A1%2C%20Bom%20dia!%20%20Me%20chamo%20Kelligiane!%20Estou%20aqui%20para%20confirmar%20seu%20agendamento%20no%20Sal%C3%A3o.%20Podemos%20confirmar%3F"); 
+   window.open("https://web.whatsapp.com/send?phone=5565999999104"); 
 }
 
 $('#reagendarr').on('click',function(){	
