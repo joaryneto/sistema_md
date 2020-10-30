@@ -62,7 +62,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 									<div class="form-group col-md-4 m-t-20">
 									  <label>Horario:</label>
 									    <div id="horario2">
-										<select name="hora2" id="hora2" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required">
+										<select name="hora2" id="hora2" class="form-control" autocomplete="off" required="required">
 										<option>Selecionar Horario</option>
 										</select>
 										</div>

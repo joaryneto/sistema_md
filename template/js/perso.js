@@ -21,15 +21,36 @@ function pesquisar(pesquisa)
 
 function agenda(tipo,codigo,cliente,data,hora,nome)
 {
-	//if(tipo == 2)
-	//{
-	    $('#editaagenda').modal('show');
-	    requestPage2('?br=edit_agendamento&codigo='+ codigo +'&cliente='+ cliente +'&data='+ data +'&hora='+ hora +'&nome='+ nome +'&ap=3','loadagenda','GET');
-	//}
+   $('#editaagenda').modal('show');
+   requestPage2('?br=edit_agendamento&codigo='+ codigo +'&cliente='+ cliente +'&data='+ data +'&hora='+ hora +'&nome='+ nome +'&ap=3','loadagenda','GET');
 }
 
-$( "#agenda" ).click(function() 
-{	
+$('#reagendarr').on('click',function(){	
+
+    var datav = document.getElementById('dataagenda2').value;
+	var horav = document.getElementById('hora2').value;
+	var codigo = document.getElementById('codagenda').value;
+	
+	if(datav == "")
+	{
+		swal('Atenção', 'Selecione uma data.');
+	}
+	if(horav == "")
+	{
+		swal('Atenção', 'Selecione a hora.');
+	}
+	if(codigo == "")
+	{
+		swal('Atenção', 'Selecione um Cliente.');
+	}
+	else
+	{
+	   requestPage2('?br=atu_agendamento&codigo='+ codigo +'&data='+ datav +'&hora='+ horav +'&ap=2','horario2','GET');
+	}
+});
+
+$('#agendaex').on('click',function(){	
+
     var datav = document.getElementById('dataagenda2').value;
 	var horav = document.getElementById('hora2').value;
 	var codigo = document.getElementById('codagenda').value;

@@ -93,6 +93,11 @@ function revertedata($data){
   }
 .tableFixHead thead th { position: sticky; top: 0; }
 .tableFixHead thead th { background:#fff; }
+
+.form-control 
+{
+    height: calc(2.5em + .75rem + 2px) !important;
+}
 </style>
 </head>
 
@@ -156,7 +161,7 @@ function revertedata($data){
             </div>
         </div>
         <div class="list-group main-menu my-5">
-            <a href="sistema.php?url=cad_agendamento" class="list-group-item list-group-item-action active"><i class="material-icons">home</i>Agendamento</a>
+            <a href="sistema.php?url=cad_agendamento" class="list-group-item list-group-item-action active"><i class="material-icons">home</i>Agenda</a>
             <a href="latestnews.html" class="list-group-item list-group-item-action"><i class="material-icons">view_day</i>Latest news</a>
             <a href="subscribed.html" class="list-group-item list-group-item-action"><i class="material-icons">library_books</i>Subscribed</a>
             <a href="notification.html" class="list-group-item list-group-item-action"><i class="material-icons">notifications</i>Notification <span class="badge badge-dark text-white">2</span></a></a>
@@ -338,7 +343,7 @@ function auto()
                     <div class="modal-footer">
 						<div class="row">
                          <div class="col">
-						 <button type="button" id="agenda" class="mb-2 btn btn-sm btn-primary">Gravar</button>
+						 <button type="button" id="reagendarr" class="mb-2 btn btn-sm btn-primary">Gravar</button>
                          <button type="button" class="mb-2 btn btn-sm btn-danger" data-dismiss="modal">Sair</button>
 					   </div></div>
                     </div>
