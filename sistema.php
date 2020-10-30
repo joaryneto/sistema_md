@@ -54,6 +54,9 @@ function revertedata($data){
     <!-- page CSS -->
     <link href="template/vendor/switchery/dist/switchery.min.css" rel="stylesheet" />
 	
+	<!-- autocomplete CSS -->
+    <link rel="stylesheet" href="template/vendor/EasyAutocomplete-1.3.5/easy-autocomplete.css" >
+	
     <!-- Swiper CSS -->
     <link href="template/vendor/swiper/css/swiper.min.css" rel="stylesheet">
 
@@ -287,7 +290,7 @@ function auto()
     <div class="modal-dialog modal-lg">
             <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="myLargeModalLabel"><b>Agendar Horario : </h4>
+                                <h4 class="modal-title" id="myLargeModalLabel"><b>Agendar Horario </h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                 </div>
                                     <div class="modal-body">
@@ -312,8 +315,8 @@ function auto()
                     <div class="modal-footer">
 						<div class="row">
                          <div class="col">
-						 <button type="button" onclick="agendar();"  class="mb-2 btn btn-sm btn-primary">Gravar</button>
-                         <button type="button" class="mb-2 btn btn-sm btn-danger" data-dismiss="modal">Sair</button>
+						 <button type="button" onclick="agendar();"  class="btn btn-outline-primary rounded mb-2">Gravar</button>
+                         <button type="button" class="btn btn-outline-danger rounded mb-2" data-dismiss="modal">Sair</button>
 					   </div></div>
                     </div>
 					</div>
@@ -329,10 +332,13 @@ function auto()
 			
 			
                             <div class="modal-header">
-                                <h4 class="modal-title" id="myLargeModalLabel"><b>Reagendar : </h4>
+                                <h4 class="modal-title" id="myLargeModalLabel"><b>Reagendar </h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                 </div>
                                     <div class="modal-body">
+									 <div class="form-group col-md-12 m-t-20"><label>Text AutoComplete</label>
+                                     <input  type="text" class="form-control" style="width:100%;" id="example-ajax-post" placeholder="Type Something...">
+									 </div>
 									<div id="loadagenda">
 									<div class="row">
 									<div class="col-12">
@@ -343,8 +349,8 @@ function auto()
                     <div class="modal-footer">
 						<div class="row">
                          <div class="col">
-						 <button type="button" id="reagendarr" class="mb-2 btn btn-sm btn-primary">Gravar</button>
-                         <button type="button" class="mb-2 btn btn-sm btn-danger" data-dismiss="modal">Sair</button>
+						 <button type="button" id="reagendarr" class="btn btn-outline-primary rounded mb-2">Gravar</button>
+                         <button type="button" class="btn btn-outline-danger rounded mb-2" data-dismiss="modal">Sair</button>
 					   </div></div>
                     </div>
 					</div>
@@ -474,6 +480,11 @@ function auto()
         $("#desc").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
     </script>
 	
+	<!-- autocomplete js--> 
+    <script src="template/vendor/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js"></script> 
+
+    <!-- page specific script -->
+    <script src="template/js/autocomplete.js"></script>
 </body>
 
 </html>

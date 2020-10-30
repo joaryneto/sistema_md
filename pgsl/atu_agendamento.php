@@ -78,9 +78,10 @@ else if($_GET['ap'] == 2)
  ?>
  
   <script> 
-  swal("Atenção", "Reagendado com sucesso."); 
   $('#editaagenda').modal('hide');
-  window.location.href='sistema.php';
+  swal("Atenção", "Reagendado com sucesso.");
+  requestPage2('?br=atu_pesquisa&pesquisa=&ap=4','load','GET');
+   
   </script>
  
  <?

@@ -161,10 +161,11 @@ else if($_GET['ap'] == 4)
                             </figure>
                         </div>
                         <div class="col pl-0">
-                            <b href="newsdetails.html" class="h4 mb-3 font-weight-normal"><? echo $row['nome'];?></b>
+                            <b class="h4 mb-3 font-weight-normal"><? echo $row['nome'];?></b>
                             <p class="large text-mute" style="font-size: initial;">Dia: <? echo formatodatahora($row['data']);?> às Hora: <? echo $row['hora'];?>hs</p>
-                            <a class="text-dark"><button type="button" class="shadow mr-2 btn btn-primary rounded mb-2">Editar</button></a>
-							<button type="button" class="shadow mr-2 btn btn-danger rounded mb-2">Excluir</button>
+							<button type="button" onclick="agenda(1);" class="mb-2 btn btn-outline-success  rounded-0">Atender</button>
+                            <button type="button" onclick="agenda(2,'<? echo $row['codigo'];?>','<? echo $row['cliente'];?>','<? echo $row['data'];?>','<? echo $row['hora'];?>','<? echo $row['nome'];?>');" class="mb-2 btn btn-outline-primary rounded-0">Editar</button>
+							<button type="button" id="" class="mb-2 btn btn-outline-danger rounded-0">Excluir</button>
                         </div>
                     </div>
                 </div>

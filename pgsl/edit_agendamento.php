@@ -32,7 +32,12 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 									</div>
 									<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Data:</label>
 										<input name="codagenda" id="codagenda" type="hidden" autocomplete="off" value="<?=$_GET['codigo'];?>" class="form-control" required="required">
-									    <input name="dataagenda2"  id="dataagenda2" value="" type="text" autocomplete="off" class="form-control">
+										<div class="input-group">
+                                                <input type="text" name="dataagenda2" id="dataagenda2" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
 										<script>
 										jQuery('#dataagenda2').datepicker({
 												format: 'dd/mm/yyyy',
@@ -40,6 +45,11 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 										        todayHighlight: true,
 												language: "pt-BR",
 												orientation: "bottom left"
+										});
+							
+										
+										$(function() {
+										  $("#dataagenda2").datepicker();
 										});
 										
 										//function changedata(datavv)
