@@ -59,10 +59,6 @@ function revertedata($data){
 	
     <!-- Swiper CSS -->
     <link href="template/vendor/swiper/css/swiper.min.css" rel="stylesheet">
-
-    <!-- Input Select Seach css -->
-    <link href="template/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
-    <link href="template/vendor/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
 	
     <link href="template/vendor/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
     <!-- Page plugins css -->
@@ -337,7 +333,7 @@ function auto()
                                 </div>
                                     <div class="modal-body">
 									 <div class="form-group col-md-12 m-t-20"><label>Text AutoComplete</label>
-                                     <input  type="text" class="form-control" style="width:100%;" id="example-ajax-post" placeholder="Type Something...">
+                                     <input  type="text" class="form-control" style="width:340px;" id="example-ajax-post" placeholder="Type Something...">
 									 </div>
 									<div id="loadagenda">
 									<div class="row">
