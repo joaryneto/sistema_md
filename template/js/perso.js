@@ -27,7 +27,7 @@ function agenda(tipo,codigo,cliente,data,hora,nome)
 
 function whats(numero,texto)
 {
-   window.open("https://web.whatsapp.com/send?phone=5565999999104"); 
+   window.open("https://api.whatsapp.com/send?phone=55"+ numero +"&text="+ texto.replace(/ /g, "%20") +""); 
 }
 
 $('#reagendarr').on('click',function(){	

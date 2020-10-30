@@ -11,7 +11,7 @@ function formatodatahora($data){
 }
 
 function formatohora($horas){
-    return date("H:i", $horas);
+    return date("H:i", strtotime($horas));
 }
 
 date_default_timezone_set('America/Cuiaba');
