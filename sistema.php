@@ -332,9 +332,7 @@ function auto()
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                 </div>
                                     <div class="modal-body">
-									 <div class="form-group col-md-12 m-t-20"><label>Text AutoComplete</label>
-                                     <input  type="text" class="form-control" style="width:340px;" id="example-ajax-post" placeholder="Type Something...">
-									 </div>
+									 
 									<div id="loadagenda">
 									<div class="row">
 									<div class="col-12">

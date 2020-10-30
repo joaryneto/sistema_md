@@ -275,6 +275,28 @@ function lancar()
 	}
 }
 
+function lancar2() 
+{
+	//var caixa = document.getElementById('caixa').value;
+	var tipo = document.getElementById('tipo').value;
+	var dinheiro = document.getElementById('dinheiro').value;
+	
+	//swal('Atenção', teste);
+	
+	if(descricao == "")
+	{
+		swal('Atenção', 'Nenhuma forma de pagamento escolhido.');
+	}
+	else
+	{
+		//$("#itenss").append('<tr><td>'+ descricao +'</td><td>1x'+ preco +'</td><td>'+ total +'</td><td>.</td></tr>');
+	
+	    ajaxLoader('?br=atu_caixa&tipo='+ tipo +'&desc='+ dinheiro +'&ap=3','formpagamento','GET');
+ 
+	    $('#coditem').val('');
+	}
+}
+
 function pagar()
 {
 	var dinheiro = document.getElementById('dinheiro').value;
@@ -298,15 +320,21 @@ function loadtotal()
 
 function loadpg()
 {
-	var dinheiro = document.getElementById('dinheiro').value;
-	//var credito = document.getElementById('credito').value;
-	var ctdebito = document.getElementById('ctdebito').value;
-	var ctcredito = document.getElementById('ctcredito').value;
-	var ted = document.getElementById('ted').value;
-	
 	//if (event.keyCode === 13) 
 	//{
-      ajaxLoader('?br=atu_caixa&dinheiro='+ dinheiro +'&ctdebito='+ ctdebito +'&ctcredito='+ ctcredito +'&ted='+ ted +'&load=2','loading','GET');
+		
+	var dinheiro = parseFloat(document.getElementById('dinheiro').value.replace(',', '.'));
+	//var credito = document.getElementById('credito').value;
+	var ctdebito = parseFloat(document.getElementById('ctdebito').value.replace(',', '.'));
+	var ctcredito = parseFloat(document.getElementById('ctcredito').value.replace(',', '.'));
+	var ted = parseFloat(document.getElementById('ted').value.replace(',', '.'));
+	
+	//var total = parseFloat(dinheiro.replace(',', '.'))-+parseFloat(ctdebito.replace(',', '.'))-+parseFloat(ctcredito.replace(',', '.'))-+parseFloat(ted.replace(',', '.'));
+	//var numbers = [dinheiro, ctdebito, ctcredito, ted];
+
+	//swal('Valor: '+ dinheiro +'');
+
+       ajaxLoader('?br=atu_caixa&dinheiro='+ dinheiro +'&ctdebito='+ ctdebito +'&ctcredito='+ ctcredito +'&ted='+ ted +'&load=2','loading','GET');
     //}
 }
 
@@ -478,7 +506,7 @@ function auto()
 								<div class="input-group col-md-1 m-t-20">
 								 <div class="row">
                                    <div class="col">
-								     <button type="button" class="shadow mr-2 btn btn-primary rounded mb-2" href="javascript: Web(0);" onclick="lancar();"> Lançar</button>
+								     <button type="button" class="btn btn-outline-primary rounded mb-2" href="javascript: Web(0);" onclick="lancar();"> Lançar</button>
 								   </div>
 								 </div>
 								</div>
@@ -529,7 +557,7 @@ function auto()
 								<h1 style="color: green;font-weight: bold;">Total: R$ <span id="vtotal"><?=$_SESSION['vtotal'];?></span></h1></div><div class="input-group col-md-10 m-t-20">
 								<div id="gravar"></div></div>
 								<div class="input-group col-md-12 m-t-20">
-								<button type="button" class="shadow mr-2 btn btn-primary rounded mb-2" onclick="atualizar();" data-toggle="modal" data-target="#pagamento"><i class="fa fa-plus-circle"></i> Concluir</button>
+								<button type="button" class="btn btn-outline-primary rounded mb-2" onclick="atualizar();" data-toggle="modal" data-target="#pagamento"> Concluir</button>
 							  </form>
                             </div>
                         </div>
@@ -610,7 +638,7 @@ function auto()
 											</div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="mb-2 btn btn-sm btn-danger" data-dismiss="modal">Fechar</button>
+                                                <button type="button" class="btn btn-outline-danger rounded mb-2" data-dismiss="modal">Fechar</button>
                                             </div>
                                         </div>
 										
@@ -650,7 +678,7 @@ function auto()
 											</div>
                                             </div>
                                             <div class="modal-footer">
-											    <a href="javascript: Web(0);" onclick="excluir(<?=$_SESSION['produto'];?>)"  class="btn btn-primary">Excluir</a>
+											    <a href="javascript: Web(0);" onclick="excluir(<?=$_SESSION['produto'];?>)"  class="btn btn-outline-danger rounded mb-2">Excluir</a>
                                                 <button type="button" class="mb-2 btn btn-sm btn-danger" data-dismiss="modal">Sair</button>
                                             </div>
                                         </div>
@@ -670,39 +698,49 @@ function auto()
                                             <div class="modal-body">
 											<div class="row">
 											<div class="col-12">
-											<div class="input-group col-md-12 m-t-20">
-								            <h1 style="color: green;font-weight: bold;">Total: R$ <span id="vtotalp"></span></h1></div><div class="input-group col-md-10 m-t-20">
-								            <div id="gravar"></div></div>
-											<h4>Formas de pagamentos</h4>
 											<form class="m-t-40 row" name="laudo" method="post" action="<? echo $action;?>">
-											<div class="form-group col-md-12 m-t-20"><label>Dinheiro</label>
+											<div class="input-group col-md-12 m-t-20">
+								            <h2 style="color: green; font-weight: bold;">Total: R$ <span id="vtotalp"></span></h2></div>
+											<div class="input-group col-md-12 m-t-20">
+								            <div id="gravar"></div>
+											</div>
+											<div class="form-group col-md-5 m-t-20"><label>Formas de pagamentos</label>
+											<select name="tipo" id="tipo" class="form-control" style="width: 100%; height:36px;" required="required">
+											   <option value="1">Dinheiro</option>
+											   <option value="2">Cartão de Débito</option>
+											   <option value="3">Cartão de Crédito</option>
+											   <option value="4">Transferencia ( Ted, doc, tev)</option>
+											   <option value="5">Link de Pagamento</option>
+											   <option value="6">Outros</option>
+											</select></div>
+											<div class="form-group col-md-3 m-t-20"><label>Valor R$</label>
 											<input type="text" name="dinheiro" id="dinheiro" placeholder="0" onchange="loadpg();" value="" class="form-control" >
-											<!--<label>Crédito </label>
-											<input type="text" name="credito" id="credito" placeholder="0" onkeyup="loadpg();" value="" class="form-control" >-->
-											</div><div class="form-group col-md-12 m-t-20">
-											<label>Cartão de Débito </label>
-											<input type="text" name="ctdebito" id="ctdebito" placeholder="0" onchange="loadpg();" value="" class="form-control" >
-											</div><div class="form-group col-md-12 m-t-20">
-											<label>Cartão de Crédito </label>
-											<input type="text" name="ctcredito" id="ctcredito" placeholder="0" onchange="loadpg();" value="" class="form-control" >
-											</div><div class="form-group col-md-12 m-t-20">
-											<label>Transferencia ( Ted, doc, tev) </label>
-											<input type="text" name="ted" id="ted" placeholder="0" onchange="loadpg();" value="" class="form-control" >
+											</div>
+											<div class="form-group col-md-1 m-t-20">
+											<div class="row">
+											   <div class="col">
+											   <button type="button" class="btn btn-outline-primary rounded mb-2" href="javascript: Web(0);" onclick="lancar2();"> Lançar</button>
+											   </div>
+											   </div>
+											</div>
+											<div class="form-group col-md-12 m-t-20">
+											<table id="formpagamento">
+											</table>
 											</div>
 											<div class="input-group col-md-12 m-t-20">
-											<h1 style="font-weight: bold;" id="vtroco"></h1></div>
+											<h2 style="font-weight: bold;" id="vtroco"></h2>
+											</div>
 											<div class="input-group col-md-10 m-t-20">
 											<div id="gravar"></div></div>
-											<div class="input-group col-md-10 m-t-20">
-											<div id="gravar"></div></div>
+											</form>
 											</div>
 											</div>
                                             </div>
                                             <div class="modal-footer">
 											<div class="row">
                                                  <div class="col">
-											    <a href="javascript: Web(0);" onclick="pagar();"  class="mb-2 btn btn-sm btn-primary">Confirmar pagamento</a>
-                                                <button type="button" class="mb-2 btn btn-sm btn-danger" data-dismiss="modal">Sair</button>
+											    <button type="button" onclick="pagar();"  class="btn btn-outline-primary rounded mb-2">Confirmar</button>
+                                                <button type="button" class="btn btn-outline-danger rounded mb-2" data-dismiss="modal">Sair</button>
 												</div></div>
                                             </div>
                                         </div>

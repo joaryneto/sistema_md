@@ -52,39 +52,22 @@ if($_GET['load'] == 1)
 }
 else if($_GET['load'] == 2)
 {
-    $SQL = "SELECT sum(total) as total FROM vendas_mov where venda='".$_SESSION['venda']."'";
-	$RES = mysqli_query($db3,$SQL);
-	$CREW = mysqli_fetch_array($RES);
-	
 	$dinheiro = str_replace(",",".", str_replace(".","",$_GET['dinheiro']));
-	$ctdebito = str_replace(",",".", str_replace(".","",$_GET['ctdebito']));
-	$ctcredito = str_replace(",",".", str_replace(".","",$_GET['ctcredito']));
-	$ted = str_replace(",",".", str_replace(".","",$_GET['ted']));
-	$totals = str_replace(",",".", $_SESSION['totalvenda']);
+	$totals = str_replace(",",".", str_replace(".","",$_SESSION['totalvenda']));
 
-	$a = $dinheiro+$ctcredito;
-	$b = $a+$ctdebito;
-	$c = $b+$ted;
-	$valor = $c;
-
-	//$t = $totals;
-	//$v = $valor-+$t;
-	
 	if($valor <= $totals)
 	{
 		$v = $totals-+$valor;
 		
-		//print("<script>swal('Atenção', '".$valor." e ".$_SESSION['totalvenda']." total: ".$v."');</script>");
-		//print("<script> document.getElementById('vdiferenca').innerHTML = '".number_format($v,2,",",".")."';</script>");
+		print("<script>swal('Atenção', '".$valor." e ".$totals." total: ".$v."');</script>");
 		print("<script> document.getElementById('vtroco').innerHTML = '<span  style=\"color: red;\">Falta: R$ ".number_format($v,2,",",".")."</span>';</script>");
 		$_SESSION['recebido'] = $v;
 	}
 	else
 	{
 		$v = $valor-+$totals;
-		//print("<script>swal('Atenção', '".$valor." e ".$_SESSION['totalvenda']."');</script>");
+		print("<script>swal('Atenção', '".$valor." e ".$totals."');</script>");
 		print("<script> document.getElementById('vtroco').innerHTML = '<span style=\"color: green;\">Troco: R$".number_format($v,2,",",".")."</span>';</script>");
-		//print("<script> document.getElementById('vdiferenca').innerHTML = '".number_format("0",2,",",".")."';</script>");
 		$_SESSION['recebido'] = $v;
 	}
 }
@@ -160,11 +143,11 @@ if($_GET['ap'] == 1)
 	{
 	    echo "";
 	}
-									  
+	
+	$_SESSION['totalvenda'] = $CREW['total'];	
+	
 	print("<script> document.getElementById('vtotal').innerHTML = '".number_format($CREW['total'],2,",",".")."';</script>");
 	
-	$_SESSION['totalvenda'] = $CREW['total'];
-
 }
 else if($_GET['ap'] == 2)
 {
@@ -173,18 +156,7 @@ else if($_GET['ap'] == 2)
 	$CREW = mysqli_fetch_array($RES);
 	
 	$dinheiro = str_replace(",",".", str_replace(".","",$_GET['dinheiro']));
-	$ctdebito = str_replace(",",".", str_replace(".","",$_GET['ctdebito']));
-	$ctcredito = str_replace(",",".", str_replace(".","",$_GET['ctcredito']));
-	$ted = str_replace(",",".", str_replace(".","",$_GET['ted']));
-	$totals = str_replace(",",".", $_SESSION['totalvenda']);
-
-	$a = $dinheiro+$ctcredito;
-	$b = $a+$ctdebito;
-	$c = $b+$ted;
-	$valor = $c;
-	
-	//$b = $a+;
-	//$c = $b+;
+	$tipo = $_GET['dinheiro'];
 	
 	if($valor < $totals)
 	{
@@ -194,39 +166,42 @@ else if($_GET['ap'] == 2)
 	}
 	else
 	{
-		//$v = $valor-+$totals;
-		//print("<script>swal('Atenção', '".$valor." e ".$totals." total: ".$v."');</script>");
 		
-		if(!Empty($dinheiro))
-		{
-		     $SQL1 = "INSERT into vendas_recebidos(sistema,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$dinheiro."','1','1');";
-	         mysqli_query($db3,$SQL1);
-			 //print('<script>swal("Atenção", "'.$SQL1.'");</script>');
-		}
-		if(!Empty($ctcredito))
-		{
-			$SQL1 = "INSERT into vendas_recebidos(sistema,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$ctcredito."','2','1');";
-	        mysqli_query($db3,$SQL1);
-		}
-		if(!Empty($ctdebito))
-		{
-			$SQL1 = "INSERT into vendas_recebidos(sistema,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$ctdebito."','3','1');";
-	        mysqli_query($db3,$SQL1);
-		}
-		if(!Empty($ted))
-	    {
-			$SQL1 = "INSERT into vendas_recebidos(sistema,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$ted."','4','1');";
-	        mysqli_query($db3,$SQL1);
-		}
+		$SQL1 = "INSERT into vendas_recebidos(sistema,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$dinheiro."','1','1');";
+	    mysqli_query($db3,$SQL1);
 		
 	    $data = date('Y-m-d H:i:s');
 	    $SQL2 = "UPDATE vendas SET status=0, data='".$data."' where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['venda']."'";
+		$SQL2 = "UPDATE vendas_recebidos SET status=1 where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['venda']."'";
 	    $RES = mysqli_query($db3,$SQL2);
 		
 	    print("<script>window.location.href='caixa.php';</script>");
 	}
 }
-
+else if($_GET['ap'] == 3)
+{
+	$dinheiro = str_replace(",",".", str_replace(".","",$_GET['dinheiro']));
+	$tipo = $_GET['dinheiro'];
+	
+	if($valor == $totals)
+	{
+		$v = $totals-+$valor;
+		print("<script>swal('Atenção', 'Existe uma diferença de valor total R$ ".number_format($v,2,",",".").". Confirme o valor pago.');</script>");
+	}
+	else
+	{
+		
+		$SQL1 = "INSERT into vendas_recebidos(sistema,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$dinheiro."','".$tipo."','1');";
+	    mysqli_query($db3,$SQL1);
+		
+	    $data = date('Y-m-d H:i:s');
+	    $SQL2 = "UPDATE vendas SET status=0, data='".$data."' where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['venda']."'";
+		$SQL2 = "UPDATE vendas_recebidos SET status=1 where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['venda']."'";
+	    $RES = mysqli_query($db3,$SQL2);
+		
+	    print("<script>window.location.href='caixa.php';</script>");
+	}
+}
 
 mysqli_close($db3);
 ?>	
