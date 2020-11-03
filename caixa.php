@@ -232,32 +232,31 @@ function lancar()
 	var qtd = document.getElementById('qtd').value;
 	var desc = document.getElementById('desc').value;
 	var preco = document.getElementById('preco').value;
-	var total = document.getElementById('total').value;
+	var total = document.getElementById('totals').value;
 	
 	
-	//if(empty(localStorage.getItem('total2')))
-	//{
-	//	localStorage.setItem("total",'0');
-	//}
-	
-    //var valor = localStorage.getItem('total2');
-	//var b = parseInt(valor)+parseInt(total);
-	//localStorage.setItem("total2",b);
-    //var teste = localStorage.getItem('total2'); // Pegar informação
-	//localStorage.removeItem('total'); //remover //  Remover informação
-	
-	//swal('Atenção', teste);
 	
 	if(descricao == "")
 	{
 		swal('Atenção', 'Nenhum produto encontrato');
+	}
+	if(coditem == "")
+	{
+		swal('Atenção', 'Nenhum produto encontrato');
+	}
+	if(qtd == "")
+	{
+		swal('Atenção', 'Nenhuma quantidade estipulado');
+	}
+	if(total == "")
+	{
+		swal('Atenção', 'Nenhum valor encontrado');
 	}
 	else
 	{
 		//$("#itenss").append('<tr><td>'+ descricao +'</td><td>1x'+ preco +'</td><td>'+ total +'</td><td>.</td></tr>');
 	
 	    ajaxLoader('?br=atu_caixa&produto='+ coditem +'&desc='+ desc +'&preco='+ preco +'&total='+ total +'&quantidade='+ qtd +'&ap=1','itenss','GET');
-	    //ajaxLoader('?br=atu_caixa&produto='+ coditem +'&preco='+ preco +'&total='+ total +'&quantidade='+ qtd +'&ap=1','itenss','GET');
 	 
 	     
 	    $('#coditem').val('');
@@ -497,7 +496,7 @@ function auto()
 								<div class="input-group col-md-2 m-t-20">
 								<div class="input-group mb-3">
 								<input type="hidden" name="total" id="total" disabled value="" class="form-control">
-								<input type="text" name="totals" autocomplete="off" id="totals" placeholder="Total R$ " disabled value="" class="form-control">
+								<input type="text" name="totals" autocomplete="off" id="totals" placeholder="Total R$ " value="" class="form-control">
                                     <div class="input-group-append">
                                          <span class="input-group-text" id="basic-addon2">Total</span>
                                     </div>
@@ -779,6 +778,7 @@ function auto()
         $("#ctcredito").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
         $("#ted").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
         $("#desc").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+		$("#totals").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
     </script>
 	
     <!-- page level script -->

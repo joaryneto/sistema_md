@@ -26,12 +26,8 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
                               
 									<div class="row">
 									<div class="col-12">
-									<div class="form-group col-md-12 m-t-20"><label>Text AutoComplete</label>
-                                     <input  type="text" class="form-control" style="width:340px;" id="example-ajax-post" placeholder="Pesquisa Cliente...">
-									 <input name="codigodd" id="codigodd" type="hidden" autocomplete="off" class="form-control" required="required" />
-									 </div>
 									<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Cliente:</label>
-									    <input name="nome2" id="nome2" type="text" value="<?=$_GET['nome'];?>" autocomplete="off" class="form-control">
+									    <input name="nome2" id="nome2" type="text" value="<?=$_GET['nome'];?>" autocomplete="off" class="form-control" readonly>
 									<div id="pesquisacliente"></div>
 									</div>
 									<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Data:</label>

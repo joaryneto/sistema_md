@@ -22,7 +22,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //}
 //require_once("../load/class/mysql.php");
 
-if($_GET['load'] == 1)
+/*if($_GET['load'] == 1)
 {
 	
 $data = array();
@@ -40,7 +40,7 @@ while($row = mysqli_fetch_array($RES))
 
 echo json_encode($data);
 
-}
+}*/
 
 if(isset($_GET["codigo"]) and $_GET['ap'] == 1)
 {
@@ -80,8 +80,6 @@ else if($_GET['ap'] == 2)
   <script> 
   $('#editaagenda').modal('hide');
   swal("Atenção", "Reagendado com sucesso.");
-  requestPage2('?br=atu_pesquisa&pesquisa=&ap=4','load','GET');
-   
   </script>
  
  <?
@@ -94,12 +92,42 @@ else if($_GET['ap'] == 3)
  
   <script> 
   swal("Atenção", "Excluido com sucesso."); 
-  window.location.href='sistema.php';
+  //window.location.href='sistema.php';
   </script>
  
  <?
 }
 
+if($_GET['load'] == 1)
+{
+	            
+	$SQL = "SELECT agendamento.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento.data,agendamento.hora FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente where agendamento.sistema='".$_SESSION['sistema']."' and clientes.nome like '%".$_GET['pesquisa']."%' ORDER BY agendamento.codigo asc";
+	$RES = mysqli_query($db3,$SQL);
+	while($row = mysqli_fetch_array($RES))
+	{
+				?>
+				<div class="col-12 col-md-6 mb-4">
+                    <div class="row">
+                        <div class="col-4">
+                            <figure class="m-0 h-150 w-100 rounded overflow-hidden">
+                                <div class="background" style='background-image: url("template/images/escova-inteligente.jpg");'>
+                                    
+                                </div>
+                            </figure>
+                        </div>
+                        <div class="col pl-0">
+                            <b class="h4 mb-3 font-weight-normal"><? echo $row['nome'];?></b>
+                            <p class="large text-mute" style="font-size: initial;">Dia: <? echo formatodatahora($row['data']);?> às Hora: <? echo formatohora($row['hora']);?>hs</p>
+							<button type="button" onclick="whats('<? echo str_replace("(","", str_replace(")","", str_replace("-","",$row['celular'])));?>','Bom dia *<? echo $row['nome'];?>*! %0APassando para lembrar que você tem horário agendado hoje às *<? echo formatohora($row['hora']);?>hs*.%0A%0A *Studio KA*');" class="mb-2 btn btn-outline-success  rounded-0">Whats <i class="fa fa-whatsapp" aria-hidden="true"></i></button>
+                            <button type="button" onclick="agenda(2,'<? echo $row['codigo'];?>','<? echo $row['cliente'];?>','<? echo $row['data'];?>','<? echo $row['hora'];?>','<? echo $row['nome'];?>');" class="mb-2 btn btn-outline-primary rounded-0">Editar</button>
+							<button type="button" onclick="agendaex('<? echo $row['codigo'];?>');" class="mb-2 btn btn-outline-danger rounded-0">Excluir</button>
+                        </div>
+                    </div>
+                </div>
+			  <?
+			  
+	}
+}
 
 
 ?>

@@ -323,12 +323,21 @@ function excluir2(produto)
 	}
 }
 </script>	
-                <div class="row">
-				
-                    <div class="col-12">
-					
-                        <div class="card">
-                            <div class="card-body">
+<div class="container-fluid bg-template mb-4">
+            <div class="row hn-290 position-relative">
+			<div class="background opac heightset">
+                    <i class="fa fa-calendar" style="font-size: 200px;position: absolute;left: 40%;top: 50px;"></i>
+                </div>
+                <div class="container align-self-end">
+                    <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Caixa Alteriores";?></h2>
+                    <p class="text-mute mb-2"><? echo $_SESSION["DESCRICAOPG2"] = "Lista";?></p>
+                    <input type="text" Onkeyup="pesquisar(this.value);" class="form-control form-control-lg search bottom-25 position-relative border-0" placeholder="Pesquisa">
+                </div>
+            </div>
+        </div>   
+				  
+<div class="container pt-5">
+            <div class="row" id="load">
 							    <?
 								
 								$SQL3 = "SELECT sum(total) as total FROM vendas_mov where caixa='".$_SESSION['caixa']."'";
@@ -338,8 +347,6 @@ function excluir2(produto)
 								$vtotal = number_format($ROW3['total'],2,",",".");
 								
 								?>
-								<h1 class="card-title"><? echo $_SESSION["PAGINA"] = "Caixa Alteriores";?></h1>
-								<form class="m-t-40 row" name="laudo" method="post" action="<? echo $action;?>">
 								<div class="form-group col-md-12 m-t-20" style="clear: both;">
                                         <table class="table table-hover">
                                             <thead>
@@ -365,7 +372,7 @@ function excluir2(produto)
 										  {
 												 
 										  ?>
-                                            <tr onclick="ajaxLoader('?br=rel_caixaanteriores&codigo=<? echo $row['codigo'];?>','itenss','GET');" data-toggle="modal" data-target="#itens" aria-invalid="false"><!-- color: #20aee3; -->
+                                            <tr onclick="ajaxLoader('?br=rel_caixaanteriores&codigo=<? echo $row['codigo'];?>','loadanteriores','GET');" data-toggle="modal" data-target="#extratocaixaanteriores" aria-invalid="false"><!-- color: #20aee3; -->
 											    <td class="text-center"><? echo $row['codigo'];?></td>
                                                 <td class="text-center"><? echo $row['nome'];?></td>
 												<td class="text-right"><? echo formatodatahora($row['data_ab']);?> <? echo $row['hora_ab'];?></td>
@@ -387,33 +394,4 @@ function excluir2(produto)
                                         </table>
                                     </div>
 								</div>
-								<div id="itens" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="myLargeModalLabel"><b>Extrato : </h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            </div>
-                                            <div class="modal-body">
-											<div class="row">
-											<div class="col-12">
-											<div id="itenss">											 
-											</div>
-											</div>
-											</div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Fechar</button>
-                                            </div>
-                                        </div>
-										
-                                        <!-- /.modal-content -->
-                                    </div>
-									
-                                    <!-- /.modal-dialog -->
-                                </div>
-							  </form>
                             </div>
-                        </div>
-					</div>
-				</div>

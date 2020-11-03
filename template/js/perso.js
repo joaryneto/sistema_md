@@ -30,6 +30,40 @@ function whats(numero,texto)
    window.open("https://api.whatsapp.com/send?phone=55"+ numero +"&text="+ texto.replace(/ /g, "%20") +""); 
 }
 
+function agendar()
+{	
+	var datav = document.getElementById('dataagenda').value;
+	var horav = document.getElementById('hora').value;
+	var codigo = document.getElementById('codigo').value;
+	
+	if(datav == "")
+	{
+		swal('Atenção', 'Selecione uma data.');
+	}
+	if(horav == "")
+	{
+		swal('Atenção', 'Selecione a hora.');
+	}
+	if(codigo == "")
+	{
+		swal('Atenção', 'Selecione um Cliente.');
+	}
+	else
+	{
+	   requestPage2('?br=atu_agendamento&codigo='+ codigo +'&data='+ datav +'&hora='+ horav +'&ap=1&load=1','load','GET');
+	}
+}
+
+$('#aagenda').on('click',function(){	
+
+      $('#dataagenda').val('');
+      $('#codigo').val('');
+      $('Input[nome]').val('');
+      $('#hora').val('');
+      $('#agenda').modal('show');
+
+});
+
 $('#reagendarr').on('click',function(){	
 
     var datav = document.getElementById('dataagenda2').value;
@@ -50,9 +84,15 @@ $('#reagendarr').on('click',function(){
 	}
 	else
 	{
-	   requestPage2('?br=atu_agendamento&codigo='+ codigo +'&data='+ datav +'&hora='+ horav +'&ap=2','loadagenda','GET');
+	   requestPage2('?br=atu_agendamento&codigo='+ codigo +'&data='+ datav +'&hora='+ horav +'&ap=2&=load=1','loadagenda','GET');
 	}
 });
+
+
+function agendaex(codigo)
+{
+	requestPage('?br=atu_agendamento&codigo='+ codigo +'&ap=3&load=1','load','GET');
+}
 
 $('#agendaex').on('click',function(){	
 

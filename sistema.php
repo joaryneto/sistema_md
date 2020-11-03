@@ -238,7 +238,7 @@ function revertedata($data){
 
 </script>
 <div class="fab">
-   <button type="button" data-toggle="modal" data-target="#agenda" class="main">
+   <button type="button" id="aagenda" class="main">
       <i class="fa fa-calendar"></i>
    </button>
   </div>
@@ -259,21 +259,27 @@ function buscarcliente(nome)
 	}
 }
 
-function selectcliente(codigo,nome)
+function codigo(codigo)
 {	
-	var datav = document.getElementById('dataagenda').value;
+   // if(event.key === 'Enter') 
+	//{
+	   var datav = document.getElementById('dataagenda').value;
+	   //var codigo = document.getElementById('codigo').value;
 	
-	if(datav == "")
-	{
-		swal('Atenção', 'Selecione uma data.');
-	}
-	else
-	{
-	   document.getElementById('pcliente').style.display = 'none';
-	   $('#codigo').val(codigo);
-	   $('#nome').val(nome);
-	   requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&nome='+ nome +'&data='+ datav +'&ap=2','horario','GET');
-	}
+	   if(datav == "")
+	   {
+		  swal('Atenção', 'Selecione uma data.');
+	   }
+	   else if(codigo == "")
+	   {
+		  swal('Atenção', 'Selecione um cliente.');
+	   }
+	   else
+   	   {
+	      //$('#codigo').val(codigo);
+	      requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&data='+ datav +'&ap=2','horario','GET');
+	   }
+	//}
 }
 
 function auto()
@@ -297,9 +303,10 @@ function auto()
 									    <input name="dataagenda" id="dataagenda" OnChange="alteradata();" type="text" autocomplete="off" class="form-control" required="required" />
 									</div>
 									<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Pesquisar Cliente:</label>
-										<input name="codigo" id="codigo" type="hidden" autocomplete="off" class="form-control" required="required" />
-									    <input name="nome" id="nome" type="text" onkeyup="buscarcliente(this.value);" autocomplete="off" class="form-control" required="required" />
+										<input name="codigo" id="codigo" onchange="codigo(this.value)" type="hidden" autocomplete="off" class="form-control" required="required" />
+									    <input name="nome" id="example-ajax-post" type="text" style="width:300px" autocomplete="off" class="form-control" required="required" />
 									<div id="pesquisacliente"></div>
+									
 									</div>
 									<div class="form-group col-md-4 m-t-20" id="horario">
 									    <input name="hora" id="hora" type="hidden" autocomplete="off" class="form-control" required="required" />
@@ -355,6 +362,32 @@ function auto()
         <!-- /.modal-dialog -->
     </div>	
     <!-- wrapper ends -->
+	
+	<div id="extratocaixaanteriores" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myLargeModalLabel"><b>Extrato : </h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            </div>
+                                            <div class="modal-body">
+											<div class="row">
+											<div class="col-12">
+											<div id="loadanteriores">											 
+											</div>
+											</div>
+											</div>
+                                            </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Fechar</button>
+                            </div>
+                    </div>
+										
+                 <!-- /.modal-content -->
+              </div>
+									
+           <!-- /.modal-dialog -->
+      </div>
 
     <!-- color chooser menu start -->
     <div class="modal fade " id="colorscheme" tabindex="-1" role="dialog" aria-hidden="true">
