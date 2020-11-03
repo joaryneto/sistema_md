@@ -68,6 +68,22 @@ function revertedata($data){
     <link href="template/vendor/calendar/dist/fullcalendar.css" rel="stylesheet" />
 	
 	<script type="text/javascript" src="template/js/AjaxScript.js.php"></script>
+<style>
+.tableFixHead          { 
+  overflow-y: auto; 
+  height: auto;
+  border: 1px solid;
+  border-color: lightgray;
+  border-radius: 14px 14px 14px 14px;
+  }
+.tableFixHead thead th { position: sticky; top: 0; }
+.tableFixHead thead th { background:#fff; }
+
+.form-control 
+{
+    height: calc(2.5em + .75rem + 2px) !important;
+}
+</style>
 </head>
 
 <body>
