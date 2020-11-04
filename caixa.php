@@ -50,11 +50,11 @@ function revertedata($data){
     <link rel="stylesheet" href="template/vendor/materializeicon/material-icons.css">
 
     <!-- Roboto fonts CSS -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
 
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="template/vendor/bootstrap-4.4.1/css/bootstrap.min.css" rel="stylesheet">
-
+	
     <!-- Swiper CSS -->
     <link href="template/vendor/swiper/css/swiper.min.css" rel="stylesheet">
 
@@ -63,6 +63,15 @@ function revertedata($data){
 	
 	<!--alerts CSS -->
     <link href="template/vendor/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
+	
+	
+	<script type="text/javascript" src="template/vendor/propeller-master/dist/css/propeller.css"></script>
+	
+	<link href="template/vendor/propeller-master/components/list/css/list.css" type="text/css" rel="stylesheet" />
+	<link href="template/vendor/propeller-master/components/card/css/card.css" type="text/css" rel="stylesheet" />
+	<link href="template/vendor/propeller-master/components/typography/css/typography.css" type="text/css" rel="stylesheet" />
+    <link href="template/vendor/propeller-master/components/button/css/button.css" type="text/css" rel="stylesheet" />
+    <link href="template/vendor/propeller-master/components/floating-action-button/css/floating-action-button.css" type="text/css" rel="stylesheet" /> 
 	
 	<!-- Calendar CSS -->
     <link href="template/vendor/calendar/dist/fullcalendar.css" rel="stylesheet" />
@@ -74,7 +83,6 @@ function revertedata($data){
   height: auto;
   border: 1px solid;
   border-color: lightgray;
-  border-radius: 14px 14px 14px 14px;
   }
 .tableFixHead thead th { position: sticky; top: 0; }
 .tableFixHead thead th { background:#fff; }
@@ -82,6 +90,10 @@ function revertedata($data){
 .form-control 
 {
     height: calc(2.5em + .75rem + 2px) !important;
+}
+
+.fab {
+    bottom: 10px !important;
 }
 </style>
 </head>
@@ -124,17 +136,6 @@ function revertedata($data){
         </div>
         <!-- header ends -->
 
-<style>
-.tableFixHead          { 
-  overflow-y: auto; 
-  height: 200px;
-  border: 1px solid;
-  border-color: lightgray;
-  border-radius: 14px 14px 14px;  
-  }
-.tableFixHead thead th { position: sticky; top: 0; }
-.tableFixHead thead th { background:#fff; }
-</style>
 <?
 					
 					
@@ -472,10 +473,10 @@ function auto()
  <div class="container">              
            <div class="row">			
                     <div class="col-12">
-								<form class="m-t-40 row" name="laudo" method="post" action="<? echo $action;?>">
+								<div class="m-t-40 row" style="display: flex;" id="forcaixa">
 								<div class="input-group col-md-12 m-t-20">
 								 <div class="input-group mb-3">
-                                  <input type="text" class="form-control" autocomplete="off"   name="descricao" onMouseOver="auto();" id="descricao" data-toggle="modal" data-target="#itens" placeholder="Descrição do produto - ( Clique aqui )" aria-invalid="false" readonly="readonly">
+                                  <input type="text" class="form-control form-control-lg" autocomplete="off"   name="descricao" onMouseOver="auto();" id="descricao" data-toggle="modal" data-target="#itens" placeholder="Descrição do produto - ( Clique aqui )" aria-invalid="false" readonly="readonly">
                                     <div class="input-group-append">
                                          <span class="input-group-text" id="basic-addon2">Desc.  </span>
                                     </div>
@@ -483,7 +484,7 @@ function auto()
 								</div>
 								<div class="input-group col-md-5 m-t-20">
 								 <div class="input-group mb-3">
-                                  <input type="text" class="form-control" autocomplete="off" autofocus="true" name="codigo" id="codigo" placeholder="Codigo de barra">
+                                  <input type="text" class="form-control form-control-lg" autocomplete="off" autofocus="true" name="codigo" id="codigo" placeholder="Codigo de barra">
                                     <div class="input-group-append">
                                          <span class="input-group-text" id="basic-addon2">Cod.  </span>
                                     </div>
@@ -491,7 +492,7 @@ function auto()
 								</div>
 								<div class="input-group col-md-2 m-t-20">
 								<div class="input-group mb-3">
-								<input type="text" name="qtd" id="qtd" autocomplete="off" placeholder="Qtd" onMouseOver="auto();" value="" onkeyup="loadtotal();" class="form-control" >
+								<input type="text" name="qtd" id="qtd" class="form-control form-control-lg" autocomplete="off" placeholder="Qtd" onMouseOver="auto();" value="" onkeyup="loadtotal();">
                                     <div class="input-group-append">
                                          <span class="input-group-text" id="basic-addon2"> Qtd.</span>
                                     </div>
@@ -499,11 +500,11 @@ function auto()
 								</div>
 								
 								<input type="hidden" name="coditem" autocomplete="off" id="coditem" value="" class="form-control">
-								<input type="hidden" name="preco" id="preco" placeholder="Preço R$ " disabled value="" class="form-control" >
+								<input type="hidden" name="preco" id="preco" placeholder="Preço R$ " disabled value="" class="form-control form-control-lg" >
 								
 								<div class="input-group col-md-2 m-t-20" style="display: none">
 								<div class="input-group mb-3">
-								<input type="text" name="desc" autocomplete="off" id="desc" placeholder="Desc." onMouseOver="testE();" onchange="loadtotal();" value="" class="form-control" >
+								<input type="text" name="desc" autocomplete="off" id="desc" placeholder="Desc." onMouseOver="testE();" onchange="loadtotal();" value="" class="form-control form-control-lg" >
                                     <div class="input-group-append">
                                          <span class="input-group-text" id="basic-addon2">Desc.</span>
                                     </div>
@@ -512,7 +513,7 @@ function auto()
 								<div class="input-group col-md-2 m-t-20">
 								<div class="input-group mb-3">
 								<input type="hidden" name="total" id="total" disabled value="" class="form-control">
-								<input type="text" name="totals" autocomplete="off" id="totals" placeholder="Total R$ " value="" class="form-control">
+								<input type="text" name="totals" autocomplete="off" id="totals" placeholder="Total R$ " value="" class="form-control form-control-lg">
                                     <div class="input-group-append">
                                          <span class="input-group-text" id="basic-addon2">Total</span>
                                     </div>
@@ -521,23 +522,29 @@ function auto()
 								<div class="input-group col-md-1 m-t-20">
 								 <div class="row">
                                    <div class="col">
-								     <button type="button" class="btn btn-outline-primary rounded mb-2" href="javascript: Web(0);" onclick="lancar();"> Lançar</button>
+								   <button class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" onclick="lancar();" type="button"><i class="material-icons pmd-sm">add</i></button>
 								   </div>
 								 </div>
 								</div>
-								<div class="input-group col-md-5 m-t-20">
+								</div>
+								<div class="m-t-40 row">
+								<div class="input-group col-md-12 m-t-20">
                                 <div class="help-block"></div></div>
 								<div class="form-group col-md-12 m-t-20" style="clear:">
-                                       <div class="tableFixHead"> <table class="table table-hover">
-                                            <thead>
-                                                <tr>
+									<div class="pmd-card pmd-table-card-responsive" id="dtable" style="display:none;">
+						<div class="pmd-table-card">  
+							<table class="table pmd-table table-hover">
+								<thead>
+									<tr>
+										<tr>
                                                     <th class="text-center">Descrição</th>
                                                     <th class="text-right">Qtd/C. Uni.</th>
                                                     <th class="text-right">Total</th>
                                                 </tr>
-                                            </thead>
-                                            <tbody id="itenss">
-                                                <? 
+									</tr>
+								</thead>
+								<tbody id="itenss">
+									<? 
 										  
 										  $data = date('Y');
 										  $sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.total) as totals, count(vendas_mov.produto) as quantidade from vendas_mov inner join produtos on produtos.codigo=vendas_mov.produto where vendas_mov.venda='".$_SESSION['venda']."' GROUP BY vendas_mov.total,vendas_mov.produto";
@@ -563,24 +570,25 @@ function auto()
                                             </tr>';
 										  }
 										  ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
+								</tbody>
+							</table>
+						</div>
+					</div>
 								</div>
+								
 								<div class="input-group col-md-12 m-t-20">
 								<input type="hidden" class="form-control" name="totalvenda" id="totalvenda" value="" required="" aria-invalid="false">
 								<h1 style="color: green;font-weight: bold;">Total: R$ <span id="vtotal"><?=$_SESSION['vtotal'];?></span></h1></div><div class="input-group col-md-10 m-t-20">
 								<div id="gravar"></div></div>
 								<div class="input-group col-md-12 m-t-20">
-								<button type="button" class="btn btn-outline-primary rounded mb-2" onclick="atualizar();" data-toggle="modal" data-target="#pagamento"> Concluir</button>
-							  </form>
+							  </div>
                             </div>
                         </div>
 					</div>
 				</div>
 			</div>
     </div>
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+	                           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -662,47 +670,6 @@ function auto()
 									
                                     <!-- /.modal-dialog -->
                                 </div>
-								
-								<div id="quantidade" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="myLargeModalLabel"><b>Quantidade de Itens : </h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            </div>
-                                            <div class="modal-body">
-											<div class="row">
-											<div class="col-12">
-											<div class="form-group col-md-12 m-t-20">
-											
-											<table class="display nowrap table table-hover table-striped table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Descrição</th>
-												<th>Preço</th>
-												<th>Total</th>
-												<th>X</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="quantidaeitem">
-										
-                                        </tbody>
-                                    </table>											 
-											</div>
-											</div>
-											</div>
-                                            </div>
-                                            <div class="modal-footer">
-											    <a href="javascript: Web(0);" onclick="excluir(<?=$_SESSION['produto'];?>)"  class="btn btn-outline-danger rounded mb-2">Excluir</a>
-                                                <button type="button" class="mb-2 btn btn-sm btn-danger" data-dismiss="modal">Sair</button>
-                                            </div>
-                                        </div>
-										
-                                        <!-- /.modal-content -->
-                                    </div>
-									
-                                    <!-- /.modal-dialog -->
-                                </div>
                                 <div class="modal fade" id="pagamento" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -761,7 +728,35 @@ function auto()
                                         </div>
                                     </div>
                                 </div>
-
+								<script>
+							    function slow()
+								{
+								  if($('#dtable').css('display') == 'none' )
+								  {
+									 $("#forcaixa" ).hide( "slow" );
+                                     $("#dtable" ).show( "slow" );
+									 $("#btncarrinho").attr("data-title","Add Produtos");
+								  }
+								  else
+								  {
+									 $("#forcaixa" ).show( "slow" );
+									 $("#dtable" ).hide( "slow" );
+									 $("#btncarrinho").attr("data-title","Itens do Carrinho");
+								  }
+								}
+                                </script>
+					
+ <div class="menu pmd-floating-action" role="navigation"> 
+        <button class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" onclick="slow();" id="btncarrinho" data-title="Itens do Carrinho"> 
+            <span class="pmd-floating-hidden">Itens</span> 
+            <i class="material-icons">store_mall_directory</i> 
+        </button> 
+        <button class="pmd-floating-action-btn btn btn-lg pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" onclick="atualizar();" data-toggle="modal" data-target="#pagamento" data-title="Concluir"> 
+            <span class="pmd-floating-hidden">Primary</span>
+            <i class="material-icons pmd-sm">check</i> 
+        </button> 
+    </div>
+	
     <!-- jquery, popper and bootstrap js 
     <script src="template/js/jquery-3.3.1.min.js"></script>-->
 	<script src="template/vendor/jquery/jquery.min.js"></script>
@@ -786,6 +781,7 @@ function auto()
     <script src="template/vendor/sweetalert/sweetalert.min.js"></script>
     <script src="template/vendor/sweetalert/jquery.sweet-alert.custom.js"></script>
 	
+	<script type="text/javascript" src="template/vendor/propeller-master/dist/js/propeller.min.js"></script>
 	<!-- MASK INPUT -->
     <script src="template/vendor/mask.money/jquery.maskMoney.js"></script>
     <script>
