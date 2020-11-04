@@ -79,7 +79,7 @@ $string = '{
 
 
 $fp = fopen('manifest.json', 'w');
-fwrite($fp, json_encode($string));
+fwrite($fp, $string);
 fclose($fp);
 
 //echo $_SESSION['sistema'];
