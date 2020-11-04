@@ -24,7 +24,6 @@ function revertedata($data){
 		return $data;
 }
 
-
 if($_SERVER['SERVER_NAME'] == "svsistema.app")
 {
 	$_SESSION['tipo'] = 1;
@@ -37,6 +36,51 @@ else if($_SERVER['SERVER_NAME'] == "sistema.sl")
 {
 	$_SESSION['tipo'] = 3;
 }
+
+
+$string = '{
+  "name": "Aspa",
+  "short_name": "Aspa",
+  "icons": [{
+    "src": "/images/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }, {
+      "src": "/images/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }, {
+      "src": "/images/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    }, {
+      "src": "/images/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }, {
+      "src": "/images/icons/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }, {
+      "src": "/images/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }, {
+      "src": "/images/icons/icon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+	  "purpose": "maskable"
+    }],
+  "start_url": "/index.php",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF"
+}';
+
+
+$fp = fopen('manifest.json', 'w');
+fwrite($fp, json_encode($string));
+fclose($fp);
 
 //echo $_SESSION['sistema'];
 ?>
