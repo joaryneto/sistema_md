@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     /* Browser fullscreen experience on double click */
     if (self == top) {
-        $('body').on('dblclick', function (e) {
+        $('body').on('tripleclick', function (e) {
 
             if (!document.fullscreenElement && // alternative standard method
                 !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) { // current working methods
