@@ -141,7 +141,7 @@ if($_GET['ap'] == 1)
 	} 									  
 	if($b == 0)
 	{
-	    echo "";
+	    echo '<tr><td colspan="4" class="text-center"> Nenhum registro encontrado.</td></tr>';
 	}
 	
 	$_SESSION['totalvenda'] = $CREW['total'];	
@@ -181,25 +181,26 @@ else if($_GET['ap'] == 2)
 else if($_GET['ap'] == 3)
 {
 	$dinheiro = str_replace(",",".", str_replace(".","",$_GET['dinheiro']));
-	$tipo = $_GET['dinheiro'];
+	$totals = $_SESSION['totalvenda'];
+	$tipo = $_GET['tipo'];
 	
-	if($valor == $totals)
+	if($dinheiro <= $totals)
 	{
-		$v = $totals-+$valor;
-		print("<script>swal('Atenção', 'Existe uma diferença de valor total R$ ".number_format($v,2,",",".").". Confirme o valor pago.');</script>");
-	}
-	else
-	{
+		$v = $totals-+$dinheiro;
+		//print("<script>swal('Atenção', 'Existe uma diferença de valor total R$ ".number_format($v,2,",",".").". Confirme o valor pago 2.');</script>");
+		//print("<script>swal('Atenção', 'Total: ".$totals." Dinheiro: ".$dinheiro."  total soma R$ ".number_format($v,2,",",".").". Confirme o valor pago 1.');</script>");
 		
 		$SQL1 = "INSERT into vendas_recebidos(sistema,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$dinheiro."','".$tipo."','1');";
 	    mysqli_query($db3,$SQL1);
 		
-	    $data = date('Y-m-d H:i:s');
-	    $SQL2 = "UPDATE vendas SET status=0, data='".$data."' where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['venda']."'";
-		$SQL2 = "UPDATE vendas_recebidos SET status=1 where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['venda']."'";
-	    $RES = mysqli_query($db3,$SQL2);
+	    //$data = date('Y-m-d H:i:s');
+	    //$SQL2 = "UPDATE vendas SET status=0, data='".$data."' where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['venda']."'";
+		//$SQL2 = "UPDATE vendas_recebidos SET status=1 where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['venda']."'";
+	    //$RES = mysqli_query($db3,$SQL2);
 		
-	    print("<script>window.location.href='caixa.php';</script>");
+	    //print("<script>window.location.href='caixa.php';</script>");
+		
+	    print('<script> document.getElementById("vtroco").innerHTML = "<span style=\'color: red;\'>Falta: R$ '.number_format($v,2,",",".").'</span>";</script>');
 	}
 }
 

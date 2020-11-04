@@ -67,11 +67,17 @@ function revertedata($data){
 	
 	<script type="text/javascript" src="template/vendor/propeller-master/dist/css/propeller.css"></script>
 	
+	
+	<link href="template/vendor/propeller-master/components/select2/css/pmd-select2.css" type="text/css" rel="stylesheet" />
+	<link href="template/vendor/propeller-master/components/select2/css/select2.min.css" type="text/css" rel="stylesheet" />
+	<link href="template/vendor/propeller-master/components/select2/css/select2-bootstrap.css" type="text/css" rel="stylesheet" />
+	
 	<link href="template/vendor/propeller-master/components/list/css/list.css" type="text/css" rel="stylesheet" />
 	<link href="template/vendor/propeller-master/components/card/css/card.css" type="text/css" rel="stylesheet" />
 	<link href="template/vendor/propeller-master/components/typography/css/typography.css" type="text/css" rel="stylesheet" />
     <link href="template/vendor/propeller-master/components/button/css/button.css" type="text/css" rel="stylesheet" />
     <link href="template/vendor/propeller-master/components/floating-action-button/css/floating-action-button.css" type="text/css" rel="stylesheet" /> 
+	<link href="template/vendor/propeller-master/components/textfield/css/textfield.css" type="text/css" rel="stylesheet" /> 
 	
 	<!-- Calendar CSS -->
     <link href="template/vendor/calendar/dist/fullcalendar.css" rel="stylesheet" />
@@ -288,28 +294,6 @@ function lancar()
 		//localStorage.setItem("total",''+ parseInt(total) +'');
 		
 		//document.getElementById('vtotal').innerHTML = teste;
-	}
-}
-
-function lancar2() 
-{
-	//var caixa = document.getElementById('caixa').value;
-	var tipo = document.getElementById('tipo').value;
-	var dinheiro = document.getElementById('dinheiro').value;
-	
-	//swal('Atenção', teste);
-	
-	if(descricao == "")
-	{
-		swal('Atenção', 'Nenhuma forma de pagamento escolhido.');
-	}
-	else
-	{
-		//$("#itenss").append('<tr><td>'+ descricao +'</td><td>1x'+ preco +'</td><td>'+ total +'</td><td>.</td></tr>');
-	
-	    ajaxLoader('?br=atu_caixa&tipo='+ tipo +'&desc='+ dinheiro +'&ap=3','formpagamento','GET');
- 
-	    $('#coditem').val('');
 	}
 }
 
@@ -682,12 +666,12 @@ function auto()
 											<div class="col-12">
 											<form class="m-t-40 row" name="laudo" method="post" action="<? echo $action;?>">
 											<div class="input-group col-md-12 m-t-20">
-								            <h2 style="color: green; font-weight: bold;">Total: R$ <span id="vtotalp"></span></h2></div>
+								            <h1 class="pmd-display1" style="color: green; font-weight: bold;">Total: R$ <span id="vtotalp"></span></h1></div>
 											<div class="input-group col-md-12 m-t-20">
 								            <div id="gravar"></div>
 											</div>
-											<div class="form-group col-md-5 m-t-20"><label>Formas de pagamentos</label>
-											<select name="tipo" id="tipo" class="form-control" style="width: 100%; height:36px;" required="required">
+											<div class="form-group col-md-5 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Formas de pagamentos</label>
+											<select name="tipo" id="tipo" class="form-control mat-input form-control" style="width: 100%; height:36px;" required="required">
 											   <option value="1">Dinheiro</option>
 											   <option value="2">Cartão de Débito</option>
 											   <option value="3">Cartão de Crédito</option>
@@ -695,22 +679,48 @@ function auto()
 											   <option value="5">Link de Pagamento</option>
 											   <option value="6">Outros</option>
 											</select></div>
-											<div class="form-group col-md-3 m-t-20"><label>Valor R$</label>
-											<input type="text" name="dinheiro" id="dinheiro" placeholder="0" onchange="loadpg();" value="" class="form-control" >
+											<div class="form-group col-md-3 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Valor R$</label>
+											<input type="text" name="dinheiro" id="dinheiro" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control" >
 											</div>
-											<div class="form-group col-md-1 m-t-20">
-											<div class="row">
-											   <div class="col">
-											   <button type="button" class="btn btn-outline-primary rounded mb-2" href="javascript: Web(0);" onclick="lancar2();"> Lançar</button>
-											   </div>
-											   </div>
+											<div class="form-group col-md-12 m-t-20" id="recebpagamento">
+											
 											</div>
+											<div class="input-group col-md-1 m-t-20">
+								 <div class="row">
+                                   <div class="col">
+								   <script>
+								   function lancar2() 
+{
+	//var caixa = document.getElementById('caixa').value;
+	var tipo = document.getElementById('tipo').value;
+	var dinheiro = document.getElementById('dinheiro').value;
+	
+	//swal('Atenção', teste);
+	
+	if(dinheiro == "")
+	{
+		swal('Atenção', 'Nenhuma forma de pagamento escolhido.');
+	}
+	else
+	{
+		//$("#itenss").append('<tr><td>'+ descricao +'</td><td>1x'+ preco +'</td><td>'+ total +'</td><td>.</td></tr>');
+	
+	    ajaxLoader('?br=atu_caixa&tipo='+ tipo +'&dinheiro='+ dinheiro +'&ap=3','recebpagamento','GET');
+ 
+	    //$('#coditem').val('');
+	}
+}
+								   </script>
+								   <button class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" onclick="lancar2();" type="button"><i class="material-icons pmd-sm">add</i></button>
+								   </div>
+								 </div>
+								</div>
 											<div class="form-group col-md-12 m-t-20">
 											<table id="formpagamento">
 											</table>
 											</div>
 											<div class="input-group col-md-12 m-t-20">
-											<h2 style="font-weight: bold;" id="vtroco"></h2>
+											<h1 class="pmd-display1" style="font-weight: bold;" id="vtroco"></h1>
 											</div>
 											<div class="input-group col-md-10 m-t-20">
 											<div id="gravar"></div></div>
@@ -721,8 +731,8 @@ function auto()
                                             <div class="modal-footer">
 											<div class="row">
                                                  <div class="col">
-											    <button type="button" onclick="pagar();"  class="btn btn-outline-primary rounded mb-2">Confirmar</button>
-                                                <button type="button" class="btn btn-outline-danger rounded mb-2" data-dismiss="modal">Sair</button>
+											    <button type="button" onclick="pagar();"  class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Confirmar</button>
+                                                <button type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-danger" data-dismiss="modal">Sair</button>
 												</div></div>
                                             </div>
                                         </div>
@@ -747,9 +757,9 @@ function auto()
                                 </script>
 					
  <div class="menu pmd-floating-action" role="navigation"> 
-        <button class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" onclick="slow();" id="btncarrinho" data-title="Itens do Carrinho"> 
+        <button class="pmd-floating-action-btn btn pmd-btn-fab pmd-ripple-effect btn-secondary pmd-btn-raised" onclick="slow();" id="btncarrinho" data-title="Itens do Carrinho"> 
             <span class="pmd-floating-hidden">Itens</span> 
-            <i class="material-icons">store_mall_directory</i> 
+            <i class="material-icons">add_shopping_cart</i> 
         </button> 
         <button class="pmd-floating-action-btn btn btn-lg pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" onclick="atualizar();" data-toggle="modal" data-target="#pagamento" data-title="Concluir"> 
             <span class="pmd-floating-hidden">Primary</span>
@@ -781,6 +791,11 @@ function auto()
     <script src="template/vendor/sweetalert/sweetalert.min.js"></script>
     <script src="template/vendor/sweetalert/jquery.sweet-alert.custom.js"></script>
 	
+	
+	<!-- Propeller textfield js -->
+	<script type="text/javascript" src="template/vendor/propeller-master/components/textfield/js/textfield.js"></script>
+
+	<script type="text/javascript" src="template/vendor/propeller-master/components/select2/js/pmd-select2.js"></script>
 	<script type="text/javascript" src="template/vendor/propeller-master/dist/js/propeller.min.js"></script>
 	<!-- MASK INPUT -->
     <script src="template/vendor/mask.money/jquery.maskMoney.js"></script>
