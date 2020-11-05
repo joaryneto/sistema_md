@@ -1,59 +1,60 @@
+<!DOCTYPE html>
 <html>
-<!-- Mirrored from maxartkiller.com/website/Lemux/lemux-HTML/framworkElements/modal.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Dec 2019 13:57:02 GMT -->
-<head>
-
-    <title>EC Tecnologia</title>
-	
-	
-</head>
-
-<body>
-
-
-
-<div id="mapa"> </div>
-    <!-- Roboto fonts CSS -->
-	
-<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <head>
+    <title>Earthquake Markers</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkAxHHQRiSufp-pcVynzrGEcTAtAgpC14&callback=initMap&libraries=&v=weekly"
       defer
     ></script>
+    <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
 
-        <!-- Arquivo de inicialização do mapa -->
-	
-<script>
-  function init() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 6,
-      center: new google.maps.LatLng(51.509865, -0.118092)
-    });
-    var icon = {
-        path: "M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0z", //SVG path of awesomefont marker
-        fillColor: '#333333', //color of the marker
-        fillOpacity: 1,
-        strokeWeight: 0,
-        scale: 0.09, //size of the marker, careful! this scale also affects anchor and labelOrigin
-        anchor: new google.maps.Point(200,510), //position of the icon, careful! this is affected by scale
-        labelOrigin: new google.maps.Point(205,190) //position of the label, careful! this is affected by scale
-    }
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script>
+      let map;
 
-    var marker = new google.maps.Marker({
-      position: map.getCenter(),
-      map: map,
-      icon: icon,
-      label: {
-        fontFamily: "'Font Awesome 5 Free'",
-        text: '\uf0f9', //icon code
-        fontWeight: '900', //careful! some icons in FA5 only exist for specific font weights
-        color: '#FFFFFF', //color of the text inside marker
-      },
-    });
-  }
-  google.maps.event.addDomListener(window, 'load', init);
-</script>	
-</body>
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 2,
+          center: new google.maps.LatLng(2.8, -187.3),
+          mapTypeId: "terrain",
+        });
+        // Create a <script> tag and set the USGS URL as the source.
+        const script = document.createElement("script");
+        // This example uses a local copy of the GeoJSON stored at
+        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+        script.src =
+          "https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js";
+        document.getElementsByTagName("head")[0].appendChild(script);
+      }
 
-
-<!-- Mirrored from maxartkiller.com/website/Lemux/lemux-HTML/framworkElements/modal.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Dec 2019 13:57:05 GMT -->
+      // Loop through the results array and place a marker for each
+      // set of coordinates.
+      const eqfeed_callback = function (results) {
+        for (let i = 0; i < results.features.length; i++) {
+          const coords = results.features[i].geometry.coordinates;
+          const latLng = new google.maps.LatLng(coords[1], coords[0]);
+          new google.maps.Marker({
+            position: latLng,
+            map: map,
+          });
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+  </body>
 </html>
