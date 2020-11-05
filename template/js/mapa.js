@@ -17,7 +17,7 @@ function initialize() {
 
 initialize();
 
-function abrirInfoBox(id, marker) 
+/*function abrirInfoBox(id, marker) 
 {
 	if (typeof(idInfoBoxAberto) == 'number' && typeof(infoBox[idInfoBoxAberto]) == 'object') {
 		infoBox[idInfoBoxAberto].close();
@@ -25,7 +25,7 @@ function abrirInfoBox(id, marker)
 
 	infoBox[id].open(map, marker);
 	idInfoBoxAberto = id;
-}
+}*/
   
 function carregarPontos() {
 
@@ -35,16 +35,16 @@ function carregarPontos() {
     //-----------------------------------------------------------------------
     // 2) Send a http request with AJAX http://api.jquery.com/jQuery.ajax/
     //-----------------------------------------------------------------------
-    $.ajax({                                      
+    /*$.ajax({                                      
       url: 'db.php',                  //the script to call to get data         	  
       data: "",                        //you can insert url argumnets here to pass to api.php                                //for example "id=5&parent=6"
       dataType: 'json',                //data format      
       success: function(data)          //on recieve of reply
-      {
+      {*/
         //var id = data[0].regiao;              //get id
         //var vname = data[0].comentario;           //get name
 		
-	$.getJSON('template/js/pontos.json', function(pontos) {
+	$.getJSON('pgsl/pontos.php', function(pontos) {
 		
 		var latlngbounds = new google.maps.LatLngBounds();
 		
@@ -56,7 +56,7 @@ function carregarPontos() {
 				icon: ""+ [ponto.icon] +""
 			});
 			
-		   var conteudo = '<div id="iw-container">' +
+		   /*var conteudo = '<div id="iw-container">' +
                     '<div class="iw-title">' + data[0].regiao + '</div>' +
                     '<div class="iw-content">' +
                       '<div class="iw-subTitle"></div>' +
@@ -67,7 +67,7 @@ function carregarPontos() {
                       '<br>' + data[0].telefone + '<br>email: ' + data[0].email + '<br></p>'+
                     '</div>' +
                     '<div class="iw-bottom-gradient"></div>' +
-                  '</div>';
+                  '</div>';*/
 			
 			var myOptions = {
 				content: "" + conteudo + "",
@@ -93,7 +93,7 @@ function carregarPontos() {
 		
 	});
 	
-	      } 
+	    //  } 
     });
   }); 
 }
