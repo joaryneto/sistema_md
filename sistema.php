@@ -164,7 +164,7 @@ function revertedata($data){
 			<nav class="navbar" style="padding: .1rem 0rem;">
                 <ul class="navbar-nav">
 				    <li class="nav-item dropdown" style="width: 230px;">
-                        <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="sistema.php?url=inicio" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
                             <div class="list-group-item list-group-item-action active">
                                 <i class="material-icons">perm_contact_calendar</i> Agenda
                             </div>
@@ -263,7 +263,7 @@ function revertedata($data){
 </div>
 <? if($_GET['url'] == "inicio"){?>
  <div class="menu pmd-floating-action" role="navigation"> 
-        <button class="pmd-floating-action-btn btn btn-lg pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" onclick="atualizar();" data-toggle="modal" data-target="#pagamento" data-title="Concluir"> 
+        <button class="pmd-floating-action-btn btn btn-lg pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" id="aagenda"> 
             <span class="pmd-floating-hidden">Primary</span>
             <i class="material-icons pmd-sm">perm_contact_calendar</i> 
         </button> 
