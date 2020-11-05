@@ -17,7 +17,8 @@ function initialize() {
 
 initialize();
 
-function abrirInfoBox(id, marker) {
+function abrirInfoBox(id, marker) 
+{
 	if (typeof(idInfoBoxAberto) == 'number' && typeof(infoBox[idInfoBoxAberto]) == 'object') {
 		infoBox[idInfoBoxAberto].close();
 	}
@@ -43,7 +44,7 @@ function carregarPontos() {
         //var id = data[0].regiao;              //get id
         //var vname = data[0].comentario;           //get name
 		
-	$.getJSON('js/pontos.json', function(pontos) {
+	$.getJSON('template/js/pontos.json', function(pontos) {
 		
 		var latlngbounds = new google.maps.LatLngBounds();
 		
@@ -73,12 +74,12 @@ function carregarPontos() {
 				pixelOffset: new google.maps.Size(-150, 0)
         	};
 			
-			infoBox[data[0].id] = new InfoBox(myOptions);
-			infoBox[data[0].id].marker = marker;
+			//infoBox[data[0].id] = new InfoBox(myOptions);
+			//infoBox[data[0].id].marker = marker;
 			
-			infoBox[data[0].id].listener = google.maps.event.addListener(marker, 'click', function (e) {
-				abrirInfoBox(data[0].id, marker);
-			});
+			//infoBox[data[0].id].listener = google.maps.event.addListener(marker, 'click', function (e) {
+			//	abrirInfoBox(data[0].id, marker);
+			//});
 			
 			markers.push(marker);
 			
