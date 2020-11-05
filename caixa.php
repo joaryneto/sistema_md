@@ -543,7 +543,7 @@ function showPosition(position)
   {
 	  
 	  var distancia = (getDistanceFromLatLonInKm(
-   {lat: -15.5592615, lng: -56.0448968},
+   {lat: -15.552971, lng: -56.056201},
    {lat: position.coords.latitude, lng: position.coords.longitude}
 )); 
       var km = distancia / 1000;
