@@ -510,65 +510,7 @@ function auto()
 								   </div>
 								 </div>
 								</div>
-								<p id="demo">Clique no botão para receber as coordenadas:</p>
-<button onclick="getLocation()">Clique Aqui</button>
-<script>
-function getDistanceFromLatLonInKm(position1, position2) 
-{
-    "use strict";
-    var deg2rad = function (deg) { return deg * (Math.PI / 180); },
-        R = 6371,
-        dLat = deg2rad(position2.lat - position1.lat),
-        dLng = deg2rad(position2.lng - position1.lng),
-        a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
-            + Math.cos(deg2rad(position1.lat))
-            * Math.cos(deg2rad(position1.lat))
-            * Math.sin(dLng / 2) * Math.sin(dLng / 2),
-        c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return ((R * c *1000).toFixed());
-}
-
-
-var x=document.getElementById("demo");
-
-function getLocation()
-  {
-  if (navigator.geolocation)
-    {
-    navigator.geolocation.getCurrentPosition(showPosition,showError);
-    }
-  else{x.innerHTML="Seu browser não suporta Geolocalização.";}
-  }
-function showPosition(position)
-  {
-	  
-	  var distancia = (getDistanceFromLatLonInKm(
-   {lat: -15.552971, lng: -56.056201},
-   {lat: position.coords.latitude, lng: position.coords.longitude}
-)); 
-      var km = distancia / 1000;
-      x.innerHTML ="Distancia: " + km.toFixed(1) + " km"; 
-	  
-  }
-function showError(error)
-  {
-  switch(error.code) 
-    {
-    case error.PERMISSION_DENIED:
-      x.innerHTML="Usuário rejeitou a solicitação de Geolocalização."
-      break;
-    case error.POSITION_UNAVAILABLE:
-      x.innerHTML="Localização indisponível."
-      break;
-    case error.TIMEOUT:
-      x.innerHTML="A requisição expirou."
-      break;
-    case error.UNKNOWN_ERROR:
-      x.innerHTML="Algum erro desconhecido aconteceu."
-      break;
-    }
-  }
-</script>
+								
 
 								</div>
 								<div class="m-t-40 row">
