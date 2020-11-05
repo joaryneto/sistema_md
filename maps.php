@@ -4,7 +4,7 @@
     <title>Earthquake Markers</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeWJF-L_qKGclsEzof6FLaQ2gVzi41pog&callback=initMap&libraries=&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCGdG9DWYHvzKCQG8ZuOXhYwNY2Gby04E&callback=initMap&libraries=&v=weekly"
       defer
     ></script>
     <style type="text/css">
