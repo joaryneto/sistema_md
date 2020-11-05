@@ -12,14 +12,14 @@
 
 
 <div id="mapa"> </div>
-
-    <link rel="stylesheet" href="template/css/estilos.css">
-
     <!-- Roboto fonts CSS -->
 	
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
- 
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+
         <!-- Arquivo de inicialização do mapa -->
 	
 <script>
