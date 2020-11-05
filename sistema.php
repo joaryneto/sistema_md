@@ -117,7 +117,7 @@ function revertedata($data){
     <!-- Loader ends -->
 
     <!-- sidebar -->
-    <div class="sidebar">
+    <div class="sidebar sidebar-left">
         <div class="row no-gutters">
             <div class="col-auto align-self-center">
                 <figure class="avatar avatar-40">
@@ -159,11 +159,30 @@ function revertedata($data){
                 <a href="login.php" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
             </div>
         </div>
+		
         <div class="list-group main-menu my-5">
-            <a href="sistema.php?url=cad_agendamento" class="list-group-item list-group-item-action active"><i class="material-icons">home</i>Agenda</a>
-            <a href="latestnews.html" class="list-group-item list-group-item-action"><i class="material-icons">view_day</i>Latest news</a>
-            <a href="subscribed.html" class="list-group-item list-group-item-action"><i class="material-icons">library_books</i>Subscribed</a>
-            <a href="notification.html" class="list-group-item list-group-item-action"><i class="material-icons">notifications</i>Notification <span class="badge badge-dark text-white">2</span></a></a>
+		<nav class="navbar" style="padding: .1rem 0rem;">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown" style="width: 255px;">
+                        <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="item-title list-group-item list-group-item-action">
+                                <i class="material-icons">menu</i> Caixa
+                            </div>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="javascript:void(0)" class="sidebar-close  dropdown-item">
+                             Caixa Atual
+                            </a>
+                            <a href="#" class="sidebar-close dropdown-item menu-right">
+                             Caixa Anteriores
+                            </a>
+                            <a href="javascript:void(0)" class="sidebar-close dropdown-item popup-open" data-toggle="modal" data-target="#fullscreenmenu">
+                             Full Screen
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
     <!-- sidebar ends -->

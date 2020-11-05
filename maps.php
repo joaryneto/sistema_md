@@ -35,7 +35,7 @@
           center: myLatLng,
           fullscreenControl: true,
           zoomControl: true,
-          streetViewControl: false
+          streetViewControl: true
         });
         new google.maps.Marker({
           position: myLatLng,
