@@ -275,7 +275,8 @@ function showError(error)
     }
   }
 </script>
-
+<div id="mapa">
+        </div>
 								</div>
 	
                         </div>
@@ -336,7 +337,18 @@ function showError(error)
     </script>
 	
     <!-- page level script -->
-
+ 
+        <!-- Maps API Javascript -->
+        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBppUaO6bff64aKcuZv-CUTUPWOBFW200s&sensor=false"></script>
+        
+        <!-- Caixa de informação -->
+        <script src="template/js/infobox.js"></script>
+		
+        <!-- Agrupamento dos marcadores -->
+		<script src="template/js/markerclusterer.js"></script>
+ 
+        <!-- Arquivo de inicialização do mapa -->
+		<script src="template/js/mapa.js"></script>
 
 </body>
 
