@@ -513,7 +513,24 @@ function auto()
 								<p id="demo">Clique no botão para receber as coordenadas:</p>
 <button onclick="getLocation()">Clique Aqui</button>
 <script>
+function getDistanceFromLatLonInKm(position1, position2) 
+{
+    "use strict";
+    var deg2rad = function (deg) { return deg * (Math.PI / 180); },
+        R = 6371,
+        dLat = deg2rad(position2.lat - position1.lat),
+        dLng = deg2rad(position2.lng - position1.lng),
+        a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+            + Math.cos(deg2rad(position1.lat))
+            * Math.cos(deg2rad(position1.lat))
+            * Math.sin(dLng / 2) * Math.sin(dLng / 2),
+        c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return ((R * c *1000).toFixed());
+}
+
+
 var x=document.getElementById("demo");
+
 function getLocation()
   {
   if (navigator.geolocation)
@@ -524,8 +541,16 @@ function getLocation()
   }
 function showPosition(position)
   {
-  x.innerHTML="Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;  
+      //x.innerHTML="Latitude: " + position.coords.latitude + 
+      //"<br>Longitude: " + position.coords.longitude; 
+
+         var distancia = (getDistanceFromLatLonInKm(
+   {lat: -15.5592615, lng: -56.0448968},
+   {lat: position.coords.latitude, lng: position.coords.longitude}
+));
+
+console.log(distancia);	  
+	  
   }
 function showError(error)
   {
