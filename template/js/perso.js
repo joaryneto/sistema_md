@@ -1,3 +1,4 @@
+'user strict'
 function logar()
 {
     var login = document.getElementById('inputEmail').value;
@@ -117,3 +118,25 @@ $('#agendaex').on('click',function(){
 	   requestPage2('?br=atu_agendamento&codigo='+ codigo +'&data='+ datav +'&hora='+ horav +'&ap=2','horario2','GET');
 	}
 });
+
+
+$('#catual').on('click',function()
+{	
+   document.getElementById("btnshow").click();
+   requestPage('?br=cad_caixaatual','conteudo','GET');
+});
+
+$('#canteriores').on('click',function()
+{	
+   document.getElementById("btnshow").click();
+   requestPage('?br=cad_caixaalteriores','conteudo','GET');
+});
+
+$('#cmpagamento').on('click',function()
+{	
+   document.getElementById("btnshow").click();
+   requestPage('?br=cad_cmeiodepagamento','conteudo','GET');
+});
+
+
+

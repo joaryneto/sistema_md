@@ -672,50 +672,24 @@ function auto()
 											<div class="input-group col-md-12 m-t-20">
 								            <div id="gravar"></div>
 											</div>
-											<div class="form-group col-md-5 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Formas de pagamentos</label>
-											<select name="tipo" id="tipo" class="form-control mat-input form-control" style="width: 100%; height:36px;" required="required">
-											   <option value="1">Dinheiro</option>
-											   <option value="2">Cartão de Débito</option>
-											   <option value="3">Cartão de Crédito</option>
-											   <option value="4">Transferencia ( Ted, doc, tev)</option>
-											   <option value="5">Link de Pagamento</option>
-											   <option value="6">Outros</option>
-											</select></div>
-											<div class="form-group col-md-3 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Valor R$</label>
-											<input type="text" name="dinheiro" id="dinheiro" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control" >
+											<div class="input-group col-md-12 m-t-20">
+											<div class="form-group col-md-12 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Dinheiro</label>
+											<input type="text" name="dinheiro" id="dinheiro" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control">
+											</div>
+											<div class="form-group col-md-12 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Cartão de Débito</label>
+											<input type="text" name="cdebito" id="cdebito" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control">
+											</div>
+											<div class="form-group col-md-12 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Cartão de Crédito</label>
+											<input type="text" name="ccredito" id="ccredito" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control">
+											</div>
+											<div class="form-group col-md-12 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Transferencia ( Ted, doc, tev)</label>
+											<input type="text" name="ted" id="ted" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control">
+											</div>
 											</div>
 											<div class="form-group col-md-12 m-t-20" id="recebpagamento">
 											
 											</div>
 											<div class="input-group col-md-1 m-t-20">
-								 <div class="row">
-                                   <div class="col">
-<script>
-function lancar2() 
-{
-	//var caixa = document.getElementById('caixa').value;
-	var tipo = document.getElementById('tipo').value;
-	var dinheiro = document.getElementById('dinheiro').value;
-	
-	//swal('Atenção', teste);
-	
-	if(dinheiro == "")
-	{
-		swal('Atenção', 'Nenhuma forma de pagamento escolhido.');
-	}
-	else
-	{
-		//$("#itenss").append('<tr><td>'+ descricao +'</td><td>1x'+ preco +'</td><td>'+ total +'</td><td>.</td></tr>');
-	
-	    requestPage2('?br=atu_caixa&tipo='+ tipo +'&dinheiro='+ dinheiro +'&ap=3','recebpagamento','GET');
- 
-	    //$('#coditem').val('');
-	}
-}
-								   </script>
-								   <button class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" onclick="lancar2();" type="button"><i class="material-icons pmd-sm">add</i></button>
-								   </div>
-								 </div>
 								</div>
 											<div class="form-group col-md-12 m-t-20">
 											<table id="formpagamento">
@@ -724,8 +698,6 @@ function lancar2()
 											<div class="input-group col-md-12 m-t-20">
 											<h1 class="pmd-display1" style="font-weight: bold;" id="vtroco"></h1>
 											</div>
-											<div class="input-group col-md-10 m-t-20">
-											<div id="gravar"></div></div>
 											</form>
 											</div>
 											</div>

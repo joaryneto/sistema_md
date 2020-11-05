@@ -187,18 +187,18 @@ else if($_GET['ap'] == 3)
 	if($dinheiro <= $totals)
 	{
 		$v = $totals-+$dinheiro;
-		//print("<script>swal('Atenção', 'Existe uma diferença de valor total R$ ".number_format($v,2,",",".").". Confirme o valor pago 2.');</script>");
-		//print("<script>swal('Atenção', 'Total: ".$totals." Dinheiro: ".$dinheiro."  total soma R$ ".number_format($v,2,",",".").". Confirme o valor pago 1.');</script>");
 		
 		$SQL1 = "INSERT into vendas_recebidos(sistema,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$dinheiro."','".$tipo."','1');";
 	    mysqli_query($db3,$SQL1);
 		
 	    //$data = date('Y-m-d H:i:s');
-	    //$SQL2 = "UPDATE vendas SET status=0, data='".$data."' where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['venda']."'";
+	    //$SQL2 = "UPDATE vendas SET status=2, data='".$data."' where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['venda']."'";
 		//$SQL2 = "UPDATE vendas_recebidos SET status=1 where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['venda']."'";
-	    //$RES = mysqli_query($db3,$SQL2);
+	    $RES = mysqli_query($db3,$SQL2);
 		
 	    //print("<script>window.location.href='caixa.php';</script>");
+		
+		$_SESSION['totalvenda'] = $_SESSION['totalvenda']-$dinheiro;
 		
 	    print('<script> document.getElementById("vtroco").innerHTML = "<span style=\'color: red;\'>Falta: R$ '.number_format($v,2,",",".").'</span>";</script>');
 	}

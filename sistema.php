@@ -177,13 +177,13 @@ function revertedata($data){
                             </div>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="sistema.php?url=cad_caixaatual" class="sidebar-close dropdown-item menu-right">
+                            <a href="javascript:void(0)" id="catual" class="sidebar-close dropdown-item menu-right">
 							 Caixa Atual
                             </a>
-                            <a href="sistema.php?url=cad_caixaalteriores" class="sidebar-close dropdown-item menu-right">
+                            <a href="sistema.php?url=cad_caixaalteriores" id="canteriores" class="sidebar-close dropdown-item menu-right">
                              Caixa Anteriores
                             </a>
-                            <a href="sistema.php?url=cad_cmeiodepagamento" class="sidebar-close dropdown-item popup-open" >
+                            <a href="sistema.php?url=cad_cmeiodepagamento" id="cmpagamento" class="sidebar-close dropdown-item popup-open" >
                              Meios de Pagamento
                             </a>
                         </div>
@@ -201,7 +201,7 @@ function revertedata($data){
         <div class="header">
             <div class="row no-gutters">
                 <div class="col-auto">
-                    <button class="btn btn-link menu-btn"><i class="material-icons menu">menu</i><i class="material-icons closeicon">close</i><span class="new-notification"></span></button>
+                    <button class="btn btn-link menu-btn" id="btnshow"><i class="material-icons menu">menu</i><i class="material-icons closeicon">close</i><span class="new-notification"></span></button>
                 </div>
                 <div class="col text-left">
                     <div class="header-logo">
@@ -219,7 +219,7 @@ function revertedata($data){
 
         <!-- page content here -->
         
-        
+        <div id="conteudo">
 		<?php
 		if(Empty($_SESSION['manutencao']))
 		{
@@ -236,7 +236,7 @@ function revertedata($data){
 		} 
 		?>
         <!-- page content ends -->
-
+        </div>
 
         <!-- footer -->
         <div class="footer">
