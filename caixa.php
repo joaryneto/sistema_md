@@ -690,8 +690,8 @@ function auto()
 											<div class="input-group col-md-1 m-t-20">
 								 <div class="row">
                                    <div class="col">
-								   <script>
-								   function lancar2() 
+<script>
+function lancar2() 
 {
 	//var caixa = document.getElementById('caixa').value;
 	var tipo = document.getElementById('tipo').value;
@@ -707,7 +707,7 @@ function auto()
 	{
 		//$("#itenss").append('<tr><td>'+ descricao +'</td><td>1x'+ preco +'</td><td>'+ total +'</td><td>.</td></tr>');
 	
-	    ajaxLoader('?br=atu_caixa&tipo='+ tipo +'&dinheiro='+ dinheiro +'&ap=3','recebpagamento','GET');
+	    requestPage2('?br=atu_caixa&tipo='+ tipo +'&dinheiro='+ dinheiro +'&ap=3','recebpagamento','GET');
  
 	    //$('#coditem').val('');
 	}

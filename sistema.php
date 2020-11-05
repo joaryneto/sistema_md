@@ -117,7 +117,7 @@ function revertedata($data){
     <!-- Loader ends -->
 
     <!-- sidebar -->
-    <div class="sidebar sidebar-left">
+    <div class="sidebar">
         <div class="row no-gutters">
             <div class="col-auto align-self-center">
                 <figure class="avatar avatar-40">
@@ -161,23 +161,30 @@ function revertedata($data){
         </div>
 		
         <div class="list-group main-menu my-5">
-		<nav class="navbar" style="padding: .1rem 0rem;">
+			<nav class="navbar" style="padding: .1rem 0rem;">
                 <ul class="navbar-nav">
-                    <li class="nav-item dropdown" style="width: 255px;">
+				    <li class="nav-item dropdown" style="width: 230px;">
                         <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="item-title list-group-item list-group-item-action">
-                                <i class="material-icons">menu</i> Caixa
+                            <div class="list-group-item list-group-item-action active">
+                                <i class="material-icons">perm_contact_calendar</i> Agenda
+                            </div>
+                        </a>
+					</li>
+                    <li class="nav-item dropdown" style="width: 230px;">
+                        <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="list-group-item list-group-item-action">
+                                <i class="material-icons">home</i> Caixa
                             </div>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="javascript:void(0)" class="sidebar-close  dropdown-item">
-                             Caixa Atual
+                            <a href="sistema.php?url=cad_caixaatual" class="sidebar-close dropdown-item menu-right">
+							 Caixa Atual
                             </a>
-                            <a href="#" class="sidebar-close dropdown-item menu-right">
+                            <a href="sistema.php?url=cad_caixaalteriores" class="sidebar-close dropdown-item menu-right">
                              Caixa Anteriores
                             </a>
-                            <a href="javascript:void(0)" class="sidebar-close dropdown-item popup-open" data-toggle="modal" data-target="#fullscreenmenu">
-                             Full Screen
+                            <a href="sistema.php?url=cad_cmeiodepagamento" class="sidebar-close dropdown-item popup-open" >
+                             Meios de Pagamento
                             </a>
                         </div>
                     </li>
@@ -237,7 +244,7 @@ function revertedata($data){
                 <div class="col-auto mx-auto">
                     <div class="row no-gutters justify-content-center">
                         <div class="col-auto">
-                            <a href="sistema.php" class="btn btn-link-default active">
+                            <a href="sistema.php?url=inicio" class="btn btn-link-default active">
                                 <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
                                 <span class="text-name">Agenda</span>
                             </a>
@@ -253,15 +260,14 @@ function revertedata($data){
             </div>
         </div>
 <!-- footer ends -->
-<script>
-
-</script>
-<div class="fab">
-   <button type="button" id="aagenda" class="main">
-      <i class="fa fa-calendar"></i>
-   </button>
-  </div>
 </div>
+<? if($_GET['url'] == "inicio"){?>
+ <div class="menu pmd-floating-action" role="navigation"> 
+        <button class="pmd-floating-action-btn btn btn-lg pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" onclick="atualizar();" data-toggle="modal" data-target="#pagamento" data-title="Concluir"> 
+            <span class="pmd-floating-hidden">Primary</span>
+            <i class="material-icons pmd-sm">perm_contact_calendar</i> 
+        </button> 
+    </div>
 <script>
 
 function alteradata()
@@ -381,12 +387,13 @@ function auto()
         <!-- /.modal-dialog -->
     </div>	
     <!-- wrapper ends -->
-	
+	<? } ?>
+	<? if($_GET['url'] == "cad_caixaalteriores"){?>
 	<div id="extratocaixaanteriores" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title" id="myLargeModalLabel"><b>Extrato : </h4>
+                                                <h4 class="modal-title" id="myLargeModalLabel"><b>Extrato </h4>
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                             </div>
                                             <div class="modal-body">
@@ -407,67 +414,7 @@ function auto()
 									
            <!-- /.modal-dialog -->
       </div>
-
-    <!-- color chooser menu start -->
-    <div class="modal fade " id="colorscheme" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content ">
-                <div class="modal-header theme-header border-0">
-                    <h6 class="">Color Picker</h6>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body pt-0">
-                    <div class="text-center theme-color">
-                        <button class="m-1 btn red-theme-bg text-white btn-rounded-54 shadow-sm" data-theme="red"><i class="material-icons w-50">color_lens_outline</i></button>
-                        <button class="m-1 btn blue-theme-bg text-white btn-rounded-54 shadow-sm" data-theme="blue"><i class="material-icons w-50">color_lens_outline</i></button>
-                        <button class="m-1 btn yellow-theme-bg text-white btn-rounded-54 shadow-sm" data-theme="yellow"><i class="material-icons w-50">color_lens_outline</i></button>
-                        <button class="m-1 btn green-theme-bg text-white btn-rounded-54 shadow-sm" data-theme="green"><i class="material-icons w-50">color_lens_outline</i></button>
-                        <button class="m-1 btn pink-theme-bg text-white btn-rounded-54 shadow-sm" data-theme="pink"><i class="material-icons w-50">color_lens_outline</i></button>
-                        <button class="m-1 btn orange-theme-bg text-white btn-rounded-54 shadow-sm" data-theme="orange"><i class="material-icons w-50">color_lens_outline</i></button>
-                        <button class="m-1 btn purple-theme-bg text-white btn-rounded-54 shadow-sm" data-theme="purple"><i class="material-icons w-50">color_lens_outline</i></button>
-                        <button class="m-1 btn deeppurple-theme-bg text-white btn-rounded-54 shadow-sm" data-theme="deeppurple"><i class="material-icons w-50">color_lens_outline</i></button>
-                        <button class="m-1 btn lightblue-theme-bg text-white btn-rounded-54 shadow-sm" data-theme="lightblue"><i class="material-icons w-50">color_lens_outline</i></button>
-                        <button class="m-1 btn teal-theme-bg text-white btn-rounded-54 shadow-sm" data-theme="teal"><i class="material-icons w-50">color_lens_outline</i></button>
-                        <button class="m-1 btn lime-theme-bg text-white btn-rounded-54 shadow-sm" data-theme="lime"><i class="material-icons w-50">color_lens_outline</i></button>
-                        <button class="m-1 btn deeporange-theme-bg text-white btn-rounded-54 shadow-sm" data-theme="deeporange"><i class="material-icons w-50">color_lens_outline</i></button>
-                        <button class="m-1 btn gray-theme-bg text-white btn-rounded-54 shadow-sm" data-theme="gray"><i class="material-icons w-50">color_lens_outline</i></button>
-                        <button class="m-1 btn black-theme-bg text-white btn-rounded-54 shadow-sm" data-theme="black"><i class="material-icons w-50">color_lens_outline</i></button>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="col-6 text-left">
-                        <div class="row">
-                            <div class="col-auto text-right align-self-center"><i class="material-icons text-warning md-36 vm">wb_sunny</i></div>
-                            <div class="col-auto text-center align-self-center px-0">
-                                <div class="custom-control custom-switch float-right">
-                                    <input type="checkbox" name="themelayout" class="custom-control-input" id="theme-dark">
-                                    <label class="custom-control-label" for="theme-dark"></label>
-                                </div>
-                            </div>
-                            <div class="col-auto text-left align-self-center"><i class="material-icons text-dark md-36 vm">brightness_2</i></div>
-                        </div>
-                    </div>
-                    <div class="col-6 text-right">
-                        <div class="row">
-                            <div class="col-auto text-right align-self-center">LTR</div>
-                            <div class="col-auto text-center align-self-center px-0">
-                                <div class="custom-control custom-switch float-right">
-                                    <input type="checkbox" name="rtllayout" class="custom-control-input" id="theme-rtl">
-                                    <label class="custom-control-label" for="theme-rtl"></label>
-                                </div>
-                            </div>
-                            <div class="col-auto text-left align-self-center">RTL</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- color chooser menu ends -->
-
-
+    <? } ?>
 
     <!-- jquery, popper and bootstrap js -->
     <script src="template/vendor/jquery/jquery.min.js"></script>
