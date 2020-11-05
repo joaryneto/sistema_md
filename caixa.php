@@ -541,15 +541,12 @@ function getLocation()
   }
 function showPosition(position)
   {
-      //x.innerHTML="Latitude: " + position.coords.latitude + 
-      //"<br>Longitude: " + position.coords.longitude; 
-
-         var distancia = (getDistanceFromLatLonInKm(
+	  
+	  var distancia = (getDistanceFromLatLonInKm(
    {lat: -15.5592615, lng: -56.0448968},
    {lat: position.coords.latitude, lng: position.coords.longitude}
-));
-
-console.log(distancia);	  
+)); 
+      x.innerHTML ="Distancia: " + distancia; 
 	  
   }
 function showError(error)
