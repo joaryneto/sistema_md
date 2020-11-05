@@ -546,7 +546,8 @@ function showPosition(position)
    {lat: -15.5592615, lng: -56.0448968},
    {lat: position.coords.latitude, lng: position.coords.longitude}
 )); 
-      x.innerHTML ="Distancia: " + distancia; 
+      var km = distancia / 1000;
+      x.innerHTML ="Distancia: " + km.toFixed(1) + " km"; 
 	  
   }
 function showError(error)
