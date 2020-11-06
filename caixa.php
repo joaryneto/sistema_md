@@ -521,7 +521,7 @@ function auto()
 								 </div>
 								</div>
 								<div class="form-group col-md-12 m-t-20">
-								<button class="btn pmd-btn-raised btn-primary btn-block pmd-ripple-effect" type="button" onclick="atualizar();" data-toggle="modal" data-target="#pagamento">Confirmar pagamento</button>
+								<button class="btn btn-lg btn pmd-btn-raised btn-primary btn-block pmd-ripple-effect" type="button" onclick="atualizar();" data-toggle="modal" data-target="#pagamento">Confirmar pagamento</button>
 								</div>
 								<div class="input-group col-md-10 m-t-20">
 								<div id="gravar"></div></div>
