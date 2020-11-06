@@ -49,6 +49,9 @@
 	<!-- Propeller alerts js -->
 	<script type="text/javascript" src="template/vendor/propeller-master/components/alert/js/alert.js"></script>
 
+    <!-- Propeller tabs js -->
+    <script type="text/javascript" language="javascript" src="template/vendor/propeller-master/components/tab/js/tab-scrollable.js"></script>
+
 	<!-- MASK INPUT -->
     <script src="template/vendor/mask.money/jquery.maskMoney.js"></script>
     <script>

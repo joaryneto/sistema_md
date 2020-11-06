@@ -8,7 +8,7 @@ if($_GET['ap'] == 1)
   if($_GET['tipo'] == 1)
   {
 	  ?>
-	    <div class="form-group col-md-12 m-t-20"><label>Pesquisar Cliente:</label>
+	    <div class="form-group pmd-textfield pmd-textfield-floating-label"><label for="first-name">Pesquisar Cliente:</label>
 			<input name="nome" id="nome" type="text" onkeyup="bcliente(this.value)" style="width:300px" autocomplete="off" class="form-control" required="required" />
 			<div id="pesquisacliente"></div>
 		</div>						
@@ -21,7 +21,9 @@ if($_GET['ap'] == 1)
        <table class="table table-hover">
          <tbody id="itenss">
         <?
-        $_SESSION['codcliente'] = "";
+		unset($_SESSION['codcliente']);
+		unset($_SESSION['nome']);
+		
         $pesquisa = $_GET['pesquisa'];
 
          $SQL = "SELECT codigo,nome FROM clientes where nome like '%".$pesquisa."%' LIMIT 10;";
@@ -46,9 +48,11 @@ else if($_GET['ap'] == 2)
 	if($_GET['tipo'] == 1)
 	{
 		$_SESSION['codcliente'] = $_GET['codigo'];
+		$_SESSION['nome'] = $_GET['nome'];
 		
 		?>
-		<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Data:</label>
+		<div class="form-group pmd-textfield pmd-textfield-floating-label" id="inputcliente">
+		<label for="first-name">Data:</label>
 			<input name="dataagenda" id="dataagenda" OnChange="data(this.value);" type="text" autocomplete="off" class="form-control" required="required" />
 		</div>
 		<script>
@@ -65,12 +69,20 @@ else if($_GET['ap'] == 2)
 	else
 	{
    	?>
-	<label>Horario:</label>
+	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="inputcliente"><label for="first-name">Nome:</label>
+	<input type="text" name="nome" id="nome" value="<?=$_SESSION['nome'];?>" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required" disabled />
+	<input type="hidden" name="codigo" id="codigo" value="<?=$_SESSION['codcliente'];?>" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required">
+	</div>
+	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="inputcliente"><label for="first-name">Data:</label>
+	<input type="text" name="dataagenda" id="dataagenda" value="<?=$_GET['data'];?>" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required" disabled />
+	</div>
+	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="inputcliente"><label for="first-name">Horario:</label>
 	<select name="hora" id="hora" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required">
-	<option value="">Selecionar Horario</option>
+	<option value=""></option>
 		<?
 		
 		$data = revertedata($_GET['data']);
+		
 		
 		$SQL1 = "SELECT hora FROM horarios where sistema='".$_SESSION['sistema']."'";
 		$RES1 = mysqli_query($db3,$SQL1);
@@ -97,6 +109,7 @@ else if($_GET['ap'] == 2)
 
 		?>
 	</select>
+	</div>
 	<?
 	}
 }

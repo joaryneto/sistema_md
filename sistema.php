@@ -216,6 +216,7 @@ function revertedata($data){
 
 function data(valor)
 {
+	
 	if(valor == "")
 	{
 	    swal('Atenção', 'Selecione uma data.');
@@ -223,6 +224,7 @@ function data(valor)
 	else
    	{
 	      //$('#codigo').val(codigo);
+		$( "dataagenda" ).datepicker( "hide" );
 	    requestPage2('?br=atu_pesquisa&codigo=<?=$_SESSION['codcliente'];?>&data='+ valor +'&tipo=2&ap=2','loadfagenda','GET');
 	}
 }
@@ -254,7 +256,7 @@ function cliente(codigo,nome)
     <div class="modal-dialog modal-lg">
             <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="myLargeModalLabel"><b>Agendar Horario </h4>
+								<h2 class="pmd-card-title-text">Agendar Horario</h2>
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                 </div>
                                     <div class="modal-body">
@@ -281,8 +283,8 @@ function cliente(codigo,nome)
                     <div class="modal-footer">
 						<div class="row">
                          <div class="col">
-						 <button type="button" onclick="agendar();"  class="btn btn-outline-primary rounded mb-2">Gravar</button>
-                         <button type="button" class="btn btn-outline-danger rounded mb-2" data-dismiss="modal">Sair</button>
+						 <button type="button" onclick="agendar();"  class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Gravar</button>
+                         <button type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-danger" data-dismiss="modal">Sair</button>
 					   </div></div>
                     </div>
 					</div>
@@ -313,8 +315,8 @@ function cliente(codigo,nome)
                     <div class="modal-footer">
 						<div class="row">
                          <div class="col">
-						 <button type="button" id="reagendarr" class="btn btn-outline-primary rounded mb-2">Gravar</button>
-                         <button type="button" class="btn btn-outline-danger rounded mb-2" data-dismiss="modal">Sair</button>
+						 <button type="button" id="reagendarr" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Gravar</button>
+                         <button type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-danger" data-dismiss="modal">Sair</button>
 					   </div></div>
                     </div>
 					</div>
@@ -343,7 +345,7 @@ function cliente(codigo,nome)
 											</div>
                                             </div>
                                 <div class="modal-footer">
-                                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Fechar</button>
+                                <button type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-danger" data-dismiss="modal">Fechar</button>
                             </div>
                     </div>
 										
