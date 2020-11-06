@@ -46,7 +46,7 @@ if(isset($_GET["codigo"]) and $_GET['ap'] == 1)
 {
 
  //$hora = date('H:i:s');
- $query = "INSERT INTO agendamento (sistema,cliente, data, hora, nome) VALUES ('".$_SESSION['sistema']."','".$_GET['codigo']."', '".revertedata($_GET['data'])."','".$_GET['hora']."','".$_GET['nome']."')";
+ $query = "INSERT INTO agendamento (sistema,cliente, data, hora, nome,status) VALUES ('".$_SESSION['sistema']."','".$_GET['codigo']."', '".revertedata($_GET['data'])."','".$_GET['hora']."','".$_GET['nome']."','1')";
  $sucesso = mysqli_query($db3,$query);
  
  if($sucesso == true)

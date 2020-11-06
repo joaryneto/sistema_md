@@ -116,6 +116,34 @@ $('#agendaex').on('click',function(){
 });
 
 
+/* MENU VERTICAL  */
+
+$('#ldata').on('click',function()
+{	
+   document.getElementById("btnshow").click();
+   requestPage('?br=inicio','conteudo','GET');
+});
+
+$('#ldata').on('click',function()
+{	
+   document.getElementById("btnshow").click();
+   requestPage('?br=inicio','conteudo','GET');
+});
+
+$('#ldata').on('click',function()
+{	
+   document.getElementById("btnshow").click();
+   requestPage('?br=inicio','conteudo','GET');
+});
+
+$('#ldata').on('click',function()
+{	
+   document.getElementById("btnshow").click();
+   requestPage('?br=inicio','conteudo','GET');
+});
+
+/* MENU HORIZONTAL  */
+
 $('#catual').on('click',function()
 {	
    document.getElementById("btnshow").click();

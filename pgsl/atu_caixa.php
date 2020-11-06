@@ -100,8 +100,11 @@ if($_GET['ap'] == 1)
 	if($_GET['excluir'] == 1)
 	{
 	   //$teste = explode(",",$_GET['codigo']);
+	   //echo $SQL = "SELECT codigo as qtd from vendas_mov sistema='".$_SESSION['sistema']."' and produto='".$codigo."' and venda='".$_SESSION['venda']."' and total='".$total."'";
+	   //$RES = mysqli_query(db3,$SQL);
+	   //$RSSS = mysqli_fetch_array($RES);
 	
-       //foreach($teste as $i)
+       //for ($xx = 1; $xx <= $RSSS['qtd']; $xx++) 
        //{
 	      $SQL = "DELETE from vendas_mov where sistema='".$_SESSION['sistema']."' and produto='".$codigo."' and venda='".$_SESSION['venda']."' and total='".$total."'";
 	      $RES = mysqli_query($db3,$SQL);
@@ -115,12 +118,12 @@ if($_GET['ap'] == 1)
 		{
             $SQL = "INSERT vendas_mov(sistema,produto,venda,caixa,data,preco,total,usuario,status) values('".$_SESSION['sistema']."','".$produto."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$data."','".$preco."','".$total."','".$_SESSION['usuario']."',1)";
             $RES = mysqli_query($db3,$SQL);
-			
+
         } 
 	
     }
 	
-	$SQL = "SELECT sum(total) as total FROM vendas_mov where venda='".$_SESSION['venda']."'";
+	$SQL = "SELECT sum(total) as total, count(codigo) as qtd FROM vendas_mov where venda='".$_SESSION['venda']."'";
 	$RES = mysqli_query($db3,$SQL);
 	$CREW = mysqli_fetch_array($RES);
 						  
@@ -142,12 +145,14 @@ if($_GET['ap'] == 1)
 	if($b == 0)
 	{
 	    echo '<tr><td colspan="4" class="text-center"> Nenhum registro encontrado.</td></tr>';
+		print("<script> slow();</script>");
 	}
 	
+	$_SESSION['qtditens'] = $CREW['qtd'];
 	$_SESSION['totalvenda'] = $CREW['total'];	
 	
 	print("<script> document.getElementById('vtotal').innerHTML = '".number_format($CREW['total'],2,",",".")."';</script>");
-	
+	print("<script> document.getElementById('qtdbgd').innerHTML = '".$_SESSION['qtditens']."';</script>");
 }
 else if($_GET['ap'] == 2)
 {

@@ -189,9 +189,21 @@ function revertedata($data){
                 <div class="col-auto mx-auto">
                     <div class="row no-gutters justify-content-center">
                         <div class="col-auto">
-                            <a href="sistema.php?url=inicio" class="btn btn-link-default active">
+                            <a href="javascript:void(0)" id="ldata" class="btn btn-link-default active">
                                 <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
-                                <span class="text-name">Agenda</span>
+                                <span class="text-name">Data</span>
+                            </a>
+                        </div>
+						<div class="col-auto">
+                            <a href="javascript:void(0)" class="btn btn-link-default">
+                                <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
+                                <span class="text-name">Agendado</span>
+                            </a>
+                        </div>
+						<div class="col-auto">
+                            <a href="javascript:void(0)" class="btn btn-link-default ">
+                                <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
+                                <span class="text-name">Finalizado</span>
                             </a>
                         </div>
                         <div class="col-auto">
@@ -216,16 +228,18 @@ function revertedata($data){
 
 function data(valor)
 {
-	
-	if(valor == "")
+	if(event.key === 'Enter') 
 	{
+	  if(valor == "")
+	  {
 	    swal('Atenção', 'Selecione uma data.');
-	}
-	else
-   	{
+	  }
+	  else
+   	  {
 	      //$('#codigo').val(codigo);
 		$( "dataagenda" ).datepicker( "hide" );
 	    requestPage2('?br=atu_pesquisa&codigo=<?=$_SESSION['codcliente'];?>&data='+ valor +'&tipo=2&ap=2','loadfagenda','GET');
+	  }
 	}
 }
 

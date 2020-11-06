@@ -453,15 +453,13 @@ function auto()
                                     </div>
                                    </div> 
 								</div>
-								<div class="input-group col-md-1 m-t-20">
+								<div class="form-group col-md-2 m-t-20">
 								 <div class="row">
                                    <div class="col">
-								   <button class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" onclick="lancar();" type="button"><i class="material-icons pmd-sm">add</i></button>
+								   <button class="btn pmd-btn-outline pmd-ripple-effect btn-primary" onclick="lancar();" type="button">Lançar <i class="material-icons pmd-sm">add</i></button>
 								   </div>
 								 </div>
 								</div>
-								
-
 								</div>
 								<div class="m-t-40 row">
 								<div class="input-group col-md-12 m-t-20">
@@ -511,13 +509,22 @@ function auto()
 						</div>
 					</div>
 								</div>
-								
 								<div class="input-group col-md-12 m-t-20">
 								<input type="hidden" class="form-control" name="totalvenda" id="totalvenda" value="" required="" aria-invalid="false">
-								<h1 style="color: green;font-weight: bold;">Total: R$ <span id="vtotal"><?=$_SESSION['vtotal'];?></span></h1></div><div class="input-group col-md-10 m-t-20">
+								<h1 style="color: green;font-weight: bold;">Total: R$ <span id="vtotal"><?=$_SESSION['vtotal'];?></span></h1></div>
+								<div class="form-group col-md-12 m-t-20">
+								 <div class="row">
+                                   <div class="col">
+								   <button class="btn pmd-btn-raised btn pmd-btn-outline pmd-ripple-effect btn-warning" onclick="slow();" id="btncarrinho" data-title="Itens do Carrinho"> 
+                                     <b id="qtdbgd"><?=$_SESSION['qtditens'];?></b> Itens<i class="material-icons">add_shopping_cart</i></button>
+								   </div>
+								 </div>
+								</div>
+								<div class="form-group col-md-12 m-t-20">
+								<button class="btn pmd-btn-raised btn-primary btn-block pmd-ripple-effect" type="button" onclick="atualizar();" data-toggle="modal" data-target="#pagamento">Confirmar pagamento</button>
+								</div>
+								<div class="input-group col-md-10 m-t-20">
 								<div id="gravar"></div></div>
-								<div class="input-group col-md-12 m-t-20">
-							  </div>
                             </div>
                         </div>
 					</div>
@@ -655,7 +662,7 @@ function auto()
                                             <div class="modal-footer">
 											<div class="row">
                                                  <div class="col">
-											    <button type="button" onclick="pagar();"  class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Confirmar</button>
+											    <button type="button" onclick="pagar();"  class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Concluir</button>
                                                 <button type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-danger" data-dismiss="modal">Sair</button>
 												</div></div>
                                             </div>
@@ -679,17 +686,6 @@ function auto()
 								  }
 								}
                                 </script>
-					
- <div class="menu pmd-floating-action" role="navigation"> 
-        <button class="pmd-floating-action-btn btn pmd-btn-fab pmd-ripple-effect btn-secondary pmd-btn-raised" onclick="slow();" id="btncarrinho" data-title="Itens do Carrinho"> 
-            <span class="pmd-floating-hidden">Itens</span> 
-            <i class="material-icons">add_shopping_cart</i> 
-        </button> 
-        <button class="pmd-floating-action-btn btn btn-lg pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" onclick="atualizar();" data-toggle="modal" data-target="#pagamento" data-title="Concluir"> 
-            <span class="pmd-floating-hidden">Primary</span>
-            <i class="material-icons pmd-sm">check</i> 
-        </button> 
-    </div>
 	
 <? include 'scripts.php'?>
 
