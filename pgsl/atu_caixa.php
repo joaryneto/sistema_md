@@ -156,10 +156,13 @@ if($_GET['ap'] == 1)
 }
 else if($_GET['ap'] == 2)
 {
-    $SQL = "SELECT sum(total) as total FROM vendas_mov where venda='".$_SESSION['venda']."'";
-	$RES = mysqli_query($db3,$SQL);
-	$CREW = mysqli_fetch_array($RES);
+    //$SQL = "SELECT sum(total) as total FROM vendas_mov where venda='".$_SESSION['venda']."'";
+	//$RES = mysqli_query($db3,$SQL);
+	//$CREW = mysqli_fetch_array($RES);
 	
+	$dinheiro = str_replace(",",".", str_replace(".","",$_GET['dinheiro']));
+	$dinheiro = str_replace(",",".", str_replace(".","",$_GET['dinheiro']));
+	$dinheiro = str_replace(",",".", str_replace(".","",$_GET['dinheiro']));
 	$dinheiro = str_replace(",",".", str_replace(".","",$_GET['dinheiro']));
 	$tipo = $_GET['dinheiro'];
 	
@@ -186,6 +189,7 @@ else if($_GET['ap'] == 2)
 else if($_GET['ap'] == 3)
 {
 	$dinheiro = str_replace(",",".", str_replace(".","",$_GET['dinheiro']));
+	
 	$totals = $_SESSION['totalvenda'];
 	$tipo = $_GET['tipo'];
 	

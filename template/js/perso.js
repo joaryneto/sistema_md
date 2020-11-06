@@ -115,26 +115,19 @@ $('#agendaex').on('click',function(){
 	}
 });
 
+/* PAGAMENTOS */
+
+$('#btnpagar').on('click',function()
+{
+	var dinheiro = document.getElementById('dinheiro').value;
+	var ctdebito = document.getElementById('ctdebito').value;
+	var ctcredito = document.getElementById('ctcredito').value;
+	var ted = document.getElementById('ted').value;
+	
+	requestPage('?br=atu_caixa&dinheiro='+ dinheiro +'&ctdebito='+ ctdebito +'&ctcredito='+ ctcredito +'&ted='+ ted +'&ap=2','loading','GET');
+});
 
 /* MENU VERTICAL  */
-
-$('#ldata').on('click',function()
-{	
-   document.getElementById("btnshow").click();
-   requestPage('?br=inicio','conteudo','GET');
-});
-
-$('#ldata').on('click',function()
-{	
-   document.getElementById("btnshow").click();
-   requestPage('?br=inicio','conteudo','GET');
-});
-
-$('#ldata').on('click',function()
-{	
-   document.getElementById("btnshow").click();
-   requestPage('?br=inicio','conteudo','GET');
-});
 
 $('#ldata').on('click',function()
 {	

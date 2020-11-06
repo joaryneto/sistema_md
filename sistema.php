@@ -37,6 +37,15 @@ function revertedata($data){
 <head>
 <? include 'css.php';?>
 <style>
+.tableFixHead          { 
+  overflow-y: auto; 
+  height: auto;
+  border: 1px solid;
+  border-color: lightgray;
+  }
+.tableFixHead thead th { position: sticky; top: 0; }
+.tableFixHead thead th { background:#fff; }
+
 .form-control 
 {
     height: calc(2.5em + .75rem + 2px) !important;
@@ -125,10 +134,10 @@ function revertedata($data){
                             <a href="javascript:void(0)" id="catual" class="sidebar-close dropdown-item menu-right">
 							 Caixa Atual
                             </a>
-                            <a href="sistema.php?url=cad_caixaalteriores" id="canteriores" class="sidebar-close dropdown-item menu-right">
+                            <a href="javascript:void(0)" id="canteriores" class="sidebar-close dropdown-item menu-right">
                              Caixa Anteriores
                             </a>
-                            <a href="sistema.php?url=cad_cmeiodepagamento" id="cmpagamento" class="sidebar-close dropdown-item popup-open" >
+                            <a href="javascript:void(0)" id="cmpagamento" class="sidebar-close dropdown-item popup-open" >
                              Meios de Pagamento
                             </a>
                         </div>

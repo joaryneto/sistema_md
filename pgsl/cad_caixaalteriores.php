@@ -145,7 +145,8 @@ if($_GET['excluir'] == 1)
         </div>   
 				  
 <div class="container pt-5">
-            <div class="row" id="load">
+            <div class="row">
+			<div class="col-md-6 card-type">
 							    <?
 								
 								$SQL3 = "SELECT sum(total) as total FROM vendas_mov where caixa='".$_SESSION['caixa']."'";
@@ -161,7 +162,7 @@ if($_GET['excluir'] == 1)
                                                 <tr>
                                                     <th class="text-center">#</th>
                                                     <th class="text-center">Usuario</th>
-                                                    <th class="text-right">Abertura</th>
+                                                    <th class="text-right">Abertura/Fechamento</th>
                                                     <th class="text-right">Fechamento</th>
 													<th class="text-right">Total R$</th>
                                                 </tr>
@@ -200,6 +201,6 @@ if($_GET['excluir'] == 1)
 										  ?>
                                             </tbody>
                                         </table>
-                                    </div>
+                                    </div></div>
 								</div>
                             </div>
