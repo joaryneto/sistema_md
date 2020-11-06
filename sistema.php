@@ -35,68 +35,13 @@ function revertedata($data){
 <html lang="pt-br" class="color-theme-blue">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover, user-scalable=no">
-    <meta name="description" content="">
-    <meta name="author" content="Maxartkiller">
-
-    <title>EC Tecnologia</title>
-
-    <!-- Material design icons CSS -->
-    <link rel="stylesheet" href="template/vendor/materializeicon/material-icons.css">
-
-    <!-- Roboto fonts CSS -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
-
-    <!-- Bootstrap core CSS -->
-    <link href="template/vendor/bootstrap-4.4.1/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- page CSS -->
-    <link href="template/vendor/switchery/dist/switchery.min.css" rel="stylesheet" />
-	
-	<!-- autocomplete CSS -->
-    <link rel="stylesheet" href="template/vendor/EasyAutocomplete-1.3.5/easy-autocomplete.css" >
-	
-    <!-- Swiper CSS -->
-    <link href="template/vendor/swiper/css/swiper.min.css" rel="stylesheet">
-	
-    <link href="template/vendor/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-    <!-- Page plugins css -->
-    <link href="template/vendor/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
-    <!-- Color picker plugins css -->
-    <link href="template/vendor/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
-    <!-- Date picker plugins css -->
-    <link href="template/vendor/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-    <!-- Daterange picker plugins css -->
-    <link href="template/vendor/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
-    <link href="template/vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-	
-    <!-- Custom styles for this template -->
-    <link href="template/css/style.css" rel="stylesheet">
-	
-	<!--alerts CSS -->
-    <link href="template/vendor/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
-	
-	<!-- Calendar CSS -->
-    <link href="template/vendor/calendar/dist/fullcalendar.css" rel="stylesheet" />
-	
-	<script type="text/javascript" src="template/js/AjaxScript.js.php"></script>
-	
+<? include 'css.php';?>
 <style>
-.tableFixHead          { 
-  overflow-y: auto; 
-  height: auto;
-  border: 1px solid;
-  border-color: lightgray;
-  border-radius: 14px 14px 14px 14px;
-  }
-.tableFixHead thead th { position: sticky; top: 0; }
-.tableFixHead thead th { background:#fff; }
-
 .form-control 
 {
     height: calc(2.5em + .75rem + 2px) !important;
 }
+
 </style>
 </head>
 
@@ -259,57 +204,52 @@ function revertedata($data){
                 </div>
             </div>
         </div>
-<!-- footer ends -->
-</div>
-<? if($_GET['url'] == "inicio"){?>
- <div class="menu pmd-floating-action" role="navigation"> 
-        <button class="pmd-floating-action-btn btn btn-lg pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" id="aagenda"> 
+		<div class="menu pmd-floating-action" role="navigation" style="bottom: 80px;"> 
+        <button class="pmd-floating-action-btn btn btn-lg pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" id="aagenda" data-title="Concluir"> 
             <span class="pmd-floating-hidden">Primary</span>
             <i class="material-icons pmd-sm">perm_contact_calendar</i> 
         </button> 
-    </div>
+</div>
+<!-- footer ends -->
+</div>
 <script>
 
-function alteradata()
+function data(valor)
 {
-	$('#nome').val('');
+	$( "#dataagenda" ).datepicker( "destroy" );
+    $( "#dataagenda" ).hide();
+	
+	if(valor == "")
+	{
+	    swal('Atenção', 'Selecione uma data.');
+	}
+	else
+   	{
+	      //$('#codigo').val(codigo);
+	    requestPage2('?br=atu_pesquisa&codigo=<?=$_SESSION['codcliente'];?>&data='+ valor +'&tipo=2&ap=2','loadfagenda','GET');
+	}
 }
 
-function buscarcliente(nome)
+function bcliente(nome)
 {
 	if(event.key === 'Enter') 
 	{
 	   $('#codigo').val('');
-	   requestPage2('?br=atu_pesquisa&pesquisa='+ nome +'&ap=1','pesquisacliente','GET');
+	   requestPage2('?br=atu_pesquisa&pesquisa='+ nome +'&tipo=2&ap=1','pesquisacliente','GET');
 	}
 }
 
-function codigo(codigo)
+function cliente(codigo,nome)
 {	
-   // if(event.key === 'Enter') 
-	//{
-	   var datav = document.getElementById('dataagenda').value;
-	   //var codigo = document.getElementById('codigo').value;
-	
-	   if(datav == "")
-	   {
-		  swal('Atenção', 'Selecione uma data.');
-	   }
-	   else if(codigo == "")
-	   {
-		  swal('Atenção', 'Selecione um cliente.');
-	   }
-	   else
-   	   {
+	if(codigo == "")
+	{
+	    swal('Atenção', 'Selecione um cliente.');
+	}
+	else
+   	{
 	      //$('#codigo').val(codigo);
-	      requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&data='+ datav +'&ap=2','horario','GET');
-	   }
-	//}
-}
-
-function auto()
-{
-	document.getElementById('pcliente').style.display = 'none';
+	    requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&nome='+ nome +'&tipo=1&ap=2','loadfagenda','GET');
+	}
 }
 
 </script>
@@ -323,21 +263,22 @@ function auto()
                                     <div class="modal-body">
 									
 									<div class="row">
-									<div class="col-12">
-									<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Data:</label>
+									<div class="col-12" id="loadfagenda">
+									
+									<!--<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Data:</label>
 									    <input name="dataagenda" id="dataagenda" OnChange="alteradata();" type="text" autocomplete="off" class="form-control" required="required" />
 									</div>
 									<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Pesquisar Cliente:</label>
 										<input name="codigo" id="codigo" onchange="codigo(this.value)" type="hidden" autocomplete="off" class="form-control" required="required" />
-									    <input name="nome" id="example-ajax-post" type="text" style="width:300px" autocomplete="off" class="form-control" required="required" />
+									    <input name="nome" id="nome" type="text" style="width:300px" autocomplete="off" class="form-control" required="required" />
 									<div id="pesquisacliente"></div>
 									
 									</div>
 									<div class="form-group col-md-4 m-t-20" id="horario">
 									    <input name="hora" id="hora" type="hidden" autocomplete="off" class="form-control" required="required" />
-									</div>
+									</div>-->
 									
-							</div>
+							        </div>
 						</div>
                     
                     <div class="modal-footer">
@@ -387,7 +328,7 @@ function auto()
         <!-- /.modal-dialog -->
     </div>	
     <!-- wrapper ends -->
-	<? } ?>
+	
 	<? if($_GET['url'] == "cad_caixaalteriores"){?>
 	<div id="extratocaixaanteriores" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog modal-lg">
@@ -416,68 +357,8 @@ function auto()
       </div>
     <? } ?>
 
-    <!-- jquery, popper and bootstrap js -->
-    <script src="template/vendor/jquery/jquery.min.js"></script>
-    <script src="template/js/popper.min.js"></script>
-    <script src="template/vendor/bootstrap-4.4.1/js/bootstrap.min.js"></script>
+<? include 'scripts.php'?>
 
-    <script src="template/vendor/switchery/dist/switchery.min.js"></script>
-
-    <!-- swiper js -->
-    <script src="template/vendor/swiper/js/swiper.min.js"></script>
-
-    <!-- cookie js -->
-    <script src="template/vendor/cookie/jquery.cookie.js"></script>
-
-
-    <!-- template custom js -->
-    <script src="template/js/main.js"></script>
-
-	<script src="template/js/perso.js"></script>
-
-	<!-- Plugin JavaScript -->
-    <script src="template/vendor/moment/moment.js"></script>
-    <script src="template/vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
-    <!-- Clock Plugin JavaScript -->
-    <script src="template/vendor/clockpicker/dist/jquery-clockpicker.min.js"></script>
-    <!-- Color Picker Plugin JavaScript -->
-    <script src="template/vendor/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
-    <script src="template/vendor/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
-    <script src="template/vendor/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
-    <!-- Date Picker Plugin JavaScript -->
-    <script src="template/vendor/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-    <!-- Date range Plugin JavaScript -->
-    <script src="template/vendor/timepicker/bootstrap-timepicker.min.js"></script>
-    <script src="template/vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
-	<script src="template/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js"></script>
-    <script>
-	jQuery('#dataagenda').datepicker({
-		format: 'dd/mm/yyyy',
-        autoclose: true,
-        todayHighlight: true,
-		language: "pt-BR",
-		orientation: "bottom left"
-    });
-    </script>
-    <!-- Sweet-Alert  -->
-    <script src="template/vendor/sweetalert/sweetalert.min.js"></script>
-    <script src="template/vendor/sweetalert/jquery.sweet-alert.custom.js"></script>
-	
-	<!-- MASK INPUT -->
-    <script src="template/vendor/mask.money/jquery.maskMoney.js"></script>
-    <script>
-        $("#dinheiro").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
-        $("#ctdebito").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
-        $("#ctcredito").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
-        $("#ted").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
-        $("#desc").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
-    </script>
-	
-	<!-- autocomplete js--> 
-    <script src="template/vendor/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js"></script> 
-
-    <!-- page specific script -->
-    <script src="template/js/autocomplete.js"></script>
 </body>
 
 </html>

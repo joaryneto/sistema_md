@@ -3,45 +3,68 @@ ob_start();
 session_start();
 
 
-if(!Empty($_GET['pesquisa']) and $_GET['ap'] == 1)
+if($_GET['ap'] == 1)
 {
+  if($_GET['tipo'] == 1)
+  {
+	  ?>
+	    <div class="form-group col-md-12 m-t-20"><label>Pesquisar Cliente:</label>
+			<input name="nome" id="nome" type="text" onkeyup="bcliente(this.value)" style="width:300px" autocomplete="off" class="form-control" required="required" />
+			<div id="pesquisacliente"></div>
+		</div>						
+	   <?
+  }
+  else
+  {
 ?>
+     <div class="tableFixHead" id="pcliente"> 
+       <table class="table table-hover">
+         <tbody id="itenss">
+        <?
+        $_SESSION['codcliente'] = "";
+        $pesquisa = $_GET['pesquisa'];
 
-<div class="tableFixHead" id="pcliente"> <table class="table table-hover">
-                                            <tbody id="itenss">
-<?
-
-//require_once("../load/class/mysql.php");
-
-$pesquisa = $_GET['pesquisa'];
-
-$SQL = "SELECT codigo,nome FROM clientes where nome like '%".$pesquisa."%' LIMIT 10;";
-$RES = mysqli_query($db3,$SQL);
-while($row = mysqli_fetch_array($RES))
-{
-	?>
-	<tr Onclick="selectcliente('<?=$row['codigo'];?>','<?=$row['nome'];?>');"><td colspan="3"><?=$row['nome']?></td></tr>
+         $SQL = "SELECT codigo,nome FROM clientes where nome like '%".$pesquisa."%' LIMIT 10;";
+         $RES = mysqli_query($db3,$SQL);
+         while($row = mysqli_fetch_array($RES))
+         {
+	   ?>
+	   <tr Onclick="cliente('<?=$row['codigo'];?>','<?=$row['nome'];?>');"><td colspan="3"><?=$row['nome']?></td></tr>
 	
-	<?
-}
+	   <?
+          }
+       ?>
+       </tbody>
+      </table>
+    </div>
 
-
-
-
-?>
-   </tbody>
- </table>
-</div>
-
-<?
+   <?
+  }
 }
 else if($_GET['ap'] == 2)
-{
+{   
+	if($_GET['tipo'] == 1)
+	{
+		$_SESSION['codcliente'] = $_GET['codigo'];
+		
+		?>
+		<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Data:</label>
+			<input name="dataagenda" id="dataagendas" OnChange="data(this.value);" type="text" autocomplete="off" class="form-control" required="required" />
+		</div>
+		<script>
+		jQuery('#dataagendas').datepicker({
+				format: 'dd/mm/yyyy',
+ 		       autoclose: true,
+ 		       todayHighlight: true,
+				language: "pt-BR",
+				orientation: "bottom left"
+ 		   });
+ 	    </script>
+		<?
+	}
+	else
+	{
    	?>
-	<!--<label>Cliente :</label>
-	<input name="codigo" id="codigo" type="hidden" value="<?=$_GET['nome'];?>" autocomplete="off" class="form-control" required="required" />
-	<input name="nome" id="nome" type="text" onkeyup="buscarcliente(this.value);" value="<?=$_GET['nome'];?>" autocomplete="off" class="form-control" required="required" />
-	<div id="pesquisacliente"></div>-->
 	<label>Horario:</label>
 	<select name="hora" id="hora" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required">
 	<option value="">Selecionar Horario</option>
@@ -75,6 +98,7 @@ else if($_GET['ap'] == 2)
 		?>
 	</select>
 	<?
+	}
 }
 else if($_GET['ap'] == 3)
 {
@@ -139,6 +163,10 @@ else if($_GET['ap'] == 4)
 			  <?
 			  
 	}
+}
+else if($_GET['ap'] == 5)
+{
+	
 }
 
 ?>

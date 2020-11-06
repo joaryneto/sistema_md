@@ -32,57 +32,7 @@ function revertedata($data){
 
 <!-- Mirrored from maxartkiller.com/website/Lemux/lemux-HTML/framworkElements/modal.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Dec 2019 13:57:02 GMT -->
 <head>
-    <meta charset="iso-8859-1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="template/assets/images/favicon.png">
-
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>EC Tecnologia</title>
-	
-	
-    <!-- Material design icons CSS -->
-    <link rel="stylesheet" href="template/vendor/materializeicon/material-icons.css">
-
-    <!-- Roboto fonts CSS -->
-
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Bootstrap core CSS -->
-    <link href="template/vendor/bootstrap-4.4.1/css/bootstrap.min.css" rel="stylesheet">
-	
-    <!-- Swiper CSS -->
-    <link href="template/vendor/swiper/css/swiper.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="template/css/style.css" rel="stylesheet">
-	
-	<!--alerts CSS -->
-    <link href="template/vendor/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
-	
-	
-	<script type="text/javascript" src="template/vendor/propeller-master/dist/css/propeller.css"></script>
-	
-	
-	<link href="template/vendor/propeller-master/components/select2/css/pmd-select2.css" type="text/css" rel="stylesheet" />
-	<link href="template/vendor/propeller-master/components/select2/css/select2.min.css" type="text/css" rel="stylesheet" />
-	<link href="template/vendor/propeller-master/components/select2/css/select2-bootstrap.css" type="text/css" rel="stylesheet" />
-	
-	<link href="template/vendor/propeller-master/components/list/css/list.css" type="text/css" rel="stylesheet" />
-	<link href="template/vendor/propeller-master/components/card/css/card.css" type="text/css" rel="stylesheet" />
-	<link href="template/vendor/propeller-master/components/typography/css/typography.css" type="text/css" rel="stylesheet" />
-    <link href="template/vendor/propeller-master/components/button/css/button.css" type="text/css" rel="stylesheet" />
-    <link href="template/vendor/propeller-master/components/floating-action-button/css/floating-action-button.css" type="text/css" rel="stylesheet" /> 
-	<link href="template/vendor/propeller-master/components/textfield/css/textfield.css" type="text/css" rel="stylesheet" /> 
-	
-	<!-- Calendar CSS -->
-    <link href="template/vendor/calendar/dist/fullcalendar.css" rel="stylesheet" />
-	
-	<script type="text/javascript" src="template/js/AjaxScript.js.php"></script>
+<? include 'css.php';?>
 <style>
 .tableFixHead          { 
   overflow-y: auto; 
@@ -741,49 +691,7 @@ function auto()
         </button> 
     </div>
 	
-    <!-- jquery, popper and bootstrap js 
-    <script src="template/js/jquery-3.3.1.min.js"></script>-->
-	<script src="template/vendor/jquery/jquery.min.js"></script>
-    <script src="template/js/popper.min.js"></script>
-    <script src="template/vendor/bootstrap-4.4.1/js/bootstrap.min.js"></script>
-
-    <!-- swiper js -->
-    <script src="template/vendor/swiper/js/swiper.min.js"></script>
-
-    <!-- cookie js -->
-    <script src="template/vendor/cookie/jquery.cookie.js"></script>
-
-    <!-- swiper js -->
-    <script src="template/vendor/swiper/js/swiper.min.js"></script>
-
-    <!-- template custom js -->
-    <script src="template/js/main.js"></script>
-
-	<script src="template/js/perso.js"></script>
-	
-    <!-- Sweet-Alert  -->
-    <script src="template/vendor/sweetalert/sweetalert.min.js"></script>
-    <script src="template/vendor/sweetalert/jquery.sweet-alert.custom.js"></script>
-	
-	
-	<!-- Propeller textfield js -->
-	<script type="text/javascript" src="template/vendor/propeller-master/components/textfield/js/textfield.js"></script>
-
-	<script type="text/javascript" src="template/vendor/propeller-master/components/select2/js/pmd-select2.js"></script>
-	<script type="text/javascript" src="template/vendor/propeller-master/dist/js/propeller.min.js"></script>
-	<!-- MASK INPUT -->
-    <script src="template/vendor/mask.money/jquery.maskMoney.js"></script>
-    <script>
-        $("#dinheiro").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
-        $("#ctdebito").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
-        $("#ctcredito").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
-        $("#ted").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
-        $("#desc").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
-		$("#totals").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
-    </script>
-	
-    <!-- page level script -->
-
+<? include 'scripts.php'?>
 
 </body>
 

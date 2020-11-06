@@ -55,14 +55,10 @@ function agendar()
 	}
 }
 
-$('#aagenda').on('click',function(){	
-
-      $('#dataagenda').val('');
-      $('#codigo').val('');
-      $('Input[nome]').val('');
-      $('#hora').val('');
+$('#aagenda').on('click',function()
+{	
       $('#agenda').modal('show');
-
+	  requestPage2('?br=atu_pesquisa&tipo=1&ap=1','loadfagenda','GET');
 });
 
 $('#reagendarr').on('click',function(){	

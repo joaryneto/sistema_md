@@ -80,7 +80,7 @@ else
 	$_SESSION['pages'] = 3;
 	
 
-	print "<script> window.location='sistema.php'; </script>";
+	//sprint "<script> window.location='sistema.php?url=inicio'; </script>";
   }
 
 }
@@ -89,7 +89,7 @@ else
 
 if($x == 1)
 {
-	print "<script> window.location='sistema.php'; </script>";
+	print "<script> window.location='sistema.php?url=inicio'; </script>";
 }
 else
 {

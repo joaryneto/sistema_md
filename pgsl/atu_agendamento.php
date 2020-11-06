@@ -54,8 +54,12 @@ if(isset($_GET["codigo"]) and $_GET['ap'] == 1)
  ?>
  
  <script> 
- 
- swal("Atenção", "Agendado com sucesso."); 
+ swal({   
+            title: "Atenção",   
+            text: "Agendado com sucesso.",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });
  $('#agenda').modal('hide');
  </script>
  
@@ -79,7 +83,12 @@ else if($_GET['ap'] == 2)
  
   <script> 
   $('#editaagenda').modal('hide');
-  swal("Atenção", "Reagendado com sucesso.");
+   swal({   
+            title: "Atenção",   
+            text: "Reagendado com sucesso.",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });
   </script>
  
  <?
@@ -90,9 +99,13 @@ else if($_GET['ap'] == 3)
    mysqli_query($db3,$SQL);
  ?>
  
-  <script> 
-  swal("Atenção", "Excluido com sucesso."); 
-  //window.location.href='sistema.php';
+  <script>
+  swal({   
+            title: "Atenção",   
+            text: "Excluido com sucesso.",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });
   </script>
  
  <?
