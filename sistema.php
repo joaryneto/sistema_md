@@ -216,9 +216,6 @@ function revertedata($data){
 
 function data(valor)
 {
-	$( "#dataagenda" ).datepicker( "destroy" );
-    $( "#dataagenda" ).hide();
-	
 	if(valor == "")
 	{
 	    swal('Atenção', 'Selecione uma data.');

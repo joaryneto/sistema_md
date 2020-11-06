@@ -49,10 +49,10 @@ else if($_GET['ap'] == 2)
 		
 		?>
 		<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Data:</label>
-			<input name="dataagenda" id="dataagendas" OnChange="data(this.value);" type="text" autocomplete="off" class="form-control" required="required" />
+			<input name="dataagenda" id="dataagenda" OnChange="data(this.value);" type="text" autocomplete="off" class="form-control" required="required" />
 		</div>
 		<script>
-		jQuery('#dataagendas').datepicker({
+		jQuery('#dataagenda').datepicker({
 				format: 'dd/mm/yyyy',
  		       autoclose: true,
  		       todayHighlight: true,
