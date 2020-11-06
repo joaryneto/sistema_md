@@ -43,19 +43,16 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 			<li class="nav-item">
 				<a class="nav-link active" href="#icon-with-bottom-label-home" aria-controls="home" role="tab" data-toggle="tab" style="color: rgba(0,0,0,.54);">
 					<i class="material-icons pmd-icon-sm">mood</i> 
-					Agendados
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#icon-with-bottom-label-about" aria-controls="about" role="tab" data-toggle="tab" style="color: rgba(0,0,0,.54);">
 					<i class="material-icons pmd-icon-sm">settings</i>
-					Iniciado
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#icon-with-bottom-label-work" aria-controls="work" role="tab" data-toggle="tab" style="color: rgba(0,0,0,.54);">
 					<i class="material-icons pmd-icon-sm mr-2">call</i>
-					Finalizado
 				</a>
 			</li>
 		</ul>
