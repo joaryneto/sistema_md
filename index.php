@@ -21,6 +21,11 @@ else if($_GET['sistema'] == "agspa"  or $_SERVER['SERVER_NAME'] == "sistema.sl")
 	$_SESSION['nomesoft'] = "AgSpa";
 	$_SESSION['tipo'] = 3;
 }
+else
+{
+	$_SESSION['nomesoft'] = "AgSpa";
+	$_SESSION['tipo'] = 3;	
+}
 
 $string = '{
   "name": "'.$_SESSION['nomesoft'].'",
