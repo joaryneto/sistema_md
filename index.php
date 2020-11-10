@@ -11,12 +11,12 @@ if($_SERVER['SERVER_NAME'] == "svsistema.app")
 	$_SESSION['nomesoft'] = "AgEC";
 	$_SESSION['tipo'] = 1;
 }
-else if($_SERVER['SERVER_NAME'] == "sistema.sge")
+else if($_SERVER['SERVER_NAME'] == "app.sge.ectecnologia.com.br")
 {
 	$_SESSION['nomesoft'] = "AgSge";
 	$_SESSION['tipo'] = 2;
 }
-else if($_SERVER['SERVER_NAME'] == "sistema.sl")
+else if($_SERVER['SERVER_NAME'] == "app.sl.ectecnologia.com.br")
 {
 	$_SESSION['nomesoft'] = "AgSpa";
 	$_SESSION['tipo'] = 3;
