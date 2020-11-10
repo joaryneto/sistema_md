@@ -23,11 +23,7 @@ else if($_GET['sistema'] == "agsl")
 }
 else
 {
-	?>
-	<script>
-	window.location='servicos.php';
-	</script>
-	<?
+	header('Location: servicos.php');
 }
 
 $string = '{
