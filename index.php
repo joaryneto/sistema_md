@@ -6,17 +6,17 @@ session_start();
 
 require_once("./load/load.php");
 
-if($_SERVER['SERVER_NAME'] == "svsistema.app")
+if($_GET['sistema'] == "app" or $_SERVER['SERVER_NAME'] == "app.sistema")
 {
 	$_SESSION['nomesoft'] = "AgEC";
 	$_SESSION['tipo'] = 1;
 }
-else if($_SERVER['SERVER_NAME'] == "app.sge.ectecnologia.com.br")
+else if($_GET['sistema'] == "agsge" or $_SERVER['SERVER_NAME'] == "sistema.sge")
 {
 	$_SESSION['nomesoft'] = "AgSge";
 	$_SESSION['tipo'] = 2;
 }
-else if($_SERVER['SERVER_NAME'] == "app.sl.ectecnologia.com.br")
+else if($_GET['sistema'] == "agspa"  or $_SERVER['SERVER_NAME'] == "sistema.sl")
 {
 	$_SESSION['nomesoft'] = "AgSpa";
 	$_SESSION['tipo'] = 3;
