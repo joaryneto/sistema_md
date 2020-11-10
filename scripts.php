@@ -55,10 +55,7 @@
 	<!-- MASK INPUT -->
     <script src="template/vendor/mask.money/jquery.maskMoney.js"></script>
     <script>
-	
-	$(".alert").alert('close');
-	
-	
+	    //$(".alert").alert('close');
         $("#dinheiro").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
         $("#ctdebito").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
         $("#ctcredito").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});

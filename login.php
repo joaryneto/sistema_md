@@ -4,22 +4,7 @@ ob_start();
 
 session_start();
 
-if($_SERVER['SERVER_NAME'] == "svsistema.app")
-{
-	$_SESSION['tipo'] = 1;
-}
-else if($_SERVER['SERVER_NAME'] == "sistema.sge")
-{
-	$_SESSION['tipo'] = 2;
-}
-else if($_SERVER['SERVER_NAME'] == "sistema.sl")
-{
-	$_SESSION['tipo'] = 3;
-}
-
 require_once("./load/load.php");
-
-//echo $_SESSION['tipo'];
 
 ?>
 <!doctype html>
@@ -81,7 +66,7 @@ require_once("./load/load.php");
                                     <div class="col pl-0">
                                         <div class="form-group float-label active">
                                             <input type="text" id="inputEmail" name="login" class="form-control" required autofocus >
-                                            <label for="inputEmail" autocomplete="off" class="form-control-label">Nome do usuário</label>
+                                            <label for="inputEmail" autocomplete="off" class="form-control-label">Nome do usuário - <?=$_SESSION['tipo'];?></label>
                                         </div>
                                     </div>
                                 </div>

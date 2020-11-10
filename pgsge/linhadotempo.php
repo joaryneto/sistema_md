@@ -17,44 +17,6 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
    //exit("<strong> Erro: Você não tem permissão. </strong>");
 //}
 
-if($_GET['bloquear']==1 and $menu7 == 1 or $_GET['bloquear']==1 and $menu99 == 1)
-{
-  $SQL = "UPDATE laudos_enviados SET laudador=NULL , status=-1 where codigo=".$_GET['codigo']."";
-  $sucesso = mysqli_query($db,$SQL);
-  
-  if($sucesso)
-  {
-	 print "<script> window.alert('Laudo bloqueado com sucesso...'); </script>";
-	 print "<script> window.location='iniciado.php?url=inicio';</script>"; 
-  }
-}
-
-if($_GET['excluir']==1 and $menu8 == 1)
-{
-  
-  $SQL = "UPDATE laudos_enviados SET laudador=NULL , status=-2 where codigo=".$_GET['codigo']."";
-  $sucesso = mysqli_query($db,$SQL);
-  
-  if($sucesso)
-  {
-	 print "<script> window.alert('Laudo excluido com sucesso...'); </script>";
-	 print "<script> window.location='iniciado.php?url=inicio';</script>"; 
-  }
-  
-  //$SQL = "DELETE FROM laudos_enviados where codigo=".$_GET['codigo']."";
-  //$sucesso = mysqli_query($db,$SQL);
-  
-  //if($sucesso)
-  //{
-	// print "<script> window.alert('Laudo excluido com sucesso...'); </script>";
-	// print "<script> window.location='iniciado.php?url=inicio';</script>"; 
-  //}
-}
-
-function formatodatahora($data){
-    return date("d/m/Y", strtotime($data));
-}
-
 if(isset($_GET['mes']))
 {
 	$mes=$_GET['mes'];
@@ -67,101 +29,115 @@ else
 }
 
 ?>
-<link href="template/css/pages/timeline-vertical-horizontal.css" rel="stylesheet">
 <script>
 								
 	function mess(mes)
 	{
-		window.location.href='iniciado.php?url=linhadotempo&mes=' + mes;					
+		window.location.href='sistema.php?url=linhadotempo&mes=' + mes;					
     }
 </script>
-<div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <ul class="timeline" style="max-width: 1400px;">
-								    <li>
-									<select name="empresa" id="empresa" class="form-control" onChange="mess(this.value);" style="width: 100%; height:36px;">
-									    <option value="01" <? if($mes == "01"){ echo "selected";}?>>Janeiro</option>
-									    <option value="02" <? if($mes == "02"){ echo "selected";}?>>Fevereiro</option>
-									    <option value="03" <? if($mes == "03"){ echo "selected";}?>>Março</option>
-									    <option value="04" <? if($mes == "04"){ echo "selected";}?>>Abril</option>
-									    <option value="05" <? if($mes == "05"){ echo "selected";}?>>Maio</option>
-									    <option value="06" <? if($mes == "06"){ echo "selected";}?>>Junho</option>
-									    <option value="07" <? if($mes == "07"){ echo "selected";}?>>Julho</option>
-									    <option value="08" <? if($mes == "08"){ echo "selected";}?>>Agosto</option>
-									    <option value="09" <? if($mes == "09"){ echo "selected";}?>>Setembro</option>
-									    <option value="10" <? if($mes == "10"){ echo "selected";}?>>Outubro</option>
-									    <option value="11" <? if($mes == "11"){ echo "selected";}?>>Novembro</option>
-									    <option value="12" <? if($mes == "12"){ echo "selected";}?>>Dezembro</option>
-                                      </select>
-								     </li>
-									 <li style="padding: 30px;">
-                                           <div class="timeline-badge success" style="border-radius: 10px;">Dias</div>
-                                         
-                                        </li>
-									<?
-									
-									 
-									 
-									 $count = 0; 
-									 $SQL = "select usuarios.nome,diario.data,diario.conteudo,diario.texto,matriculas.codigo,turmas.descricao as turma,materias.descricao as disciplina,matriculas.foto from turmas_professor 
-									 inner JOIN turmas on turmas.codigo=turmas_professor.turma 
-									 inner join diario on diario.turma=turmas.codigo
-									 inner join materias on materias.codigo=diario.materia 
-									 inner join matriculas on matriculas.turma=diario.turma  
-									 inner join usuarios on usuarios.codigo=turmas_professor.usuario 
-									 where matriculas.status=1 and matriculas.matricula=".$cod_aluno." and month(diario.data)=".$mes." and YEAR(diario.data)=".$ano."";
-									 $RES = mysqli_query($db,$SQL);
-									 while($row = mysqli_fetch_array($RES))
-									 {
-										 $professor = $row['nome'];
-										 $disciplina = $row['disciplina'];
-										 $hora = date("Y",strtotime($row['data']));
-										 $dia = date("d",strtotime($row['data']));
-										 $conteudo = $row['conteudo'];
-										 $texto = $row['texto'];
-										
-                                         if($count == 0)
-                                         {
-								     ?>
-									    
-                                        <li>
-                                           <div class="timeline-badge success"><? echo $dia;?></div>
-                                          <div class="timeline-panel">
-                                            <div class="timeline-heading">
-                                                <h4 class="timeline-title">Prof. <? echo $professor; ?></h4>
-												<h4 class="timeline-title">Disciplina: <? echo $disciplina; ?> - <? echo $conteudo; ?> </h4>
-                                            </div>
-                                            <div class="timeline-body">
-                                                <p><? echo $texto;?></p>
-                                            </div>
-                                        </div>
-                                        </li>
-										 <?   $count = 1;
-										   }
-										   else
-										   { ?>
-										<li class="timeline-inverted">
-                                        <div class="timeline-badge warning"><? echo $dia;?></div>
-                                        <div class="timeline-panel">
-                                            <div class="timeline-heading">
-                                                <h4 class="timeline-title">Prof. <? echo $professor; ?></h4>
-												<h4 class="timeline-title">Disciplina: <? echo $disciplina; ?> - <? echo $conteudo; ?> </h4>
-                                            </div>
-                                            <div class="timeline-body">
-                                                <p><? echo $texto;?></p>
-                                            </div>
-                                         </div>
-                                        </li>
-										 <?   $count = 0;
-										    } ?>
-										 
-									<? //$count++;
-									} ?>
-                                    
-                                </ul>
+<div class="container-fluid bg-template mb-4">
+            <div class="row hn-290 position-relative">
+			<div class="background opac heightset">
+                    <i class="fa fa-calendar" style="font-size: 200px;position: absolute;left: 40%;top: 50px;"></i>
+                </div>
+                <div class="container align-self-end">
+                    <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Agenda";?></h2>
+                    <p class="text-mute mb-2"><? echo $_SESSION["DESCRICAOPG2"] = "Lista";?></p>
+					<select name="empresa" id="empresa" class="form-control form-control-lg search bottom-25 position-relative border-0" onChange="mess(this.value);" style="width: 100%; height:36px;">
+				<option value="01" <? if($mes == "01"){ echo "selected";}?>>Janeiro</option>
+				<option value="02" <? if($mes == "02"){ echo "selected";}?>>Fevereiro</option>
+				<option value="03" <? if($mes == "03"){ echo "selected";}?>>Março</option>
+				<option value="04" <? if($mes == "04"){ echo "selected";}?>>Abril</option>
+				<option value="05" <? if($mes == "05"){ echo "selected";}?>>Maio</option>
+				<option value="06" <? if($mes == "06"){ echo "selected";}?>>Junho</option>
+				<option value="07" <? if($mes == "07"){ echo "selected";}?>>Julho</option>
+				<option value="08" <? if($mes == "08"){ echo "selected";}?>>Agosto</option>
+				<option value="09" <? if($mes == "09"){ echo "selected";}?>>Setembro</option>
+				<option value="10" <? if($mes == "10"){ echo "selected";}?>>Outubro</option>
+				<option value="11" <? if($mes == "11"){ echo "selected";}?>>Novembro</option>
+				<option value="12" <? if($mes == "12"){ echo "selected";}?>>Dezembro</option>
+			 </select>
+                </div>
+        </div>
+</div>   
+<div class="container pt-5">
+  
+  <div class="row">
+	<div class="col-md-12 col-sm-12"> 
+		<div class="component-box">
+			<!--Tabs with Icon example -->
+             <div class="row" id="load">
+				<?
+				$count = 0; 
+				$SQL = "select usuarios.nome,diario.data,diario.conteudo,diario.texto,matriculas.codigo,turmas.descricao as turma,materias.descricao as disciplina,matriculas.foto from turmas_professor 
+				inner JOIN turmas on turmas.codigo=turmas_professor.turma 
+				inner join diario on diario.turma=turmas.codigo
+				inner join materias on materias.codigo=diario.materia 
+				inner join matriculas on matriculas.turma=diario.turma  
+				inner join usuarios on usuarios.codigo=turmas_professor.usuario 
+				where matriculas.status=1 and matriculas.matricula=".$_SESSION['matricula']." and month(diario.data)=".$mes." and YEAR(diario.data)=".$ano."";
+				$RES = mysqli_query($db,$SQL);
+				while($row = mysqli_fetch_array($RES))
+				{
+						$professor = $row['nome'];
+						$disciplina = $row['disciplina'];
+						$hora = date("Y",strtotime($row['data']));
+						$dia = date("d",strtotime($row['data']));
+						$conteudo = $row['conteudo'];
+						$texto = $row['texto'];
+				?>
+				
+				<div class="col-lg-6 col-md-6">
+                                <!-- Card -->
+                                <!-- Default card starts -->
+<div class="pmd-card pmd-card-default pmd-z-depth">
+
+	<!-- Card header -->
+    <div class="pmd-card-title">
+	     <div class="media-left">
+		 <h2>Dia <? echo $dia;?></h2>
+        </div>
+        <div class="media-body media-middle">
+            <h3 class="pmd-card-title-text"><?=$professor?></h3>
+            <span class="pmd-card-subtitle-text"><?=$disciplina?></span>
+        </div>
+    </div>
+    
+    <!-- Card media 
+    <div class="pmd-card-media">
+        <img src="template/images/profile-pic.png" class="card-img-top img-responsive">
+    </div>-->
+    
+    <!-- Card body -->
+    <div class="pmd-card-title">
+        <h2 class="pmd-card-title-text"><?=$conteudo?></h2>
+    </div>	
+    
+    <div class="pmd-card-body">
+        <?=$texto?>
+    </div>
+    
+    <!-- Card media actions -->
+    <div class="pmd-card-actions">
+        <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">share</i></button>
+        <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">thumb_up</i></button>
+        <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">drafts</i></button>
+    </div>
+    
+    <!-- Card actions 
+    <div class="pmd-card-actions">
+        <button class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Primary</button>
+        <button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Action</button>
+    </div>-->
+</div>
+<!--Default card ends -->
+                                <!-- Card -->
                             </div>
-                        </div>
-                    </div>
-</div>				
+				
+			  <?}?>
+		   </div>
+	   </div>
+    </div>
+  </div>
+</div>

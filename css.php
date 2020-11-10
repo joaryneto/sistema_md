@@ -24,6 +24,8 @@
 	<!-- autocomplete CSS -->
     <link rel="stylesheet" href="template/vendor/EasyAutocomplete-1.3.5/easy-autocomplete.css" >
 	
+	<link href="template/vendor/propeller-master/components/table/css/table.css" type="text/css" rel="stylesheet" /> 
+	
     <!-- Swiper CSS -->
     <link href="template/vendor/swiper/css/swiper.min.css" rel="stylesheet">
 	

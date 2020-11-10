@@ -2,7 +2,7 @@
 
 require_once("./load/class/mysql.php");
 
-/*if($_SESSION['tipo'] == 1)
+if($_SESSION['tipo'] == 1)
 {
 	$_SESSION['pg'] = "pages";
 }
@@ -17,9 +17,9 @@ else if($_SESSION['tipo'] == 3)
 else
 {
 	print("<script>window.location.href='index.php';</script>");
-}*/
+}
 
-$_SESSION['pg'] = "pgsl";
+//$_SESSION['pg'] = "pgsl";
 
 if(isset($_GET['br']) == true) 
 {

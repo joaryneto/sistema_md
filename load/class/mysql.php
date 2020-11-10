@@ -15,8 +15,9 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //	echo "Não conectou com banco 1...";
 //}
 
-if($_SESSION['tipo'] == "2")
+if($_SESSION['tipo'] == 2)
 {
+	
 if(!$db = mysqli_connect("mysql669.umbler.com:41890", "sistemasge", "I_Jt{4|p6u"))
 {
     //print("<script>window.alert('Não conectou com banco...')</script>");
@@ -29,8 +30,8 @@ if(!$db = mysqli_connect("mysql669.umbler.com:41890", "sistemasge", "I_Jt{4|p6u"
 //mysqli_close($db);
 
 }
-
-	
+else if($_SESSION['tipo'] == 3)
+{	
 if(!$db3 = mysqli_connect("mysql669.umbler.com:41890", "sistemasl", "I_Jt{4|p6u"))
 {
     //print("<script>window.alert('Não conectou com banco...')</script>");
@@ -41,17 +42,16 @@ if(!$db3 = mysqli_connect("mysql669.umbler.com:41890", "sistemasl", "I_Jt{4|p6u"
 @mysqli_set_charset($db3,'UTF8');
 
 //mysqli_close($db3);
+}
 
-
-
-if(!$db2 = mysqli_connect("mysql669.umbler.com:41890","sistemaec","I_Jt{4|p6u"))
+/*if(!$db2 = mysqli_connect("mysql669.umbler.com:41890","sistemaec","I_Jt{4|p6u"))
 {
    //print("<script>window.alert('Não conectou com banco...')</script>");
 	echo "Não conectou com banco 2";
 }
 
 @mysqli_select_db($db2, "sistemaec");
-@mysqli_set_charset($db2,'UTF8');
+@mysqli_set_charset($db2,'UTF8');*/
 
 //mysqli_close($db2);
 //@mysqli_query($db,"SET NAMES 'latin1'");

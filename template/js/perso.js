@@ -155,5 +155,11 @@ $('#cmpagamento').on('click',function()
    requestPage('?br=cad_cmeiodepagamento','conteudo','GET');
 });
 
+/* MENU SGE  */
 
-
+$('#ldotempo').on('click',function()
+{	
+   //document.getElementById("btnshow").click();
+   //requestPage('?br=linhadotempo','conteudo','GET');
+   window.location='sistema.php?url=linhadotempo';
+});

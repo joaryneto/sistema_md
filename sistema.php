@@ -28,8 +28,6 @@ function revertedata($data){
 		return $data;
 }
 
-//echo $_SESSION['sistema'];
-
 ?>
 <!doctype html>
 <html lang="pt-br" class="color-theme-blue">
@@ -78,7 +76,8 @@ function revertedata($data){
                     <img src="images/man-930397_640%402x.png" alt="">
                 </figure>
             </div>
-            <div class="col pl-3 align-self-center">
+            <? if($_SESSION['tipo'] == 2){?>
+			<div class="col pl-3 align-self-center">
                 <p class="my-0"><?=$_SESSION['nome']?></p>
                 <p class="text-mute my-0 small">
 				<?
@@ -109,18 +108,85 @@ function revertedata($data){
 				
 				?></p>
             </div>
+			<?}?>
+			<? if($_SESSION['tipo'] == 3){?>
+			<div class="col pl-3 align-self-center">
+                <p class="my-0"><?=$_SESSION['nome']?></p>
+                <p class="text-mute my-0 small">
+				<?
+				
+				switch($_SESSION['tipo'])
+			    {
+					case 1:
+					{
+						echo "Atendente";
+					}
+					break;
+					case 2:
+					{
+						echo "Profissional";
+					}
+					break;
+					case 3:
+					{
+						echo "Administrador";
+					}
+					break;
+					default:
+				    {
+						echo "Não definido";
+					}
+					break;
+				}
+				
+				?></p>
+            </div>
+			<?}?>
             <div class="col-auto align-self-center">
                 <a href="login.php" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
             </div>
         </div>
-		
+		<? if($_SESSION['tipo'] == 2){?>
+        <div class="list-group main-menu my-5">
+			<nav class="navbar" style="padding: .1rem 0rem;">
+                <ul class="navbar-nav">
+				    <li class="nav-item dropdown" style="width: 230px;">
+                        <a href="sistema.php?url=linhadotempo" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action active">
+                                <i class="material-icons">perm_contact_calendar</i> Linha do tempo
+                            </div>
+                        </a>
+					</li>
+                    <li class="nav-item dropdown" style="width: 230px;">
+                        <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="list-group-item list-group-item-action">
+                                <i class="material-icons">home</i> Aulas
+                            </div>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="sistema.php?url=cad_diario" class="sidebar-close dropdown-item menu-right">
+							 Conteúdo Lecionado
+                            </a>
+                            <a href="sistema.php?url=cad_fechar" class="sidebar-close dropdown-item menu-right">
+                             Fechar Bimestre
+                            </a>
+                            <a href="sistema.php?url=cad_abrir" class="sidebar-close dropdown-item popup-open" >
+                             Abrir Bimestre
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+		<?}?>
+		<? if($_SESSION['tipo'] == 3){?>
         <div class="list-group main-menu my-5">
 			<nav class="navbar" style="padding: .1rem 0rem;">
                 <ul class="navbar-nav">
 				    <li class="nav-item dropdown" style="width: 230px;">
                         <a href="sistema.php?url=inicio" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
                             <div class="list-group-item list-group-item-action active">
-                                <i class="material-icons">perm_contact_calendar</i> Agenda
+                                <i class="material-icons">perm_contact_calendar</i> Agenda - <?=$_SESSION['tipo'];?>
                             </div>
                         </a>
 					</li>
@@ -145,6 +211,7 @@ function revertedata($data){
                 </ul>
             </nav>
         </div>
+		<?}?>
     </div>
     <!-- sidebar ends -->
 
@@ -192,6 +259,42 @@ function revertedata($data){
         <!-- page content ends -->
         </div>
 
+<? if($_SESSION['tipo'] == 2){?>
+        <!-- footer -->
+        <div class="footer">
+            <div class="no-gutters">
+                <div class="col-auto mx-auto">
+                    <div class="row no-gutters justify-content-center">
+                        <div class="col-auto">
+                            <a href="javascript:void(0)" id="ldotempo" class="btn btn-link-default active">
+                                <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
+                                <span class="text-name">Linha do tempo</span>
+                            </a>
+                        </div>
+						<div class="col-auto">
+                            <a href="javascript:void(0)" class="btn btn-link-default">
+                                <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
+                                <span class="text-name">Agendado</span>
+                            </a>
+                        </div>
+						<div class="col-auto">
+                            <a href="javascript:void(0)" class="btn btn-link-default ">
+                                <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
+                                <span class="text-name">Finalizado</span>
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <a href="caixa.php" class="btn btn-link-default">
+                                <span class="icon-text"><i class="material-icons">store_mall_directory</i></span>
+                                <span class="text-name">Vendas</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<? } ?>
+<? if($_SESSION['tipo'] == 3){?>
         <!-- footer -->
         <div class="footer">
             <div class="no-gutters">
@@ -232,7 +335,10 @@ function revertedata($data){
         </button> 
 </div>
 <!-- footer ends -->
+<? } ?>
 </div>
+
+<? if($_SESSION['tipo'] == 3){?>
 <script>
 
 function data(valor)
@@ -350,8 +456,8 @@ function cliente(codigo,nome)
         <!-- /.modal-dialog -->
     </div>	
     <!-- wrapper ends -->
-	
-	<? if($_GET['url'] == "cad_caixaalteriores"){?>
+	<? } ?>
+	<? if($_GET['url'] == "cad_caixaalteriores" and $_SESSION['tipo'] == 3){?>
 	<div id="extratocaixaanteriores" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">

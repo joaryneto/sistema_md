@@ -6,41 +6,25 @@ session_start();
 
 require_once("./load/load.php");
 
-function formatodatahora($data){
-    return date("d/m/Y", strtotime($data));
-}
-
-date_default_timezone_set('America/Cuiaba');
-$data = date('Y-m-d');
-$hora = date('H:i:s');
-
-function revertedata($data){
-
-		if($data != ""){
-		$sep_data = explode("/",$data);
-		$data = $sep_data[2]."-".$sep_data[1]."-".$sep_data[0];
-		}
-		
-		return $data;
-}
-
 if($_SERVER['SERVER_NAME'] == "svsistema.app")
 {
+	$_SESSION['nomesoft'] = "AgEC";
 	$_SESSION['tipo'] = 1;
 }
 else if($_SERVER['SERVER_NAME'] == "sistema.sge")
 {
+	$_SESSION['nomesoft'] = "AgSge";
 	$_SESSION['tipo'] = 2;
 }
 else if($_SERVER['SERVER_NAME'] == "sistema.sl")
 {
+	$_SESSION['nomesoft'] = "AgSpa";
 	$_SESSION['tipo'] = 3;
 }
 
-
 $string = '{
-  "name": "Aspa",
-  "short_name": "Aspa",
+  "name": "'.$_SESSION['nomesoft'].'",
+  "short_name": "'.$_SESSION['nomesoft'].'",
   "icons": [{
     "src": "/images/icons/icon-128x128.png",
       "sizes": "128x128",
@@ -179,7 +163,7 @@ fclose($fp);
                             <img src="template/images/turtle.png" alt="" class="mw-100 mx-auto mb-4">
                             <br><br>
                             <h2 class="text-uppercase font-weight-light">Discover life underwater</h2>
-                            <p class="text-mute">Lorem ipsum dolor sit amet, consect etur adipiscing elit. Sndisse conv allis.</p>
+                            <p class="text-mute">Lorem ipsum dolor sit amet, consect etur adipiscing elit. Sndisse conv allis. <?=$_SERVER['SERVER_NAME'];?></p>
                         </div>
                     </div>
                 </div>

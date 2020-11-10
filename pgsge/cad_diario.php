@@ -17,23 +17,9 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //if($_SESSION['menu3'] == false)
 //{
 //   print("<script>window.alert('Erro: Você não tem permissão.')</script>");
-//   print("<script>window.location.href='iniciado.php';</script>");
+//   print("<script>window.location.href='sistema.php';</script>");
 //   //exit("<strong> Erro: Você não tem permissão. </strong>");
 //}
-
-function formatodatahora($data){
-    return date("d/m/Y", strtotime($data));
-}
-
-function revertedata($data){
-
-		if($data != ""){
-		$sep_data = explode("/",$data);
-		$data = $sep_data[2]."-".$sep_data[1]."-".$sep_data[0];
-		}
-		
-		return $data;
-}
 
 if(isset($_GET['codigo']))
 {
@@ -75,7 +61,7 @@ if($_GET['ap'] == "1")
 	if($sucesso)
 	{
 	    print("<script>window.alert('Conteudo ja cadastrada!')</script>");
-		print("<script>window.location.href='iniciado.php?url=cad_diario';</script>");
+		print("<script>window.location.href='sistema.php?url=cad_diario';</script>");
 	}
 	else
 	{
@@ -85,7 +71,7 @@ if($_GET['ap'] == "1")
 	   if($sucesso)
 	   {
 		   print("<script>window.alert('Conteudo Cadastrada com sucesso...')</script>");
-		   print("<script>window.location.href='iniciado.php?url=cad_diario';</script>");
+		   print("<script>window.location.href='sistema.php?url=cad_diario';</script>");
 	   }
 	   else
 	   {
@@ -101,7 +87,7 @@ elseif($_GET['ap'] == "2")
 	if($sucesso)
 	{
         print("<script>window.alert('Atualizado com sucesso.');</script>");
-		print("<script>window.location.href='iniciado.php?url=cad_diario&codigo=".$_GET['codigo']."';</script>");
+		print("<script>window.location.href='sistema.php?url=cad_diario&codigo=".$_GET['codigo']."';</script>");
 	}
 	else
 	{
@@ -118,7 +104,7 @@ if($_GET['fechar'] == "3")
 	if($sucesso)
 	{
         print("<script>window.alert('Bimestre fechado com sucesso.');</script>");
-		print("<script>window.location.href='iniciado.php?url=cad_diario&codigo=".$_GET['codigo']."';</script>");
+		print("<script>window.location.href='sistema.php?url=cad_diario&codigo=".$_GET['codigo']."';</script>");
 	}
 	else
 	{
@@ -134,7 +120,7 @@ if($_GET['excluir'] == 1)
 	if($sucesso)
 	{
         print("<script>window.alert('Excluido com sucesso.');</script>");
-		print("<script>window.location.href='iniciado.php?url=cad_diario';</script>");
+		print("<script>window.location.href='sistema.php?url=cad_diario';</script>");
 	}
 	else
 	{
@@ -209,7 +195,7 @@ $.each($("input[name='check[]']:checked"),function()
 			}
 			else
 			{
-			   matricula = matriculas.join(", ");
+			   matricula = matriculas.join(",");
 			}
 			
 		    ajaxLoader('?br=atu_presenca&matricula='+ matricula +'&nots='+ nots +'&data=<? echo $data;?>&diario=<? echo $_GET['codigo'];?>&disciplina=<? echo $_GET['disciplina'];?>&periodo=<? echo $periodo; ?>&gravar=1','gravarpresenca','GET');
@@ -264,21 +250,33 @@ $.each($("input[name='check[]']:value"),function()
 	});
 }
 </script>	
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
+<div class="container-fluid bg-template mb-4">
+            <div class="row hn-154 position-relative">
+			<div class="background opac heightset">
+                    <i class="fa fa-calendar" style="font-size: 200px;position: absolute;left: 40%;top: 50px;"></i>
+                </div>
+                <div class="container align-self-end">
+                    <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Diario de Classe";?></h2>
+                    <p class="text-mute mb-2"><? echo $_SESSION["DESCRICAOPG2"] = "Lista";?></p>
+                </div>
+            </div>
+        </div>
+<div class="container pt-5">
+  
+  <div class="row">
+	<div class="col-md-12 col-sm-12"> 
+		<div class="component-box">
+			<!--Tabs with Icon example -->
 							    
 								
 							    <? if(Empty($_GET['codigo']) and Empty($_GET['frequencia']) and Empty($_GET['nota']) or Empty($_GET['codigo']) and Empty($_GET['nota']) and Empty($_GET['frequencia']) or !Empty($_GET['codigo']) and Empty($_GET['frequencia']) and Empty($_GET['nota']) or !Empty($_GET['codigo']) and Empty($_GET['nota']) and Empty($_GET['frequencia'])) { ?>
                                 <?
 								if(Empty($_GET['codigo']) and Empty($_GET['frequencia']))
-								{  $action = "iniciado.php?url=cad_diario&ap=1";}
+								{  $action = "sistema.php?url=cad_diario&ap=1";}
 							    if(!Empty($_GET['codigo']))
-								{  $action = "iniciado.php?url=cad_diario&codigo=".$_GET['codigo']."&ap=2";}
+								{  $action = "sistema.php?url=cad_diario&codigo=".$_GET['codigo']."&ap=2";}
 								
 								?>
-								<h4 class="card-title"><? echo $_SESSION["PAGINA"] = "Cadastro de Aulas";?></h4>
 								<form class="m-t-40 row" name="laudo" method="post" action="<? echo $action;?>">
 								<div class="form-group col-md-4 m-t-20"><label>Turma :</label>
 								<select name="turma" id="turma" style="width: 100%; height:36px;" class="select2 form-control custom-select" required="required">
@@ -329,47 +327,49 @@ $.each($("input[name='check[]']:value"),function()
 								<textarea class="textarea_editor form-control" name="txtobs" id="txtobs" rows="10" placeholder="Escreva aqui ..." required="required"><? if(!Empty($_GET['codigo'])){ echo $texto;} ?></textarea>
 								</div>
 								<? }else{ ?>
-								<h4>Turma : <? echo $tdescricao;?></h4>
-								<h4>Disciplina : <? echo $mdescricao;?></h4>
-								<h4>Bimestre : <? echo $pdescricao;?></h4>
-								<h4>Conteudo : <? echo $conteudo;?></h4>
+								<div class="col-md-12">
+								<h2>Turma : <? echo $tdescricao;?></h2>
+								<h2>Disciplina : <? echo $mdescricao;?></h2>
+								<h2>Bimestre : <? echo $pdescricao;?></h2>
+								<h2>Conteudo : <? echo $conteudo;?></h2>
+								</div>
 								<? } ?>
 								<div class="form-group col-md-12 m-t-20">
 								<br>
-								<div class="form-actions">
 								<? if(Empty($_GET['codigo'])){?>
 								<button type="submit" class="btn btn-info"><i class="fa fa-plus-circle"></i> Cadastrar </button>
-								<a class="btn btn-info" href="iniciado.php?url=cad_diario"><i class="fa fa-plus-circle"></i> Novo</a>
+								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario"><i class="fa fa-plus-circle"></i> Novo</a>
 								<?}else{?>
-								<a class="btn btn-info" href="iniciado.php?url=cad_diario&codigo=<? echo $_GET['codigo']; ?>&excluir=1"><i class="fa fa-plus-circle"></i> Excluir</a>
+								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario&codigo=<? echo $_GET['codigo']; ?>&excluir=1"><i class="fa fa-plus-circle"></i> Excluir</a>
 								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota'])){?>
-								<button type="submit" class="btn btn-info"><i class="fa fa-plus-circle"></i> Gravar </button>
-								<a class="btn btn-info" href="iniciado.php?url=cad_diario<?if(Empty($_GET['codigo'])){?>&codigo=<? echo $_GET['codigo']; ?><?}?>"><i class="fa fa-plus-circle"></i> Voltar</a>
+								<button class="btn pmd-btn-outline pmd-ripple-effect btn-primary" type="submit" ><i class="fa fa-plus-circle"></i> Gravar </button>
+								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario<?if(Empty($_GET['codigo'])){?>&codigo=<? echo $_GET['codigo']; ?><?}?>"><i class="fa fa-plus-circle"></i> Voltar</a>
 								<? }else{ ?>
-								<a class="btn btn-info" href="iniciado.php?url=cad_diario<?if(!Empty($_GET['codigo'])){?>&codigo=<? echo $_GET['codigo']; ?><?}?>"><i class="fa fa-plus-circle"></i> Voltar</a>
+								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario<?if(!Empty($_GET['codigo'])){?>&codigo=<? echo $_GET['codigo']; ?><?}?>"><i class="fa fa-plus-circle"></i> Voltar</a>
 								<?if(!Empty($_GET['frequencia']) and Empty($_GET['nota'])){?>
-								<a class="btn btn-info" href="javascript: WEB(0)" onClick="gravar();"><i class="fa fa-plus-circle"></i> Gravar</a>
+								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: WEB(0)" onClick="gravar();"><i class="fa fa-plus-circle"></i> Gravar</a>
 								<? }?><?}?>
 								
 								
 								<?}?>
 								<? if(!Empty($_GET['codigo']) and Empty($_GET['frequencia']) && Empty($_GET['nota'])) { ?>
-								<a class="btn btn-info" href="iniciado.php?url=cad_diario&codigo=<? echo $_GET['codigo']; ?>&frequencia=1&disciplina=<? echo $disciplina;?>"><i class="fa fa-plus-circle"></i> Registrar Frequencia</a>
+								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario&codigo=<? echo $_GET['codigo']; ?>&frequencia=1&disciplina=<? echo $disciplina;?>"><i class="fa fa-plus-circle"></i> Registrar Frequencia</a>
 								<? } ?>
 								<? if(!Empty($_GET['codigo']) and Empty($_GET['nota']) && Empty($_GET['frequencia'])) { ?>
-								<a class="btn btn-info" href="iniciado.php?url=cad_diario&codigo=<? echo $_GET['codigo']; ?>&nota=1&disciplina=<? echo $disciplina;?>"><i class="fa fa-plus-circle"></i> Inserir Nota</a>
+								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario&codigo=<? echo $_GET['codigo']; ?>&nota=1&disciplina=<? echo $disciplina;?>"><i class="fa fa-plus-circle"></i> Inserir Nota</a>
 								<? } ?>
 								<? if(!Empty($_GET['codigo']) and !Empty($_GET['nota']) && Empty($_GET['frequencia'])) { ?>
-								<a class="btn btn-info" href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus-circle"></i> Fechar Bimestre</a>
+								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus-circle"></i> Fechar Bimestre</a>
 								<? } ?>
 								
-								</div></div>
+								</div>
 								<? if(Empty($_GET['codigo']) && Empty($_GET['frequencia']) && Empty($_GET['nota'])){?>
-                                <div class="form-group col-md-12 m-t-20">
-                                    <table class="display nowrap table table-hover table-striped table-bordered">
+                          <div class="col-md-12">
+					       <div class="component-box">
+							<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+							  <table class="table pmd-table">
                                         <thead>
                                             <tr>
-                                                <th>Codigo</th>
                                                 <th>Turma</th>
 												<th>Disciplina</th>
 												<th>Conteudo</th>
@@ -391,22 +391,25 @@ $.each($("input[name='check[]']:value"),function()
 										  {
 										  ?>
                                             <tr>
-                                                <td><? echo $row['codigo'];?></td>
                                                 <td><? echo $row['a'];?></td>
 												<td><? echo $row['b'];?></td>
 												<td><? echo $row['c'];?></td>
 												<td><? echo formatodatahora($row['data']);?></td>
-												<td><a class="fa fa-edit" href="iniciado.php?url=cad_diario&codigo=<? echo $row['codigo']?>" style="font-size: 150%;"><a></td>
-												<td><a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir exame" style="font-size: 150%; color: red;" href="iniciado.php?url=cad_diario&codigo=<? echo $row['codigo']?>&excluir=1"><a></td>
+												<td><a class="fa fa-edit" href="sistema.php?url=cad_diario&codigo=<? echo $row['codigo']?>" style="font-size: 150%;"><a></td>
+												<td><a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir exame" style="font-size: 150%; color: red;" href="sistema.php?url=cad_diario&codigo=<? echo $row['codigo']?>&excluir=1"><a></td>
                                             </tr>
 										  <? } ?>
                                         </tbody>
                                     </table>
-                                </div>
+                                  </div>
+								</div>
+				               </div>
 								<?}
 								if($_GET['frequencia'] == 1){?>
-								<div class="form-group col-md-12 m-t-20">
-                                    <table class="display nowrap table table-hover table-striped table-bordered">
+								<div class="col-md-12">
+					       <div class="component-box">
+							<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+							  <table class="table pmd-table">
                                         <thead>
                                             <tr>
                                                 <th>Foto</th>
@@ -432,7 +435,7 @@ $.each($("input[name='check[]']:value"),function()
 												 
 										  ?>
                                             <tr>
-                                                <td><? if(Empty($row['foto'])){echo '<img style="width: 40px" src="template/img/semfoto.png">';}else{echo "TESTE 2";}?></td>
+                                                <td><? if(Empty($row['foto'])){echo '<img style="width: 40px" src="template/images/semfoto.png">';}else{echo "TESTE 2";}?></td>
                                                 <td><? echo $row['nome'];?></td>
 												<td><? 
 												     
@@ -494,7 +497,7 @@ $.each($("input[name='check[]']:value"),function()
 										  }?>
                                         </tbody>
                                     </table>
-                                </div>
+                                </div></div></div>
 								<?}?>
 								<? if($_GET['nota'] == 1){?>
 								<script>
@@ -507,8 +510,10 @@ $.each($("input[name='check[]']:value"),function()
 								  }
 								}
 								</script>
-								<div class="form-group col-md-12 m-t-20">
-                                    <table class="display nowrap table table-hover table-striped table-bordered">
+								<div class="col-md-12">
+					       <div class="component-box">
+							<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+							  <table class="table pmd-table">
                                         <thead>
                                             <tr>
                                                 <th>Foto</th>
@@ -534,7 +539,7 @@ $.each($("input[name='check[]']:value"),function()
 												 
 										  ?>
                                             <tr>
-                                                <td><? if(Empty($row['foto'])){echo '<img style="width: 40px" src="template/img/semfoto.png">';}else{echo "TESTE 2";}?></td>
+                                                <td><? if(Empty($row['foto'])){echo '<img style="width: 40px" src="template/images/semfoto.png">';}else{echo "TESTE 2";}?></td>
                                                 <td><? echo $row['nome'];?></td>
 												<td><? 
 												     
@@ -550,7 +555,7 @@ $.each($("input[name='check[]']:value"),function()
 													 ?>
 												      
 													  <!--<input type="text" class="form-control" name="<? echo $row['codigo'];?>" value="<? echo $valor;?>" onKeypress="javascript: ajaxLoader('?br=atu_nota&nota='+ this.value +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $_GET['codigo'];?>&disciplina=<? echo $_GET['disciplina'];?>&periodo=<? echo $periodo; ?>&ap=1','<? echo $row['codigo'];?>','GET'); return(moeda(this,'.',',',event));">-->
-													  <input type="text" class="form-control" name="nota" value="<? echo $valor;?>" onkeypress="return(moeda(this,'.','.',event));" onkeydown="javascript: if(event.key === 'Enter'){ ajaxLoader('?br=atu_nota&nota='+ this.value +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $_GET['codigo'];?>&disciplina=<? echo $_GET['disciplina'];?>&periodo=<? echo $periodo; ?>&ap=1','<? echo $row['codigo'];?>','GET');}">
+													  <input type="text" class="form-control" name="nota" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal=","  id="nota<? echo $rows1['codigo'];?>" value="<? echo $valor;?>" onkeydown="javascript: if(event.key === 'Enter'){ ajaxLoader('?br=atu_nota&nota='+ this.value +'&codigo=<? echo $rows1['codigo'];?>&ap=1','<? echo $rows1['codigo'];?>','GET');}" maxlength="5">
 													 <?}else{ echo "Faltou";}?>
 													  
 													  </td>
@@ -574,7 +579,7 @@ $.each($("input[name='check[]']:value"),function()
 										  }?>
                                         </tbody>
                                     </table>
-                                </div>
+                                </div> </div> </div>
 								<?}?>
 								</form>
 								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
@@ -589,7 +594,7 @@ $.each($("input[name='check[]']:value"),function()
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                                <a href="iniciado.php?url=cad_diario&fechar=1" class="btn btn-primary">Continuar</a>
+                                                <a href="sistema.php?url=cad_diario&fechar=1" class="btn btn-primary">Continuar</a>
                                             </div>
                                         </div>
                                     </div>
@@ -606,7 +611,7 @@ $.each($("input[name='check[]']:value"),function()
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                                <a href="iniciado.php?url=cad_diario&fechar=1" class="btn btn-primary">Continuar</a>
+                                                <a href="sistema.php?url=cad_diario&fechar=1" class="btn btn-primary">Continuar</a>
                                             </div>
                                         </div>
                                     </div>
@@ -615,3 +620,4 @@ $.each($("input[name='check[]']:value"),function()
                         </div>
 					</div>
 				</div>
+			</div>

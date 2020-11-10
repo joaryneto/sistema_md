@@ -4,7 +4,7 @@
 
 $url = $_GET['url'];
 
-/*if($_SESSION['tipo'] == 1)
+if($_SESSION['tipo'] == 1)
 {
 	$_SESSION['pg'] = "pages";
 	if ($url == "") { $url = "inicio"; }
@@ -12,7 +12,7 @@ $url = $_GET['url'];
 else if($_SESSION['tipo'] == 2)
 {
 	$_SESSION['pg'] = "pgsge";
-	if ($url == "") { $url = "inicio"; }
+	if ($url == "") { $url = "linhadotempo"; }
 }
 else if($_SESSION['tipo'] == 3)
 {
@@ -22,16 +22,16 @@ else if($_SESSION['tipo'] == 3)
 else
 {
 	//print("<script>window.location.href='index.php';</script>");
-}*/
+}
 
-$_SESSION['pg'] = "pgsl";
-if ($url == "") { $url = "inicio"; }
+//$_SESSION['pg'] = "pgsl";
+//if ($url == "") { $url = "inicio"; }
 
 switch ($url) {
 
-   		case "inicio":
-       	include("".$_SESSION['pg']."/inicio.php");
-       	break;
+   		//case "inicio":
+       	//include("".$_SESSION['pg']."/inicio.php");
+       	//break;
 		
 		default:
 		include("".$_SESSION['pg']."/$url.php");
