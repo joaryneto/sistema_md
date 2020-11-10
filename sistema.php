@@ -271,7 +271,7 @@ function revertedata($data){
                                 <span class="text-name">Linha do tempo</span>
                             </a>
                         </div>
-						<div class="col-auto">
+						<!--<div class="col-auto">
                             <a href="javascript:void(0)" class="btn btn-link-default">
                                 <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
                                 <span class="text-name">Agendado</span>
@@ -288,7 +288,7 @@ function revertedata($data){
                                 <span class="icon-text"><i class="material-icons">store_mall_directory</i></span>
                                 <span class="text-name">Vendas</span>
                             </a>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>

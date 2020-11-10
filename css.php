@@ -46,10 +46,9 @@
 	<!--alerts CSS -->
     <link href="template/vendor/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
 	
+	<link href="template/vendor/html5-editor/bootstrap-wysihtml5.css" type="text/css" rel="stylesheet" />
 	
-	<script type="text/javascript" src="template/vendor/propeller-master/dist/css/propeller.css"></script>
-	
-	
+	<link href="template/vendor/propeller-master/dist/css/propeller.css" type="text/css" rel="stylesheet" />
 	<link href="template/vendor/propeller-master/components/select2/css/pmd-select2.css" type="text/css" rel="stylesheet" />
 	<link href="template/vendor/propeller-master/components/select2/css/select2.min.css" type="text/css" rel="stylesheet" />
 	<link href="template/vendor/propeller-master/components/select2/css/select2-bootstrap.css" type="text/css" rel="stylesheet" />

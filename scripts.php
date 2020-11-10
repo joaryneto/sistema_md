@@ -39,6 +39,9 @@
     <script src="template/vendor/sweetalert/jquery.sweet-alert.custom.js"></script>
 	
 	
+    <script type="text/javascript" src="template/vendor/html5-editor/bootstrap-wysihtml5.js"></script>
+	
+	
 	<!-- Propeller textfield js -->
 	<script type="text/javascript" src="template/vendor/propeller-master/components/textfield/js/textfield.js"></script>
 

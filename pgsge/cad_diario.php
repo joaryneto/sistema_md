@@ -243,7 +243,7 @@ $.each($("input[name='check[]']:value"),function()
 				  o++;
 		    });
 					
-			var nota = notas.join(", ");
+			var nota = notas.join(",");
 			
 		    ajaxLoader('?br=atu_nota&notas='+ nota +'&data=<? echo $data;?>&diario=<? echo $_GET['codigo'];?>&disciplina=<? echo $_GET['disciplina'];?>&periodo=<? echo $periodo; ?>&gravar=1','gravarpresenca','GET');
 			
@@ -555,11 +555,11 @@ $.each($("input[name='check[]']:value"),function()
 													 ?>
 												      
 													  <!--<input type="text" class="form-control" name="<? echo $row['codigo'];?>" value="<? echo $valor;?>" onKeypress="javascript: ajaxLoader('?br=atu_nota&nota='+ this.value +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $_GET['codigo'];?>&disciplina=<? echo $_GET['disciplina'];?>&periodo=<? echo $periodo; ?>&ap=1','<? echo $row['codigo'];?>','GET'); return(moeda(this,'.',',',event));">-->
-													  <input type="text" class="form-control" name="nota" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal=","  id="nota<? echo $rows1['codigo'];?>" value="<? echo $valor;?>" onkeydown="javascript: if(event.key === 'Enter'){ ajaxLoader('?br=atu_nota&nota='+ this.value +'&codigo=<? echo $rows1['codigo'];?>&ap=1','<? echo $rows1['codigo'];?>','GET');}" maxlength="5">
+													  <input type="text" class="form-control" name="nota" id="nota<? echo $rows1['codigo'];?>" value="<? echo $valor;?>" onkeydown="javascript: if(event.key === 'Enter'){ ajaxLoader('?br=atu_nota&nota='+ this.value +'&codigo=<? echo $rows1['codigo'];?>&ap=1','<? echo $rows1['codigo'];?>','GET');}" maxlength="5">
 													 <?}else{ echo "Faltou";}?>
 													  
 													  </td>
-												<td><div id="<? echo $row['codigo'];?>">
+												<td><div id="<? echo $rows1['codigo'];?>">
 												<? 
 											         
 													 $SQL = "SELECT sum(nota) as qtd FROM frequencia where matricula='".$row['codigo']."' and disciplina='".$disciplina."' and periodo='".$periodo."' and falta=0";

@@ -6,25 +6,28 @@ session_start();
 
 require_once("./load/load.php");
 
-if($_GET['sistema'] == "app" or $_SERVER['SERVER_NAME'] == "app.sistema")
+if($_GET['sistema'] == "app")
 {
 	$_SESSION['nomesoft'] = "AgEC";
 	$_SESSION['tipo'] = 1;
 }
-else if($_GET['sistema'] == "agsge" or $_SERVER['SERVER_NAME'] == "sistema.sge")
+else if($_GET['sistema'] == "agsge")
 {
 	$_SESSION['nomesoft'] = "AgSge";
 	$_SESSION['tipo'] = 2;
 }
-else if($_GET['sistema'] == "agspa"  or $_SERVER['SERVER_NAME'] == "sistema.sl")
+else if($_GET['sistema'] == "agsl")
 {
 	$_SESSION['nomesoft'] = "AgSpa";
 	$_SESSION['tipo'] = 3;
 }
 else
 {
-	$_SESSION['nomesoft'] = "AgSpa";
-	$_SESSION['tipo'] = 3;	
+	?>
+	<script>
+	window.location='servicos.php';
+	</script>
+	<?
 }
 
 $string = '{
@@ -165,24 +168,24 @@ fclose($fp);
                 <div class="swiper-slide overflow-hidden bg-gradient-cyan text-white">
                     <div class="row no-gutters h-100">
                         <div class="col align-self-center text-center">
-                            <img src="template/images/turtle.png" alt="" class="mw-100 mx-auto mb-4">
+                            <img src="template/images/escolar_01.png" height="350px" alt="" class="mw-100 mx-auto mb-4">
                             <br><br>
-                            <h2 class="text-uppercase font-weight-light">Discover life underwater</h2>
-                            <p class="text-mute">Lorem ipsum dolor sit amet, consect etur adipiscing elit. Sndisse conv allis. <?=$_SERVER['SERVER_NAME'];?></p>
+                            <h2 class="text-uppercase font-weight-light">Descubra a como é bom estudar</h2>
+                            <p class="text-mute"></p>
                         </div>
                     </div>
                 </div>
                 <div class="swiper-slide overflow-hidden bg-gradient-purple text-white">
                     <div class="row no-gutters h-100">
                         <div class="col align-self-center text-center">
-                            <img src="template/images/weightless.png" alt="" class="mw-100 mx-auto mb-4">
+                            <img src="template/images/escolar_02.png" height="350px" alt="" class="mw-100 mx-auto mb-4">
                             <br><br>
-                            <h2 class="text-uppercase font-weight-light">Get into the sky far away so far</h2>
-                            <p class="text-mute">Lorem ipsum dolor sit amet, consect etur adipiscing elit. Sndisse conv allis.</p>
+                            <h2 class="text-uppercase font-weight-light">Uma experiencia unica!</h2>
+                            <p class="text-mute">Estudar online nunca ficou tão facil.</p>
                         </div>
                     </div>
                 </div>
-                <div class="swiper-slide overflow-hidden bg-gradient-red text-white">
+                <!--<div class="swiper-slide overflow-hidden bg-gradient-red text-white">
                     <div class="row no-gutters h-100">
                         <div class="col align-self-center text-center">
                             <img src="template/images/fruits.png" alt="" class="mw-100 mx-auto mb-4">
@@ -191,15 +194,15 @@ fclose($fp);
                             <p class="text-mute">Lorem ipsum dolor sit amet, consect etur adipiscing elit. Sndisse conv allis.</p>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination bullets-white text-left"></div>
         </div>
-        <a href="login.php" class="btn btn-light btn-lg button-fab right-bottom text-uppercase">Login <i class="material-icons vm">arrow_forward</i></a>
+        <a href="login.php" class="btn btn-light btn-lg button-fab right-bottom text-uppercase">Logar <i class="material-icons vm">arrow_forward</i></a>
     </div>
     <!-- wrapper ends -->
-
+    
 
     <!-- jquery, popper and bootstrap js -->
     <script src="template/js/jquery-3.3.1.min.js"></script>
@@ -244,7 +247,4 @@ fclose($fp);
   </script>
 
 </body>
-
-
-<!-- Mirrored from maxartkiller.com/website/Lemux/lemux-HTML/introduction.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Dec 2019 13:56:32 GMT -->
 </html>
