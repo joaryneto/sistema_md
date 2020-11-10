@@ -16,11 +16,12 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 
 //$options = new Options();
-//$options->set('defaultFont', 'Courier');
+
 
 // Instantiate and use the dompdf class 
 
 $options = new Options();
+//$options->set('defaultFont', 'Courier');
 $options->set('isHtml5ParserEnabled', true);
 $options->set('isRemoteEnabled', true);
 $dompdf = new Dompdf($options);
@@ -36,72 +37,246 @@ $cnpj = $_GET['cnpj'];
             }
 
             body {
-                margin-top: 3cm;
+                margin-top: 2.0cm;
                 margin-left: 0.5cm;
                 margin-right: 0.5cm;
                 margin-bottom: 2cm;
-				font-size: 10px;
+				font-size: 8px;
+				color:#000;
             }
 
             /** Define the header rules **/
             header {
                 position: fixed;
-                top: 0.1cm;
+                top: 0.5cm;
                 left: 0.5cm;
                 right: 0.5cm;
-                height: 2.8cm;
+                height: 1.2cm;
 				border: 1px;
 				border: 1px solid black;
             }
 			
-			.logo{
-				width:85px;
-				padding:1px
+			header table
+			{
+				border: 0px;
+				border-collapse: collapse;
+				margin-bottom:0px;
+			}
+			
+			header table td
+			{
+				border: 0px;
+				border-collapse: collapse;
+				text-align: center;
+			}
+			
+			header table td .logo{
+				width:30px;
+				padding:5px;
+				position: absolute;
+				left:10px;
+			}
+			
+			header table td .tituloh
+			{
+				font-size: 16px;
+				font-weight: bolder;
+				position: absolute;
+				left: 55%;
+				padding:10px;
+			}
+			
+			table
+			{
+				border: 1px solid black;
+				border-collapse: collapse;
+				width: 100%;
+				margin-bottom:10px;
+				font-family: Verdana, Arial, Helvetica, sans-serif;
+			}
+			
+			table .titulo
+			{
+				font-size: 16px;
+				padding:0px;
+				font-weight: bolder;
+				background-color: #FFF;
+				
+			}
+			
+			table td
+			{
+				border: 1px solid black;
+				border-collapse: collapse;
+				text-align: center;
+			}
+			table th
+			{
+				border: 1px solid black; 
+				border-collapse: collapse;
+				width: 100px;
+				background-color: #559fd2;
+				font-weight: bold;
+				font-size: 10px;
+				text-align: center;
 			}
 
             /** Define the footer rules **/
             footer {
                 position: fixed; 
                 bottom: 0cm; 
-                left: 0cm; 
-                right: 0cm;
+                left: 0.5cm; 
+                right: 0.5cm;
                 height: 1cm;
             }
         </style>';
   $vb .='</head>';
   $vb .='<body>';
   $vb .='<header>';
-  $vb .='<img src="http://sistema.sge/template/images/logo.png" class="logo" width="100px"/>';
+  $vb .='<table>';
+  $vb .='<tbody>';
+  $vb .='<tr>';
+  $vb .='<td><img src="http://sistema.sge/template/images/logo.png" class="logo"/></td>';
+  $vb .='<td><div class="tituloh">Diário de Classe</div></td>';
+  $vb .='</tr>';
+  $vb .='</tbody>';
+  $vb .='</table>';
   $vb .='</header>';
   $vb .='<footer>';
-  $vb .='<img src="footer.png" width="100%" height="100%"/>';
+  $vb .='<table>';
+  $vb .='<tbody>';
+  $vb .='<tr>';
+  $vb .='<th colspan="9" class="titulo">&nbsp;</td>';
+  $vb .='</tr>';
+  $vb .='</tbody>';
+  $vb .='</table>';
   $vb .='</footer>';
   $vb .='<main>';
-  $vb .='<table style="width: 100% ;border: 1px solid #559fd2; border-collapse: collapse;">';
+  $vb .='<table>';
+  $vb .='<tbody>';
   $vb .='<tr>';
-  $vb .='<td style="border: 1px solid black; border-collapse: collapse;width: 100px;background-color: #559fd2;"><b>Codigo</b></td>';
-  $vb .='<td style="border: 1px solid black; border-collapse: collapse;width: 100px;background-color: #559fd2;"><b>Matricula</b></td>';
-  $vb .='<td style="border: 1px solid black; border-collapse: collapse;width: 100px;background-color: #559fd2;"><b>Nome</b></td>';
-  $vb .='<td style="border: 1px solid black; border-collapse: collapse;width: 100px;background-color: #559fd2;"><b>Data</b></td>';
+  $vb .='<th>Etapa</th>';
+  $vb .='<th>Ano</th>';
+  $vb .='<th>Cod.</th>';
+  $vb .='<th>Disciplina</th>';
+  $vb .='<th>Turno</th>';
+  $vb .='<th>Curso</th>';
+  $vb .='<th>Série</th>';
+  $vb .='<th>Turma</th>';
+  $vb .='<th>Professor</th>';
   $vb .='</tr>';
+  $vb .='<tr>';
+  
+  $pSQL1 = "select data from diario where YEAR(data)=2020";
+  $pRES1 = mysqli_query($db,$pSQL1);
+  $prow = mysqli_fetch_assoc($pRES1);
+	  
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='</tr>';
+  $vb .='</tbody>';
+  $vb .='</table>';
 
-  $ccount = 1;
-  $flag = false;
-  $SQL = "select * from matriculas";
-  $result = mysqli_query($db,$SQL);
-  while($row = mysqli_fetch_assoc($result)) 
+  $vb .='<table>';
+  $vb .='<tbody>';
+  $vb .='<tr>';
+  $vb .='<td colspan="3">&nbsp;</td>';
+  $vb .='<th><b>Mês</b></th>';
+   
+  $SQL1 = "select data from diario where YEAR(data)=2020 and materia=5";
+  $RES1 = mysqli_query($db,$SQL1);
+  while($row = mysqli_fetch_assoc($RES1)) 
   {
-	$vb .='<tr>';
-    $vb .='<td style="border: 1px solid black; border-collapse: collapse;">'.$ccount.'</td>';
-	$vb .='<td style="border: 1px solid black; border-collapse: collapse;">'.$row['matricula'].'</td>';
-	$vb .='<td style="border: 1px solid black; border-collapse: collapse;">'.$row['nome'].'</td>';
-	$vb .='<td style="border: 1px solid black; border-collapse: collapse;">'.date("d/m/Y", strtotime($row['nascimento'])).'</td>';
-	$vb .='</tr>';
-	
-	$ccount ++;
+      $vb .='<td>'.date("m", strtotime($row['data'])).'</td>';
   }
-   $vb .='</tr>';
-   $vb .='</table>';	
+  $RES1->close();
+  $vb .='<th rowspan="2">T. F.</th>';
+  $vb .='<th>&nbsp;</th>';
+  $vb .='<th>&nbsp;</th>';
+  $vb .='<th>&nbsp;</th>';
+  $vb .='<th colspan="2">Total</th>';
+  $vb .='</tr>';
+  $vb .='<tr>';
+  $vb .='<th>N°</th>';
+  $vb .='<th>Matricula</th>';
+  $vb .='<th>Aluno</th>';
+  $vb .='<th>Dia</th>';
+  $SQL2 = "select data from diario where YEAR(data)=2020 and materia=5";
+  $RES2 = mysqli_query($db,$SQL2);
+  while($row = mysqli_fetch_assoc($RES2)) 
+  {
+     $vb .='<td>'.date("d", strtotime($row['data'])).'</td>';
+  }
+  $RES2->close();
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>N</td>';
+  $vb .='<td>F</td>';
+  $vb .='</tr>';
+  $vb .='<tr>';
+   
+  $count = 1;
+  $SQL3 = "select codigo,matricula,nome from matriculas";
+  $RES3 = mysqli_query($db,$SQL3);
+  while($row = mysqli_fetch_assoc($RES3)) 
+  {
+	     
+         $vb .='<td>'.$count.'</td>';
+         $vb .='<td>'.$row['matricula'].'</td>';
+         $vb .='<td colspan="2">'.$row['nome'].'</td>';
+   
+         $falta = 0;
+		 $SQL1 = "select codigo,data from diario where YEAR(data)=2020 and materia=5";
+		 $RES1 = mysqli_query($db,$SQL1);
+		 while($rrow2 = mysqli_fetch_assoc($RES1)) 
+		 {
+              
+              $DSQL1 = "select data from frequencia where data='".$rrow2['data']."'  and matricula=".$row['codigo']." and YEAR(data)=2020 and falta=0;";
+              $DRES1 = mysqli_query($db,$DSQL1);
+              $drow = mysqli_fetch_assoc($DRES1);
+                 
+	          if(!Empty($drow['data']))
+			  {
+                   $vb .='<td>P</td>';
+				   $falta ++;
+			  }
+			  else
+			  {
+		         $vb .='<td>F</td>'; 
+			  }
+			  
+			  $DRES1->close();
+		 }
+		 
+		 $RES1->close();
+		 
+         $vb .='<td>'.$falta.'</td>';
+		 $vb .='<td></td>';
+		 $vb .='<td></td>';
+		 $vb .='<td></td>';
+		 $vb .='<td>&nbsp;</td>';
+		 $vb .='<td>&nbsp;</td>';
+		 
+         $vb .='</tr>';
+		 
+		 $count ++;
+   }
+   
+   $RES3->close();
+	
+   $vb .='</tbody>';
+   $vb .='</table>';
+   
+   
+   
    $vb .='</main>';
    $vb .='</body>';
    $vb .='</html>';
