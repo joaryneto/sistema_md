@@ -549,13 +549,13 @@ $.each($("input[name='check[]']:value"),function()
 													 {
 													 ?>
 												      
-													  <!--<input type="text" class="form-control" name="< echo $row['codigo'];?>" value="< echo $valor;?>" onKeypress="javascript: ajaxLoader('?br=atu_nota&nota='+ this.value +'&data=< echo $row['data'];?>&matricula=< echo $row['codigo'];?>&diario=< echo $_GET['codigo'];?>&disciplina=< echo $_GET['disciplina'];?>&periodo=< echo $periodo; ?>&ap=1','< echo $row['codigo'];?>','GET'); return(moeda(this,'.',',',event));">-->
-													  
-													  <input type="text" class="form-control" name="nota" id="nota<? echo $rows1['codigo'];?>" value="<? echo $valor;?>" onkeydown="javascript: if(event.key === 'Enter'){ ajaxLoader('?br=atu_nota&nota='+ this.value +'&codigo=<? echo $rows1['codigo'];?>&ap=1','<? echo $rows1['codigo'];?>','GET');}" maxlength="5">
-													 <?}else{ echo "Faltou";}?>
 													  <script>
-													       $("#nota<? echo $rows1['codigo'];?>").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:'.', affixesStay: false});
+													  		$("#nota").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:'.', affixesStay: false});
 													  </script>
+													  <!--<input type="text" class="form-control" name="<? echo $row['codigo'];?>" value="<? echo $valor;?>" onKeypress="javascript: ajaxLoader('?br=atu_nota&nota='+ this.value +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $_GET['codigo'];?>&disciplina=<? echo $_GET['disciplina'];?>&periodo=<? echo $periodo; ?>&ap=1','<? echo $row['codigo'];?>','GET'); return(moeda(this,'.',',',event));">-->
+													  <input type="text" class="form-control" name="nota" value="<? echo $valor;?>" onkeypress="return(moeda(this,'.','.',event));" onkeydown="javascript: if(event.key === 'Enter'){ ajaxLoader('?br=atu_nota&nota='+ this.value +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $_GET['codigo'];?>&disciplina=<? echo $_GET['disciplina'];?>&periodo=<? echo $periodo; ?>&ap=1','<? echo $row['codigo'];?>','GET');}">
+													 <?}else{ echo "Faltou";}?>
+													  
 													  </td>
 												<td><div id="<? echo $row['codigo'];?>">
 												<? 
