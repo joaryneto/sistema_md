@@ -404,7 +404,6 @@ function excluir2(produto)
 								<div class="input-group col-md-1 m-t-20">
 								<input type="text" name="qtd" id="qtd" autocomplete="off" placeholder="Qtd" value="" onkeyup="loadtotal();" class="form-control" >
 								</div>
-								
 								<input type="hidden" name="coditem" autocomplete="off" id="coditem" value="" class="form-control">
 								<input type="hidden" name="preco" id="preco" placeholder="Preço R$ " disabled value="" class="form-control" >
 								

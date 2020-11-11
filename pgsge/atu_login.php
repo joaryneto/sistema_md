@@ -13,7 +13,9 @@ $_SESSION['senha'] = $senha;
 $x = 0;
 
 
-$SQL = "select usuarios.sistema,usuarios.codigo,usuarios.nome,usuarios.tipo, usuarios.matricula from usuarios where usuarios.cpf='".$_SESSION['login']."' and usuarios.senha='".$_SESSION['senha']."' or usuarios.email='".$_SESSION['login']."' and usuarios.senha='".$_SESSION['senha']."' or usuarios.login='".$_SESSION['login']."' and usuarios.senha='".$_SESSION['senha']."'";
+$SQL = "select usuarios.sistema,usuarios.codigo,usuarios.nome,usuarios.tipo, usuarios.matricula,matriculas.turma from usuarios 
+left join matriculas on matriculas.matricula=usuarios.matricula
+where usuarios.cpf='".$_SESSION['login']."' and usuarios.senha='".$_SESSION['senha']."' or usuarios.email='".$_SESSION['login']."' and usuarios.senha='".$_SESSION['senha']."' or usuarios.login='".$_SESSION['login']."' and usuarios.senha='".$_SESSION['senha']."'";
 
 $ress = mysqli_query($db,$SQL);
   
@@ -25,8 +27,9 @@ while($res = mysqli_fetch_array($ress))
     $_SESSION['usuario'] = $res['codigo'];
 	$_SESSION['sistema'] = $res['sistema'];
 	$_SESSION['nome'] = $res['nome'];
-	//$_SESSION['tipo'] = $res['tipo'];
+	$_SESSION['permissao'] = $res['tipo'];
 	$_SESSION['matricula'] = $res['matricula'];
+	$_SESSION['turma'] = $res['turma'];
 	
 	//$_SESSION['menu'] = 3;
 	//$_SESSION['pages'] = 3;

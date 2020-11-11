@@ -23,7 +23,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 
 if(isset($_GET['codigo']))
 {
-	$SQL = "SELECT diario.turma,diario.materia,diario.periodo,diario.data,diario.conteudo,diario.texto,materias.descricao as mdescricao,turmas.descricao as tdescricao,periodo.descricao as pdescricao FROM diario 
+	$SQL = "SELECT diario.turma,diario.video,diario.materia,diario.periodo,diario.data,diario.conteudo,diario.texto,materias.descricao as mdescricao,turmas.descricao as tdescricao,periodo.descricao as pdescricao FROM diario 
 	inner join materias on materias.codigo=diario.materia 
 	inner join turmas on turmas.codigo=diario.turma
 	inner join periodo on periodo.codigo=diario.periodo
@@ -41,6 +41,7 @@ if(isset($_GET['codigo']))
 		 $data = $row['data'];
 		 $conteudo = $row['conteudo'];
 		 $texto = $row['texto'];
+		 $video = $row['video'];
 		 $pdescricao = $row['pdescricao'];
 		 $tdescricao = $row['tdescricao'];
 		 $mdescricao = $row['mdescricao'];
@@ -52,6 +53,8 @@ if(isset($_GET['codigo']))
 	{
 		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-1')</script>");
 	}
+	
+	$sucesso->close();
 }
 
 if($_GET['ap'] == "1")
@@ -65,7 +68,7 @@ if($_GET['ap'] == "1")
 	}
 	else
 	{
-	   $SQL1 = "INSERT into diario(turma,materia,periodo,data,conteudo,texto) values('".$_POST['turma']."','".$_POST['disciplina']."','".$_POST['periodo']."','".revertedata($_POST['txtdata'])."','".$_POST['conteudo']."','".$_POST['txtobs']."')";
+	   $SQL1 = "INSERT into diario(usuario,turma,materia,periodo,video,data,conteudo,texto) values('".$_SESSION['usuario']."','".$_POST['turma']."','".$_POST['disciplina']."','".$_POST['periodo']."','".$_POST['video']."','".revertedata($_POST['txtdata'])."','".$_POST['conteudo']."','".$_POST['txtobs']."')";
 	   $sucesso = mysqli_query($db,$SQL1);
 	   
 	   if($sucesso)
@@ -77,6 +80,8 @@ if($_GET['ap'] == "1")
 	   {
 		   print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-2')</script>");
 	   }
+	   
+	   $sucesso->close();
 	}
 }
 elseif($_GET['ap'] == "2")
@@ -93,6 +98,8 @@ elseif($_GET['ap'] == "2")
 	{
 		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-3')</script>");
 	}
+	
+	$sucesso->close();
 	
 }
 
@@ -111,6 +118,8 @@ if($_GET['fechar'] == "3")
 		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-3')</script>");
 	}
 	
+	$sucesso->close();
+	
 }
 if($_GET['excluir'] == 1)
 {
@@ -126,6 +135,8 @@ if($_GET['excluir'] == 1)
 	{
 		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-3')</script>");
 	}
+	
+	$sucesso->close();
 	
 }
 
@@ -282,44 +293,58 @@ $.each($("input[name='check[]']:value"),function()
 								<select name="turma" id="turma" style="width: 100%; height:36px;" class="select2 form-control custom-select" required="required">
                                     <option value="">Selecionar</option>
 									<? 
-										  $sql = "select * from turmas";
-										  $res = mysqli_query($db,$sql); 
-										  while($row = mysqli_fetch_array($res))
+										  $sql1 = "select turmas.descricao,turmas.codigo from turmas
+										  inner join turmas_professor on turmas_professor.turma=turmas.codigo
+										  where turmas_professor.usuario='".$_SESSION['usuario']."' group by turmas.descricao";
+										  $res1 = mysqli_query($db,$sql1); 
+										  while($row = mysqli_fetch_array($res1))
 										  {
 										  ?>
                                            <option value="<? echo $row['codigo']?>" <? if($row['codigo']==$turma){ echo " selected"; }?>><? echo $row['descricao'];?></option>
-										  <? } ?>
+										  <? } 
+										  $res1->close();
+										  ?>
                                 </select>
 								</div>
 								<div class="form-group col-md-4 m-t-20"><label>Diciplina :</label>
 								<select name="disciplina" id="disciplina" style="width: 100%; height:36px;" class="select2 form-control custom-select" required="required">
                                     <option value="">Selecionar</option>
 									<? 
-										  $sql = "select * from materias";
-										  $res = mysqli_query($db,$sql); 
-										  while($row = mysqli_fetch_array($res))
+										  $sql2 = "select materias.descricao,materias.codigo from materias
+										  inner join materias_professor on materias_professor.materia=materias.codigo
+										  where materias_professor.usuario='".$_SESSION['usuario']."' group by materias.descricao";
+										  $res2 = mysqli_query($db,$sql2); 
+										  while($row = mysqli_fetch_array($res2))
 										  {
 										  ?>
                                            <option value="<? echo $row['codigo']?>" <? if($row['codigo']==$disciplina){ echo " selected"; }?>><? echo $row['descricao'];?></option>
-										  <? } ?>
+										  <? }
+                                          $res2->close();
+										  ?>
                                 </select>
 								</div>
 								<div class="form-group col-md-4 m-t-20"><label>Periodo :</label>
 								<select name="periodo" id="periodo" style="width: 100%; height:36px;" class="select2 form-control custom-select" required="required">
                                     <option value="">Selecionar</option>
 									<? 
-										  $sql = "select * from periodo";
-										  $res = mysqli_query($db,$sql); 
-										  while($row = mysqli_fetch_array($res))
+										  $sql3 = "select * from periodo";
+										  $res3 = mysqli_query($db,$sql3); 
+										  while($row = mysqli_fetch_array($res3))
 										  {
 										  ?>
                                            <option value="<? echo $row['codigo']?>" <? if($row['codigo']==$periodo){ echo " selected"; }?>><? echo $row['descricao'];?></option>
-										  <? } ?>
+										  <? }
+										  $res3->close();
+										  ?>
                                 </select>
+								</div>
+								<div class="form-group col-md-5 m-t-20"><label><b>Link Video :</b></label>
+                                <input type="text" name="video" id="video" class="form-control"  value="<? if(!Empty($_GET['codigo'])){ echo $video; } ?>"  required="required">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label><b>Data :</b></label>
                                 <input type="text" name="txtdata" id="txtdata" class="form-control"  value="<? if(!Empty($_GET['codigo'])){ echo formatodatahora($data); } ?>" placeholder="dd/mm/yyyy"  data-mask="99/99/9999"  required="required">
 								</div>
+								
 								<div class="form-group col-md-5 m-t-20"><label><b>Conteudo Lecionado :</b></label>
                                 <input type="text" name="conteudo" class="form-control" id="conteudo" value="<? if(!Empty($_GET['codigo'])){ echo $conteudo;} ?>" placeholder="" required="required">
 								</div>
@@ -364,6 +389,9 @@ $.each($("input[name='check[]']:value"),function()
 								
 								</div>
 								<? if(Empty($_GET['codigo']) && Empty($_GET['frequencia']) && Empty($_GET['nota'])){?>
+								<div class="form-group col-md-5 m-t-20"><label>Pesquisa :</label>
+                                <input type="text" name="conteudo" class="form-control" id="conteudo" value="<? if(!Empty($_GET['codigo'])){ echo $conteudo;} ?>" placeholder="" required="required">
+								</div>
                           <div class="col-md-12">
 					       <div class="component-box">
 							<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
@@ -374,31 +402,33 @@ $.each($("input[name='check[]']:value"),function()
 												<th>Disciplina</th>
 												<th>Conteudo</th>
 												<th>Data</th>
-												<th>X</th>
-												<th>X</th>
+												<th>Editar</th>
+												<th>Excluir</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="listdiario">
 										<? 
 										  
 										  $data = date('Y');
-										  $sql = "select diario.codigo,diario.conteudo,turmas.descricao as a,materias.descricao as b,diario.conteudo as c,diario.data from diario 
+										  $sql4 = "select diario.codigo,diario.conteudo,turmas.descricao as a,materias.descricao as b,diario.conteudo as c,diario.data from diario 
 										  inner JOIN turmas on turmas.codigo=diario.turma 
 										  inner join materias on materias.codigo=diario.materia 
-										  inner join periodo on periodo.codigo=diario.periodo where YEAR(data)=$data";
-										  $res = mysqli_query($db,$sql); 
-										  while($row = mysqli_fetch_array($res))
+										  inner join periodo on periodo.codigo=diario.periodo where YEAR(diario.data)=$data and diario.usuario='".$_SESSION['usuario']."';";
+										  $res4 = mysqli_query($db,$sql4); 
+										  while($row = mysqli_fetch_array($res4))
 										  {
 										  ?>
                                             <tr>
-                                                <td><? echo $row['a'];?></td>
-												<td><? echo $row['b'];?></td>
-												<td><? echo $row['c'];?></td>
-												<td><? echo formatodatahora($row['data']);?></td>
-												<td><a class="fa fa-edit" href="sistema.php?url=cad_diario&codigo=<? echo $row['codigo']?>" style="font-size: 150%;"><a></td>
-												<td><a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir exame" style="font-size: 150%; color: red;" href="sistema.php?url=cad_diario&codigo=<? echo $row['codigo']?>&excluir=1"><a></td>
+                                                <td data-title="Turma"><? echo $row['a'];?></td>
+												<td data-title="Disciplina"><? echo $row['b'];?></td>
+												<td data-title="Conteudo"><? echo $row['c'];?></td>
+												<td data-title="Data"><? echo formatodatahora($row['data']);?></td>
+												<td data-title="Editar"><a class="fa fa-edit" href="sistema.php?url=cad_diario&codigo=<? echo $row['codigo']?>" style="font-size: 150%;"><a></td>
+												<td data-title="Excluir"><a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir exame" style="font-size: 150%; color: red;" href="sistema.php?url=cad_diario&codigo=<? echo $row['codigo']?>&excluir=1"><a></td>
                                             </tr>
-										  <? } ?>
+										  <? }
+										  $res4->close();
+										  ?>
                                         </tbody>
                                     </table>
                                   </div>
@@ -422,15 +452,15 @@ $.each($("input[name='check[]']:value"),function()
 										<? 
 										  
 										  $data = date('Y');
-										  $sql = "select diario.data,matriculas.codigo,matriculas.nome,turmas.descricao as turma,matriculas.foto from diario 
+										  $sql5 = "select diario.data,matriculas.codigo,matriculas.nome,turmas.descricao as turma,matriculas.foto from diario 
 										  inner JOIN turmas on turmas.codigo=diario.turma 
 										  inner join materias on materias.codigo=diario.materia 
 										  inner join periodo on periodo.codigo=diario.periodo
 										  inner join matriculas on matriculas.turma=diario.turma
-										  where diario.codigo='".$_GET['codigo']."' and matriculas.status=1";
-										  $res = mysqli_query($db,$sql); 
+										  where diario.codigo='".$_GET['codigo']."' and matriculas.status=1 and diario.usuario='".$_SESSION['usuario']."';";
+										  $res5 = mysqli_query($db,$sql5); 
 										  $a = 0;
-										  while($row = mysqli_fetch_array($res))
+										  while($row = mysqli_fetch_array($res5))
 										  {
 												 
 										  ?>
@@ -440,8 +470,8 @@ $.each($("input[name='check[]']:value"),function()
 												<td><? 
 												     
 													 $SQL = "SELECT codigo,falta FROM frequencia where matricula=".$row['codigo']." and diario=".$_GET['codigo']."";
-													 $RES = mysqli_query($db,$SQL);
-												     $rows1 = mysqli_fetch_array($RES);
+													 $RES6 = mysqli_query($db,$SQL);
+												     $rows1 = mysqli_fetch_array($RES6);
 													 //$p = 0;
 													 //while($rows3 = mysqli_fetch_array($RES))
 													 //{
@@ -459,14 +489,14 @@ $.each($("input[name='check[]']:value"),function()
 												<td><div id="<? echo $row['codigo'];?>">
 												<? 
 											         $ano = date('Y');
-													 $SQL = "SELECT falta as qtd FROM frequencia where matricula=".$row['codigo']." and disciplina=".$disciplina." and periodo=".$periodo." and falta=1 and YEAR(data)=$ano";
-													 $RES = mysqli_query($db,$SQL);
+													 $SQL7 = "SELECT falta as qtd FROM frequencia where matricula=".$row['codigo']." and disciplina=".$disciplina." and periodo=".$periodo." and falta=1 and YEAR(data)=$ano ";
+													 $RES7 = mysqli_query($db,$SQL7);
 													 
 													 $total = 0;
 													 $n = 1;
 												     $y = 0;	
 													 
-													 while($rows2 = mysqli_fetch_assoc($RES))
+													 while($rows2 = mysqli_fetch_assoc($RES7))
 													 {
 														 //echo "The number is: $n <br>";
 														 //$total = $rows2['qtd'];
@@ -484,17 +514,24 @@ $.each($("input[name='check[]']:value"),function()
 													    echo "0";
 													 }
 													 
+													 $RES6->close();
+													 $RES7->close();
+													 
 												?></div>
 												</td>
                                             </tr>
-										  <? $a = 1;} if($a == 0){
+										  <? $a = 1;} 
+										  if($a == 0)
+										  {
 											  echo "<tr>
    											       <td>Nenhum Aluno cadastrado na turma</td>
    											       <td></td>
 													  <td></td>
 													  <td></td>
    											         </tr>";
-										  }?>
+										  }
+										  $res5->close();
+										  ?>
                                         </tbody>
                                     </table>
                                 </div></div></div>
@@ -526,15 +563,15 @@ $.each($("input[name='check[]']:value"),function()
 										<? 
 										  
 										  $data = date('Y');
-										  $sql = "select diario.data,matriculas.codigo,matriculas.nome,turmas.descricao as turma,matriculas.foto from diario 
+										  $sql8 = "select diario.data,matriculas.codigo,matriculas.nome,turmas.descricao as turma,matriculas.foto from diario 
 										  inner JOIN turmas on turmas.codigo=diario.turma 
 										  inner join materias on materias.codigo=diario.materia 
 										  inner join periodo on periodo.codigo=diario.periodo
 										  inner join matriculas on matriculas.turma=diario.turma
-										  where diario.codigo='".$_GET['codigo']."' and matriculas.status=1";
-										  $res = mysqli_query($db,$sql); 
+										  where diario.codigo='".$_GET['codigo']."' and matriculas.status=1 and diario.usuario='".$_SESSION['usuario']."';";
+										  $res8 = mysqli_query($db,$sql8); 
 										  $b = 0;
-										  while($row = mysqli_fetch_array($res))
+										  while($row = mysqli_fetch_array($res8))
 										  {
 												 
 										  ?>
@@ -543,9 +580,9 @@ $.each($("input[name='check[]']:value"),function()
                                                 <td><? echo $row['nome'];?></td>
 												<td><? 
 												     
-													 $SQL = "SELECT codigo,nota,falta FROM frequencia where matricula='".$row['codigo']."' and diario='".$_GET['codigo']."'";
-													 $RES = mysqli_query($db,$SQL);
-												     $rows1 = mysqli_fetch_array($RES);
+													 $SQL9 = "SELECT codigo,nota,falta FROM frequencia where matricula='".$row['codigo']."' and diario='".$_GET['codigo']."'";
+													 $RES9 = mysqli_query($db,$SQL9);
+												     $rows1 = mysqli_fetch_array($RES9);
 													 
 													 $falta = $rows1['falta'];
 													 $valor = number_format($rows1['nota'], 2, ".", ".");
@@ -562,9 +599,9 @@ $.each($("input[name='check[]']:value"),function()
 												<td><div id="<? echo $rows1['codigo'];?>">
 												<? 
 											         
-													 $SQL = "SELECT sum(nota) as qtd FROM frequencia where matricula='".$row['codigo']."' and disciplina='".$disciplina."' and periodo='".$periodo."' and falta=0";
-													 $RES = mysqli_query($db,$SQL);
-												     $rows2 = mysqli_fetch_array($RES);
+													 $SQL10 = "SELECT sum(nota) as qtd FROM frequencia where matricula='".$row['codigo']."' and disciplina='".$disciplina."' and periodo='".$periodo."' and falta=0";
+													 $RES10 = mysqli_query($db,$SQL10);
+												     $rows2 = mysqli_fetch_array($RES10);
 													 echo $rows2['qtd'];
 												?></div>
 												</td>
@@ -576,7 +613,11 @@ $.each($("input[name='check[]']:value"),function()
 													  <td></td>
 													  <td></td>
    											         </tr>";
-										  }?>
+										  }
+										  $res8->close();
+										  $RES9->close();
+										  $RES10->close();
+										  ?>
                                         </tbody>
                                     </table>
                                 </div> </div> </div>

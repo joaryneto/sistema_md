@@ -21,21 +21,6 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //   //exit("<strong> Erro: Você não tem permissão. </strong>");
 //}
 
-function formatodatahora($data){
-    return date("d/m/Y", strtotime($data));
-}
-
-function revertedata($data){
-
-		if($data != ""){
-		$sep_data = explode("/",$data);
-		$data = $sep_data[2]."-".$sep_data[1]."-".$sep_data[0];
-		}
-		
-		return $data;
-}
-
-    
     $codigo = $_GET['codigo'];
     $check = $_GET['check'];
     $materia = $_GET['materia'];

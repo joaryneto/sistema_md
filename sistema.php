@@ -82,16 +82,16 @@ function revertedata($data){
                 <p class="text-mute my-0 small">
 				<?
 				
-				switch($_SESSION['tipo'])
+				switch($_SESSION['permissao'])
 			    {
 					case 1:
 					{
-						echo "Atendente";
+						echo "Aluno";
 					}
 					break;
 					case 2:
 					{
-						echo "Profissional";
+						echo "Professor";
 					}
 					break;
 					case 3:
@@ -157,23 +157,39 @@ function revertedata($data){
                             </div>
                         </a>
 					</li>
+					<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
+					<li class="nav-item dropdown" style="width: 230px;">
+                        <a href="sistema.php?url=cad_alunos" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action">
+                                <i class="material-icons">perm_contact_calendar</i> Alunos
+                            </div>
+                        </a>
+					</li>
+					<? } ?>
+					<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
                     <li class="nav-item dropdown" style="width: 230px;">
                         <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="list-group-item list-group-item-action">
                                 <i class="material-icons">home</i> Aulas
                             </div>
                         </a>
+						
                         <div class="dropdown-menu">
+						    <?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
                             <a href="sistema.php?url=cad_diario" class="sidebar-close dropdown-item menu-right">
 							 Conteúdo Lecionado
                             </a>
-                            <a href="sistema.php?url=cad_fechar" class="sidebar-close dropdown-item menu-right">
+                            <? } ?>
+							<?if($_SESSION['permissao'] == 3){?>
+							<a href="sistema.php?url=cad_fechar" class="sidebar-close dropdown-item menu-right">
                              Fechar Bimestre
                             </a>
                             <a href="sistema.php?url=cad_abrir" class="sidebar-close dropdown-item popup-open" >
                              Abrir Bimestre
                             </a>
+		                    <?}?>
                         </div>
+						<? } ?>
                     </li>
                 </ul>
             </nav>
@@ -271,13 +287,13 @@ function revertedata($data){
                                 <span class="text-name">Linha do tempo</span>
                             </a>
                         </div>
-						<!--<div class="col-auto">
-                            <a href="javascript:void(0)" class="btn btn-link-default">
+						<div class="col-auto">
+                            <a href="sistema.php?url=cad_diario" class="btn btn-link-default">
                                 <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
-                                <span class="text-name">Agendado</span>
+                                <span class="text-name">Diario</span>
                             </a>
                         </div>
-						<div class="col-auto">
+						<!--<div class="col-auto">
                             <a href="javascript:void(0)" class="btn btn-link-default ">
                                 <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
                                 <span class="text-name">Finalizado</span>
@@ -484,7 +500,17 @@ function cliente(codigo,nome)
            <!-- /.modal-dialog -->
       </div>
     <? } ?>
+	<? if($_GET['url'] == "cad_usuarios" and $_SESSION['permissao'] == 3){?>
+<div id="modalusuario" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal-dialog modal-lg">
+<div class="modal-content" id="modals" style="width:450px">
+<!-- /.modal-content -->
+</div>
 
+<!-- /.modal-dialog -->
+</div>
+</div>
+      <? } ?>
 <? include 'scripts.php'?>
 
 </body>

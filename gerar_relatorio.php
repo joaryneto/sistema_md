@@ -82,8 +82,9 @@ $cnpj = $_GET['cnpj'];
 				font-size: 16px;
 				font-weight: bolder;
 				position: absolute;
-				left: 55%;
-				padding:10px;
+				left: 40%;
+				right: 20%;
+				padding:1.5%;
 			}
 			
 			table
@@ -137,7 +138,7 @@ $cnpj = $_GET['cnpj'];
   $vb .='<tbody>';
   $vb .='<tr>';
   $vb .='<td><img src="http://sistema.sge/template/images/logo.png" class="logo"/></td>';
-  $vb .='<td><div class="tituloh">Diário de Classe</div></td>';
+  $vb .='<td><div class="tituloh">Escola Mundo do Saber</div></td>';
   $vb .='</tr>';
   $vb .='</tbody>';
   $vb .='</table>';
@@ -154,6 +155,9 @@ $cnpj = $_GET['cnpj'];
   $vb .='<main>';
   $vb .='<table>';
   $vb .='<tbody>';
+  $vb .='<tr>';
+  $vb .='<td colspan="9" class="titulo">Diário de Classe</td>';
+  $vb .='</tr>';
   $vb .='<tr>';
   $vb .='<th>Etapa</th>';
   $vb .='<th>Ano</th>';
@@ -229,7 +233,7 @@ $cnpj = $_GET['cnpj'];
   while($row = mysqli_fetch_assoc($RES3)) 
   {
 	     
-         $vb .='<td>'.$count.'</td>';
+         $vb .='<td>'.str_pad($count, 4 , '0' , STR_PAD_LEFT).'</td>';
          $vb .='<td>'.$row['matricula'].'</td>';
          $vb .='<td colspan="2">'.$row['nome'].'</td>';
    
@@ -246,11 +250,12 @@ $cnpj = $_GET['cnpj'];
 	          if(!Empty($drow['data']))
 			  {
                    $vb .='<td>P</td>';
-				   $falta ++;
+				   
 			  }
 			  else
 			  {
 		         $vb .='<td>F</td>'; 
+				 $falta ++;
 			  }
 			  
 			  $DRES1->close();
@@ -275,11 +280,83 @@ $cnpj = $_GET['cnpj'];
    $vb .='</tbody>';
    $vb .='</table>';
    
+   $vb .='<table>';
+   $vb .='<tbody>';
+   $vb .='<tr>';
+   $vb .='<td><p>Recebido em: ___/___/_______ &nbsp;Assinatura do Professor:_____________________________</p></td>';
+   $vb .='<td>Recebido em: ___/___/_______ &nbsp;Assinatura do Chefe deDepartamento:_____________________________</td>';
+   $vb .='</tr>';
+   $vb .='</tbody>';
+   $vb .='</table>';
    
+     $vb .='<table>';
+  $vb .='<tbody>';
+  $vb .='<tr>';
+  $vb .='<td colspan="9" class="titulo">Diário de Conteúdo</td>';
+  $vb .='</tr>';
+  $vb .='<tr>';
+  $vb .='<th>Etapa</th>';
+  $vb .='<th>Ano</th>';
+  $vb .='<th>Cod.</th>';
+  $vb .='<th>Disciplina</th>';
+  $vb .='<th>Turno</th>';
+  $vb .='<th>Curso</th>';
+  $vb .='<th>Série</th>';
+  $vb .='<th>Turma</th>';
+  $vb .='<th>Professor</th>';
+  $vb .='</tr>';
+  $vb .='<tr>';
+  
+  $pSQL1 = "select data from diario where YEAR(data)=2020";
+  $pRES1 = mysqli_query($db,$pSQL1);
+  $prow = mysqli_fetch_assoc($pRES1);
+	  
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='</tr>';
+  $vb .='</tbody>';
+  $vb .='</table>';
+
+  $vb .='<table>';
+  $vb .='<tbody>';
+  $vb .='<tr>';
+  $vb .='<th>&nbsp;</th>';
+  $vb .='<th>&nbsp;</th>';
+  $vb .='<th>&nbsp;</th>';
+  $vb .='<th>&nbsp;</th>';
+  $vb .='<th>&nbsp;</th>';
+  $vb .='</tr>';
+  
+  $vb .='<tr>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>&nbsp;</td>';
+  $vb .='</tr>';
+  
+  $vb .='</tbody>';
+  $vb .='</table>';
    
-   $vb .='</main>';
-   $vb .='</body>';
-   $vb .='</html>';
+  $vb .='<table>';
+  $vb .='<tbody>';
+  $vb .='<tr>';
+  $vb .='<td><p>Recebido em: ___/___/_______ &nbsp;Assinatura do Professor:_____________________________</p></td>';
+  $vb .='<td>Recebido em: ___/___/_______ &nbsp;Assinatura do Chefe deDepartamento:_____________________________</td>';
+  $vb .='</tr>';
+  $vb .='</tbody>';
+  $vb .='</table>';
+   
+  $vb .='</main>';
+  $vb .='</body>';
+  $vb .='</html>';
   
 // Load content from html file 
 //$vb = file_get_contents("pgsge/rel_producao.php"); 
