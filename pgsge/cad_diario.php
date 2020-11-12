@@ -55,7 +55,7 @@ if(isset($_GET['codigo']))
 		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-1')</script>");
 	}
 	
-	$sucesso->close();
+	//$sucesso->close();
 }
 
 if($_GET['ap'] == "1")
@@ -93,8 +93,8 @@ if($_GET['ap'] == "1")
 		   print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-2')</script>");
 	   }
 	   
-	   $RES1->close();
-	   $RES2->close();
+	   //$RES1->close();
+	   //$RES2->close();
 	}
 }
 elseif($_GET['ap'] == "2")
@@ -112,7 +112,7 @@ elseif($_GET['ap'] == "2")
 		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-3')</script>");
 	}
 	
-	$sucesso->close();
+	//$sucesso->close();
 	
 }
 
@@ -131,7 +131,7 @@ if($_GET['fechar'] == "3")
 		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-3')</script>");
 	}
 	
-	$sucesso->close();
+	///$sucesso->close();
 	
 }
 if($_GET['excluir'] == 1)
@@ -140,8 +140,8 @@ if($_GET['excluir'] == 1)
 	$RES = mysqli_query($db,$SQL1);
 	
 	print("<script>alert('Excluido com sucesso.');</script>");
-	//print("<script>location.href='sistema.php?url=cad_diario';</script>");
-	$RES->close();
+	print("<script>window.location.href='sistema.php?url=cad_diario';</script>");
+	//$RES->close();
 }
 
 ?>	
@@ -551,8 +551,8 @@ function gravardiario()
 													    echo "0";
 													 }
 													 
-													 $RES6->close();
-													 $RES7->close();
+													 //$RES6->close();
+													 //$RES7->close();
 													 
 												?></div>
 												</td>
@@ -567,7 +567,7 @@ function gravardiario()
 													  <td></td>
    											         </tr>";
 										  }
-										  $res5->close();
+										  //$res5->close();
 										  ?>
                                         </tbody>
                                     </table>
@@ -656,9 +656,9 @@ function gravardiario()
 													  <td></td>
    											         </tr>";
 										  }
-										  $res8->close();
-										  $RES9->close();
-										  $RES10->close();
+										  //$res8->close();
+										  //$RES9->close();
+										  //$RES10->close();
 										  ?>
                                         </tbody>
                                     </table>
