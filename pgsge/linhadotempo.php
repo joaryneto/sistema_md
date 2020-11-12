@@ -86,6 +86,7 @@ else
 						$dia = date("d",strtotime($row['data']));
 						$conteudo = $row['conteudo'];
 						$texto = $row['texto'];
+						$video = $row['video'];
 				?>
 				
 				<div class="col-lg-6 col-md-6">
@@ -137,7 +138,7 @@ else
                             </div>
 				
 			  <?}
-			  $RES->close();
+			  //$RES->close();
 			  ?>
 		   </div>
 	   </div>

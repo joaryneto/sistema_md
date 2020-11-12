@@ -191,6 +191,15 @@ function revertedata($data){
                         </div>
 						<? } ?>
                     </li>
+					<?if($_SESSION['permissao'] == 3){?>
+					<li class="nav-item dropdown" style="width: 230px;">
+                        <a href="sistema.php?url=cad_usuarios" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action">
+                                <i class="material-icons">perm_contact_calendar</i> Usuarios
+                            </div>
+                        </a>
+					</li>
+					<? } ?>
                 </ul>
             </nav>
         </div>
