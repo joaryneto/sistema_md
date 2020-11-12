@@ -13,12 +13,12 @@ if($_GET['sistema'] == "app")
 }
 else if($_GET['sistema'] == "agsge")
 {
-	$_SESSION['nomesoft'] = "AgSge";
+	$_SESSION['nomesoft'] = "G. Escolar";
 	$_SESSION['tipo'] = 2;
 }
 else if($_GET['sistema'] == "agsl")
 {
-	$_SESSION['nomesoft'] = "AgSpa";
+	$_SESSION['nomesoft'] = "G. Hair & Spa";
 	$_SESSION['tipo'] = 3;
 }
 else
@@ -74,8 +74,6 @@ fclose($fp);
 <!doctype html>
 <html lang="pt-br" class="color-theme-blue">
 
-
-<!-- Mirrored from maxartkiller.com/website/Lemux/lemux-HTML/introduction.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Dec 2019 13:56:31 GMT -->
 <head>
     <meta charset="iso-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover, user-scalable=no">
