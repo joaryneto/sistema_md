@@ -137,20 +137,11 @@ if($_GET['fechar'] == "3")
 if($_GET['excluir'] == 1)
 {
 	$SQL1 = "DELETE FROM diario where codigo='".$_GET['codigo']."'";
-	$sucesso = mysqli_query($db,$SQL1);
+	$RES = mysqli_query($db,$SQL1);
 	
-	if($sucesso)
-	{
-        print("<script>window.alert('Excluido com sucesso.');</script>");
-		print("<script>window.location.href='sistema.php?url=cad_diario';</script>");
-	}
-	else
-	{
-		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-3')</script>");
-	}
-	
-	$sucesso->close();
-	
+	print("<script>alert('Excluido com sucesso.');</script>");
+	//print("<script>location.href='sistema.php?url=cad_diario';</script>");
+	$RES->close();
 }
 
 ?>	
