@@ -57,7 +57,6 @@ $string = '{
       "src": "/images/icons/icon-32x32.png",
       "sizes": "32x32",
       "type": "image/png",
-	  "purpose": "maskable"
     }],
   "start_url": "/index.php",
   "display": "standalone",
