@@ -80,7 +80,12 @@ if($_GET['ap'] == "1")
 	   if($RES2)
 	   {
 		   print("<script>window.alert('Conteudo Cadastrada com sucesso...')</script>");
-		   print("<script>window.location.href='sistema.php?url=cad_diario';</script>");
+		   
+		   $RES1 = mysqli_query($db,"SELECT max(diario.codigo) as codigo FROM diario inner join turmas_professor on turmas_professor.turma=diario.turma where turmas_professor.usuario='".$_SESSION['usuario']."'");
+		   $row = mysqli_fetch_array($RES1);
+		   
+		   
+		   print("<script>window.location.href='sistema.php?url=cad_diario&codigo=".$row['codigo']."';</script>");
 	   }
 	   else
 	   {
@@ -230,15 +235,6 @@ $.each($("input[name='check[]']:value"),function()
 	i++;
 });
 
-
-//if(i == 0)
-//{
-//	swal('Atenção', 'Selecione os alunos para gravar.');
-//	//alert('TESTE');
-//    return true;	
-//}
-//else
-//{
 		swal({   
             title: "Atenção!",   
             text: "Você esta iniciando a gravação de Notas dos alunos.",   
@@ -267,6 +263,12 @@ $.each($("input[name='check[]']:value"),function()
 			
 	});
 }
+
+function gravardiario()
+{
+	
+}
+
 </script>	
 <div class="container-fluid bg-template mb-4">
             <div class="row hn-154 position-relative">
@@ -294,8 +296,37 @@ $.each($("input[name='check[]']:value"),function()
 							    if(!Empty($_GET['codigo']))
 								{  $action = "sistema.php?url=cad_diario&codigo=".$_GET['codigo']."&ap=2";}
 								
+								//$token = md5(uniqid(""));
+									 
+							    /*$x = 0;
+								$DSQL1 = "select codigo from diario where usuario = '".$_SESSION['usuario']."' and status = 2 order by codigo desc limit 1;";
+								$DRES1 = mysqli_query($db,$DSQL1);
+								while($ROW2 = mysqli_fetch_array($DRES1))
+								{
+									$x = 1;
+									$_SESSION['diario'] = $ROW2['codigo'];
+								}
+								
+								$DRES1->close();
+								
+								if($x == 0)
+							    { 
+									$DSQL2 = "insert into diario(usuario,status) values ('".$_SESSION['usuario']."',2)";
+								    mysqli_query($db,$DSQL2);
+								}
+								
+								$DSQL3 = "select codigo from diario where usuario = '".$_SESSION['usuario']."' and status = 2 order by codigo desc limit 1;";
+								$DRES3 = mysqli_query($db,$DSQL3);
+								while($ROW2 = mysqli_fetch_array($DRES3))
+								{
+									echo $_SESSION['diario'] = $ROW2['codigo'];
+								}
+								$DRES3->close();
+								*/
+								
 								?>
 								<form class="m-t-40 row" name="laudo" method="post" action="<? echo $action;?>">
+								<input type="hidden" name="diario" id="diario" class="form-control"  value="<? echo $_SESSION['diario']; ?>">
 								<div class="form-group col-md-4 m-t-20"><label>Turma :</label>
 								<select name="turma" id="turma" style="width: 100%; height:36px;" class="select2 form-control custom-select" required="required">
                                     <option value="">Selecionar</option>
@@ -464,7 +495,7 @@ $.each($("input[name='check[]']:value"),function()
 										  inner join materias on materias.codigo=diario.materia 
 										  inner join periodo on periodo.codigo=diario.periodo
 										  inner join matriculas on matriculas.turma=diario.turma
-										  where diario.codigo='".$_GET['codigo']."' and matriculas.status=1 and diario.usuario='".$_SESSION['usuario']."';";
+										  where diario.codigo='".$_GET['codigo']."' and matriculas.status=1 and diario.usuario='".$_SESSION['usuario']."' and diario.turma='".$turma."';";
 										  $res5 = mysqli_query($db,$sql5); 
 										  $a = 0;
 										  while($row = mysqli_fetch_array($res5))

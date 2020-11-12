@@ -21,73 +21,31 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //   //exit("<strong> Erro: Você não tem permissão. </strong>");
 //}
 
-if(isset($_GET['codigo']))
-{
-	$sucesso = mysqli_query($db,"SELECT descricao FROM turmas where codigo='".$_GET['codigo']."'");
-	
-	if($sucesso)
-	{
-      while($row = mysqli_fetch_array($sucesso))
-	  {
-		 $descricao = $row['descricao'];
-		 //print("<script>window.alert('TESTE ".$descricao.",".$valor."')</script>");
-	  }
-	}
-	else
-	{
-		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-1')</script>");
-	}
-}
 
-if($_GET['ap'] == "1")
+if(isset($_GET['matricula']))
 {
 	$x = 0;
-	$SQL = "SELECT * FROM matriculas left join usuarios on usuarios.matricula=matriculas.matricula where matriculas.nome like '%".$_POST['cnome']."%' or usuarios.nome like '%".$_POST['cnome']."%' limit 1;";
-	$RES = mysqli_query($db,$SQL);
+	$RES = mysqli_query($db,"SELECT * FROM matriculas where matricula='".$_GET['matricula']."'");
 	while($row = mysqli_fetch_array($RES))
 	{
-		$x = 1;
-	}
+		 
+		 $x = 1;
+		 $matricula = $row['matricula'];
+		 $nome = $row['nome'];
+		 $estado = $row['estado'];
+		 $cidade = $row['cidade'];
+		 $ensino = $row['ensino'];
+		 $turma = $row['turma'];
+		 $situacao = $row['status'];
 
-	if($x == 1)
-	{
-	    print("<script> swal('Atenção', 'Aluno(a) ja cadastrado!'); </script>");
-		//print("<script>window.location.href='sistema.php?url=cad_alunos&cadastro=1';</script>");
-	}
-	else
-	{
-	   $SQL1 = "INSERT into matriculas(matricula,nome,estado,cidade,ensino,turma,status) values('".$_SESSION['matricula']."','".$_POST['cnome']."','".$_POST['estado']."','".$_POST['cidade']."','".$_POST['ensino']."','".$_POST['turma']."',1);";
-	   $sucesso = mysqli_query($db,$SQL1);
-	   
-	   $SQL2 = "INSERT into usuarios(login,senha,matricula,nome,tipo,status) values('".$_SESSION['matricula']."','".$_SESSION['matricula']."','".$_SESSION['matricula']."','".$_POST['cnome']."',1,1);";
-	   $sucesso = mysqli_query($db,$SQL2);
-	   
-	   if($sucesso)
-	   {
-		   print("<script> swal('Atenção', 'Aluno(a) Cadastrado com sucesso.'); </script>");
-		   print("<script>window.location.href='sistema.php?url=cad_alunos';</script>");
-	   }
-	   else
-	   {
-		   print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-2')</script>");
-	   }
-	}
-}
-elseif($_GET['ap'] == "2")
-{
-	$SQL1 = "UPDATE turmas SET descricao=".$_POST['descricao']." where codigo='".$_GET['codigo']."'";
-	$sucesso = mysqli_query($db,$SQL1);
-	
-	if($sucesso)
-	{
-        print("<script>window.alert('Alterado com sucesso.');</script>");
-		print("<script>window.location.href='iniciado.php?url=cad_turmas';</script>");
-	}
-	else
-	{
-		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-3')</script>");
+		 //print("<script>window.alert('TESTE ".$descricao.",".$valor."')</script>");
 	}
 	
+	if($x == 0)
+	{
+		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-1')</script>");
+		print("<script>window.location.href='sistema.php?url=cad_alunos';</script>");
+	}
 }
 
 ?>	
@@ -102,6 +60,7 @@ function gravar()
 	var cidade = document.getElementById('cidade').value;
 	var ensino = document.getElementById('ensino').value;
 	var turma = document.getElementById('turma').value;
+	var status = document.getElementById('situacao').value;
 	
 	if(matricula == "")
 	{
@@ -127,9 +86,13 @@ function gravar()
 	{
 		swal('Atenção', 'Campo Turma em branco.');
 	}
+	else if(status == "")
+	{
+		swal('Atenção', 'Campo Situação em branco.');
+	}
 	else
 	{
-        requestPage('?br=atu_aluno&refer=','loginResult','POST', BuscaElementosForm('alunoform'));
+        requestPage2('?br=atu_alunos&matricula='+ matricula +'&nome='+ nome +'&estado='+ estado +'&cidade='+ cidade +'&ensino='+ ensino +'&turma='+ turma +'&situacao='+ status +'&ap=<? if(Empty($_GET["matricula"])){ echo "1";}else{ echo "2";}?>','load','GET');
     }
 }
 
@@ -159,11 +122,11 @@ function gravar()
 								?>
 								<div class="form-group col-md-3 m-t-20"><label>Matricula :</label>
 								<!--onKeyPress="return(MascaraMoeda(this,'.','.',event)); "-->
-								<input type="text" name="matricula" id="matricula" value="<? if(isset($_GET['codigo'])){ echo $matricula;}else{ echo $_SESSION['matricula'];} ?>" readonly class="form-control" required="required">
+								<input type="text" name="matricula" id="matricula" value="<? if(isset($_GET['matricula'])){ echo $matricula;}else{ echo $_SESSION['matricula'];} ?>" readonly class="form-control" required="required">
 								</div>
 		                        <div class="form-group col-md-3 m-t-20"><label>Nome :</label>
 								<!--onKeyPress="return(MascaraMoeda(this,'.','.',event)); "-->
-								<input type="text" name="cnome" id="cnome" value="<? if(isset($_GET['codigo'])){ echo $nome;} ?>" class="form-control" required="required">
+								<input type="text" name="cnome" id="cnome" value="<? if(isset($_GET['matricula'])){ echo $nome;} ?>" class="form-control" required="required">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>Estado :</label>
 								<select name="estado" id="estado" class="form-control" onChange="javascript: ajaxLoader('?br=cad_listacidades&estado='+ this.value ,'cidades','GET');" style="width: 100%; height:36px;" required="required">
@@ -197,18 +160,18 @@ function gravar()
 								<div class="form-group col-md-2 m-t-20"><label>Ensino :</label>
 								<select name="ensino" id="ensino" class="form-control" onChange="javascript: ajaxLoader('?br=cad_listacurso&curso='+ this.value ,'cursar','GET');"  style="width: 100%; height:36px;">
                                   <option value="">Selecionar</option>
-								  <option value="0" <? if($ensino == 0 and isset($_GET['codigo'])){ echo "selected"; } ?>>Infantil</option>
-								  <option value="1" <? if($ensino == 1 and isset($_GET['codigo'])){ echo "selected"; } ?>>Fundamental</option>
-								  <option value="2" <? if($ensino == 2 and isset($_GET['codigo'])){ echo "selected"; } ?>>Médio</option>
+								  <option value="0" <? if($ensino == 0 and isset($_GET['matricula'])){ echo "selected"; } ?>>Infantil</option>
+								  <option value="1" <? if($ensino == 1 and isset($_GET['matricula'])){ echo "selected"; } ?>>Fundamental</option>
+								  <option value="2" <? if($ensino == 2 and isset($_GET['matricula'])){ echo "selected"; } ?>>Médio</option>
                                 </select></div>
 								<div class="form-group col-md-2 m-t-20"><label>Turma :</label>
 								<div id="cursar">
 								<select name="turma" id="turma" class="form-control" style="width: 100%; height:36px;" required="required">
                                     <option value="">Selecionar</option>
 									<? 
-									      if(isset($_GET['codigo']))
+									      if(isset($_GET['matricula']))
 										  {
-										  $sql = "select codigo,descricao from turmas";
+										  $sql = "select turmas.codigo,turmas.descricao from turmas inner join turmas_professor on turmas_professor.turma=turmas.codigo where turmas.curso='".$_GET['curso']."' and turmas_professor.usuario='".$_SESSION['usuario']."'";
 										  $res = mysqli_query($db,$sql); 
 										  while($row = mysqli_fetch_array($res))
 										  {
@@ -220,8 +183,20 @@ function gravar()
 										  ?>
                                 </select></div>
 								</div>
+								<div class="form-group col-md-2 m-t-20"><label>Situação :</label>
+								<select name="situacao" id="situacao" class="form-control" style="width: 100%; height:36px;" required="required">
+                                    <option>Selecionar Situação</option>
+                                           <option value="0" <? if(0 == $situacao and isset($_GET['matricula'])){ echo "selected"; } ?>>Inativa</option>
+										   <option value="1" <? if(1 == $situacao and isset($_GET['matricula'])){ echo "selected"; } ?>>Ativa</option>
+										   <option value="2" <? if(2 == $situacao and isset($_GET['matricula'])){ echo "selected"; } ?>>Pre-Ativa</option>
+										   <option value="3" <? if(3 == $situacao and isset($_GET['matricula'])){ echo "selected"; } ?>>Transferido</option>
+                                </select>
+								</div>
+								<div class="form-group col-md-12 m-t-20" id="load">
+								</div>
 								<div class="form-group col-md-12 m-t-20">
 								<button type="button" onclick="gravar();" class="btn btn-info"><i class="fa fa-plus-circle"></i> Gravar</button>
+								<button type="button" onclick="window.location='sistema.php?url=cad_alunos';" class="btn btn-info"><i class="fa fa-plus-circle"></i> voltar</button>
 								</div>
 								<?}else{?>
 								<div class="form-group col-md-12 m-t-20">
@@ -241,7 +216,7 @@ function gravar()
                                                 <th>Matricula</th>
                                                 <th>Nome</th>
 												<th>Turma</th>
-												<th>X</th>
+												<th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -252,10 +227,10 @@ function gravar()
 											  $Whernome = " matriculas.nome like '%".$_POST['pesquisa']."%'";
 										  }
 										  
-										  $sql = "select matriculas.matricula,matriculas.nome,matriculas.nome,turmas.descricao from matriculas 
+										  $sql = "select matriculas.matricula,matriculas.nome,matriculas.nome,turmas.descricao,matriculas.status from matriculas 
 										  inner join  turmas on turmas.codigo=matriculas.turma 
 										  inner join turmas_professor on turmas_professor.turma=matriculas.turma and turmas_professor.usuario='".$_SESSION['usuario']."'
-										  where $Whernome matriculas.status=1";
+										  where $Whernome matriculas.status in (0,1,3)";
 										  $res = mysqli_query($db,$sql); 
 										  while($row = mysqli_fetch_array($res))
 										  {
@@ -264,7 +239,24 @@ function gravar()
                                                 <td data-title="Matricula"><? echo $row['matricula'];?></td>
                                                 <td data-title="Aluno"><? echo $row['nome'];?></td>
 												<td data-title="Turma"><? echo $row['descricao'];?></td>
-												<td data-title="Editar"><a class="fa fa-edit" href="iniciado.php?url=cad_turmas&codigo=<? echo $row['codigo']?>" style="font-size: 150%;"><a></td>
+												<td data-title="Status"><? 
+												Switch($row['status'])
+												{
+												 case 0:
+												 { echo "Inativo";}
+												 break;
+												 case 1:
+												 { echo "Ativo";}
+												 break;
+												 case 2:
+												 { echo "Pre-Ativa";}
+												 break;
+												 case 3:
+												 { echo "Transferido";}
+												 break;
+												}
+																		 ?></td>
+												<td data-title="Editar"><a class="fa fa-edit" href="sistema.php?url=cad_alunos&cadastro=1&matricula=<? echo $row['matricula']?>" style="font-size: 150%;"><a></td>
                                             </tr>
 										  <? } ?>
                                         </tbody>

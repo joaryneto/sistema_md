@@ -12,7 +12,7 @@ if($_GET['ap'] == "1")
 
 	if($x == 1)
 	{
-	    print("<script> swal('Atenção', 'Aluno(a) ja cadastrado!'); </script>");
+	    print('<script> swal("Atenção", "Aluno(a) ja cadastrado! '.$SQL.'"); </script>');
 		//print("<script>window.location.href='sistema.php?url=cad_alunos&cadastro=1';</script>");
 	}
 	else
