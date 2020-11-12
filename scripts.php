@@ -36,10 +36,11 @@
 	<script>
 	jQuery('#txtdata').datepicker({
 		format: 'dd/mm/yyyy',
- 		autoclose: true,
- 		todayHighlight: true
-	});
+        autoclose: true,
+        todayHighlight: true
+    });
 	</script>
+	
     <!-- Sweet-Alert  -->
     <script src="template/vendor/sweetalert/sweetalert.min.js"></script>
     <script src="template/vendor/sweetalert/jquery.sweet-alert.custom.js"></script>
@@ -70,6 +71,8 @@
     <!-- Propeller tabs js -->
     <script type="text/javascript" language="javascript" src="template/vendor/propeller-master/components/tab/js/tab-scrollable.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+	
 	<!-- MASK INPUT -->
     <script src="template/vendor/mask.money/jquery.maskMoney.js"></script>
     <script>
@@ -81,8 +84,6 @@
         $("#desc").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
 		$("#totals").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
     </script>
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 	
 	<!-- autocomplete js--> 
     <script src="template/vendor/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js"></script> 

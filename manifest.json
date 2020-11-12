@@ -1,6 +1,6 @@
 {
-  "name": "AgSge",
-  "short_name": "AgSge",
+  "name": "G. Escolar",
+  "short_name": "G. Escolar",
   "icons": [{
     "src": "/images/icons/icon-128x128.png",
       "sizes": "128x128",
@@ -28,9 +28,9 @@
     }, {
       "src": "/images/icons/icon-32x32.png",
       "sizes": "32x32",
-      "type": "image/png",
+      "type": "image/png"
     }],
-  "start_url": "/index.php",
+  "start_url": "/index.php?sistema=agsge",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF"
