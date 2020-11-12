@@ -1,4 +1,4 @@
-<select name="cidade" id="cidade"class="form-control" style="width: 100%; height:36px;">
+<select name="turma" id="turma"class="form-control" style="width: 100%; height:36px;">
 <option value=""> Selecionar </option>
 <?
 

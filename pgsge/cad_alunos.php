@@ -255,7 +255,7 @@ function gravar()
 											  $Whernome = " matriculas.nome like '%".$_POST['pesquisa']."%'";
 										  }
 										  
-										  $sql = "select matriculas.matricula,matriculas.nome,matriculas.nome,turmas.descricao from matriculas 
+										  echo $sql = "select matriculas.matricula,matriculas.nome,matriculas.nome,turmas.descricao from matriculas 
 										  inner join  turmas on turmas.codigo=matriculas.turma 
 										  inner join turmas_professor on turmas_professor.turma=matriculas.turma and turmas_professor.usuario='".$_SESSION['usuario']."'
 										  where $Whernome matriculas.status=1";

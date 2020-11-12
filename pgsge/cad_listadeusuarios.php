@@ -3,8 +3,7 @@
 if($_GET['ap'] == 1)
 {
 ?>
-
-<table class="display nowrap table table-hover table-striped table-bordered">
+<table class="table table-hover table-striped table-bordered">
 <thead>
 <tr>
 <th>Codigo</th>
@@ -41,7 +40,8 @@ while($row = mysqli_fetch_array($res))
 <? 
 }
 ?>
-<tbody>
+</tbody>
+</table>
 <?
 }
 else if($_GET['ap'] == 2)

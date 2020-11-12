@@ -59,19 +59,25 @@ if(isset($_GET['codigo']))
 
 if($_GET['ap'] == "1")
 {
-	$sucesso = mysqli_query($db,"SELECT * FROM diario where turma='".$_POST['turma']."' and materia='".$_POST['disciplina']."' and periodo='".$_POST['periodo']."' and data='".revertedata($_POST['txtdata'])."' and conteudo like '%'".$_POST['conteudo']."'%'");
+	$x = 0;
+	$RES1 = mysqli_query($db,"SELECT * FROM diario where turma='".$_POST['turma']."' and materia='".$_POST['disciplina']."' and periodo='".$_POST['periodo']."' and data='".revertedata($_POST['txtdata'])."' and conteudo like '%'".$_POST['conteudo']."'%'");
+	while($row = mysqli_fetch_array($RES1))
+	{
+		$x = 1;
+	}
 	
-	if($sucesso)
+	
+	if($x == 1)
 	{
 	    print("<script>window.alert('Conteudo ja cadastrada!')</script>");
 		print("<script>window.location.href='sistema.php?url=cad_diario';</script>");
 	}
 	else
 	{
-	   $SQL1 = "INSERT into diario(usuario,turma,materia,periodo,video,data,conteudo,texto) values('".$_SESSION['usuario']."','".$_POST['turma']."','".$_POST['disciplina']."','".$_POST['periodo']."','".$_POST['video']."','".revertedata($_POST['txtdata'])."','".$_POST['conteudo']."','".$_POST['txtobs']."')";
-	   $sucesso = mysqli_query($db,$SQL1);
+	   $SQL2 = "INSERT into diario(usuario,turma,materia,periodo,video,data,conteudo,texto) values('".$_SESSION['usuario']."','".$_POST['turma']."','".$_POST['disciplina']."','".$_POST['periodo']."','".$_POST['video']."','".revertedata($_POST['txtdata'])."','".$_POST['conteudo']."','".$_POST['txtobs']."')";
+	   $RES2 = mysqli_query($db,$SQL2);
 	   
-	   if($sucesso)
+	   if($RES2)
 	   {
 		   print("<script>window.alert('Conteudo Cadastrada com sucesso...')</script>");
 		   print("<script>window.location.href='sistema.php?url=cad_diario';</script>");
@@ -81,7 +87,8 @@ if($_GET['ap'] == "1")
 		   print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-2')</script>");
 	   }
 	   
-	   $sucesso->close();
+	   $RES1->close();
+	   $RES2->close();
 	}
 }
 elseif($_GET['ap'] == "2")
@@ -339,7 +346,7 @@ $.each($("input[name='check[]']:value"),function()
                                 </select>
 								</div>
 								<div class="form-group col-md-5 m-t-20"><label><b>Link Video :</b></label>
-                                <input type="text" name="video" id="video" class="form-control"  value="<? if(!Empty($_GET['codigo'])){ echo $video; } ?>"  required="required">
+                                <input type="text" name="video" id="video" class="form-control"  value="<? if(!Empty($_GET['codigo'])){ echo $video; } ?>">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label><b>Data :</b></label>
                                 <input type="text" name="txtdata" id="txtdata" class="form-control"  value="<? if(!Empty($_GET['codigo'])){ echo formatodatahora($data); } ?>" placeholder="dd/mm/yyyy"  data-mask="99/99/9999"  required="required">
@@ -390,7 +397,7 @@ $.each($("input[name='check[]']:value"),function()
 								</div>
 								<? if(Empty($_GET['codigo']) && Empty($_GET['frequencia']) && Empty($_GET['nota'])){?>
 								<div class="form-group col-md-5 m-t-20"><label>Pesquisa :</label>
-                                <input type="text" name="conteudo" class="form-control" id="conteudo" value="<? if(!Empty($_GET['codigo'])){ echo $conteudo;} ?>" placeholder="" required="required">
+                                <input type="text" name="pesquisa" class="form-control" id="pesquisa" value="<? if(!Empty($_GET['codigo'])){ echo $conteudo;} ?>" placeholder="Pesquisar conteúdo">
 								</div>
                           <div class="col-md-12">
 					       <div class="component-box">

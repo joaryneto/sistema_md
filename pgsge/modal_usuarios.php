@@ -133,12 +133,11 @@ else
 <?if($_GET['modal'] == 1){?>
 
 <div class="modal-header">
-<h4 class="modal-title" id="myLargeModalLabel"><b>Lista de Usuarios : </h4>
+<h2 class="pmd-card-title-text">Lista de Usuarios :</h2>
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
 <div class="modal-body">
-<div class="row">
-<div class="col-12">
+<form class="form-horizontal">
 <div class="form-group "><label>Busca:</label>
 <input name="user" type="text" class="form-control" onkeyup="javascript: requestPage2('?br=cad_listadeusuarios&pesquisa='+ this.value +'&ap=1','listusuarios','GET');" />
 </div>
@@ -188,14 +187,14 @@ if($x == 0)
 ?>
 </tbody>	
 </table>
-	</div></div>										 
+</form>										 
 </div>
 <div class="modal-footer">
 <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Fechar</button>
 </div>
 <? }else if($_GET['modal'] == 2){?>
 <!-- Modal -->
-			<div class="modal-header">
+			<div class="modal-header pmd-modal-bordered">
 				<h4 class="modal-title" id="myLargeModalLabel"><b>Turmas e Disciplinas</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 			</div>
