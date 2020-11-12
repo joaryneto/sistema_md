@@ -156,14 +156,13 @@ $cnpj = $_GET['cnpj'];
   $vb .='<table>';
   $vb .='<tbody>';
   $vb .='<tr>';
-  $vb .='<td colspan="9" class="titulo">Diário de Classe</td>';
+  $vb .='<td colspan="8" class="titulo">Diário de Classe</td>';
   $vb .='</tr>';
   $vb .='<tr>';
   $vb .='<th>Etapa</th>';
   $vb .='<th>Ano</th>';
-  $vb .='<th>Cod.</th>';
+  $vb .='<th>Cod. Disc.</th>';
   $vb .='<th>Disciplina</th>';
-  $vb .='<th>Turno</th>';
   $vb .='<th>Curso</th>';
   $vb .='<th>Série</th>';
   $vb .='<th>Turma</th>';
@@ -171,30 +170,56 @@ $cnpj = $_GET['cnpj'];
   $vb .='</tr>';
   $vb .='<tr>';
   
-  $pSQL1 = "select data from diario where YEAR(data)=2020";
+  $pSQL1 = "select usuarios.nome,periodo.descricao as etapa ,diario.materia,materias.descricao as disciplina,turmas.descricao as cturma,diario.data,turmas_professor.usuario from diario 
+  inner join turmas_professor on turmas_professor.turma=diario.turma 
+  inner join turmas on turmas.codigo=diario.turma
+  inner join materias on materias.codigo=diario.materia
+  inner join periodo on periodo.codigo=diario.periodo
+  inner join usuarios on usuarios.codigo=diario.usuario
+  where YEAR(diario.data)=2020 and turmas_professor.usuario=1 and diario.materia=5";
   $pRES1 = mysqli_query($db,$pSQL1);
   $prow = mysqli_fetch_assoc($pRES1);
 	  
+	  
+  $vb .='<td>'.$prow['etapa'].'</td>';
+  $vb .='<td>'.date("Y", strtotime($prow['data'])).'</td>';
+  $vb .='<td>'.str_pad($prow['materia'], 4 , '0' , STR_PAD_LEFT).'</td>';
+  $vb .='<td>'.$prow['disciplina'].'</td>';
   $vb .='<td>&nbsp;</td>';
   $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>'.$prow['cturma'].'</td>';
+  $vb .='<td>'.$prow['nome'].'</td>';
   $vb .='</tr>';
   $vb .='</tbody>';
   $vb .='</table>';
 
+  $pRES1->close();
+  
+  $SQL1 = "select count(diario.codigo) as qtd from diario inner join turmas_professor on turmas_professor.turma=diario.turma where YEAR(diario.data)=2020 and turmas_professor.usuario=1 and diario.materia=5";
+  $RES1 = mysqli_query($db,$SQL1);
+  $row1 = mysqli_fetch_assoc($RES1);
+  $valor1 = 1+$row1['qtd'];
+  
   $vb .='<table>';
   $vb .='<tbody>';
   $vb .='<tr>';
+  $vb .='<td colspan="4">&nbsp;</td>';
+  $vb .='<td colspan="'.$valor1.'">Aulas / Data</td>';
+  
+  $SQL1 = "select count(diario.codigo) as qtd from diario inner join turmas_professor on turmas_professor.turma=diario.turma where YEAR(diario.data)=2020 and turmas_professor.usuario=1 and diario.materia=5 and tipo=2";
+  $RES1 = mysqli_query($db,$SQL1);
+  $row2 = mysqli_fetch_assoc($RES1);
+  $valor2 = 2+$row2['qtd'];
+  
+  $vb .='<td colspan="'.$valor2.'">&nbsp;</td>';
+  $vb .='</tr>';
+  $vb .='<tr>';
   $vb .='<td colspan="3">&nbsp;</td>';
   $vb .='<th><b>Mês</b></th>';
+  
+  $RES1->close();
    
-  $SQL1 = "select data from diario where YEAR(data)=2020 and materia=5";
+  $SQL1 = "select diario.data from diario inner join turmas_professor on turmas_professor.turma=diario.turma where YEAR(diario.data)=2020 and turmas_professor.usuario=1 and diario.materia=5";
   $RES1 = mysqli_query($db,$SQL1);
   while($row = mysqli_fetch_assoc($RES1)) 
   {
@@ -202,9 +227,15 @@ $cnpj = $_GET['cnpj'];
   }
   $RES1->close();
   $vb .='<th rowspan="2">T. F.</th>';
-  $vb .='<th>&nbsp;</th>';
-  $vb .='<th>&nbsp;</th>';
-  $vb .='<th>&nbsp;</th>';
+  
+  $SQL1 = "select diario.data from diario inner join turmas_professor on turmas_professor.turma=diario.turma where YEAR(diario.data)=2020 and turmas_professor.usuario=1 and diario.materia=5 and tipo=2";
+  $RES1 = mysqli_query($db,$SQL1);
+  while($row = mysqli_fetch_assoc($RES1)) 
+  {
+      $vb .='<td>'.date("m", strtotime($row['data'])).'</td>';
+  }
+  $RES1->close();
+  
   $vb .='<th colspan="2">Total</th>';
   $vb .='</tr>';
   $vb .='<tr>';
@@ -212,23 +243,29 @@ $cnpj = $_GET['cnpj'];
   $vb .='<th>Matricula</th>';
   $vb .='<th>Aluno</th>';
   $vb .='<th>Dia</th>';
-  $SQL2 = "select data from diario where YEAR(data)=2020 and materia=5";
+  $SQL2 = "select diario.data from diario inner join turmas_professor on turmas_professor.turma=diario.turma where YEAR(diario.data)=2020 and turmas_professor.usuario=1 and diario.materia=5";
   $RES2 = mysqli_query($db,$SQL2);
   while($row = mysqli_fetch_assoc($RES2)) 
   {
      $vb .='<td>'.date("d", strtotime($row['data'])).'</td>';
   }
   $RES2->close();
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
+  
+  $SQL2 = "select diario.data from diario inner join turmas_professor on turmas_professor.turma=diario.turma where YEAR(diario.data)=2020 and turmas_professor.usuario=1 and diario.materia=5 and diario.tipo=2";
+  $RES2 = mysqli_query($db,$SQL2);
+  while($row = mysqli_fetch_assoc($RES2)) 
+  {
+     $vb .='<td>'.date("d", strtotime($row['data'])).'</td>';
+  }
+  $RES2->close();
+  
   $vb .='<td>N</td>';
   $vb .='<td>F</td>';
   $vb .='</tr>';
   $vb .='<tr>';
    
   $count = 1;
-  $SQL3 = "select codigo,matricula,nome from matriculas";
+  $SQL3 = "select matriculas.codigo,matriculas.matricula,matriculas.nome from matriculas inner join turmas_professor on turmas_professor.turma=matriculas.turma where turmas_professor.usuario=1";
   $RES3 = mysqli_query($db,$SQL3);
   while($row = mysqli_fetch_assoc($RES3)) 
   {
@@ -238,12 +275,12 @@ $cnpj = $_GET['cnpj'];
          $vb .='<td colspan="2">'.$row['nome'].'</td>';
    
          $falta = 0;
-		 $SQL1 = "select codigo,data from diario where YEAR(data)=2020 and materia=5";
+		 $SQL1 = "select diario.data, diario.codigo from diario inner join turmas_professor on turmas_professor.turma=diario.turma where YEAR(diario.data)=2020 and turmas_professor.usuario=1 and diario.materia=5";
 		 $RES1 = mysqli_query($db,$SQL1);
 		 while($rrow2 = mysqli_fetch_assoc($RES1)) 
 		 {
               
-              $DSQL1 = "select data from frequencia where data='".$rrow2['data']."'  and matricula=".$row['codigo']." and YEAR(data)=2020 and falta=0;";
+              $DSQL1 = "select data,nota from frequencia where data='".$rrow2['data']."' and matricula=".$row['codigo']." and diario=".$rrow2['codigo']." and YEAR(data)=2020 and falta=0;";
               $DRES1 = mysqli_query($db,$DSQL1);
               $drow = mysqli_fetch_assoc($DRES1);
                  
@@ -264,9 +301,31 @@ $cnpj = $_GET['cnpj'];
 		 $RES1->close();
 		 
          $vb .='<td>'.$falta.'</td>';
-		 $vb .='<td></td>';
-		 $vb .='<td></td>';
-		 $vb .='<td></td>';
+		 
+		 $RSQL1 = "select diario.data, diario.codigo from diario inner join turmas_professor on turmas_professor.turma=diario.turma where YEAR(diario.data)=2020 and turmas_professor.usuario=1 and diario.materia=5 and tipo=2";
+		 $RRES1 = mysqli_query($db,$RSQL1);
+		 while($rrow2 = mysqli_fetch_assoc($RRES1)) 
+		 {
+              $DDSQL1 = "select nota from frequencia where data='".$rrow2['data']."' and matricula=".$row['codigo']." and diario=".$rrow2['codigo']." and YEAR(data)=2020 and falta=0;";
+              $DDRES1 = mysqli_query($db,$DDSQL1);
+              $ddrow = mysqli_fetch_assoc($DDRES1);
+                 
+	          if(!Empty($ddrow['nota']))
+			  {
+                   $vb .='<td>'.$ddrow['nota'].'</td>';
+				   
+			  }
+			  else
+			  {
+		         $vb .='<td>0</td>'; 
+				 //$falta ++;
+			  }
+			  
+			  $DDRES1->close();
+		 }
+		 
+		 $RRES1->close();
+		 
 		 $vb .='<td>&nbsp;</td>';
 		 $vb .='<td>&nbsp;</td>';
 		 
@@ -284,22 +343,21 @@ $cnpj = $_GET['cnpj'];
    $vb .='<tbody>';
    $vb .='<tr>';
    $vb .='<td><p>Recebido em: ___/___/_______ &nbsp;Assinatura do Professor:_____________________________</p></td>';
-   $vb .='<td>Recebido em: ___/___/_______ &nbsp;Assinatura do Chefe deDepartamento:_____________________________</td>';
+   $vb .='<td>Recebido em: ___/___/_______ &nbsp;Assinatura do Chefe de Departamento:_____________________________</td>';
    $vb .='</tr>';
    $vb .='</tbody>';
    $vb .='</table>';
    
-     $vb .='<table>';
+  $vb .='<table>';
   $vb .='<tbody>';
   $vb .='<tr>';
-  $vb .='<td colspan="9" class="titulo">Diário de Conteúdo</td>';
+  $vb .='<td colspan="8" class="titulo">Diário de Conteúdo</td>';
   $vb .='</tr>';
   $vb .='<tr>';
   $vb .='<th>Etapa</th>';
   $vb .='<th>Ano</th>';
-  $vb .='<th>Cod.</th>';
+  $vb .='<th>Cod. Disc.</th>';
   $vb .='<th>Disciplina</th>';
-  $vb .='<th>Turno</th>';
   $vb .='<th>Curso</th>';
   $vb .='<th>Série</th>';
   $vb .='<th>Turma</th>';
@@ -307,22 +365,30 @@ $cnpj = $_GET['cnpj'];
   $vb .='</tr>';
   $vb .='<tr>';
   
-  $pSQL1 = "select data from diario where YEAR(data)=2020";
+  $pSQL1 = "select usuarios.nome,periodo.descricao as etapa ,diario.materia,materias.descricao as disciplina,turmas.descricao as cturma,diario.data,turmas_professor.usuario from diario 
+  inner join turmas_professor on turmas_professor.turma=diario.turma 
+  inner join turmas on turmas.codigo=diario.turma
+  inner join materias on materias.codigo=diario.materia
+  inner join periodo on periodo.codigo=diario.periodo
+  inner join usuarios on usuarios.codigo=diario.usuario
+  where YEAR(diario.data)=2020 and turmas_professor.usuario=1 and diario.materia=5";
   $pRES1 = mysqli_query($db,$pSQL1);
   $prow = mysqli_fetch_assoc($pRES1);
 	  
+	  
+  $vb .='<td>'.$prow['etapa'].'</td>';
+  $vb .='<td>'.date("Y", strtotime($prow['data'])).'</td>';
+  $vb .='<td>'.str_pad($prow['materia'], 4 , '0' , STR_PAD_LEFT).'</td>';
+  $vb .='<td>'.$prow['disciplina'].'</td>';
   $vb .='<td>&nbsp;</td>';
   $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
+  $vb .='<td>'.$prow['cturma'].'</td>';
+  $vb .='<td>'.$prow['nome'].'</td>';
   $vb .='</tr>';
   $vb .='</tbody>';
   $vb .='</table>';
+  
+  $pRES1->close();
 
   $vb .='<table>';
   $vb .='<tbody>';
@@ -333,12 +399,21 @@ $cnpj = $_GET['cnpj'];
   $vb .='<th>Professor</th>';
   $vb .='</tr>';
   
-  $vb .='<tr>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='<td>&nbsp;</td>';
-  $vb .='</tr>';
+  $aucount = 1;
+  $SQL1 = "select diario.usuario,diario.data,diario.conteudo from diario inner join turmas_professor on turmas_professor.turma=diario.turma where YEAR(diario.data)=2020 and turmas_professor.usuario=1 and diario.materia=5";
+  $RES1 = mysqli_query($db,$SQL1);
+  while($row = mysqli_fetch_assoc($RES1)) 
+  {
+      $vb .='<tr>';
+      $vb .='<td>'.date("d/m/Y", strtotime($row['data'])).'</td>';
+      $vb .='<td>'.$aucount.' - '.$aucount.'</td>';
+      $vb .='<td>'.$row['conteudo'].'</td>';
+      $vb .='<td>'.str_pad($row['usuario'], 6 , '0' , STR_PAD_LEFT).'</td>';
+      $vb .='</tr>';
+	  
+      $aucount ++;
+  }
+  $RES1->close();
   
   $vb .='</tbody>';
   $vb .='</table>';
@@ -347,7 +422,7 @@ $cnpj = $_GET['cnpj'];
   $vb .='<tbody>';
   $vb .='<tr>';
   $vb .='<td><p>Recebido em: ___/___/_______ &nbsp;Assinatura do Professor:_____________________________</p></td>';
-  $vb .='<td>Recebido em: ___/___/_______ &nbsp;Assinatura do Chefe deDepartamento:_____________________________</td>';
+  $vb .='<td>Recebido em: ___/___/_______ &nbsp;Assinatura do Chefe de Departamento:_____________________________</td>';
   $vb .='</tr>';
   $vb .='</tbody>';
   $vb .='</table>';
@@ -368,7 +443,9 @@ $dompdf->setPaper('A4', 'landscape');
 $dompdf->render(); 
  
 // Output the generated PDF (1 = download and 0 = preview) 
-$dompdf->stream("codexworld", array("Attachment" => 0));
+$dompdf->stream("relatorio", array("Attachment" => 0));
 
+$output = $dompdf->output();
+file_put_contents('relatorio.pdf', $output);
 
 ?>

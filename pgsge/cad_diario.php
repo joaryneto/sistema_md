@@ -23,7 +23,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 
 if(isset($_GET['codigo']))
 {
-	$SQL = "SELECT diario.turma,diario.video,diario.materia,diario.periodo,diario.data,diario.conteudo,diario.texto,materias.descricao as mdescricao,turmas.descricao as tdescricao,periodo.descricao as pdescricao FROM diario 
+	$SQL = "SELECT diario.tipo,diario.turma,diario.video,diario.materia,diario.periodo,diario.data,diario.conteudo,diario.texto,materias.descricao as mdescricao,turmas.descricao as tdescricao,periodo.descricao as pdescricao FROM diario 
 	inner join materias on materias.codigo=diario.materia 
 	inner join turmas on turmas.codigo=diario.turma
 	inner join periodo on periodo.codigo=diario.periodo
@@ -45,6 +45,7 @@ if(isset($_GET['codigo']))
 		 $pdescricao = $row['pdescricao'];
 		 $tdescricao = $row['tdescricao'];
 		 $mdescricao = $row['mdescricao'];
+		 $tipo = $row['tipo'];
 		 
 		 //print("<script>window.alert('TESTE ".$descricao.",".$valor."')</script>");
 	  }
@@ -74,7 +75,7 @@ if($_GET['ap'] == "1")
 	}
 	else
 	{
-	   $SQL2 = "INSERT into diario(usuario,turma,materia,periodo,video,data,conteudo,texto) values('".$_SESSION['usuario']."','".$_POST['turma']."','".$_POST['disciplina']."','".$_POST['periodo']."','".$_POST['video']."','".revertedata($_POST['txtdata'])."','".$_POST['conteudo']."','".$_POST['txtobs']."')";
+	   $SQL2 = "INSERT into diario(usuario,turma,materia,periodo,video,data,conteudo,texto,tipo) values('".$_SESSION['usuario']."','".$_POST['turma']."','".$_POST['disciplina']."','".$_POST['periodo']."','".$_POST['video']."','".revertedata($_POST['txtdata'])."','".$_POST['conteudo']."','".$_POST['txtobs']."','".$_POST['tipo']."')";
 	   $RES2 = mysqli_query($db,$SQL2);
 	   
 	   if($RES2)
@@ -98,7 +99,7 @@ if($_GET['ap'] == "1")
 }
 elseif($_GET['ap'] == "2")
 {
-	$SQL1 = "UPDATE diario SET conteudo='".$_POST['conteudo']."', texto='".$_POST['txtobs']."' where codigo='".$_GET['codigo']."'";
+	$SQL1 = "UPDATE diario SET conteudo='".$_POST['conteudo']."', texto='".$_POST['txtobs']."',tipo='".$_POST['tipo']."' where codigo='".$_GET['codigo']."'";
 	$sucesso = mysqli_query($db,$SQL1);
 	
 	if($sucesso)
@@ -380,11 +381,18 @@ function gravardiario()
                                 <input type="text" name="video" id="video" class="form-control"  value="<? if(!Empty($_GET['codigo'])){ echo $video; } ?>">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label><b>Data :</b></label>
-                                <input type="text" name="txtdata" id="txtdata" class="form-control"  value="<? if(!Empty($_GET['codigo'])){ echo formatodatahora($data); } ?>" placeholder="dd/mm/yyyy"  data-mask="99/99/9999"  required="required">
+                                <input type="text" name="txtdata" id="txtdata" class="form-control"  value="<? if(!Empty($_GET['codigo'])){ echo formatodatahora($data); } ?>" placeholder="dd/mm/yyyy"  data-mask="00/00/0000" data-mask-clearifnotmatch="true"  required="required">
 								</div>
 								
 								<div class="form-group col-md-5 m-t-20"><label><b>Conteudo Lecionado :</b></label>
                                 <input type="text" name="conteudo" class="form-control" id="conteudo" value="<? if(!Empty($_GET['codigo'])){ echo $conteudo;} ?>" placeholder="" required="required">
+								</div>
+								<div class="form-group col-md-2 m-t-20"><label>Tipo :</label>
+								<select name="tipo" id="tipo" class="form-control" style="width: 100%; height:36px;" required="required">
+                                      <option value="">Selecionar Tipo</option>
+                                      <option value="1" <? if(1 == $tipo and isset($_GET['codigo'])){ echo "selected"; } ?>>Aula Normal</option>
+									  <option value="2" <? if(2 == $tipo and isset($_GET['codigo'])){ echo "selected"; } ?>>Avaliação</option>
+                                </select>
 								</div>
 								<div class="form-group col-md-12 m-t-20"><label><b>Texto :</b></label>                               
 								<textarea class="textarea_editor form-control" name="txtobs" id="txtobs" rows="10" placeholder="Escreva aqui ..." required="required"><? if(!Empty($_GET['codigo'])){ echo $texto;} ?></textarea>
@@ -490,7 +498,7 @@ function gravardiario()
 										<? 
 										  
 										  $data = date('Y');
-										  $sql5 = "select diario.data,matriculas.codigo,matriculas.nome,turmas.descricao as turma,matriculas.foto from diario 
+										  $sql5 = "select diario.codigo as coddiario,diario.data,matriculas.codigo,matriculas.nome,turmas.descricao as turma,matriculas.foto from diario 
 										  inner JOIN turmas on turmas.codigo=diario.turma 
 										  inner join materias on materias.codigo=diario.materia 
 										  inner join periodo on periodo.codigo=diario.periodo
@@ -527,7 +535,7 @@ function gravardiario()
 												<td><div id="<? echo $row['codigo'];?>">
 												<? 
 											         $ano = date('Y');
-													 $SQL7 = "SELECT falta as qtd FROM frequencia where matricula=".$row['codigo']." and disciplina=".$disciplina." and periodo=".$periodo." and falta=1 and YEAR(data)=$ano ";
+													 echo $SQL7 = "SELECT falta as qtd FROM frequencia where matricula=".$row['codigo']." and disciplina=".$disciplina." and periodo=".$periodo." and falta=1 and YEAR(data)=$ano ";
 													 $RES7 = mysqli_query($db,$SQL7);
 													 
 													 $total = 0;
@@ -601,7 +609,7 @@ function gravardiario()
 										<? 
 										  
 										  $data = date('Y');
-										  $sql8 = "select diario.data,matriculas.codigo,matriculas.nome,turmas.descricao as turma,matriculas.foto from diario 
+										  $sql8 = "select diario.codigo as coddiario,diario.data,matriculas.codigo,matriculas.nome,turmas.descricao as turma,matriculas.foto from diario 
 										  inner JOIN turmas on turmas.codigo=diario.turma 
 										  inner join materias on materias.codigo=diario.materia 
 										  inner join periodo on periodo.codigo=diario.periodo
@@ -630,14 +638,19 @@ function gravardiario()
 													 ?>
 												      
 													  <!--<input type="text" class="form-control" name="<? echo $row['codigo'];?>" value="<? echo $valor;?>" onKeypress="javascript: ajaxLoader('?br=atu_nota&nota='+ this.value +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $_GET['codigo'];?>&disciplina=<? echo $_GET['disciplina'];?>&periodo=<? echo $periodo; ?>&ap=1','<? echo $row['codigo'];?>','GET'); return(moeda(this,'.',',',event));">-->
-													  <input type="text" class="form-control" name="nota" id="nota<? echo $rows1['codigo'];?>" value="<? echo $valor;?>" onkeydown="javascript: if(event.key === 'Enter'){ ajaxLoader('?br=atu_nota&nota='+ this.value +'&codigo=<? echo $rows1['codigo'];?>&ap=1','<? echo $rows1['codigo'];?>','GET');}" maxlength="5">
-													 <?}else{ echo "Faltou";}?>
+													  <input type="text" class="form-control" name="nota" id="nota<? echo $rows1['codigo'];?>" value="<? echo $valor;?>" data-mask="#.##0.00" data-mask-reverse="true" onkeydown="javascript: if(event.key === 'Enter'){ ajaxLoader('?br=atu_nota&nota='+ this.value +'&codigo=<? echo $rows1['codigo'];?>&ap=1','<? echo $rows1['codigo'];?>','GET');}" maxlength="5">
+													 <?}
+													   else
+													   { 
+												          echo "Faltou";
+													   }
+													   ?>
 													  
 													  </td>
 												<td><div id="<? echo $rows1['codigo'];?>">
 												<? 
 											         
-													 $SQL10 = "SELECT sum(nota) as qtd FROM frequencia where matricula='".$row['codigo']."' and disciplina='".$disciplina."' and periodo='".$periodo."' and falta=0";
+													 $SQL10 = "SELECT sum(nota) as qtd FROM frequencia where matricula='".$row['codigo']."' and disciplina='".$disciplina."' and periodo='".$periodo."' and falta=0 and diario=".$row['coddiario']."";
 													 $RES10 = mysqli_query($db,$SQL10);
 												     $rows2 = mysqli_fetch_array($RES10);
 													 echo $rows2['qtd'];
