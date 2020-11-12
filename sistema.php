@@ -191,15 +191,6 @@ function revertedata($data){
                         </div>
 						<? } ?>
                     </li>
-					<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
-					<li class="nav-item dropdown" style="width: 230px;">
-                        <a href="sistema.php?url=cad_usuarios" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
-                            <div class="list-group-item list-group-item-action">
-                                <i class="material-icons">perm_contact_calendar</i> Usuarios
-                            </div>
-                        </a>
-					</li>
-					<? } ?>
                 </ul>
             </nav>
         </div>
@@ -510,9 +501,9 @@ function cliente(codigo,nome)
       </div>
     <? } ?>
 	<? if($_GET['url'] == "cad_usuarios" and $_SESSION['permissao'] == 3){?>
-<div id="modalusuario" class="modal fade" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content" id="modals">
+<div id="modalusuario" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal-dialog modal-lg">
+<div class="modal-content" id="modals" style="width:450px">
 <!-- /.modal-content -->
 </div>
 

@@ -42,21 +42,21 @@ if(isset($_GET['codigo']))
 if($_GET['ap'] == "1")
 {
 	$x = 0;
-	$RES = mysqli_query($db,"SELECT * FROM matriculas where nome='".$_POST['cnome']."'");
-	while($row = mysql_fetch_array($RES))
+	$SQL = "SELECT * FROM matriculas left join usuarios on usuarios.matricula=matriculas.matricula where matriculas.nome like '%".$_POST['cnome']."%' or usuarios.nome like '%".$_POST['cnome']."%' limit 1;";
+	$RES = mysqli_query($db,$SQL);
+	while($row = mysqli_fetch_array($RES))
 	{
 		$x = 1;
 	}
-	
-	
+
 	if($x == 1)
 	{
-	    print("<script>swal('Atenção', 'Aluno(a) ja cadastrado!');</script>");
-		print("<script>window.location.href='sistema.php?url=cad_alunos&cadastro=1';</script>");
+	    print("<script> swal('Atenção', 'Aluno(a) ja cadastrado!'); </script>");
+		//print("<script>window.location.href='sistema.php?url=cad_alunos&cadastro=1';</script>");
 	}
 	else
 	{
-	   $SQL1 = "INSERT into matriculas(matricula,nome,estado,cidade,ensino,turma) values('".$_SESSION['matricula']."','".$_POST['cnome']."','".$_POST['estado']."','".$_POST['cidade']."','".$_POST['ensino']."','".$_POST['turma']."');";
+	   $SQL1 = "INSERT into matriculas(matricula,nome,estado,cidade,ensino,turma,status) values('".$_SESSION['matricula']."','".$_POST['cnome']."','".$_POST['estado']."','".$_POST['cidade']."','".$_POST['ensino']."','".$_POST['turma']."',1);";
 	   $sucesso = mysqli_query($db,$SQL1);
 	   
 	   $SQL2 = "INSERT into usuarios(login,senha,matricula,nome,tipo,status) values('".$_SESSION['matricula']."','".$_SESSION['matricula']."','".$_SESSION['matricula']."','".$_POST['cnome']."',1,1);";
@@ -64,7 +64,7 @@ if($_GET['ap'] == "1")
 	   
 	   if($sucesso)
 	   {
-		   print("<script>swal('Atenção', 'Aluno(a) Cadastrado com sucesso.');</script>");
+		   print("<script> swal('Atenção', 'Aluno(a) Cadastrado com sucesso.'); </script>");
 		   print("<script>window.location.href='sistema.php?url=cad_alunos';</script>");
 	   }
 	   else
@@ -96,7 +96,6 @@ elseif($_GET['ap'] == "2")
 
 function gravar()
 {
-	var form = document.getElementById('cadaluno').value;
 	var matricula = document.getElementById('matricula').value;
 	var nome = document.getElementById('cnome').value;
 	var estado = document.getElementById('estado').value;
@@ -130,9 +129,7 @@ function gravar()
 	}
 	else
 	{
-	
-        document.getElementById('cadaluno').submit();
-
+        requestPage('?br=atu_aluno&refer=','loginResult','POST', BuscaElementosForm('alunoform'));
     }
 }
 
@@ -152,7 +149,7 @@ function gravar()
   <div class="row">
 	<div class="col-md-12 col-sm-12"> 
 		<div class="component-box">
-		                        <form class="m-t-40 row" name="cadaluno" id="cadaluno" method="post" action="sistema.php?url=cad_alunos&ap=1">
+		                        <form class="m-t-40 row" name="alunoform" id="alunoform" method="post">
 								<?if($_GET['cadastro'] == 1){?>
 								<?
 								  
@@ -224,7 +221,7 @@ function gravar()
                                 </select></div>
 								</div>
 								<div class="form-group col-md-12 m-t-20">
-								<button type="submit" onclick="gravar();" class="btn btn-info"><i class="fa fa-plus-circle"></i> Gravar</button>
+								<button type="button" onclick="gravar();" class="btn btn-info"><i class="fa fa-plus-circle"></i> Gravar</button>
 								</div>
 								<?}else{?>
 								<div class="form-group col-md-12 m-t-20">
@@ -255,7 +252,7 @@ function gravar()
 											  $Whernome = " matriculas.nome like '%".$_POST['pesquisa']."%'";
 										  }
 										  
-										  echo $sql = "select matriculas.matricula,matriculas.nome,matriculas.nome,turmas.descricao from matriculas 
+										  $sql = "select matriculas.matricula,matriculas.nome,matriculas.nome,turmas.descricao from matriculas 
 										  inner join  turmas on turmas.codigo=matriculas.turma 
 										  inner join turmas_professor on turmas_professor.turma=matriculas.turma and turmas_professor.usuario='".$_SESSION['usuario']."'
 										  where $Whernome matriculas.status=1";
