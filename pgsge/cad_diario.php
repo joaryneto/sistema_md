@@ -526,7 +526,7 @@ function gravardiario()
 												<td><div id="<? echo $row['codigo'];?>">
 												<? 
 											         $ano = date('Y');
-													 echo $SQL7 = "SELECT falta as qtd FROM frequencia where matricula=".$row['codigo']." and disciplina=".$disciplina." and periodo=".$periodo." and falta=1 and YEAR(data)=$ano ";
+													 $SQL7 = "SELECT falta as qtd FROM frequencia where matricula=".$row['codigo']." and disciplina=".$disciplina." and periodo=".$periodo." and falta=1 and YEAR(data)=$ano ";
 													 $RES7 = mysqli_query($db,$SQL7);
 													 
 													 $total = 0;
