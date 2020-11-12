@@ -13,11 +13,13 @@ if($_GET['sistema'] == "app")
 }
 else if($_GET['sistema'] == "agsge")
 {
+	$_SESSION['sistema'] = "agsge";
 	$_SESSION['nomesoft'] = "G. Escolar";
 	$_SESSION['tipo'] = 2;
 }
 else if($_GET['sistema'] == "agsl")
 {
+	$_SESSION['sistema'] = "agsl";
 	$_SESSION['nomesoft'] = "G. Hair & Spa";
 	$_SESSION['tipo'] = 3;
 }
@@ -58,7 +60,7 @@ $string = '{
       "sizes": "32x32",
       "type": "image/png",
     }],
-  "start_url": "/index.php",
+  "start_url": "/index.php?sistema=".$_SESSION["sistema"]."",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF"
