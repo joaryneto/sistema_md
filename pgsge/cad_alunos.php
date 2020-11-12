@@ -41,25 +41,31 @@ if(isset($_GET['codigo']))
 
 if($_GET['ap'] == "1")
 {
-	$sucesso = mysqli_query($db,"SELECT * FROM matriculas where nome like '%".$_POST['nome']."%'");
+	$x = 0;
+	$RES = mysqli_query($db,"SELECT * FROM matriculas where nome='".$_POST['cnome']."'");
+	while($row = mysql_fetch_array($RES))
+	{
+		$x = 1;
+	}
 	
-	if($sucesso)
+	
+	if($x == 1)
 	{
 	    print("<script>window.alert('Aluno(a) ja cadastrado!')</script>");
-		print("<script>window.location.href='iniciado.php?url=cad_turma';</script>");
+		print("<script>window.location.href='sistema.php?url=cad_alunos&cadastro=1';</script>");
 	}
 	else
 	{
-	   $SQL1 = "INSERT into matriculas(matricula,nome,estado,cidade,ensino,turma) values('".$_POST['nome']."','".$_POST['estado']."','".$_POST['cidade']."','".$_POST['ensino']."','".$_POST['turma']."')";
+	   echo $SQL1 = "INSERT into matriculas(matricula,nome,estado,cidade,ensino,turma) values('".$_SESSION['matricula']."','".$_POST['cnome']."','".$_POST['estado']."','".$_POST['cidade']."','".$_POST['ensino']."','".$_POST['turma']."');";
 	   $sucesso = mysqli_query($db,$SQL1);
 	   
-	   $SQL1 = "INSERT into usuarios(login,senha,matricula,nome,tipo,status) values('".$_POST['nome']."','".$_POST['estado']."','".$_POST['cidade']."','".$_POST['ensino']."','".$_POST['turma']."')";
-	   $sucesso = mysqli_query($db,$SQL1);
+	   echo $SQL2 = "INSERT into usuarios(login,senha,matricula,nome,tipo,status) values('".$_SESSION['matricula']."','".$_SESSION['matricula']."','".$_SESSION['matricula']."','".$_POST['cnome']."',1,1);";
+	   $sucesso = mysqli_query($db,$SQL2);
 	   
 	   if($sucesso)
 	   {
-		   print("<script>window.alert('Turma Cadastrada com sucesso...')</script>");
-		   print("<script>window.location.href='iniciado.php?url=cad_turma';</script>");
+		   print("<script>window.alert('Aluno(a) Cadastrado com sucesso...')</script>");
+		   //print("<script>window.location.href='sistema.php?url=cad_alunos';</script>");
 	   }
 	   else
 	   {
@@ -84,7 +90,53 @@ elseif($_GET['ap'] == "2")
 	
 }
 
-?>		
+?>	
+
+<script>
+
+function gravar()
+{
+	var form = document.getElementById('cadaluno').value;
+	var matricula = document.getElementById('matricula').value;
+	var nome = document.getElementById('cnome').value;
+	var estado = document.getElementById('estado').value;
+	var cidade = document.getElementById('cidade').value;
+	var ensino = document.getElementById('ensino').value;
+	var turma = document.getElementById('turma').value;
+	
+	if(matricula == "")
+	{
+		swal('Atenção', 'Campo Matricula em branco.');
+	}
+	else if(nome == "")
+	{
+		swal('Atenção', 'Campo Nome em branco.');
+	}
+	else if(estado == "")
+	{
+		swal('Atenção', 'Campo Estado em branco.');
+	}
+	else if(cidade == "")
+	{
+		swal('Atenção', 'Campo Cidade em branco.');
+	}
+	else if(ensino == "")
+	{
+		swal('Atenção', 'Campo Ensino em branco.');
+	}
+	else if(turma == "")
+	{
+		swal('Atenção', 'Campo Turma em branco.');
+	}
+	else
+	{
+	
+        document.getElementById('cadaluno').submit();
+
+    }
+}
+
+</script>	
 <div class="container-fluid bg-template mb-4">
             <div class="row hn-154 position-relative">
 			<div class="background opac heightset">
@@ -100,9 +152,10 @@ elseif($_GET['ap'] == "2")
   <div class="row">
 	<div class="col-md-12 col-sm-12"> 
 		<div class="component-box">
-		                        <form class="m-t-40 row" name="laudo" method="post" action="sistema.php?url=cad_alunos&ap=1">
+		                        <form class="m-t-40 row" name="cadaluno" id="cadaluno" method="post" action="sistema.php?url=cad_alunos&ap=1">
 								<?if($_GET['cadastro'] == 1){?>
 								<?
+								  
 								   $d = date('YdHis');
 								   $matri = $d;
 								   $_SESSION['matricula'] = $matri;
@@ -113,7 +166,7 @@ elseif($_GET['ap'] == "2")
 								</div>
 		                        <div class="form-group col-md-3 m-t-20"><label>Nome :</label>
 								<!--onKeyPress="return(MascaraMoeda(this,'.','.',event)); "-->
-								<input type="text" name="nome" id="nome" value="<? if(isset($_GET['codigo'])){ echo $nome;} ?>" class="form-control" required="required">
+								<input type="text" name="cnome" id="cnome" value="<? if(isset($_GET['codigo'])){ echo $nome;} ?>" class="form-control" required="required">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>Estado :</label>
 								<select name="estado" id="estado" class="form-control" onChange="javascript: ajaxLoader('?br=cad_listacidades&estado='+ this.value ,'cidades','GET');" style="width: 100%; height:36px;" required="required">
@@ -171,7 +224,7 @@ elseif($_GET['ap'] == "2")
                                 </select></div>
 								</div>
 								<div class="form-group col-md-12 m-t-20">
-								<button type="button" onclick="window.location='sistema.php?url=cad_alunos&cadastro=1';" class="btn btn-info"><i class="fa fa-plus-circle"></i> Gravar</button>
+								<button type="submit" onclick="gravar();" class="btn btn-info"><i class="fa fa-plus-circle"></i> Gravar</button>
 								</div>
 								<?}else{?>
 								<div class="form-group col-md-12 m-t-20">

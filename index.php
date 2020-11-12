@@ -165,7 +165,7 @@ fclose($fp);
                         <div class="col align-self-center text-center">
                             <img src="template/images/escolar_01.png" height="350px" alt="" class="mw-100 mx-auto mb-4">
                             <br><br>
-                            <h2 class="text-uppercase font-weight-light">Descubra a como é bom estudar</h2>
+                            <h2 class="text-uppercase font-weight-light">Descubra como é bom estudar online.</h2>
                             <p class="text-mute"></p>
                         </div>
                     </div>

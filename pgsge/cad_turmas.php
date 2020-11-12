@@ -41,12 +41,17 @@ if(isset($_GET['codigo']))
 
 if($_GET['ap'] == "1")
 {
-	$sucesso = mysqli_query($db,"SELECT * FROM turmas where laudador like '%".$_POST['descricao']."%'");
+	$x = 0;
+	$RES = mysqli_query($db,"SELECT * FROM turmas where laudador like '%".$_POST['descricao']."%'");
+	while($row = mysql_fetch_array($RES))
+	{
+		$x = 1;
+	}
 	
-	if($sucesso)
+	if($x == 1)
 	{
 	    print("<script>window.alert('Turma ja cadastrada!')</script>");
-		print("<script>window.location.href='iniciado.php?url=cad_turma';</script>");
+		print("<script>window.location.href='sistema.php?url=cad_turmas';</script>");
 	}
 	else
 	{
@@ -56,7 +61,7 @@ if($_GET['ap'] == "1")
 	   if($sucesso)
 	   {
 		   print("<script>window.alert('Turma Cadastrada com sucesso...')</script>");
-		   print("<script>window.location.href='iniciado.php?url=cad_turma';</script>");
+		   print("<script>window.location.href='sistema.php?url=cad_turmas';</script>");
 	   }
 	   else
 	   {
