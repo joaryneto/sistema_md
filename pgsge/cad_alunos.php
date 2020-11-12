@@ -51,21 +51,21 @@ if($_GET['ap'] == "1")
 	
 	if($x == 1)
 	{
-	    print("<script>window.alert('Aluno(a) ja cadastrado!')</script>");
+	    print("<script>swal('Atenção', 'Aluno(a) ja cadastrado!');</script>");
 		print("<script>window.location.href='sistema.php?url=cad_alunos&cadastro=1';</script>");
 	}
 	else
 	{
-	   echo $SQL1 = "INSERT into matriculas(matricula,nome,estado,cidade,ensino,turma) values('".$_SESSION['matricula']."','".$_POST['cnome']."','".$_POST['estado']."','".$_POST['cidade']."','".$_POST['ensino']."','".$_POST['turma']."');";
+	   $SQL1 = "INSERT into matriculas(matricula,nome,estado,cidade,ensino,turma) values('".$_SESSION['matricula']."','".$_POST['cnome']."','".$_POST['estado']."','".$_POST['cidade']."','".$_POST['ensino']."','".$_POST['turma']."');";
 	   $sucesso = mysqli_query($db,$SQL1);
 	   
-	   echo $SQL2 = "INSERT into usuarios(login,senha,matricula,nome,tipo,status) values('".$_SESSION['matricula']."','".$_SESSION['matricula']."','".$_SESSION['matricula']."','".$_POST['cnome']."',1,1);";
+	   $SQL2 = "INSERT into usuarios(login,senha,matricula,nome,tipo,status) values('".$_SESSION['matricula']."','".$_SESSION['matricula']."','".$_SESSION['matricula']."','".$_POST['cnome']."',1,1);";
 	   $sucesso = mysqli_query($db,$SQL2);
 	   
 	   if($sucesso)
 	   {
-		   print("<script>window.alert('Aluno(a) Cadastrado com sucesso...')</script>");
-		   //print("<script>window.location.href='sistema.php?url=cad_alunos';</script>");
+		   print("<script>swal('Atenção', 'Aluno(a) Cadastrado com sucesso.');</script>");
+		   print("<script>window.location.href='sistema.php?url=cad_alunos';</script>");
 	   }
 	   else
 	   {
