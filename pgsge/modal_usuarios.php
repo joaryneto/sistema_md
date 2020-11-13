@@ -130,8 +130,109 @@ else
 }
 ?>		
 
-<?if($_GET['modal'] == 1){?>
+<?if($_GET['modal'] == 1){
 
+if(!Empty($_GET['codigo']))
+{
+	$res = mysqli_query($db,"SELECT * FROM usuarios where codigo='".$_GET['codigo']."'");
+	
+	if($res)
+	{
+
+	  $x = 0;
+      while($row = mysqli_fetch_array($res))
+	  {
+		 $cpf = $row['cpf'];
+		 $login = $row['login'];
+		 $nome = $row['nome'];
+		 $senha = $row['senha'];
+		 $email = $row['email'];
+		 $tipo = $row['tipo'];
+		 $situacao = $row['status'];
+		 
+		 $x = 1;
+	  }
+	  
+	  $res2 = mysqli_query($db,"SELECT menu FROM permissoes where usuario='".$_GET['codigo']."' and status=1");
+	  
+	  while($row = mysqli_fetch_array($res2))
+      {
+		 ///print("<script>window.alert('".$row['menu']."')</script>");
+		 
+		 Switch($row['menu'])
+		 {
+			 case 0:
+			 $smenu0 = true;
+			 break;
+			 case 1:
+			 $smenu1 = true;
+			 break;
+			 case 2:
+			 $smenu2 = true;
+			 break;
+			 case 3:
+			 $smenu3 = true;
+			 break;
+			 case 4:
+			 $smenu4 = true;
+			 break;
+			 case 5:
+			 $smenu5 = true;
+			 break;
+			 case 6:
+			 $smenu6 = true;
+			 break;
+			 case 7:
+			 $smenu7 = true;
+			 break;
+			 case 8:
+			 $smenu8 = true;
+			 break;
+			 case 9:
+			 $smenu9 = true;
+			 break;
+			 case 10:
+			 $smenu10 = true;
+			 break;
+			 case 11:
+			 $smenu11 = true;
+			 break;
+			 case 12:
+			 $smenu12 = true;
+			 break;
+			 case 13:
+			 $smenu13 = true;
+			 break;
+			 case 14:
+			 $smenu14 = true;
+			 break;
+			 case 15:
+			 $smenu15 = true;
+			 break;
+			 case 16:
+			 $smenu16 = true;
+			 break;
+			 case 99:
+			 $smenu99 = true;
+			 break;
+		 }
+	  }
+	}
+	else
+	{
+		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-1')</script>");
+	}
+}
+else
+{
+	$cpf = "";
+	$nome = "";
+	$senha = "";
+	$email = "";
+	$tipo = "";
+	$situacao = 1;
+}
+?>
 <div class="modal-header">
 <h2 class="pmd-card-title-text">Lista de Usuarios :</h2>
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>

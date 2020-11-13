@@ -85,7 +85,7 @@ function revertedata($data){
         <div class="row no-gutters">
             <div class="col-auto align-self-center">
                 <figure class="avatar avatar-40">
-                    <img src="images/man-930397_640%402x.png" alt="">
+                    <img src="template/images/usuario.png" alt="">
                 </figure>
             </div>
             <? if($_SESSION['tipo'] == 2){?>
@@ -171,11 +171,23 @@ function revertedata($data){
 					</li>
 					<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
 					<li class="nav-item dropdown" style="width: 230px;">
-                        <a href="sistema.php?url=cad_alunos" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                        <a class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="list-group-item list-group-item-action">
                                 <i class="material-icons">perm_contact_calendar</i> Alunos
                             </div>
                         </a>
+						<div class="dropdown-menu">
+						    <?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
+                            <a href="sistema.php?url=cad_alunos&cadastro=1" class="sidebar-close dropdown-item menu-right">
+							 Cadastrar
+                            </a>
+                            <? } ?>
+							<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
+                            <a href="sistema.php?url=cad_alunos" class="sidebar-close dropdown-item menu-right">
+							 Lista de Alunos
+                            </a>
+                            <? } ?>
+                        </div>
 					</li>
 					<? } ?>
 					<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
@@ -203,6 +215,22 @@ function revertedata($data){
                         </div>
 						<? } ?>
                     </li>
+					<?if($_SESSION['permissao'] == 3){?>
+					<li class="nav-item dropdown" style="width: 230px;">
+                        <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="list-group-item list-group-item-action">
+                                <i class="material-icons">perm_contact_calendar</i> Relatorio
+                            </div>
+                        </a>
+						<div class="dropdown-menu">
+						    <?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
+                            <a href="sistema.php?url=cad_diario" class="sidebar-close dropdown-item menu-right" onclick="requestPage2('?br=modal_relatorio&amp;codigo=&amp;modal=1','modals','GET');" class="btn btn-info" data-toggle="modal" data-target="#modalusuario">
+							 Diario de Classe
+                            </a>
+							<?}?>
+                        </div>
+					</li>
+					<? } ?>
 					<?if($_SESSION['permissao'] == 3){?>
 					<li class="nav-item dropdown" style="width: 230px;">
                         <a href="sistema.php?url=cad_usuarios" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
@@ -531,7 +559,6 @@ function cliente(codigo,nome)
            <!-- /.modal-dialog -->
       </div>
     <? } ?>
-	<? if($_GET['url'] == "cad_usuarios" and $_SESSION['permissao'] == 3){?>
 <div id="modalusuario" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
 <div class="modal-dialog modal-lg">
 <div class="modal-content" id="modals">
@@ -541,7 +568,6 @@ function cliente(codigo,nome)
 <!-- /.modal-dialog -->
 </div>
 </div>
-      <? } ?>
 <? include 'scripts.php'?>
 
 </body>

@@ -96,14 +96,26 @@ function gravar()
     }
 }
 
-</script>	
+</script>
+<?
+if(Empty($_GET['cadastro']))
+{
+  $input = "<input type='text' name='pesquisa' id='pesquisa' value='' class='form-control form-control-lg search bottom-25 position-relative border-0' onkeyup=\"javascript: requestPage2('?br=atu_alunos&pesquisa='+ this.value +'&ap=3','listaalunos','GET');\" required='required'>";
+  $valor = 290;
+}
+else
+{
+  $valor = 154;
+}
+?>
 <div class="container-fluid bg-template mb-4">
-            <div class="row hn-154 position-relative">
+            <div class="row hn-<?=$valor;?> position-relative">
 			<div class="background opac heightset">
                 </div>
                 <div class="container align-self-end">
                     <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Cadastro de Alunos";?></h2>
                     <p class="text-mute mb-2"><? echo $_SESSION["DESCRICAOPG2"] = "Lista";?></p>
+					<?=$input;?>
                 </div>
         </div>
 </div>   
@@ -199,16 +211,8 @@ function gravar()
 								<button type="button" onclick="window.location='sistema.php?url=cad_alunos';" class="btn btn-info"><i class="fa fa-plus-circle"></i> voltar</button>
 								</div>
 								<?}else{?>
-								<div class="form-group col-md-12 m-t-20">
-								<button type="button" onclick="window.location='sistema.php?url=cad_alunos&cadastro=1';" class="btn btn-info"><i class="fa fa-plus-circle"></i> Cadastrar</button>
-								</div>
-								<div class="form-group col-md-12 m-t-20"><label>Pesquisa :</label>
-								<!--onKeyPress="return(MascaraMoeda(this,'.','.',event)); "-->
-								<input type="text" name="pesquisa" id="pesquisa" value="<? if(isset($_POST['pesquisa'])){ echo $_POST['pesquisa'];} ?>" class="form-control" required="required">
-								</div>
-								
 								<div class="col-md-12">
-					            <div class="component-box">
+					            <div class="component-box" id="listaalunos">
                                 <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
 							        <table class="table pmd-table">
                                         <thead>
