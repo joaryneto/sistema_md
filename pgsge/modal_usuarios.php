@@ -159,8 +159,8 @@ while($row = mysqli_fetch_array($res))
 {
 ?>
 <tr style="cursor: pointer;" onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'" onclick="javascript: window.location='sistema.php?url=cad_usuarios&codigo=<? echo $row['codigo'];?>';">
-<td><? echo $row['nome'];?></td>
-<td><? Switch($row['status'])
+<td data-title="Nome"><? echo $row['nome'];?></td>
+<td data-title="Status"><? Switch($row['status'])
 	 {
 	   case 0:
 		 echo '<span class="label label-danger">Inativo</span>';
@@ -186,8 +186,9 @@ if($x == 0)
 ?>
 </tbody>	
 </table>
-</form>										 
 </div>
+</div>
+</form>										 
 <div class="modal-footer">
 <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Fechar</button>
 </div>
