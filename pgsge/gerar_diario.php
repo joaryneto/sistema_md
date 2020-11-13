@@ -456,16 +456,11 @@ $dompdf->setPaper('A4', 'landscape');
 $dompdf->render(); 
  
 // Output the generated PDF (1 = download and 0 = preview) 
-//$dompdf->stream("relatorio", array("Attachment" => 1));
+$dompdf->stream("relatorio", array("Attachment" => 0));
 
 $nome = $professor.$data.'.pdf';
 
-$output = $dompdf->output();
-file_put_contents(''.$nome.'', $output);
+//$output = $dompdf->output();
+//file_put_contents(''.$nome.'', $output);
 
 ?>
-<script>
-window.location.href = "xml.php?link=<?=$nome;?>";
-//window.open("<?=$nome;?>");
-</script>
-<? //} ?>

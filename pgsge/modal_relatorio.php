@@ -51,7 +51,8 @@ function gravar()
 	}
 	else
 	{
-        requestPage2('?br=gerar_diario&professor='+ professor +'&turmas='+ turmas +'&disciplina='+ disciplina +'&ano='+ ano +'','load','GET');
+        //relatorio('?br=gerar_diario&professor='+ professor +'&turmas='+ turmas +'&disciplina='+ disciplina +'&ano='+ ano +'','load','GET');
+		window.open('relatorio.php?url=gerar_diario&professor='+ professor +'&turmas='+ turmas +'&disciplina='+ disciplina +'&ano='+ ano +'');
     }
 }
 
