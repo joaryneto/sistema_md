@@ -458,7 +458,7 @@ $dompdf->render();
 // Output the generated PDF (1 = download and 0 = preview) 
 //$dompdf->stream("relatorio", array("Attachment" => 1));
 
-$nome = $professor.$data.'.pdf';
+$nome = $professor.$ano.'.pdf';
 
 $output = $dompdf->output();
 file_put_contents(''.$nome.'', $output);
