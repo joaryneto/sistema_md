@@ -6,6 +6,11 @@ session_start();
 
 require_once("./load/load.php");
 
+function isMobile() 
+{
+    return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+}
+
 function formatodatahora($data){
     return date("d/m/Y", strtotime($data));
 }
@@ -200,13 +205,15 @@ function revertedata($data){
                         </a>
 					</li>
 					<? } ?>
+					<? if(isMobile())?>
 					<li class="nav-item dropdown" style="width: 230px;" id="btninstall">
                         <a href="javascript:void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
                             <div class="list-group-item list-group-item-action">
-                                <i class="material-icons">perm_contact_calendar</i> Instalar App
+                                <i class="material-icons">get_app</i> Instalar App
                             </div>
                         </a>
 					</li>
+		           <? } ?>
                 </ul>
             </nav>
         </div>
