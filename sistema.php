@@ -4,7 +4,19 @@ ob_start();
 
 session_start();
 
+if($_SESSION['usuario'] == "")
+{
+	print("<script>window.location.href='index.php';</script>");
+}
+else
+{
+
 require_once("./load/load.php");
+
+function isMobile() 
+{
+    return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+}
 
 function formatodatahora($data){
     return date("d/m/Y", strtotime($data));
@@ -200,9 +212,19 @@ function revertedata($data){
                         </a>
 					</li>
 					<? } ?>
+					<? if(isMobile()){?>
+					<li class="nav-item dropdown" style="width: 230px;" id="btninstall">
+                        <a href="javascript:void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action">
+                                <i class="material-icons">get_app</i> Instalar App
+                            </div>
+                        </a>
+					</li>
+		           <? } ?>
                 </ul>
             </nav>
         </div>
+	
 		<?}?>
 		<? if($_SESSION['tipo'] == 3){?>
         <div class="list-group main-menu my-5">
@@ -512,7 +534,7 @@ function cliente(codigo,nome)
 	<? if($_GET['url'] == "cad_usuarios" and $_SESSION['permissao'] == 3){?>
 <div id="modalusuario" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
 <div class="modal-dialog modal-lg">
-<div class="modal-content" id="modals" style="width:450px">
+<div class="modal-content" id="modals">
 <!-- /.modal-content -->
 </div>
 
@@ -525,3 +547,4 @@ function cliente(codigo,nome)
 </body>
 
 </html>
+<? } ?>

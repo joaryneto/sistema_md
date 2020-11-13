@@ -4,72 +4,30 @@ ob_start();
 
 session_start();
 
-require_once("./load/load.php");
+//require_once("./load/load.php");
 
 if($_GET['sistema'] == "app")
 {
+	$_SESSION['nosistema'] = "agsl";
 	$_SESSION['nomesoft'] = "AgEC";
 	$_SESSION['tipo'] = 1;
 }
 else if($_GET['sistema'] == "agsge")
 {
-	$_SESSION['sistema'] = "agsge";
-	$_SESSION['nomesoft'] = "G. Escolar";
+	$_SESSION['nosistema'] = "agsge";
+	$_SESSION['nomesoft'] = "Ag. Escolar";
 	$_SESSION['tipo'] = 2;
 }
 else if($_GET['sistema'] == "agsl")
 {
-	$_SESSION['sistema'] = "agsl";
-	$_SESSION['nomesoft'] = "G. Hair & Spa";
+	$_SESSION['nosistema'] = "agsl";
+	$_SESSION['nomesoft'] = "Ag. Hair & Spa";
 	$_SESSION['tipo'] = 3;
 }
 else
 {
 	header('Location: servicos.php');
 }
-
-$string = '{
-  "name": "'.$_SESSION['nomesoft'].'",
-  "short_name": "'.$_SESSION['nomesoft'].'",
-  "icons": [{
-    "src": "/images/icons/icon-128x128.png",
-      "sizes": "128x128",
-      "type": "image/png"
-    }, {
-      "src": "/images/icons/icon-144x144.png",
-      "sizes": "144x144",
-      "type": "image/png"
-    }, {
-      "src": "/images/icons/icon-152x152.png",
-      "sizes": "152x152",
-      "type": "image/png"
-    }, {
-      "src": "/images/icons/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    }, {
-      "src": "/images/icons/icon-256x256.png",
-      "sizes": "256x256",
-      "type": "image/png"
-    }, {
-      "src": "/images/icons/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }, {
-      "src": "/images/icons/icon-32x32.png",
-      "sizes": "32x32",
-      "type": "image/png"
-    }],
-  "start_url": "/index.php?sistema='.$_SESSION["sistema"].'",
-  "display": "standalone",
-  "background_color": "#FFFFFF",
-  "theme_color": "#FFFFFF"
-}';
-
-
-$fp = fopen('manifest.json', 'w');
-fwrite($fp, $string);
-fclose($fp);
 
 //echo $_SESSION['sistema'];
 ?>
@@ -221,25 +179,8 @@ fclose($fp);
                     el: '.swiper-pagination',
                 },
             });
-        })
+        });
 
     </script>
-    <script src="/scripts/luxon-1.11.4.js"></script>
-  <script src="/scripts/app.js"></script>
-  <!-- CODELAB: Add the install script here -->
-  <script src="/scripts/install.js"></script>
-
-  <script>
-    // CODELAB: Register service worker.
-	if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-        .then((reg) => {
-          console.log('Service worker registered.', reg);
-        });
-  });
-}
-  </script>
-
 </body>
 </html>

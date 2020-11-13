@@ -139,13 +139,13 @@ else
 <div class="modal-body">
 <form class="form-horizontal">
 <div class="form-group "><label>Busca:</label>
-<input name="user" type="text" class="form-control" onkeyup="javascript: requestPage2('?br=cad_listadeusuarios&pesquisa='+ this.value +'&ap=1','listusuarios','GET');" />
+<input name="user" type="text" class="form-control" autocomplete="off" onkeyup="javascript: requestPage2('?br=cad_listadeusuarios&pesquisa='+ this.value +'&ap=1','listusuarios','GET');" />
 </div>
-<div class="form-group" id="listusuarios">
-<table class="table table-hover table-striped table-bordered">
+<div id="listusuarios">
+<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+<table class="table pmd-table">
 <thead>
 <tr>
-<th>Codigo</th>
 <th>Nome</th>
 <th>Status</th>
 </tr>
@@ -159,9 +159,8 @@ while($row = mysqli_fetch_array($res))
 {
 ?>
 <tr style="cursor: pointer;" onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'" onclick="javascript: window.location='sistema.php?url=cad_usuarios&codigo=<? echo $row['codigo'];?>';">
-<td><? echo str_pad($row['codigo'], 4 , '0' , STR_PAD_LEFT);?></td>
-<td><? echo $row['nome'];?></td>
-<td><? Switch($row['status'])
+<td data-title="Nome"><? echo $row['nome'];?></td>
+<td data-title="Status"><? Switch($row['status'])
 	 {
 	   case 0:
 		 echo '<span class="label label-danger">Inativo</span>';
@@ -187,8 +186,9 @@ if($x == 0)
 ?>
 </tbody>	
 </table>
-</form>										 
 </div>
+</div>
+</form>										 
 <div class="modal-footer">
 <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Fechar</button>
 </div>

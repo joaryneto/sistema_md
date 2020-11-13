@@ -6,7 +6,6 @@ if($_GET['ap'] == 1)
 <table class="table table-hover table-striped table-bordered">
 <thead>
 <tr>
-<th>Codigo</th>
 <th>Nome</th>
 <th>Status</th>
 </tr>
@@ -21,7 +20,6 @@ while($row = mysqli_fetch_array($res))
 {
 ?>
 <tr style="cursor: pointer;" onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'" onclick="javascript: window.location='sistema.php?url=cad_usuarios&codigo=<? echo $row['codigo'];?>';">
-<td><? echo $row['codigo'];?></td>
 <td><? echo $row['nome'];?></td>
 <td><? Switch($row['status'])
        {
