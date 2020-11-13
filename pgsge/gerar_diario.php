@@ -1,6 +1,6 @@
 <?php
 
-$_SESSION['tipo'] = 2;
+//$_SESSION['tipo'] = 2;
 
 $professor = $_GET['professor'];
 $ano = $_GET['ano'];
@@ -225,6 +225,8 @@ $cnpj = $_GET['cnpj'];
   $vb .='<tr>';
   $vb .='<td colspan="3">&nbsp;</td>';
   $vb .='<th><b>Mês</b></th>';
+  
+  $RES1->close();
    
   $SQL1 = "select diario.data from diario 
   inner join turmas_professor on turmas_professor.turma=diario.turma 
@@ -234,7 +236,7 @@ $cnpj = $_GET['cnpj'];
   {
       $vb .='<td>'.date("m", strtotime($row['data'])).'</td>';
   }
-
+  $RES1->close();
   $vb .='<th rowspan="2">T. F.</th>';
   
   $SQL1 = "select diario.data from diario 
@@ -245,6 +247,7 @@ $cnpj = $_GET['cnpj'];
   {
       $vb .='<td>'.date("m", strtotime($row['data'])).'</td>';
   }
+  $RES1->close();
   
   $vb .='<th colspan="2">Total</th>';
   $vb .='</tr>';
@@ -261,6 +264,7 @@ $cnpj = $_GET['cnpj'];
   {
      $vb .='<td>'.date("d", strtotime($row['data'])).'</td>';
   }
+  $RES2->close();
   
   $SQL2 = "select diario.data from diario 
   inner join turmas_professor on turmas_professor.turma=diario.turma 
@@ -270,6 +274,7 @@ $cnpj = $_GET['cnpj'];
   {
      $vb .='<td>'.date("d", strtotime($row['data'])).'</td>';
   }
+  $RES2->close();
   
   $vb .='<td>N</td>';
   $vb .='<td>F</td>';
@@ -310,9 +315,11 @@ $cnpj = $_GET['cnpj'];
 		         $vb .='<td>F</td>'; 
 				 $falta ++;
 			  }
-
+			  
+			  $DRES1->close();
 		 }
 		 
+		 $RES1->close();
 		 
          $vb .='<td>'.$falta.'</td>';
 		 
@@ -337,8 +344,11 @@ $cnpj = $_GET['cnpj'];
 		         $vb .='<td>0</td>'; 
 				 //$falta ++;
 			  }
+			  
+			  $DDRES1->close();
 		 }
 		 
+		 $RRES1->close();
 		 
 		 $vb .='<td>&nbsp;</td>';
 		 $vb .='<td>&nbsp;</td>';
@@ -347,6 +357,8 @@ $cnpj = $_GET['cnpj'];
 		 
 		 $count ++;
    }
+   
+   $RES3->close();
 	
    $vb .='</tbody>';
    $vb .='</table>';
@@ -414,6 +426,7 @@ $cnpj = $_GET['cnpj'];
 	  
       $aucount ++;
   }
+  $RES1->close();
   
   $vb .='</tbody>';
   $vb .='</table>';
@@ -443,11 +456,15 @@ $dompdf->setPaper('A4', 'landscape');
 $dompdf->render(); 
  
 // Output the generated PDF (1 = download and 0 = preview) 
-$dompdf->stream("relatorio", array("Attachment" => 0));
+//$dompdf->stream("relatorio", array("Attachment" => 1));
 
 $nome = $professor.$data.'.pdf';
 
-//$output = $dompdf->output();
-//file_put_contents(''.$nome.'', $output);
+$output = $dompdf->output();
+file_put_contents(''.$nome.'', $output);
 
 ?>
+<script>
+window.location.href = "xml.php?link=<?=$nome;?>";
+//window.open("<?=$nome;?>");
+</script>
