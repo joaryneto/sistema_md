@@ -99,8 +99,8 @@ if($_GET['gravar'] == 1)
 		?>
 	<script> 
 		//alert('TESTE');
-		swal('Atenção', 'Gravado com sucesso...'); 
-		//window.location.href='iniciado.php?url=cad_diario&codigo=<? echo $diario; ?>&frequencia=1&disciplina=<? echo $disciplina;?>';
+		//swal('Atenção', 'Gravado com sucesso...'); 
+		window.location.href='sistema.php?url=cad_diario&codigo=<? echo $diario; ?>&frequencia=1&disciplina=<? echo $disciplina;?>';
 	</script>
 	<?
 }

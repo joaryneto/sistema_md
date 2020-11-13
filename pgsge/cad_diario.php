@@ -429,10 +429,10 @@ function gravardiario()
 								<div class="form-group col-md-5 m-t-20"><label>Pesquisa :</label>
                                 <input type="text" name="pesquisa" class="form-control"  autocomplete="off" id="pesquisa" value="<? if(!Empty($_GET['codigo'])){ echo $conteudo;} ?>" placeholder="Pesquisar conteúdo">
 								</div>
-                          <div class="col-md-12">
-					       <div class="component-box">
-							<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
-							  <table class="table pmd-table">
+                                 <div class="col-md-12">
+					              <div class="component-box">
+							       <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+							         <table class="table pmd-table">
                                         <thead>
                                             <tr>
                                                 <th>Turma</th>
@@ -629,7 +629,7 @@ function gravardiario()
 													 ?>
 												      
 													  <!--<input type="text" class="form-control" name="<? echo $row['codigo'];?>" value="<? echo $valor;?>" onKeypress="javascript: ajaxLoader('?br=atu_nota&nota='+ this.value +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $_GET['codigo'];?>&disciplina=<? echo $_GET['disciplina'];?>&periodo=<? echo $periodo; ?>&ap=1','<? echo $row['codigo'];?>','GET'); return(moeda(this,'.',',',event));">-->
-													  <input type="text" class="form-control" name="nota" id="nota<? echo $rows1['codigo'];?>" value="<? echo $valor;?>" data-mask="#.##0.00" data-mask-reverse="true" onkeydown="javascript: if(event.key === 'Enter'){ ajaxLoader('?br=atu_nota&nota='+ this.value +'&codigo=<? echo $rows1['codigo'];?>&ap=1','<? echo $rows1['codigo'];?>','GET');}" maxlength="5">
+													  <input type="text" class="form-control" name="nota" id="nota<? echo $rows1['codigo'];?>" value="<? echo $valor;?>" data-mask="#.##0.00" data-mask-reverse="true" onkeydown="javascript: ajaxLoader('?br=atu_nota&nota='+ this.value +'&codigo=<? echo $rows1['codigo'];?>&ap=1','<? echo $rows1['codigo'];?>','GET'); " maxlength="5">
 													 <?}
 													   else
 													   { 

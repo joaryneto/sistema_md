@@ -253,7 +253,7 @@ else
 </thead>
 <tbody>
 <?
-$sql = "SELECT * FROM usuarios";
+$sql = "SELECT * FROM usuarios limit 10";
 $res = mysqli_query($db,$sql); 
 $x = 0;
 while($row = mysqli_fetch_array($res))
