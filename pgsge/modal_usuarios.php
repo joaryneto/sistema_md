@@ -141,8 +141,9 @@ else
 <div class="form-group "><label>Busca:</label>
 <input name="user" type="text" class="form-control" onkeyup="javascript: requestPage2('?br=cad_listadeusuarios&pesquisa='+ this.value +'&ap=1','listusuarios','GET');" />
 </div>
-<div class="form-group" id="listusuarios">
-<table class="table table-hover table-striped table-bordered">
+<div id="listusuarios">
+<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+<table class="table pmd-table">
 <thead>
 <tr>
 <th>Nome</th>
