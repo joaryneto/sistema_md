@@ -179,7 +179,7 @@ else
                     el: '.swiper-pagination',
                 },
             });
-        })
+        });
 
     </script>
 </body>
