@@ -8,8 +8,6 @@ if($_SESSION['usuario'] == "")
 {
 	print("<script>window.location.href='index.php';</script>");
 }
-else
-{
 
 require_once("./load/load.php");
 
@@ -547,4 +545,3 @@ function cliente(codigo,nome)
 </body>
 
 </html>
-<? } ?>
