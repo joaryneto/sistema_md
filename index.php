@@ -8,18 +8,19 @@ require_once("./load/load.php");
 
 if($_GET['sistema'] == "app")
 {
+	$_SESSION['nosistema'] = "agsl";
 	$_SESSION['nomesoft'] = "AgEC";
 	$_SESSION['tipo'] = 1;
 }
 else if($_GET['sistema'] == "agsge")
 {
-	$_SESSION['sistema'] = "agsge";
+	$_SESSION['nosistema'] = "agsge";
 	$_SESSION['nomesoft'] = "Ag. Escolar";
 	$_SESSION['tipo'] = 2;
 }
 else if($_GET['sistema'] == "agsl")
 {
-	$_SESSION['sistema'] = "agsl";
+	$_SESSION['nosistema'] = "agsl";
 	$_SESSION['nomesoft'] = "Ag. Hair & Spa";
 	$_SESSION['tipo'] = 3;
 }
