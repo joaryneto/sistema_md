@@ -4,7 +4,7 @@ ob_start();
 
 session_start();
 
-if($_SESSION['sistema'])
+if($_SESSION['sistema'] == "")
 {
 	print("<script>window.location.href='index.php';</script>");
 }
