@@ -3,7 +3,8 @@
 if($_GET['ap'] == 1)
 {
 ?>
-<table class="table table-hover table-striped table-bordered">
+<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+<table class="table pmd-table">
 <thead>
 <tr>
 <th>Nome</th>
@@ -40,6 +41,7 @@ while($row = mysqli_fetch_array($res))
 ?>
 </tbody>
 </table>
+</div>
 <?
 }
 else if($_GET['ap'] == 2)
