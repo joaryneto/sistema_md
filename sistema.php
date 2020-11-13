@@ -200,8 +200,8 @@ function revertedata($data){
                         </a>
 					</li>
 					<? } ?>
-					<li class="nav-item dropdown" style="width: 230px;" id="pwainstall">
-                        <a href="javascript:void(0);" id="pwainstall_button" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+					<li class="nav-item dropdown" style="width: 230px;" id="btninstall">
+                        <a href="javascript:void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
                             <div class="list-group-item list-group-item-action">
                                 <i class="material-icons">perm_contact_calendar</i> Instalar App
                             </div>
@@ -210,33 +210,7 @@ function revertedata($data){
                 </ul>
             </nav>
         </div>
-		<script>
-window.addEventListener('beforeinstallprompt', (e) => {
-	e.preventDefault();
-	deferredPrompt = e;
-	pwa_redirect.style.display = 'block';
-});
-</script>
-		<script>
-var pwa4wp_open_install = function(){
-    console.log("install button show");
-};
-document.getElementById("pwainstall_button").addEventListener("click",function(){
-	if(window.pwa4wp_installevent !== undefined ){
-		window.pwa4wp_installevent.prompt();
-		window.pwa4wp_installevent.userChoice.then(function(choiceResult){
-			if(choiceResult === 'accepted'){
-				console.log('pwa installation accepted.')
-			} else {
-				console.log('pwa installation refused.')
-			}
-		});
-		window.pwa4wp_installevent = null;
-	} else {
-		console.log("install event is undefined");
-	}
-});
-</script>
+	
 		<?}?>
 		<? if($_SESSION['tipo'] == 3){?>
         <div class="list-group main-menu my-5">
