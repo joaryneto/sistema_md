@@ -1,6 +1,6 @@
 <?php
 
-//$_SESSION['tipo'] = 2;
+$_SESSION['tipo'] = 2;
 
 $professor = $_GET['professor'];
 $ano = $_GET['ano'];
