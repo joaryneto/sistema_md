@@ -202,8 +202,6 @@ $cnpj = $_GET['cnpj'];
   $vb .='</tbody>';
   $vb .='</table>';
 
-  $pRES1->close();
-  
   $SQL1 = "select count(diario.codigo) as qtd from diario inner join turmas_professor on turmas_professor.turma=diario.turma where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas."";
   $RES1 = mysqli_query($db,$SQL1);
   $row1 = mysqli_fetch_assoc($RES1);
@@ -403,8 +401,6 @@ $cnpj = $_GET['cnpj'];
   $vb .='</tbody>';
   $vb .='</table>';
   
-  $pRES1->close();
-
   $vb .='<table>';
   $vb .='<tbody>';
   $vb .='<tr>';
