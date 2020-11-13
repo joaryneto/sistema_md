@@ -369,14 +369,14 @@ function gravardiario()
                                 </select>
 								</div>
 								<div class="form-group col-md-5 m-t-20"><label><b>Link Video :</b></label>
-                                <input type="text" name="video" id="video" class="form-control"  value="<? if(!Empty($_GET['codigo'])){ echo $video; } ?>">
+                                <input type="text" name="video" id="video" class="form-control" autocomplete="off" value="<? if(!Empty($_GET['codigo'])){ echo $video; } ?>">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label><b>Data :</b></label>
                                 <input type="text" name="txtdata" id="txtdata" class="form-control"  value="<? if(!Empty($_GET['codigo'])){ echo formatodatahora($data); } ?>" placeholder="dd/mm/yyyy"  data-mask="00/00/0000" data-mask-clearifnotmatch="true"  required="required">
 								</div>
 								
 								<div class="form-group col-md-5 m-t-20"><label><b>Conteudo Lecionado :</b></label>
-                                <input type="text" name="conteudo" class="form-control" id="conteudo" value="<? if(!Empty($_GET['codigo'])){ echo $conteudo;} ?>" placeholder="" required="required">
+                                <input type="text" name="conteudo" class="form-control"  autocomplete="off" id="conteudo" value="<? if(!Empty($_GET['codigo'])){ echo $conteudo;} ?>" placeholder="" required="required">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>Tipo :</label>
 								<select name="tipo" id="tipo" class="form-control" style="width: 100%; height:36px;" required="required">
@@ -386,7 +386,7 @@ function gravardiario()
                                 </select>
 								</div>
 								<div class="form-group col-md-12 m-t-20"><label><b>Texto :</b></label>                               
-								<textarea class="textarea_editor form-control" name="txtobs" id="txtobs" rows="10" placeholder="Escreva aqui ..." required="required"><? if(!Empty($_GET['codigo'])){ echo $texto;} ?></textarea>
+								<textarea class="textarea_editor form-control" name="txtobs"  autocomplete="off" id="txtobs" rows="10" placeholder="Escreva aqui ..." required="required"><? if(!Empty($_GET['codigo'])){ echo $texto;} ?></textarea>
 								</div>
 								<? }else{ ?>
 								<div class="col-md-12">
@@ -427,7 +427,7 @@ function gravardiario()
 								</div>
 								<? if(Empty($_GET['codigo']) && Empty($_GET['frequencia']) && Empty($_GET['nota'])){?>
 								<div class="form-group col-md-5 m-t-20"><label>Pesquisa :</label>
-                                <input type="text" name="pesquisa" class="form-control" id="pesquisa" value="<? if(!Empty($_GET['codigo'])){ echo $conteudo;} ?>" placeholder="Pesquisar conteúdo">
+                                <input type="text" name="pesquisa" class="form-control"  autocomplete="off" id="pesquisa" value="<? if(!Empty($_GET['codigo'])){ echo $conteudo;} ?>" placeholder="Pesquisar conteúdo">
 								</div>
                           <div class="col-md-12">
 					       <div class="component-box">
