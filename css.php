@@ -19,7 +19,7 @@
 
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Bootstrap core CSS -->
-    <link href="template/vendor/bootstrap-4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	
 	<!-- autocomplete CSS -->
     <link rel="stylesheet" href="template/vendor/EasyAutocomplete-1.3.5/easy-autocomplete.css" >
@@ -48,7 +48,7 @@
 	
 	<link href="template/vendor/html5-editor/bootstrap-wysihtml5.css" type="text/css" rel="stylesheet" />
 	
-	<link href="template/vendor/propeller-master/dist/css/propeller.css" type="text/css" rel="stylesheet" />
+	<!--<link href="template/vendor/propeller-master/dist/css/propeller.css" type="text/css" rel="stylesheet" />-->
 	<link href="template/vendor/propeller-master/components/select2/css/pmd-select2.css" type="text/css" rel="stylesheet" />
 	<link href="template/vendor/propeller-master/components/select2/css/select2.min.css" type="text/css" rel="stylesheet" />
 	<link href="template/vendor/propeller-master/components/select2/css/select2-bootstrap.css" type="text/css" rel="stylesheet" />

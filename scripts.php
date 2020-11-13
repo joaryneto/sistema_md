@@ -2,7 +2,7 @@
     <script src="template/js/jquery-3.3.1.min.js"></script>-->
 	<script src="template/vendor/jquery/jquery.min.js"></script>
     <script src="template/js/popper.min.js"></script>
-    <script src="template/vendor/bootstrap-4.4.1/js/bootstrap.min.js"></script>
+    <script src="template/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- swiper js -->
     <script src="template/vendor/swiper/js/swiper.min.js"></script>
