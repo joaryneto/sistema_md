@@ -334,7 +334,9 @@ elseif($_GET['ap'] == "4")
 								
 								<form name="laudo" class="form-material m-t-40 row" autocomplete="off" method="post" action="<? if(Empty($_GET['codigo'])){ echo "iniciado.php?url=cad_usuarios&ap=1";}else { echo "iniciado.php?url=cad_usuarios&codigo=".$_GET['codigo']."&ap=2";} ?>" enctype="multipart/form-data">
 								<div class="form-group col-md-2 m-t-20"><label>CPF :</label>
-								<input type="text" name="cpf" id="cpf" <? if(isset($_GET['codigo'])){ ?> value="<? echo $cpf; ?>" <? } ?> class="form-control" required="required"><a style="position: absolute;left: 80%;" class="btn btn-info" href="#" data-toggle="modal" data-target="#usuarioss"><i class="fa fa-search"></i></a></div>
+								<input type="text" name="cpf" id="cpf" <? if(isset($_GET['codigo'])){ ?> value="<? echo $cpf; ?>" <? } ?> class="form-control" required="required">
+								<a style="position: absolute;left: 80%;" class="btn btn-info" href="#" data-toggle="modal" data-target="#usuarioss">
+								<i class="fa fa-search"></i></a></div>
 								<div class="form-group col-md-2 m-t-20"><label>Login :</label>
 								<input type="text" name="login" id="login" value="<? if(isset($_GET['codigo'])){ echo $login;} ?>" class="form-control" required="required">
 								</div>

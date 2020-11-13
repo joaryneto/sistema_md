@@ -328,10 +328,10 @@ elseif($_GET['ap'] == "4")
 	<div class="col-md-12 col-sm-12"> 
 		<div class="component-box">
 								<form name="laudo" class="form-material m-t-40 row" autocomplete="off" method="post" action="<? if(Empty($_GET['codigo'])){ echo "sistema.php?url=cad_usuarios&ap=1";}else { echo "sistema.php?url=cad_usuarios&codigo=".$_GET['codigo']."&ap=2";} ?>" enctype="multipart/form-data">
-								<div class="form-group col-md-2 m-t-20"><label>CPF :</label>
+								<div class="form-group col-md-3 m-t-20"><label>CPF :</label>
 								<input type="text" name="cpf" id="cpf" <? if(isset($_GET['codigo'])){ ?> value="<? echo $cpf; ?>" readonly <? } ?> class="form-control" required="required">
-								<a style="position: absolute;left: 80%;" onclick="requestPage2('?br=modal_usuarios&codigo=<?=$_GET['codigo'];?>&modal=1','modals','GET');"  class="btn btn-info" href="javascript:void(0)"  data-toggle="modal" data-target="#modalusuario">
-								<i class="fa fa-search"></i></a></div>
+								<button type="button" style="position: absolute;left: 80%;top: 34px;height: 50px;width: 50px;" onclick="requestPage2('?br=modal_usuarios&amp;codigo=&amp;modal=1','modals','GET');" class="btn btn-info" data-toggle="modal" data-target="#modalusuario">
+								<i class="fa fa-search" style="font-size: x-large;"></i></button></div>
 								<div class="form-group col-md-3 m-t-20"><label>Login :</label>
 								<input type="text" name="login" id="login" <? if(isset($_GET['codigo'])){?> value="<? echo $login;?>" readonly <? } ?>class="form-control" required="required">
 								</div>
