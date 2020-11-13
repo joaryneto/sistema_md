@@ -8,6 +8,8 @@ if($_SESSION['usuario'] == "")
 {
 	print("<script>window.location.href='index.php';</script>");
 }
+else
+{
 
 require_once("./load/load.php");
 
@@ -210,7 +212,7 @@ function revertedata($data){
                         </a>
 					</li>
 					<? } ?>
-					<? if(isMobile())?>
+					<? if(isMobile()){?>
 					<li class="nav-item dropdown" style="width: 230px;" id="btninstall">
                         <a href="javascript:void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
                             <div class="list-group-item list-group-item-action">
@@ -545,3 +547,4 @@ function cliente(codigo,nome)
 </body>
 
 </html>
+<? } ?>
