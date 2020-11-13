@@ -4,6 +4,13 @@ ob_start();
 
 session_start();
 
+if($_SESSION['sistema'])
+{
+	print("<script>window.location.href='index.php';</script>");
+}
+else
+{
+
 require_once("./load/load.php");
 
 function isMobile() 
@@ -540,3 +547,4 @@ function cliente(codigo,nome)
 </body>
 
 </html>
+<? } ?>
