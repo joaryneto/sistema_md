@@ -103,10 +103,7 @@
 		
 		$('#pwainstall_button').on('click',function()
         {
-		    navigator.serviceWorker.register('/service-worker.js')
-        .then((reg) => {
-          console.log('Service worker registered.', reg);
-        });
+		    showInstallPromotion();
 		});
 
     </script>
