@@ -90,3 +90,31 @@
 
     <!-- page specific script -->
     <script src="template/js/autocomplete.js"></script>
+
+	    <!-- page level script -->
+    <script>
+        $(window).on('load', function() {
+            var swiper = new Swiper('.introduction', {
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+            });
+        })
+
+    </script>
+    <script src="/scripts/luxon-1.11.4.js"></script>
+  <script src="/scripts/app.js"></script>
+  <!-- CODELAB: Add the install script here -->
+  <script src="/scripts/install.js"></script>
+
+  <script>
+    // CODELAB: Register service worker.
+	if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+        .then((reg) => {
+          console.log('Service worker registered.', reg);
+        });
+  });
+}
+  </script>

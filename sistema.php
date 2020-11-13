@@ -200,9 +200,45 @@ function revertedata($data){
                         </a>
 					</li>
 					<? } ?>
+					<li class="nav-item dropdown" style="width: 230px;">
+                        <a href="javascript:void(0);" id="btninstall" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action">
+                                <i class="material-icons">perm_contact_calendar</i> Instalar App
+                            </div>
+                        </a>
+					</li>
                 </ul>
             </nav>
         </div>
+		<script>
+		let deferredPrompt;
+
+		window.addEventListener('beforeinstallprompt', (e) => {
+		   // Prevent the mini-infobar from appearing on mobile
+		   e.preventDefault();
+		   // Stash the event so it can be triggered later.
+		   deferredPrompt = e;
+		   // Update UI notify the user they can install the PWA
+		   showInstallPromotion();
+        });
+		
+		
+		$('#btninstall').on('click',function(){
+		// Hide the app provided install promotion
+		hideMyInstallPromotion();
+		// Show the install prompt
+		deferredPrompt.prompt();
+ 		// Wait for the user to respond to the prompt
+		deferredPrompt.userChoice.then((choiceResult) => {
+		if (choiceResult.outcome === 'accepted') {
+ 		     console.log('User accepted the install prompt');
+ 		   } else {
+		      console.log('User dismissed the install prompt');
+		    }
+		  });
+		});
+	
+		</script>
 		<?}?>
 		<? if($_SESSION['tipo'] == 3){?>
         <div class="list-group main-menu my-5">
