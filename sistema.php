@@ -512,7 +512,7 @@ function cliente(codigo,nome)
 	<? if($_GET['url'] == "cad_usuarios" and $_SESSION['permissao'] == 3){?>
 <div id="modalusuario" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
 <div class="modal-dialog modal-lg">
-<div class="modal-content" id="modals" style="width:450px">
+<div class="modal-content" id="modals">
 <!-- /.modal-content -->
 </div>
 
