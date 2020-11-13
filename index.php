@@ -4,7 +4,7 @@ ob_start();
 
 session_start();
 
-require_once("./load/load.php");
+//require_once("./load/load.php");
 
 if($_GET['sistema'] == "app")
 {
@@ -182,22 +182,5 @@ else
         })
 
     </script>
-    <script src="/scripts/luxon-1.11.4.js"></script>
-  <script src="/scripts/app.js"></script>
-  <!-- CODELAB: Add the install script here -->
-  <script src="/scripts/install.js"></script>
-
-  <script>
-    // CODELAB: Register service worker.
-	if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-        .then((reg) => {
-          console.log('Service worker registered.', reg);
-        });
-  });
-}
-  </script>
-
 </body>
 </html>
