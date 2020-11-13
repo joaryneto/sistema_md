@@ -99,7 +99,16 @@
                     el: '.swiper-pagination',
                 },
             });
-        })
+        });
+		
+		$('#pwainstall_button').on('click',function()
+        {
+		    var swiper = new Swiper('.introduction', {
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+            });
+		});
 
     </script>
     <script src="/scripts/luxon-1.11.4.js"></script>
