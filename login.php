@@ -65,7 +65,7 @@ require_once("./load/load.php");
                                     </div>
                                     <div class="col pl-0">
                                         <div class="form-group float-label active">
-                                            <input type="text" id="inputEmail" name="login" class="form-control" required autofocus >
+                                            <input type="text" id="inputEmail" autocomplete="off" name="login" class="form-control" required autofocus >
                                             <label for="inputEmail" autocomplete="off" class="form-control-label">Nome do usuário - <?=$_SESSION['tipo'];?></label>
                                         </div>
                                     </div>
