@@ -275,12 +275,10 @@ function requestPage2(url, div, tipo, campos, hideLoading)
 }
 
 
-function requestmodal(url, div, tipo, modals , campos, hideLoading)
+function requestmodal(url, div, tipo, campos, hideLoading)
 {
 	
 	//window.alert(tipo);
-	
-	
 	
     var ajax = null;
 	if(window.ActiveXObject)
@@ -298,7 +296,6 @@ function requestmodal(url, div, tipo, modals , campos, hideLoading)
 	{
 	    if (typeof hideLoading === 'undefined' || hideLoading !== true) 
 		{
-			//$(".loader-screen").fadeIn();
             document.getElementById(div).innerHTML = '<div style="text-align: center;"><img src="template/images/loading_1.gif" /></div>';
         }
 		
@@ -317,18 +314,14 @@ function requestmodal(url, div, tipo, modals , campos, hideLoading)
 						document.getElementById(div).innerHTML = ajax.responseText;
 						var texto=unescape(ajax.responseText);
 						extraiScript(texto);
-						//$('.loader-screen').fadeOut('slow');
 						
 					}
      		  	}
 				else if(ajax.readyState == 0)
-					//$(".loader-screen").fadeIn();
 					document.getElementById(div).innerHTML = '<div style="text-align: center;"><img src="template/images/loading_1.gif" /></div>';
                 else if(ajax.readyState == 3)
-					//$(".loader-screen").fadeIn();
                     document.getElementById(div).innerHTML = '<div style="text-align: center;"><img src="template/images/loading_1.gif" /></div>';
 				else
-					//$(".loader-screen").fadeIn();
 					document.getElementById(div).innerHTML = '<div style="text-align: center;"><img src="template/images/loading_1.gif" /></div>';
 		}
 
@@ -341,8 +334,6 @@ function requestmodal(url, div, tipo, modals , campos, hideLoading)
 			ajax.send(campos);
 			
 			window.alert(campos);
-			
-			//$('.loader-screen').fadeOut('slow');
 		}
     	else 
 		{
