@@ -229,7 +229,7 @@ function revertedata($data){
                         </a>
 						<div class="dropdown-menu">
 						    <?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
-                            <a href="sistema.php?url=cad_diario" class="sidebar-close dropdown-item menu-right" onclick="requestPage2('?br=modal_relatorio&amp;codigo=&amp;modal=1','modals','GET');" class="btn btn-info" data-toggle="modal" data-target="#modalusuario">
+                            <a href="javascript:void(0);" id="relatorio_diario" class="sidebar-close dropdown-item menu-right" class="btn btn-info" data-toggle="modal" data-target="#modalusuario">
 							 Diario de Classe
                             </a>
 							<?}?>

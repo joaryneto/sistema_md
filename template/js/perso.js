@@ -163,3 +163,11 @@ $('#ldotempo').on('click',function()
    //requestPage('?br=linhadotempo','conteudo','GET');
    window.location='sistema.php?url=linhadotempo';
 });
+
+
+$('#relatorio_diario').on('click',function()
+{	
+    document.getElementById("btnshow").click();
+	requestPage2('?br=modal_relatorio&modal=1','modals','GET');
+	//$('#modalusuario').modal('show');
+});

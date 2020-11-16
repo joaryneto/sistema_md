@@ -105,4 +105,6 @@ function gravar()
 <div class="form-group col-md-12 m-t-20" id="load">
 <div>
 </form>										 
+<div class="modal-footer">
+</div>
 <? }?>
