@@ -58,7 +58,7 @@ function gravar()
 
 </script>
 <div class="modal-header">
-<h2 class="pmd-card-title-text">Gerar Diario :</h2>
+<h2 class="pmd-card-title-text">Gerar Diario </h2>
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
 <div class="modal-body">

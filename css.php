@@ -69,7 +69,7 @@
     <!-- Custom styles for this template -->
     <link href="template/css/style.css" rel="stylesheet">
 	
-	<!-- Ionic for this template -->
+	<!-- Ionic for this template 
 	<script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
   <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
@@ -78,7 +78,7 @@
       --ion-safe-area-top: 20px;
       --ion-safe-area-bottom: 22px;
     }
-  </style>
+  </style>-->
   
 	<!--alerts CSS -->
     <link href="template/vendor/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
