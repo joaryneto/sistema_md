@@ -9,7 +9,7 @@ session_start();
 if($_GET['sistema'] == "app")
 {
 	$_SESSION['nosistema'] = "agsl";
-	$_SESSION['nomesoft'] = "AgEC";
+	$_SESSION['nomesoft'] = "Gerenciamento de Sistema";
 	$_SESSION['tipo'] = 1;
 	
 	$sistema = "sistema";
@@ -18,7 +18,7 @@ if($_GET['sistema'] == "app")
 else if($_GET['sistema'] == "agsge")
 {
 	$_SESSION['nosistema'] = "agsge";
-	$_SESSION['nomesoft'] = "Ag. Escolar";
+	$_SESSION['nomesoft'] = "Sg Escolar";
 	$_SESSION['tipo'] = 2;
 	
 	$sistema = "agsge";
@@ -27,7 +27,7 @@ else if($_GET['sistema'] == "agsge")
 else if($_GET['sistema'] == "agsl")
 {
 	$_SESSION['nosistema'] = "agsl";
-	$_SESSION['nomesoft'] = "Ag. Hair & Spa";
+	$_SESSION['nomesoft'] = "Sg Hair & Spa";
 	$_SESSION['tipo'] = 3;
 	
 	$sistema = "agsl";
