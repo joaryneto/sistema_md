@@ -274,7 +274,6 @@ function gravardiario()
             </div>
         </div>
 <div class="container pt-5">
-  
   <div class="row">
 	<div class="col-md-12 col-sm-12"> 
 		<div class="component-box">
@@ -703,4 +702,5 @@ function gravardiario()
                         </div>
 					</div>
 				</div>
+			</div>
 	
