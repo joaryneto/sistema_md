@@ -64,14 +64,6 @@ function revertedata($data){
 @media screen and (max-width: 480px) {
 .modal-dialog {
     margin: -0.1rem !important;
-	height: 100% !important;
-	--width: 100% !important;
-	--min-width: auto !important;
-	--max-width: auto !important;
-	--height: 100%  !important;
-	--min-height: auto  !important;
-	--max-height: auto  !important;
-	--overflow: hidden  !important;
 }
 }
 </style>
