@@ -40,7 +40,7 @@ else
     <meta name="description" content="">
     <meta name="author" content="Maxartkiller">
 
-    <title>EC TECNOLOGIA - Equipe cuiabana de Tecnologia da informaÁ„o</title>
+    <title>EC TECNOLOGIA - Equipe cuiabana de Tecnologia da informa√ß√£o</title>
 	  <meta name="codelab" content="your-first-pwa-v3">
   <!-- CODELAB: Add iOS meta tags and icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -64,7 +64,7 @@ else
 <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
   <!-- CODELAB: Add description here -->
-  <meta name="description" content="Equipe cuiabana de Tecnologia da informaÁ„o">
+  <meta name="description" content="Equipe cuiabana de Tecnologia da informa√ß√£o">
   <!-- CODELAB: Add meta theme-color -->
   <meta name="theme-color" content="#2F3BA2" />
   
@@ -123,7 +123,7 @@ else
                         <div class="col align-self-center text-center">
                             <img src="template/images/escolar_01.png" height="350px" alt="" class="mw-100 mx-auto mb-4">
                             <br><br>
-                            <h2 class="text-uppercase font-weight-light">Descubra como È bom estudar online.</h2>
+                            <h2 class="text-uppercase font-weight-light">Descubra como √© bom estudar online.</h2>
                             <p class="text-mute"></p>
                         </div>
                     </div>
@@ -134,7 +134,7 @@ else
                             <img src="template/images/escolar_02.png" height="350px" alt="" class="mw-100 mx-auto mb-4">
                             <br><br>
                             <h2 class="text-uppercase font-weight-light">Uma experiencia unica!</h2>
-                            <p class="text-mute">Estudar online nunca ficou t„o facil.</p>
+                            <p class="text-mute">Estudar online nunca ficou t√£o facil.</p>
                         </div>
                     </div>
                 </div>
