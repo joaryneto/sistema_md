@@ -46,7 +46,11 @@
     <script src="template/vendor/sweetalert/sweetalert.min.js"></script>
     <script src="template/vendor/sweetalert/jquery.sweet-alert.custom.js"></script>
 	
-	
+  <script type="module">
+    import { modalController } from 'https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/index.esm.js';
+    window.modalController = modalController;
+  </script>
+  
     <script type="text/javascript" src="template/vendor/html5-editor/bootstrap-wysihtml5.js"></script>
 	<script src="template/vendor/html5-editor/wysihtml5-0.3.0.js"></script>
     <script src="template/vendor/html5-editor/bootstrap-wysihtml5.js"></script>

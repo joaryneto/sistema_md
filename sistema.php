@@ -61,10 +61,19 @@ function revertedata($data){
     height: calc(2.5em + .75rem + 2px) !important;
 }
 
+@media screen and (max-width: 480px) {
 .modal-dialog {
     margin: -0.1rem !important;
+	height: 100% !important;
+	--width: 100% !important;
+	--min-width: auto !important;
+	--max-width: auto !important;
+	--height: 100%  !important;
+	--min-height: auto  !important;
+	--max-height: auto  !important;
+	--overflow: hidden  !important;
 }
-
+}
 </style>
 </head>
 
@@ -573,7 +582,6 @@ function cliente(codigo,nome)
 </div>
 </div>
 <? include 'scripts.php'?>
-
 </body>
 
 </html>

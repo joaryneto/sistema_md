@@ -105,7 +105,4 @@ function gravar()
 <div class="form-group col-md-12 m-t-20" id="load">
 <div>
 </form>										 
-<div class="modal-footer">
-<button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Fechar</button>
-</div>
 <? }?>
