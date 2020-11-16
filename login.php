@@ -98,6 +98,19 @@ require_once("./load/load.php");
     <!-- final do invólucro -->
 
 <? include('scripts.php');?>
+<script>
+$(window).on('load', function() {
+  var token = localStorage.getItem('token');
+  
+  if(token === null)
+  {
 
+  }
+  else
+  {
+	  window.location.href="sistema.php?token=" + token;
+  }
+});
+</script>
 </body>
 </html>

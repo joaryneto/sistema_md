@@ -1,16 +1,4 @@
 'user strict'
-$(window).on('load', function() {
-  var token = localStorage.getItem('token');
-  if(token === null)
-  {
-
-  }
-  else
-  {
-	  window.location.href="sistema.php?token=" + token;
-  }
-});
-
 function logar()
 {
     var login = document.getElementById('inputEmail').value;

@@ -61,6 +61,10 @@ function revertedata($data){
     height: calc(2.5em + .75rem + 2px) !important;
 }
 
+.modal-dialog {
+    margin: -0.1rem !important;
+}
+
 </style>
 </head>
 

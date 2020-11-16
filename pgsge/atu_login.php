@@ -34,7 +34,8 @@ while($res = mysqli_fetch_array($ress))
 	//$_SESSION['menu'] = 3;
 	//$_SESSION['pages'] = 3;
 	
-	//sprint "<script> window.location='sistema.php?url=inicio'; </script>";
+	$token = mb_strtoupper(strval(bin2hex(openssl_random_pseudo_bytes(16))));
+	print('<script> localStorage.setItem("token", "'.$token.'"); </script>');
 }
 
 
@@ -42,7 +43,7 @@ while($res = mysqli_fetch_array($ress))
 
 if($x == 1)
 {
-	print "<script> window.location='sistema.php?url=linhadotempo'; </script>";
+	print "<script> window.location='sistema.php?url=linhadotempo';  </script>";
 }
 else
 {

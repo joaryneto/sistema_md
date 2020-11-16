@@ -11,23 +11,32 @@ if($_GET['sistema'] == "app")
 	$_SESSION['nosistema'] = "agsl";
 	$_SESSION['nomesoft'] = "AgEC";
 	$_SESSION['tipo'] = 1;
+	
+	$sistema = "sistema";
+	print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
 }
 else if($_GET['sistema'] == "agsge")
 {
 	$_SESSION['nosistema'] = "agsge";
 	$_SESSION['nomesoft'] = "Ag. Escolar";
 	$_SESSION['tipo'] = 2;
+	
+	$sistema = "agsge";
+	print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
 }
 else if($_GET['sistema'] == "agsl")
 {
 	$_SESSION['nosistema'] = "agsl";
 	$_SESSION['nomesoft'] = "Ag. Hair & Spa";
 	$_SESSION['tipo'] = 3;
+	
+	$sistema = "agsl";
+	print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
 }
-else
-{
-	header('Location: servicos.php');
-}
+//else
+//{
+//	header('Location: servicos.php');
+//}
 
 //echo $_SESSION['sistema'];
 ?>
@@ -182,5 +191,10 @@ else
         });
 
     </script>
+	<?if($_GET['sistema'] == ""){?>
+	<script>
+	$(window).on('load', function() {var sistema = localStorage.getItem('sistema');if(sistema === null){}else{ window.location.href="index.php?sistema=" + sistema;}});
+	</script>
+	<?}?>
 </body>
 </html>

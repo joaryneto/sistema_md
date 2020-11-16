@@ -383,4 +383,3 @@ elseif($_GET['ap'] == "4")
                         </div>
 					</div>
 				</div>
-			</div>
