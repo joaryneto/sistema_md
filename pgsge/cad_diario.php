@@ -68,11 +68,10 @@ if(isset($_GET['codigo']))
 ?>	
 <script>
 
+/*
 function gravarpresenca() 
 {
-
-
-swal({   
+        swal({   
             title: "Atenção!",   
             text: "Você esta iniciando a gravação de presença dos alunos.",   
             type: "warning",   
@@ -124,7 +123,7 @@ swal({
 		    ajaxLoader('?br=atu_presenca&matricula='+ matricula +'&nots='+ nots +'&data=<? echo $data;?>&diario=<? echo $_GET['codigo'];?>&disciplina=<? echo $_GET['disciplina'];?>&periodo=<? echo $periodo; ?>&gravar=1','gravarpresenca','GET');
 			
 	});
-}
+}*/
 
 /*
 function gravarnota() 
@@ -398,7 +397,7 @@ function gravarrio(sv,codigo)
 								</div>
 								<? if(!Empty($_GET['codigo']) && Empty($_GET['frequencia']) && Empty($_GET['nota'])){?>
 								<div class="form-group col-md-5 m-t-20"><label>Pesquisa :</label>
-                                <input type="text" name="pesquisa" class="form-control"  autocomplete="off" id="pesquisa" value="" placeholder="Pesquisar conteúdo">
+                                <input type="text" name="pesquisa" id="pesquisa" onkeyup="" class="form-control"  autocomplete="off"  value="" placeholder="Pesquisar conteúdo">
 								</div>
                                  <div class="col-md-12">
 					              <div class="component-box">
