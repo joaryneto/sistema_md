@@ -8,19 +8,17 @@ $turmas = $_GET['turmas'];
 $disciplina = $_GET['disciplina'];
 $periodo = $_GET['etapa'];
 
+$x = 0;
 $pSQL1 = "select usuarios.nome,periodo.descricao as etapa ,diario.materia,materias.descricao as disciplina,turmas.descricao as cturma,diario.data,turmas_professor.usuario from diario 
 inner join turmas_professor on turmas_professor.turma=diario.turma 
 inner join turmas on turmas.codigo=diario.turma
 inner join materias on materias.codigo=diario.materia
 inner join periodo on periodo.codigo=diario.periodo
 inner join usuarios on usuarios.codigo=diario.usuario
-where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and diario.periodo=".$periodo."";
+where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and diario.periodo=".$periodo." limit 1";
 $pRES1 = mysqli_query($db,$pSQL1);
 $tprow = mysqli_fetch_assoc($pRES1);
 
-if(!Empty($tprow['usuario']))
-{
-	
 //require_once("load/class/mysql.php");
 
 // Include autoloader 
@@ -468,13 +466,3 @@ file_put_contents(''.$nome.'', $output);
 window.location.href = "xml.php?link=<?=$nome;?>";
 //window.open("<?=$nome;?>");
 </script>
-<? }
-   else
-   {
-	  ?>
-	  <script>
-	  swal('Atenção', 'Nenhuma informação encontrado.'); 
-	  </script>
-	  <?
-   }
-?>
