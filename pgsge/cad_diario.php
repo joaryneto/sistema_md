@@ -69,7 +69,7 @@ if(isset($_GET['codigo']))
 <script>
 
 <? if(!Empty($_GET['frequencia'])){?>
-function ppresenca(){
+/*function ppresenca(){
         swal({   
             title: "Atenção!",   
             text: "Você esta iniciando a gravação de presença dos alunos.",   
@@ -125,7 +125,7 @@ function ppresenca(){
 		    requestPage('?br=atu_presenca&matricula='+ matricula +'&nots='+ nots +'&data=<? echo $data;?>&diario='+ vdiario +'&disciplina='+ vdisciplina +'&periodo=&gravar=1','gravarpresenca','GET');
 			
 	});
-}
+}*/
 <? } ?>
 
 function excluir(codigo)
@@ -149,7 +149,7 @@ function excluir(codigo)
 	        {
 	        	  requestPage('?br=atu_diario&ap=3&codigo='+ codigo +'&load=1','listdiario','GET');
 	        }
-        }
+        });
 }
 
 function gravarrio(sv,codigo)
