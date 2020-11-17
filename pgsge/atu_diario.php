@@ -82,7 +82,7 @@ if($_GET['ap'] == 3)
         });
     </script>');
 	
-	//print("<script>window.location.href='sistema.php?url=cad_diario';</script>");
+	print("<script>window.location.href='sistema.php?url=cad_diario';</script>");
 	//$RES->close();
 }
 
