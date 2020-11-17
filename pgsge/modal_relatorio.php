@@ -28,6 +28,7 @@ function gravar()
 	var turmas = document.getElementById('r_turmas').value;
 	var disciplina = document.getElementById('r_disciplina').value;
 	var ano = document.getElementById('r_ano').value;
+	var etapa = document.getElementById('r_etapa').value;
 	
 	if(professor == "")
 	{
@@ -45,9 +46,13 @@ function gravar()
 	{
 		swal('Atenção', 'Campo Data em branco.');
 	}
+	else if(etapa == "")
+	{
+		swal('Atenção', 'Campo Periodo em branco.');
+	}
 	else
 	{
-        relatorio('?br=gerar_diario&professor='+ professor +'&turmas='+ turmas +'&disciplina='+ disciplina +'&ano='+ ano +'','load','GET');
+        relatorio('?br=gerar_diario&professor='+ professor +'&turmas='+ turmas +'&disciplina='+ disciplina +'&ano='+ ano +'&etapa='+ etapa +'','load','GET');
 		//window.open('relatorio.php?url=gerar_diario&professor='+ professor +'&turmas='+ turmas +'&disciplina='+ disciplina +'&ano='+ ano +'');
     }
 }
@@ -79,6 +84,21 @@ function gravar()
 <div class="form-group col-md-5 m-t-20"><label>Disciplina :</label>
 <select name="disciplina" id="r_disciplina" class="form-control" style="width: 100%; height:36px;" required="required">
 	<option value="">Escolher</option>
+</select>
+</div>
+<div class="form-group col-md-4 m-t-20"><label>Periodo :</label>
+<select name="r_etapa" id="r_etapa" style="width: 100%; height:36px;" class="select2 form-control custom-select" required="required">
+	<option value="">Selecionar</option>
+	<? 
+		  $sql3 = "select * from periodo";
+		  $res3 = mysqli_query($db,$sql3); 
+		  while($row = mysqli_fetch_array($res3))
+		  {
+		  ?>
+		   <option value="<? echo $row['codigo']?>" <? if($row['codigo']==$periodo){ echo " selected"; }?>><? echo $row['descricao'];?></option>
+		  <? }
+		  $res3->close();
+		  ?>
 </select>
 </div>
 <div class="form-group col-md-3 m-t-20"><label>Ano :</label>

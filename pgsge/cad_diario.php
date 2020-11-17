@@ -141,15 +141,15 @@ function excluir(codigo)
             closeOnConfirm: true 
         }, function()
 		{  
-	if(codigo == null)
-	{
+	        if(codigo == null)
+	        {
 		
-	}
-	else
-	{
-	  requestPage('?br=atu_diario&ap=3&codigo='+ codigo +'&load=1','listdiario','GET');
-	}
-		}
+	        }
+	        else
+	        {
+	        	  requestPage('?br=atu_diario&ap=3&codigo='+ codigo +'&load=1','listdiario','GET');
+	        }
+        }
 }
 
 function gravarrio(sv,codigo)
