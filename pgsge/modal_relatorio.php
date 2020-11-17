@@ -52,7 +52,7 @@ function gravar()
 	}
 	else
 	{
-        relatorio('?br=gerar_diario&professor='+ professor +'&turmas='+ turmas +'&disciplina='+ disciplina +'&ano='+ ano +'&etapa='+ etapa +'','load','GET');
+        relatorio('?br=gerar_diario&professor='+ professor +'&turmas='+ turmas +'&disciplina='+ disciplina +'&ano='+ ano +'&etapa='+ etapa +'','loadmodal','GET');
 		//window.open('relatorio.php?url=gerar_diario&professor='+ professor +'&turmas='+ turmas +'&disciplina='+ disciplina +'&ano='+ ano +'');
     }
 }
@@ -118,7 +118,7 @@ function gravar()
 <div class="form-group col-md-12 m-t-20">
 <button type="button" onclick="gravar();" class="btn btn-info"><i class="fa fa-plus-circle"></i> Gerar</button>
 </div>
-<div class="form-group col-md-12 m-t-20" id="load">
+<div class="form-group col-md-12 m-t-20" id="loadmodal">
 <div>
 </form>										 
 <div class="modal-footer">
