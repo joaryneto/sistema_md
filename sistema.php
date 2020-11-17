@@ -18,28 +18,6 @@ function isMobile()
     return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
 }
 
-function formatodatahora($data){
-    return date("d/m/Y", strtotime($data));
-}
-
-function formatohora($horas){
-    return date("H:i", strtotime($horas));
-}
-
-date_default_timezone_set('America/Cuiaba');
-$data = date('Y-m-d');
-$hora = date('H:i:s');
-
-function revertedata($data){
-
-		if($data != ""){
-		$sep_data = explode("/",$data);
-		$data = $sep_data[2]."-".$sep_data[1]."-".$sep_data[0];
-		}
-		
-		return $data;
-}
-
 ?>
 <!doctype html>
 <html lang="pt-br" class="color-theme-blue">

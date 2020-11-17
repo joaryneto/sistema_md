@@ -6,9 +6,11 @@ session_start();
 
 require_once("./load/load.php");
 
-if($_GET['deslogar']==1)
+if(@$_GET['deslogar']==1)
 {
-	
+	unset($_SESSION['usuario']);
+	print('<script> localStorage.removeItem("token"); </script>');
+	print "<script> window.location='login.php';  </script>";
 }
 ?>
 <!doctype html>
