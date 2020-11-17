@@ -20,7 +20,7 @@
 			<h3 class="list-group-item-heading">Sistema de Gerenciamento de Escola</h3>
 			<p class="list-group-item-text"></p>
 			</a> <a href="index.php?sistema=agsl" class="list-group-item">
-			<h3 class="list-group-item-heading">Sistema de Gerenciamento de Sal√£o</h3>
+			<h3 class="list-group-item-heading">Sistema de Gerenciamento de Sal„o</h3>
 			<p class="list-group-item-text"></p>
 			</a>
 			</div>

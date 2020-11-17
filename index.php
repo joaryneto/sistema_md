@@ -6,7 +6,25 @@ session_start();
 
 //require_once("./load/load.php");
 
-if(@$_GET['sistema'] == "app")
+if(Empty($_GET['sistema']))
+{
+	//if(Empty($_SESSION['nosistema']))
+	//{
+	?>
+	<script>
+	$(window).on('load', function() 
+	{
+    var sistema = localStorage.getItem('sistema');if(sistema === null){}else{ window.location.href="index.php?sistema=" + sistema;}
+    });
+	</script>
+	<?//}
+}
+else
+{
+	$_SESSION['nosistema'] = $_GET['sistema'];
+}
+
+if(@$_SESSION['nosistema'] == "app")
 {
 	$_SESSION['nosistema'] = "agsl";
 	$_SESSION['nomesoft'] = "Gerenciamento de Sistema";
@@ -15,7 +33,7 @@ if(@$_GET['sistema'] == "app")
 	$sistema = "sistema";
 	print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
 }
-else if(@$_GET['sistema'] == "agsge")
+else if(@$_SESSION['nosistema'] == "agsge")
 {
 	$_SESSION['nosistema'] = "agsge";
 	$_SESSION['nomesoft'] = "Sg Escolar";
@@ -24,7 +42,7 @@ else if(@$_GET['sistema'] == "agsge")
 	$sistema = "agsge";
 	print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
 }
-else if(@$_GET['sistema'] == "agsl")
+else if(@$_SESSION['nosistema'] == "agsl")
 {
 	$_SESSION['nosistema'] = "agsl";
 	$_SESSION['nomesoft'] = "Sg Hair & Spa";
@@ -191,13 +209,5 @@ else
         });
 
     </script>
-	<?if(Empty($_SESSION['nosistema']))
-	{?>
-	<script>
-	//$(window).on('load', function() {
-    var sistema = localStorage.getItem('sistema');if(sistema === null){}else{ window.location.href="index.php?sistema=" + sistema;}
-    //});
-	</script>
-	<?}?>
 </body>
 </html>
