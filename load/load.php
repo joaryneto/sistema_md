@@ -56,7 +56,7 @@ $string = '{
       "sizes": "32x32",
       "type": "image/png"
     }],
-  "start_url": "/index.php?sistema='.$_SESSION["nosistema"].'",
+  "start_url": "https://app.ectecnologia.com.br/index.php?sistema='.$_SESSION["nosistema"].'",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF"

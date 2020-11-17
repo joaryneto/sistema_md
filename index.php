@@ -33,11 +33,10 @@ else if(@$_GET['sistema'] == "agsl")
 	$sistema = "agsl";
 	print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
 }
-
-//else
-//{
-//	header('Location: servicos.php');
-//}
+else
+{
+	header('Location: servicos.php');
+}
 
 //echo $_SESSION['sistema'];
 ?>
