@@ -18,8 +18,8 @@ where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and
 $pRES1 = mysqli_query($db,$pSQL1);
 $tprow = mysqli_fetch_assoc($pRES1);
 
-//if(!Empty($tprow['usuario']))
-//{
+if(!Empty($tprow['usuario']))
+{
 	
 //require_once("load/class/mysql.php");
 
@@ -468,3 +468,13 @@ file_put_contents(''.$nome.'', $output);
 window.location.href = "xml.php?link=<?=$nome;?>";
 //window.open("<?=$nome;?>");
 </script>
+<? }
+   else
+   {
+	  ?>
+	  <script>
+	  swal('Atenção', 'Nenhuma informação encontrado.'); 
+	  </script>
+	  <?
+   }
+?>
