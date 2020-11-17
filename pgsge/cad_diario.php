@@ -68,9 +68,8 @@ if(isset($_GET['codigo']))
 ?>	
 <script>
 
-/*
-function gravarpresenca() 
-{
+<? if(!Empty($_GET['frequencia'])){?>
+function ppresenca(){
         swal({   
             title: "Atenção!",   
             text: "Você esta iniciando a gravação de presença dos alunos.",   
@@ -107,7 +106,7 @@ function gravarpresenca()
 			}
 			else
 			{
-			   not = nots.join(", ");
+			   not = nots.join(",");
 			}
 			
 			var matricula = "";
@@ -120,49 +119,14 @@ function gravarpresenca()
 			   matricula = matriculas.join(",");
 			}
 			
-		    ajaxLoader('?br=atu_presenca&matricula='+ matricula +'&nots='+ nots +'&data=<? echo $data;?>&diario=<? echo $_GET['codigo'];?>&disciplina=<? echo $_GET['disciplina'];?>&periodo=<? echo $periodo; ?>&gravar=1','gravarpresenca','GET');
+			var vdiario = "<? echo $_GET['codigo'];?>";
+			var vdisciplina = "<? echo $_GET['disciplina'];?>";
+			
+		    requestPage('?br=atu_presenca&matricula='+ matricula +'&nots='+ nots +'&data=<? echo $data;?>&diario='+ vdiario +'&disciplina='+ vdisciplina +'&periodo=&gravar=1','gravarpresenca','GET');
 			
 	});
-}*/
-
-/*
-function gravarnota() 
-{
-
-var i = 0;
-$.each($("input[name='check[]']:value"),function()
-{
-	i++;
-});
-
-		swal({   
-            title: "Atenção!",   
-            text: "Você esta iniciando a gravação de Notas dos alunos.",   
-            type: "warning",   
-            showCancelButton: true,   
-            //confirmButtonColor: "#DD6B55",   
-            confirmButtonText: "Sim, Gravar!",
-            cancelButtonText: "Não, Cancelar!", 			
-            closeOnConfirm: true 
-        }, function()
-		{   
-		
-		    var i = 0;
-			var o = 0;
-			
-		    var notas = [];
-		    $.each($("input[name='check[]']"),function()
-		    {
-		    	  notas.push($(this).val());
-				  o++;
-		    });
-					
-			var nota = notas.join(",");
-			
-		    ajaxLoader('?br=atu_nota&notas='+ nota +'&data=<? echo $data;?>&diario=<? echo $_GET['codigo'];?>&disciplina=<? echo $_GET['disciplina'];?>&periodo=<? echo $periodo; ?>&gravar=1','gravarpresenca','GET');
-			
-	});
-}*/
+}
+<? } ?>
 
 function excluir(codigo)
 {
@@ -175,6 +139,7 @@ function excluir(codigo)
 	  requestPage('?br=atu_diario&ap=3&codigo='+ codigo +'&load=1','listdiario','GET');
 	}
 }
+
 function gravarrio(sv,codigo)
 {
     var turma = document.getElementById('turma').value;
@@ -228,6 +193,20 @@ function gravarrio(sv,codigo)
 		}
 	}		
 }
+
+
+$("#check[]").on('change', function() {
+  if ($(this).is(':checked')) 
+  {
+    $(this).attr('value', 'true');
+	alert('TESTE 1');
+  } else {
+    $(this).attr('value', 'false');
+	alert('TESTE 2');
+  }
+  
+   //$('#checkbox-value').text($('#checkbox1').val());
+});
 
 </script>	
 <div class="container-fluid bg-template mb-4">
@@ -372,14 +351,16 @@ function gravarrio(sv,codigo)
 								<button type="button" OnClick="gravarrio(1);" class="btn btn-info"><i class="fa fa-plus-circle"></i> Cadastrar </button>
 								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario"><i class="fa fa-plus-circle"></i> Novo</a>
 								<?}else{?>
+								<?if(Empty($_GET['frequencia']) and Empty($_GET['nota'])){?>
 								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" onclick="excluir(<? echo $_GET['codigo'];?>)" href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Excluir</a>
+								<?}?>
 								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota'])){?>
 								<button class="btn pmd-btn-outline pmd-ripple-effect btn-primary" type="button" OnClick="gravarrio(2,<? echo $_GET['codigo']; ?>);" ><i class="fa fa-plus-circle"></i> Gravar </button>
 								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario<?if(Empty($_GET['codigo'])){?>&codigo=<? echo $_GET['codigo']; ?><?}?>"><i class="fa fa-plus-circle"></i> Voltar</a>
 								<? }else{ ?>
 								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario<?if(!Empty($_GET['codigo'])){?>&codigo=<? echo $_GET['codigo']; ?><?}?>"><i class="fa fa-plus-circle"></i> Voltar</a>
 								<?if(!Empty($_GET['frequencia']) and Empty($_GET['nota'])){?>
-								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: WEB(0)" onClick="gravarpresenca();"><i class="fa fa-plus-circle"></i> Gravar</a>
+								<!--<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: WEB(0)" onClick="ppresenca();"><i class="fa fa-plus-circle"></i> Gravar</a>-->
 								<? }?><?}?>
 								
 								
@@ -387,7 +368,7 @@ function gravarrio(sv,codigo)
 								<? if(!Empty($_GET['codigo']) and Empty($_GET['frequencia']) && Empty($_GET['nota'])) { ?>
 								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario&codigo=<? echo $_GET['codigo']; ?>&frequencia=1&disciplina=<? echo $disciplina;?>"><i class="fa fa-plus-circle"></i> Registrar Frequencia</a>
 								<? } ?>
-								<? if(!Empty($_GET['codigo']) and Empty($_GET['nota']) && Empty($_GET['frequencia'])) { ?>
+								<? if(!Empty($_GET['codigo']) and Empty($_GET['nota']) && !Empty($_GET['frequencia'])) { ?>
 								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario&codigo=<? echo $_GET['codigo']; ?>&nota=1&disciplina=<? echo $disciplina;?>"><i class="fa fa-plus-circle"></i> Inserir Nota</a>
 								<? } ?>
 								<? if(!Empty($_GET['codigo']) and !Empty($_GET['nota']) && Empty($_GET['frequencia'])) { ?>
@@ -416,12 +397,12 @@ function gravarrio(sv,codigo)
                                         <tbody id="listdiario">
 										<? 
 										  
-										  $data = date('Y');
+										  $cano = date('Y');
 										  $sql4 = "select diario.codigo,diario.conteudo,turmas.descricao as a,materias.descricao as b,diario.conteudo as c,diario.data from diario 
 										  inner JOIN turmas on turmas.codigo=diario.turma 
 										  inner join materias on materias.codigo=diario.materia 
 										  inner join periodo on periodo.codigo=diario.periodo 
-										  where YEAR(diario.data)=$data and diario.usuario='".$_SESSION['usuario']."' and diario.status=1;";
+										  where YEAR(diario.data)=$cano and diario.usuario='".$_SESSION['usuario']."' and diario.status=1;";
 										  $res4 = mysqli_query($db,$sql4); 
 										  while($row = mysqli_fetch_array($res4))
 										  {
@@ -463,7 +444,7 @@ function gravarrio(sv,codigo)
                                         <tbody>
 										<? 
 										  
-										  $data = date('Y');
+										  $cano = date('Y');
 										  $sql5 = "select diario.codigo as coddiario,diario.data,matriculas.codigo,matriculas.nome,turmas.descricao as turma,matriculas.foto from diario 
 										  inner JOIN turmas on turmas.codigo=diario.turma 
 										  inner join materias on materias.codigo=diario.materia 
@@ -481,19 +462,35 @@ function gravarrio(sv,codigo)
                                                 <td><? echo $row['nome'];?></td>
 												<td><? 
 												     
+
 													 $SQL = "SELECT codigo,falta FROM frequencia where matricula=".$row['codigo']." and diario=".$_GET['codigo']."";
 													 $RES6 = mysqli_query($db,$SQL);
-												     $rows1 = mysqli_fetch_array($RES6);
+												     $rows = mysqli_fetch_array($RES6);
+													 
 													 //$p = 0;
 													 //while($rows3 = mysqli_fetch_array($RES))
 													 //{
 													 //	 $p = 1;
 													 //}
 													 
+													 if(Empty($rows['codigo']))
+													 {
+													    $SQL = "INSERT INTO frequencia(diario,matricula,disciplina,periodo,data,falta) values('".$_GET['codigo']."','".$row['codigo']."','".$disciplina."','".$periodo."','".$data."','1');";
+		                                                $sucesso = mysqli_query($db,$SQL);
+													 }
+													 
+													 
+													 $SQL = "SELECT codigo,falta FROM frequencia where matricula=".$row['codigo']." and diario=".$_GET['codigo']."";
+													 $RES6 = mysqli_query($db,$SQL);
+												     $rows1 = mysqli_fetch_array($RES6);
+													 
 													 ?>
-												      <!--<input type="checkbox" name="check[]" value="<? echo $row['codigo'];?>" <? if($rows1['falta'] == "0"){?> checked <? }else{ ?> <? }?> OnClick="javascript: ajaxLoader('?br=atu_presenca&check='+ this.checked +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $_GET['codigo'];?>&disciplina=<? echo $_GET['disciplina'];?>&periodo=<? echo $periodo; ?>&ap=1','<? echo $row['codigo'];?>','GET');" data-color="#009efb" />-->
+													 <div class="checkbox pmd-default-theme">
+										             <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+												     <input type="checkbox" class="pm-ini" name="<? echo $row['codigo'];?>" id="<? echo $row['codigo'];?>" value="<? echo $row['codigo'];?>" <? if($rows1['falta'] == "0"){?> checked <? }else{ ?> <? }?> OnClick="javascript: ajaxLoader('?br=atu_presenca&check='+ this.checked +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $row['coddiario'];?>&disciplina=<? echo $_GET['disciplina'];?>&periodo=<? echo $periodo; ?>&ap=1','<? echo $row['codigo'];?>','GET');" data-color="#009efb" />
+													 <span class="pmd-checkbox-label">&nbsp;</span></div>
 													  
-													  <input type="checkbox" name="check[]" value="<? echo $row['codigo'];?>" <? if($rows1['falta'] == "0"){?> checked <? }else{ ?> <? }?> data-color="#009efb" />
+													   <!--<input type="checkbox" name="check[]" value="<? echo $row['codigo'];?>" <? if($rows1['falta'] == "0"){?> checked <? }else{ ?> <? }?> data-color="#009efb" />-->
 													  
 													  
 													  

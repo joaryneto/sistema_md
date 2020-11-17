@@ -90,6 +90,8 @@
 	<link href="template/vendor/propeller-master/components/select2/css/select2.min.css" type="text/css" rel="stylesheet" />
 	<link href="template/vendor/propeller-master/components/select2/css/select2-bootstrap.css" type="text/css" rel="stylesheet" />
 	
+	
+	<link href="template/vendor/propeller-master/components/checkbox/css/checkbox.css" type="text/css" rel="stylesheet" />
 	<link href="template/vendor/propeller-master/components/list/css/list.css" type="text/css" rel="stylesheet" />
 	<link href="template/vendor/propeller-master/components/card/css/card.css" type="text/css" rel="stylesheet" />
 	<link href="template/vendor/propeller-master/components/typography/css/typography.css" type="text/css" rel="stylesheet" />

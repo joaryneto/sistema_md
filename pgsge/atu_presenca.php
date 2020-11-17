@@ -20,7 +20,43 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //   print("<script>window.location.href='iniciado.php';</script>");
 //   //exit("<strong> Erro: Você não tem permissão. </strong>");
 //}
+if($_GET['ap'] == 1)
+{
+   $diario = $_GET['diario'];
+   //$check = $_GET['diario'];
+   $disciplina = $_GET['disciplina'];
+   $matricula = $_GET['matricula'];
+   $periodo = $_GET['periodo'];
+   $data = $_GET['data'];
+	
+   $count = 0;
+   $x = 0;
+   $SQL1 = "SELECT * FROM frequencia where diario=".$diario." and matricula=".$matricula." and disciplina=".$disciplina." and periodo=".$periodo."";
+   $sucesso = mysqli_query($db,$SQL1);
 
+   while($row = mysqli_fetch_array($sucesso))
+   {
+	   $x = 1;
+	   $count++;
+   }
+	
+   if($x == 1)
+   {
+     
+	 if($_GET['check'] == "true")
+	 {
+		$valor = 0;
+	 }
+	  else
+	 {
+		$valor = 1; 
+	 }
+	   //echo "<br>";
+       $SQL = "UPDATE frequencia SET falta='$valor' where diario='".$diario."' and periodo=".$periodo." and matricula=".$matricula." and disciplina=".$disciplina."";
+       $sucesso = mysqli_query($db,$SQL);
+
+     }
+}
 if($_GET['gravar'] == 1)
 {
 	

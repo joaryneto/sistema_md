@@ -69,7 +69,7 @@
 
 	<script type="text/javascript" src="template/vendor/propeller-master/components/select2/js/pmd-select2.js"></script>
 	<script type="text/javascript" src="template/vendor/propeller-master/dist/js/propeller.min.js"></script>
-	
+	<script type="text/javascript" src="template/vendor/propeller-master/components/checkbox/js/checkbox.js"></script>
 	
 	<!-- Propeller alerts js -->
 	<script type="text/javascript" src="template/vendor/propeller-master/components/alert/js/alert.js"></script>
