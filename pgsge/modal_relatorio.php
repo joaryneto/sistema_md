@@ -95,7 +95,7 @@ function gravar()
 		  while($row = mysqli_fetch_array($res3))
 		  {
 		  ?>
-		   <option value="<? echo $row['codigo']?>" <? if($row['codigo']==$periodo){ echo " selected"; }?>><? echo $row['descricao'];?></option>
+		   <option value="<? echo $row['codigo']?>"><? echo $row['descricao'];?></option>
 		  <? }
 		  $res3->close();
 		  ?>
