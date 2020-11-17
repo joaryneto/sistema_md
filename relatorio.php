@@ -29,31 +29,7 @@ function revertedata($data){
 }
 
 ?>
-<!doctype html>
-<html lang="pt-br" class="color-theme-white">
-
-<head>
-<? include 'css.php';?>
-</head>
-
-<body>
-    <!-- Loader -->
-
-    <!-- Loader ends -->
-
-    <!-- sidebar ends -->
-
-    <!-- wrapper starts -->
-    <div class="wrapper">
-
-        <!-- header -->
-        <!-- header ends -->
-
-
-        <!-- page content here -->
-        
-        <div id="conteudo">
-		<?php
+<?php
 		if(Empty($_SESSION['manutencao']))
 		{
 			$_SESSION['manutencao'] = 0;
@@ -67,13 +43,4 @@ function revertedata($data){
 		{
 			include("url2.php");
 		} 
-		?>
-		
-        <!-- page content ends -->
-        </div>
-    </div>
-<? include 'scripts.php'?>
-
-</body>
-
-</html>
+?>

@@ -2,7 +2,7 @@
 
 //echo "url2";
 
-$url = $_GET['url'];
+$url = @$_GET['url'];
 
 if($_SESSION['tipo'] == 1)
 {

@@ -160,7 +160,7 @@ function revertedata($data){
             </div>
 			<?}?>
             <div class="col-auto align-self-center">
-                <a href="login.php" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
+                <a href="login.php?deslogar=1" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
             </div>
         </div>
 		<? if($_SESSION['tipo'] == 2){?>

@@ -379,10 +379,10 @@ function relatorio(url, div, tipo, campos, hideLoading)
 				{
 					if(ajax.status == 200 || window.location.href.indexOf("http")==-1)
 					{
-						//document.getElementById(div).innerHTML = ajax.responseText;
+						document.getElementById(div).innerHTML = "";
 						var texto=unescape(ajax.responseText);
 						extraiScript(texto);
-						$('.loader-screen').fadeOut('slow');
+						//$('.loader-screen').fadeOut('slow');
 					}
      		  	}
 				else if(ajax.readyState == 0)

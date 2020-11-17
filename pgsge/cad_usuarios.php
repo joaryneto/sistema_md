@@ -1,9 +1,4 @@
 <?
-ob_start();
-session_start();
-
-?>
-<?
 $PageRequest = strtolower(basename( $_SERVER['REQUEST_URI'] ));
 $PageName = strtolower(basename( __FILE__ ));
 if($PageRequest == $PageName) exit("<strong> Erro: Não é permitido acessar o arquivo diretamente. </strong>");
@@ -14,7 +9,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 	exit();
 }
 
-if($_SESSION['menu99'] == false)
+if(@$_SESSION['menu99'] == false)
 {
    //print("<script>window.alert('Erro: Você não tem permissão.')</script>");
    //print("<script>window.location.href='iniciado.php';</script>");
@@ -148,7 +143,7 @@ if(isset($_GET['exame']))
 	}
 }
 
-if($_GET['ap'] == "1")
+if(@$_GET['ap'] == "1")
 {
     $y = 0;
 	$x = 0;
@@ -225,9 +220,9 @@ if($_GET['ap'] == "1")
 	   }
 	}
 }
-elseif($_GET['ap'] == "2")
+elseif(@$_GET['ap'] == "2")
 {
-   if(Empty($_POST['cpf']))
+   if(Empty($_POST['nome']))
    {
 		print("<script>window.alert('Campo em branco!');</script>");
 	    print("<script>window.location.href='sistema.php?url=cad_usuarios&codigo=".$_GET['codigo']."';</script>");
@@ -269,7 +264,7 @@ elseif($_GET['ap'] == "2")
 	}
   }
 }
-elseif($_GET['ap'] == "3")
+elseif(@$_GET['ap'] == "3")
 {
 	$SQL1 = "SELECT codigo FROM tipo_exame where descricao like '%RX%'";
 	$sucesso = mysqli_query($db,$SQL);
@@ -296,7 +291,7 @@ elseif($_GET['ap'] == "3")
 		print('<script> window.alert("Pacote adicionado com sucesso...")</script>');		
 	}
 }
-elseif($_GET['ap'] == "4")
+elseif(@$_GET['ap'] == "4")
 {
 	//$SQL1 = "DELETE FROM permissoes where usuario='".$_GET['codigo']."'";
 	//$sucesso = mysqli_query($db,$SQL1);
@@ -309,6 +304,10 @@ elseif($_GET['ap'] == "4")
 	   print("<script>window.alert('Usuario desativado com sucesso...');</script>");
 	   print("<script>window.location.href='sistema.php?url=cad_usuarios&codigo=".$_GET['codigo']."';</script>");
 	}
+}
+else
+{
+	
 }
 ?>		
 <div class="container-fluid bg-template mb-4">

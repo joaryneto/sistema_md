@@ -1,9 +1,4 @@
 <?
-ob_start();
-session_start();
-
-?>
-<?
 $PageRequest = strtolower(basename( $_SERVER['REQUEST_URI'] ));
 $PageName = strtolower(basename( __FILE__ ));
 if($PageRequest == $PageName) exit("<strong> Erro: Não é permitido acessar o arquivo diretamente. </strong>");
@@ -21,6 +16,10 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //   //exit("<strong> Erro: Você não tem permissão. </strong>");
 //}
 
+$situacao = "";
+$estado = "";
+$cidade = "";
+$ensino = "";
 
 if(isset($_GET['matricula']))
 {
@@ -98,6 +97,9 @@ function gravar()
 
 </script>
 <?
+
+$input = "";
+
 if(Empty($_GET['cadastro']))
 {
   $input = "<input type='text' name='pesquisa' id='pesquisa' value='' class='form-control form-control-lg search bottom-25 position-relative border-0' onkeyup=\"javascript: requestPage2('?br=atu_alunos&pesquisa='+ this.value +'&ap=3','listaalunos','GET');\" required='required'>";

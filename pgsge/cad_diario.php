@@ -1,9 +1,4 @@
 <?
-ob_start();
-session_start();
-
-?>
-<?
 $PageRequest = strtolower(basename( $_SERVER['REQUEST_URI'] ));
 $PageName = strtolower(basename( __FILE__ ));
 if($PageRequest == $PageName) exit("<strong> Erro: Não é permitido acessar o arquivo diretamente. </strong>");
@@ -58,6 +53,8 @@ if(isset($_GET['codigo']))
 	//$sucesso->close();
 }
 
+if(!Empty($_GET['ap']))
+{
 if($_GET['ap'] == "1")
 {
 	$x = 0;
@@ -143,7 +140,7 @@ if($_GET['excluir'] == 1)
 	print("<script>window.location.href='sistema.php?url=cad_diario';</script>");
 	//$RES->close();
 }
-
+}
 ?>	
 <script>
 function gravar() 
@@ -471,7 +468,7 @@ function gravardiario()
 								</div>
 				               </div>
 								<?}
-								if($_GET['frequencia'] == 1){?>
+								if(@$_GET['frequencia'] == 1){?>
 								<div class="col-md-12">
 					       <div class="component-box">
 							<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
@@ -572,7 +569,7 @@ function gravardiario()
                                     </table>
                                 </div></div></div>
 								<?}?>
-								<? if($_GET['nota'] == 1){?>
+								<? if(@$_GET['nota'] == 1){?>
 								<script>
 								
 								function runScript(e,) {

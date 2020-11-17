@@ -33,6 +33,7 @@ else if($_GET['sistema'] == "agsl")
 	$sistema = "agsl";
 	print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
 }
+
 //else
 //{
 //	header('Location: servicos.php');
@@ -191,9 +192,12 @@ else if($_GET['sistema'] == "agsl")
         });
 
     </script>
-	<?if($_GET['sistema'] == ""){?>
+	<?if(Empty($_SESSION['nosistema']))
+	{?>
 	<script>
-	$(window).on('load', function() {var sistema = localStorage.getItem('sistema');if(sistema === null){}else{ window.location.href="index.php?sistema=" + sistema;}});
+	//$(window).on('load', function() {
+    var sistema = localStorage.getItem('sistema');if(sistema === null){}else{ window.location.href="index.php?sistema=" + sistema;}
+    //});
 	</script>
 	<?}?>
 </body>

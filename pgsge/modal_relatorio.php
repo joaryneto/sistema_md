@@ -1,8 +1,4 @@
-<?
-ob_start();
-session_start();
 
-?>
 <?
 $PageRequest = strtolower(basename( $_SERVER['REQUEST_URI'] ));
 $PageName = strtolower(basename( __FILE__ ));
@@ -14,7 +10,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 	exit();
 }
 
-if($_SESSION['menu99'] == false)
+if(@$_SESSION['menu99'] == false)
 {
    //print("<script>window.alert('Erro: Você não tem permissão.')</script>");
    //print("<script>window.location.href='iniciado.php';</script>");
@@ -28,10 +24,10 @@ if($_SESSION['menu99'] == false)
 
 function gravar()
 {
-	var professor = document.getElementById('professor').value;
-	var turmas = document.getElementById('turmas').value;
-	var disciplina = document.getElementById('disciplina').value;
-	var ano = document.getElementById('ano').value;
+	var professor = document.getElementById('r_professor').value;
+	var turmas = document.getElementById('r_turmas').value;
+	var disciplina = document.getElementById('r_disciplina').value;
+	var ano = document.getElementById('r_ano').value;
 	
 	if(professor == "")
 	{
@@ -51,8 +47,8 @@ function gravar()
 	}
 	else
 	{
-        //relatorio('?br=gerar_diario&professor='+ professor +'&turmas='+ turmas +'&disciplina='+ disciplina +'&ano='+ ano +'','load','GET');
-		window.open('relatorio.php?url=gerar_diario&professor='+ professor +'&turmas='+ turmas +'&disciplina='+ disciplina +'&ano='+ ano +'');
+        relatorio('?br=gerar_diario&professor='+ professor +'&turmas='+ turmas +'&disciplina='+ disciplina +'&ano='+ ano +'','load','GET');
+		//window.open('relatorio.php?url=gerar_diario&professor='+ professor +'&turmas='+ turmas +'&disciplina='+ disciplina +'&ano='+ ano +'');
     }
 }
 
@@ -64,7 +60,7 @@ function gravar()
 <div class="modal-body">
 <form class="m-t-40 row">
 <div class="form-group col-md-9 m-t-20"><label>Professor :</label>
-<select name="professor" id="professor" class="form-control" style="width: 100%; height:36px;" onChange="javascript: ajaxLoader('?br=atu_relatorio&codigo='+ this.value +'&ap=1','turmas','GET');" required="required">
+<select name="professor" id="r_professor" class="form-control" style="width: 100%; height:36px;" onChange="javascript: ajaxLoader('?br=atu_relatorio&codigo='+ this.value +'&ap=1','r_turmas','GET');" required="required">
 	<option value="">Escolher</option>
 	<? 
 	   $SQL = "Select * from usuarios where tipo=2";
@@ -76,20 +72,20 @@ function gravar()
 </select>
 </div>
 <div class="form-group col-md-5 m-t-20"><label>Turma :</label>
-<select name="turmas" id="turmas" class="form-control" style="width: 100%; height:36px;" onChange="javascript: ajaxLoader('?br=atu_relatorio&codigo='+ document.getElementById('professor').value +'&ap=2','disciplina','GET');" required="required">
+<select name="turmas" id="r_turmas" class="form-control" style="width: 100%; height:36px;" onChange="javascript: ajaxLoader('?br=atu_relatorio&codigo='+ document.getElementById('r_professor').value +'&ap=2','r_disciplina','GET');" required="required">
 	<option value="">Escolher</option>
 </select>
 </div>
 <div class="form-group col-md-5 m-t-20"><label>Disciplina :</label>
-<select name="disciplina" id="disciplina" class="form-control" style="width: 100%; height:36px;" required="required">
+<select name="disciplina" id="r_disciplina" class="form-control" style="width: 100%; height:36px;" required="required">
 	<option value="">Escolher</option>
 </select>
 </div>
 <div class="form-group col-md-3 m-t-20"><label>Ano :</label>
-<input name="ano" id="ano" type="text" readonly class="form-control" autocomplete="off" />
+<input name="ano" id="r_ano" type="text" readonly class="form-control" autocomplete="off" />
 </div>
 <script>
-	jQuery('#ano').datepicker({
+	jQuery('#r_ano').datepicker({
 		format: 'yyyy',
         autoclose: true,
         todayHighlight: true,

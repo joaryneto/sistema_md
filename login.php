@@ -6,6 +6,10 @@ session_start();
 
 require_once("./load/load.php");
 
+if($_GET['deslogar']==1)
+{
+	
+}
 ?>
 <!doctype html>
 <html lang="pt-br" class="color-theme-blue">
@@ -98,19 +102,15 @@ require_once("./load/load.php");
     <!-- final do invólucro -->
 
 <? include('scripts.php');?>
-<script>
-$(window).on('load', function() {
-  var token = localStorage.getItem('token');
-  
-  if(token === null)
-  {
-
-  }
-  else
-  {
-	  window.location.href="sistema.php?token=" + token;
-  }
-});
-</script>
+<?if(Empty($_SESSION['nosistema']))
+	{?>
+	<script>
+	//$(window).on('load', function() 
+	//{
+      var sistema = localStorage.getItem('sistema');
+      if(sistema === null){}else{ window.location.href="index.php?sistema=" + sistema;}
+	//});
+	</script>
+	<?}?>
 </body>
 </html>
