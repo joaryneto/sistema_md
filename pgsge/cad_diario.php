@@ -130,6 +130,17 @@ function ppresenca(){
 
 function excluir(codigo)
 {
+	swal({   
+            title: "Atenção!",   
+            text: "Você certeza que gostaria de excluir este conteúdo?",   
+            type: "warning",   
+            showCancelButton: true,   
+            //confirmButtonColor: "#DD6B55",   
+            confirmButtonText: "Sim, Gravar!",
+            cancelButtonText: "Não, Cancelar!", 			
+            closeOnConfirm: true 
+        }, function()
+		{  
 	if(codigo == null)
 	{
 		
@@ -138,6 +149,7 @@ function excluir(codigo)
 	{
 	  requestPage('?br=atu_diario&ap=3&codigo='+ codigo +'&load=1','listdiario','GET');
 	}
+		}
 }
 
 function gravarrio(sv,codigo)
@@ -450,7 +462,7 @@ $("#check[]").on('change', function() {
 										  inner join materias on materias.codigo=diario.materia 
 										  inner join periodo on periodo.codigo=diario.periodo
 										  inner join matriculas on matriculas.turma=diario.turma
-										  where diario.codigo='".$_GET['codigo']."' and matriculas.status=1 and diario.usuario='".$_SESSION['usuario']."' and diario.turma='".$turma."';";
+										  where diario.codigo='".$_GET['codigo']."' and matriculas.status in (0,1,3) and diario.usuario='".$_SESSION['usuario']."' and diario.turma='".$turma."';";
 										  $res5 = mysqli_query($db,$sql5); 
 										  $a = 0;
 										  while($row = mysqli_fetch_array($res5))
@@ -577,7 +589,7 @@ $("#check[]").on('change', function() {
 										  inner join materias on materias.codigo=diario.materia 
 										  inner join periodo on periodo.codigo=diario.periodo
 										  inner join matriculas on matriculas.turma=diario.turma
-										  where diario.codigo='".$_GET['codigo']."' and matriculas.status=1 and diario.usuario='".$_SESSION['usuario']."';";
+										  where diario.codigo='".$_GET['codigo']."' and matriculas.status in (0,1,3) and diario.usuario='".$_SESSION['usuario']."';";
 										  $res8 = mysqli_query($db,$sql8); 
 										  $b = 0;
 										  while($row = mysqli_fetch_array($res8))
