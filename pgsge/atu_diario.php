@@ -41,7 +41,7 @@ if($_GET['ap'] == "1")
 }
 else if($_GET['ap'] == "2")
 {
-	$SQL1 = "UPDATE diario SET turma='".$_GET['turma']."',materia='".$_GET['disciplina']."',periodo='".$_GET['periodo']."', conteudo='".$_GET['conteudo']."', texto='".$_GET['txtobs']."',tipo='".$_GET['tipo']."' where codigo='".$_GET['codigo']."'";
+	$SQL1 = "UPDATE diario SET turma='".$_GET['turma']."',materia='".$_GET['disciplina']."',periodo='".$_GET['periodo']."', conteudo='".$_GET['conteudo']."',data='".revertedata($_GET['txtdata'])."', texto='".$_GET['txtobs']."',tipo='".$_GET['tipo']."' where codigo='".$_GET['codigo']."'";
 	$sucesso = mysqli_query($db,$SQL1);
 	
 	if($sucesso)
