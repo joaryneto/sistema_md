@@ -395,7 +395,7 @@ function gravarrio(sv,codigo)
 								<? } ?>
 								
 								</div>
-								<? if(!Empty($_GET['codigo']) && Empty($_GET['frequencia']) && Empty($_GET['nota'])){?>
+								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota'])){?>
 								<div class="form-group col-md-5 m-t-20"><label>Pesquisa :</label>
                                 <input type="text" name="pesquisa" id="pesquisa" onkeyup="" class="form-control"  autocomplete="off"  value="" placeholder="Pesquisar conteúdo">
 								</div>
