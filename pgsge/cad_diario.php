@@ -458,9 +458,9 @@ $("#check[]").on('change', function() {
 												 
 										  ?>
                                             <tr>
-                                                <td><? if(Empty($row['foto'])){echo '<img style="width: 40px" src="template/images/semfoto.png">';}else{echo "TESTE 2";}?></td>
-                                                <td><? echo $row['nome'];?></td>
-												<td><? 
+                                                <td data-title="Foto"><? if(Empty($row['foto'])){echo '<img style="width: 40px" src="template/images/semfoto.png">';}else{echo "TESTE 2";}?></td>
+                                                <td data-title="Nome"><? echo $row['nome'];?></td>
+												<td data-title="Presença"><? 
 												     
 
 													 $SQL = "SELECT codigo,falta FROM frequencia where matricula=".$row['codigo']." and diario=".$_GET['codigo']."";
@@ -495,7 +495,7 @@ $("#check[]").on('change', function() {
 													  
 													  
 													  </td>
-												<td><div id="<? echo $row['codigo'];?>">
+												<td data-title="Faltas no Periodo"><div id="<? echo $row['codigo'];?>">
 												<? 
 											         $ano = date('Y');
 													 $SQL7 = "SELECT falta as qtd FROM frequencia where matricula=".$row['codigo']." and disciplina=".$disciplina." and periodo=".$periodo." and falta=1 and YEAR(data)=$ano ";
@@ -585,9 +585,9 @@ $("#check[]").on('change', function() {
 												 
 										  ?>
                                             <tr>
-                                                <td><? if(Empty($row['foto'])){echo '<img style="width: 40px" src="template/images/semfoto.png">';}else{echo "TESTE 2";}?></td>
-                                                <td><? echo $row['nome'];?></td>
-												<td><? 
+                                                <td data-title="Foto"><? if(Empty($row['foto'])){echo '<img style="width: 40px" src="template/images/semfoto.png">';}else{echo "TESTE 2";}?></td>
+                                                <td data-title="Nome"><? echo $row['nome'];?></td>
+												<td data-title="Nota"><? 
 												     
 													 $SQL9 = "SELECT codigo,nota,falta FROM frequencia where matricula='".$row['codigo']."' and diario='".$_GET['codigo']."'";
 													 $RES9 = mysqli_query($db,$SQL9);
@@ -610,7 +610,7 @@ $("#check[]").on('change', function() {
 													   ?>
 													  
 													  </td>
-												<td><div id="<? echo $rows1['codigo'];?>">
+												<td data-title="Nota final"><div id="<? echo $rows1['codigo'];?>">
 												<? 
 											         
 													 $SQL10 = "SELECT sum(nota) as qtd FROM frequencia where matricula='".$row['codigo']."' and disciplina='".$disciplina."' and periodo='".$periodo."' and falta=0 and diario=".$row['coddiario']."";
