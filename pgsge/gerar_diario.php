@@ -444,7 +444,7 @@ $cnpj = $_GET['cnpj'];
   
   
 $dat = date('ymdhis');
-$nome = ''.$professor.$ano.'_'.$dat.''; 
+$nome = ''.$professor.$ano.''; 
 $lnk = './arquivos/diario/'.$nome.'.pdf';  
 // Load content from html file 
 //$vb = file_get_contents("pgsge/rel_producao.php"); 
