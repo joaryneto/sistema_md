@@ -468,4 +468,6 @@ $dompdf->stream("relatorio", array("Attachment" => 0));
 $output = $dompdf->output();
 file_put_contents(''.$lnk.'', $output);
 
+print('<script> window.location.href = "pdf.php?link='.$lnk.'"; </script>');
+
 ?>
