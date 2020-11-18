@@ -13,7 +13,7 @@ $lnk = $_GET['link'];
 header('Content-Type: application/pdf');
 header('Content-Length: 202');
 header('Content-Disposition: attachment; name="field2"; filename="'.$lnk.'"');
-$fp=fopen(''.$lnk.'','r');
+$fp=fopen('arquivo/diario/'.$lnk.'','r');
 fpassthru($fp);
 fclose($fp);
 

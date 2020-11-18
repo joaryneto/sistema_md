@@ -1,7 +1,11 @@
 <?
 
-function formatodatahora($data){
+function formatodata($data){
     return date("d/m/Y", strtotime($data));
+}
+
+function formatodatahora($data){
+    return date("d/m/Y H:i:s", strtotime($data));
 }
 
 function formatohora($horas){
@@ -11,6 +15,7 @@ function formatohora($horas){
 date_default_timezone_set('America/Cuiaba');
 $data = date('Y-m-d');
 $hora = date('H:i:s');
+$datahora = date('Y-m-d H:i:s');
 
 function revertedata($data){
 

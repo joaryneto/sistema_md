@@ -154,7 +154,7 @@ $cnpj = $_GET['cnpj'];
   $vb .='<table>';
   $vb .='<tbody>';
   $vb .='<tr>';
-  $vb .='<td><img src="http://sistema.sge/template/images/logo.png" class="logo"/></td>';
+  $vb .='<td><img src="https://app.ectecnologia.com.br/template/images/logo.png" class="logo"/></td>';
   $vb .='<td><div class="tituloh">Escola Mundo do Saber</div></td>';
   $vb .='</tr>';
   $vb .='</tbody>';
@@ -200,7 +200,7 @@ $cnpj = $_GET['cnpj'];
   $vb .='</tbody>';
   $vb .='</table>';
 
-  $SQL1 = "select count(diario.codigo) as qtd from diario inner join turmas_professor on turmas_professor.turma=diario.turma where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and diario.periodo=".$periodo."";
+  $SQL1 = "select count(diario.codigo) as qtd from diario inner join turmas_professor on turmas_professor.turma=diario.turma where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and diario.periodo=".$periodo." and diario.status=1";
   $RES1 = mysqli_query($db,$SQL1);
   $row1 = mysqli_fetch_assoc($RES1);
   $valor1 = 1+$row1['qtd'];
@@ -213,7 +213,7 @@ $cnpj = $_GET['cnpj'];
   
   $SQL1 = "select count(diario.codigo) as qtd from diario 
   inner join turmas_professor on turmas_professor.turma=diario.turma 
-  where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and tipo=2  and diario.periodo=".$periodo."";
+  where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and tipo=2  and diario.periodo=".$periodo." and diario.status=1";
   $RES1 = mysqli_query($db,$SQL1);
   $row2 = mysqli_fetch_assoc($RES1);
   $valor2 = 2+$row2['qtd'];
@@ -228,7 +228,7 @@ $cnpj = $_GET['cnpj'];
    
   $SQL1 = "select diario.data from diario 
   inner join turmas_professor on turmas_professor.turma=diario.turma 
-  where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas."  and diario.periodo=".$periodo."";
+  where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas."  and diario.periodo=".$periodo."  and diario.status=1";
   $RES1 = mysqli_query($db,$SQL1);
   while($row = mysqli_fetch_assoc($RES1)) 
   {
@@ -239,7 +239,7 @@ $cnpj = $_GET['cnpj'];
   
   $SQL1 = "select diario.data from diario 
   inner join turmas_professor on turmas_professor.turma=diario.turma 
-  where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and tipo=2  and diario.periodo=".$periodo."";
+  where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and tipo=2  and diario.periodo=".$periodo."  and diario.status=1";
   $RES1 = mysqli_query($db,$SQL1);
   while($row = mysqli_fetch_assoc($RES1)) 
   {
@@ -256,7 +256,7 @@ $cnpj = $_GET['cnpj'];
   $vb .='<th>Dia</th>';
   $SQL2 = "select diario.data from diario 
   inner join turmas_professor on turmas_professor.turma=diario.turma 
-  where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and diario.periodo=".$periodo."";
+  where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and diario.periodo=".$periodo."  and diario.status=1";
   $RES2 = mysqli_query($db,$SQL2);
   while($row = mysqli_fetch_assoc($RES2)) 
   {
@@ -266,7 +266,7 @@ $cnpj = $_GET['cnpj'];
   
   $SQL2 = "select diario.data from diario 
   inner join turmas_professor on turmas_professor.turma=diario.turma 
-  where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and diario.tipo=2  and diario.periodo=".$periodo."";
+  where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and diario.tipo=2  and diario.periodo=".$periodo."  and diario.status=1";
   $RES2 = mysqli_query($db,$SQL2);
   while($row = mysqli_fetch_assoc($RES2)) 
   {
@@ -281,7 +281,7 @@ $cnpj = $_GET['cnpj'];
    
   $count = 1;
   $SQL3 = "select matriculas.codigo,matriculas.matricula,matriculas.nome from matriculas 
-  inner join turmas_professor on turmas_professor.turma=matriculas.turma where turmas_professor.usuario=".$professor."";
+  inner join turmas_professor on turmas_professor.turma=matriculas.turma where turmas_professor.usuario=".$professor." and matriculas.turma=".$turmas."";
   $RES3 = mysqli_query($db,$SQL3);
   while($row = mysqli_fetch_assoc($RES3)) 
   {
@@ -293,7 +293,7 @@ $cnpj = $_GET['cnpj'];
          $falta = 0;
 		 $SQL1 = "select diario.data, diario.codigo from diario 
 		 inner join turmas_professor on turmas_professor.turma=diario.turma 
-		 where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and diario.periodo=".$periodo."";
+		 where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and diario.periodo=".$periodo."  and diario.status=1";
 		 $RES1 = mysqli_query($db,$SQL1);
 		 while($rrow2 = mysqli_fetch_assoc($RES1)) 
 		 {
@@ -323,7 +323,7 @@ $cnpj = $_GET['cnpj'];
 		 
 		 $RSQL1 = "select diario.data, diario.codigo from diario 
 		 inner join turmas_professor on turmas_professor.turma=diario.turma 
-		 where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and tipo=2 and diario.periodo=".$periodo."";
+		 where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and tipo=2 and diario.periodo=".$periodo."  and diario.status=1";
 		 $RRES1 = mysqli_query($db,$RSQL1);
 		 while($rrow2 = mysqli_fetch_assoc($RRES1)) 
 		 {
@@ -411,7 +411,7 @@ $cnpj = $_GET['cnpj'];
   $aucount = 1;
   $SQL1 = "select diario.usuario,diario.data,diario.conteudo, diario.texto from diario 
   inner join turmas_professor on turmas_professor.turma=diario.turma 
-  where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and diario.periodo=".$periodo."";
+  where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and diario.periodo=".$periodo."  and diario.status=1";
   $RES1 = mysqli_query($db,$SQL1);
   while($row = mysqli_fetch_assoc($RES1)) 
   {
@@ -442,8 +442,17 @@ $cnpj = $_GET['cnpj'];
   $vb .='</body>';
   $vb .='</html>';
   
+  
+$dat = date('ymdhis');
+$nome = ''.$professor.$ano.'_'.$dat.''; 
+$lnk = './arquivos/diario/'.$nome.'.pdf';  
 // Load content from html file 
 //$vb = file_get_contents("pgsge/rel_producao.php"); 
+
+$SQL = "INSERT INTO arquivos (sistema,usuario,arquivo,data,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$lnk."','".$datahora."',1);";
+$RES = mysqli_query($db,$SQL);
+
+//$RES->Close();
 
 $dompdf->loadHtml($vb); 
  
@@ -453,16 +462,10 @@ $dompdf->setPaper('A4', 'landscape');
 // Render the HTML as PDF 
 $dompdf->render(); 
 
-$nome = $professor.$ano.'.pdf';
-
 // Output the generated PDF (1 = download and 0 = preview) 
-$dompdf->stream($nome, array("Attachment" => 0));
+$dompdf->stream('teste.pdf', array("Attachment" => 1));
 
 $output = $dompdf->output();
-file_put_contents(''.$nome.'', $output);
+file_put_contents(''.$lnk.'', $output);
 
 ?>
-<script>
-window.location.href = "xml.php?link=<?=$nome;?>";
-//window.open("<?=$nome;?>");
-</script>

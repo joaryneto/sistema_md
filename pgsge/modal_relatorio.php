@@ -119,7 +119,42 @@ function gravar()
 <button type="button" onclick="gravar();" class="btn btn-info"><i class="fa fa-plus-circle"></i> Gerar</button>
 </div>
 <div class="form-group col-md-12 m-t-20" id="loadmodal">
-<div>
+</div>
+<script>
+
+setInterval(function()
+{ 
+   
+   ajaxLoader('?br=atu_arquivos&ap=3";}?>','m_arquivos','GET'); 
+}, 1000);
+							
+</script>
+<div class="form-group col-md-12 m-t-20" id="loadmodal">
+<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+	<table class="table pmd-table">
+		<thead>
+			<tr>
+				<th>Data</th>
+				<th>Link</th>
+			</tr>
+		</thead>
+		<tbody id="m_arquivos">
+		<?
+		
+		  $SQL = "SELECT data,arquivo FROM arquivos where usuario='".$_SESSION['usuario']."' order by data desc limit 5;";
+		  $res = mysqli_query($db,$SQL); 
+		  while($row = mysqli_fetch_array($res))
+		  {
+		  ?>
+			<tr>
+				<td data-title="Data"><? echo formatodatahora($row['data']);?></td>
+				<td data-title="Link"><a class="fa fa-edit" target="_brank" href="<? echo $row['arquivo']?>" style="font-size: 150%;"><a></td>
+			</tr>
+		  <? } ?>
+		</tbody>
+	</table>
+  </div>
+</div>
 </form>										 
 <div class="modal-footer">
 </div>
