@@ -19,20 +19,20 @@ function data(valor)
 
 function bccliente(nome)
 {
-	//if(event.key === 'Enter') 
-	//{
-	   ///$('#codigo').val('');
-	//   requestPage2('?br=atu_pesquisa&pesquisa='+ nome +'&tipo=2&ap=1','pesquisacliente','GET');
-	//}
-	
-	swal('Atenção', 'Selecione um cliente.');
+	if(nome == "")
+	{
+	    swal('Atenção', 'Campo cliente branco.');
+	}
+	else
+	{
+	   requestPage2('?br=atu_pesquisa&pesquisa='+ nome +'&tipo=3&ap=1','pesquisacliente','GET');
+    }
 }
 
-function cliente(codigo,nome)
+function cliente()
 {	
-
     var data = document.getElementById('dataagenda').value;
-	var hora = document.getElementById('dataagenda').value;
+	var hora = document.getElementById('hora').value;
 	var nome = document.getElementById('nome').value;
 	var codigo = document.getElementById('codigo').value;
 	
@@ -54,7 +54,12 @@ function cliente(codigo,nome)
 	}
 }
 
-function proximo()
+function proximo1()
+{
+	requestPage2('?br=atu_pesquisa&data='+ document.getElementById('dataagenda').value +'&ap=2','modals','GET');
+}
+
+function proximo2()
 {
 	requestPage2('?br=atu_pesquisa&data='+ document.getElementById('dataagenda').value +'&ap=2','modals','GET');
 }
@@ -98,8 +103,8 @@ if(@$_GET['ap'] == 1)
 }
 else if($_GET['ap'] == 2)
 {
-	$_SESSION['adata'] = $_GET['data'];
-	$_SESSION['ahora'] = $_GET['hora'];
+	$_SESSION['adata'] = @$_GET['data'];
+	$_SESSION['ahora'] = @$_GET['hora'];
 	
 ?>
 <div class="modal-header">
@@ -110,10 +115,10 @@ else if($_GET['ap'] == 2)
 <form class="m-t-40 row">
 <div class="modal-body">
 <form class="m-t-40 row">
-    <?if(Empty($_GET['nome']) and Empty($_GET['codigo']))
+    <?if(!Empty($_GET['nome']) and !Empty($_GET['codigo']))
 	{
-		$_SESSION['nome'] = $_GET['nome'];
-        $_SESSION['codcliente']	= $_GET['codigo'];
+		$_SESSION['nome'] = @$_GET['nome'];
+        $_SESSION['codcliente']	= @$_GET['codigo'];
 		
 	?>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="inputcliente"><label for="first-name">Nome:</label>
@@ -175,7 +180,35 @@ else if($_GET['ap'] == 2)
 	<?
 
 }
-else if($_GET['ap'] == 3)
+else if()
+{
+	?>
+<div class="modal-header">
+<h2 class="pmd-card-title-text">Gerar Diario </h2>
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form class="m-t-40 row">
+<div class="modal-body">
+<form class="m-t-40 row">
+    <?if(!Empty($_GET['nome']) and !Empty($_GET['codigo']))
+	{
+		$_SESSION['nome'] = @$_GET['nome'];
+        $_SESSION['codcliente']	= @$_GET['codigo'];
+		
+	?>
+	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="inputcliente"><label for="first-name">Nome:</label>
+	<input type="text" name="nome" id="nome" value="" onkeyup="" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required" />
+	</div>	
+	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="cliente();"><i class="fa fa-plus-circle"></i> Proximo</a>
+		
+</form>
+		</div>
+		<div class="modal-footer">
+</div>
+	<?
+}
+else if($_GET['ap'] == 4)
 {
    	?>
 	<select name="hora2" id="hora2" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required">
