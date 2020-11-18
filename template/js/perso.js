@@ -17,7 +17,7 @@ function logar()
 
 function pesquisar(pesquisa)
 {
-	requestPage2('?br=atu_pesquisa&pesquisa='+ pesquisa +'&ap=4','load','GET');
+	requestPage2('?br=atu_pesquisa&pesquisa='+ pesquisa +'&load=1','load','GET');
 }
 
 function agenda(tipo,codigo,cliente,data,hora,nome)
@@ -57,8 +57,8 @@ function agendar()
 
 $('#aagenda').on('click',function()
 {	
-      $('#agenda').modal('show');
-	  requestPage2('?br=atu_pesquisa&tipo=1&ap=1','loadfagenda','GET');
+      $('#modalusuario').modal('show');
+	  requestPage2('?br=atu_pesquisa&tipo=1&ap=1','modals','GET');
 });
 
 $('#reagendarr').on('click',function(){	

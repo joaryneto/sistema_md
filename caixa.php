@@ -393,7 +393,7 @@ function auto()
 {
   document.getElementById("codigo").focus();
 }
- 
+
 </script>			
 <div class="container-fluid bg-template mb-4">
             <div class="row hn-154 position-relative">

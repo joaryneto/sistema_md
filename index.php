@@ -142,7 +142,49 @@ else
             </div>
         </div>
         <!-- header ends -->
-        
+        <?if($_SESSION['nosistema'] == "agsl"){?>
+        <div class="swiper-container introduction vh-100">
+            <div class="swiper-wrapper">
+                <!--<div class="swiper-slide overflow-hidden bg-gradient-red text-white">
+                    <div class="row no-gutters h-100">
+                        <div class="col align-self-center text-center">
+                            <img src="template/images/cabelos.png" alt="" class="mw-100 mx-auto mb-4">
+                            <br><br>
+                            <h2 class="text-uppercase font-weight-light">O que você procura?</h2>
+                             <p class="text-mute">
+							 <div style="marigin: 0px">
+			                   <input type="text" style="width: 300px; position: absolute; left: 50%; right: 50%;" name="cnome" id="cnome" placeholder="Digite sua cidade" value="" class="form-control" required="required">
+		                     </div>
+							</p>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="swiper-slide overflow-hidden bg-gradient-purple text-white">
+                    <div class="row no-gutters h-100">
+                        <div class="col align-self-center text-center">
+                            <img src="template/images/hair.png" height="350px" alt="" class="mw-100 mx-auto mb-4">
+                            <br><br>
+                            <h2 class="text-uppercase font-weight-light">Beleza e seu bem estar em suas mãos.</h2>
+                            <p class="text-mute"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide overflow-hidden bg-gradient-purple text-white">
+                    <div class="row no-gutters h-100">
+                        <div class="col align-self-center text-center">
+                            <img src="template/images/cabelos.png" height="350px" alt="" class="mw-100 mx-auto mb-4">
+                            <br><br>
+                            <h2 class="text-uppercase font-weight-light">Uma experiencia unica!</h2>
+                            <p class="text-mute">Encontre os melhores Spa & Cabelereiros.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination bullets-white text-left">teste</div>
+        </div>		
+		
+		<?} else if($_SESSION['nosistema'] == "agsge"){?>
         <div class="swiper-container introduction vh-100">
             <div class="swiper-wrapper">
                 <div class="swiper-slide overflow-hidden bg-gradient-cyan text-white">
@@ -179,6 +221,7 @@ else
             <!-- Add Pagination -->
             <div class="swiper-pagination bullets-white text-left"></div>
         </div>
+		<?}?>
         <a href="login.php" class="btn btn-light btn-lg button-fab right-bottom text-uppercase">Logar <i class="material-icons vm">arrow_forward</i></a>
     </div>
     <!-- wrapper ends -->

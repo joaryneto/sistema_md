@@ -1,59 +1,84 @@
-<?
-ob_start();
-session_start();
+<script>
 
-
-if($_GET['ap'] == 1)
+function data(valor)
 {
-  if($_GET['tipo'] == 1)
-  {
-	  ?>
-	    <div class="form-group pmd-textfield pmd-textfield-floating-label"><label for="first-name">Pesquisar Cliente:</label>
-			<input name="nome" id="nome" type="text" onkeyup="bcliente(this.value)" style="width:300px" autocomplete="off" class="form-control" required="required" />
-			<div id="pesquisacliente"></div>
-		</div>						
-	   <?
-  }
-  else
-  {
-?>
-     <div class="tableFixHead" id="pcliente"> 
-       <table class="table table-hover">
-         <tbody id="itenss">
-        <?
-		unset($_SESSION['codcliente']);
-		unset($_SESSION['nome']);
-		
-        $pesquisa = $_GET['pesquisa'];
-
-         $SQL = "SELECT codigo,nome FROM clientes where nome like '%".$pesquisa."%' LIMIT 10;";
-         $RES = mysqli_query($db3,$SQL);
-         while($row = mysqli_fetch_array($RES))
-         {
-	   ?>
-	   <tr Onclick="cliente('<?=$row['codigo'];?>','<?=$row['nome'];?>');"><td colspan="3"><?=$row['nome']?></td></tr>
-	
-	   <?
-          }
-       ?>
-       </tbody>
-      </table>
-    </div>
-
-   <?
-  }
-}
-else if($_GET['ap'] == 2)
-{   
-	if($_GET['tipo'] == 1)
+	if(event.key === 'Enter') 
 	{
-		$_SESSION['codcliente'] = $_GET['codigo'];
-		$_SESSION['nome'] = $_GET['nome'];
+	  if(valor == "")
+	  {
+	    swal('Atenção', 'Selecione uma data.');
+	  }
+	  else
+   	  {
+	      //$('#codigo').val(codigo);
+		$( "dataagenda" ).datepicker( "hide" );
+	    requestPage2('?br=atu_pesquisa&codigo=<?=$_SESSION['codcliente'];?>&data='+ valor +'&tipo=2&ap=2','loadfagenda','GET');
+	  }
+	}
+}
+
+function bccliente(nome)
+{
+	//if(event.key === 'Enter') 
+	//{
+	   ///$('#codigo').val('');
+	//   requestPage2('?br=atu_pesquisa&pesquisa='+ nome +'&tipo=2&ap=1','pesquisacliente','GET');
+	//}
+	
+	swal('Atenção', 'Selecione um cliente.');
+}
+
+function cliente(codigo,nome)
+{	
+
+    var data = document.getElementById('dataagenda').value;
+	var hora = document.getElementById('dataagenda').value;
+	var nome = document.getElementById('nome').value;
+	var codigo = document.getElementById('codigo').value;
+	
+	if(valor == "")
+	{
+	    swal('Atenção', 'Selecione uma data.');
+	}
+	else if(valor == "")
+	{
+	    swal('Atenção', 'Selecione uma data.');
+	}
+	else if(valor == "")
+	{
+	    swal('Atenção', 'Selecione uma data.');
+	}
+	else
+	{
+	    requestPage2('?br=atu_pesquisa&data='+ data +'&hora='+ hora +'&nome='+ cliente +'&codigo='+ cliente +'&ap=2','modals','GET');
+	}
+}
+
+function proximo()
+{
+	requestPage2('?br=atu_pesquisa&data='+ document.getElementById('dataagenda').value +'&ap=2','modals','GET');
+}
+
+</script>
+<?
+
+if(@$_GET['ap'] == 1)
+{   
+		$_SESSION['codcliente'] = @$_GET['codigo'];
+		$_SESSION['nome'] = @$_GET['nome'];
 		
 		?>
+<div class="modal-header">
+<h2 class="pmd-card-title-text">Gerar Diario </h2>
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form class="m-t-40 row">
+<div class="modal-body">
+<form class="m-t-40 row">
 		<div class="form-group pmd-textfield pmd-textfield-floating-label" id="inputcliente">
 		<label for="first-name">Data:</label>
-			<input name="dataagenda" id="dataagenda" OnChange="data(this.value);" type="text" autocomplete="off" class="form-control" required="required" />
+			<input name="dataagenda" id="dataagenda" type="text" autocomplete="off" class="form-control" required="required" />
 		</div>
 		<script>
 		jQuery('#dataagenda').datepicker({
@@ -64,54 +89,91 @@ else if($_GET['ap'] == 2)
 				orientation: "bottom left"
  		   });
  	    </script>
+		<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="proximo();"><i class="fa fa-plus-circle"></i> Proximo</a>
+		</form>
+		</div>
+		<div class="modal-footer">
+</div>
 		<?
-	}
-	else
+}
+else if($_GET['ap'] == 2)
+{
+	$_SESSION['adata'] = $_GET['data'];
+	$_SESSION['ahora'] = $_GET['hora'];
+	
+?>
+<div class="modal-header">
+<h2 class="pmd-card-title-text">Gerar Diario </h2>
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form class="m-t-40 row">
+<div class="modal-body">
+<form class="m-t-40 row">
+    <?if(Empty($_GET['nome']) and Empty($_GET['codigo']))
 	{
-   	?>
+		$_SESSION['nome'] = $_GET['nome'];
+        $_SESSION['codcliente']	= $_GET['codigo'];
+		
+	?>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="inputcliente"><label for="first-name">Nome:</label>
 	<input type="text" name="nome" id="nome" value="<?=$_SESSION['nome'];?>" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required" disabled />
 	<input type="hidden" name="codigo" id="codigo" value="<?=$_SESSION['codcliente'];?>" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required">
 	</div>
+    <? } ?>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="inputcliente"><label for="first-name">Data:</label>
-	<input type="text" name="dataagenda" id="dataagenda" value="<?=$_GET['data'];?>" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required" disabled />
+	<input type="text" name="dataagenda" id="dataagenda" value="<?=$_SESSION['adata'];?>" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required" disabled />
 	</div>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="inputcliente"><label for="first-name">Horario:</label>
 	<select name="hora" id="hora" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required">
-	<option value=""></option>
+	<option value="">Horarios</option>
 		<?
 		
 		$data = revertedata($_GET['data']);
 		
-		
-		$SQL1 = "SELECT hora FROM horarios where sistema='".$_SESSION['sistema']."'";
+		$SQL1 = "SELECT horarios.hora, agendamento.nome FROM horarios left join agendamento on agendamento.hora=horarios.hora ORDER BY horarios.hora asc";
 		$RES1 = mysqli_query($db3,$SQL1);
 		while($row1 = mysqli_fetch_array($RES1))
 		{
-		  $x = 0;
-		  $SQL2 = "SELECT hora FROM agendamento where data='".$data."' and hora='".$row1['hora']."'";
+			
+		  /*$x = 0;
+		  $SQL2 = "SELECT hora FROM agendamento left join where data='".$data."' and hora='".$row1['hora']."'";
 		  $RES2 = mysqli_query($db3,$SQL2);
 		  while($row2 = mysqli_fetch_array($RES2))
 		  {
-		     //$rhora = formatohora($row['inicio']);
 			 $x = 1;
-		  }
+		  }*/
 		  
-		  if($x == 1)
-		  {
+		  //if($x == 1)
+		  //{
+			  if(Empty($_SESSION['ahora']))
+			  {
+				 $selectd = ""; 
+			  }
+			  else
+			  {
+				 $selectd = "selected";  
+			  }
 			  
-		  }
-		  else
-		  {
-			  echo "<option value='".$row1['hora']."'>".$row1['hora']."</option>";
-		  }
+			  echo "<option value='".$row1['hora']."' ".$selectd.">".$row1['hora']." - ".$row1['nome']."</option>";
+		 // }
+		 // else
+		  //{
+		//	  echo "<option value='".$row1['hora']."'>".$row1['hora']." </option>";
+		  //}
 		}
 
 		?>
 	</select>
 	</div>
+	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="cliente();"><i class="fa fa-plus-circle"></i> Proximo</a>
+		
+</form>
+		</div>
+		<div class="modal-footer">
+</div>
 	<?
-	}
+
 }
 else if($_GET['ap'] == 3)
 {
@@ -147,7 +209,7 @@ else if($_GET['ap'] == 3)
 
 	<?
 }
-else if($_GET['ap'] == 4)
+if(@$_GET['load'] == 1)
 {
 	            
 	$SQL = "SELECT agendamento.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento.data,agendamento.hora FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente where agendamento.sistema='".$_SESSION['sistema']."' and clientes.nome like '%".$_GET['pesquisa']."%' and agendamento.status=1 ORDER BY agendamento.codigo asc";
@@ -182,11 +244,6 @@ else if($_GET['ap'] == 4)
 			  
 	}
 }
-else if($_GET['ap'] == 5)
-{
-	
-}
-
 ?>
 
 

@@ -389,7 +389,7 @@ function isMobile()
             </div>
         </div>
 		<div class="menu pmd-floating-action" role="navigation" style="bottom: 80px;"> 
-        <button class="pmd-floating-action-btn btn btn-lg pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" id="aagenda" data-title="Concluir"> 
+        <button class="pmd-floating-action-btn btn btn-lg pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" id="aagenda" data-title="Agendar"> 
             <span class="pmd-floating-hidden">Primary</span>
             <i class="material-icons pmd-sm">perm_contact_calendar</i> 
         </button> 
@@ -399,48 +399,6 @@ function isMobile()
 </div>
 
 <? if($_SESSION['tipo'] == 3){?>
-<script>
-
-function data(valor)
-{
-	if(event.key === 'Enter') 
-	{
-	  if(valor == "")
-	  {
-	    swal('Atenção', 'Selecione uma data.');
-	  }
-	  else
-   	  {
-	      //$('#codigo').val(codigo);
-		$( "dataagenda" ).datepicker( "hide" );
-	    requestPage2('?br=atu_pesquisa&codigo=<?=$_SESSION['codcliente'];?>&data='+ valor +'&tipo=2&ap=2','loadfagenda','GET');
-	  }
-	}
-}
-
-function bcliente(nome)
-{
-	if(event.key === 'Enter') 
-	{
-	   $('#codigo').val('');
-	   requestPage2('?br=atu_pesquisa&pesquisa='+ nome +'&tipo=2&ap=1','pesquisacliente','GET');
-	}
-}
-
-function cliente(codigo,nome)
-{	
-	if(codigo == "")
-	{
-	    swal('Atenção', 'Selecione um cliente.');
-	}
-	else
-   	{
-	      //$('#codigo').val(codigo);
-	    requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&nome='+ nome +'&tipo=1&ap=2','loadfagenda','GET');
-	}
-}
-
-</script>
 <div id="agenda" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
             <div class="modal-content">
