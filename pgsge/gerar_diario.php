@@ -463,7 +463,7 @@ $dompdf->setPaper('A4', 'landscape');
 $dompdf->render(); 
 
 // Output the generated PDF (1 = download and 0 = preview) 
-$dompdf->stream($nome, array("Attachment" => 0));
+$dompdf->stream("relatorio", array("Attachment" => 0));
 
 $output = $dompdf->output();
 file_put_contents(''.$lnk.'', $output);
