@@ -444,7 +444,7 @@ $cnpj = $_GET['cnpj'];
   
   
 $dat = date('ymdhis');
-$nome = ''.$professor.$ano.''; 
+$nome = ''.$professor.$ano.'_'.$dat.''; 
 $lnk = './arquivos/diario/'.$nome.'.pdf';  
 // Load content from html file 
 //$vb = file_get_contents("pgsge/rel_producao.php"); 
@@ -463,7 +463,7 @@ $dompdf->setPaper('A4', 'landscape');
 $dompdf->render(); 
 
 // Output the generated PDF (1 = download and 0 = preview) 
-$dompdf->stream('teste.pdf', array("Attachment" => 0));
+$dompdf->stream($nome, array("Attachment" => 0));
 
 $output = $dompdf->output();
 file_put_contents(''.$lnk.'', $output);
