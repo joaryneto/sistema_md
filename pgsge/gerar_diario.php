@@ -57,7 +57,7 @@ $cnpj = $_GET['cnpj'];
                 margin-top: 2.0cm;
                 margin-left: 0.5cm;
                 margin-right: 0.5cm;
-                margin-bottom: 2cm;
+                margin-bottom: 0.5cm;
 				font-size: 8px;
 				color:#000;
             }
@@ -127,12 +127,12 @@ $cnpj = $_GET['cnpj'];
 				border: 1px solid black;
 				border-collapse: collapse;
 				text-align: center;
+				font-size: 8px;
 			}
 			table th
 			{
 				border: 1px solid black; 
 				border-collapse: collapse;
-				width: 100px;
 				background-color: #559fd2;
 				font-weight: bold;
 				font-size: 10px;
@@ -286,9 +286,9 @@ $cnpj = $_GET['cnpj'];
   while($row = mysqli_fetch_assoc($RES3)) 
   {
 	     
-         $vb .='<td>'.str_pad($count, 4 , '0' , STR_PAD_LEFT).'</td>';
-         $vb .='<td>'.$row['matricula'].'</td>';
-         $vb .='<td colspan="2">'.$row['nome'].'</td>';
+         $vb .='<td style="font-size: 8px">'.str_pad($count, 4 , '0' , STR_PAD_LEFT).'</td>';
+         $vb .='<td style=" font-size: 8px">'.$row['matricula'].'</td>';
+         $vb .='<td style="width: 100px; text-align: left; font-size: 8px" colspan="2">'.$row['nome'].'</td>';
    
          $falta = 0;
 		 $SQL1 = "select diario.data, diario.codigo from diario 
@@ -305,12 +305,12 @@ $cnpj = $_GET['cnpj'];
                  
 	          if(!Empty($drow['data']))
 			  {
-                   $vb .='<td>P</td>';
+                   $vb .='<td style="font-size: 6px">P</td>';
 				   
 			  }
 			  else
 			  {
-		         $vb .='<td>F</td>'; 
+		         $vb .='<td style="font-size: 6px">F</td>'; 
 				 $falta ++;
 			  }
 			  

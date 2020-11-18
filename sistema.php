@@ -4,6 +4,8 @@ ob_start();
 
 session_start();
 
+date_default_timezone_set('America/Cuiaba');
+
 if($_SESSION['usuario'] == "")
 {
 	print("<script>window.location.href='index.php';</script>");
