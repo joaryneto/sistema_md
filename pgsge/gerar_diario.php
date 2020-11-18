@@ -288,7 +288,7 @@ $cnpj = $_GET['cnpj'];
 	     
          $vb .='<td style="font-size: 8px">'.str_pad($count, 4 , '0' , STR_PAD_LEFT).'</td>';
          $vb .='<td style=" font-size: 8px">'.$row['matricula'].'</td>';
-         $vb .='<td style="width: 100px; text-align: left; font-size: 8px" colspan="2">'.$row['nome'].'</td>';
+         $vb .='<td style="width: 130px; text-align: left; font-size: 8px" colspan="2">'.$row['nome'].'</td>';
    
          $falta = 0;
 		 $SQL1 = "select diario.data, diario.codigo from diario 
@@ -463,7 +463,7 @@ $dompdf->setPaper('A4', 'landscape');
 $dompdf->render(); 
 
 // Output the generated PDF (1 = download and 0 = preview) 
-$dompdf->stream('teste.pdf', array("Attachment" => 1));
+$dompdf->stream('teste.pdf', array("Attachment" => 0));
 
 $output = $dompdf->output();
 file_put_contents(''.$lnk.'', $output);
