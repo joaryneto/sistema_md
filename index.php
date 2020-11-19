@@ -134,7 +134,45 @@ require_once("./load/load.php");
             </div>
         </div>
         <!-- header ends -->
-        <?if($_SESSION['tipo'] == 2){?>
+		<?if($_SESSION['tipo'] == 1){?>
+		<?} else if($_SESSION['tipo'] == 2){?>
+        <div class="swiper-container introduction vh-100">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide overflow-hidden bg-gradient-cyan text-white">
+                    <div class="row no-gutters h-100">
+                        <div class="col align-self-center text-center">
+                            <img src="template/images/escolar_01.png" height="350px" alt="" class="mw-100 mx-auto mb-4">
+                            <br><br>
+                            <h2 class="text-uppercase font-weight-light">Descubra como é bom estudar online.</h2>
+                            <p class="text-mute"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide overflow-hidden bg-gradient-purple text-white">
+                    <div class="row no-gutters h-100">
+                        <div class="col align-self-center text-center">
+                            <img src="template/images/escolar_02.png" height="350px" alt="" class="mw-100 mx-auto mb-4">
+                            <br><br>
+                            <h2 class="text-uppercase font-weight-light">Uma experiencia unica!</h2>
+                            <p class="text-mute">Estudar online nunca ficou tão facil.</p>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="swiper-slide overflow-hidden bg-gradient-red text-white">
+                    <div class="row no-gutters h-100">
+                        <div class="col align-self-center text-center">
+                            <img src="template/images/fruits.png" alt="" class="mw-100 mx-auto mb-4">
+                            <br><br>
+                            <h2 class="text-uppercase font-weight-light">Health is wealth! your presence</h2>
+                            <p class="text-mute">Lorem ipsum dolor sit amet, consect etur adipiscing elit. Sndisse conv allis.</p>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination bullets-white text-left"></div>
+        </div>
+		<?}else if($_SESSION['tipo'] == 3){?>
         <div class="swiper-container introduction vh-100">
             <div class="swiper-wrapper">
                 <!--<div class="swiper-slide overflow-hidden bg-gradient-red text-white">
@@ -174,45 +212,7 @@ require_once("./load/load.php");
             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination bullets-white text-left">teste</div>
-        </div>		
-		
-		<?} else if($_SESSION['tipo'] == 3){?>
-        <div class="swiper-container introduction vh-100">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide overflow-hidden bg-gradient-cyan text-white">
-                    <div class="row no-gutters h-100">
-                        <div class="col align-self-center text-center">
-                            <img src="template/images/escolar_01.png" height="350px" alt="" class="mw-100 mx-auto mb-4">
-                            <br><br>
-                            <h2 class="text-uppercase font-weight-light">Descubra como é bom estudar online.</h2>
-                            <p class="text-mute"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide overflow-hidden bg-gradient-purple text-white">
-                    <div class="row no-gutters h-100">
-                        <div class="col align-self-center text-center">
-                            <img src="template/images/escolar_02.png" height="350px" alt="" class="mw-100 mx-auto mb-4">
-                            <br><br>
-                            <h2 class="text-uppercase font-weight-light">Uma experiencia unica!</h2>
-                            <p class="text-mute">Estudar online nunca ficou tão facil.</p>
-                        </div>
-                    </div>
-                </div>
-                <!--<div class="swiper-slide overflow-hidden bg-gradient-red text-white">
-                    <div class="row no-gutters h-100">
-                        <div class="col align-self-center text-center">
-                            <img src="template/images/fruits.png" alt="" class="mw-100 mx-auto mb-4">
-                            <br><br>
-                            <h2 class="text-uppercase font-weight-light">Health is wealth! your presence</h2>
-                            <p class="text-mute">Lorem ipsum dolor sit amet, consect etur adipiscing elit. Sndisse conv allis.</p>
-                        </div>
-                    </div>
-                </div>-->
-            </div>
-            <!-- Add Pagination -->
-            <div class="swiper-pagination bullets-white text-left"></div>
-        </div>
+        </div>	
 		<?}?>
         <a href="login.php" class="btn btn-light btn-lg button-fab right-bottom text-uppercase">Logar <i class="material-icons vm">arrow_forward</i></a>
     </div>
