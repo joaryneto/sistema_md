@@ -68,7 +68,7 @@ $string = '{
 }';
 
 
-$fp = fopen('manifest2.json', 'w');
+$fp = fopen('manifest.json', 'w');
 fwrite($fp, $string);
 fclose($fp);
 
