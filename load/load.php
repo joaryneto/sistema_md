@@ -46,7 +46,7 @@ $string = '{
     }, {
       "src": "/images/icons/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
 	  "purpose": "any maskable"
     }, {
       "src": "/images/icons/icon-256x256.png",
