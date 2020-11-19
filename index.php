@@ -24,7 +24,7 @@ else
 	$_SESSION['nosistema'] = $_GET['sistema'];
 }
 
-if(@$_SESSION['nosistema'] == "app")
+if(@$_SERVER['SERVER_NAME'] == "app.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.app")
 {
 	$_SESSION['nosistema'] = "agsl";
 	$_SESSION['nomesoft'] = "Gerenciamento de Sistema";
@@ -86,8 +86,10 @@ else
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<?if($_SESSION['tipo'] == 2){?>
+<?if($_SESSION['tipo'] == 1){?>
 <link rel="manifest" href="/manifest.json">
+<?else if($_SESSION['tipo'] == 2){?>
+<link rel="manifest" href="/manifest1.json">
 <?}else if($_SESSION['tipo'] == 3)?>
 <link rel="manifest" href="/manifest2.json">
 <?}?>
