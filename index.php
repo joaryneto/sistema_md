@@ -35,7 +35,7 @@ if(@$_SESSION['nosistema'] == "app")
 }
 else if(@$_SERVER['SERVER_NAME'] == "sge.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.sge")
 {
-	$_SESSION['nosistema'] = "agsge";
+	$_SESSION['nosistema'] = "sge.ectecnologia.com.br/index.php";
 	$_SESSION['nomesoft'] = "Sg Escolar";
 	$_SESSION['tipo'] = 2;
 	
@@ -44,7 +44,7 @@ else if(@$_SERVER['SERVER_NAME'] == "sge.ectecnologia.com.br" or @$_SERVER['SERV
 }
 else if(@$_SERVER['SERVER_NAME'] == "sl.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.sl")
 {
-	$_SESSION['nosistema'] = "agsl";
+	$_SESSION['nosistema'] = "sl.ectecnologia.com.br/index.php";
 	$_SESSION['nomesoft'] = "Sg Hair & Spa";
 	$_SESSION['tipo'] = 3;
 	

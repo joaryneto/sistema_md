@@ -60,14 +60,14 @@ $string = '{
       "sizes": "32x32",
       "type": "image/png"
     }],
-  "start_url": "https://app.ectecnologia.com.br/index.php?sistema='.$_SESSION["nosistema"].'",
+  "start_url": "https://'.$_SESSION["nosistema"].'",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF"
 }';
 
 
-$fp = fopen('manifest.json', 'w');
+$fp = fopen('manifest2.json', 'w');
 fwrite($fp, $string);
 fclose($fp);
 
