@@ -134,7 +134,7 @@ require_once("./load/load.php");
             </div>
         </div>
         <!-- header ends -->
-        <?if($_SESSION['tipo'] == 3){?>
+        <?if($_SESSION['tipo'] == 2){?>
         <div class="swiper-container introduction vh-100">
             <div class="swiper-wrapper">
                 <!--<div class="swiper-slide overflow-hidden bg-gradient-red text-white">
