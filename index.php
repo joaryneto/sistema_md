@@ -86,13 +86,7 @@ else
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<?if($_SESSION['tipo'] == 1){?>
-<link rel="manifest" href="/manifest.json">
-<?}else if($_SESSION['tipo'] == 2){?>
-<link rel="manifest" href="/manifest1.json">
-<?}else if($_SESSION['tipo'] == 3)?>
-<link rel="manifest" href="/manifest2.json">
-<?}?>
+
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
