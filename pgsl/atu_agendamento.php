@@ -56,6 +56,7 @@ if(isset($_GET["codigo"]) and $_GET['ap'] == 1)
             showConfirmButton: false 
         });
  $('#agenda').modal('hide');
+ window.location.href='sistema.php?url=inicio';
  </script>
  
  <?

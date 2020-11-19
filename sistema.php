@@ -243,6 +243,7 @@ function isMobile()
         <div class="list-group main-menu my-5">
 			<nav class="navbar" style="padding: .1rem 0rem;">
                 <ul class="navbar-nav">
+				    <?if(@$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 3  or @$_SESSION['permissao'] == 4){?>
 				    <li class="nav-item dropdown" style="width: 230px;">
                         <a href="sistema.php?url=inicio" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
                             <div class="list-group-item list-group-item-action active">
@@ -250,6 +251,8 @@ function isMobile()
                             </div>
                         </a>
 					</li>
+					<? } ?>
+					<?if(@$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 4){?>
 					<li class="nav-item dropdown" style="width: 230px;">
                         <a href="caixa.php" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
                             <div class="list-group-item list-group-item-action">
@@ -257,6 +260,8 @@ function isMobile()
                             </div>
                         </a>
 					</li>
+					<? } ?>
+					<?if(@$_SESSION['permissao'] == 3 or @$_SESSION['permissao'] == 4){?>
                     <li class="nav-item dropdown" style="width: 230px;">
                         <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="list-group-item list-group-item-action">
@@ -275,6 +280,16 @@ function isMobile()
                             </a>
                         </div>
                     </li>
+					<? } ?>
+					<?if(@$_SESSION['permissao'] == 4){?>
+					<li class="nav-item dropdown" style="width: 230px;">
+                        <a href="sistema.php?url=cad_usuarios" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action">
+                                <i class="material-icons">perm_contact_calendar</i> Usuarios
+                            </div>
+                        </a>
+					</li>
+					<? } ?>
 					<? if(isMobile()){?>
 					<li class="nav-item dropdown" style="width: 230px;" id="btninstall">
                         <a href="javascript:void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
@@ -379,10 +394,10 @@ function isMobile()
                         <div class="col-auto">
                             <a href="javascript:void(0)" id="ldata" class="btn btn-link-default active">
                                 <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
-                                <span class="text-name">Data</span>
+                                <span class="text-name">Agenda</span>
                             </a>
                         </div>
-						<div class="col-auto">
+						<!--<div class="col-auto">
                             <a href="javascript:void(0)" class="btn btn-link-default">
                                 <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
                                 <span class="text-name">Agendado</span>
@@ -393,7 +408,7 @@ function isMobile()
                                 <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
                                 <span class="text-name">Finalizado</span>
                             </a>
-                        </div>
+                        </div>-->
                         <div class="col-auto">
                             <a href="caixa.php" class="btn btn-link-default">
                                 <span class="icon-text"><i class="material-icons">store_mall_directory</i></span>
@@ -404,12 +419,14 @@ function isMobile()
                 </div>
             </div>
         </div>
+		<?if($_GET['url'] == "inicio"){?>
 		<div class="menu pmd-floating-action" role="navigation" style="bottom: 80px;"> 
         <button class="pmd-floating-action-btn btn btn-lg pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" id="aagenda" data-title="Agendar"> 
             <span class="pmd-floating-hidden">Primary</span>
             <i class="material-icons pmd-sm">perm_contact_calendar</i> 
         </button> 
-</div>
+         </div>
+		<?}?>
 <!-- footer ends -->
 <? } ?>
 </div>

@@ -3,7 +3,8 @@
 if($_GET['ap'] == 1)
 {
 ?>
-<table class="display nowrap table table-hover table-striped table-bordered">
+<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+<table class="table pmd-table">
 <thead>
 <tr>
 <th>Nome</th>
@@ -13,15 +14,15 @@ if($_GET['ap'] == 1)
 <tbody>
 <? 
 
-$sql = "SELECT * FROM usuarios where email like '%".$_GET['pesquisa']."%' or nome like '%".$_GET['pesquisa']."%'";
-$res = mysqli_query($db,$sql); 
+$sql = "SELECT * FROM usuarios where nome like '%".$_GET['pesquisa']."%';";
+$res = mysqli_query($db3,$sql); 
 $x = 0;
 while($row = mysqli_fetch_array($res))
 {
 ?>
-<tr style="cursor: pointer;" onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'" onclick="javascript: window.location='iniciado.php?url=cad_usuarios&codigo=<? echo $row['codigo'];?>';">
-<td><? echo $row['nome'];?></td>
-<td><? Switch($row['status'])
+<tr style="cursor: pointer;" onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'" onclick="javascript: window.location='sistema.php?url=cad_usuarios&codigo=<? echo $row['codigo'];?>';">
+<td data-title="Nome"><? echo $row['nome'];?></td>
+<td data-title="Status"><? Switch($row['status'])
        {
 		   case 0:
 		     echo '<span class="label label-danger">Inativo</span>';
@@ -35,13 +36,13 @@ while($row = mysqli_fetch_array($res))
 	   }
 	   ?></td>
 </tr>
-<? $x = 1;
+<? 
 }
-
-  if($x == 0)
-  {
-	 echo "<tr><td>Nenhum resultado encontrado.</td><td></td><td></td><td></td></tr>";
-  }
+?>
+</tbody>
+</table>
+</div>
+<?
 }
 else if($_GET['ap'] == 2)
 {
@@ -62,8 +63,8 @@ $data = date('Y');
 $sql = "select diario.codigo,diario.conteudo,turmas.descricao as a,materias.descricao as b,diario.conteudo as c,diario.data,diario.status from diario 
 inner JOIN turmas on turmas.codigo=diario.turma 
 inner join materias on materias.codigo=diario.materia 
-inner join periodo on periodo.codigo=diario.periodo where YEAR(data)=$data and diario.conteudo like '%".$_GET['pesquisa']."%'";
-$res = mysqli_query($db,$sql); 
+inner join periodo on periodo.codigo=diario.periodo where YEAR(data)=$data and diario.conteudo like '%".$_GET['pesquisa']."%';";
+$res = mysqli_query($db3,$sql); 
 $x = 0;
 while($row = mysqli_fetch_array($res))
 {

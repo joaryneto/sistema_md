@@ -148,6 +148,12 @@ $hora = date('H:i:s');
 	?>
 <script>
 
+function c_cliente(codigo,nome)
+{
+	$('#c_cliente').val(codigo);
+	document.getElementById('c_nome').innerHTML = ''+ nome +'';
+}
+
 function itens(descricao,codigo,preco)
 {
 	$('#coditem').val();
@@ -395,14 +401,12 @@ function auto()
                     <div class="col-12">
 								<div class="m-t-40 row" style="display: flex;" id="forcaixa">
 								<div class="pmd-card-body"> 
-
-							<!-- Default raised circle button with ripple effect -->
-							<button class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" type="button"><i class="material-icons pmd-sm">person_add</i></button>
-							
-							<!-- Primary raised circle button with ripple effect -->
-							<button class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">trending_down</i></button>
-						
-						</div>
+							    <!-- Default raised circle button with ripple effect -->
+							    <button class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" type="button"><i class="material-icons pmd-sm">person_add</i></button>
+							   <!-- Primary raised circle button with ripple effect -->
+							        <button class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">trending_down</i></button>
+						       </div>  
+						        <h2 id="c_nome"></h2>
 								<div class="input-group col-md-12 m-t-20">
 								 <div class="input-group mb-3">
                                   <input type="text" class="form-control form-control-lg" autocomplete="off"   name="descricao" onMouseOver="auto();" id="descricao" data-toggle="modal" data-target="#itens" placeholder="Descrição do produto - ( Clique aqui )" aria-invalid="false" readonly="readonly">
