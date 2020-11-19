@@ -5,25 +5,6 @@ ob_start();
 session_start();
 
 
-
-if(Empty($_GET['sistema']))
-{
-	//if(Empty($_SESSION['nosistema']))
-	//{
-	?>
-	<script>
-	$(window).on('load', function() 
-	{
-    var sistema = localStorage.getItem('sistema');if(sistema === null){}else{ window.location.href="index.php?sistema=" + sistema;}
-    });
-	</script>
-	<?//}
-}
-else
-{
-	$_SESSION['nosistema'] = $_GET['sistema'];
-}
-
 if(@$_SERVER['SERVER_NAME'] == "app.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.app")
 {
 	$_SESSION['nosistema'] = "agsl";
