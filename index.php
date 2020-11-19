@@ -4,10 +4,9 @@ ob_start();
 
 session_start();
 
-
 if(@$_SERVER['SERVER_NAME'] == "app.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.app")
 {
-	$_SESSION['nosistema'] = "agsl";
+	$_SESSION['nosistema'] = "app.ectecnologia.com.br/index.php";
 	$_SESSION['nomesoft'] = "Gerenciamento de Sistema";
 	$_SESSION['tipo'] = 1;
 	$_SESSION['manifest'] = "manifest.json";
@@ -40,7 +39,7 @@ else
 	header('Location: servicos.php');
 }
 
-require_once("./load/load.php");
+//require_once("./load/load.php");
 
 //echo $_SESSION['sistema'];
 ?>

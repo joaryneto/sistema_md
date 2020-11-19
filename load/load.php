@@ -60,7 +60,7 @@ $string = '{
       "sizes": "32x32",
       "type": "image/png"
     }],
-  "start_url": "/index.php",
+  "start_url": "https://'.$_SESSION['nosistema'].'",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF"
