@@ -142,7 +142,7 @@ else
             </div>
         </div>
         <!-- header ends -->
-        <?if($_SESSION['nosistema'] == "agsl"){?>
+        <?if($_SESSION['tipo'] == 3){?>
         <div class="swiper-container introduction vh-100">
             <div class="swiper-wrapper">
                 <!--<div class="swiper-slide overflow-hidden bg-gradient-red text-white">
@@ -184,7 +184,7 @@ else
             <div class="swiper-pagination bullets-white text-left">teste</div>
         </div>		
 		
-		<?} else if($_SESSION['nosistema'] == "agsge"){?>
+		<?} else if($_SESSION['tipo'] == 3){?>
         <div class="swiper-container introduction vh-100">
             <div class="swiper-wrapper">
                 <div class="swiper-slide overflow-hidden bg-gradient-cyan text-white">
