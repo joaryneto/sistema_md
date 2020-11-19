@@ -17,7 +17,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //}
 
 
-if($_GET['ap'] == 1)
+if(@$_GET['ap'] == 1)
 {
 
    $data = date('Y');

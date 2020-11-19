@@ -138,12 +138,12 @@ $hora = date('H:i:s');
 		
 	}
 	
-	$SQL3 = "SELECT sum(total) as total FROM vendas_mov where venda='".$_SESSION['venda']."'";
+	$SQL3 = "SELECT sum(preco) as total, count(codigo) as qtd FROM vendas_mov where venda='".$_SESSION['venda']."'";
 	$RES3 = mysqli_query($db3,$SQL3);
 	$ROW3 = mysqli_fetch_array($RES3);
-								
+		
+    $_SESSION['qtditens'] = $ROW3['qtd'];		
 	$_SESSION['vtotal'] = number_format($ROW3['total'],2,",",".");
-	
 								
 	?>
 <script>
@@ -394,6 +394,15 @@ function auto()
            <div class="row">			
                     <div class="col-12">
 								<div class="m-t-40 row" style="display: flex;" id="forcaixa">
+								<div class="pmd-card-body"> 
+
+							<!-- Default raised circle button with ripple effect -->
+							<button class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" type="button"><i class="material-icons pmd-sm">person_add</i></button>
+							
+							<!-- Primary raised circle button with ripple effect -->
+							<button class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">trending_down</i></button>
+						
+						</div>
 								<div class="input-group col-md-12 m-t-20">
 								 <div class="input-group mb-3">
                                   <input type="text" class="form-control form-control-lg" autocomplete="off"   name="descricao" onMouseOver="auto();" id="descricao" data-toggle="modal" data-target="#itens" placeholder="Descrição do produto - ( Clique aqui )" aria-invalid="false" readonly="readonly">
@@ -456,16 +465,15 @@ function auto()
 							<table class="table pmd-table table-hover">
 								<thead>
 									<tr>
-										<tr>
-                                                    <th class="text-center">Descrição</th>
-                                                    <th class="text-right">Qtd/C. Uni.</th>
-                                                    <th class="text-right">Total</th>
-                                                </tr>
-									</tr>
+										<th class="text-center">#</th>
+										<th class="text-center">Descrição</th>
+										<th class="text-right">Qtd/C. Uni.</th>
+										<th class="text-right">Total</th>
+								    </tr>
 								</thead>
 								<tbody id="itenss">
 									<? 
-										  
+										  $d_count = 0;  
 										  $data = date('Y');
 										  $sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.preco) as totals, count(vendas_mov.produto) as quantidade from vendas_mov inner join produtos on produtos.codigo=vendas_mov.produto where vendas_mov.venda='".$_SESSION['venda']."' GROUP BY vendas_mov.total,vendas_mov.produto";
 										  $res = mysqli_query($db3,$sql); 
@@ -475,12 +483,13 @@ function auto()
 												 
 										  ?>
                                             <tr ><!-- color: #20aee3; -->
-                                                <td class="text-center">(<? echo $row['codigo'];?>) - <? echo $row['descricao'];?></td>
-												<td class="text-right"><? echo $row['quantidade'];?>x<? echo number_format($row['preco'],2,",",".");?></td>
-												<td class="text-right">R$ <? echo number_format($row['totals'],2,",",".");?>  <a href="javascript: Web(0);" onclick="excluir(<?=$row['produto'];?>,<?=$row['total'];?>)"><i class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="" style="font-size: 150%; color: red;"></i></a></td>
+											    <td data-title="#"><?=$d_count;?></td>
+                                                <td data-title="Descrição">(<? echo $row['codigo'];?>) - <? echo $row['descricao'];?></td>
+												<td data-title="Qtd/C. Uni."><? echo $row['quantidade'];?>x<? echo number_format($row['preco'],2,",",".");?></td>
+												<td data-title="Total">R$ <? echo number_format($row['totals'],2,",",".");?>  <a href="javascript: Web(0);" onclick="excluir(<?=$row['produto'];?>,<?=$row['total'];?>)"><i class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="" style="font-size: 150%; color: red;"></i></a></td>
                                             </tr>
 										  <? $b = 1;
-										  
+										     $d_count ++;
 										  } 
 										  
 										  if($b == 0)

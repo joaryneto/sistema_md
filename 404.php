@@ -16,7 +16,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<!--List group items with heading and Linking start -->
-		Pagina não encontrada.
+		Pagina nÃ£o encontrada.
 	</div>
 </div>
 <? include 'scripts.php';?>
