@@ -35,8 +35,8 @@
 </style>
 <?
 
-$inicio = revertedata($_POST['datainicio']);
-$final = revertedata($_POST['datafinal']);
+$inicio = revertedata(@$_POST['datainicio']);
+$final = revertedata(@$_POST['datafinal']);
 
 setlocale(LC_MONETARY,"pt_BR", "ptb");
 //$valor = money_format('%n', $valor);
@@ -49,6 +49,13 @@ if(!Empty($_POST['datainicio']) and !Empty($_POST['datafinal']))
 }
 
 ?>
+<div class="modal-header">
+<h2 class="pmd-card-title-text">Agenda </h2>
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form class="m-t-40 row">
+<div class="modal-body">
 <div id="print" class="conteudo" style="color: black;">
 <table style="width: 100%;font-size: 11px; color: black;" class="table-bordered">
 <tbody>
@@ -136,8 +143,11 @@ while($row = mysqli_fetch_array($res2))
 </table>
 </div>
 </div>
+</div>
+		<div class="modal-footer">
+</div>
 <?
-if($_GET['imprimir'] == 1)
+if(@$_GET['imprimir'] == 1)
 {
 ?>
 <script>

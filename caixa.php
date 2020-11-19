@@ -6,23 +6,9 @@ session_start();
 
 require_once("./load/load.php");
 
-function formatodatahora($data){
-    return date("d/m/Y", strtotime($data));
-}
-
 date_default_timezone_set('America/Cuiaba');
 $data = date('Y-m-d');
 $hora = date('H:i:s');
-
-function revertedata($data){
-
-		if($data != ""){
-		$sep_data = explode("/",$data);
-		$data = $sep_data[2]."-".$sep_data[1]."-".$sep_data[0];
-		}
-		
-		return $data;
-}
 
 //echo $_SESSION['sistema'];
 ?>
@@ -273,11 +259,11 @@ function loadpg()
 	//if (event.keyCode === 13) 
 	//{
 		
-	var dinheiro = parseFloat(document.getElementById('dinheiro').value.replace(',', '.'));
+	var dinheiro = document.getElementById('dinheiro').value;
 	//var credito = document.getElementById('credito').value;
-	var ctdebito = parseFloat(document.getElementById('ctdebito').value.replace(',', '.'));
-	var ctcredito = parseFloat(document.getElementById('ctcredito').value.replace(',', '.'));
-	var ted = parseFloat(document.getElementById('ted').value.replace(',', '.'));
+	var ctdebito = document.getElementById('ctdebito').value;
+	var ctcredito = document.getElementById('ctcredito').value;
+	var ted = document.getElementById('ted').value;
 	
 	//var total = parseFloat(dinheiro.replace(',', '.'))-+parseFloat(ctdebito.replace(',', '.'))-+parseFloat(ctcredito.replace(',', '.'))-+parseFloat(ted.replace(',', '.'));
 	//var numbers = [dinheiro, ctdebito, ctcredito, ted];
@@ -516,7 +502,7 @@ function auto()
 								 <div class="row">
                                    <div class="col">
 								   <button class="btn pmd-btn-raised btn pmd-btn-outline pmd-ripple-effect btn-warning" onclick="slow();" id="btncarrinho" data-title="Itens do Carrinho"> 
-                                     <b id="qtdbgd"><?=$_SESSION['qtditens'];?></b> Itens<i class="material-icons">add_shopping_cart</i></button>
+                                     <b id="qtdbgd"><?=@$_SESSION['qtditens'];?></b> Itens<i class="material-icons">add_shopping_cart</i></button>
 								   </div>
 								 </div>
 								</div>
@@ -575,7 +561,7 @@ function auto()
 											   <tbody>
 											   <?
 											   $data = date('Y');
-										       $sql = "select * from produtos ";
+										       $sql = "select * from produtos where sistema='".$_SESSION['sistema']."'";
 											   $res = mysqli_query($db3,$sql); 
 											   $x = 0;
 											   while($row = mysqli_fetch_array($res))
@@ -585,7 +571,7 @@ function auto()
 											   <td><? echo $row['codigo'];?></td>
 											   <td><? echo $row['descricao'];?></td>
 											   <td><? echo $row['preco'];?></td>
-											   <td><? echo $row['b'];?></td>
+											   <td><? echo $row['estoque'];?></td>
 											   </tr>
 											   <? $x = 1;
 											   }
@@ -634,10 +620,10 @@ function auto()
 											<input type="text" name="dinheiro" id="dinheiro" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control">
 											</div>
 											<div class="form-group col-md-12 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Cartão de Débito</label>
-											<input type="text" name="cdebito" id="cdebito" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control">
+											<input type="text" name="cdebito" id="ctdebito" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control">
 											</div>
 											<div class="form-group col-md-12 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Cartão de Crédito</label>
-											<input type="text" name="ccredito" id="ccredito" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control">
+											<input type="text" name="ccredito" id="ctcredito" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control">
 											</div>
 											<div class="form-group col-md-12 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Transferencia ( Ted, doc, tev)</label>
 											<input type="text" name="ted" id="ted" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control">

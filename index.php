@@ -33,7 +33,7 @@ if(@$_SESSION['nosistema'] == "app")
 	$sistema = "sistema";
 	print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
 }
-else if(@$_SESSION['nosistema'] == "agsge")
+else if(@$_SERVER['SERVER_NAME'] == "sge.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.sge")
 {
 	$_SESSION['nosistema'] = "agsge";
 	$_SESSION['nomesoft'] = "Sg Escolar";
@@ -42,7 +42,7 @@ else if(@$_SESSION['nosistema'] == "agsge")
 	$sistema = "agsge";
 	print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
 }
-else if(@$_SESSION['nosistema'] == "agsl")
+else if(@$_SERVER['SERVER_NAME'] == "sl.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.sl")
 {
 	$_SESSION['nosistema'] = "agsl";
 	$_SESSION['nomesoft'] = "Sg Hair & Spa";

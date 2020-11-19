@@ -268,6 +268,15 @@ function isMobile()
                             </a>
                         </div>
                     </li>
+					<? if(isMobile()){?>
+					<li class="nav-item dropdown" style="width: 230px;" id="btninstall">
+                        <a href="javascript:void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action">
+                                <i class="material-icons">get_app</i> Instalar App
+                            </div>
+                        </a>
+					</li>
+		           <? } ?>
                 </ul>
             </nav>
         </div>

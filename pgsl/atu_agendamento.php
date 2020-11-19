@@ -1,9 +1,4 @@
 <?
-ob_start();
-session_start();
-
-?>
-<?
 $PageRequest = strtolower(basename( $_SERVER['REQUEST_URI'] ));
 $PageName = strtolower(basename( __FILE__ ));
 if($PageRequest == $PageName) exit("<strong> Erro: Não é permitido acessar o arquivo diretamente. </strong>");
@@ -113,8 +108,9 @@ else if($_GET['ap'] == 3)
 
 if($_GET['load'] == 1)
 {
-	            
-	$SQL = "SELECT agendamento.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento.data,agendamento.hora FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente where agendamento.sistema='".$_SESSION['sistema']."' and clientes.nome like '%".$_GET['pesquisa']."%' ORDER BY agendamento.codigo asc";
+	$pesquisa = @$_GET['pesquisa'];
+	
+	$SQL = "SELECT agendamento.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento.data,agendamento.hora FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente where agendamento.sistema='".$_SESSION['sistema']."' and clientes.nome like '%".$pesquisa."%' ORDER BY agendamento.codigo asc";
 	$RES = mysqli_query($db3,$SQL);
 	while($row = mysqli_fetch_array($RES))
 	{
@@ -129,11 +125,15 @@ if($_GET['load'] == 1)
                             </figure>
                         </div>
                         <div class="col pl-0">
-                            <b class="h4 mb-3 font-weight-normal"><? echo $row['nome'];?></b>
-                            <p class="large text-mute" style="font-size: initial;">Dia: <? echo formatodatahora($row['data']);?> às Hora: <? echo formatohora($row['hora']);?>hs</p>
-							<button type="button" onclick="whats('<? echo str_replace("(","", str_replace(")","", str_replace("-","",$row['celular'])));?>','Bom dia *<? echo $row['nome'];?>*! %0APassando para lembrar que você tem horário agendado hoje às *<? echo formatohora($row['hora']);?>hs*.%0A%0A *Studio KA*');" class="mb-2 btn btn-outline-success  rounded-0">Whats <i class="fa fa-whatsapp" aria-hidden="true"></i></button>
-                            <button type="button" onclick="agenda(2,'<? echo $row['codigo'];?>','<? echo $row['cliente'];?>','<? echo $row['data'];?>','<? echo $row['hora'];?>','<? echo $row['nome'];?>');" class="mb-2 btn btn-outline-primary rounded-0">Editar</button>
-							<button type="button" onclick="agendaex('<? echo $row['codigo'];?>');" class="mb-2 btn btn-outline-danger rounded-0">Excluir</button>
+                            <h3><p class="large text-mute" style="font-size: initial;"><? echo $row['nome'];?></p></h3>
+                            <p class="large text-mute" style="font-size: initial;">Dia: <? echo formatodata($row['data']);?> às Hora: <? echo formatohora($row['hora']);?>hs</p>
+                            <button type="button" onclick="agenda(2,'<? echo $row['codigo'];?>','<? echo $row['cliente'];?>','<? echo $row['data'];?>','<? echo $row['hora'];?>','<? echo $row['nome'];?>');" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Editar</button>
+							<button type="button" onclick="agendaex('<? echo $row['codigo'];?>');" class="btn pmd-btn-outline pmd-ripple-effect btn-danger">Excluir</button>
+							<div class="pmd-card-actions">
+								<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" onclick="whats('<? echo str_replace("(","", str_replace(")","", str_replace("-","",$row['celular'])));?>','Bom dia *<? echo $row['nome'];?>*! %0APassando para lembrar que você tem horário agendado hoje às *<? echo formatohora($row['hora']);?>hs*.%0A%0A *Studio KA*');"><i class="fa fa-whatsapp" aria-hidden="true" style="font-size: 210%; color: green;"></i></button>
+								<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">thumb_up</i></button>
+								<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">drafts</i></button>
+							</div>
                         </div>
                     </div>
                 </div>

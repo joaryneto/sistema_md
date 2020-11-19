@@ -1,9 +1,4 @@
 <?
-ob_start();
-session_start();
-
-?>
-<?
 $PageRequest = strtolower(basename( $_SERVER['REQUEST_URI'] ));
 $PageName = strtolower(basename( __FILE__ ));
 if($PageRequest == $PageName) exit("<strong> Erro: Não é permitido acessar o arquivo diretamente. </strong>");
@@ -22,7 +17,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //}
 
 
-if($_GET['load'] == 1)
+if(@$_GET['load'] == 1)
 {
 	$desc = str_replace('.', "", $_GET['desc']);
 	$preco = str_replace('.', "", $_GET['preco']);
@@ -50,10 +45,15 @@ if($_GET['load'] == 1)
    </script>
    <?
 }
-else if($_GET['load'] == 2)
+else if(@$_GET['load'] == 2)
 {
 	$dinheiro = str_replace(",",".", str_replace(".","",$_GET['dinheiro']));
-	$totals = str_replace(",",".", str_replace(".","",$_SESSION['totalvenda']));
+	$debito = str_replace(",",".", str_replace(".","",$_GET['ctdebito']));
+	$credito = str_replace(",",".", str_replace(".","",$_GET['ctcredito']));
+	$ted = str_replace(",",".", str_replace(".","",$_GET['ted']));
+	$totals = str_replace(",",".", $_SESSION['totalvenda']);
+	
+	$valor = $dinheiro-+$debito+$credito+$ted;
 
 	if($valor <= $totals)
 	{
@@ -71,7 +71,7 @@ else if($_GET['load'] == 2)
 		$_SESSION['recebido'] = $v;
 	}
 }
-else if($_GET['load'] == 3)
+else if(@$_GET['load'] == 3)
 {
 	$SQL = "SELECT sum(total) as total FROM vendas_mov where venda='".$_SESSION['venda']."'";
 	$RES = mysqli_query($db3,$SQL);
@@ -82,22 +82,22 @@ else if($_GET['load'] == 3)
 	print('<script> document.getElementById("vtroco").innerHTML = "<span style=\'color: red;\'>Falta: R$ '.number_format($vtotal,2,",",".").'</span>";</script>');
 }
 
-if($_GET['ap'] == 1)
+if(@$_GET['ap'] == 1)
 {
 	
 	$data = date("Y-m-d");
-	$codigo = $_GET['codigo'];
+	$codigo = @$_GET['codigo'];
 	//$venda = $_GET['venda'];
 	
-	$preco = str_replace('.', "", $_GET['preco']);
-	$total = str_replace('.', "", $_GET['total']);
+	$preco = str_replace('.', "", @$_GET['preco']);
+	$total = str_replace('.', "", @$_GET['total']);
 	
     $preco = str_replace(',', ".", $preco);
 	$total = str_replace(',', ".", $total);
-	$produto = $_GET['produto'];
-	$qtd = $_GET['quantidade'];
+	$produto = @$_GET['produto'];
+	$qtd = @$_GET['quantidade'];
 	
-	if($_GET['excluir'] == 1)
+	if(@$_GET['excluir'] == 1)
 	{
 	   //$teste = explode(",",$_GET['codigo']);
 	   //echo $SQL = "SELECT codigo as qtd from vendas_mov sistema='".$_SESSION['sistema']."' and produto='".$codigo."' and venda='".$_SESSION['venda']."' and total='".$total."'";
@@ -154,7 +154,7 @@ if($_GET['ap'] == 1)
 	print("<script> document.getElementById('vtotal').innerHTML = '".number_format($CREW['total'],2,",",".")."';</script>");
 	print("<script> document.getElementById('qtdbgd').innerHTML = '".$_SESSION['qtditens']."';</script>");
 }
-else if($_GET['ap'] == 2)
+else if(@$_GET['ap'] == 2)
 {
     //$SQL = "SELECT sum(total) as total FROM vendas_mov where venda='".$_SESSION['venda']."'";
 	//$RES = mysqli_query($db3,$SQL);
@@ -186,7 +186,7 @@ else if($_GET['ap'] == 2)
 	    print("<script>window.location.href='caixa.php';</script>");
 	}
 }
-else if($_GET['ap'] == 3)
+else if(@$_GET['ap'] == 3)
 {
 	$dinheiro = str_replace(",",".", str_replace(".","",$_GET['dinheiro']));
 	
@@ -213,7 +213,6 @@ else if($_GET['ap'] == 3)
 	}
 }
 
-mysqli_close($db3);
 ?>	
 
 
