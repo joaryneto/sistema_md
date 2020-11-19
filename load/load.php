@@ -67,11 +67,12 @@ $string = '{
   "theme_color": "#FFFFFF"
 }';
 
-
+if(!Empty($_SESSION['manifest']))
+{
 $fp = fopen(''.$_SESSION['manifest'].'', 'w');
 fwrite($fp, $string);
 fclose($fp);
-
+}
 
 if($_SESSION['tipo'] == 1)
 {
