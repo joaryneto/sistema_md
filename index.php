@@ -4,7 +4,7 @@ ob_start();
 
 session_start();
 
-//require_once("./load/load.php");
+require_once("./load/load.php");
 
 if(Empty($_GET['sistema']))
 {
