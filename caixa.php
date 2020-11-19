@@ -401,11 +401,11 @@ function auto()
                     <div class="col-12">
 								<div class="m-t-40 row" style="display: flex;" id="forcaixa">
 								<div class="pmd-card-body"> 
-							    <!-- Default raised circle button with ripple effect -->
-							    <button class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" type="button"><i class="material-icons pmd-sm">person_add</i></button>
-							   <!-- Primary raised circle button with ripple effect -->
+							     <!-- Default raised circle button with ripple effect -->
+							        <button class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" type="button" onclick="requestPage2('?br=modal_clientes&codigo=<?=$_GET['codigo'];?>&modal=2','modals','GET');" data-toggle="modal" data-target="#modalusuario"><i class="material-icons pmd-sm">person_add</i></button>
+							        <!-- Primary raised circle button with ripple effect -->
 							        <button class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">trending_down</i></button>
-						       </div>  
+						        </div>  
 						        <h2 id="c_nome"></h2>
 								<div class="input-group col-md-12 m-t-20">
 								 <div class="input-group mb-3">
@@ -668,6 +668,15 @@ function auto()
                                         </div>
                                     </div>
                                 </div>
+								<div id="modalusuario" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+								<div class="modal-dialog modal-lg">
+								<div class="modal-content" id="modals">
+								<!-- /.modal-content -->
+								</div>
+
+								<!-- /.modal-dialog -->
+								</div>
+								</div>
 								<script>
 							    function slow()
 								{

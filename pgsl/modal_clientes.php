@@ -41,7 +41,7 @@ if(@$_SESSION['menu99'] == false)
 </thead>
 <tbody>
 <?
-$sql = "SELECT * FROM usuarios limit 10";
+$sql = "SELECT * FROM clientes limit 10";
 $res = mysqli_query($db3,$sql); 
 $x = 0;
 while($row = mysqli_fetch_array($res))
