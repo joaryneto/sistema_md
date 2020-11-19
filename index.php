@@ -29,6 +29,7 @@ if(@$_SERVER['SERVER_NAME'] == "app.ectecnologia.com.br" or @$_SERVER['SERVER_NA
 	$_SESSION['nosistema'] = "agsl";
 	$_SESSION['nomesoft'] = "Gerenciamento de Sistema";
 	$_SESSION['tipo'] = 1;
+	$_SESSION['manifest'] = "manifest.json";
 	
 	$sistema = "sistema";
 	print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
@@ -38,6 +39,7 @@ else if(@$_SERVER['SERVER_NAME'] == "sge.ectecnologia.com.br" or @$_SERVER['SERV
 	$_SESSION['nosistema'] = "sge.ectecnologia.com.br/index.php";
 	$_SESSION['nomesoft'] = "Sg Escolar";
 	$_SESSION['tipo'] = 2;
+	$_SESSION['manifest'] = "manifest1.json";
 	
 	$sistema = "agsge";
 	print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
@@ -47,6 +49,7 @@ else if(@$_SERVER['SERVER_NAME'] == "sl.ectecnologia.com.br" or @$_SERVER['SERVE
 	$_SESSION['nosistema'] = "sl.ectecnologia.com.br/index.php";
 	$_SESSION['nomesoft'] = "Sg Hair & Spa";
 	$_SESSION['tipo'] = 3;
+	$_SESSION['manifest'] = "manifest2.json";
 	
 	$sistema = "agsl";
 	print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');

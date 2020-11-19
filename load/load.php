@@ -68,7 +68,7 @@ $string = '{
 }';
 
 
-$fp = fopen('manifest.json', 'w');
+$fp = fopen(''.$_SESSION['manifest'].'', 'w');
 fwrite($fp, $string);
 fclose($fp);
 
