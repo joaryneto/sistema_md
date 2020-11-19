@@ -467,7 +467,7 @@ function auto()
 									<? 
 										  
 										  $data = date('Y');
-										  $sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.total) as totals, count(vendas_mov.produto) as quantidade from vendas_mov inner join produtos on produtos.codigo=vendas_mov.produto where vendas_mov.venda='".$_SESSION['venda']."' GROUP BY vendas_mov.total,vendas_mov.produto";
+										  $sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.preco) as totals, count(vendas_mov.produto) as quantidade from vendas_mov inner join produtos on produtos.codigo=vendas_mov.produto where vendas_mov.venda='".$_SESSION['venda']."' GROUP BY vendas_mov.total,vendas_mov.produto";
 										  $res = mysqli_query($db3,$sql); 
 										  $b = 0;
 										  while($row = mysqli_fetch_array($res))
@@ -476,7 +476,7 @@ function auto()
 										  ?>
                                             <tr ><!-- color: #20aee3; -->
                                                 <td class="text-center">(<? echo $row['codigo'];?>) - <? echo $row['descricao'];?></td>
-												<td class="text-right"><? echo $row['quantidade'];?>x<? echo number_format($row['total'],2,",",".");?></td>
+												<td class="text-right"><? echo $row['quantidade'];?>x<? echo number_format($row['preco'],2,",",".");?></td>
 												<td class="text-right">R$ <? echo number_format($row['totals'],2,",",".");?>  <a href="javascript: Web(0);" onclick="excluir(<?=$row['produto'];?>,<?=$row['total'];?>)"><i class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="" style="font-size: 150%; color: red;"></i></a></td>
                                             </tr>
 										  <? $b = 1;
@@ -538,18 +538,18 @@ function auto()
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title" id="myLargeModalLabel"><b>Lista de Produtos : </h4>
+												<h2 class="pmd-card-title-text">Lista de Produtos </h2>
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                             </div>
                                             <div class="modal-body">
 											<div class="row">
-											<div class="col-12">
-											<div class="form-group col-md-12 m-t-20"><label>Busca:</label>
-                                             <input name="user" type="text" class="form-control" onkeyup="javascript: ajaxLoader('?br=listusuarios&pesquisa='+ this.value +'&ap=2','listusuarios','GET');" />
-											</div>
 											
-											<div class="form-group col-md-12 m-t-20" id="">
-											<table class="display nowrap table table-hover table-striped table-bordered">
+											<div class="form-group col-md-12 m-t-20"><label>Busca:</label>
+                                             <input name="user" type="text" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_produtos&pesquisa='+ this.value +'&ap=1','list_produtos','GET');" />
+											</div>
+											<div class="col-md-12">
+											<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+							                <table class="table pmd-table">
 											<thead>
 											  <tr>
 											<th>Codigo</th>
@@ -558,7 +558,7 @@ function auto()
 											<th>Estoque</th>
 											</tr>
 											 </thead>
-											   <tbody>
+											   <tbody id="list_produtos">
 											   <?
 											   $data = date('Y');
 										       $sql = "select * from produtos where sistema='".$_SESSION['sistema']."'";
@@ -568,10 +568,10 @@ function auto()
 											   {
 											   ?>
 											   <tr style="cursor: pointer;" onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'" onclick="itens('<? echo $row['descricao'];?>',<? echo $row['codigo'];?>,'<? echo number_format($row['preco'],2,",",".");?>');">
-											   <td><? echo $row['codigo'];?></td>
-											   <td><? echo $row['descricao'];?></td>
-											   <td><? echo $row['preco'];?></td>
-											   <td><? echo $row['estoque'];?></td>
+											   <td data-title="Codigo"><? echo $row['codigo'];?></td>
+											   <td data-title="Descrição"><? echo $row['descricao'];?></td>
+											   <td data-title="Preço R$"><? echo $row['preco'];?></td>
+											   <td data-title="Estoque"><? echo $row['estoque'];?></td>
 											   </tr>
 											   <? $x = 1;
 											   }

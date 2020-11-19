@@ -246,7 +246,14 @@ function isMobile()
 				    <li class="nav-item dropdown" style="width: 230px;">
                         <a href="sistema.php?url=inicio" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
                             <div class="list-group-item list-group-item-action active">
-                                <i class="material-icons">perm_contact_calendar</i> Agenda - <?=$_SESSION['tipo'];?>
+                                <i class="material-icons">perm_contact_calendar</i> Agenda
+                            </div>
+                        </a>
+					</li>
+					<li class="nav-item dropdown" style="width: 230px;">
+                        <a href="caixa.php" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action">
+                                <i class="material-icons">perm_contact_calendar</i> Vendas
                             </div>
                         </a>
 					</li>
