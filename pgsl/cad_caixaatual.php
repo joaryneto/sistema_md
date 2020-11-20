@@ -39,14 +39,16 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 								$vtotal = number_format($ROW3['total'],2,",",".");
 								
 								?>
-								<div class="form-group col-md-12 m-t-20" style="clear: both;">
-                                        <table class="table table-hover">
+								<div class="col-md-12">
+					            <div class="component-box">
+                                <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+							        <table class="table pmd-table">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">#</th>
-                                                    <th class="text-center">Descrição</th>
-                                                    <th class="text-right">Qtd/C. Uni.</th>
-                                                    <th class="text-right">Total</th>
+                                                    <th>#</th>
+                                                    <th>Descrição</th>
+                                                    <th>Qtd/C. Uni.</th>
+                                                    <th>Total</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="itenss">
@@ -64,10 +66,10 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 												 
 										  ?>
                                             <tr ><!-- color: #20aee3; -->
-											    <td class="text-center"><? echo $row['codigo'];?></td>
-                                                <td class="text-center"><? echo $row['descricao'];?></td>
-												<td class="text-right"><? echo $row['quantidade'];?>x<? echo $row['preco'];?></td>
-												<td class="text-right">R$ <? echo number_format($row['totals'],2,",",".");?></td>
+											    <td data-title="#"><? echo $row['codigo'];?></td>
+                                                <td data-title="Descrição"><? echo $row['descricao'];?></td>
+												<td data-title="Qtd/C. Uni."><? echo $row['quantidade'];?>x<? echo $row['preco'];?></td>
+												<td data-title="Total">R$ <? echo number_format($row['totals'],2,",",".");?></td>
                                             </tr>
 										  <? $b = 1;
 										  
@@ -83,6 +85,8 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
                                             </tbody>
                                         </table>
                                     </div>
+									</div>
+									</div>
 								<div class="input-group col-md-12 m-t-20">
 								<input type="hidden" class="form-control" name="totalcaixa" id="totalcaixa" value="" required="" aria-invalid="false">
 								<h1 style="color: green;font-weight: bold;">Total: R$ <span id="vtotal"><?=$vtotal;?></span></h1>

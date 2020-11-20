@@ -291,14 +291,14 @@ if($x == 0)
 <? }else if($_GET['modal'] == 2){?>
 <!-- Modal -->
 			<div class="modal-header pmd-modal-bordered">
-				<h4 class="modal-title" id="myLargeModalLabel"><b>Turmas e Disciplinas</h4>
+				<h4 class="modal-title" id="myLargeModalLabel"><b>Serviços de Profissional</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 			</div>
 			<div class="row">
 			<div class="col-12">
 			<!--<input type="text" name="pesquisa" id="pesquisa" value="" onkeyup="javascript: ajaxLoader('?br=cad_exameusuario&codigo=< echo $_GET['codigo'];?>&pesquisa='+ document.getElementById('pesquisa').value +'&list=1','listexame','GET');" class="form-control">-->
 			<div class="form-group col-md-12 m-t-20">
-			<span>Turmas :</span>
+			<span>Serviços :</span>
 			<?
 			
 			   if(!Empty($_GET['codigo']))
@@ -306,15 +306,13 @@ if($x == 0)
 				   
 				 $coduser = $_GET['codigo'];
 				 
-				 $SQL2 = "SELECT turmas.codigo,turmas.descricao FROM turmas 
-				 left join turmas_professor on turmas_professor.turma=turmas.codigo
-				 GROUP BY descricao order by turmas.descricao ASC";
+				 $SQL2 = "SELECT produtos.codigo, produtos.descricao from produtos inner join produtos_usuarios on produtos_usuarios.produto=produtos.codigo order by produtos.descricao ASC";
 				 $RES2 = mysqli_query($db3,$SQL2);
 				 
 				 while($rowex = mysqli_fetch_array($RES2))
 				 {
 					
-					$SQL4 = "SELECT turma FROM turmas_professor where turma='".$rowex['codigo']."' and usuario='".$coduser."'";
+					$SQL4 = "SELECT produto FROM produtos_usuarios where produto='".$rowex['codigo']."' and usuario='".$coduser."'";
 					$RES4 = mysqli_query($db3,$SQL4);
 					$row = mysqli_fetch_array($RES4);
 					//{

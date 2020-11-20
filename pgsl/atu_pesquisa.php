@@ -69,7 +69,7 @@ function proximo_b(codigo)
 	var data = document.getElementById('dataagenda').value;
 	var hora = document.getElementById('hora').value;
 	
-	requestPage2('?br=atu_pesquisa&data='+ data +'&hora='+ hora +'&ap=3','modals','GET');
+	requestPage2('?br=atu_pesquisa&data='+ data +'&hora='+ hora +'&ap=6','modals','GET');
 }
 
 function proximo_c(codigo, nome, data, hora)
@@ -193,8 +193,9 @@ else if(@$_GET['ap'] == 2)
 	</div>
 	<?if(Empty($_GET['nome'])){?>
 	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="proximo_b();"><i class="fa fa-plus-circle"></i> Proximo</a>
-	<?}else{?>
+    <?}else{?>
 	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="cliente_s();"><i class="fa fa-plus-circle"></i> Gravar</a>
+	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="requestPage2('?br=atu_pesquisa&tipo=1&ap=1','modals','GET');"><i class="fa fa-plus-circle"></i> Novo</a>
 	<?}?>
 		
 </form>
@@ -226,6 +227,9 @@ else if(@$_GET['ap'] == 3)
 	</script>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label">
 	<input type="text" name="nome" id="nome" value="" placeholder="Buscar cliente por nome" onkeyup="cliente_r(this.value,'<?=$_SESSION['adata'];?>','<?=$_SESSION['ahora'];?>');" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required" />
+	</div>
+	<div class="form-group pmd-textfield pmd-textfield-floating-label">
+	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="requestPage2('?br=atu_pesquisa&tipo=1&ap=1','modals','GET');"><i class="fa fa-plus-circle"></i> Novo</a>
 	</div>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="inputcliente">
 	</div>
@@ -261,6 +265,7 @@ while($row = mysqli_fetch_array($res))
 </tr>
 <? $x = 1;
 }
+
 
 if($x == 0)
 {
@@ -306,6 +311,50 @@ else if(@$_GET['ap'] == 5)
 	 </select>
 
 	<?
+}
+else if(@$_GET['ap'] == 6)
+{
+	
+$pesquisa = @$_GET['pesquisa'];
+?>
+<div class="modal-header">
+<h2 class="pmd-card-title-text">Agenda - Profissional </h2>
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form class="m-t-40 row">
+<?
+$SQL = "SELECT * FROM usuarios where tipo=2 and status=1;";
+$res = mysqli_query($db3,$SQL); 
+$x = 0;
+while($row = mysqli_fetch_array($res))
+{
+?>
+<div class="col-12 col-md-4 mb-4">
+<div class="pmd-card pmd-card-media-inline pmd-card-default pmd-z-depth">
+					<div class="pmd-card-media">
+						<div class="media-body">
+							<h2 class="pmd-card-title-text"><?=$row['nome'];?></h2>
+							<span class="pmd-card-subtitle-text"></span>	
+						</div>
+						<div class="media-right media-middle">
+							<a href="javascript:void(0);">
+								<img src="template/images/escova-inteligente.jpg" width="100" height="100">
+							</a>
+						</div>
+					</div>
+					<div class="pmd-card-actions">
+					<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button">
+					<i class="material-icons pmd-sm">check_circle</i></button>
+					</div>
+</div>
+</div>
+<? } ?>
+</form>
+		</div>
+		<div class="modal-footer">
+</div>
+<?
 }
 if(@$_GET['load'] == 1)
 {

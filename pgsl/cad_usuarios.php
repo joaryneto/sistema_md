@@ -364,7 +364,6 @@ else
                                     <option>Selecionar Situação</option>
                                            <option value="0" <? if(0 == $situacao){ echo "selected"; } ?>>Inativa</option>
 										   <option value="1" <? if(1 == $situacao){ echo "selected"; } ?>>Ativa</option>
-										   <option value="2" <? if(2 == $situacao){ echo "selected"; } ?>>Pre-Ativa</option>
                                 </select>
 								</div>
 									

@@ -220,7 +220,7 @@ function isMobile()
 					<li class="nav-item dropdown" style="width: 230px;">
                         <a href="sistema.php?url=cad_usuarios" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
                             <div class="list-group-item list-group-item-action">
-                                <i class="material-icons">perm_contact_calendar</i> Usuarios
+                                <i class="material-icons">supervisor_account</i> Usuarios
                             </div>
                         </a>
 					</li>
@@ -269,13 +269,13 @@ function isMobile()
                             </div>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="javascript:void(0)" id="catual" class="sidebar-close dropdown-item menu-right">
+                            <a href="sistema.php?url=cad_caixaatual" class="sidebar-close dropdown-item menu-right">
 							 Caixa Atual
                             </a>
-                            <a href="javascript:void(0)" id="canteriores" class="sidebar-close dropdown-item menu-right">
+                            <a href="sistema.php?url=cad_caixaalteriores" class="sidebar-close dropdown-item menu-right">
                              Caixa Anteriores
                             </a>
-                            <a href="javascript:void(0)" id="cmpagamento" class="sidebar-close dropdown-item popup-open" >
+                            <a href="sistema.php?url=cad_cmeiodepagamento" class="sidebar-close dropdown-item popup-open" >
                              Meios de Pagamento
                             </a>
                         </div>
@@ -283,9 +283,24 @@ function isMobile()
 					<? } ?>
 					<?if(@$_SESSION['permissao'] == 4){?>
 					<li class="nav-item dropdown" style="width: 230px;">
+                        <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="list-group-item list-group-item-action">
+                                <i class="material-icons">card_giftcard</i> Produtos
+                            </div>
+                        </a>
+						<div class="dropdown-menu">
+                            <a href="sistema.php?url=cad_produtos&cadastro=1" id="catual" class="sidebar-close dropdown-item menu-right">
+							 Cadastrar
+                            </a>
+                            <a href="sistema.php?url=cad_produtos" id="canteriores" class="sidebar-close dropdown-item menu-right">
+                             Lista de Produtos
+                            </a>
+                        </div>
+					</li>
+					<li class="nav-item dropdown" style="width: 230px;">
                         <a href="sistema.php?url=cad_usuarios" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
                             <div class="list-group-item list-group-item-action">
-                                <i class="material-icons">perm_contact_calendar</i> Usuarios
+                                <i class="material-icons">supervisor_account</i> Usuarios
                             </div>
                         </a>
 					</li>

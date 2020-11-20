@@ -42,6 +42,22 @@ if(@$_GET['ap'] == 1)
    
    }
 }
+else if($_GET['ap'] == 2)
+{  
+  $sql = "select * from produtos where sistema='".$_SESSION['sistema']."' and descricao like '%".$_GET['pesquisa']."%'";
+  $res = mysqli_query($db3,$sql); 
+  while($row = mysqli_fetch_array($res))
+  {
+  ?>
+	<tr>
+		<td data-title="Codigo"><? echo $row['codigo'];?></td>
+		<td data-title="Descrição"><? echo $row['descricao'];?></td>
+		<!--<td>< echo $numero = number_format($row['valor_padrao']-+$row['valor'], 2, ',','.');?></td>-->
+		<td data-title="Editar"><a class="fa fa-edit" href="sistema.php?url=cad_produtos&codigo=<? echo $row['codigo']?>&cadastro=1" style="font-size: 150%;"><a></td>
+	</tr>
+  <?
+  } 
+}
 ?>	
 
 
