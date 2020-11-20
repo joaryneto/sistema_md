@@ -132,12 +132,12 @@ function psdiario(texto)
 {
   if(texto == "")
   {
-         swal({   
+        /* swal({   
             title: "Atenção!",   
             text: "Pesquisa em branco.",   
             timer: 1000,   
             showConfirmButton: false 
-        });
+        });*/
   }
   else
   {
