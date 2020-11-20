@@ -388,7 +388,7 @@ $("#check[]").on('change', function() {
 								<? } ?>
 								
 								</div>
-								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota'])){?>
+								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota']) && Empty($_GET['codigo'])){?>
 								<div class="form-group col-md-5 m-t-20"><label>Pesquisa :</label>
                                 <input type="text" name="pesquisa" id="pesquisa" onkeyup="" class="form-control"  autocomplete="off"  value="" placeholder="Pesquisar conteúdo">
 								</div>
@@ -440,7 +440,7 @@ $("#check[]").on('change', function() {
 								//{
 								//	echo '<div id="listdiario"> </div>';
 								//}
-								if(@$_GET['frequencia'] == 1){?>
+								if(@$_GET['frequencia'] == 1 && Empty($_GET['codigo'])){?>
 								<div class="col-md-12">
 					       <div class="component-box">
 							<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
