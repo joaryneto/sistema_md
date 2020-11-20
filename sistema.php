@@ -420,12 +420,20 @@ function isMobile()
             </div>
         </div>
 		<?if($_GET['url'] == "inicio"){?>
-		<div class="menu pmd-floating-action" role="navigation" style="bottom: 80px;"> 
-        <button class="pmd-floating-action-btn btn btn-lg pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" id="aagenda" data-title="Agendar"> 
+		 <div class="menu pmd-floating-action" role="navigation" style="bottom: 80px;"> 
+        <a href="javascript:void(0);" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="Clientes"> 
+            <span class="pmd-floating-hidden">Clientes</span> 
+            <i class="material-icons">supervisor_account</i> 
+        </a> 
+        <a href="javascript:void(0);" id="aagenda" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="Agenda"> 
+            <span class="pmd-floating-hidden">Agendar</span> 
+            <i class="material-icons">perm_contact_calendar</i> 
+        </a> 
+        <a href="javascript:void(0);" class="pmd-floating-action-btn btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" data-title="Add"> 
             <span class="pmd-floating-hidden">Primary</span>
-            <i class="material-icons pmd-sm">perm_contact_calendar</i> 
-        </button> 
-         </div>
+            <i class="material-icons pmd-sm">add</i> 
+        </a> 
+    </div>
 		<?}?>
 <!-- footer ends -->
 <? } ?>
