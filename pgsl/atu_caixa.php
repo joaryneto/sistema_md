@@ -94,6 +94,7 @@ if(@$_GET['ap'] == 1)
 	
     $preco = str_replace(',', ".", $preco);
 	$total = str_replace(',', ".", $total);
+	$cliente = @$_GET['codigo'];
 	$produto = @$_GET['produto'];
 	$qtd = @$_GET['quantidade'];
 	
@@ -116,7 +117,7 @@ if(@$_GET['ap'] == 1)
 		//$xx = 0;
 		for ($xx = 1; $xx <= $qtd; $xx++) 
 		{
-            $SQL = "INSERT vendas_mov(sistema,produto,venda,caixa,data,preco,total,usuario,status) values('".$_SESSION['sistema']."','".$produto."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$data."','".$preco."','".$total."','".$_SESSION['usuario']."',1)";
+            $SQL = "INSERT vendas_mov(sistema,cliente,produto,venda,caixa,data,preco,total,usuario,status) values('".$_SESSION['sistema']."','".$cliente."','".$produto."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$data."','".$preco."','".$total."','".$_SESSION['usuario']."',1)";
             $RES = mysqli_query($db3,$SQL);
 
         } 
@@ -127,7 +128,7 @@ if(@$_GET['ap'] == 1)
 	$RES = mysqli_query($db3,$SQL);
 	$CREW = mysqli_fetch_array($RES);
 			 
-    $d_count = 0;			 
+    $d_count = 1;			 
 	$data = date('Y');
 	$sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.preco) as totals, count(vendas_mov.produto) as quantidade from vendas_mov inner join produtos on produtos.codigo=vendas_mov.produto where vendas_mov.venda='".$_SESSION['venda']."' GROUP BY vendas_mov.total, vendas_mov.produto";
 	$res = mysqli_query($db3,$sql); 
@@ -137,10 +138,10 @@ if(@$_GET['ap'] == 1)
 												 
 	?>
 	<tr ><!-- color: #20aee3; -->
-		<td data-title="#"><?=$d_count;?></td>
-		<td data-title="Descrição">(<? echo $row['codigo'];?>) - <? echo $row['descricao'];?></td>
-		<td data-title="Qtd/C. Uni."><? echo $row['quantidade'];?>x<? echo number_format($row['preco'],2,",",".");?></td>
-		<td data-title="Total">R$ <? echo number_format($row['totals'],2,",",".");?>  <a href="javascript: Web(0);" onclick="excluir(<?=$row['produto'];?>,<?=$row['total'];?>)"><i class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="" style="font-size: 150%; color: red;"></i></a></td>
+		<td class="text-center" data-title="#"><?=$d_count;?></td>
+		<td class="text-center" data-title="Descrição">(<? echo $row['codigo'];?>) - <? echo $row['descricao'];?></td>
+		<td class="text-right" data-title="Qtd/C. Uni."><? echo $row['quantidade'];?>x<? echo number_format($row['preco'],2,",",".");?></td>
+		<td class="text-right" data-title="Total">R$ <? echo number_format($row['totals'],2,",",".");?>  <a href="javascript: Web(0);" onclick="excluir(<?=$row['produto'];?>,<?=$row['total'];?>)"><i class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="" style="font-size: 150%; color: red;"></i></a></td>
 	</tr>
 	<? $b = 1;
 	   $d_count ++;

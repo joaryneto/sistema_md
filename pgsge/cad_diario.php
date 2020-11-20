@@ -388,7 +388,7 @@ $("#check[]").on('change', function() {
 								<? } ?>
 								
 								</div>
-								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota'])){?>
+								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota']) && Empty($_GET['codigo'])){?>
 								<div class="form-group col-md-5 m-t-20"><label>Pesquisa :</label>
                                 <input type="text" name="pesquisa" id="pesquisa" onkeyup="" class="form-control"  autocomplete="off"  value="" placeholder="Pesquisar conteúdo">
 								</div>
@@ -423,7 +423,7 @@ $("#check[]").on('change', function() {
                                                 <td data-title="Turma"><? echo $row['a'];?></td>
 												<td data-title="Disciplina"><? echo $row['b'];?></td>
 												<td data-title="Conteudo"><? echo $row['c'];?></td>
-												<td data-title="Data"><? echo formatodatahora($row['data']);?></td>
+												<td data-title="Data"><? echo formatodata($row['data']);?></td>
 												<td data-title="Editar"><a class="fa fa-edit" href="sistema.php?url=cad_diario&codigo=<? echo $row['codigo']?>" style="font-size: 150%;"><a></td>
 												<td data-title="Excluir"><a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir exame" style="font-size: 150%; color: red;" onclick="excluir(<? echo $row['codigo']?>)" href="javascript:void(0);"><a></td>
                                             </tr>
@@ -440,7 +440,7 @@ $("#check[]").on('change', function() {
 								//{
 								//	echo '<div id="listdiario"> </div>';
 								//}
-								if(@$_GET['frequencia'] == 1){?>
+								if(Empty($_GET['codigo'])){?>
 								<div class="col-md-12">
 					       <div class="component-box">
 							<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">

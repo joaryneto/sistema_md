@@ -88,7 +88,7 @@ if(@$_GET['ap'] == 1)
 		
 		?>
 <div class="modal-header">
-<h2 class="pmd-card-title-text">Agenda </h2>
+<h2 class="pmd-card-title-text">Agenda - Data </h2>
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
 <div class="modal-body">
@@ -96,8 +96,8 @@ if(@$_GET['ap'] == 1)
 <div class="modal-body">
 <form class="m-t-40 row">
 		<div class="form-group pmd-textfield pmd-textfield-floating-label" id="inputcliente">
-		<label for="first-name">Data:</label>
-			<input name="dataagenda" id="dataagenda" type="text" autocomplete="off" class="form-control" required="required" />
+		    <label for="first-name">Data:</label>
+			<input name="dataagenda" id="dataagenda" type="text" autocomplete="off" class="form-control  form-control-lg" required="required" />
 		</div>
 		<script>
 		jQuery('#dataagenda').datepicker({
@@ -143,8 +143,8 @@ else if(@$_GET['ap'] == 2)
 	<input type="text" name="dataagenda" id="dataagenda" value="<?=$_GET['data'];?>" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required" disabled />
 	</div>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label"><label for="first-name">Horario:</label>
-	<select name="hora" id="hora" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required" <? if(!Empty($_GET['hora'])){ echo "disabled";}?> >
-	<option value="">Horarios</option>
+	<select name="hora" id="hora" class="form-control" placeholder="Escolha um horario" autocomplete="off"  style="width: 100%; height:36px;" required="required" <? if(!Empty($_GET['hora'])){ echo "disabled";}?> >
+	<option value=""></option>
 		<?
 		
 		$data = revertedata($_GET['data']);
@@ -211,7 +211,7 @@ else if(@$_GET['ap'] == 3)
 	
 	?>
 <div class="modal-header">
-<h2 class="pmd-card-title-text">Gerar Diario </h2>
+<h2 class="pmd-card-title-text">Agenda - Cliente </h2>
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
 <div class="modal-body">
@@ -225,8 +225,7 @@ else if(@$_GET['ap'] == 3)
     }
 	</script>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label">
-	<label for="first-name">Nome:</label>
-	<input type="text" name="nome" id="nome" value="" onkeyup="cliente_r(this.value,'<?=$_SESSION['adata'];?>','<?=$_SESSION['ahora'];?>');" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required" />
+	<input type="text" name="nome" id="nome" value="" placeholder="Buscar cliente por nome" onkeyup="cliente_r(this.value,'<?=$_SESSION['adata'];?>','<?=$_SESSION['ahora'];?>');" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required" />
 	</div>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="inputcliente">
 	</div>

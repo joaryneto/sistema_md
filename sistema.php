@@ -429,11 +429,11 @@ function isMobile()
             <span class="pmd-floating-hidden">Agendar</span> 
             <i class="material-icons">perm_contact_calendar</i> 
         </a> 
-        <a href="javascript:void(0);" class="pmd-floating-action-btn btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" data-title="Add"> 
+        <button type="button" class="pmd-floating-action-btn btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" data-title="Add"> 
             <span class="pmd-floating-hidden">Primary</span>
             <i class="material-icons pmd-sm">add</i> 
-        </a> 
-    </div>
+        </button> 
+        </div>
 		<?}?>
 <!-- footer ends -->
 <? } ?>

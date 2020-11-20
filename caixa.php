@@ -14,9 +14,6 @@ $hora = date('H:i:s');
 ?>
 <!doctype html>
 <html lang="en" class="color-theme-blue">
-
-
-<!-- Mirrored from maxartkiller.com/website/Lemux/lemux-HTML/framworkElements/modal.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Dec 2019 13:57:02 GMT -->
 <head>
 <? include 'css.php';?>
 <style>
@@ -147,11 +144,32 @@ $hora = date('H:i:s');
 								
 	?>
 <script>
-
-function c_cliente(codigo,nome)
+function btn_cexit()
 {
-	$('#c_cliente').val(codigo);
-	document.getElementById('c_nome').innerHTML = ''+ nome +'';
+	if($('#c_nome').css('display') == 'flex' )
+	{
+		$("#c_nome" ).hide( "slow" );
+		$('#c_codigo').val("");
+	    document.getElementById('nome').innerHTML = '';
+	}
+}
+
+function SL_cliente(codigo,nome)
+{
+	if(codigo == "" && nome == "")
+	{
+		swal('Atenção', 'Escolha um cliente');
+	}
+	else
+	{
+		$("#forcaixa" ).show( "slow" );
+		$("#dtable" ).hide( "slow" );
+		$("#dt" ).show( "slow" );
+		$("#c_nome" ).show( "slow" );    
+		$('#c_codigo').val(codigo);
+	    document.getElementById('nome').innerHTML = ''+ nome +'';
+		$('#modalusuario').modal('hide');
+	}
 }
 
 function itens(descricao,codigo,preco)
@@ -192,6 +210,7 @@ function empty(str)
 function lancar() 
 {
 	//var caixa = document.getElementById('caixa').value;
+	var codigo = document.getElementById('c_codigo').value;
 	var coditem = document.getElementById('coditem').value;
 	var descricao = document.getElementById('descricao').value;
 	var qtd = document.getElementById('qtd').value;
@@ -203,25 +222,25 @@ function lancar()
 	
 	if(descricao == "")
 	{
-		swal('Atenção', 'Nenhum produto encontrato');
+		swal('Atenção', 'Selecione um produto.');
 	}
-	if(coditem == "")
+	else if(coditem == "")
 	{
-		swal('Atenção', 'Nenhum produto encontrato');
+		swal('Atenção', 'Selecione um produto.');
 	}
-	if(qtd == "")
+	else if(qtd == "")
 	{
-		swal('Atenção', 'Nenhuma quantidade estipulado');
+		swal('Atenção', 'Quantidade em branco.');
 	}
-	if(total == "")
+	else if(total == "")
 	{
-		swal('Atenção', 'Nenhum valor encontrado');
+		swal('Atenção', 'Valor em branco.');
 	}
 	else
 	{
 		//$("#itenss").append('<tr><td>'+ descricao +'</td><td>1x'+ preco +'</td><td>'+ total +'</td><td>.</td></tr>');
 	
-	    ajaxLoader('?br=atu_caixa&produto='+ coditem +'&desc='+ desc +'&preco='+ preco +'&total='+ total +'&quantidade='+ qtd +'&ap=1','itenss','GET');
+	    ajaxLoader('?br=atu_caixa&codigo='+ codigo +'&produto='+ coditem +'&desc='+ desc +'&preco='+ preco +'&total='+ total +'&quantidade='+ qtd +'&ap=1','itenss','GET');
 	 
 	     
 	    $('#coditem').val('');
@@ -400,22 +419,21 @@ function auto()
            <div class="row">			
                     <div class="col-12">
 								<div class="m-t-40 row" style="display: flex;" id="forcaixa">
-								<div class="pmd-card-body"> 
-							     <!-- Default raised circle button with ripple effect -->
-							        <button class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" type="button" onclick="requestPage2('?br=modal_clientes&codigo=<?=$_GET['codigo'];?>&modal=2','modals','GET');" data-toggle="modal" data-target="#modalusuario"><i class="material-icons pmd-sm">person_add</i></button>
-							        <!-- Primary raised circle button with ripple effect -->
-							        <button class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">trending_down</i></button>
-						        </div>  
-						        <h2 id="c_nome"></h2>
+								<div class="input-group col-md-12 m-t-20" id="c_nome" style="display: none;">
+								<div class="input-group mb-3">
+								   <h2>CLIENTE: <span id="nome"></span> <a href="javascript: Web(0);" onclick="btn_cexit();"><i class="fa fa-times-circle" style="font-size: 110%; color: red;"></i></a></h2>  
+								   <input type="hidden" name="c_codigo" id="c_codigo" placeholder="" value="" class="form-control form-control-lg" >
+                                   </div>								   
+								</div>
 								<div class="input-group col-md-12 m-t-20">
 								 <div class="input-group mb-3">
                                   <input type="text" class="form-control form-control-lg" autocomplete="off"   name="descricao" onMouseOver="auto();" id="descricao" data-toggle="modal" data-target="#itens" placeholder="Descrição do produto - ( Clique aqui )" aria-invalid="false" readonly="readonly">
                                     <div class="input-group-append">
-                                         <span class="input-group-text" id="basic-addon2">Desc.  </span>
+                                         <span class="input-group-text" id="basic-addon2">Desc.</span>
                                     </div>
                                    </div>    
 								</div>
-								<div class="input-group col-md-5 m-t-20">
+								<div class="input-group col-md-5 m-t-20" style="display: none">
 								 <div class="input-group mb-3">
                                   <input type="text" class="form-control form-control-lg" autocomplete="off" autofocus="true" name="codigo" id="codigo" placeholder="Codigo de barra">
                                     <div class="input-group-append">
@@ -435,7 +453,7 @@ function auto()
 								<input type="hidden" name="coditem" autocomplete="off" id="coditem" value="" class="form-control">
 								<input type="hidden" name="preco" id="preco" placeholder="Preço R$ " disabled value="" class="form-control form-control-lg" >
 								
-								<div class="input-group col-md-2 m-t-20" style="display: none">
+								<div class="input-group col-md-2 m-t-20" id="c_desc" style="display: none">
 								<div class="input-group mb-3">
 								<input type="text" name="desc" autocomplete="off" id="desc" placeholder="Desc." onMouseOver="testE();" onchange="loadtotal();" value="" class="form-control form-control-lg" >
                                     <div class="input-group-append">
@@ -455,7 +473,7 @@ function auto()
 								<div class="form-group col-md-2 m-t-20">
 								 <div class="row">
                                    <div class="col">
-								   <button class="btn pmd-btn-outline pmd-ripple-effect btn-primary" onclick="lancar();" type="button">Lançar <i class="material-icons pmd-sm">add</i></button>
+								   <button class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" onclick="lancar();" type="button"><i class="material-icons pmd-sm">add_circle</i></button>
 								   </div>
 								 </div>
 								</div>
@@ -477,20 +495,20 @@ function auto()
 								</thead>
 								<tbody id="itenss">
 									<? 
-										  $d_count = 0;  
+										  $d_count = 1;  
 										  $data = date('Y');
-										  $sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.preco) as totals, count(vendas_mov.produto) as quantidade from vendas_mov inner join produtos on produtos.codigo=vendas_mov.produto where vendas_mov.venda='".$_SESSION['venda']."' GROUP BY vendas_mov.total,vendas_mov.produto";
+										  $sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.preco) as totals, count(vendas_mov.produto) as quantidade from vendas_mov inner join produtos on produtos.codigo=vendas_mov.produto where vendas_mov.venda='".$_SESSION['venda']."' GROUP BY vendas_mov.total,vendas_mov.produto order by produtos.codigo asc";
 										  $res = mysqli_query($db3,$sql); 
 										  $b = 0;
 										  while($row = mysqli_fetch_array($res))
 										  {
 												 
 										  ?>
-                                            <tr ><!-- color: #20aee3; -->
-											    <td data-title="#"><?=$d_count;?></td>
-                                                <td data-title="Descrição">(<? echo $row['codigo'];?>) - <? echo $row['descricao'];?></td>
-												<td data-title="Qtd/C. Uni."><? echo $row['quantidade'];?>x<? echo number_format($row['preco'],2,",",".");?></td>
-												<td data-title="Total">R$ <? echo number_format($row['totals'],2,",",".");?>  <a href="javascript: Web(0);" onclick="excluir(<?=$row['produto'];?>,<?=$row['total'];?>)"><i class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="" style="font-size: 150%; color: red;"></i></a></td>
+                                            <tr onclick="excluir(<?=$row['produto'];?>,<?=$row['total'];?>)"><!-- color: #20aee3; -->
+											    <td class="text-center" data-title="#"><? echo $row['codigo'];?></td>
+                                                <td class="text-center" data-title="Descrição"><? echo $row['descricao'];?></td>
+												<td class="text-right"  data-title="Qtd/C. Uni."><? echo $row['quantidade'];?>x<? echo number_format($row['preco'],2,",",".");?></td>
+												<!--<td class="text-right"  data-title="Total">R$ < echo number_format($row['totals'],2,",",".");?>  <a href="javascript: Web(0);"><i class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="" style="font-size: 150%; color: red;"></i></a></td>-->
                                             </tr>
 										  <? $b = 1;
 										     $d_count ++;
@@ -512,14 +530,6 @@ function auto()
 								<input type="hidden" class="form-control" name="totalvenda" id="totalvenda" value="" required="" aria-invalid="false">
 								<h1 style="color: green;font-weight: bold;">Total: R$ <span id="vtotal"><?=$_SESSION['vtotal'];?></span></h1></div>
 								<div class="form-group col-md-12 m-t-20">
-								 <div class="row">
-                                   <div class="col">
-								   <button class="btn pmd-btn-raised btn pmd-btn-outline pmd-ripple-effect btn-warning" onclick="slow();" id="btncarrinho" data-title="Itens do Carrinho"> 
-                                     <b id="qtdbgd"><?=@$_SESSION['qtditens'];?></b> Itens<i class="material-icons">add_shopping_cart</i></button>
-								   </div>
-								 </div>
-								</div>
-								<div class="form-group col-md-12 m-t-20">
 								<button class="btn btn-lg btn pmd-btn-raised btn-primary btn-block pmd-ripple-effect" type="button" onclick="atualizar();" data-toggle="modal" data-target="#pagamento">Confirmar pagamento</button>
 								</div>
 								<div class="input-group col-md-10 m-t-20">
@@ -529,6 +539,45 @@ function auto()
 					</div>
 				</div>
 			</div>
+			<script>
+			function btn_cliente()
+			{				
+			    requestPage2('?br=modal_clientes&codigo=<?=$_GET['codigo'];?>&modal=1','modals','GET');
+			}
+			
+			function c_desconto()
+			{
+				//data-toggle="modal" data-target="#modalusuario"
+			   //requestPage2('?br=modal_clientes&codigo=<?=$_GET['codigo'];?>&modal=1','modals','GET');
+			   if($('#c_desc').css('display') == 'none' )
+			   {
+				   $("#forcaixa" ).show( "slow" );
+				   $("#c_desc" ).show( "slow" );
+			   }
+			   else
+			   {
+				   $("#c_desc" ).hide( "slow" );
+			   }
+			}
+			</script>
+			<div class="menu pmd-floating-action" role="navigation"> 
+			<button class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" type="button" onclick="btn_cliente();" data-toggle="modal" data-target="#modalusuario" data-title="Clientes">
+			    <span class="pmd-floating-hidden">Clientes</span> 
+				<i class="material-icons pmd-sm">person_add</i>
+			</button>
+			<button class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" type="button" onclick="c_desconto();" data-title="[%] Desconto">
+			<span class="pmd-floating-hidden">[%] Desconto</span> 
+			<i class="material-icons pmd-sm">trending_down</i>
+			</button>
+			<a href="javascript:void(0);" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" onclick="slow();" data-title="Itens do Carrinho"> 
+               <span class="pmd-floating-hidden">Itens do Carrinho</span> 
+			   <i class="material-icons">add_shopping_cart</i> 
+            </a>  
+           <button type="button" class="pmd-floating-action-btn btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" data-title="Menu"> 
+               <span class="pmd-floating-hidden">Primary</span>
+               <i class="material-icons pmd-sm">extension</i> 
+           </button> 
+        </div>
     </div>
 	                           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
                                     <div class="modal-dialog" role="document">
