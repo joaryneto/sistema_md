@@ -88,15 +88,28 @@ if($_GET['ap'] == 3)
 
 if(@$_GET['load'] == 1)
 {
-?>
-<? 
+  if(Empty($_GET['pesquisa']))
+  {
+	print('<script>
+         swal({   
+            title: "Atenção!",   
+            text: "Pesquisa em branco.",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });
+    </script>');
+  }
+  else
+  {
+	  $whe = " and diario.conteudo like '%".$_GET['pesquisa']."%'";
+  }
   
   $data = date('Y');
   $sql4 = "select diario.codigo,diario.conteudo,turmas.descricao as a,materias.descricao as b,diario.conteudo as c,diario.data from diario 
   inner JOIN turmas on turmas.codigo=diario.turma 
   inner join materias on materias.codigo=diario.materia 
   inner join periodo on periodo.codigo=diario.periodo 
-  where YEAR(diario.data)=$data and diario.usuario='".$_SESSION['usuario']."' and diario.status=1;";
+  where YEAR(diario.data)=$data and diario.usuario='".$_SESSION['usuario']."' and diario.status=1 $whe;";
   $res4 = mysqli_query($db,$sql4); 
   while($row = mysqli_fetch_array($res4))
   {
