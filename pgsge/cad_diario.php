@@ -388,7 +388,7 @@ $("#check[]").on('change', function() {
 								<? } ?>
 								
 								</div>
-								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota']) && Empty($_GET['codigo'])){?>
+								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota']) && !Empty($_GET['codigo'])){?>
 								<div class="form-group col-md-5 m-t-20"><label>Pesquisa :</label>
                                 <input type="text" name="pesquisa" id="pesquisa" onkeyup="" class="form-control"  autocomplete="off"  value="" placeholder="Pesquisar conteúdo">
 								</div>
