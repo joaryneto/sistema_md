@@ -414,7 +414,7 @@ $("#check[]").on('change', function() {
 										  inner JOIN turmas on turmas.codigo=diario.turma 
 										  inner join materias on materias.codigo=diario.materia 
 										  inner join periodo on periodo.codigo=diario.periodo 
-										  where YEAR(diario.data)=$cano and diario.usuario='".$_SESSION['usuario']."' and diario.status=1 order by diario.codigo asc;";
+										  where YEAR(diario.data)=$cano and diario.usuario='".$_SESSION['usuario']."' and diario.status=1 order by diario.codigo desc;";
 										  $res4 = mysqli_query($db,$sql4); 
 										  while($row = mysqli_fetch_array($res4))
 										  {
