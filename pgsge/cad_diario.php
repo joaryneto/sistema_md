@@ -440,7 +440,7 @@ $("#check[]").on('change', function() {
 								//{
 								//	echo '<div id="listdiario"> </div>';
 								//}
-								if(@$_GET['frequencia'] == 1 && Empty($_GET['codigo'])){?>
+								if(@$_GET['frequencia'] == 1 && !Empty($_GET['codigo'])){?>
 								<div class="col-md-12">
 					       <div class="component-box">
 							<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
