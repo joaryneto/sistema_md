@@ -24,11 +24,11 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 
     $codigo = $_GET['codigo'];
     $check = $_GET['check'];
-    $turma = $_GET['turma'];
+    $servico = $_GET['servico'];
 	
 	//$count = 0;
 	$x = 0;
-	$SQL1 = "SELECT * FROM turmas_professor where sistema='".$_SESSION['sistema']."' usuario=".$codigo." and turma=".$turma."";
+	$SQL1 = "SELECT * FROM produtos_usuarios where sistema='".$_SESSION['sistema']."' usuario=".$codigo." and produto=".$servico."";
 	$sucesso = mysqli_query($db,$SQL1);
 	
 	while($row = mysqli_fetch_array($sucesso))
@@ -41,14 +41,14 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 	if($x == 1)
 	{
 		//echo "<br>";
-        $SQL = "DELETE FROM turmas_professor where sistema='".$_SESSION['sistema']."' and usuario='".$codigo."' and turma=".$turma."";
+        $SQL = "DELETE FROM produtos_usuarios where sistema='".$_SESSION['sistema']."' and usuario='".$codigo."' and produto=".$servico."";
      	$sucesso = mysqli_query($db,$SQL);
 	}
 	else
 	{
 		//print("<script>window.alert('Aluno não esteve presente!');</script>");
 		//echo "<br>";
-		$SQL = "INSERT INTO turmas_professor(sistema,usuario,turma) values('".$_SESSION['sistema']."','".$codigo."','".$turma."');";
+		$SQL = "INSERT INTO produtos_usuarios(sistema,usuario,produto) values('".$_SESSION['sistema']."','".$codigo."','".$servico."');";
 		$sucesso = mysqli_query($db,$SQL);
 	}	
 	

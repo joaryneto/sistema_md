@@ -23,7 +23,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 
 if(isset($_GET['codigo']))
 {
-	$sucesso = mysqli_query($db3,"SELECT codigob,descricao,preco,custo,estoque FROM produtos where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'");
+	$sucesso = mysqli_query($db3,"SELECT codigob,descricao,preco,custo,estoque,tipo FROM produtos where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'");
 	
 	if($sucesso)
 	{
@@ -34,6 +34,7 @@ if(isset($_GET['codigo']))
 		 $preco = $row['preco'];
 		 $custo = $row['custo'];
 		 $estoque = $row['estoque'];
+		 $tipo = $row['tipo'];
 		 //print("<script>window.alert('TESTE ".$descricao.",".$valor."')</script>");
 	  }
 	}
@@ -60,7 +61,7 @@ if($_GET['ap'] == "1")
 	}
 	else
 	{
-	   $SQL1 = "INSERT into produtos(sistema,codigob, descricao, preco, custo, estoque) values('".$_SESSION['sistema']."','".$_POST['codbarra']."','".$_POST['descricao']."','".$_POST['preco']."','".$_POST['custo']."','".$_POST['estoque']."')";
+	   $SQL1 = "INSERT into produtos(sistema,codigob, descricao, preco, custo, estoque,tipo,status) values('".$_SESSION['sistema']."','".$_POST['codbarra']."','".$_POST['descricao']."','".$_POST['preco']."','".$_POST['custo']."','".$_POST['estoque']."','".$_POST['tipo']."',1)";
 	   $sucesso = mysqli_query($db3,$SQL1);
 	   
 	   if($sucesso)
@@ -76,7 +77,7 @@ if($_GET['ap'] == "1")
 }
 elseif($_GET['ap'] == "2")
 {
-	$SQL1 = "UPDATE produtos SET codigob='".$_POST['codbarra']."',descricao='".$_POST['descricao']."',preco='".$_POST['preco']."',custo='".$_POST['custo']."',estoque='".$_POST['estoque']."' where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
+	$SQL1 = "UPDATE produtos SET codigob='".$_POST['codbarra']."',descricao='".$_POST['descricao']."',preco='".$_POST['preco']."',custo='".$_POST['custo']."',estoque='".$_POST['estoque']."',tipo='".$_POST['tipo']."' where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
 	$sucesso = mysqli_query($db3,$SQL1);
 	
 	if($sucesso)
@@ -141,7 +142,13 @@ else
 								<div class="form-group col-md-2 m-t-20"><label>Estoque :</label>
 								<input type="text" name="estoque" id="estoque" value="<? if(isset($_GET['codigo'])){ echo $estoque;} ?>" class="form-control" required="required">
 								</div>
-								<div class="form-group col-md-4 m-t-20">
+								<div class="form-group col-md-2 m-t-20"><label>Tipo :</label>
+								<select name="tipo" class="form-control" style="width: 100%; height:36px;" required="required">
+                                    <option value="">Selecionar Tipo</option>
+                                       <option value="1" <? if(1 == $tipo){ echo "selected"; } ?>>Produtos</option>
+									   <option value="2" <? if(2 == $tipo){ echo "selected"; } ?>>Serviços</option>
+                                </select></div>
+								<div class="form-group col-md-12 m-t-20">
 								<br>
 								<div class="form-actions">
 								<button type="submit" class="btn btn-info"><i class="fa fa-plus-circle"></i> <? if(isset($_GET['codigo'])){ echo "Gravar";}else { echo "Cadastrar";} ?></button>

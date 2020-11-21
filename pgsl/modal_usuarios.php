@@ -296,6 +296,45 @@ if($x == 0)
 			</div>
 			<div class="row">
 			<div class="col-12">
+			<div class="col-md-12 col-sm-12"> 
+<div class="component-box">
+			<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+		    <table class="table pmd-table">
+				<thead>
+					<tr>
+						<th class="text-center">Cod.</th>
+						<th class="text-center">Serviço</th>
+						<th class="text-right">Comissão</th>
+					</tr>
+				</thead>
+				<tbody>
+				<? 
+			     echo $SQL2 = "SELECT produtos.codigo, produtos.descricao, produtos.descricao from produtos inner join produtos_usuarios on produtos_usuarios.produto=produtos.codigo where produtos_usuarios.usuario='".$_GET['codigo']."' and produtos.tipo=2 order by produtos.descricao ASC";
+				 $RES2 = mysqli_query($db3,$SQL2);
+				 while($rowex = mysqli_fetch_array($RES2))
+				 {
+					 
+			  ?>
+				<tr><!-- color: #20aee3; -->
+					<td data-title="Cod."><? echo $row['codigo'];?></td>
+					<td data-title="Serviço"><? echo $row['descricao'];?></td>
+					<td data-title="Comissão">R$ <? echo number_format($row['totals'],2,",",".");?></td>
+					<td><a href="javascript: void(0);" onclick="requestPage2('?br=rel_caixaanteriores&codigo=<? echo $row['codigo'];?>','modals','GET');" data-toggle="modal" data-target="#modalusuario" aria-invalid="false"><i class="fa fa-trash-o" style="font-size: 150%; color: red;"></i></a></td>
+				</tr>
+			  <? $b = 1;
+			  
+			   } 
+			  
+			  if($b == 0)
+			  {
+				 echo '<tr ><!-- color: #20aee3; -->
+					<td colspan="5" class="text-center"> Nenhum registro encontrado.</td>
+				</tr>';
+			  }
+			  ?>
+				</tbody>
+			</table>
+		</div></div>
 			<!--<input type="text" name="pesquisa" id="pesquisa" value="" onkeyup="javascript: ajaxLoader('?br=cad_exameusuario&codigo=< echo $_GET['codigo'];?>&pesquisa='+ document.getElementById('pesquisa').value +'&list=1','listexame','GET');" class="form-control">-->
 			<div class="form-group col-md-12 m-t-20">
 			<span>Serviços :</span>
@@ -306,7 +345,7 @@ if($x == 0)
 				   
 				 $coduser = $_GET['codigo'];
 				 
-				 $SQL2 = "SELECT produtos.codigo, produtos.descricao from produtos inner join produtos_usuarios on produtos_usuarios.produto=produtos.codigo order by produtos.descricao ASC";
+				 $SQL2 = "SELECT produtos.codigo, produtos.descricao from produtos left join produtos_usuarios on produtos_usuarios.produto=produtos.codigo where produtos.tipo=2 order by produtos.descricao ASC";
 				 $RES2 = mysqli_query($db3,$SQL2);
 				 
 				 while($rowex = mysqli_fetch_array($RES2))
@@ -319,45 +358,17 @@ if($x == 0)
 					
 					
 			?>
-						<br><input type="checkbox" name="<? echo $rowex['codigo'];?>" id="<? echo $rowex['codigo'];?>" OnClick="javascript: requestPage2('?br=atu_turmas&codigo=<? echo $_GET['codigo'];?>&check='+ document.getElementById('<? echo $rowex['codigo'];?>').checked +'&turma='+ this.value ,'listaexames','GET');" value="<? echo $rowex['codigo'];?>" <? if($rowex['codigo'] == $row['turma']) { echo 'checked="checked"'; } ?> data-color="#009efb"  /> <b><? echo $rowex['descricao']; ?> </b>
+						<br><input type="checkbox" name="<? echo $rowex['codigo'];?>" id="<? echo $rowex['codigo'];?>" OnClick="javascript: requestPage2('?br=atu_servicos&codigo=<? echo $_GET['codigo'];?>&check='+ document.getElementById('<? echo $rowex['codigo'];?>').checked +'&servico='+ this.value ,'listaservicos','GET');" value="<? echo $rowex['codigo'];?>" <? if($rowex['codigo'] == $row['turma']) { echo 'checked="checked"'; } ?> data-color="#009efb"  /> <b><? echo $rowex['descricao']; ?> </b>
 				 <? //}
 				 }
 			   }
 			?>
 			
-			<div id="listaexames"></div>
+			<div id="listaservicos"></div>
 			<br>
-			<span>Disciplinas : </span>
-			<?
-			
-			   if(!Empty($_GET['codigo']))
-			   {
-				   
-				 $coduser = $_GET['codigo'];
-				 
-				 $SQL2 = "SELECT materias.codigo,materias.descricao FROM materias 
-				 left join materias_professor on materias_professor.materia=materias.codigo
-				 GROUP BY descricao order by materias.descricao ASC";
-				 $RES2 = mysqli_query($db3,$SQL2);
-				 
-				 while($rowex = mysqli_fetch_array($RES2))
-				 {
-					
-					$SQL4 = "SELECT materia FROM materias_professor where materia='".$rowex['codigo']."' and usuario='".$coduser."'";
-					$RES4 = mysqli_query($db3,$SQL4);
-					$row = mysqli_fetch_array($RES4);
-					//{
-					
-					
-			?>
-						<br><input type="checkbox" name="<? echo $rowex['codigo'];?>" id="<? echo $rowex['codigo'];?>" OnClick="javascript: ajaxLoader('?br=atu_disciplinas&codigo=<? echo $_GET['codigo'];?>&check='+ document.getElementById('<? echo $rowex['codigo'];?>').checked +'&materia='+ this.value ,'listamaterias','GET');" value="<? echo $rowex['codigo'];?>" <? if($rowex['codigo'] == $row['materia']) { echo 'checked="checked"'; } ?> data-color="#009efb"  /> <b><? echo $rowex['descricao']; ?> </b>
-				 <? //}
-				 }
-			   }
-			?>
-			<div id="listamaterias"></div>
-			</div>
 	</div>
+  </div>
+</div>
   </div>
 </div>
 <? }else if($_GET['modal'] == 3){?>
