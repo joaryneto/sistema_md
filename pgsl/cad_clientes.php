@@ -57,7 +57,7 @@ if(isset($inputb['codigo']))
 if(@$inputb['ap'] == "1")
 {
 	$x = 0;
-	$SQL = "SELECT * FROM clientes where sistema='".$_SESSION['sistema']."' and nome like '%".$_POST['nome']."%' or cpf='".$_POST['cpf']."'";
+	$SQL = "SELECT * FROM clientes where sistema='".$_SESSION['sistema']."' and nome like '%".$_POST['nome']."%';'";
 	$RES = mysqli_query($db3,$SQL);
 	while($row = mysqli_fetch_array($RES))
 	{
@@ -67,7 +67,7 @@ if(@$inputb['ap'] == "1")
 	if($x == 1)
 	{
 	    print("<script>window.alert('Cliente já foi cadastrada, escolha outro.')</script>");
-		print("<script>window.location.href='iniciado.php?url=cad_clientes';</script>");
+		print("<script>window.location.href='sistema.php?url=cad_clientes';</script>");
 	}
 	else
 	{
@@ -77,7 +77,7 @@ if(@$inputb['ap'] == "1")
 	   if($sucesso)
 	   {
 		   //print("<script>window.alert('Produtos Cadastrada com sucesso.')</script>");
-		   //print("<script>window.location.href='sistema.php?url=cad_clientes';</script>");
+		   print("<script>window.location.href='sistema.php?url=cad_clientes';</script>");
 	   }
 	   else
 	   {
@@ -139,7 +139,7 @@ else
 							    <?if(@$inputb['cadastro'] == 1){?>
 								<div class="form-group col-md-6 m-t-20"><label>Nome :</label>
 								<input type="text" name="nome" id="nome" value="<? if(isset($inputb['codigo'])){ echo $nome;} ?>" class="form-control" required="required">
-								<button type="button" style="position: absolute;left: 80%;top: 31px;height: 55px;width: 50px;" onclick="requestPage2('?br=modal_clientes&amp;codigo=&amp;modal=2','modals','GET');" class="btn btn-info" data-toggle="modal" data-target="#modalusuario">
+								<button type="button" style="position: absolute;left: 80%;top: 31px;height: 55px;width: 50px;" onclick="requestPage2('?br=modal_clientes&amp;codigo=&amp;modal=2','modals','GET');" class="btn btn-info " data-toggle="modal" data-target="#modalusuario">
 								<i class="fa fa-search" style="font-size: x-large;"></i></button></div>
 								<div class="form-group col-md-2 m-t-20"><label>Data de Nasc. :</label>
 								<input type="text" name="nascimento" id="nascimento" value="<? if(isset($inputb['codigo'])){ echo $nascimento;} ?>" data-mask="00/00/0000" class="form-control">
