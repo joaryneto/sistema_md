@@ -129,7 +129,7 @@ if(@$_GET['excluir'] == 1)
 <div class="container-fluid bg-template mb-4">
             <div class="row hn-290 position-relative">
 			<div class="background opac heightset">
-                    <i class="fa fa-calendar" style="font-size: 200px;position: absolute;left: 40%;top: 50px;"></i>
+                    <i class="material-icons md-dark pmd-md" style="font-size: 180px; position: absolute;float: right; top: 50px; left: 61%;">account_balance</i>
                 </div>
                 <div class="container align-self-end">
                     <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Caixa Alteriores";?></h2>
@@ -156,15 +156,15 @@ if(@$_GET['excluir'] == 1)
 		 <table class="table pmd-table">
 				<thead>
 					<tr>
-						<th class="text-center">Cod.</th>
-						<th class="text-center">Usuario</th>
-						<th class="text-right">Abertura/Fechamento</th>
-						<th class="text-right">Fechamento</th>
-						<th class="text-right">Total R$</th>
+						<th>Cod.</th>
+						<th>Usuario</th>
+						<th>Abertura/Fechamento</th>
+						<th>Fechamento</th>
+						<th>Total R$</th>
 					</tr>
 				</thead>
 				<tbody>
-					<? 
+			  <? 
 			  $sql = "select vendas_op.codigo,vendas_op.data_ab,vendas_op.hora_ab,vendas_op.data_fe,vendas_op.hora_fe,usuarios.nome,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.total) as totals, count(vendas_mov.produto) as quantidade from vendas_op 
 			  left join vendas_mov on vendas_mov.caixa=vendas_op.codigo
 			  left join produtos on produtos.codigo=vendas_mov.produto
@@ -177,13 +177,12 @@ if(@$_GET['excluir'] == 1)
 			  {
 					 
 			  ?>
-				<tr><!-- color: #20aee3; -->
+				<tr onclick="requestPage2('?br=rel_caixaanteriores&codigo=<? echo $row['codigo'];?>','modals','GET');" data-toggle="modal" data-target="#modalusuario" aria-invalid="false"><!-- color: #20aee3; -->
 					<td data-title="Cod."><? echo $row['codigo'];?></td>
 					<td data-title="Usuario"><? echo $row['nome'];?></td>
 					<td data-title="Abertura"><? echo formatodata($row['data_ab']);?> <? echo $row['hora_ab'];?></td>
 					<td data-title="Fechamento"><? if(!Empty($row['data_fe'])){ echo formatodatahora($row['data_fe']);}?> <? echo $row['hora_fe'];?></td>
 					<td data-title="Total R$">R$ <? echo number_format($row['totals'],2,",",".");?></td>
-					<td><a href="javascript: void(0);" onclick="requestPage2('?br=rel_caixaanteriores&codigo=<? echo $row['codigo'];?>','modals','GET');" data-toggle="modal" data-target="#modalusuario" aria-invalid="false"><i class="fa fa-trash-o" style="font-size: 150%; color: red;"></i></a></td>
 				</tr>
 			  <? $b = 1;
 			  

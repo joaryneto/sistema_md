@@ -252,6 +252,21 @@ function isMobile()
                         </a>
 					</li>
 					<? } ?>
+					<li class="nav-item dropdown" style="width: 230px;">
+                        <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="list-group-item list-group-item-action">
+                                <i class="material-icons">card_giftcard</i> Clientes
+                            </div>
+                        </a>
+						<div class="dropdown-menu">
+                            <a href="sistema.php?url=cad_clientes&cadastro=1" id="catual" class="sidebar-close dropdown-item menu-right">
+							 Cadastrar
+                            </a>
+                            <a href="sistema.php?url=cad_clientes" id="canteriores" class="sidebar-close dropdown-item menu-right">
+                             Lista de Clientes
+                            </a>
+                        </div>
+					</li>
 					<?if(@$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 4){?>
 					<li class="nav-item dropdown" style="width: 230px;">
                         <a href="caixa.php" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">

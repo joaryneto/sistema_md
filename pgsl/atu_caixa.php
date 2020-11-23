@@ -19,13 +19,13 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 
 if(@$_GET['load'] == 1)
 {
-	$desc = str_replace('.', "", $_GET['desc']);
-	$preco = str_replace('.', "", $_GET['preco']);
-	$total = str_replace('.', "", $_GET['total']);
+	$desc = str_replace('.', "", @$_GET['desc']);
+	$preco = str_replace('.', "", @$_GET['preco']);
+	$total = str_replace('.', "", @$_GET['total']);
 	
 	$desc = str_replace(',', ".", $desc);
 	$preco = str_replace(',', ".", $preco);
-	$qtd = $_GET['qtd'];
+	$qtd = @$_GET['qtd'];
 	$total = str_replace(',', ".", $total);
 	$d = $desc;
 	
@@ -53,7 +53,7 @@ else if(@$_GET['load'] == 2)
 	$ted = str_replace(",",".", str_replace(".","",$_GET['ted']));
 	$totals = str_replace(",",".", $_SESSION['totalvenda']);
 	
-	$valor = $dinheiro-+$debito+$credito+$ted;
+	$valor = $dinheiro+$debito+$credito+$ted;
 
 	if($valor <= $totals)
 	{
@@ -126,31 +126,7 @@ if(@$_GET['ap'] == 1)
 	
 	$SQL = "SELECT sum(preco) as total, count(codigo) as qtd FROM vendas_mov where venda='".$_SESSION['venda']."'";
 	$RES = mysqli_query($db3,$SQL);
-	$CREW = mysqli_fetch_array($RES);
-			 
-    $d_count = 1;			 
-	$data = date('Y');
-	$sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.preco) as totals, count(vendas_mov.produto) as quantidade from vendas_mov inner join produtos on produtos.codigo=vendas_mov.produto where vendas_mov.venda='".$_SESSION['venda']."' GROUP BY vendas_mov.total, vendas_mov.produto";
-	$res = mysqli_query($db3,$sql); 
-	$b = 0;
-	while($row = mysqli_fetch_array($res))
-	{
-												 
-	?>
-	<tr ><!-- color: #20aee3; -->
-		<td class="text-center" data-title="#"><?=$d_count;?></td>
-		<td class="text-center" data-title="Descrição">(<? echo $row['codigo'];?>) - <? echo $row['descricao'];?></td>
-		<td class="text-right" data-title="Qtd/C. Uni."><? echo $row['quantidade'];?>x<? echo number_format($row['preco'],2,",",".");?></td>
-		<td class="text-right" data-title="Total">R$ <? echo number_format($row['totals'],2,",",".");?>  <a href="javascript: Web(0);" onclick="excluir(<?=$row['produto'];?>,<?=$row['total'];?>)"><i class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="" style="font-size: 150%; color: red;"></i></a></td>
-	</tr>
-	<? $b = 1;
-	   $d_count ++;
-	} 									  
-	if($b == 0)
-	{
-	    echo '<tr><td colspan="4" class="text-center"> Nenhum registro encontrado.</td></tr>';
-		print("<script> slow();</script>");
-	}
+	$CREW = mysqli_fetch_array($RES);	 
 	
 	$_SESSION['qtditens'] = $CREW['qtd'];
 	$_SESSION['totalvenda'] = $CREW['total'];	
@@ -240,6 +216,33 @@ else if(@$_GET['ap'] == 3)
 		
 	    print('<script> document.getElementById("vtroco").innerHTML = "<span style=\'color: red;\'>Falta: R$ '.number_format($v,2,",",".").'</span>";</script>');
 	}
+}
+
+if(@$_GET['load'] == 1)
+{
+    $d_count = 1;			 
+	$data = date('Y');
+	$sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.preco) as totals, count(vendas_mov.produto) as quantidade from vendas_mov inner join produtos on produtos.codigo=vendas_mov.produto where vendas_mov.venda='".$_SESSION['venda']."' GROUP BY vendas_mov.total, vendas_mov.produto";
+	$res = mysqli_query($db3,$sql); 
+	$b = 0;
+	while($row = mysqli_fetch_array($res))
+	{
+												 
+	?>
+	<tr onclick="excluir(<?=$row['produto'];?>,<?=$row['total'];?>)"><!-- color: #20aee3; -->
+		<td data-title="#"><?=$d_count;?></td>
+		<td data-title="Descrição">(<? echo $row['codigo'];?>) - <? echo $row['descricao'];?></td>
+		<td data-title="Qtd/C. Uni."><? echo $row['quantidade'];?>x<? echo number_format($row['preco'],2,",",".");?></td>
+		<td data-title="Total">R$ <? echo number_format($row['totals'],2,",",".");?></td>
+	</tr>
+	<? $b = 1;
+	   $d_count ++;
+	} 									  
+	if($b == 0)
+	{
+	    echo '<tr><td colspan="4" class="text-center"> Nenhum registro encontrado.</td></tr>';
+		print("<script> slow();</script>");
+	}	
 }
 
 ?>	

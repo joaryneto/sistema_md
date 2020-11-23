@@ -34,6 +34,16 @@ $hora = date('H:i:s');
 .fab {
     bottom: 10px !important;
 }
+
+@media screen and (max-width: 480px) {
+.modal-dialog {
+    margin: -0.1rem !important;
+}
+
+.modal-content {
+    margin: 0px;
+ }
+}
 </style>
 </head>
 
@@ -168,7 +178,7 @@ function SL_cliente(codigo,nome)
 		$("#c_nome" ).show( "slow" );    
 		$('#c_codigo').val(codigo);
 	    document.getElementById('nome').innerHTML = ''+ nome +'';
-		$('#modalusuario').modal('hide');
+		$('#modalap').modal('hide');
 	}
 }
 
@@ -359,7 +369,7 @@ function excluir(produto,total)
     }, function()
     { 
 	      
-		ajaxLoader('?br=atu_caixa&codigo='+ produto +'&total='+ total +'&excluir=1&ap=1','itenss','GET');
+		ajaxLoader('?br=atu_caixa&codigo='+ produto +'&total='+ total +'&excluir=1&ap=1&load=1','itenss','GET');
 		
     });
 }
@@ -411,7 +421,7 @@ function auto()
                 <!-- use hn-60 if there is no page specific name required as below and remove below container -->
                 <div class="container align-self-end">
                     <h3 class="font-weight-light"><? echo $_SESSION["PAGINA"] = "Venda caixa (PDV)"; ?></h3>
-                    <p class="text-mute mb-4"><? echo $_SESSION["PAGINA2"] = "(PDV)";?></p>
+                    <p class="text-mute mb-4">List Caixa</p>
                 </div>
             </div>
         </div>
@@ -421,7 +431,7 @@ function auto()
 								<div class="m-t-40 row" style="display: flex;" id="forcaixa">
 								<div class="input-group col-md-12 m-t-20" id="c_nome" style="display: none;">
 								<div class="input-group mb-3">
-								   <h2>CLIENTE: <span id="nome"></span> <a href="javascript: Web(0);" onclick="btn_cexit();"><i class="fa fa-times-circle" style="font-size: 110%; color: red;"></i></a></h2>  
+								   <h3><i class="material-icons pmd-sm" style="font-size: 140%;position: relative;top:  3px;">person</i> <span id="nome"></span> <a href="javascript: Web(0);" onclick="btn_cexit();"><i class="fa fa-times-circle" style="font-size: 110%; color: red;"></i></a></h3>  
 								   <input type="hidden" name="c_codigo" id="c_codigo" placeholder="" value="" class="form-control form-control-lg" >
                                    </div>								   
 								</div>
@@ -455,7 +465,7 @@ function auto()
 								
 								<div class="input-group col-md-2 m-t-20" id="c_desc" style="display: none">
 								<div class="input-group mb-3">
-								<input type="text" name="desc" autocomplete="off" id="desc" placeholder="Desc." onMouseOver="testE();" onchange="loadtotal();" value="" class="form-control form-control-lg" >
+								<input type="text" name="desc" autocomplete="off" id="d_esc" placeholder="Desc." onMouseOver="testE();" onchange="loadtotal();" value="" class="form-control form-control-lg" >
                                     <div class="input-group-append">
                                          <span class="input-group-text" id="basic-addon2">Desc.</span>
                                     </div>
@@ -482,18 +492,18 @@ function auto()
 								<div class="input-group col-md-12 m-t-20">
                                 <div class="help-block"></div></div>
 								<div class="form-group col-md-12 m-t-20" style="clear:">
-									<div class="pmd-card pmd-table-card-responsive" id="dtable" style="display:none;">
-						<div class="pmd-table-card">  
-							<table class="table pmd-table table-hover">
-								<thead>
+								<div class="pmd-card pmd-table-card-responsive" id="dtable" style="display:none;">
+						        <div class="pmd-table-card">  
+							    <table class="table pmd-table table-hover">
+								 <thead>
 									<tr>
-										<th class="text-center">#</th>
-										<th class="text-center">Descrição</th>
-										<th class="text-right">Qtd/C. Uni.</th>
-										<th class="text-right">Total</th>
+										<th>#</th>
+										<th>Descrição</th>
+										<th>Qtd/C. Uni.</th>
+										<th>Total</th>
 								    </tr>
-								</thead>
-								<tbody id="itenss">
+								 </thead>
+								 <tbody id="itenss">
 									<? 
 										  $d_count = 1;  
 										  $data = date('Y');
@@ -505,10 +515,10 @@ function auto()
 												 
 										  ?>
                                             <tr onclick="excluir(<?=$row['produto'];?>,<?=$row['total'];?>)"><!-- color: #20aee3; -->
-											    <td class="text-center" data-title="#"><? echo $row['codigo'];?></td>
-                                                <td class="text-center" data-title="Descrição"><? echo $row['descricao'];?></td>
-												<td class="text-right"  data-title="Qtd/C. Uni."><? echo $row['quantidade'];?>x<? echo number_format($row['preco'],2,",",".");?></td>
-												<!--<td class="text-right"  data-title="Total">R$ < echo number_format($row['totals'],2,",",".");?>  <a href="javascript: Web(0);"><i class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="" style="font-size: 150%; color: red;"></i></a></td>-->
+											    <td data-title="#"><? echo $row['codigo'];?></td>
+                                                <td data-title="Descrição"><? echo $row['descricao'];?></td>
+												<td data-title="Qtd/C. Uni."><? echo $row['quantidade'];?>x<? echo number_format($row['preco'],2,",",".");?></td>
+												<td data-title="Total">R$ <? echo number_format($row['totals'],2,",",".");?></td>
                                             </tr>
 										  <? $b = 1;
 										     $d_count ++;
@@ -521,10 +531,10 @@ function auto()
                                             </tr>';
 										  }
 										  ?>
-								</tbody>
-							</table>
-						</div>
-					</div>
+							  	     </tbody>
+							      </table>
+						         </div>
+					            </div>
 								</div>
 								<div class="input-group col-md-12 m-t-20">
 								<input type="hidden" class="form-control" name="totalvenda" id="totalvenda" value="" required="" aria-invalid="false">
@@ -542,26 +552,27 @@ function auto()
 			<script>
 			function btn_cliente()
 			{				
-			    requestPage2('?br=modal_clientes&codigo=<?=$_GET['codigo'];?>&modal=1','modals','GET');
+			    requestPage2('?br=modal_clientes&codigo=&modal=1','modals','GET');
 			}
 			
 			function c_desconto()
 			{
-				//data-toggle="modal" data-target="#modalusuario"
-			   //requestPage2('?br=modal_clientes&codigo=<?=$_GET['codigo'];?>&modal=1','modals','GET');
 			   if($('#c_desc').css('display') == 'none' )
 			   {
 				   $("#forcaixa" ).show( "slow" );
+				   $("#dtable" ).hide( "slow" );
 				   $("#c_desc" ).show( "slow" );
 			   }
 			   else
 			   {
 				   $("#c_desc" ).hide( "slow" );
+				   $("#forcaixa" ).show( "slow" );
+				   $("#dtable" ).hide( "slow" );
 			   }
 			}
 			</script>
 			<div class="menu pmd-floating-action" role="navigation"> 
-			<button class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" type="button" onclick="btn_cliente();" data-toggle="modal" data-target="#modalusuario" data-title="Clientes">
+			<button class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" type="button" onclick="btn_cliente();" data-toggle="modal" data-target="#modalap" data-title="Clientes">
 			    <span class="pmd-floating-hidden">Clientes</span> 
 				<i class="material-icons pmd-sm">person_add</i>
 			</button>
@@ -687,7 +698,7 @@ function auto()
 											<div class="form-group col-md-12 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Cartão de Crédito</label>
 											<input type="text" name="ccredito" id="ctcredito" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control">
 											</div>
-											<div class="form-group col-md-12 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Transferencia ( Ted, doc, tev)</label>
+											<div class="form-group col-md-12 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Transferencia ( Ted, doc, tev, Pix)</label>
 											<input type="text" name="ted" id="ted" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control">
 											</div>
 											</div>
@@ -717,10 +728,11 @@ function auto()
                                         </div>
                                     </div>
                                 </div>
-								<div id="modalusuario" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+								<div id="modalap" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
 								<div class="modal-dialog modal-lg">
 								<div class="modal-content" id="modals">
 								<!-- /.modal-content -->
+								
 								</div>
 
 								<!-- /.modal-dialog -->
@@ -742,6 +754,7 @@ function auto()
 									 $("#btncarrinho").attr("data-title","Itens do Carrinho");
 								  }
 								}
+								
                                 </script>
 	
 <? include 'scripts.php'?>

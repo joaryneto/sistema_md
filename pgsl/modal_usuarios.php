@@ -46,7 +46,7 @@ if(!Empty($_GET['codigo']))
 	  
 	  $res2 = mysqli_query($db3,"SELECT menu FROM permissoes where usuario='".$_GET['codigo']."' and status=1");
 	  
-	  while($row = mysqli_fetch_array($res2))
+	  while($row = @mysqli_fetch_array($res2))
       {
 		 ///print("<script>window.alert('".$row['menu']."')</script>");
 		 
@@ -291,28 +291,65 @@ if($x == 0)
 <? }else if($_GET['modal'] == 2){?>
 <!-- Modal -->
 			<div class="modal-header pmd-modal-bordered">
-				<h4 class="modal-title" id="myLargeModalLabel"><b>Serviços de Profissional</h4>
+				<h2 class="pmd-card-title-text">Serviços de Profissional</h2>
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 			</div>
+			<div class="modal-body">
 			<div class="row">
 			<div class="col-12">
+			<form class="m-t-40 row">
 			<script>
 			$('#m_servicos').on('click',function()
 			{
 				var servico = document.getElementById('servico').value;
+				var comissao = document.getElementById('comissao').value;
 				//var datav = document.getElementById('dataagenda2').value;
 				
-			    requestPage2('?br=atu_servicos&codigo=<? echo $_GET['codigo'];?>&servico='+ servico +'&ap=1&load=1','u_load','GET');
+				if(servico == "")
+				{
+					 swal({   
+					    title: "Atenção",   
+					    text: "Campo Serviço em branco.",   
+					    timer: 1500,   
+					    showConfirmButton: false 
+                     });
+				}
+				else if(comissao == "")
+				{
+					 swal({   
+					    title: "Atenção",   
+					    text: "Campo comissão em branco.",   
+					    timer: 1500,   
+					    showConfirmButton: false 
+                     });
+				}
+				else
+				{
+			       requestPage2('?br=atu_servicos&codigo=<? echo $_GET['codigo'];?>&servico='+ servico +'&comissao='+ comissao +'&ap=1&load=1','u_load','GET');
+				}
 			});
 			
 			function m_desabilitar(servico)
 			{				
-			    requestPage2('?br=atu_servicos&servico='+ servico +'&ap=2&load=1','u_load','GET');
+			    requestPage2('?br=atu_servicos&codigo=<? echo $_GET['codigo'];?>&servico='+ servico +'&ap=2&load=1','u_load','GET');
 			}
+			
+			function m_change()
+			{
+				var comissao = document.getElementById('comissao').value;
+				
+				if(comissao >= 0)
+				{
+				   $('#comissao').val('0,00');
+				}
+			}
+
+		    $("#comissao").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+			
 			</script>
-			<div class="form-group col-md-9 m-t-20"><label>Tipo :</label>
-				<select name="servico" id="servico" class="form-control" style="width: 100%; height:36px;" required="required">
-                <option value="">Selecionar Tipo</option>
+			<div class="form-group col-md-6 m-t-20"><label>Serviço :</label>
+				<select name="servico" id="servico" class="form-control" onclick="m_change();" style="width: 100%; height:36px;" required="required">
+                <option value="">Selecionar Serviço</option>
 				 <?
 				 $SQL2 = "SELECT produtos.codigo, produtos.descricao, produtos.descricao from produtos where produtos.tipo=2 order by produtos.descricao ASC";
 				 $RES2 = mysqli_query($db3,$SQL2);
@@ -322,8 +359,12 @@ if($x == 0)
 			   <?}?>
             </select>
 			</div>
+			<div class="form-group col-md-3 m-t-20"><label>Comissão :</label>
+			   <input type="text" name="comissao" id="comissao" value="0,00" data-mask="#.##0,00" data-mask-reverse="true" class="form-control" required="required">
+			</div>
 			<div class="form-group col-md-3 m-t-20">
-			<button type="submit" class="btn btn-info" id="m_servicos"><i class="fa fa-plus-circle"></i> Gravar</button>
+			<br><br>
+			<button type="button" class="btn btn-info" id="m_servicos"><i class="fa fa-plus-circle"></i> Gravar</button>
             </div>
 			<div class="form-group col-md-2 m-t-20">
 			</div>
@@ -333,14 +374,16 @@ if($x == 0)
 		    <table class="table pmd-table">
 				<thead>
 					<tr>
-						<th class="text-center">Cod.</th>
-						<th class="text-center">Serviço</th>
-						<th class="text-right">Comissão</th>
+						<th>Cod.</th>
+						<th>Serviço</th>
+						<th>Comissão</th>
+						<th>Op.</th>
 					</tr>
 				</thead>
 				<tbody id="u_load">
 				<? 
-			     $SQL2 = "SELECT produtos_usuarios.codigo, produtos.descricao from produtos inner join produtos_usuarios on produtos_usuarios.produto=produtos.codigo where produtos_usuarios.usuario='".$_GET['codigo']."' and produtos.tipo=2 and produtos_usuarios.status=1 order by produtos.descricao ASC";
+			     $b = 0;
+			     $SQL2 = "SELECT produtos_usuarios.codigo, produtos.descricao, produtos_usuarios.comissao from produtos inner join produtos_usuarios on produtos_usuarios.produto=produtos.codigo where produtos_usuarios.usuario='".$_GET['codigo']."' and produtos.tipo=2 and produtos_usuarios.status=1 order by produtos.descricao ASC";
 				 $RES2 = mysqli_query($db3,$SQL2);
 				 while($row = mysqli_fetch_array($RES2))
 				 {
@@ -349,8 +392,8 @@ if($x == 0)
 				<tr><!-- color: #20aee3; -->
 					<td data-title="Cod."><? echo $row['codigo'];?></td>
 					<td data-title="Serviço"><? echo $row['descricao'];?></td>
-					<td data-title="Comissão">R$ <? echo number_format($row['totals'],2,",",".");?></td>
-					<td><a href="javascript: void(0);" onclick="m_desabilitar(<?=$row['codigo'];?>);"><i class="fa fa-trash-o" style="font-size: 150%; color: red;"></i></a></td>
+					<td data-title="Comissão">R$ <? echo number_format($row['comissao'],2,",",".");?></td>
+					<td data-title="Op."><a href="javascript: void(0);" onclick="m_desabilitar(<?=$row['codigo'];?>);"><i class="fa fa-ban" style="font-size: 150%; color: red;"></i></a></td>
 				</tr>
 			  <? $b = 1;
 			  
@@ -365,7 +408,8 @@ if($x == 0)
 			  ?>
 				</tbody>
 			</table>
-		</div></div>
+			</form>
+		</div></div></div>
 		<div id="listaservicos"></div>
   </div>
 </div>
@@ -373,7 +417,7 @@ if($x == 0)
 </div>
 <? }else if($_GET['modal'] == 3){?>
 			<div class="modal-header">
-				<h4 class="modal-title" id="myLargeModalLabel"><b>Lista de permissões</h4>
+				<h2 class="modal-title" id="myLargeModalLabel"><b>Lista de permissões</h2>
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 			</div>
 			<div class="modal-body">
@@ -420,7 +464,7 @@ if($x == 0)
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="myLargeModalLabel"><b>Assinatura do Usuario : </b> <? if(isset($_GET['codigo'])){ echo $nome;} ?></h4>
+				<h2 class="modal-title" id="myLargeModalLabel"><b>Assinatura do Usuario  </b> <? if(isset($_GET['codigo'])){ echo $nome;} ?></h2>
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 			</div>
 			<div class="modal-body">

@@ -371,7 +371,7 @@ else
 								<div class="form-group col-md-12 m-t-20">
 								<div class="form-actions">
 								<button type="submit" class="btn btn-info"><i class="fa fa-plus-circle"></i> <? if(isset($_GET['codigo'])){ echo "Gravar";}else { echo "Cadastrar";} ?></button>
-								<a class="btn btn-info" href="sistema.php?url=cad_usuarios"><i class="fa fa-plus-circle"></i> Novo cadastro</a>
+								<a class="btn btn-info" href="sistema.php?url=cad_usuarios"><i class="fa fa-plus-circle"></i> Novo</a>
 								</div></div>
 								
 								</form>
