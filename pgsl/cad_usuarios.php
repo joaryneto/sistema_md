@@ -354,7 +354,7 @@ else
 								<div class="form-actions">
 								<!--<a class="btn btn-info" onclick="javascript: ajaxLoader('?br=mexames&codigo=<? echo $_GET['codigo'];?>&list=1','listaexames','GET');" data-toggle="modal" data-target="#exames"><i class="fa fa-plus-circle"></i> Exames Atendidos</a>-->
 								<? if(!Empty($_GET['codigo']) and $tipo == 2 or !Empty($_GET['codigo']) and $tipo == 3 or !Empty($_GET['codigo']) and $tipo == 4){?>
-								<button type="button" class="btn btn-info" onclick="requestPage2('?br=modal_usuarios&codigo=<?=$_GET['codigo'];?>&modal=2','modals','GET');" data-toggle="modal" data-target="#modalusuario"><i class="fa fa-plus-circle"></i> Produtos </button>
+								<button type="button" class="btn btn-info" onclick="requestPage2('?br=modal_usuarios&codigo=<?=$_GET['codigo'];?>&modal=2','modals','GET');" data-toggle="modal" data-target="#modalusuario"><i class="fa fa-plus-circle"></i> Serviços </button>
 								<!--<button type="button" class="btn btn-info" onclick="requestPage2('?br=modal_usuarios&codigo=<=$_GET['codigo'];?>&modal=3','modals','GET');" data-toggle="modal" data-target="#modalusuario"><i class="fa fa-plus-circle"></i> Permissões</button>-->
 								<!--<a href="" class="btn btn-info" data-toggle="modal" data-target="#assinatura"><i class="fa fa-plus-circle"></i> Assinatura</a>-->
 								<?  }   ?>

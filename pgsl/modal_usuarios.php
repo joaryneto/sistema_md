@@ -296,8 +296,39 @@ if($x == 0)
 			</div>
 			<div class="row">
 			<div class="col-12">
+			<script>
+			$('#m_servicos').on('click',function()
+			{
+				var servico = document.getElementById('servico').value;
+				//var datav = document.getElementById('dataagenda2').value;
+				
+			    requestPage2('?br=atu_servicos&codigo=<? echo $_GET['codigo'];?>&servico='+ servico +'&ap=1&load=1','u_load','GET');
+			});
+			
+			function m_desabilitar(servico)
+			{				
+			    requestPage2('?br=atu_servicos&servico='+ servico +'&ap=2&load=1','u_load','GET');
+			}
+			</script>
+			<div class="form-group col-md-9 m-t-20"><label>Tipo :</label>
+				<select name="servico" id="servico" class="form-control" style="width: 100%; height:36px;" required="required">
+                <option value="">Selecionar Tipo</option>
+				 <?
+				 $SQL2 = "SELECT produtos.codigo, produtos.descricao, produtos.descricao from produtos where produtos.tipo=2 order by produtos.descricao ASC";
+				 $RES2 = mysqli_query($db3,$SQL2);
+				 while($row = mysqli_fetch_array($RES2))
+				 {?>
+			         <option value="<? echo $row['codigo'];?>"><? echo $row['descricao'];?></option>
+			   <?}?>
+            </select>
+			</div>
+			<div class="form-group col-md-3 m-t-20">
+			<button type="submit" class="btn btn-info" id="m_servicos"><i class="fa fa-plus-circle"></i> Gravar</button>
+            </div>
+			<div class="form-group col-md-2 m-t-20">
+			</div>
 			<div class="col-md-12 col-sm-12"> 
-<div class="component-box">
+            <div class="component-box">
 			<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
 		    <table class="table pmd-table">
 				<thead>
@@ -307,11 +338,11 @@ if($x == 0)
 						<th class="text-right">Comissão</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="u_load">
 				<? 
-			     echo $SQL2 = "SELECT produtos.codigo, produtos.descricao, produtos.descricao from produtos inner join produtos_usuarios on produtos_usuarios.produto=produtos.codigo where produtos_usuarios.usuario='".$_GET['codigo']."' and produtos.tipo=2 order by produtos.descricao ASC";
+			     $SQL2 = "SELECT produtos_usuarios.codigo, produtos.descricao from produtos inner join produtos_usuarios on produtos_usuarios.produto=produtos.codigo where produtos_usuarios.usuario='".$_GET['codigo']."' and produtos.tipo=2 and produtos_usuarios.status=1 order by produtos.descricao ASC";
 				 $RES2 = mysqli_query($db3,$SQL2);
-				 while($rowex = mysqli_fetch_array($RES2))
+				 while($row = mysqli_fetch_array($RES2))
 				 {
 					 
 			  ?>
@@ -319,7 +350,7 @@ if($x == 0)
 					<td data-title="Cod."><? echo $row['codigo'];?></td>
 					<td data-title="Serviço"><? echo $row['descricao'];?></td>
 					<td data-title="Comissão">R$ <? echo number_format($row['totals'],2,",",".");?></td>
-					<td><a href="javascript: void(0);" onclick="requestPage2('?br=rel_caixaanteriores&codigo=<? echo $row['codigo'];?>','modals','GET');" data-toggle="modal" data-target="#modalusuario" aria-invalid="false"><i class="fa fa-trash-o" style="font-size: 150%; color: red;"></i></a></td>
+					<td><a href="javascript: void(0);" onclick="m_desabilitar(<?=$row['codigo'];?>);"><i class="fa fa-trash-o" style="font-size: 150%; color: red;"></i></a></td>
 				</tr>
 			  <? $b = 1;
 			  
@@ -335,38 +366,7 @@ if($x == 0)
 				</tbody>
 			</table>
 		</div></div>
-			<!--<input type="text" name="pesquisa" id="pesquisa" value="" onkeyup="javascript: ajaxLoader('?br=cad_exameusuario&codigo=< echo $_GET['codigo'];?>&pesquisa='+ document.getElementById('pesquisa').value +'&list=1','listexame','GET');" class="form-control">-->
-			<div class="form-group col-md-12 m-t-20">
-			<span>Serviços :</span>
-			<?
-			
-			   if(!Empty($_GET['codigo']))
-			   {
-				   
-				 $coduser = $_GET['codigo'];
-				 
-				 $SQL2 = "SELECT produtos.codigo, produtos.descricao from produtos left join produtos_usuarios on produtos_usuarios.produto=produtos.codigo where produtos.tipo=2 order by produtos.descricao ASC";
-				 $RES2 = mysqli_query($db3,$SQL2);
-				 
-				 while($rowex = mysqli_fetch_array($RES2))
-				 {
-					
-					$SQL4 = "SELECT produto FROM produtos_usuarios where produto='".$rowex['codigo']."' and usuario='".$coduser."'";
-					$RES4 = mysqli_query($db3,$SQL4);
-					$row = mysqli_fetch_array($RES4);
-					//{
-					
-					
-			?>
-						<br><input type="checkbox" name="<? echo $rowex['codigo'];?>" id="<? echo $rowex['codigo'];?>" OnClick="javascript: requestPage2('?br=atu_servicos&codigo=<? echo $_GET['codigo'];?>&check='+ document.getElementById('<? echo $rowex['codigo'];?>').checked +'&servico='+ this.value ,'listaservicos','GET');" value="<? echo $rowex['codigo'];?>" <? if($rowex['codigo'] == $row['turma']) { echo 'checked="checked"'; } ?> data-color="#009efb"  /> <b><? echo $rowex['descricao']; ?> </b>
-				 <? //}
-				 }
-			   }
-			?>
-			
-			<div id="listaservicos"></div>
-			<br>
-	</div>
+		<div id="listaservicos"></div>
   </div>
 </div>
   </div>
