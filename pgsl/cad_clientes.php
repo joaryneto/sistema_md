@@ -179,7 +179,7 @@ else
 								<div class="col-md-12">
 					            <div class="component-box">
                                 <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
-								<button type="button" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" href="window.location='sistema.php?url=cad_clientes&cadastro=1';"><i class="material-icons pmd-sm">add_circle</i></button>
+								<button type="button" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" onclick="window.location='sistema.php?url=cad_clientes&cadastro=1';"><i class="material-icons pmd-sm">add_circle</i></button>
 							        <table class="table pmd-table">
                                         <thead>
                                             <tr>
