@@ -81,4 +81,68 @@ if($x == 0)
 </form>										 
 <div class="modal-footer">
 </div>
+<? 
+}
+else if($_GET['modal'] == 2)
+{
+?>
+<div class="modal-header">
+<h2 class="pmd-card-title-text">Lista de Cliente :</h2>
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form class="form-horizontal">
+<div class="form-group "><label>Busca:</label>
+<input name="user" type="text" class="form-control" autocomplete="off" onkeyup="javascript: requestPage2('?br=atu_listacliente&pesquisa='+ this.value +'&ap=1','listclientes','GET');" />
+</div>
+<div>
+<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+<table class="table pmd-table">
+<thead>
+<tr>
+<th>Nome</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="listclientes">
+<?
+$sql = "SELECT * FROM clientes limit 10";
+$res = mysqli_query($db3,$sql); 
+$x = 0;
+while($row = mysqli_fetch_array($res))
+{
+?>
+<tr style="cursor: pointer;" onclick="window.location='sistema.php?url=cad_clientes&cadastro=1&codigo=<? echo $row['codigo'];?>';">
+<td data-title="Nome"><? echo $row['nome'];?></td>
+<td data-title="Status"><? Switch($row['status'])
+	 {
+	   case 0:
+		 echo '<span class="label label-danger">Inativo</span>';
+	   break;
+	   case 1:
+		 echo '<span class="label label-success">Ativo</span>';
+	   break;
+	   case 2:
+		 echo '<span class="label label-warning">Pre-ativo</span>';
+	   break;
+   }
+   ?>
+</td>
+</tr>
+<? $x = 1;
+}
+
+if($x == 0)
+{
+ echo "<tr><td>Nenhum resultado encontrado.</td><td></td><td></td><td></td></tr>";
+
+}
+?>
+</tbody>	
+</table>
+</div>
+</div>
+</form>										 
+<div class="modal-footer">
+</div>
 <? } ?>

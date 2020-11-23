@@ -451,7 +451,7 @@ function isMobile()
         </div>
 		<?if($_GET['url'] == "inicio"){?>
 		 <div class="menu pmd-floating-action" role="navigation" style="bottom: 80px;"> 
-        <a href="javascript:void(0);" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="Clientes"> 
+        <a href="javascript:void(0);" onclick="window.location='sistema.php?url=cad_clientes';" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="Clientes"> 
             <span class="pmd-floating-hidden">Clientes</span> 
             <i class="material-icons">supervisor_account</i> 
         </a> 

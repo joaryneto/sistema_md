@@ -18,6 +18,16 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 
 $inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 
+
+$nome =  "";
+$nascimento =  "";
+$sexo =  "";
+$telefone =  "";
+$celular = "";
+$rg =  "";
+$cpf = "";
+$status =  "";
+
 if(isset($inputb['codigo']))
 {
 	$sucesso = mysqli_query($db3,"SELECT nome,nascimento,sexo,telefone,celular,rg,cpf,status FROM clientes where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'");
@@ -61,13 +71,13 @@ if(@$inputb['ap'] == "1")
 	}
 	else
 	{
-	   $SQL1 = "INSERT into produtos(sistema, nome, nascimento,sexo, telefone, celular, rg, cpf, status) values('".$_SESSION['sistema']."','".$_POST['nome']."','".revertedata($_POST['nascimento'])."','".$_POST['sexo']."','".$_POST['telefone']."','".$_POST['celular']."','".$_POST['rg']."','".$_POST['cpf']."','".$_POST['status']."')";
+	   $SQL1 = "INSERT into clientes(sistema, nome, nascimento,sexo, telefone, celular, rg, cpf, status) values('".$_SESSION['sistema']."','".$_POST['nome']."','".revertedata($_POST['nascimento'])."','".$_POST['sexo']."','".$_POST['telefone']."','".$_POST['celular']."','".$_POST['rg']."','".$_POST['cpf']."','".$_POST['status']."')";
 	   $sucesso = mysqli_query($db3,$SQL1);
 	   
 	   if($sucesso)
 	   {
 		   //print("<script>window.alert('Produtos Cadastrada com sucesso.')</script>");
-		   print("<script>window.location.href='sistema.php?url=cad_clientes';</script>");
+		   //print("<script>window.location.href='sistema.php?url=cad_clientes';</script>");
 	   }
 	   else
 	   {
@@ -125,13 +135,14 @@ else
 	<div class="col-md-12 col-sm-12"> 
 		<div class="component-box">
 			<!--Tabs with Icon example -->
-								<form class="form-material m-t-40 row" name="laudo" method="post" action="<? if($inputb['codigo'] ==""){ echo "sistema.php?url=cad_clientes&ap=1";}else { echo "sistema.php?url=cad_clientes&ap=2&codigo=".$inputb['codigo']."";} ?>">
+								<form class="form-material m-t-40 row" name="laudo" method="post" action="<? if(@$inputb['codigo'] ==""){ echo "sistema.php?url=cad_clientes&ap=1";}else { echo "sistema.php?url=cad_clientes&ap=2&codigo=".@$inputb['codigo']."";} ?>">
 							    <?if(@$inputb['cadastro'] == 1){?>
 								<div class="form-group col-md-6 m-t-20"><label>Nome :</label>
 								<input type="text" name="nome" id="nome" value="<? if(isset($inputb['codigo'])){ echo $nome;} ?>" class="form-control" required="required">
-								</div>
+								<button type="button" style="position: absolute;left: 80%;top: 31px;height: 55px;width: 50px;" onclick="requestPage2('?br=modal_clientes&amp;codigo=&amp;modal=2','modals','GET');" class="btn btn-info" data-toggle="modal" data-target="#modalusuario">
+								<i class="fa fa-search" style="font-size: x-large;"></i></button></div>
 								<div class="form-group col-md-2 m-t-20"><label>Data de Nasc. :</label>
-								<input type="text" name="nascimento" id="nascimento" value="<? if(isset($inputb['codigo'])){ echo $nascimento;} ?>" data-mask="00/00/0000" class="form-control" required="required">
+								<input type="text" name="nascimento" id="nascimento" value="<? if(isset($inputb['codigo'])){ echo $nascimento;} ?>" data-mask="00/00/0000" class="form-control">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>Sexo :</label>
 								<select name="sexo" class="form-control" style="width: 100%; height:36px;" required="required">
@@ -140,16 +151,16 @@ else
 									   <option value="2" <? if(2 == $sexo){ echo "selected"; } ?>>Feminino</option>
                                 </select></div>
 								<div class="form-group col-md-2 m-t-20"><label>Telefone. :</label>
-								<input type="text" name="telefone" id="telefone" placeholder="(DD)0000-0000" value="<? if(isset($inputb['codigo'])){ echo $telefone;} ?>" data-mask="(00)0000-0000" class="form-control" required="required">
+								<input type="text" name="telefone" id="telefone" placeholder="(DD)0000-0000" value="<? if(isset($inputb['codigo'])){ echo $telefone;} ?>" data-mask="(00)0000-0000" class="form-control">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>Celular :</label>
-								<input type="text" name="celular" id="celular" placeholder="(DD)00000-0000" value="<? if(isset($inputb['codigo'])){ echo $celular;} ?>" data-mask="(00)00000-0000" class="form-control" required="required">
+								<input type="text" name="celular" id="celular" placeholder="(DD)00000-0000" value="<? if(isset($inputb['codigo'])){ echo $celular;} ?>" data-mask="(00)00000-0000" class="form-control">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>RG :</label>
-								<input type="text" name="rg" id="rg" value="<? if(isset($inputb['codigo'])){ echo $rg;} ?>" data-mask="00000000" class="form-control" required="required">
+								<input type="text" name="rg" id="rg" value="<? if(isset($inputb['codigo'])){ echo $rg;} ?>" data-mask="00000000" class="form-control">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>CPF :</label>
-								<input type="text" name="cpf" id="cpf" value="<? if(isset($inputb['codigo'])){ echo $cpf;} ?>" data-mask="00000000000" class="form-control" required="required">
+								<input type="text" name="cpf" id="cpf" value="<? if(isset($inputb['codigo'])){ echo $cpf;} ?>" data-mask="00000000000" class="form-control">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>Status :</label>
 								<select name="status" class="form-control" style="width: 100%; height:36px;" required="required">
@@ -168,6 +179,7 @@ else
 								<div class="col-md-12">
 					            <div class="component-box">
                                 <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+								<button type="button" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" href="window.location='sistema.php?url=cad_clientes&cadastro=1';"><i class="material-icons pmd-sm">add_circle</i></button>
 							        <table class="table pmd-table">
                                         <thead>
                                             <tr>
