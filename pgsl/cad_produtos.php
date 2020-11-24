@@ -18,6 +18,13 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 
 $inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 
+$codbarra = "";
+$descricao = "";
+$preco = "";
+$custo = "";
+$estoque = "";
+$tipo = "";
+		 
 if(isset($inputb['codigo']))
 {
 	$sucesso = mysqli_query($db3,"SELECT codigob,descricao,preco,custo,estoque,tipo FROM produtos where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'");
@@ -122,7 +129,7 @@ else
 	<div class="col-md-12 col-sm-12"> 
 		<div class="component-box">
 			<!--Tabs with Icon example -->
-								<form class="form-material m-t-40 row" name="laudo" method="post" action="<? if($inputb['codigo'] ==""){ echo "sistema.php?url=cad_produtos&ap=1";}else { echo "sistema.php?url=cad_produtos&ap=2&codigo=".$inputb['codigo']."";} ?>">
+								<form class="form-material m-t-40 row" name="laudo" method="post" action="<? if(@$inputb['codigo'] ==""){ echo "sistema.php?url=cad_produtos&ap=1";}else { echo "sistema.php?url=cad_produtos&ap=2&codigo=".@$inputb['codigo']."";} ?>">
 							    <?if(@$inputb['cadastro'] == 1){?>
 								<div class="form-group col-md-2 m-t-20"><label>Codigo de Barra :</label>
 								<input type="text" name="codbarra" id="codbarra" value="<? if(isset($inputb['codigo'])){ echo $codbarra;} ?>" class="form-control">
