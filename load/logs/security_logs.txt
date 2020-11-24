@@ -247,3 +247,33 @@
 
  --------------------
 
+ Login: Nao Logado  
+ IP: 192.168.1.6 
+ IP Reverso: sistema.medfacil.local 
+ Data: 2020-11-24 13:14 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0 
+ Pagina: /login.php?br=atu_login&login=%271%27&senha=1 
+ Metodo: GET 
+
+ --------------------
+
+ Login: Nao Logado  
+ IP: 192.168.1.6 
+ IP Reverso: sistema.medfacil.local 
+ Data: 2020-11-24 13:27 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0 
+ Pagina: /login.php?br=atu_login&login=%271%27&senha=1 
+ Metodo: GET 
+
+ --------------------
+
+ Login: Nao Logado  
+ IP: 192.168.1.6 
+ IP Reverso: sistema.medfacil.local 
+ Data: 2020-11-24 13:27 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0 
+ Pagina: /login.php?br=atu_login&login=%271%27&senha=1 
+ Metodo: GET 
+
+ --------------------
+
