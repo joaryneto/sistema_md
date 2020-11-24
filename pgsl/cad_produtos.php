@@ -132,19 +132,19 @@ else
 								<form class="form-material m-t-40 row" name="laudo" method="post" action="<? if(@$inputb['codigo'] ==""){ echo "sistema.php?url=cad_produtos&ap=1";}else { echo "sistema.php?url=cad_produtos&ap=2&codigo=".@$inputb['codigo']."";} ?>">
 							    <?if(@$inputb['cadastro'] == 1){?>
 								<div class="form-group col-md-2 m-t-20"><label>Codigo de Barra :</label>
-								<input type="text" name="codbarra" id="codbarra" value="<? if(isset($inputb['codigo'])){ echo $codbarra;} ?>" class="form-control">
+								<input type="text" name="codbarra" id="codbarra" value="<? if(isset($inputb['codigo'])){ echo $codbarra;} ?>" placeholder="Codigo de barra ( Se tiver )" class="form-control">
 								</div>
 								<div class="form-group col-md-4 m-t-20"><label>Descrição :</label>
-								<input type="text" name="descricao" id="descricao" value="<? if(isset($inputb['codigo'])){ echo $descricao;} ?>" class="form-control" required="required">
+								<input type="text" name="descricao" id="descricao" value="<? if(isset($inputb['codigo'])){ echo $descricao;} ?>" placeholder="Descrição" class="form-control" required="required">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>Preço :</label>
-								<input type="text" name="preco" id="preco" value="<? if(isset($inputb['codigo'])){ echo $preco;} ?>" data-mask="#.##0,00" data-mask-reverse="true" class="form-control" required="required">
+								<input type="text" name="preco" id="preco" value="<? if(isset($inputb['codigo'])){ echo $preco;} ?>" placeholder="0,00" data-mask="#.##0,00" data-mask-reverse="true" class="form-control" required="required">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>Custo :</label>
-								<input type="text" name="custo" id="custo" value="<? if(isset($inputb['codigo'])){ echo $custo;} ?>" data-mask="#.##0,00" data-mask-reverse="true" class="form-control">
-								</div>
+								<input type="text" name="custo" id="custo" value="<? if(isset($inputb['codigo'])){ echo $custo;} ?>" placeholder="0,00" data-mask="#.##0,00" data-mask-reverse="true" class="form-control">
+								</div> 
 								<div class="form-group col-md-2 m-t-20"><label>Estoque :</label>
-								<input type="text" name="estoque" id="estoque" value="<? if(isset($inputb['codigo'])){ echo $estoque;} ?>" class="form-control" required="required">
+								<input type="text" name="estoque" id="estoque" value="<? if(isset($inputb['codigo'])){ echo $estoque;} ?>" placeholder="0" class="form-control" required="required">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>Tipo :</label>
 								<select name="tipo" class="form-control" style="width: 100%; height:36px;" required="required">
