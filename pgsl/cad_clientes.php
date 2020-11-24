@@ -101,9 +101,6 @@ elseif(@$inputb['ap'] == "2")
 	}
 }
 
-?>	
-<?
-
 $input = "";
 
 if(Empty($inputb['cadastro']))
@@ -119,7 +116,7 @@ else
 <div class="container-fluid bg-template mb-4">
             <div class="row hn-<?=$valor;?> position-relative">
 			<div class="background opac heightset">
-					<i class="material-icons md-dark pmd-md" style="font-size: 200px;position: absolute;left: 58%;top: 50px;">people</i>
+					<i class="material-icons md-dark pmd-md" style="font-size: 200px;position: absolute;left: 53%;top: 50px;">people</i>
                 </div>
                 <div class="container align-self-end">
                     <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Clientes";?></h2>
