@@ -74,7 +74,7 @@ if(isset($inputb["codigo"]) and $inputb['ap'] == 1)
 else if($inputb['ap'] == 2)
 {
 
-   $SQL = "UPDATE agendamento SET data='".revertedata($inputb['data'])."', hora='".$inputb['hora']."' WHERE codigo='".$inputb['codigo']."'";
+   $SQL = "UPDATE agendamento SET data='".revertedata($inputb['data'])."', hora='".$inputb['hora']."' WHERE sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
    mysqli_query($db3,$SQL);
  ?>
  
@@ -92,7 +92,7 @@ else if($inputb['ap'] == 2)
 }
 else if($inputb['ap'] == 3)
 {
-   $SQL = "DELETE from agendamento WHERE codigo='".$inputb['codigo']."'";
+   $SQL = "DELETE from agendamento WHERE sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
    mysqli_query($db3,$SQL);
  ?>
  

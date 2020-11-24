@@ -150,7 +150,7 @@ else if(@$inputb['ap'] == 2)
 	<?if(!Empty($inputb['profissional']) and !Empty($inputb['codigo']))
 	{
 		
-		$SQL = "SELECT * FROM usuarios where codigo='".$inputb['profissional']."';";
+		$SQL = "SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['profissional']."';";
 		$RES = mysqli_query($db3,$SQL);
 		$RESS = mysqli_fetch_array($RES);
 		
@@ -181,7 +181,7 @@ else if(@$inputb['ap'] == 2)
 		  $x = 0;
 		  $nome = "";
 		  
-		  $SQL2 = "SELECT hora,nome FROM agendamento where data='".$data."' and profissional='".$_SESSION['codpro']."' and hora='".$row1['hora']."'";
+		  $SQL2 = "SELECT hora,nome FROM agendamento where sistema='".$_SESSION['sistema']."' and data='".$data."' and profissional='".$_SESSION['codpro']."' and hora='".$row1['hora']."'";
 		  $RES2 = mysqli_query($db3,$SQL2);
 		  while($row2 = mysqli_fetch_array($RES2))
 		  {
@@ -285,7 +285,7 @@ $pesquisa = @$inputb['pesquisa'];
 </thead>
 <tbody>
 <?
-$SQL = "SELECT * FROM clientes where nome like '%".$pesquisa."%';";
+$SQL = "SELECT * FROM clientes where sistema='".$_SESSION['sistema']."' and nome like '%".$pesquisa."%';";
 $res = mysqli_query($db3,$SQL); 
 $x = 0;
 while($row = mysqli_fetch_array($res))
@@ -413,7 +413,7 @@ else if($inputb['ap'] == 7)
 		
 		$data = revertedata($inputb['data']);
 		
-		$SQL1 = "SELECT horarios.hora FROM horarios ORDER BY horarios.hora asc";
+		$SQL1 = "SELECT horarios.hora FROM horarios sistema='".$_SESSION['sistema']."' ORDER BY horarios.hora asc";
 		$RES1 = mysqli_query($db3,$SQL1);
 		while($row1 = mysqli_fetch_array($RES1))
 		{
@@ -421,7 +421,7 @@ else if($inputb['ap'] == 7)
 		  $x = 0;
 		  $nome = "";
 		  
-		  echo $SQL2 = "SELECT hora,nome FROM agendamento where data='".$data."' and profissional='".$profissional."' and hora='".$row1['hora']."'";
+		  echo $SQL2 = "SELECT hora,nome FROM agendamento where sistema='".$_SESSION['sistema']."' and data='".$data."' and profissional='".$profissional."' and hora='".$row1['hora']."'";
 		  $RES2 = mysqli_query($db3,$SQL2);
 		  while($row2 = mysqli_fetch_array($RES2))
 		  {

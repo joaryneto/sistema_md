@@ -125,7 +125,7 @@ if($_GET['load'] == 1)
 	 $codigo = $inputb['codigo'];
 	 
      $b = "";
-	 $SQL2 = "SELECT produtos_usuarios.codigo, produtos.descricao, produtos_usuarios.comissao from produtos inner join produtos_usuarios on produtos_usuarios.produto=produtos.codigo where produtos_usuarios.usuario='".$codigo."' and produtos.tipo=2 and produtos_usuarios.status=1 order by produtos.descricao ASC";
+	 $SQL2 = "SELECT produtos_usuarios.codigo, produtos.descricao, produtos_usuarios.comissao from produtos inner join produtos_usuarios on produtos_usuarios.produto=produtos.codigo where produtos_usuarios.sistema='".$_SESSION['sistema']."' and produtos_usuarios.usuario='".$codigo."' and produtos.tipo=2 and produtos_usuarios.status=1 order by produtos.descricao ASC";
 	 $RES2 = mysqli_query($db3,$SQL2);
 	 while($row = mysqli_fetch_array($RES2))
 	 {

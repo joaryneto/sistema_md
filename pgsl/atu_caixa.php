@@ -73,7 +73,7 @@ else if(@$_GET['load'] == 2)
 }
 else if(@$_GET['load'] == 3)
 {
-	$SQL = "SELECT sum(preco) as total FROM vendas_mov where venda='".$_SESSION['venda']."'";
+	$SQL = "SELECT sum(preco) as total FROM vendas_mov where sistema='".$_SESSION['sistema']."' and venda='".$_SESSION['venda']."'";
 	$RES = mysqli_query($db3,$SQL);
 	$CREW = mysqli_fetch_array($RES);
 	
@@ -124,7 +124,7 @@ if(@$_GET['ap'] == 1)
 	
     }
 	
-	$SQL = "SELECT sum(preco) as total, count(codigo) as qtd FROM vendas_mov where venda='".$_SESSION['venda']."'";
+	$SQL = "SELECT sum(preco) as total, count(codigo) as qtd FROM vendas_mov where sistema='".$_SESSION['sistema']."' and venda='".$_SESSION['venda']."'";
 	$RES = mysqli_query($db3,$SQL);
 	$CREW = mysqli_fetch_array($RES);	 
 	
@@ -222,7 +222,7 @@ if(@$_GET['load'] == 1)
 {
     $d_count = 1;			 
 	$data = date('Y');
-	$sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.preco) as totals, count(vendas_mov.produto) as quantidade from vendas_mov inner join produtos on produtos.codigo=vendas_mov.produto where vendas_mov.venda='".$_SESSION['venda']."' GROUP BY vendas_mov.total, vendas_mov.produto";
+	$sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.preco) as totals, count(vendas_mov.produto) as quantidade from vendas_mov inner join produtos on produtos.codigo=vendas_mov.produto where vendas_mov.sistema='".$_SESSION['sistema']."' and vendas_mov.venda='".$_SESSION['venda']."' GROUP BY vendas_mov.total, vendas_mov.produto";
 	$res = mysqli_query($db3,$sql); 
 	$b = 0;
 	while($row = mysqli_fetch_array($res))

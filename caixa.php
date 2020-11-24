@@ -7,6 +7,14 @@ session_start();
 require_once("./load/load.php");
 
 date_default_timezone_set('America/Cuiaba');
+
+if($_SESSION['usuario'] == "")
+{
+	print("<script>window.location.href='index.php';</script>");
+}
+else
+{
+	
 $data = date('Y-m-d');
 $hora = date('H:i:s');
 
@@ -465,7 +473,7 @@ function auto()
 								
 								<div class="input-group col-md-2 m-t-20" id="c_desc" style="display: none">
 								<div class="input-group mb-3">
-								<input type="text" name="desc" autocomplete="off" id="d_esc" placeholder="Desc." onMouseOver="testE();" onchange="loadtotal();" value="" class="form-control form-control-lg" >
+								<input type="text" name="desc" autocomplete="off" id="desc" placeholder="Desc." onMouseOver="testE();" onchange="loadtotal();" value="" class="form-control form-control-lg" >
                                     <div class="input-group-append">
                                          <span class="input-group-text" id="basic-addon2">Desc.</span>
                                     </div>
@@ -764,3 +772,4 @@ function auto()
 
 <!-- Mirrored from maxartkiller.com/website/Lemux/lemux-HTML/framworkElements/modal.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Dec 2019 13:57:05 GMT -->
 </html>
+<? } ?>

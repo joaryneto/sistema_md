@@ -1,11 +1,9 @@
 <?
 
-error_reporting(E_ALL);
-ob_start();
-session_start();
+$inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 
-$login = @$_GET['login'];
-$senha = @$_GET['senha'];
+$login = @$inputb['login'];
+$senha = @$inputb['senha'];
 
 $_SESSION['login'] = $login;
 $_SESSION['senha'] = $senha;

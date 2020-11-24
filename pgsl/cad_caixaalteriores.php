@@ -16,114 +16,6 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //   //exit("<strong> Erro: Você não tem permissão. </strong>");
 //}
 
-if(isset($_GET['codigo']))
-{
-	$SQL = "SELECT diario.turma,diario.materia,diario.periodo,diario.data,diario.conteudo,diario.texto,materias.descricao as mdescricao,turmas.descricao as tdescricao,periodo.descricao as pdescricao FROM diario 
-	inner join materias on materias.codigo=diario.materia 
-	inner join turmas on turmas.codigo=diario.turma
-	inner join periodo on periodo.codigo=diario.periodo
-	where diario.codigo='".$_GET['codigo']."'";
-	
-	$sucesso = mysqli_query($db,$SQL);
-	
-	if($sucesso)
-	{
-      while($row = mysqli_fetch_array($sucesso))
-	  {
-		 $turma = $row['turma'];
-		 $disciplina = $row['materia'];
-		 $periodo = $row['periodo'];
-		 $data = $row['data'];
-		 $conteudo = $row['conteudo'];
-		 $texto = $row['texto'];
-		 $pdescricao = $row['pdescricao'];
-		 $tdescricao = $row['tdescricao'];
-		 $mdescricao = $row['mdescricao'];
-		 
-		 //print("<script>window.alert('TESTE ".$descricao.",".$valor."')</script>");
-	  }
-	}
-	else
-	{
-		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-1')</script>");
-	}
-}
-
-if(@$_GET['ap'] == "1")
-{
-	$sucesso = mysqli_query($db,"SELECT * FROM diario where turma='".$_POST['turma']."' and materia='".$_POST['disciplina']."' and periodo='".$_POST['periodo']."' and data='".revertedata($_POST['txtdata'])."' and conteudo like '%'".$_POST['conteudo']."'%'");
-	
-	if($sucesso)
-	{
-	    print("<script>window.alert('Conteudo ja cadastrada!')</script>");
-		print("<script>window.location.href='iniciado.php?url=cad_diario';</script>");
-	}
-	else
-	{
-	   $SQL1 = "INSERT into diario(turma,materia,periodo,data,conteudo,texto) values('".$_POST['turma']."','".$_POST['disciplina']."','".$_POST['periodo']."','".revertedata($_POST['txtdata'])."','".$_POST['conteudo']."','".$_POST['txtobs']."')";
-	   $sucesso = mysqli_query($db,$SQL1);
-	   
-	   if($sucesso)
-	   {
-		   print("<script>window.alert('Conteudo Cadastrada com sucesso...')</script>");
-		   print("<script>window.location.href='iniciado.php?url=cad_diario';</script>");
-	   }
-	   else
-	   {
-		   print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-2')</script>");
-	   }
-	}
-}
-elseif(@$_GET['ap'] == "2")
-{
-	$SQL1 = "UPDATE diario SET conteudo='".$_POST['conteudo']."', texto='".$_POST['txtobs']."' where codigo='".$_GET['codigo']."'";
-	$sucesso = mysqli_query($db,$SQL1);
-	
-	if($sucesso)
-	{
-        print("<script>window.alert('Atualizado com sucesso.');</script>");
-		print("<script>window.location.href='iniciado.php?url=cad_diario&codigo=".$_GET['codigo']."';</script>");
-	}
-	else
-	{
-		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-3')</script>");
-	}
-	
-}
-
-if(@$_GET['fechar'] == "3")
-{
-	$SQL1 = "UPDATE diario SET status=0 where codigo='".$_GET['codigo']."'";
-	$sucesso = mysqli_query($db,$SQL1);
-	
-	if($sucesso)
-	{
-        print("<script>window.alert('Bimestre fechado com sucesso.');</script>");
-		print("<script>window.location.href='iniciado.php?url=cad_diario&codigo=".$_GET['codigo']."';</script>");
-	}
-	else
-	{
-		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-3')</script>");
-	}
-	
-}
-if(@$_GET['excluir'] == 1)
-{
-	$SQL1 = "DELETE FROM diario where codigo='".$_GET['codigo']."'";
-	$sucesso = mysqli_query($db,$SQL1);
-	
-	if($sucesso)
-	{
-        print("<script>window.alert('Excluido com sucesso.');</script>");
-		print("<script>window.location.href='iniciado.php?url=cad_diario';</script>");
-	}
-	else
-	{
-		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-3')</script>");
-	}
-	
-}
-
 ?>	
 
 <div class="container-fluid bg-template mb-4">
@@ -145,7 +37,7 @@ if(@$_GET['excluir'] == 1)
 <div class="component-box">
 	<?
 	
-	$SQL3 = "SELECT sum(total) as total FROM vendas_mov where caixa='".$_SESSION['caixa']."'";
+	$SQL3 = "SELECT sum(total) as total FROM vendas_mov where sistema='".$_SESSION['sistema']."' and caixa='".$_SESSION['caixa']."'";
 	$RES3 = mysqli_query($db3,$SQL3);
 	$ROW3 = mysqli_fetch_array($RES3);
 	
@@ -169,7 +61,7 @@ if(@$_GET['excluir'] == 1)
 			  left join vendas_mov on vendas_mov.caixa=vendas_op.codigo
 			  left join produtos on produtos.codigo=vendas_mov.produto
 			  inner join usuarios on usuarios.codigo=vendas_op.usuario
-			  where vendas_op.sistema='".$_SESSION['sistema']."' and vendas_op.status=0 GROUP BY vendas_op.codigo";
+			  where vendas_op.sistema='".$_SESSION['sistema']."' and vendas_op.sistema='".$_SESSION['sistema']."' and vendas_op.status=0 GROUP BY vendas_op.codigo";
 			  
 			  $res = mysqli_query($db3,$sql); 
 			  $b = 0;
