@@ -134,7 +134,7 @@ else
 								<input type="text" name="preco" id="preco" value="<? if(isset($inputb['codigo'])){ echo $preco;} ?>" data-mask="#.##0,00" data-mask-reverse="true" class="form-control" required="required">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>Custo :</label>
-								<input type="text" name="custo" id="custo" value="<? if(isset($inputb['codigo'])){ echo $custo;} ?>" data-mask="#.##0,00" data-mask-reverse="true" class="form-control" required="required">
+								<input type="text" name="custo" id="custo" value="<? if(isset($inputb['codigo'])){ echo $custo;} ?>" data-mask="#.##0,00" data-mask-reverse="true" class="form-control">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>Estoque :</label>
 								<input type="text" name="estoque" id="estoque" value="<? if(isset($inputb['codigo'])){ echo $estoque;} ?>" class="form-control" required="required">
