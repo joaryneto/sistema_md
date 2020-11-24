@@ -4,11 +4,8 @@ $PageName = strtolower(basename( __FILE__ ));
 if($PageRequest == $PageName) exit("<strong> Erro: N&atilde;o &eacute; permitido acessar o arquivo diretamente. </strong>");
 
 
-
-// by xamaee fodao :D
 class security {	
 
-	
 	function strings_invalidas($str) 
 	{
     	$str2 = $str;
@@ -75,7 +72,15 @@ class security {
    }
    
    function registrar_tentativa() 
-   {	
+   {
+	    if(!$db = mysqli_connect("mysql669.umbler.com:41890","sistemaec","I_Jt{4|p6u"))
+        {
+           echo "teste";
+        }  
+
+        mysqli_select_db($db, "sistemasl");
+        mysqli_set_charset($db,'UTF8');
+		
 		$data = date("Y-m-d G:i");
 		$navegador = $_SERVER['HTTP_USER_AGENT'];
 		$solicitada = $_SERVER['REQUEST_URI'];
@@ -91,6 +96,8 @@ class security {
 		$log.= "Pagina: {$solicitada} \r\n ";
 		$log.= "Metodo: {$metodo} \r\n\r\n ";
 		$log.= "--------------------\r\n\r\n";
+		
+		//$SQL = "INSERT ";
 		
 		$fp = fopen("load/logs/security_logs.txt", "a");
 		fwrite($fp, $log);
