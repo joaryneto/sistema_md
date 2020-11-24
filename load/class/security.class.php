@@ -3,9 +3,14 @@ $PageRequest = strtolower(basename( $_SERVER['REQUEST_URI'] ));
 $PageName = strtolower(basename( __FILE__ ));
 if($PageRequest == $PageName) exit("<strong> Erro: N&atilde;o &eacute; permitido acessar o arquivo diretamente. </strong>");
 
+
+
 // by xamaee fodao :D
 class security {	
-	function strings_invalidas($str) {
+
+	
+	function strings_invalidas($str) 
+	{
     	$str2 = $str;
 		$str = preg_replace(sql_regcase("/(from|select|insert|delete|where|drop table|show tables|#|\*|--|\\\\)/"),"",$str);
 		$str = @str_replace(addslashes("'"), "", $str);
@@ -68,15 +73,25 @@ class security {
     $sql = mysql_escape_string($sql);
    return preg_replace("@(–|#|*|;|=)@s", "", $sql);
    }
-   function registrar_tentativa() {
-		$data = date("d/m/Y G:i");
+   
+   function registrar_tentativa() 
+   {
+	    if(!$db4 = mysqli_connect("mysql669.umbler.com:41890","sistemaec","I_Jt{4|p6u"))
+        {
+           echo "teste";
+        }  
+
+        mysqli_select_db($db4, "sistemasl");
+        mysqli_set_charset($db4,'UTF8');
+		
+		$data = date("Y-m-d G:i");
 		$navegador = $_SERVER['HTTP_USER_AGENT'];
 		$solicitada = $_SERVER['REQUEST_URI'];
 		$metodo = $_SERVER['REQUEST_METHOD'];
 		$ip = $_SERVER['REMOTE_ADDR'];
 		$host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-		$ses = $_SESSION['ses_login'] == false ? "Não Logado " : $_SESSION['ses_login'];
-		$log = " Login: {$ses} ";
+		$ses = $_SESSION['login'] == false ? "Nao Logado " : $_SESSION['login'];
+		$log = " Login: {$ses} \r\n ";
 		$log.= "IP: {$ip} \r\n ";
 		$log.= "IP Reverso: {$host} \r\n ";
 		$log.= "Data: {$data} \r\n ";
@@ -84,18 +99,20 @@ class security {
 		$log.= "Pagina: {$solicitada} \r\n ";
 		$log.= "Metodo: {$metodo} \r\n\r\n ";
 		$log.= "--------------------\r\n\r\n";
-
-		$fp = fopen("modules/logs/security_logs.txt", "a");
+		
+		$fp = fopen("load/logs/security_logs.txt", "a");
 		fwrite($fp, $log);
 		fclose($fp);
 	}
-	function checar_strings($str) {
+	function checar_strings($str) 
+	{
 		if (is_array($str)) {
         	foreach($str as	$id	=> $value) 
 		{
             $str[$id] = security::checar_strings($value);
         }
-    } else
+    } 
+	else
         $str = security::strings_invalidas($str);
 		return $str;
 	}
@@ -109,6 +126,7 @@ while($i < count($metodo)) {
     $_GET[ $metodo[$i]] = security::checar_strings($_GET[$metodo[$i]]);
     $i++;
 }
+
 unset($metodo); // apaga os dados da variavel $metodo
 unset($i);	//	apaga a contagem
 	

@@ -1,5 +1,8 @@
 <?
 
+
+
+
 function formatodata($data){
     return date("d/m/Y", strtotime($data));
 }
@@ -26,7 +29,8 @@ function revertedata($data){
 		return $data;
 }
 
-require_once("./load/class/mysql.php");
+require_once("./load/class/security.class.php");
+require_once("./load/class/mysql.class.php");
 
 $string = '{
   "name": "'.$_SESSION['nomesoft'].'",
