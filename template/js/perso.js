@@ -11,7 +11,7 @@ function logar()
 	}
     else
 	{
-		requestPage('?br=atu_login&login='+ login +'&senha='+ senha +'','load','GET');
+		requestPage('?br=atu_login&login='+ login +'&senha='+ senha +'&ap=2','load','GET');
 	}		
 }
 
@@ -59,6 +59,12 @@ $('#aagenda').on('click',function()
 {	
       $('#modalusuario').modal('show');
 	  requestPage2('?br=atu_pesquisa&tipo=1&ap=1','modals','GET');
+});
+
+$('#r_senha').on('click',function()
+{	
+      $('#modalform').modal('show');
+	  requestPage2('?br=modal_recovery&modal=1','modals','GET');
 });
 
 $('#reagendarr').on('click',function(){	

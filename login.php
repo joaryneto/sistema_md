@@ -94,7 +94,7 @@ if(@$_GET['deslogar']==1)
                 <div class="w-100"></div>
                 <div class="col-12 mt-auto pb-4 col-md-6 col-lg-5 mx-auto login-footer">
                     <a href="javascript: Web(0);" Onclick="logar();" class="btn btn-lg btn-block btn-default text-uppercase position-relative"><span>Logar</span><i class="material-icons right-absoute">arrow_forward</i></a>
-					<a href="index.html" class="btn btn-lg btn-block btn-link text-secondary text-uppercase">Esqueceu a senha?</a>
+					<a href="javascript: Web(0);" id="r_senha" class="btn btn-lg btn-block btn-link text-secondary text-uppercase">Esqueceu a senha?</a>
                     <br></form>
                 </div>
             </div>
@@ -103,7 +103,12 @@ if(@$_GET['deslogar']==1)
 
     </div>
     <!-- final do invólucro -->
-
+<div id="modalform" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal-dialog modal-lg">
+<div class="modal-content" id="modals">
+</div>
+</div>
+</div>
 <? include('scripts.php');?>
 <?if(Empty($_SESSION['nosistema']))
 	{?>

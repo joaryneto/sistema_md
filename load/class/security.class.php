@@ -4,6 +4,7 @@ $PageName = strtolower(basename( __FILE__ ));
 if($PageRequest == $PageName) exit("<strong> Erro: N&atilde;o &eacute; permitido acessar o arquivo diretamente. </strong>");
 
 
+
 class security {	
 
 	function strings_invalidas($str) 
@@ -73,14 +74,16 @@ class security {
    
    function registrar_tentativa() 
    {
-	    if(!$db = mysqli_connect("mysql669.umbler.com:41890","sistemaec","I_Jt{4|p6u"))
-        {
-           echo "teste";
-        }  
 
-        mysqli_select_db($db, "sistemasl");
-        mysqli_set_charset($db,'UTF8');
-		
+        if(!$db4 = mysqli_connect("mysql669.umbler.com:41890", "sistemasl", "I_Jt{4|p6u"))
+        {
+            //print("<script>window.alert('Não conectou com banco...')</script>");
+        	echo "Não conectou com banco 3";
+        }
+
+        @mysqli_select_db($db4, "sistemasl");
+        @mysqli_set_charset($db4,'UTF8');
+
 		$data = date("Y-m-d G:i");
 		$navegador = $_SERVER['HTTP_USER_AGENT'];
 		$solicitada = $_SERVER['REQUEST_URI'];
@@ -97,7 +100,8 @@ class security {
 		$log.= "Metodo: {$metodo} \r\n\r\n ";
 		$log.= "--------------------\r\n\r\n";
 		
-		//$SQL = "INSERT ";
+		$SQL = "INSERT security_logs(sistema,usuario,login,ip,ip_reverso,data,navegador,pagina,metodo) values('".$_SESSION['sistema']."','".$_SESSION['usuario']."','{$ses}','{$ip}','{$host}','{$data}','{$navegador}','{$solicitada}','{$metodo}')";
+		mysqli_query($db4,$SQL);
 		
 		$fp = fopen("load/logs/security_logs.txt", "a");
 		fwrite($fp, $log);

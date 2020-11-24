@@ -4,11 +4,6 @@ $PageName = strtolower(basename( __FILE__ ));
 if($PageRequest == $PageName) exit("<strong> Erro: Não é permitido acessar o arquivo diretamente. </strong>");
 
 
-if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
-{
-	exit();
-}
-
 //if(!$db = mysqli_connect("robb0478.publiccloud.com.br:3306", "netin_sge", "vxkD128!"))
 //{
 //    //print("<script>window.alert('Não conectou com banco...')</script>");
@@ -32,6 +27,7 @@ if(!$db = mysqli_connect("mysql669.umbler.com:41890", "sistemasge", "I_Jt{4|p6u"
 }
 else if($_SESSION['tipo'] == 3)
 {	
+
 if(!$db3 = mysqli_connect("mysql669.umbler.com:41890", "sistemasl", "I_Jt{4|p6u"))
 {
     //print("<script>window.alert('Não conectou com banco...')</script>");
