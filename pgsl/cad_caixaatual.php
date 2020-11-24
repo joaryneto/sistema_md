@@ -32,7 +32,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 				
 							    <?
 								
-								$SQL3 = "SELECT sum(total) as total FROM vendas_mov where caixa='".$_SESSION['caixa']."'";
+								$SQL3 = "SELECT sum(total) as total FROM vendas_mov where sistema='".$_SESSION['sistema']."' and caixa='".$_SESSION['caixa']."'";
 								$RES3 = mysqli_query($db3,$SQL3);
 								$ROW3 = mysqli_fetch_array($RES3);
 								
@@ -58,7 +58,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 										  $sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.total) as totals, count(vendas_mov.produto) as quantidade from vendas 
 										  inner join vendas_mov on vendas_mov.venda=vendas.codigo
 										  inner join produtos on produtos.codigo=vendas_mov.produto 
-										  where vendas_mov.caixa='".$_SESSION['caixa']."' GROUP BY vendas_mov.total,vendas_mov.codigo";
+										  where vendas_mov.sistema='".$_SESSION['sistema']."' and vendas_mov.caixa='".$_SESSION['caixa']."' GROUP BY vendas_mov.total,vendas_mov.codigo";
 										  $res = mysqli_query($db3,$sql); 
 										  $b = 0;
 										  while($row = mysqli_fetch_array($res))

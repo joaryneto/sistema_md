@@ -252,6 +252,21 @@ function isMobile()
                         </a>
 					</li>
 					<? } ?>
+					<li class="nav-item dropdown" style="width: 230px;">
+                        <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="list-group-item list-group-item-action">
+                                <i class="material-icons">card_giftcard</i> Clientes
+                            </div>
+                        </a>
+						<div class="dropdown-menu">
+                            <a href="sistema.php?url=cad_clientes&cadastro=1" id="catual" class="sidebar-close dropdown-item menu-right">
+							 Cadastrar
+                            </a>
+                            <a href="sistema.php?url=cad_clientes" id="canteriores" class="sidebar-close dropdown-item menu-right">
+                             Lista de Clientes
+                            </a>
+                        </div>
+					</li>
 					<?if(@$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 4){?>
 					<li class="nav-item dropdown" style="width: 230px;">
                         <a href="caixa.php" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
@@ -436,7 +451,7 @@ function isMobile()
         </div>
 		<?if($_GET['url'] == "inicio"){?>
 		 <div class="menu pmd-floating-action" role="navigation" style="bottom: 80px;"> 
-        <a href="javascript:void(0);" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="Clientes"> 
+        <a href="javascript:void(0);" onclick="window.location='sistema.php?url=cad_clientes';" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="Clientes"> 
             <span class="pmd-floating-hidden">Clientes</span> 
             <i class="material-icons">supervisor_account</i> 
         </a> 

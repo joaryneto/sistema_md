@@ -148,7 +148,7 @@ if(@$_GET['ap'] == "1")
 	$x = 0;
 	
 	//echo "</br>";
-	$SQL2 = "SELECT * FROM usuarios where email='".$_POST['email']."'";
+	$SQL2 = "SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and email='".$_POST['email']."'";
 	$sucesso = mysqli_query($db3,$SQL2);
 	while($rows = mysqli_fetch_array($sucesso))
 	{
@@ -164,7 +164,7 @@ if(@$_GET['ap'] == "1")
 	{
 	   //echo "</br>";
 	   
-	   $SQL3 = "INSERT into usuarios(cpf,login,nome,email,senha,tipo,status) values('".$_POST['cpf']."','".$_POST['login']."','".$_POST['nome']."','".$_POST['email']."','".$_POST['senha']."','".$_POST['tipo']."','".$_POST['situacao']."')";
+	   $SQL3 = "INSERT into usuarios(sistema,cpf,login,nome,email,senha,tipo,status) values('".$_SESSION['sistema']."','".$_POST['cpf']."','".$_POST['login']."','".$_POST['nome']."','".$_POST['email']."','".$_POST['senha']."','".$_POST['tipo']."','".$_POST['situacao']."')";
 	   $sucesso = mysqli_query($db3,$SQL3);
 
 	   
@@ -186,7 +186,7 @@ if(@$_GET['ap'] == "1")
 	   }
 	
 	   //echo "</br>";
-	   $SQL4 = "SELECT codigo FROM usuarios where email='".$_POST['email']."'";
+	   $SQL4 = "SELECT codigo FROM usuarios where sistema='".$_SESSION['sistema']."' and email='".$_POST['email']."'";
 	   $res = mysqli_query($db3,$SQL4);
 	   while($row = mysqli_fetch_array($res))
 	   {    
@@ -197,7 +197,7 @@ if(@$_GET['ap'] == "1")
 		   foreach($_POST['menu'] as $menus)
 	       {
 			  echo "</br>";
-			  echo $SQL5 = "INSERT INTO permissoes(menu,usuario,status) values('".$menus."','".$cod."',1);";
+			  echo $SQL5 = "INSERT INTO permissoes(sistema,menu,usuario,status) values('".$_SESSION['sistema']"','".$menus."','".$cod."',1);";
 			  $sucesso = mysqli_query($db3,$SQL5);
 			  
 			  if($sucesso)
@@ -229,10 +229,10 @@ elseif(@$_GET['ap'] == "2")
    else
    {
 	
-	$SQL1 = "DELETE FROM permissoes where usuario='".$_GET['codigo']."'";
+	$SQL1 = "DELETE FROM permissoes where sistema='".$_SESSION['sistema']."' and usuario='".$_GET['codigo']."'";
 	$sucesso = mysqli_query($db3,$SQL1);
 	
-	$SQL2 = "UPDATE usuarios SET nome='".$_POST['nome']."',login='".$_POST['login']."',email='".$_POST['email']."',senha='".$_POST['senha']."',tipo='".$_POST['tipo']."', status='".$_POST['situacao']."' where codigo=".$_GET['codigo']."";
+	$SQL2 = "UPDATE usuarios SET nome='".$_POST['nome']."',login='".$_POST['login']."',email='".$_POST['email']."',senha='".$_POST['senha']."',tipo='".$_POST['tipo']."', status='".$_POST['situacao']."' where sistema='".$_SESSION['sistema']."' and codigo=".$_GET['codigo']."";
 	$sucesso = mysqli_query($db3,$SQL2);
 	
 	$output_dir = "sign/";
@@ -263,51 +263,7 @@ elseif(@$_GET['ap'] == "2")
 	}
   }
 }
-elseif(@$_GET['ap'] == "3")
-{
-	$SQL1 = "SELECT codigo FROM tipo_exame where descricao like '%RX%'";
-	$sucesso = mysqli_query($db3,$SQL);
-	
-	while($res = mysqli_fetch_array($sucesso))
-	{
 
-		$SQL2 = "SELECT * FROM laudar where cod_exame='".$res['codigo']."'";
-		$sucesso = mysqli_query($db3,$SQL2);
-
-		while($row = mysqli_fetch_array($sucesso))
-		{
-		   if(!Empty($row['cod_exame']))
-		   {
-		      $SQL3 = "INSERT INTO laudar(cod_exame,cod_medico) values('".$res['codigo']."','".$_GET['codigo']."');";
-		      $res2 = mysqli_query($db3,$SQL3);
-		   }
-		}
-	}
-	
-	if($sucesso)
-	{
-		print("<script>window.location.href='sistema.php?url=cad_usuarios&codigo=".$_GET['codigo']."';</script>");
-		print('<script> window.alert("Pacote adicionado com sucesso...")</script>');		
-	}
-}
-elseif(@$_GET['ap'] == "4")
-{
-	//$SQL1 = "DELETE FROM permissoes where usuario='".$_GET['codigo']."'";
-	//$sucesso = mysqli_query($db3,$SQL1);
-	
-	$SQL2 = "UPDATE internet_usuarios SET status=0 where codigo=".$_GET['codigo']."";
-	$sucesso = mysqli_query($db3,$SQL2);
-	
-	if($sucesso)
-	{
-	   print("<script>window.alert('Usuario desativado com sucesso...');</script>");
-	   print("<script>window.location.href='sistema.php?url=cad_usuarios&codigo=".$_GET['codigo']."';</script>");
-	}
-}
-else
-{
-	
-}
 ?>		
 <div class="container-fluid bg-template mb-4">
             <div class="row hn-154 position-relative">
@@ -371,7 +327,7 @@ else
 								<div class="form-group col-md-12 m-t-20">
 								<div class="form-actions">
 								<button type="submit" class="btn btn-info"><i class="fa fa-plus-circle"></i> <? if(isset($_GET['codigo'])){ echo "Gravar";}else { echo "Cadastrar";} ?></button>
-								<a class="btn btn-info" href="sistema.php?url=cad_usuarios"><i class="fa fa-plus-circle"></i> Novo cadastro</a>
+								<a class="btn btn-info" href="sistema.php?url=cad_usuarios"><i class="fa fa-plus-circle"></i> Novo</a>
 								</div></div>
 								
 								</form>

@@ -40,6 +40,11 @@
         autoclose: true,
         todayHighlight: true
     });
+	jQuery('#nascimento').datepicker({
+		format: 'dd/mm/yyyy',
+        autoclose: true,
+        todayHighlight: true
+    });
 	</script>
 	
     <!-- Sweet-Alert  -->
@@ -82,6 +87,7 @@
 	<!-- MASK INPUT -->
     <script src="template/vendor/mask.money/jquery.maskMoney.js"></script>
     <script>
+	$(window).on('load', function () {
 	    //$(".alert").alert('close');
         $("#dinheiro").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
         $("#ctdebito").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
@@ -89,6 +95,7 @@
         $("#ted").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
         $("#desc").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
 		$("#totals").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+	});
     </script>
 	
 	<!-- autocomplete js--> 

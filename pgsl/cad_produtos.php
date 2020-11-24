@@ -1,9 +1,4 @@
 <?
-ob_start();
-session_start();
-
-?>
-<?
 $PageRequest = strtolower(basename( $_SERVER['REQUEST_URI'] ));
 $PageName = strtolower(basename( __FILE__ ));
 if($PageRequest == $PageName) exit("<strong> Erro: Não é permitido acessar o arquivo diretamente. </strong>");
@@ -21,9 +16,11 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //   //exit("<strong> Erro: Você não tem permissão. </strong>");
 //}
 
-if(isset($_GET['codigo']))
+$inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
+
+if(isset($inputb['codigo']))
 {
-	$sucesso = mysqli_query($db3,"SELECT codigob,descricao,preco,custo,estoque,tipo FROM produtos where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'");
+	$sucesso = mysqli_query($db3,"SELECT codigob,descricao,preco,custo,estoque,tipo FROM produtos where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'");
 	
 	if($sucesso)
 	{
@@ -44,7 +41,7 @@ if(isset($_GET['codigo']))
 	}
 }
 
-if($_GET['ap'] == "1")
+if(@$inputb['ap'] == "1")
 {
 	$x = 0;
 	$SQL = "SELECT * FROM produtos where sistema='".$_SESSION['sistema']."' and descricao like '%".$_POST['descricao']."%'";
@@ -75,9 +72,9 @@ if($_GET['ap'] == "1")
 	   }
 	}
 }
-elseif($_GET['ap'] == "2")
+elseif(@$inputb['ap'] == "2")
 {
-	$SQL1 = "UPDATE produtos SET codigob='".$_POST['codbarra']."',descricao='".$_POST['descricao']."',preco='".$_POST['preco']."',custo='".$_POST['custo']."',estoque='".$_POST['estoque']."',tipo='".$_POST['tipo']."' where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
+	$SQL1 = "UPDATE produtos SET codigob='".$_POST['codbarra']."',descricao='".$_POST['descricao']."',preco='".$_POST['preco']."',custo='".$_POST['custo']."',estoque='".$_POST['estoque']."',tipo='".$_POST['tipo']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
 	$sucesso = mysqli_query($db3,$SQL1);
 	
 	if($sucesso)
@@ -96,7 +93,7 @@ elseif($_GET['ap'] == "2")
 
 $input = "";
 
-if(Empty($_GET['cadastro']))
+if(Empty($inputb['cadastro']))
 {
   $input = "<input type='text' name='pesquisa' id='pesquisa' value='' class='form-control form-control-lg search bottom-25 position-relative border-0' onkeyup=\"javascript: requestPage2('?br=atu_produtos&pesquisa='+ this.value +'&ap=2','listaprodutos','GET');\" required='required'>";
   $valor = 290;
@@ -125,22 +122,22 @@ else
 	<div class="col-md-12 col-sm-12"> 
 		<div class="component-box">
 			<!--Tabs with Icon example -->
-								<form class="form-material m-t-40 row" name="laudo" method="post" action="<? if($_GET['codigo'] ==""){ echo "sistema.php?url=cad_produtos&ap=1";}else { echo "sistema.php?url=cad_produtos&ap=2&codigo=".$_GET['codigo']."";} ?>">
-							    <?if($_GET['cadastro'] == 1){?>
+								<form class="form-material m-t-40 row" name="laudo" method="post" action="<? if($inputb['codigo'] ==""){ echo "sistema.php?url=cad_produtos&ap=1";}else { echo "sistema.php?url=cad_produtos&ap=2&codigo=".$inputb['codigo']."";} ?>">
+							    <?if(@$inputb['cadastro'] == 1){?>
 								<div class="form-group col-md-2 m-t-20"><label>Codigo de Barra :</label>
-								<input type="text" name="codbarra" id="codbarra" value="<? if(isset($_GET['codigo'])){ echo $codbarra;} ?>" class="form-control">
+								<input type="text" name="codbarra" id="codbarra" value="<? if(isset($inputb['codigo'])){ echo $codbarra;} ?>" class="form-control">
 								</div>
 								<div class="form-group col-md-4 m-t-20"><label>Descrição :</label>
-								<input type="text" name="descricao" id="descricao" value="<? if(isset($_GET['codigo'])){ echo $descricao;} ?>" class="form-control" required="required">
+								<input type="text" name="descricao" id="descricao" value="<? if(isset($inputb['codigo'])){ echo $descricao;} ?>" class="form-control" required="required">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>Preço :</label>
-								<input type="text" name="preco" id="preco" value="<? if(isset($_GET['codigo'])){ echo $preco;} ?>" data-mask="#.##0,00" data-mask-reverse="true" class="form-control" required="required">
+								<input type="text" name="preco" id="preco" value="<? if(isset($inputb['codigo'])){ echo $preco;} ?>" data-mask="#.##0,00" data-mask-reverse="true" class="form-control" required="required">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>Custo :</label>
-								<input type="text" name="custo" id="custo" value="<? if(isset($_GET['codigo'])){ echo $custo;} ?>" data-mask="#.##0,00" data-mask-reverse="true" class="form-control" required="required">
+								<input type="text" name="custo" id="custo" value="<? if(isset($inputb['codigo'])){ echo $custo;} ?>" data-mask="#.##0,00" data-mask-reverse="true" class="form-control" required="required">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>Estoque :</label>
-								<input type="text" name="estoque" id="estoque" value="<? if(isset($_GET['codigo'])){ echo $estoque;} ?>" class="form-control" required="required">
+								<input type="text" name="estoque" id="estoque" value="<? if(isset($inputb['codigo'])){ echo $estoque;} ?>" class="form-control" required="required">
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>Tipo :</label>
 								<select name="tipo" class="form-control" style="width: 100%; height:36px;" required="required">
@@ -151,9 +148,9 @@ else
 								<div class="form-group col-md-12 m-t-20">
 								<br>
 								<div class="form-actions">
-								<button type="submit" class="btn btn-info"><i class="fa fa-plus-circle"></i> <? if(isset($_GET['codigo'])){ echo "Gravar";}else { echo "Cadastrar";} ?></button>
+								<button type="submit" class="btn btn-info"><i class="fa fa-plus-circle"></i> <? if(isset($inputb['codigo'])){ echo "Gravar";}else { echo "Cadastrar";} ?></button>
 
-								<? if(!Empty($_GET['codigo'])) { ?><a class="btn btn-info" href="sistema.php?url=cad_produtos"><i class="fa fa-plus-circle"></i> Novo</a><? } ?>
+								<? if(!Empty($inputb['codigo'])) { ?><a class="btn btn-info" href="sistema.php?url=cad_produtos"><i class="fa fa-plus-circle"></i> Novo</a><? } ?>
 								</div></div>
 								<?}else{?>
 								<div class="col-md-12">

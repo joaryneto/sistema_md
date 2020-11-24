@@ -36,12 +36,13 @@ while($row = mysqli_fetch_array($RES))
 echo json_encode($data);
 
 }*/
+$inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 
-if(isset($_GET["codigo"]) and $_GET['ap'] == 1)
+if(isset($inputb["codigo"]) and $inputb['ap'] == 1)
 {
-
+  
  //$hora = date('H:i:s');
- $query = "INSERT INTO agendamento (sistema,cliente, data, hora, nome,status) VALUES ('".$_SESSION['sistema']."','".$_GET['codigo']."', '".revertedata($_GET['data'])."','".$_GET['hora']."','".$_GET['nome']."','1')";
+ $query = "INSERT INTO agendamento (sistema,cliente, profissional, data, hora, nome,status) VALUES ('".$_SESSION['sistema']."','".$inputb['codigo']."','".$inputb['pcodigo']."', '".revertedata($inputb['data'])."','".$inputb['hora']."','".$inputb['nome']."','1')";
  $sucesso = mysqli_query($db3,$query);
  
  if($sucesso == true)
@@ -70,10 +71,10 @@ if(isset($_GET["codigo"]) and $_GET['ap'] == 1)
 <?	
  }
 }
-else if($_GET['ap'] == 2)
+else if($inputb['ap'] == 2)
 {
 
-   $SQL = "UPDATE agendamento SET data='".revertedata($_GET['data'])."', hora='".$_GET['hora']."' WHERE codigo='".$_GET['codigo']."'";
+   $SQL = "UPDATE agendamento SET data='".revertedata($inputb['data'])."', hora='".$inputb['hora']."' WHERE sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
    mysqli_query($db3,$SQL);
  ?>
  
@@ -89,9 +90,9 @@ else if($_GET['ap'] == 2)
  
  <?
 }
-else if($_GET['ap'] == 3)
+else if($inputb['ap'] == 3)
 {
-   $SQL = "DELETE from agendamento WHERE codigo='".$_GET['codigo']."'";
+   $SQL = "DELETE from agendamento WHERE sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
    mysqli_query($db3,$SQL);
  ?>
  
@@ -107,9 +108,9 @@ else if($_GET['ap'] == 3)
  <?
 }
 
-if($_GET['load'] == 1)
+if($inputb['load'] == 1)
 {
-	$pesquisa = @$_GET['pesquisa'];
+	$pesquisa = @$inputb['pesquisa'];
 	
 	$SQL = "SELECT agendamento.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento.data,agendamento.hora FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente where agendamento.sistema='".$_SESSION['sistema']."' and clientes.nome like '%".$pesquisa."%' ORDER BY agendamento.codigo asc";
 	$RES = mysqli_query($db3,$SQL);
