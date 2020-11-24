@@ -5,8 +5,6 @@ $inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 $login = @$inputb['login'];
 $senha = @$inputb['senha'];
 
-print '<script> swal("Atenção", "Login ou senha invalido. '.$login.' "); </script>';
-
 if(isset($_SESSION['login']))
 {
     $x = 0;
