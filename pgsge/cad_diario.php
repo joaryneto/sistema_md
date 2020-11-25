@@ -590,7 +590,7 @@ $("#check[]").on('change', function() {
                                                 <td data-title="Nome"><? echo $row['nome'];?></td>
 												<td data-title="Nota"><? 
 												     
-													 $SQL9 = "SELECT codigo,nota,falta FROM frequencia where diario.sistema='".$_SESSION['sistema']."' and matricula='".$row['codigo']."' and diario='".$_GET['codigo']."'";
+													 $SQL9 = "SELECT codigo,nota,falta FROM frequencia where sistema='".$_SESSION['sistema']."' and matricula='".$row['codigo']."' and diario='".$_GET['codigo']."'";
 													 $RES9 = mysqli_query($db,$SQL9);
 												     $rows1 = mysqli_fetch_array($RES9);
 													 
