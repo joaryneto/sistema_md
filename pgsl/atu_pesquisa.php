@@ -381,7 +381,7 @@ function phorario(profissional)
 	<option value="">Selecionar Profissional</option>
 		<?
 		
-		$SQL1 = "SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and tipo=2 and status=1;";
+		$SQL1 = "SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and tipo in (2,3,4) and status=1;";
 		$RES1 = mysqli_query($db3,$SQL1);
 		while($row = mysqli_fetch_array($RES1))
 		{
@@ -413,7 +413,7 @@ else if($inputb['ap'] == 7)
 		
 		$data = revertedata($inputb['data']);
 		
-		$SQL1 = "SELECT horarios.hora FROM horarios sistema='".$_SESSION['sistema']."' ORDER BY horarios.hora asc";
+		$SQL1 = "SELECT horarios.hora FROM horarios ORDER BY horarios.hora asc";
 		$RES1 = mysqli_query($db3,$SQL1);
 		while($row1 = mysqli_fetch_array($RES1))
 		{
