@@ -22,7 +22,7 @@ if($_GET['ap'] == "1")
 	   
 	   if($RES2)
 	   {
-		   print("<script>window.alert('Conteudo Cadastrada com sucesso...')</script>");
+		   //print("<script>window.alert('Conteudo Cadastrada com sucesso...')</script>");
 		   
 		   $RES1 = mysqli_query($db,"SELECT max(diario.codigo) as codigo FROM diario inner join turmas_professor on turmas_professor.turma=diario.turma where turmas_professor.usuario='".$_SESSION['usuario']."'");
 		   $row = mysqli_fetch_array($RES1);
