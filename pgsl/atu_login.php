@@ -93,8 +93,6 @@ if(@$inputb['ap'] == 1)
 else
 {
 */
-if(isset($_SESSION['login']))
-{
     $x = 0;
     $SQL = "select usuarios.sistema,usuarios.codigo,usuarios.nome,usuarios.tipo from usuarios where usuarios.cpf='".$login."' and usuarios.senha='".$senha."' or usuarios.email='".$login."' and usuarios.senha='".$senha."' or usuarios.login='".$login."' and usuarios.senha='".$senha."'";
     $ress = mysqli_query($db3,$SQL);
@@ -132,6 +130,5 @@ if(isset($_SESSION['login']))
 	print "<script> swal('t', 'Login ou senha invalido.'); </script>";
     //print "<script> window.location='login.php'; </script>";
   }
-}
 //}
 ?>
