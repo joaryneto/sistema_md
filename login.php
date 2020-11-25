@@ -94,7 +94,7 @@ if(@$_GET['deslogar']==1)
                 <div class="w-100"></div>
                 <div class="col-12 mt-auto pb-4 col-md-6 col-lg-5 mx-auto login-footer">
                     <a href="javascript: Web(0);" Onclick="logar();" class="btn btn-lg btn-block btn-default text-uppercase position-relative"><span>Logar</span><i class="material-icons right-absoute">arrow_forward</i></a>
-					<a href="javascript: Web(0);" id="r_senha" class="btn btn-lg btn-block btn-link text-secondary text-uppercase">Esqueceu a senha?</a>
+					<a href="javascript: Web(0);" Onclick="recovery();" class="btn btn-lg btn-block btn-link text-secondary text-uppercase">Esqueceu a senha?</a>
                     <br></form>
                 </div>
             </div>

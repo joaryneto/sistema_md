@@ -5,7 +5,7 @@ $inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 $login = @$inputb['login'];
 $senha = @$inputb['senha'];
 
-function gerarprotocolo()
+/*function gerarprotocolo()
 {
     global $protocolo ;
     $characters = '0123456789';
@@ -92,7 +92,7 @@ if(@$inputb['ap'] == 1)
 }
 else
 {
-	
+*/
 if(isset($_SESSION['login']))
 {
     $x = 0;
@@ -133,5 +133,5 @@ if(isset($_SESSION['login']))
     //print "<script> window.location='login.php'; </script>";
   }
 }
-}
+//}
 ?>
