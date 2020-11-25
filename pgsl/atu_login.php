@@ -99,7 +99,7 @@ else
 
     while($res = @mysqli_fetch_array($ress))
     {
-     	//echo 'Logado com sucesso...';
+     	echo 'Logado com sucesso...';
 	
 	    $x = 1;
         $_SESSION['usuario'] = $res['codigo'];
