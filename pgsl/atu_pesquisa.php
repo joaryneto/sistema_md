@@ -59,8 +59,8 @@ function cliente_s()
 	}
 	else
 	{
-		$('#modalusuario').modal('hide');
-	    requestPage2('?br=atu_agendamento&data='+ data +'&hora='+ hora +'&nome='+ nome +'&pcodigo='+ pcodigo +'&codigo='+ codigo +'&ap=1&load=1','load','GET');
+		//$('#modalusuario').modal('hide');
+	    requestPage2('?br=atu_pesquisa&data='+ data +'&hora='+ hora +'&nome='+ nome +'&pcodigo='+ pcodigo +'&codigo='+ codigo +'&ap=8','modals','GET');
 	}
 }
 
@@ -259,10 +259,10 @@ else if(@$inputb['ap'] == 3)
 	<div class="form-group pmd-textfield pmd-textfield-floating-label">
 	<input type="text" name="nome" id="nome" value="" placeholder="Buscar cliente por nome" onkeyup="cliente_r(this.value,'<?=$_SESSION['adata'];?>','<?=$_SESSION['ahora'];?>','<?=$_SESSION['aprofissional'];?>');" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required" />
 	</div>
+	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="inputcliente">
+	</div>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label">
 	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="requestPage2('?br=atu_pesquisa&tipo=1&ap=1','modals','GET');"><i class="fa fa-plus-circle"></i> Novo</a>
-	</div>
-	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="inputcliente">
 	</div>
 </form>
 		</div>
@@ -278,11 +278,6 @@ $pesquisa = @$inputb['pesquisa'];
 ?>
 <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
 <table class="table pmd-table">
-<thead>
-<tr>
-<th>Cliente</th>
-</tr>
-</thead>
 <tbody>
 <?
 $SQL = "SELECT * FROM clientes where sistema='".$_SESSION['sistema']."' and nome like '%".$pesquisa."%';";
@@ -454,6 +449,107 @@ else if($inputb['ap'] == 7)
 	</select>
 	<?
 }
+else if($inputb['ap'] == 8)
+{
+	$query = "INSERT INTO agendamento (sistema,cliente, profissional, data, hora, nome,status) VALUES ('".$_SESSION['sistema']."','".$inputb['codigo']."','".$inputb['pcodigo']."', '".revertedata($inputb['data'])."','".$inputb['hora']."','".$inputb['nome']."','1')";
+    $sucesso = mysqli_query($db3,$query);
+	
+	
+	$SQL = "SELECT max(codigo) as codigo FROM agendamento where sistema='".$_SESSION['sistema']."' and cliente='".$inputb['codigo']."'";
+	$RES = mysqli_query($db3,$SQL);
+	$rows = mysqli_fetch_array($RES);
+	
+	?>
+	<div class="modal-header">
+<h2 class="pmd-card-title-text">Agenda - Servicos </h2>
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+	<script>
+	function servico_add(codigo)
+    {
+		var servico = document.getElementById('servico').value;
+		
+		if(servico == "")
+		{
+			swal('Atenção', 'Selecione um serviço.');
+		}
+		else
+		{
+		   requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&servico='+ servico +'&ap=9&load=2','listaservicos','GET');
+		}
+	}
+	</script>
+	<div class="form-group pmd-textfield pmd-textfield-floating-label"><label for="first-name">Serviços:</label>
+	<select name="servico" id="servico" class="form-control" placeholder="Escolha um horario" autocomplete="off"  style="width: 100%; height:36px;" required="required" >
+	<option value=""></option>
+	<?  $SQL = "SELECT codigo, descricao FROM produtos where sistema='".$_SESSION['sistema']."' and tipo=2";
+	    $RES = mysqli_query($db3,$SQL);
+		while($row = mysqli_fetch_array($RES))
+		{
+		  echo "<option value='".$row['codigo']."'>".$row['descricao']." - ".$nome." </option>";
+		}
+	 ?>
+	</select>
+	</div>
+	<div class="form-group pmd-textfield pmd-textfield-floating-label">
+	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="servico_add(<?=$rows['codigo'];?>);"><i class="fa fa-plus-circle"></i></a>
+	</div>
+<script>
+function a_ex(codigo)
+{
+	if(codigo == null)
+	{
+
+	}
+	else
+	{
+		  requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&ap=10&load=2','listaservicos','GET');
+	}
+}
+</script>
+	<div class="form-group pmd-textfield pmd-textfield-floating-label">
+	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="s_load">
+	<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+		<table class="table pmd-table">
+			<thead>
+				<tr>
+					<th>Descrição</th>
+					<th>Op.</th>
+				</tr>
+			</thead>
+			<tbody id="listaservicos">
+			</tbody>
+		</table>
+	 </div>
+	 </div>
+     <div class="modal-footer">
+    </div>
+	</div>
+	<?
+}
+else if($inputb['ap'] == 9)
+{
+	$servico = $inputb['servico'];
+	$codigo = $inputb['codigo'];
+	
+	if($inputb['servico'] == "")
+	{
+		print "<script> swal('t', 'Selecione um serviço.'); </script>";
+	}
+	else
+	{
+		$SQL = "INSERT into agendamento_servicos(sistema,agendamento,servico) values('".$_SESSION['sistema']."','".$codigo."','".$servico."');";
+		mysqli_query($db3,$SQL);
+	}
+}
+else if($inputb['ap'] == 10)
+{
+	$codigo = $inputb['codigo'];
+	
+	$SQL = "DELETE from agendamento_servicos where sistema='".$_SESSION['sistema']."' and codigo='".$codigo."'";
+	mysqli_query($db3,$SQL);
+}
 if(@$inputb['load'] == 1)
 {
 	            
@@ -461,13 +557,12 @@ if(@$inputb['load'] == 1)
 	$RES = mysqli_query($db3,$SQL);
 	while($row = mysqli_fetch_array($RES))
 	{
-				?>
-				<div class="col-12 col-md-6 mb-4">
-                    <div class="row">
-                        <div class="col-4">
-                            <figure class="m-0 h-150 w-100 rounded overflow-hidden">
-                                <div class="background" style='background-image: url("template/images/escova-inteligente.jpg");'>
-                                    
+		?>
+		<div class="col-12 col-md-6 mb-4">
+            <div class="row">
+                <div class="col-4">
+                    <figure class="m-0 h-150 w-100 rounded overflow-hidden">
+                        <div class="background" style='background-image: url("template/images/escova-inteligente.jpg");'>  
                                 </div>
                             </figure>
                         </div>
@@ -487,6 +582,31 @@ if(@$inputb['load'] == 1)
                 </div>
 			  <?
 			  
+	}
+}
+else if(@$inputb['load'] == 2)
+{
+	$codigo = $inputb['codigo'];
+	            
+	$SQL = "SELECT agendamento.codigo as codagenda, agendamento_servicos.codigo, agendamento.nome, produtos.descricao FROM agendamento 
+	inner join clientes on clientes.codigo=agendamento.cliente 
+	inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
+	inner join produtos on produtos.codigo=agendamento_servicos.servico
+	where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.agendamento='".$codigo."' and agendamento.status=1 ORDER BY agendamento.codigo asc";
+	
+	$RES = mysqli_query($db3,$SQL);
+	while($row = mysqli_fetch_array($RES))
+	{
+		?>
+		<tr>
+		 <td>
+		  <?=$row['descricao'];?>
+		 </td>
+		 <td>
+		  <a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir" style="font-size: 150%; color: red;" onclick="a_ex(<? echo $row['codigo']?>)" href="javascript:void(0);"><a>
+		 </td>
+		</tr>
+	    <?	  
 	}
 }
 ?>

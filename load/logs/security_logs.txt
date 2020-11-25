@@ -567,3 +567,13 @@
 
  --------------------
 
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-11-25 1:01 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_pesquisa&pesquisa=ji=&profissional=3&data=25/11/2020&hora=07:00:00&ap=4 
+ Metodo: GET 
+
+ --------------------
+
