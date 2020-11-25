@@ -105,7 +105,8 @@ $input = "";
 
 if(Empty($inputb['cadastro']))
 {
-  $input = "<input type='text' name='pesquisa' id='pesquisa' value='' class='form-control form-control-lg search bottom-25 position-relative border-0' onkeyup=\"javascript: requestPage2('?br=atu_clientes&pesquisa='+ this.value +'&ap=2','listclientes','GET');\" required='required'>";
+  $input = "<input type='text' name='pesquisa' id='pesquisa' value='' class='form-control form-control-lg search bottom-25 position-relative border-0' onkeyup=\"javascript: requestPage2('?br=atu_clientes&pesquisa='+ this.value +'&ap=2','listclientes','GET');\" required='required'>
+  <button class='btn btn-info btnadd-sh' onclick='window.location=\"sistema.php?url=cad_clientes&cadastro=1\"'><i class='fa fa-plus-circle'></i></button>";
   $valor = 290;
 }
 else
@@ -116,7 +117,7 @@ else
 <div class="container-fluid bg-template mb-4">
             <div class="row hn-<?=$valor;?> position-relative">
 			<div class="background opac heightset">
-					<i class="material-icons md-dark pmd-md" style="font-size: 200px;position: absolute;left: 53%;top: 50px;">people</i>
+					<i class="material-icons md-dark pmd-md" style="font-size: 200px;position: absolute;left: 50%;top: 50px;">people</i>
                 </div>
                 <div class="container align-self-end">
                     <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Clientes";?></h2>
@@ -136,7 +137,7 @@ else
 							    <?if(@$inputb['cadastro'] == 1){?>
 								<div class="form-group col-md-6 m-t-20"><label>Nome :</label>
 								<input type="text" name="nome" id="nome" value="<? if(isset($inputb['codigo'])){ echo $nome;} ?>" class="form-control" required="required">
-								<button type="button" style="position: absolute;left: 80%;top: 31px;height: 55px;width: 50px;" onclick="requestPage2('?br=modal_clientes&amp;codigo=&amp;modal=2','modals','GET');" class="btn btn-info " data-toggle="modal" data-target="#modalusuario">
+								<button type="button" class="btn btn-info btnadd-lg" onclick="requestPage2('?br=modal_clientes&amp;codigo=&amp;modal=2','modals','GET');"  data-toggle="modal" data-target="#modalusuario">
 								<i class="fa fa-search" style="font-size: x-large;"></i></button></div>
 								<div class="form-group col-md-2 m-t-20"><label>Data de Nasc. :</label>
 								<input type="text" name="nascimento" id="nascimento" value="<? if(isset($inputb['codigo'])){ echo $nascimento;} ?>" data-mask="00/00/0000" class="form-control">
@@ -176,7 +177,6 @@ else
 								<div class="col-md-12">
 					            <div class="component-box">
                                 <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
-								<button type="button" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" onclick="window.location='sistema.php?url=cad_clientes&cadastro=1';"><i class="material-icons pmd-sm">add_circle</i></button>
 							        <table class="table pmd-table">
                                         <thead>
                                             <tr>

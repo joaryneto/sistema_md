@@ -188,7 +188,7 @@ else if(@$_GET['ap'] == 2)
 		$SQL2 = "UPDATE vendas_recebidos SET status=1 where sistema='".$_SESSION['sistema']."' and venda='".$_SESSION['venda']."'";
 	    $RES = mysqli_query($db3,$SQL2);
 		
-	    print("<script>window.location.href='caixa.php';</script>");
+	    print("<script>window.location.href='sistema.php?url=cad_vendas';</script>");
 	}
 }
 else if(@$_GET['ap'] == 3)

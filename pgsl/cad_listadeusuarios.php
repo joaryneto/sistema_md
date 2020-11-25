@@ -14,7 +14,7 @@ if($_GET['ap'] == 1)
 <tbody>
 <? 
 
-$sql = "SELECT * FROM usuarios where nome like '%".$_GET['pesquisa']."%';";
+$sql = "SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and nome like '%".$_GET['pesquisa']."%';";
 $res = mysqli_query($db3,$sql); 
 $x = 0;
 while($row = mysqli_fetch_array($res))

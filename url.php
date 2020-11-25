@@ -7,7 +7,7 @@ $url = @$_GET['url'];
 if($_SESSION['tipo'] == 1)
 {
 	$_SESSION['pg'] = "pages";
-	if ($url == "") { $url = "inicio"; }
+	if ($url == "") { $url = "agenda"; }
 }
 else if($_SESSION['tipo'] == 2)
 {
@@ -17,7 +17,7 @@ else if($_SESSION['tipo'] == 2)
 else if($_SESSION['tipo'] == 3)
 {
 	$_SESSION['pg'] = "pgsl";
-	if ($url == "") { $url = "inicio"; }
+	if ($url == "") { $url = "agenda"; }
 }
 else
 {
@@ -29,12 +29,19 @@ else
 
 switch ($url) {
 
-   		//case "inicio":
-       	//include("".$_SESSION['pg']."/inicio.php");
-       	//break;
+   		//case "".$url."":
+       	//    include("".$_SESSION['pg']."/$url.php");
+        //break;
 		
 		default:
-		include("".$_SESSION['pg']."/$url.php");
+		    if (file_exists("".$_SESSION['pg']."/$url.php")) 
+		    {
+                include("".$_SESSION['pg']."/$url.php");
+            } 
+			else 
+			{
+                include("pages/404.php");
+            }
 		break;	
 }
 

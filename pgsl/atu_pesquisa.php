@@ -91,10 +91,31 @@ $inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 
 if(@$inputb['ap'] == 1)
 {   
-		$_SESSION['codcliente'] = @$inputb['codigo'];
-		$_SESSION['nome'] = @$inputb['nome'];
+	$_SESSION['codcliente'] = @$inputb['codigo'];
+	$_SESSION['nome'] = @$inputb['nome'];
+	
+	$x = 0;
+	$SQL = "SELECT * FROM agendamento where sistema='".$_SESSION['sistema']."' and usuario='".$_SESSION['usuario']."' and status=0;";
+	$RES = mysqli_query($db3,$SQL);
+	while($row = mysqli_fetch_array($RES))
+	{
+		$_SESSION['agendamento'] = $row['codigo'];
+		$codigo = $row['cliente'];
+		$nome = $row['nome'];
+		$profissional = $row['profissional'];
+		$data = $row['data'];
+		$hora = $row['hora'];
+		$x = 1;
+	}
+	
+	if($x == 1)
+	{
+		print("<script> requestPage2('?br=atu_pesquisa&codigo=$codigo&nome=$nome&profissional=$profissional&data=$data&hora=$hora&ap=2','modals','GET');</script> ");
+	}
+	else
+	{
 		
-		?>
+    ?>
 <div class="modal-header">
 <h2 class="pmd-card-title-text">Agenda - Data </h2>
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -121,8 +142,9 @@ if(@$inputb['ap'] == 1)
 		</form>
 		</div>
 		<div class="modal-footer">
-</div>
+     </div>
 		<?
+	}
 }
 else if(@$inputb['ap'] == 2)
 {	
@@ -217,7 +239,7 @@ else if(@$inputb['ap'] == 2)
 	<?if(Empty($_GET['nome'])){?>
 	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="proximo_b();"><i class="fa fa-plus-circle"></i> Proximo</a>
     <?}else{?>
-	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="cliente_s();"><i class="fa fa-plus-circle"></i> Gravar</a>
+	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="cliente_s();"><i class="fa fa-plus-circle"></i> Proximo</a>
 	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="requestPage2('?br=atu_pesquisa&tipo=1&ap=1','modals','GET');"><i class="fa fa-plus-circle"></i> Novo</a>
 	<?}?>
 		
@@ -451,9 +473,11 @@ else if($inputb['ap'] == 7)
 }
 else if($inputb['ap'] == 8)
 {
-	$query = "INSERT INTO agendamento (sistema,cliente, profissional, data, hora, nome,status) VALUES ('".$_SESSION['sistema']."','".$inputb['codigo']."','".$inputb['pcodigo']."', '".revertedata($inputb['data'])."','".$inputb['hora']."','".$inputb['nome']."','1')";
-    $sucesso = mysqli_query($db3,$query);
-	
+	if(!isset($_SESSION['agendamento']))
+	{
+	   $query = "INSERT INTO agendamento (sistema,cliente, profissional, data, hora, nome,status) VALUES ('".$_SESSION['sistema']."','".$inputb['codigo']."','".$inputb['pcodigo']."', '".revertedata($inputb['data'])."','".$inputb['hora']."','".$inputb['nome']."','0')";
+       $sucesso = mysqli_query($db3,$query);
+	}
 	
 	$SQL = "SELECT max(codigo) as codigo FROM agendamento where sistema='".$_SESSION['sistema']."' and cliente='".$inputb['codigo']."'";
 	$RES = mysqli_query($db3,$SQL);
@@ -481,9 +505,13 @@ else if($inputb['ap'] == 8)
 	}
 	</script>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label"><label for="first-name">Serviços:</label>
-	<select name="servico" id="servico" class="form-control" placeholder="Escolha um horario" autocomplete="off"  style="width: 100%; height:36px;" required="required" >
+	<select name="servico" id="servico" class="form-control" placeholder="Escolha um serviço" autocomplete="off"  style="width: 100%; height:36px;" required="required" >
 	<option value=""></option>
-	<?  $SQL = "SELECT codigo, descricao FROM produtos where sistema='".$_SESSION['sistema']."' and tipo=2";
+	<?  
+	
+	
+		
+	    $SQL = "SELECT codigo, descricao FROM produtos where sistema='".$_SESSION['sistema']."' and tipo=2";
 	    $RES = mysqli_query($db3,$SQL);
 		while($row = mysqli_fetch_array($RES))
 		{
@@ -491,9 +519,9 @@ else if($inputb['ap'] == 8)
 		}
 	 ?>
 	</select>
+	<button class="btn btn-info btnadd-ad" onclick="servico_add(<?=$rows['codigo'];?>);"><i class="fa fa-plus-circle"></i></button>
 	</div>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label">
-	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="servico_add(<?=$rows['codigo'];?>);"><i class="fa fa-plus-circle"></i></a>
 	</div>
 <script>
 function a_ex(codigo)
@@ -504,7 +532,7 @@ function a_ex(codigo)
 	}
 	else
 	{
-		  requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&ap=10&load=2','listaservicos','GET');
+		  requestPage2('?br=atu_pesquisa&codigo=<?=$rows["codigo"];?>&servico='+ codigo +'&ap=10&load=2','listaservicos','GET');
 	}
 }
 </script>
@@ -515,10 +543,31 @@ function a_ex(codigo)
 			<thead>
 				<tr>
 					<th>Descrição</th>
-					<th>Op.</th>
+					<th>Excluir</th>
 				</tr>
 			</thead>
 			<tbody id="listaservicos">
+			<?
+			    
+	        $SQL = "SELECT agendamento.codigo as codagenda, agendamento_servicos.codigo, agendamento.nome, produtos.descricao FROM agendamento 
+	        inner join clientes on clientes.codigo=agendamento.cliente 
+	        inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
+	        inner join produtos on produtos.codigo=agendamento_servicos.servico
+	        where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.agendamento='".$_SESSION['agendamento']."' and agendamento.status=0 ORDER BY agendamento.codigo asc";
+	
+	        $RES = mysqli_query($db3,$SQL);
+	        while($row = mysqli_fetch_array($RES))
+	        {
+		    ?>
+		    <tr>
+		      <td data-title="Descrição">
+		        <?=$row['descricao'];?>
+		     </td>
+		      <td data-title="Excluir">
+		        <a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir" style="font-size: 150%; color: red;" onclick="a_ex(<? echo $row['codigo']?>)" href="javascript:void(0);"><a>
+		     </td>
+		   </tr>
+	        <?	} ?>
 			</tbody>
 		</table>
 	 </div>
@@ -545,9 +594,9 @@ else if($inputb['ap'] == 9)
 }
 else if($inputb['ap'] == 10)
 {
-	$codigo = $inputb['codigo'];
+	$servico = $inputb['servico'];
 	
-	$SQL = "DELETE from agendamento_servicos where sistema='".$_SESSION['sistema']."' and codigo='".$codigo."'";
+	$SQL = "DELETE from agendamento_servicos where sistema='".$_SESSION['sistema']."' and codigo='".$servico."'";
 	mysqli_query($db3,$SQL);
 }
 if(@$inputb['load'] == 1)
@@ -592,17 +641,17 @@ else if(@$inputb['load'] == 2)
 	inner join clientes on clientes.codigo=agendamento.cliente 
 	inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
 	inner join produtos on produtos.codigo=agendamento_servicos.servico
-	where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.agendamento='".$codigo."' and agendamento.status=1 ORDER BY agendamento.codigo asc";
+	where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.agendamento='".$codigo."' and agendamento.status=0 ORDER BY agendamento.codigo asc";
 	
 	$RES = mysqli_query($db3,$SQL);
 	while($row = mysqli_fetch_array($RES))
 	{
 		?>
 		<tr>
-		 <td>
+		 <td data-title="Descrição">
 		  <?=$row['descricao'];?>
 		 </td>
-		 <td>
+		 <td data-title="Excluir">
 		  <a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir" style="font-size: 150%; color: red;" onclick="a_ex(<? echo $row['codigo']?>)" href="javascript:void(0);"><a>
 		 </td>
 		</tr>

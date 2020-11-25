@@ -23,7 +23,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 
 if(isset($_GET['codigo']))
 {
-	$sucesso = mysqli_query($db,"SELECT descricao FROM turmas where codigo='".$_GET['codigo']."'");
+	$sucesso = mysqli_query($db,"SELECT descricao FROM turmas where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'");
 	
 	if($sucesso)
 	{
@@ -42,7 +42,7 @@ if(isset($_GET['codigo']))
 if($_GET['ap'] == "1")
 {
 	$x = 0;
-	$RES = mysqli_query($db,"SELECT * FROM turmas where laudador like '%".$_POST['descricao']."%'");
+	$RES = mysqli_query($db,"SELECT * FROM turmas where sistema='".$_SESSION['sistema']."' and laudador like '%".$_POST['descricao']."%'");
 	while($row = mysql_fetch_array($RES))
 	{
 		$x = 1;
@@ -55,7 +55,7 @@ if($_GET['ap'] == "1")
 	}
 	else
 	{
-	   $SQL1 = "INSERT into turmas(curso,descricao) values('".$_POST['curso']."','".$_POST['descricao']."')";
+	   $SQL1 = "INSERT into turmas(sistema,curso,descricao) values('".$_SESSION['sistema']."','".$_POST['curso']."','".$_POST['descricao']."')";
 	   $sucesso = mysqli_query($db,$SQL1);
 	   
 	   if($sucesso)
@@ -71,7 +71,7 @@ if($_GET['ap'] == "1")
 }
 elseif($_GET['ap'] == "2")
 {
-	$SQL1 = "UPDATE turmas SET descricao=".$_POST['descricao']." where codigo='".$_GET['codigo']."'";
+	$SQL1 = "UPDATE turmas SET descricao=".$_POST['descricao']." where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
 	$sucesso = mysqli_query($db,$SQL1);
 	
 	if($sucesso)
@@ -127,7 +127,7 @@ elseif($_GET['ap'] == "2")
                                         <tbody>
 										<? 
 										  
-										  $sql = "select * from turmas";
+										  $sql = "select * from turmas where sistema='".$_SESSION['sistema']."'";
 										  $res = mysqli_query($db,$sql); 
 										  while($row = mysqli_fetch_array($res))
 										  {
@@ -138,7 +138,7 @@ elseif($_GET['ap'] == "2")
 												<!--<td>< echo $numero = number_format($row['valor_padrao']-+$row['valor'], 2, ',','.');?></td>-->
 												<td><a class="fa fa-edit" href="iniciado.php?url=cad_turmas&codigo=<? echo $row['codigo']?>" style="font-size: 150%;"><a></td>
                                             </tr>
-										  <? } ?>
+									   <? } ?>
                                         </tbody>
                                     </table>
                                 

@@ -3,7 +3,7 @@
 if($_GET['ap'] == "1")
 {
 	$x = 0;
-	$RES1 = mysqli_query($db,"SELECT * FROM diario where turma='".$_GET['turma']."' and materia='".$_GET['disciplina']."' and periodo='".$_GET['periodo']."' and data='".revertedata($_GET['txtdata'])."' and conteudo like '%'".$_GET['conteudo']."'%'");
+	$RES1 = mysqli_query($db,"SELECT * FROM diario where sistema='".$_SESSION['sistema']."' and turma='".$_GET['turma']."' and materia='".$_GET['disciplina']."' and periodo='".$_GET['periodo']."' and data='".revertedata($_GET['txtdata'])."' and conteudo like '%'".$_GET['conteudo']."'%'");
 	while($row = mysqli_fetch_array($RES1))
 	{
 		$x = 1;
@@ -17,7 +17,7 @@ if($_GET['ap'] == "1")
 	}
 	else
 	{
-	   $SQL2 = "INSERT into diario(usuario,turma,materia,periodo,video,data,conteudo,texto,tipo) values('".$_SESSION['usuario']."','".$_GET['turma']."','".$_GET['disciplina']."','".$_GET['periodo']."','".$_GET['video']."','".revertedata($_GET['txtdata'])."','".$_GET['conteudo']."','".$_GET['txtobs']."','".$_GET['tipo']."')";
+	   $SQL2 = "INSERT into diario(sistema,usuario,turma,materia,periodo,video,data,conteudo,texto,tipo) values('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$_GET['turma']."','".$_GET['disciplina']."','".$_GET['periodo']."','".$_GET['video']."','".revertedata($_GET['txtdata'])."','".$_GET['conteudo']."','".$_GET['txtobs']."','".$_GET['tipo']."')";
 	   $RES2 = mysqli_query($db,$SQL2);
 	   
 	   if($RES2)
@@ -41,7 +41,7 @@ if($_GET['ap'] == "1")
 }
 else if($_GET['ap'] == "2")
 {
-	$SQL1 = "UPDATE diario SET turma='".$_GET['turma']."',materia='".$_GET['disciplina']."',periodo='".$_GET['periodo']."', conteudo='".$_GET['conteudo']."',data='".revertedata($_GET['txtdata'])."', texto='".$_GET['txtobs']."',tipo='".$_GET['tipo']."' where codigo='".$_GET['codigo']."'";
+	$SQL1 = "UPDATE diario SET turma='".$_GET['turma']."',materia='".$_GET['disciplina']."',periodo='".$_GET['periodo']."', conteudo='".$_GET['conteudo']."',data='".revertedata($_GET['txtdata'])."', texto='".$_GET['txtobs']."',tipo='".$_GET['tipo']."' where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
 	$sucesso = mysqli_query($db,$SQL1);
 	
 	if($sucesso)
@@ -69,7 +69,7 @@ else if($_GET['ap'] == "2")
 }
 if($_GET['ap'] == 3)
 {
-	$SQL1 = "UPDATE diario SET status=2 where codigo='".$_GET['codigo']."'";
+	$SQL1 = "UPDATE diario SET status=2 where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
 	$RES = mysqli_query($db,$SQL1);
 	
 	
@@ -109,7 +109,7 @@ if(@$_GET['load'] == 1)
   inner JOIN turmas on turmas.codigo=diario.turma 
   inner join materias on materias.codigo=diario.materia 
   inner join periodo on periodo.codigo=diario.periodo 
-  where YEAR(diario.data)=$data and diario.usuario='".$_SESSION['usuario']."' and diario.status=1 $whe;";
+  where diario.sistema='".$_SESSION['sistema']."' and YEAR(diario.data)=$data and diario.usuario='".$_SESSION['usuario']."' and diario.status=1 $whe;";
   $res4 = mysqli_query($db,$sql4); 
   while($row = mysqli_fetch_array($res4))
   {
@@ -130,7 +130,7 @@ if(@$_GET['load'] == 1)
 
 if(@$_GET['fechar'] == "3")
 {
-	$SQL1 = "UPDATE diario SET status=0 where codigo='".$_GET['codigo']."'";
+	$SQL1 = "UPDATE diario SET status=0 where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
 	$sucesso = mysqli_query($db,$SQL1);
 	
 	if($sucesso)

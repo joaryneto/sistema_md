@@ -102,7 +102,8 @@ $input = "";
 
 if(Empty($inputb['cadastro']))
 {
-  $input = "<input type='text' name='pesquisa' id='pesquisa' value='' class='form-control form-control-lg search bottom-25 position-relative border-0' onkeyup=\"javascript: requestPage2('?br=atu_produtos&pesquisa='+ this.value +'&ap=2','listaprodutos','GET');\" required='required'>";
+  $input = "<input type='text' name='pesquisa' id='pesquisa' value='' class='form-control form-control-lg search bottom-25 position-relative border-0' onkeyup=\"javascript: requestPage2('?br=atu_produtos&pesquisa='+ this.value +'&ap=2','listaprodutos','GET');\" required='required'>
+  <button class='btn btn-info btnadd-sh' onclick='window.location=\"sistema.php?url=cad_produtos&cadastro=1\"'><i class='fa fa-plus-circle'></i></button>";
   $valor = 290;
 }
 else

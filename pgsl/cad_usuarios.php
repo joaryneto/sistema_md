@@ -196,9 +196,9 @@ if(@$_GET['ap'] == "1")
 	     {
 		   foreach($_POST['menu'] as $menus)
 	       {
-			  echo "</br>";
-			  echo $SQL5 = "INSERT INTO permissoes(sistema,menu,usuario,status) values('".$_SESSION['sistema']"','".$menus."','".$cod."',1);";
-			  $sucesso = mysqli_query($db3,$SQL5);
+			  //"</br>";
+			  //$SQL5 = "INSERT INTO permissoes(sistema,menu,usuario,status) values('".$_SESSION['sistema']"','".$menus."','".$cod."',1);";
+			  //$sucesso = mysqli_query($db3,$SQL5);
 			  
 			  if($sucesso)
 			  {
@@ -284,7 +284,7 @@ elseif(@$_GET['ap'] == "2")
 								<form name="laudo" class="form-material m-t-40 row" autocomplete="off" method="post" action="<? if(Empty($_GET['codigo'])){ echo "sistema.php?url=cad_usuarios&ap=1";}else { echo "sistema.php?url=cad_usuarios&codigo=".$_GET['codigo']."&ap=2";} ?>" enctype="multipart/form-data">
 								<div class="form-group col-md-3 m-t-20"><label>CPF :</label>
 								<input type="text" name="cpf" id="cpf" <? if(isset($_GET['codigo'])){ ?> value="<? echo $cpf; ?>" readonly <? } ?> class="form-control" required="required">
-								<button type="button" style="position: absolute;left: 80%;top: 31px;height: 55px;width: 50px;" onclick="requestPage2('?br=modal_usuarios&amp;codigo=&amp;modal=1','modals','GET');" class="btn btn-info" data-toggle="modal" data-target="#modalusuario">
+								<button type="button" class="btn btn-info btnadd-us" onclick="requestPage2('?br=modal_usuarios&amp;codigo=&amp;modal=1','modals','GET');"  data-toggle="modal" data-target="#modalusuario">
 								<i class="fa fa-search" style="font-size: x-large;"></i></button></div>
 								<div class="form-group col-md-3 m-t-20"><label>Login :</label>
 								<input type="text" name="login" id="login" <? if(isset($_GET['codigo'])){?> value="<? echo $login;?>" readonly <? } ?>class="form-control" required="required">

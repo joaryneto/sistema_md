@@ -34,7 +34,7 @@ if(isset($_GET['codigo']))
 	inner join materias on materias.codigo=diario.materia 
 	inner join turmas on turmas.codigo=diario.turma
 	inner join periodo on periodo.codigo=diario.periodo
-	where diario.codigo='".$_GET['codigo']."'";
+	where diario.sistema='".$_SESSION['sistema']."' and diario.codigo='".$_GET['codigo']."'";
 	
 	$sucesso = mysqli_query($db,$SQL);
 	
@@ -262,35 +262,7 @@ $("#check[]").on('change', function() {
 								{  $action = "sistema.php?url=cad_diario&ap=1";}
 							    if(!Empty($_GET['codigo']))
 								{  $action = "sistema.php?url=cad_diario&codigo=".$_GET['codigo']."&ap=2";}
-								
-								//$token = md5(uniqid(""));
-									 
-							    /*$x = 0;
-								$DSQL1 = "select codigo from diario where usuario = '".$_SESSION['usuario']."' and status = 2 order by codigo desc limit 1;";
-								$DRES1 = mysqli_query($db,$DSQL1);
-								while($ROW2 = mysqli_fetch_array($DRES1))
-								{
-									$x = 1;
-									$_SESSION['diario'] = $ROW2['codigo'];
-								}
-								
-								$DRES1->close();
-								
-								if($x == 0)
-							    { 
-									$DSQL2 = "insert into diario(usuario,status) values ('".$_SESSION['usuario']."',2)";
-								    mysqli_query($db,$DSQL2);
-								}
-								
-								$DSQL3 = "select codigo from diario where usuario = '".$_SESSION['usuario']."' and status = 2 order by codigo desc limit 1;";
-								$DRES3 = mysqli_query($db,$DSQL3);
-								while($ROW2 = mysqli_fetch_array($DRES3))
-								{
-									echo $_SESSION['diario'] = $ROW2['codigo'];
-								}
-								$DRES3->close();
-								*/
-								
+							
 								?>
 								<form class="m-t-40 row" name="laudo" method="post" action="<? echo $action;?>">
 								<input type="hidden" name="diario" id="diario" class="form-control"  value="<? echo $_SESSION['diario']; ?>">
@@ -479,7 +451,7 @@ $("#check[]").on('change', function() {
 										  inner join materias on materias.codigo=diario.materia 
 										  inner join periodo on periodo.codigo=diario.periodo
 										  inner join matriculas on matriculas.turma=diario.turma
-										  where diario.codigo='".$_GET['codigo']."' and matriculas.status in (0,1,3) and diario.usuario='".$_SESSION['usuario']."' and diario.turma='".$turma."';";
+										  where diario.sistema='".$_SESSION['sistema']."' and diario.codigo='".$_GET['codigo']."' and matriculas.status in (0,1,3) and diario.usuario='".$_SESSION['usuario']."' and diario.turma='".$turma."';";
 										  $res5 = mysqli_query($db,$sql5); 
 										  $a = 0;
 										  while($row = mysqli_fetch_array($res5))
@@ -492,7 +464,7 @@ $("#check[]").on('change', function() {
 												<td data-title="Presença"><? 
 												     
 
-													 $SQL = "SELECT codigo,falta FROM frequencia where matricula=".$row['codigo']." and diario=".$_GET['codigo']."";
+													 $SQL = "SELECT codigo,falta FROM frequencia where sistema='".$_SESSION['sistema']."' and matricula=".$row['codigo']." and diario=".$_GET['codigo']."";
 													 $RES6 = mysqli_query($db,$SQL);
 												     $rows = mysqli_fetch_array($RES6);
 													 
@@ -504,12 +476,12 @@ $("#check[]").on('change', function() {
 													 
 													 if(Empty($rows['codigo']))
 													 {
-													    $SQL = "INSERT INTO frequencia(diario,matricula,disciplina,periodo,data,falta) values('".$_GET['codigo']."','".$row['codigo']."','".$disciplina."','".$periodo."','".$data."','1');";
+													    $SQL = "INSERT INTO frequencia(sistema,diario,matricula,disciplina,periodo,data,falta) values('".$_SESSION['sistema']."','".$_GET['codigo']."','".$row['codigo']."','".$disciplina."','".$periodo."','".$data."','1');";
 		                                                $sucesso = mysqli_query($db,$SQL);
 													 }
 													 
 													 
-													 $SQL = "SELECT codigo,falta FROM frequencia where matricula=".$row['codigo']." and diario=".$_GET['codigo']."";
+													 $SQL = "SELECT codigo,falta FROM frequencia where sistema='".$_SESSION['sistema']."' and matricula=".$row['codigo']." and diario=".$_GET['codigo']."";
 													 $RES6 = mysqli_query($db,$SQL);
 												     $rows1 = mysqli_fetch_array($RES6);
 													 
@@ -527,7 +499,7 @@ $("#check[]").on('change', function() {
 												<td data-title="Faltas no Periodo"><div id="<? echo $row['codigo'];?>">
 												<? 
 											         $ano = date('Y');
-													 $SQL7 = "SELECT falta as qtd FROM frequencia where matricula=".$row['codigo']." and disciplina=".$disciplina." and periodo=".$periodo." and falta=1 and YEAR(data)=$ano ";
+													 $SQL7 = "SELECT falta as qtd FROM frequencia where sistema='".$_SESSION['sistema']."' and matricula=".$row['codigo']." and disciplina=".$disciplina." and periodo=".$periodo." and falta=1 and YEAR(data)=$ano ";
 													 $RES7 = mysqli_query($db,$SQL7);
 													 
 													 $total = 0;
@@ -606,7 +578,7 @@ $("#check[]").on('change', function() {
 										  inner join materias on materias.codigo=diario.materia 
 										  inner join periodo on periodo.codigo=diario.periodo
 										  inner join matriculas on matriculas.turma=diario.turma
-										  where diario.codigo='".$_GET['codigo']."' and matriculas.status in (0,1,3) and diario.usuario='".$_SESSION['usuario']."';";
+										  where diario.sistema='".$_SESSION['sistema']."' and diario.codigo='".$_GET['codigo']."' and matriculas.status in (0,1,3) and diario.usuario='".$_SESSION['usuario']."';";
 										  $res8 = mysqli_query($db,$sql8); 
 										  $b = 0;
 										  while($row = mysqli_fetch_array($res8))
@@ -618,7 +590,7 @@ $("#check[]").on('change', function() {
                                                 <td data-title="Nome"><? echo $row['nome'];?></td>
 												<td data-title="Nota"><? 
 												     
-													 $SQL9 = "SELECT codigo,nota,falta FROM frequencia where matricula='".$row['codigo']."' and diario='".$_GET['codigo']."'";
+													 $SQL9 = "SELECT codigo,nota,falta FROM frequencia where diario.sistema='".$_SESSION['sistema']."' and matricula='".$row['codigo']."' and diario='".$_GET['codigo']."'";
 													 $RES9 = mysqli_query($db,$SQL9);
 												     $rows1 = mysqli_fetch_array($RES9);
 													 
@@ -642,7 +614,7 @@ $("#check[]").on('change', function() {
 												<td data-title="Nota final"><div id="<? echo $rows1['codigo'];?>">
 												<? 
 											         
-													 $SQL10 = "SELECT sum(nota) as qtd FROM frequencia where matricula='".$row['codigo']."' and disciplina='".$disciplina."' and periodo='".$periodo."' and falta=0 and diario=".$row['coddiario']."";
+													 $SQL10 = "SELECT sum(nota) as qtd FROM frequencia where sistema='".$_SESSION['sistema']."' and matricula='".$row['codigo']."' and disciplina='".$disciplina."' and periodo='".$periodo."' and falta=0 and diario=".$row['coddiario']."";
 													 $RES10 = mysqli_query($db,$SQL10);
 												     $rows2 = mysqli_fetch_array($RES10);
 													 echo $rows2['qtd'];

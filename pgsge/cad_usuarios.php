@@ -25,7 +25,7 @@ function filtro($nome)
 
 if(!Empty($_GET['codigo']))
 {
-	$res = mysqli_query($db,"SELECT * FROM usuarios where codigo='".$_GET['codigo']."'");
+	$res = mysqli_query($db,"SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'");
 	
 	if($res)
 	{
@@ -44,7 +44,7 @@ if(!Empty($_GET['codigo']))
 		 $x = 1;
 	  }
 	  
-	  $res2 = mysqli_query($db,"SELECT menu FROM permissoes where usuario='".$_GET['codigo']."' and status=1");
+	  $res2 = mysqli_query($db,"SELECT menu FROM permissoes where sistema='".$_SESSION['sistema']."' and usuario='".$_GET['codigo']."' and status=1");
 	  
 	  while($row = mysqli_fetch_array($res2))
       {
@@ -149,7 +149,7 @@ if(@$_GET['ap'] == "1")
 	$x = 0;
 	
 	//echo "</br>";
-	$SQL2 = "SELECT * FROM usuarios where email='".$_POST['email']."'";
+	$SQL2 = "SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and email='".$_POST['email']."'";
 	$sucesso = mysqli_query($db,$SQL2);
 	while($rows = mysqli_fetch_array($sucesso))
 	{
@@ -165,7 +165,7 @@ if(@$_GET['ap'] == "1")
 	{
 	   //echo "</br>";
 	   
-	   $SQL3 = "INSERT into usuarios(cpf,login,nome,email,senha,tipo,status) values('".$_POST['cpf']."','".$_POST['login']."','".$_POST['nome']."','".$_POST['email']."','".$_POST['senha']."','".$_POST['tipo']."','".$_POST['situacao']."')";
+	   $SQL3 = "INSERT into usuarios(sistema,cpf,login,nome,email,senha,tipo,status) values('".$_SESSION['sistema']."','".$_POST['cpf']."','".$_POST['login']."','".$_POST['nome']."','".$_POST['email']."','".$_POST['senha']."','".$_POST['tipo']."','".$_POST['situacao']."')";
 	   $sucesso = mysqli_query($db,$SQL3);
 
 	   
@@ -197,9 +197,9 @@ if(@$_GET['ap'] == "1")
 	     {
 		   foreach($_POST['menu'] as $menus)
 	       {
-			  echo "</br>";
-			  echo $SQL5 = "INSERT INTO permissoes(menu,usuario,status) values('".$menus."','".$cod."',1);";
-			  $sucesso = mysqli_query($db,$SQL5);
+			  //echo "</br>";
+			  //echo $SQL5 = "INSERT INTO permissoes(menu,usuario,status) values('".$menus."','".$cod."',1);";
+			  //$sucesso = mysqli_query($db,$SQL5);
 			  
 			  if($sucesso)
 			  {
@@ -233,7 +233,7 @@ elseif(@$_GET['ap'] == "2")
 	$SQL1 = "DELETE FROM permissoes where usuario='".$_GET['codigo']."'";
 	$sucesso = mysqli_query($db,$SQL1);
 	
-	$SQL2 = "UPDATE usuarios SET nome='".$_POST['nome']."',login='".$_POST['login']."',email='".$_POST['email']."',senha='".$_POST['senha']."',tipo='".$_POST['tipo']."', status='".$_POST['situacao']."' where codigo=".$_GET['codigo']."";
+	$SQL2 = "UPDATE usuarios SET nome='".$_POST['nome']."',login='".$_POST['login']."',email='".$_POST['email']."',senha='".$_POST['senha']."',tipo='".$_POST['tipo']."', status='".$_POST['situacao']."' where sistema='".$_SESSION['sistema']."' and codigo=".$_GET['codigo']."";
 	$sucesso = mysqli_query($db,$SQL2);
 	
 	$output_dir = "sign/";
@@ -296,7 +296,7 @@ elseif(@$_GET['ap'] == "4")
 	//$SQL1 = "DELETE FROM permissoes where usuario='".$_GET['codigo']."'";
 	//$sucesso = mysqli_query($db,$SQL1);
 	
-	$SQL2 = "UPDATE internet_usuarios SET status=0 where codigo=".$_GET['codigo']."";
+	$SQL2 = "UPDATE internet_usuarios SET status=0 where sistema='".$_SESSION['sistema']."' and codigo=".$_GET['codigo']."";
 	$sucesso = mysqli_query($db,$SQL2);
 	
 	if($sucesso)

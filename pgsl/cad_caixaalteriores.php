@@ -21,7 +21,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 <div class="container-fluid bg-template mb-4">
             <div class="row hn-290 position-relative">
 			<div class="background opac heightset">
-                    <i class="material-icons md-dark pmd-md" style="font-size: 180px; position: absolute;float: right; top: 50px; left: 61%;">account_balance</i>
+                    <i class="material-icons md-dark pmd-md" style="font-size: 180px; position: absolute;float: right; top: 50px; left: 56%;">account_balance</i>
                 </div>
                 <div class="container align-self-end">
                     <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Caixa Alteriores";?></h2>

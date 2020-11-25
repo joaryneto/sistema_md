@@ -41,11 +41,162 @@ function isMobile()
     height: calc(2.5em + .75rem + 2px) !important;
 }
 
-@media screen and (max-width: 480px) {
-.modal-dialog {
+.btnadd-ad
+{
+	position: absolute;
+	left: 93.5%;
+	top: 27px;
+	height: 55px;
+	width: 50px;
+	font-size: 18px;
+}
+
+.btnadd-sh {
+    position: absolute;
+    left: 76.6%;
+    top: 256px;
+    height: 60px;
+    width: 50px;
+    font-size: 18px;
+}
+
+.btnadd-us
+{
+	position: absolute;
+	left: 77%;
+    top: 31px;
+	height: 55px;
+	width: 50px;
+	font-size: 18px;
+}
+
+.btnadd-lg {
+    position: absolute;
+    left: 90.5%;
+    top: 31px;
+    height: 55px;
+    width: 50px;
+    font-size: 18px;
+}
+
+@media screen and (max-width:575.98px) {
+  .modal-dialog {
     margin: -0.1rem !important;
+  }
+  
+  .btnadd-lg {
+    position: absolute;
+    left: 90.5%;
+    top: 31px;
+    height: 55px;
+    width: 50px;
+    font-size: 18px;
+  }
+  
+  .btnadd-ad
+  {
+	position: absolute;
+	left: 89.5%;
+	top: 27px;
+	height: 55px;
+	width: 50px;
+	font-size: 18px;
+  }
+  .btnadd-us
+  {
+	position: absolute;
+	left: 89.5%;
+	top: 27px;
+	height: 55px;
+	width: 50px;
+	font-size: 18px;
+  }
+  .btnadd-sh {
+    position: absolute;
+    left: 81.8%;
+    top: 256px;
+    height: 60px;
+    width: 50px;
+    font-size: 18px;
+  }
 }
+
+@media screen and (max-width:767.98px) {
+  
+  .btnadd-lg {
+    position: absolute;
+    left: 90.5%;
+    top: 31px;
+    height: 55px;
+    width: 50px;
+    font-size: 18px;
+  }
+  .btnadd-ad
+  {
+	position: absolute;
+	left: 86.5%;
+	top: 27px;
+	height: 55px;
+	width: 50px;
+	font-size: 18px;
+  }
+  .btnadd-us
+  {
+	position: absolute;
+	left: 89.5%;
+	top: 27px;
+	height: 55px;
+	width: 50px;
+	font-size: 18px;
+  }
+  .btnadd-sh {
+    position: absolute;
+    left: 81.8%;
+    top: 256px;
+    height: 60px;
+    width: 50px;
+    font-size: 18px;
+  }
 }
+
+@media screen and (max-width:991.98px) {
+
+  .btnadd-lg {
+    position: absolute;
+    left: 90.5%;
+    top: 31px;
+    height: 55px;
+    width: 50px;
+    font-size: 18px;
+  }
+  .btnadd-ad
+  {
+	position: absolute;
+	left: 88.5%;
+	top: 27px;
+	height: 55px;
+	width: 50px;
+	font-size: 18px;
+  }
+  .btnadd-us
+  {
+	position: absolute;
+	left: 85%;
+    top: 31px;
+	height: 55px;
+	width: 50px;
+	font-size: 18px;
+  }
+  .btnadd-sh {
+    position: absolute;
+    left: 81.8%;
+    top: 256px;
+    height: 60px;
+    width: 50px;
+    font-size: 18px;
+  }
+}
+
 </style>
 </head>
 
@@ -269,7 +420,7 @@ function isMobile()
 					</li>
 					<?if(@$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 4){?>
 					<li class="nav-item dropdown" style="width: 230px;">
-                        <a href="caixa.php" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                        <a href="sistema.php?url=cad_vendas" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
                             <div class="list-group-item list-group-item-action">
                                 <i class="material-icons">perm_contact_calendar</i> Vendas
                             </div>
@@ -422,25 +573,13 @@ function isMobile()
                 <div class="col-auto mx-auto">
                     <div class="row no-gutters justify-content-center">
                         <div class="col-auto">
-                            <a href="javascript:void(0)" id="ldata" class="btn btn-link-default active">
+                            <a href="sistema.php?url=agenda" class="btn btn-link-default active">
                                 <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
                                 <span class="text-name">Agenda</span>
                             </a>
                         </div>
-						<!--<div class="col-auto">
-                            <a href="javascript:void(0)" class="btn btn-link-default">
-                                <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
-                                <span class="text-name">Agendado</span>
-                            </a>
-                        </div>
-						<div class="col-auto">
-                            <a href="javascript:void(0)" class="btn btn-link-default ">
-                                <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
-                                <span class="text-name">Finalizado</span>
-                            </a>
-                        </div>-->
                         <div class="col-auto">
-                            <a href="caixa.php" class="btn btn-link-default">
+                            <a href="sistema.php?url=cad_vendas" class="btn btn-link-default">
                                 <span class="icon-text"><i class="material-icons">store_mall_directory</i></span>
                                 <span class="text-name">Vendas</span>
                             </a>
@@ -449,7 +588,7 @@ function isMobile()
                 </div>
             </div>
         </div>
-		<?if($_GET['url'] == "inicio"){?>
+		<?if($_GET['url'] == "agenda"){?>
 		 <div class="menu pmd-floating-action" role="navigation" style="bottom: 80px;"> 
         <a href="javascript:void(0);" onclick="window.location='sistema.php?url=cad_clientes';" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="Clientes"> 
             <span class="pmd-floating-hidden">Clientes</span> 
@@ -573,6 +712,215 @@ function isMobile()
            <!-- /.modal-dialog -->
       </div>
     <? } ?>
+<? if($_GET['url'] == "cad_vendas" and $_SESSION['tipo'] == 3){?>
+<script>
+function btn_cliente()
+{				
+requestPage2('?br=modal_clientes&codigo=&modal=1','modals','GET');
+}
+
+function c_desconto()
+{
+if($('#c_desc').css('display') == 'none' )
+{
+$("#forcaixa" ).show( "slow" );
+$("#dtable" ).hide( "slow" );
+$("#c_desc" ).show( "slow" );
+}
+else
+{
+$("#c_desc" ).hide( "slow" );
+$("#forcaixa" ).show( "slow" );
+$("#dtable" ).hide( "slow" );
+}
+}
+</script>
+<div class="menu pmd-floating-action" role="navigation"> 
+<button class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" type="button" onclick="btn_cliente();" data-toggle="modal" data-target="#modalap" data-title="Clientes">
+<span class="pmd-floating-hidden">Clientes</span> 
+<i class="material-icons pmd-sm">person_add</i>
+</button>
+<button class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" type="button" onclick="c_desconto();" data-title="[%] Desconto">
+<span class="pmd-floating-hidden">[%] Desconto</span> 
+<i class="material-icons pmd-sm">trending_down</i>
+</button>
+<a href="javascript:void(0);" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" onclick="slow();" data-title="Itens do Carrinho"> 
+<span class="pmd-floating-hidden">Itens do Carrinho</span> 
+<i class="material-icons">add_shopping_cart</i> 
+</a>  
+<button type="button" class="pmd-floating-action-btn btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" data-title="Menu"> 
+<span class="pmd-floating-hidden">Primary</span>
+<i class="material-icons pmd-sm">extension</i> 
+</button> 
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="exampleModalLabel1">Atenção!</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			</div>
+			<div class="modal-body">
+				<div id="loading"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+				<a href="iniciado.php?url=cad_diario&fechar=1" class="btn btn-primary">Continuar</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="itens" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="pmd-card-title-text">Lista de Produtos </h2>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			</div>
+			<div class="modal-body">
+			<div class="row">
+			
+			<div class="form-group col-md-12 m-t-20"><label>Busca:</label>
+			 <input name="user" type="text" class="form-control" onkeyup="javascript: ajaxLoader('?br=atu_produtos&pesquisa='+ this.value +'&ap=1','list_produtos','GET');" />
+			</div>
+			<div class="col-md-12">
+			<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+			<table class="table pmd-table">
+			<thead>
+			  <tr>
+			<th>Codigo</th>
+			<th>Descrição</th>
+			<th>Preço R$</th>
+			<th>Estoque</th>
+			</tr>
+			 </thead>
+			   <tbody id="list_produtos">
+			   <?
+			   $data = date('Y');
+			   $sql = "select * from produtos where sistema='".$_SESSION['sistema']."'";
+			   $res = mysqli_query($db3,$sql); 
+			   $x = 0;
+			   while($row = mysqli_fetch_array($res))
+			   {
+			   ?>
+			   <tr style="cursor: pointer;" onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'" onclick="itens('<? echo $row['descricao'];?>',<? echo $row['codigo'];?>,'<? echo number_format($row['preco'],2,",",".");?>');">
+			   <td data-title="Codigo"><? echo $row['codigo'];?></td>
+			   <td data-title="Descrição"><? echo $row['descricao'];?></td>
+			   <td data-title="Preço R$"><? echo $row['preco'];?></td>
+			   <td data-title="Estoque"><? echo $row['estoque'];?></td>
+			   </tr>
+			   <? $x = 1;
+			   }
+
+				if($x == 0)
+				{
+				 echo "<tr><td colspan='4'>Nenhum resultado encontrado.</td></tr>";
+			   
+			   }
+			   ?>
+			 </tbody>
+			
+			</table>											 
+			</div>
+			</div>
+			</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline-danger rounded mb-2" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+		
+		<!-- /.modal-content -->
+	</div>
+	
+	<!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="pagamento" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="modal-title" id="exampleModalLabel1"><b>Receber </b></h2>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			</div>
+			<div class="modal-body">
+			<div class="row">
+			<div class="col-12">
+			<form class="m-t-40 row" name="laudo" method="post" action="<? echo $action;?>">
+			<div class="input-group col-md-12 m-t-20">
+			<h1 class="pmd-display1" style="color: green; font-weight: bold;">Total: R$ <span id="vtotalp"></span></h1></div>
+			<div class="input-group col-md-12 m-t-20">
+			<div id="gravar"></div>
+			</div>
+			<div class="input-group col-md-12 m-t-20">
+			<div class="form-group col-md-12 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Dinheiro</label>
+			<input type="text" name="dinheiro" id="dinheiro" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control">
+			</div>
+			<div class="form-group col-md-12 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Cartão de Débito</label>
+			<input type="text" name="cdebito" id="ctdebito" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control">
+			</div>
+			<div class="form-group col-md-12 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Cartão de Crédito</label>
+			<input type="text" name="ccredito" id="ctcredito" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control">
+			</div>
+			<div class="form-group col-md-12 m-t-20 pmd-textfield pmd-textfield-floating-label"><label for="first-name">Transferencia ( Ted, doc, tev, Pix)</label>
+			<input type="text" name="ted" id="ted" placeholder="0" onchange="loadpg();" class="form-control mat-input form-control">
+			</div>
+			</div>
+			<div class="form-group col-md-12 m-t-20" id="recebpagamento">
+			
+			</div>
+			<div class="input-group col-md-1 m-t-20">
+</div>
+			<div class="form-group col-md-12 m-t-20">
+			<table id="formpagamento">
+			</table>
+			</div>
+			<div class="input-group col-md-12 m-t-20">
+			<h1 class="pmd-display1" style="font-weight: bold;" id="vtroco"></h1>
+			</div>
+			</form>
+			</div>
+			</div>
+			</div>
+			<div class="modal-footer">
+			<div class="row">
+				 <div class="col">
+				<button type="button" onclick="pagar();"  class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Concluir</button>
+				<button type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-danger" data-dismiss="modal">Sair</button>
+				</div></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modalap" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal-dialog modal-lg">
+<div class="modal-content" id="modals">
+<!-- /.modal-content -->
+
+</div>
+
+<!-- /.modal-dialog -->
+</div>
+</div>
+<script>
+function slow()
+{
+  if($('#dtable').css('display') == 'none' )
+  {
+	 $("#forcaixa" ).hide( "slow" );
+	 $("#dtable" ).show( "slow" );
+	 $("#btncarrinho").attr("data-title","Add Produtos");
+  }
+  else
+  {
+	 $("#forcaixa" ).show( "slow" );
+	 $("#dtable" ).hide( "slow" );
+	 $("#btncarrinho").attr("data-title","Itens do Carrinho");
+  }
+}
+
+</script>
+<? } ?>
 <div id="modalusuario" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
 <div class="modal-dialog modal-lg">
 <div class="modal-content" id="modals">

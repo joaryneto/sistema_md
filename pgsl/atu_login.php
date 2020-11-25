@@ -116,7 +116,7 @@ else
 
   if($x == 1)
   {
-	 print "<script> window.location='sistema.php?url=inicio'; </script>"; 
+	 print "<script> window.location='sistema.php?url=agenda'; </script>"; 
   }
   else
   {
@@ -127,7 +127,7 @@ else
 	$_SESSION['nome'] = "";
 	$_SESSION['permissao'] = "";
 		
-	print "<script> swal('t', 'Login ou senha invalido.'); </script>";
+	print "<script> swal('Atenção', 'Login ou senha invalido.'); </script>";
     //print "<script> window.location='login.php'; </script>";
   }
 //}
