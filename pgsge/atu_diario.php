@@ -1,6 +1,6 @@
 <?
 
-if($_GET['ap'] == "1")
+if(@$_GET['ap'] == "1")
 {
 	$x = 0;
 	$RES1 = mysqli_query($db,"SELECT * FROM diario where sistema='".$_SESSION['sistema']."' and turma='".$_GET['turma']."' and materia='".$_GET['disciplina']."' and periodo='".$_GET['periodo']."' and data='".revertedata($_GET['txtdata'])."' and conteudo like '%'".$_GET['conteudo']."'%'");
@@ -39,7 +39,7 @@ if($_GET['ap'] == "1")
 	   //$RES2->close();
 	}
 }
-else if($_GET['ap'] == "2")
+else if(@$_GET['ap'] == "2")
 {
 	$SQL1 = "UPDATE diario SET turma='".$_GET['turma']."',materia='".$_GET['disciplina']."',periodo='".$_GET['periodo']."', conteudo='".$_GET['conteudo']."',data='".revertedata($_GET['txtdata'])."', texto='".$_GET['txtobs']."',tipo='".$_GET['tipo']."' where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
 	$sucesso = mysqli_query($db,$SQL1);
@@ -67,7 +67,7 @@ else if($_GET['ap'] == "2")
         </script>');
 	}
 }
-if($_GET['ap'] == 3)
+if(@$_GET['ap'] == 3)
 {
 	$SQL1 = "UPDATE diario SET status=2 where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
 	$RES = mysqli_query($db,$SQL1);

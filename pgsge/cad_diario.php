@@ -353,7 +353,7 @@ $("#check[]").on('change', function() {
 								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario"><i class="fa fa-plus-circle"></i> Novo</a>
 								<?}else{?>
 								<?if(Empty($_GET['frequencia']) and Empty($_GET['nota'])){?>
-								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" onclick="excluir(<? echo $_GET['codigo'];?>)" href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Excluir</a>
+								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" onclick="excluir(<? echo $_GET['codigo'];?>)" href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Bloquear </a>
 								<?}?>
 								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota'])){?>
 								<button class="btn pmd-btn-outline pmd-ripple-effect btn-primary" type="button" OnClick="gravarrio(2,<? echo $_GET['codigo']; ?>);" ><i class="fa fa-plus-circle"></i> Gravar </button>
@@ -366,10 +366,10 @@ $("#check[]").on('change', function() {
 								
 								
 								<?}?>
-								<? if(!Empty($_GET['codigo']) and Empty($_GET['frequencia']) && Empty($_GET['nota'])) { ?>
+								<? if(!Empty($_GET['codigo']) and !Empty($_GET['frequencia']) && Empty($_GET['nota'])) { ?>
 								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario&codigo=<? echo $_GET['codigo']; ?>&frequencia=1&disciplina=<? echo $disciplina;?>"><i class="fa fa-plus-circle"></i> Registrar Frequencia</a>
 								<? } ?>
-								<? if(!Empty($_GET['codigo']) and Empty($_GET['nota']) && !Empty($_GET['frequencia'])) { ?>
+								<? if(!Empty($_GET['codigo']) and Empty($_GET['nota']) && Empty($_GET['frequencia'])) { ?>
 								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario&codigo=<? echo $_GET['codigo']; ?>&nota=1&disciplina=<? echo $disciplina;?>"><i class="fa fa-plus-circle"></i> Inserir Nota</a>
 								<? } ?>
 								<? if(!Empty($_GET['codigo']) and !Empty($_GET['nota']) && Empty($_GET['frequencia'])) { ?>
@@ -377,8 +377,8 @@ $("#check[]").on('change', function() {
 								<? } ?>
 								
 								</div>
-								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota']) && Empty($_GET['codigo'])){?>
-								<div class="form-group col-md-12 m-t-20"><label>Pesquisa :</label>
+								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota']) && Empty($_GET['codigo']) && Empty($_GET['cadastro'])){?>
+								<div class="form-group col-md-12 m-t-20">
                                 <input type="text" name="pesquisa" id="pesquisa" onkeyup="psdiario(this.value);" class="form-control"  autocomplete="off"  value="" placeholder="Pesquisar conteúdo">
 								</div>
                                  <div class="col-md-12">
@@ -424,12 +424,12 @@ $("#check[]").on('change', function() {
                                   </div>
 								</div>
 				               </div>
-								<?}
+								<?} 
 								//else
 								//{
 								//	echo '<div id="listdiario"> </div>';
 								//}
-								if(@$_GET['frequencia'] == 1 || !Empty($_GET['codigo'])){?>
+								if(@$_GET['frequencia'] == 1 || !Empty($_GET['codigo'] ) and Empty($_GET['nota'])){?>
 								<div class="col-md-12">
 					       <div class="component-box">
 							<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
@@ -451,7 +451,7 @@ $("#check[]").on('change', function() {
 										  inner join materias on materias.codigo=diario.materia 
 										  inner join periodo on periodo.codigo=diario.periodo
 										  inner join matriculas on matriculas.turma=diario.turma
-										  where diario.sistema='".$_SESSION['sistema']."' and diario.codigo='".$_GET['codigo']."' and matriculas.status in (0,1,3) and diario.usuario='".$_SESSION['usuario']."' and diario.turma='".$turma."';";
+										  where diario.sistema='".$_SESSION['sistema']."' and diario.codigo='".$_GET['codigo']."' and matriculas.status=1 and diario.usuario='".$_SESSION['usuario']."' and diario.turma='".$turma."';";
 										  $res5 = mysqli_query($db,$sql5); 
 										  $a = 0;
 										  while($row = mysqli_fetch_array($res5))
@@ -481,7 +481,9 @@ $("#check[]").on('change', function() {
 													 }
 													 
 													 
-													 $SQL = "SELECT codigo,falta FROM frequencia where sistema='".$_SESSION['sistema']."' and matricula=".$row['codigo']." and diario=".$_GET['codigo']."";
+													 $SQL = "SELECT frequencia.codigo,frequencia.falta FROM frequencia 
+													 inner join diario on diario.codigo=frequencia.diario
+													 where frequencia.sistema='".$_SESSION['sistema']."' and frequencia.status=1 and frequencia.matricula=".$row['codigo']." and frequencia.diario=".$_GET['codigo']."";
 													 $RES6 = mysqli_query($db,$SQL);
 												     $rows1 = mysqli_fetch_array($RES6);
 													 
@@ -499,7 +501,9 @@ $("#check[]").on('change', function() {
 												<td data-title="Faltas no Periodo"><div id="<? echo $row['codigo'];?>">
 												<? 
 											         $ano = date('Y');
-													 $SQL7 = "SELECT falta as qtd FROM frequencia where sistema='".$_SESSION['sistema']."' and matricula=".$row['codigo']." and disciplina=".$disciplina." and periodo=".$periodo." and falta=1 and YEAR(data)=$ano ";
+													 $SQL7 = "SELECT frequencia.falta as qtd FROM frequencia 
+													 inner join diario on diario.codigo=frequencia.diario
+													 where frequencia.sistema='".$_SESSION['sistema']."' and frequencia.matricula=".$row['codigo']." and frequencia.disciplina=".$disciplina." and frequencia.periodo=".$periodo." and frequencia.falta=1 and diario.status=1 and YEAR(frequencia.data)=$ano ";
 													 $RES7 = mysqli_query($db,$SQL7);
 													 
 													 $total = 0;
