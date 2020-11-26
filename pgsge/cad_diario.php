@@ -30,7 +30,7 @@ $tipo = "";
 		 
 if(isset($_GET['codigo']))
 {
-	$SQL = "SELECT diario.tipo,diario.turma,diario.video,diario.materia,diario.periodo,diario.data,diario.conteudo,diario.texto,materias.descricao as mdescricao,turmas.descricao as tdescricao,periodo.descricao as pdescricao FROM diario 
+	$SQL = "SELECT diario.codigo, diario.tipo,diario.turma,diario.video,diario.materia,diario.periodo,diario.data,diario.conteudo,diario.texto,materias.descricao as mdescricao,turmas.descricao as tdescricao,periodo.descricao as pdescricao FROM diario 
 	inner join materias on materias.codigo=diario.materia 
 	inner join turmas on turmas.codigo=diario.turma
 	inner join periodo on periodo.codigo=diario.periodo
@@ -42,6 +42,7 @@ if(isset($_GET['codigo']))
 	{
       while($row = mysqli_fetch_array($sucesso))
 	  {
+		 $codigo = $row['codigo'];
 		 $turma = $row['turma'];
 		 $disciplina = $row['materia'];
 		 $periodo = $row['periodo'];
@@ -381,6 +382,12 @@ $("#check[]").on('change', function() {
 								<div class="form-group col-md-12 m-t-20">
                                 <input type="text" name="pesquisa" id="pesquisa" onkeyup="psdiario(this.value);" class="form-control"  autocomplete="off"  value="" placeholder="Pesquisar conteúdo">
 								</div>
+								<script>
+								window.onload = function ()
+								{
+									requestPage2('?br=atu_diario&load=1','listdiario','GET');
+								}
+								</script>
                                  <div class="col-md-12">
 					              <div class="component-box">
 							       <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
@@ -396,29 +403,6 @@ $("#check[]").on('change', function() {
                                             </tr>
                                         </thead>
                                         <tbody id="listdiario">
-										<? 
-										  
-										  $cano = date('Y');
-										  $sql4 = "select diario.codigo,diario.conteudo,turmas.descricao as a,materias.descricao as b,diario.conteudo as c,diario.data from diario 
-										  inner JOIN turmas on turmas.codigo=diario.turma 
-										  inner join materias on materias.codigo=diario.materia 
-										  inner join periodo on periodo.codigo=diario.periodo 
-										  where YEAR(diario.data)=$cano and diario.usuario='".$_SESSION['usuario']."' and diario.status=1 order by diario.codigo desc limit 10;";
-										  $res4 = mysqli_query($db,$sql4); 
-										  while($row = mysqli_fetch_array($res4))
-										  {
-										  ?>
-                                            <tr>
-                                                <td data-title="Turma"><? echo $row['a'];?></td>
-												<td data-title="Disciplina"><? echo $row['b'];?></td>
-												<td data-title="Conteudo"><? echo $row['c'];?></td>
-												<td data-title="Data"><? echo formatodata($row['data']);?></td>
-												<td data-title="Editar"><a class="fa fa-edit" href="sistema.php?url=cad_diario&codigo=<? echo $row['codigo']?>" style="font-size: 150%;"><a></td>
-												<td data-title="Excluir"><a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir exame" style="font-size: 150%; color: red;" onclick="excluir(<? echo $row['codigo']?>)" href="javascript:void(0);"><a></td>
-                                            </tr>
-										  <? }
-										  $res4->close();
-										  ?>
                                         </tbody>
                                     </table>
                                   </div>
@@ -431,9 +415,15 @@ $("#check[]").on('change', function() {
 								//}
 								if(@$_GET['frequencia'] == 1 || !Empty($_GET['codigo'] ) and Empty($_GET['nota'])){?>
 								<div class="col-md-12">
-					       <div class="component-box">
-							<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
-							  <table class="table pmd-table">
+					            <div class="component-box">
+								<script>
+								window.onload = function ()
+								{
+								     requestPage2('?br=atu_diario&codigo=<?=$codigo;?>&disciplina=<?=$disciplina;?>&periodo=<?=$periodo;?>&turma=<?=$turma;?>&load=2','listpresenca','GET');
+								}
+								</script>
+							    <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+							    <table class="table pmd-table">
                                         <thead>
                                             <tr>
                                                 <th>Foto</th>
@@ -442,110 +432,7 @@ $("#check[]").on('change', function() {
 												<th>Faltas no Periodo</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-										<? 
-										  
-										  $cano = date('Y');
-										  $sql5 = "select diario.codigo as coddiario,diario.data,matriculas.codigo,matriculas.nome,turmas.descricao as turma,matriculas.foto from diario 
-										  inner JOIN turmas on turmas.codigo=diario.turma 
-										  inner join materias on materias.codigo=diario.materia 
-										  inner join periodo on periodo.codigo=diario.periodo
-										  inner join matriculas on matriculas.turma=diario.turma
-										  where diario.sistema='".$_SESSION['sistema']."' and diario.codigo='".$_GET['codigo']."' and matriculas.status in (0,1,3) and diario.usuario='".$_SESSION['usuario']."' and diario.turma='".$turma."';";
-										  $res5 = mysqli_query($db,$sql5); 
-										  $a = 0;
-										  while($row = mysqli_fetch_array($res5))
-										  {
-												 
-										  ?>
-                                            <tr>
-                                                <td data-title="Foto"><? if(Empty($row['foto'])){echo '<img style="width: 40px" src="template/images/semfoto.png">';}else{echo "TESTE 2";}?></td>
-                                                <td data-title="Nome"><? echo $row['nome'];?></td>
-												<td data-title="Presença"><? 
-												     
-
-													 $SQL = "SELECT codigo,falta FROM frequencia where sistema='".$_SESSION['sistema']."' and matricula=".$row['codigo']." and diario=".$_GET['codigo']."";
-													 $RES6 = mysqli_query($db,$SQL);
-												     $rows = mysqli_fetch_array($RES6);
-													 
-													 //$p = 0;
-													 //while($rows3 = mysqli_fetch_array($RES))
-													 //{
-													 //	 $p = 1;
-													 //}
-													 
-													 if(Empty($rows['codigo']))
-													 {
-													    $SQL = "INSERT INTO frequencia(sistema,diario,matricula,disciplina,periodo,data,falta) values('".$_SESSION['sistema']."','".$_GET['codigo']."','".$row['codigo']."','".$disciplina."','".$periodo."','".$data."','1');";
-		                                                $sucesso = mysqli_query($db,$SQL);
-													 }
-													 
-													 
-													 $SQL = "SELECT frequencia.codigo,frequencia.falta FROM frequencia 
-													 inner join diario on diario.codigo=frequencia.diario
-													 where frequencia.sistema='".$_SESSION['sistema']."' and frequencia.status=1 and frequencia.matricula=".$row['codigo']." and frequencia.diario=".$_GET['codigo']."";
-													 $RES6 = mysqli_query($db,$SQL);
-												     $rows1 = mysqli_fetch_array($RES6);
-													 
-													 ?>
-													 <div class="checkbox pmd-default-theme">
-										             <label class="pmd-checkbox pmd-checkbox-ripple-effect">
-												     <input type="checkbox" class="pm-ini" name="<? echo $row['codigo'];?>" id="<? echo $row['codigo'];?>" value="<? echo $row['codigo'];?>" <? if($rows1['falta'] == "0"){?> checked <? }else{ ?> <? }?> OnClick="javascript: ajaxLoader('?br=atu_presenca&check='+ this.checked +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $row['coddiario'];?>&disciplina=<? echo $disciplina;?>&periodo=<? echo $periodo; ?>&ap=1','<? echo $row['codigo'];?>','GET');" data-color="#009efb" />
-													 <span class="pmd-checkbox-label">&nbsp;</span></div>
-													  
-													   <!--<input type="checkbox" name="check[]" value="<? echo $row['codigo'];?>" <? if($rows1['falta'] == "0"){?> checked <? }else{ ?> <? }?> data-color="#009efb" />-->
-													  
-													  
-													  
-													  </td>
-												<td data-title="Faltas no Periodo"><div id="<? echo $row['codigo'];?>">
-												<? 
-											         $ano = date('Y');
-													 $SQL7 = "SELECT frequencia.falta as qtd FROM frequencia 
-													 inner join diario on diario.codigo=frequencia.diario
-													 where frequencia.sistema='".$_SESSION['sistema']."' and frequencia.matricula=".$row['codigo']." and frequencia.disciplina=".$disciplina." and frequencia.periodo=".$periodo." and frequencia.falta=1 and diario.status=1 and YEAR(frequencia.data)=$ano ";
-													 $RES7 = mysqli_query($db,$SQL7);
-													 
-													 $total = 0;
-													 $n = 1;
-												     $y = 0;	
-													 
-													 while($rows2 = mysqli_fetch_assoc($RES7))
-													 {
-														 //echo "The number is: $n <br>";
-														 //$total = $rows2['qtd'];
-														 $y = 1;
-														 
-														 $total = $n++;
-													 }
-													 
-													 if($y == 1)
-													 {
-														echo $total;
-													 }
-													 else
-													 {
-													    echo "0";
-													 }
-													 
-													 //$RES6->close();
-													 //$RES7->close();
-													 
-												?></div>
-												</td>
-                                            </tr>
-										  <? $a = 1;} 
-										  if($a == 0)
-										  {
-											  echo "<tr>
-   											       <td>Nenhum Aluno cadastrado na turma</td>
-   											       <td></td>
-													  <td></td>
-													  <td></td>
-   											         </tr>";
-										  }
-										  //$res5->close();
-										  ?>
+                                        <tbody id="listpresenca">
                                         </tbody>
                                     </table>
                                 </div></div></div>

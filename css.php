@@ -111,5 +111,3 @@
 	
 	<!-- Calendar CSS -->
     <link href="template/vendor/calendar/dist/fullcalendar.css" rel="stylesheet" />
-	
-	<script type="text/javascript" src="template/js/AjaxScript.js.php"></script>

@@ -88,28 +88,29 @@ if(@$_GET['ap'] == 3)
 
 if(@$_GET['load'] == 1)
 {
+  $whe = "";
   if(Empty($_GET['pesquisa']))
   {
-	print('<script>
+	/*print('<script>
          swal({   
             title: "Atenção!",   
             text: "Pesquisa em branco.",   
             timer: 1000,   
             showConfirmButton: false 
         });
-    </script>');
+    </script>');*/
   }
   else
   {
 	  $whe = " and diario.conteudo like '%".$_GET['pesquisa']."%'";
   }
-  
+
   $data = date('Y');
   $sql4 = "select diario.codigo,diario.conteudo,turmas.descricao as a,materias.descricao as b,diario.conteudo as c,diario.data from diario 
   inner JOIN turmas on turmas.codigo=diario.turma 
   inner join materias on materias.codigo=diario.materia 
   inner join periodo on periodo.codigo=diario.periodo 
-  where diario.sistema='".$_SESSION['sistema']."' and YEAR(diario.data)=$data and diario.usuario='".$_SESSION['usuario']."' and diario.status=1 $whe;";
+  where diario.sistema='".$_SESSION['sistema']."' and YEAR(diario.data)=$data and diario.usuario='".$_SESSION['usuario']."' and diario.status=1 $whe order by diario.codigo desc limit 5;";
   $res4 = mysqli_query($db,$sql4); 
   while($row = mysqli_fetch_array($res4))
   {
@@ -126,6 +127,113 @@ if(@$_GET['load'] == 1)
   $res4->close();
 ?>
 <?
+}
+else if(@$_GET['load'] == 2)
+{
+
+  $turma = $_GET['turma'];
+  $disciplina = $_GET['disciplina'];
+  $periodo = $_GET['periodo'];
+
+  $cano = date('Y');
+  $sql5 = "select diario.codigo as coddiario,diario.data,matriculas.codigo,matriculas.nome,turmas.descricao as turma,matriculas.foto from diario 
+  inner JOIN turmas on turmas.codigo=diario.turma 
+  inner join materias on materias.codigo=diario.materia 
+  inner join periodo on periodo.codigo=diario.periodo
+  inner join matriculas on matriculas.turma=diario.turma
+  where diario.sistema='".$_SESSION['sistema']."' and diario.codigo='".$_GET['codigo']."' and matriculas.status in (0,1,3) and diario.usuario='".$_SESSION['usuario']."' and diario.turma='".$turma."';";
+  $res5 = mysqli_query($db,$sql5); 
+  $a = 0;
+  while($row = mysqli_fetch_array($res5))
+  {
+		 
+  ?>
+	<tr>
+		<td data-title="Foto"><? if(Empty($row['foto'])){echo '<img style="width: 40px" src="template/images/semfoto.png">';}else{echo "TESTE 2";}?></td>
+		<td data-title="Nome"><? echo $row['nome'];?></td>
+		<td data-title="Presença"><? 
+			 
+
+			 $SQL = "SELECT codigo,falta FROM frequencia where sistema='".$_SESSION['sistema']."' and matricula=".$row['codigo']." and diario=".$_GET['codigo']."";
+			 $RES6 = mysqli_query($db,$SQL);
+			 $rows = mysqli_fetch_array($RES6);
+			 
+			 //$p = 0;
+			 //while($rows3 = mysqli_fetch_array($RES))
+			 //{
+			 //	 $p = 1;
+			 //}
+			 
+			 if(Empty($rows['codigo']))
+			 {
+				$SQL = "INSERT INTO frequencia(sistema,diario,matricula,disciplina,periodo,data,falta) values('".$_SESSION['sistema']."','".$_GET['codigo']."','".$row['codigo']."','".$disciplina."','".$periodo."','".$data."','1');";
+				$sucesso = mysqli_query($db,$SQL);
+			 }
+			 
+			 
+			 $SQL = "SELECT frequencia.codigo,frequencia.falta FROM frequencia 
+			 inner join diario on diario.codigo=frequencia.diario
+			 where frequencia.sistema='".$_SESSION['sistema']."' and frequencia.status=1 and frequencia.matricula=".$row['codigo']." and frequencia.diario=".$_GET['codigo']."";
+			 $RES6 = mysqli_query($db,$SQL);
+			 $rows1 = mysqli_fetch_array($RES6);
+			 
+			 ?>
+			 <div class="checkbox pmd-default-theme">
+			 <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+			 <input type="checkbox" class="pm-ini" name="<? echo $row['codigo'];?>" id="<? echo $row['codigo'];?>" value="<? echo $row['codigo'];?>" <? if($rows1['falta'] == "0"){?> checked <? }else{ ?> <? }?> OnClick="javascript: ajaxLoader('?br=atu_presenca&check='+ this.checked +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $row['coddiario'];?>&disciplina=<? echo $disciplina;?>&periodo=<? echo $periodo; ?>&ap=1','<? echo $row['codigo'];?>','GET');" data-color="#009efb" />
+			 <span class="pmd-checkbox-label">&nbsp;</span></div>
+			  
+			   <!--<input type="checkbox" name="check[]" value="<? echo $row['codigo'];?>" <? if($rows1['falta'] == "0"){?> checked <? }else{ ?> <? }?> data-color="#009efb" />-->
+			  
+			  
+			  
+			  </td>
+		<td data-title="Faltas no Periodo"><div id="<? echo $row['codigo'];?>">
+		<? 
+			 $ano = date('Y');
+			 $SQL7 = "SELECT frequencia.falta as qtd FROM frequencia 
+			 inner join diario on diario.codigo=frequencia.diario
+			 where frequencia.sistema='".$_SESSION['sistema']."' and frequencia.matricula=".$row['codigo']." and frequencia.disciplina=".$disciplina." and frequencia.periodo=".$periodo." and frequencia.falta=1 and diario.status=1 and YEAR(frequencia.data)=$ano ";
+			 $RES7 = mysqli_query($db,$SQL7);
+			 
+			 $total = 0;
+			 $n = 1;
+			 $y = 0;	
+			 
+			 while($rows2 = mysqli_fetch_assoc($RES7))
+			 {
+				 //echo "The number is: $n <br>";
+				 //$total = $rows2['qtd'];
+				 $y = 1;
+				 
+				 $total = $n++;
+			 }
+			 
+			 if($y == 1)
+			 {
+				echo $total;
+			 }
+			 else
+			 {
+				echo "0";
+			 }
+			 
+			 //$RES6->close();
+			 //$RES7->close();
+			 
+		?></div>
+		</td>
+	</tr>
+  <? $a = 1;} 
+  if($a == 0)
+  {
+	  echo "<tr>
+		   <td>Nenhum Aluno cadastrado na turma</td>
+		   <td></td>
+			  <td></td>
+			  <td></td>
+			 </tr>";
+  }
 }
 
 if(@$_GET['fechar'] == "3")

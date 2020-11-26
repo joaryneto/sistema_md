@@ -4,6 +4,7 @@
     <script src="template/js/popper.min.js"></script>
     <script src="template/vendor/bootstrap-4.4.1/js/bootstrap.min.js"></script>
 
+<script type="text/javascript" src="template/js/AjaxScript.js.php"></script>
     <noscript>Por favor habilite JavaScript para usar este site.</noscript>
     <!-- swiper js -->
     <script src="template/vendor/swiper/js/swiper.min.js"></script>
@@ -104,6 +105,7 @@
     <!-- page specific script -->
     <script src="template/js/autocomplete.js"></script>
 
+    
 	    <!-- page level script -->
     <script>
         $(window).on('load', function() {

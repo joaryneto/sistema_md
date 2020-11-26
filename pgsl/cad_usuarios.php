@@ -23,6 +23,13 @@ function filtro($nome)
 	return str_replace($array1, $array2, $nome); 
 }
 
+$cpf = "";
+$nome = "";
+$senha = "";
+$email = "";
+$tipo = "";
+$situacao = "";
+	
 if(!Empty($_GET['codigo']))
 {
 	$res = mysqli_query($db3,"SELECT * FROM usuarios where codigo='".$_GET['codigo']."'");
@@ -147,8 +154,10 @@ if(@$_GET['ap'] == "1")
     $y = 0;
 	$x = 0;
 	
+	$email = @$_POST['email'];
+	
 	//echo "</br>";
-	$SQL2 = "SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and email='".$_POST['email']."'";
+	$SQL2 = "SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and email='".$email."'";
 	$sucesso = mysqli_query($db3,$SQL2);
 	while($rows = mysqli_fetch_array($sucesso))
 	{
@@ -168,7 +177,7 @@ if(@$_GET['ap'] == "1")
 	   $sucesso = mysqli_query($db3,$SQL3);
 
 	   
-	   if(is_dir("sign/") == false)
+	   /*if(is_dir("sign/") == false)
        {
 	      mkdir("sign/", 0777);
 	   }
@@ -206,9 +215,9 @@ if(@$_GET['ap'] == "1")
 			  }
 		   }
 	     }
-	   }
+	   }*/
 	   
-	   if($y)
+	   if($sucesso)
 	   {
 		    print("<script>window.alert('Usuario Cadastrado com sucess...')</script>");
 		    print("<script>window.location.href='sistema.php?url=cad_usuarios&codigo=".$cod."';</script>");
@@ -216,6 +225,7 @@ if(@$_GET['ap'] == "1")
 	   else
 	   {
 		    print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-2')</script>");
+			print("<script>window.location.href='sistema.php?url=cad_usuarios</script>");
 	   }
 	}
 }
