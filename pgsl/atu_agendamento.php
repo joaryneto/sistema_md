@@ -92,7 +92,17 @@ else if($inputb['ap'] == 2)
 }
 else if($inputb['ap'] == 3)
 {
-   $SQL = "DELETE from agendamento WHERE sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
+   if(isset($_SESSION['agendamento']))
+   { 
+      $codigo = $_SESSION['agendamento'];
+	  $whe = "and status=0";
+   }
+   else
+   {
+	  $codigo = $inputb['codigo']
+   }
+   
+   $SQL = "DELETE from agendamento WHERE sistema='".$_SESSION['sistema']."' and codigo='".$codigo."' $whe";
    mysqli_query($db3,$SQL);
  ?>
  
@@ -106,6 +116,10 @@ else if($inputb['ap'] == 3)
   </script>
  
  <?
+}
+else
+{
+	
 }
 
 if($inputb['load'] == 1)

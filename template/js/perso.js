@@ -67,6 +67,13 @@ function recovery()
 	  requestPage2('?br=modal_recovery&modal=1','modals','GET');
 }
 
+$('#cad_cliente').on('click',function()
+{	
+		
+    //$('#modalusuario').modal('show');		
+	requestPage2('?br=modal_clientes&modal=3','modals','GET');
+});
+
 $('#reagendarr').on('click',function(){	
 
     var datav = document.getElementById('dataagenda2').value;

@@ -119,7 +119,7 @@ if(@$_GET['load'] == 1)
 		<td data-title="Turma"><? echo $row['a'];?></td>
 		<td data-title="Disciplina"><? echo $row['b'];?></td>
 		<td data-title="Conteudo"><? echo $row['c'];?></td>
-		<td data-title="Data"><? echo formatodatahora($row['data']);?></td>
+		<td data-title="Data"><? echo formatodata($row['data']);?></td>
 		<td data-title="Editar"><a class="fa fa-edit" href="sistema.php?url=cad_diario&codigo=<? echo $row['codigo']?>" style="font-size: 150%;"><a></td>
 		<td data-title="Excluir"><a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir exame" style="font-size: 150%; color: red;" onclick="excluir(<? echo $row['codigo']?>)" href="javascript:void(0);"><a></td>
 	</tr>
@@ -182,12 +182,8 @@ else if(@$_GET['load'] == 2)
 			 <label class="pmd-checkbox pmd-checkbox-ripple-effect">
 			 <input type="checkbox" class="pm-ini" name="<? echo $row['codigo'];?>" id="<? echo $row['codigo'];?>" value="<? echo $row['codigo'];?>" <? if($rows1['falta'] == "0"){?> checked <? }else{ ?> <? }?> OnClick="javascript: ajaxLoader('?br=atu_presenca&check='+ this.checked +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $row['coddiario'];?>&disciplina=<? echo $disciplina;?>&periodo=<? echo $periodo; ?>&ap=1','<? echo $row['codigo'];?>','GET');" data-color="#009efb" />
 			 <span class="pmd-checkbox-label">&nbsp;</span></div>
-			  
-			   <!--<input type="checkbox" name="check[]" value="<? echo $row['codigo'];?>" <? if($rows1['falta'] == "0"){?> checked <? }else{ ?> <? }?> data-color="#009efb" />-->
-			  
-			  
-			  
-			  </td>
+			 <!--<input type="checkbox" name="check[]" value="< echo $row['codigo'];?>" < if($rows1['falta'] == "0"){?> checked < }else{ ?> <? }?> data-color="#009efb" />-->
+			 </td>
 		<td data-title="Faltas no Periodo"><div id="<? echo $row['codigo'];?>">
 		<? 
 			 $ano = date('Y');

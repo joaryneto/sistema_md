@@ -183,7 +183,6 @@ if($_GET['excluir'] == 1)
 								<? } ?>
 								</div></div>
 								</form>
-								<? if(Empty($_GET['frequencia'])){?>
                                 <div class="table-responsive m-t-40">
                                     <table id="example23" class="display nowrap table table-hover table-striped table-bordered">
                                         <thead>
@@ -220,63 +219,8 @@ if($_GET['excluir'] == 1)
                                             </tr>
 										  <? } ?>
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Codigo</th>
-                                                <th>Turma</th>
-												<th>Disciplina</th>
-												<th>Periodo</th>
-												<th>Data</th>
-												<th>X</th>
-												<th>X</th>
-                                            </tr>
-                                        </tfoot>
                                     </table>
                                 </div>
-								<?}else{?>
-								<div class="table-responsive m-t-40">
-                                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Foto</th>
-                                                <th>Nome</th>
-												<th>Presença</th>
-												<th>Faltas no Periodo</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-										<? 
-										  
-										  $data = date('Y');
-										  $sql = "select diario.codigo,turmas.descricao as a,materias.descricao as b,periodo.descricao as c,diario.data from diario 
-										  inner JOIN turmas on turmas.codigo=diario.turma 
-										  inner join materias on materias.codigo=diario.materia 
-										  inner join periodo on periodo.codigo=diario.periodo
-										  inner join matriculas on matriculas.turma=diario.turma
-										  where diario.codigo='".$_GET['codigo']."' and matriculas.status=1";
-										  $res = mysqli_query($db,$sql); 
-										  while($row = mysqli_fetch_array($res))
-										  {
-										  ?>
-                                            <tr>
-                                                <td><? echo $row['codigo'];?></td>
-                                                <td><? echo $row['a'];?></td>
-												<td><? echo $row['b'];?></td>
-												<td><? echo $row['c'];?></td>
-                                            </tr>
-										  <? } ?>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Foto</th>
-                                                <th>Nome</th>
-												<th>Presença</th>
-												<th>Faltas no Periodo</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-								<?}?>
                             </div>
                         </div>
 					</div>

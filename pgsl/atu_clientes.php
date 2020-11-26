@@ -1,6 +1,5 @@
 <?
 
-  
   $sql = "select * from clientes where sistema='".$_SESSION['sistema']."' and nome like '%".$_GET['pesquisa']."%';";
   $res = mysqli_query($db3,$sql); 
   while($row = mysqli_fetch_array($res))
@@ -20,6 +19,8 @@
 			   }
 			   ?></td>
 		<!--<td>< echo $numero = number_format($row['valor_padrao']-+$row['valor'], 2, ',','.');?></td>-->
-		<td data-title="Editar"><a class="fa fa-edit" href="sistema.php?url=cad_clientes&codigo=<? echo $row['codigo']?>&cadastro=1" style="font-size: 150%;"><a></td>
+		<td data-title="Editar"><a class="fa fa-edit" href="javascript:void(0);" onclick="edit_cliente(<?=$row['codigo'];?>);" style="font-size: 150%;"><a></td>
 	</tr>
-  <? } ?>
+<? 
+} 
+?>

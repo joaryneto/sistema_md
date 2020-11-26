@@ -32,9 +32,7 @@ function bccliente(nome)
 function cliente_s()
 {	
     var data = document.getElementById('dataagenda').value;
-	var hora = document.getElementById('hora').value;
 	var nome = document.getElementById('nome').value;
-	var pcodigo = document.getElementById('pcodigo').value;
 	var codigo = document.getElementById('codigo').value;
 	
 	if(data == "")
@@ -49,10 +47,6 @@ function cliente_s()
 	{
 	    swal('Atenção', 'Selecione Cliente data.');
 	}
-	else if(pcodigo == "")
-	{
-	    swal('Atenção', 'Selecione um Profissional data.');
-	}
 	else if(codigo == "")
 	{
 	    swal('Atenção', 'Selecione um Cliente data.');
@@ -66,7 +60,12 @@ function cliente_s()
 
 function proximo_a()
 {
-	requestPage2('?br=atu_pesquisa&data='+ document.getElementById('dataagenda').value +'&ap=6','modals','GET');
+	requestPage2('?br=atu_pesquisa&data='+ document.getElementById('dataagenda').value +'&ap=8','modals','GET');
+}
+
+function novo_a()
+{
+	requestPage2('?br=atu_pesquisa&ap=1&novo=1','modals','GET');
 }
 
 function proximo_b(codigo)
@@ -78,10 +77,9 @@ function proximo_b(codigo)
 	requestPage2('?br=atu_pesquisa&profissional='+ profissional +'&data='+ data +'&hora='+ hora +'&ap=3','modals','GET');
 }
 
-function proximo_c(codigo, nome, data, hora, profissional)
+function proximo_c(codigo, nome, agendamento)
 {
-	
-	requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&nome='+ nome +'&profissional='+ profissional +'&data='+ data +'&hora='+ hora +'&ap=2','modals','GET');
+	requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&nome='+ nome +'&agendamento='+ agendamento +'&ap=2','modals','GET');
 }
 
 </script>
@@ -110,7 +108,7 @@ if(@$inputb['ap'] == 1)
 	
 	if($x == 1)
 	{
-		print("<script> requestPage2('?br=atu_pesquisa&codigo=$codigo&nome=$nome&profissional=$profissional&data=$data&hora=$hora&ap=2','modals','GET');</script> ");
+		print("<script> requestPage2('?br=atu_pesquisa&codigo=$codigo&data=$data&ap=8','modals','GET');</script> ");
 	}
 	else
 	{
@@ -240,7 +238,7 @@ else if(@$inputb['ap'] == 2)
 	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="proximo_b();"><i class="fa fa-plus-circle"></i> Proximo</a>
     <?}else{?>
 	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="cliente_s();"><i class="fa fa-plus-circle"></i> Proximo</a>
-	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="requestPage2('?br=atu_pesquisa&tipo=1&ap=1','modals','GET');"><i class="fa fa-plus-circle"></i> Novo</a>
+	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="novo_a();"><i class="fa fa-plus-circle"></i> Novo</a>
 	<?}?>
 		
 </form>
@@ -252,9 +250,7 @@ else if(@$inputb['ap'] == 2)
 }
 else if(@$inputb['ap'] == 3)
 {
-	$_SESSION['adata'] = @$inputb['data'];
-	$_SESSION['ahora'] = @$inputb['hora'];
-	$_SESSION['aprofissional'] = @$inputb['profissional'];
+	$_SESSION['codigo'] = @$inputb['codigo'];
 	
 	?>
 <div class="modal-header">
@@ -308,7 +304,7 @@ $x = 0;
 while($row = mysqli_fetch_array($res))
 {
 ?>
-<tr style="cursor: pointer;" onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'" onclick="proximo_c('<?=$row['codigo'];?>','<?=$row['nome'];?>','<?=$_GET['data']?>','<?=$_GET['hora']?>','<?=$_GET['profissional']?>');">
+<tr style="cursor: pointer;" onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'" onclick="proximo_c('<?=$row['codigo'];?>','<?=$row['nome'];?>');">
 <td data-title="Cliente"><? echo $row['nome'];?></td>
 </tr>
 <? $x = 1;
@@ -360,7 +356,7 @@ else if(@$inputb['ap'] == 5)
 
 	<?
 }
-else if(@$inputb['ap'] == 6)
+else if(@$inputb['ap'] == 232)
 {
 	
 $data = @$inputb['data'];
@@ -417,7 +413,7 @@ function phorario(profissional)
 </div>
 <?
 }
-else if($inputb['ap'] == 7)
+else if(@$inputb['ap'] == 7)
 {
     $data = @$inputb['hora'];
 	$profissional = @$inputb['profissional'];
@@ -471,27 +467,40 @@ else if($inputb['ap'] == 7)
 	</select>
 	<?
 }
-else if($inputb['ap'] == 8)
+else if(@$inputb['ap'] == 8)
 {
-	if(!isset($_SESSION['agendamento']))
+	$p_data = @$inputb['data'];
+	$p_codigo = @$inputb['codigo'];
+	
+	$p_x = 0;
+	$SQL = "SELECT codigo FROM agendamento where sistema='".$_SESSION['sistema']."' and usuario='".$_SESSION['usuario']."' and status=0;";
+	$RES = mysqli_query($db3,$SQL);
+	while($rows = mysqli_fetch_array($RES))
 	{
-	   $query = "INSERT INTO agendamento (sistema,cliente, profissional, data, hora, nome,status) VALUES ('".$_SESSION['sistema']."','".$inputb['codigo']."','".$inputb['pcodigo']."', '".revertedata($inputb['data'])."','".$inputb['hora']."','".$inputb['nome']."','0')";
+		$p_x = 1;
+	}
+
+	if($p_x == 0)
+    {
+	   $query = "INSERT INTO agendamento (sistema, usuario, data, status) VALUES ('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".revertedata($inputb['data'])."','0')";
        $sucesso = mysqli_query($db3,$query);
 	}
 	
-	$SQL = "SELECT max(codigo) as codigo FROM agendamento where sistema='".$_SESSION['sistema']."' and cliente='".$inputb['codigo']."'";
+	$SQL = "SELECT codigo FROM agendamento where sistema='".$_SESSION['sistema']."' and usuario='".$_SESSION['usuario']."' and status=0;";
 	$RES = mysqli_query($db3,$SQL);
 	$rows = mysqli_fetch_array($RES);
 	
 	?>
 	<div class="modal-header">
-<h2 class="pmd-card-title-text">Agenda - Servicos </h2>
+<h2 class="pmd-card-title-text">Agenda - Servicos - <?=formatodata($p_data);?></h2>
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
 <div class="modal-body">
 	<script>
 	function servico_add(codigo)
     {
+		var data = document.getElementById('dataagenda').value;
+		var hora = document.getElementById('hora').value;
 		var servico = document.getElementById('servico').value;
 		
 		if(servico == "")
@@ -500,24 +509,46 @@ else if($inputb['ap'] == 8)
 		}
 		else
 		{
-		   requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&servico='+ servico +'&ap=9&load=2','listaservicos','GET');
+		   requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&servico='+ servico +'&data='+ data +'&hora='+ hora +'&addservico=true&load=2','listaservicos','GET');
 		}
 	}
+	
+	function phorario(codigo)
+    {
+		var dataagenda = document.getElementById('dataagenda').value;
+		
+		requestPage2('?br=atu_pesquisa&profissional='+ codigo +'&data='+ dataagenda +'&lhorario=true','hora','GET');
+	}
+	
+	function pservico()
+    {
+		var profissional = document.getElementById('profissional').value;
+		
+		requestPage2('?br=atu_pesquisa&profissional='+ profissional +'&lservico=true','servico','GET');
+	}
+	
 	</script>
+	<div class="form-group pmd-textfield pmd-textfield-floating-label">
+	<input type="hidden" name="dataagenda" id="dataagenda" value="<?=$p_data;?>" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required">
+	<select name="profissional" id="profissional" class="form-control" onchange="phorario(this.value);" autocomplete="off" required="required">
+	<option value="">Selecionar Profissional</option>
+		<?
+		
+		$SQL1 = "SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and tipo in (2,3,4) and status=1;";
+		$RES1 = mysqli_query($db3,$SQL1);
+		while($row = mysqli_fetch_array($RES1))
+		{
+			echo "<option value='".$row['codigo']."'>".$row['nome']."</option>";
+		}
+     ?>
+	</select>
+	</div>
+	<div class="form-group pmd-textfield pmd-textfield-floating-label"><label for="first-name">Horario:</label>
+	<select name="hora" id="hora" class="form-control" placeholder="Escolha um serviço" onchange="pservico();" autocomplete="off"  style="width: 100%; height:36px;" required="required" >
+	</select>
+	</div>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label"><label for="first-name">Serviços:</label>
 	<select name="servico" id="servico" class="form-control" placeholder="Escolha um serviço" autocomplete="off"  style="width: 100%; height:36px;" required="required" >
-	<option value=""></option>
-	<?  
-	
-	
-		
-	    $SQL = "SELECT codigo, descricao FROM produtos where sistema='".$_SESSION['sistema']."' and tipo=2";
-	    $RES = mysqli_query($db3,$SQL);
-		while($row = mysqli_fetch_array($RES))
-		{
-		  echo "<option value='".$row['codigo']."'>".$row['descricao']." - ".$nome." </option>";
-		}
-	 ?>
 	</select>
 	<button class="btn btn-info btnadd-ad" onclick="servico_add(<?=$rows['codigo'];?>);"><i class="fa fa-plus-circle"></i></button>
 	</div>
@@ -536,21 +567,20 @@ function a_ex(codigo)
 	}
 }
 </script>
-	<div class="form-group pmd-textfield pmd-textfield-floating-label">
 	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="s_load">
 	<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
 		<table class="table pmd-table">
 			<thead>
 				<tr>
 					<th>Descrição</th>
+					<th>Data - Hora</th>
 					<th>Excluir</th>
 				</tr>
 			</thead>
 			<tbody id="listaservicos">
 			<?
 			    
-	        $SQL = "SELECT agendamento.codigo as codagenda, agendamento_servicos.codigo, agendamento.nome, produtos.descricao FROM agendamento 
-	        inner join clientes on clientes.codigo=agendamento.cliente 
+	        $SQL = "SELECT agendamento.codigo as codagenda, agendamento_servicos.codigo, agendamento.nome,agendamento.data,agendamento.hora, produtos.descricao FROM agendamento 
 	        inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
 	        inner join produtos on produtos.codigo=agendamento_servicos.servico
 	        where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.agendamento='".$_SESSION['agendamento']."' and agendamento.status=0 ORDER BY agendamento.codigo asc";
@@ -563,6 +593,9 @@ function a_ex(codigo)
 		      <td data-title="Descrição">
 		        <?=$row['descricao'];?>
 		     </td>
+			 <td data-title="Data - Hora">
+		        <?=formatodata($row['data']);?> - <?=formatohora($row['hora']);?>
+		     </td>
 		      <td data-title="Excluir">
 		        <a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir" style="font-size: 150%; color: red;" onclick="a_ex(<? echo $row['codigo']?>)" href="javascript:void(0);"><a>
 		     </td>
@@ -572,15 +605,17 @@ function a_ex(codigo)
 		</table>
 	 </div>
 	 </div>
+	  </div>
      <div class="modal-footer">
     </div>
-	</div>
 	<?
 }
-else if($inputb['ap'] == 9)
+else if(@$inputb['ap'] == 9)
 {
 	$servico = $inputb['servico'];
 	$codigo = $inputb['codigo'];
+	$data = $inputb['data'];
+	$hora = $inputb['hora'];
 	
 	if($inputb['servico'] == "")
 	{
@@ -588,17 +623,136 @@ else if($inputb['ap'] == 9)
 	}
 	else
 	{
-		$SQL = "INSERT into agendamento_servicos(sistema,agendamento,servico) values('".$_SESSION['sistema']."','".$codigo."','".$servico."');";
-		mysqli_query($db3,$SQL);
+		echo $SQL = "INSERT into agendamento_servicos(sistema,agendamento,servico,data,hora) values('".$_SESSION['sistema']."','".$codigo."','".$servico."','".$data."','".$hora."');";
+		//mysqli_query($db3,$SQL);
 	}
 }
-else if($inputb['ap'] == 10)
+else if(@$inputb['ap'] == 10)
 {
 	$servico = $inputb['servico'];
 	
 	$SQL = "DELETE from agendamento_servicos where sistema='".$_SESSION['sistema']."' and codigo='".$servico."'";
 	mysqli_query($db3,$SQL);
 }
+
+
+if(@$inputb['novo'] == 1)
+{
+   $codigo = $_SESSION['agendamento'];
+   
+   if(!isset($_SESSION['agendamento']))
+   { 
+      
+   }
+   else
+   {
+      $SQL = "DELETE from agendamento WHERE sistema='".$_SESSION['sistema']."' and codigo='".$codigo."' and status=0";
+      mysqli_query($db3,$SQL);
+   }
+ ?>
+ 
+  <script>
+  swal({   
+            title: "Atenção",   
+            text: "Excluido com sucesso.",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });
+  </script>
+ 
+ <?
+}
+
+if(@$inputb['addservico'] == "true")
+{
+	$servico = $inputb['servico'];
+	$codigo = $inputb['codigo'];
+	$data = $inputb['data'];
+	$hora = $inputb['hora'];
+	
+	if($inputb['servico'] == "")
+	{
+		print "<script> swal('t', 'Selecione um serviço.'); </script>";
+	}
+	else
+	{
+		$SQL = "INSERT into agendamento_servicos(sistema,agendamento,servico,data,hora) values('".$_SESSION['sistema']."','".$codigo."','".$servico."','".$data."','".$hora."');";
+		mysqli_query($db3,$SQL);
+	}
+}
+
+if(@$inputb['lhorario'] == "true")
+{
+    $data = @$inputb['data'];
+	$profissional = @$inputb['profissional'];
+	
+	?>
+	<label for="first-name">Horario:</label>
+	<select name="hora" id="hora" class="form-control" placeholder="Escolha um horario" autocomplete="off" required="required">
+	<option value=""></option>
+		<?
+		
+		$data = revertedata($inputb['data']);
+		
+		echo $SQL1 = "SELECT horarios.hora FROM horarios ORDER BY horarios.hora asc";
+		$RES1 = mysqli_query($db3,$SQL1);
+		while($row1 = mysqli_fetch_array($RES1))
+		{
+			
+		  $x = 0;
+		  $nome = "";
+		  
+		  echo $SQL2 = "SELECT hora,nome FROM agendamento where sistema='".$_SESSION['sistema']."' and data='".$data."' and profissional='".$profissional."' and hora='".$row1['hora']."'";
+		  $RES2 = mysqli_query($db3,$SQL2);
+		  while($row2 = mysqli_fetch_array($RES2))
+		  {
+			 $nome = $row2['nome'];
+			 $x = 1;
+		  }
+		  
+		  if($inputb['hora'] == $row1['hora'])
+	      {
+			  $selectd = "selected"; 
+		  }
+		  else
+		  {
+		      $selectd = "";  
+		  }
+		  
+		  if($x == 0)
+		  {
+			   echo "<option value='".$row1['hora']."' ".$selectd.">".$row1['hora']."</option>";
+		  }
+		  else
+		  {
+			   
+			   
+			   echo "<option value='".$row1['hora']."' ".$selectd.">".$row1['hora']." - ".$nome." </option>";
+		  }
+		}
+
+		?>
+	</select>
+	<?
+}
+
+if(@$inputb['lservico'] == "true")
+{ 
+    $p_codigo = @$inputb['profissional'];
+    ?>
+    <option value=""></option>
+	<?  
+	
+	$SQL = "SELECT produtos.codigo, produtos.descricao FROM produtos 
+	inner join produtos_usuarios on produtos_usuarios.produto=produtos.codigo
+	where produtos.sistema='".$_SESSION['sistema']."' and produtos_usuarios.usuario='{$p_codigo}' and produtos.tipo=2";
+	$RES = mysqli_query($db3,$SQL);
+	while($row = mysqli_fetch_array($RES))
+	{
+		echo "<option value='".$row['codigo']."'>".$row['descricao']." - ".$nome." </option>";
+	}
+}
+
 if(@$inputb['load'] == 1)
 {
 	            
@@ -635,10 +789,9 @@ if(@$inputb['load'] == 1)
 }
 else if(@$inputb['load'] == 2)
 {
-	$codigo = $inputb['codigo'];
+	$codigo = @$inputb['codigo'];
 	            
-	$SQL = "SELECT agendamento.codigo as codagenda, agendamento_servicos.codigo, agendamento.nome, produtos.descricao FROM agendamento 
-	inner join clientes on clientes.codigo=agendamento.cliente 
+	$SQL = "SELECT agendamento.codigo as codagenda, agendamento_servicos.codigo, agendamento.nome, agendamento.data,agendamento.hora, produtos.descricao FROM agendamento 
 	inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
 	inner join produtos on produtos.codigo=agendamento_servicos.servico
 	where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.agendamento='".$codigo."' and agendamento.status=0 ORDER BY agendamento.codigo asc";
@@ -651,6 +804,9 @@ else if(@$inputb['load'] == 2)
 		 <td data-title="Descrição">
 		  <?=$row['descricao'];?>
 		 </td>
+		  <td data-title="Data - Hora">
+		        <?=formatodata($row['data']);?> - <?=formatohora($row['hora']);?>
+		     </td>
 		 <td data-title="Excluir">
 		  <a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir" style="font-size: 150%; color: red;" onclick="a_ex(<? echo $row['codigo']?>)" href="javascript:void(0);"><a>
 		 </td>

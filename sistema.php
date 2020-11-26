@@ -396,28 +396,13 @@ function isMobile()
                 <ul class="navbar-nav">
 				    <?if(@$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 3  or @$_SESSION['permissao'] == 4){?>
 				    <li class="nav-item dropdown" style="width: 230px;">
-                        <a href="sistema.php?url=inicio" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                        <a href="sistema.php?url=agenda" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
                             <div class="list-group-item list-group-item-action active">
                                 <i class="material-icons">perm_contact_calendar</i> Agenda
                             </div>
                         </a>
 					</li>
 					<? } ?>
-					<li class="nav-item dropdown" style="width: 230px;">
-                        <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="list-group-item list-group-item-action">
-                                <i class="material-icons">card_giftcard</i> Clientes
-                            </div>
-                        </a>
-						<div class="dropdown-menu">
-                            <a href="sistema.php?url=cad_clientes&cadastro=1" id="catual" class="sidebar-close dropdown-item menu-right">
-							 Cadastrar
-                            </a>
-                            <a href="sistema.php?url=cad_clientes" id="canteriores" class="sidebar-close dropdown-item menu-right">
-                             Lista de Clientes
-                            </a>
-                        </div>
-					</li>
 					<?if(@$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 4){?>
 					<li class="nav-item dropdown" style="width: 230px;">
                         <a href="sistema.php?url=cad_vendas" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
@@ -589,12 +574,18 @@ function isMobile()
             </div>
         </div>
 		<?if($_GET['url'] == "agenda"){?>
+		<script>
+		function btn_cadcliente()
+		{				
+		   requestPage2('?br=modal_clientes&modal=3','modals','GET');
+		}
+		</script>
 		 <div class="menu pmd-floating-action" role="navigation" style="bottom: 80px;"> 
-        <a href="javascript:void(0);" onclick="window.location='sistema.php?url=cad_clientes';" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="Clientes"> 
+        <a href="javascript:void(0);" onclick="btn_cadcliente();" data-toggle="modal" data-target="#modalusuario" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="Clientes"> 
             <span class="pmd-floating-hidden">Clientes</span> 
             <i class="material-icons">supervisor_account</i> 
         </a> 
-        <a href="javascript:void(0);" id="aagenda" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="Agenda"> 
+        <a href="javascript:void(0);" id="aagenda" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="Agendar"> 
             <span class="pmd-floating-hidden">Agendar</span> 
             <i class="material-icons">perm_contact_calendar</i> 
         </a> 
@@ -716,7 +707,7 @@ function isMobile()
 <script>
 function btn_cliente()
 {				
-requestPage2('?br=modal_clientes&codigo=&modal=1','modals','GET');
+   requestPage2('?br=modal_clientes&codigo=&modal=1','modals','GET');
 }
 
 function c_desconto()
@@ -921,9 +912,19 @@ function slow()
 
 </script>
 <? } ?>
+
 <div id="modalusuario" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
 <div class="modal-dialog modal-lg">
 <div class="modal-content" id="modals">
+<!-- /.modal-content -->
+</div>
+
+<!-- /.modal-dialog -->
+</div>
+</div>
+<div id="modalbusca" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal-dialog modal-lg">
+<div class="modal-content" id="modalss">
 <!-- /.modal-content -->
 </div>
 
