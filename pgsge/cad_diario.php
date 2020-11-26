@@ -451,7 +451,7 @@ $("#check[]").on('change', function() {
 										  inner join materias on materias.codigo=diario.materia 
 										  inner join periodo on periodo.codigo=diario.periodo
 										  inner join matriculas on matriculas.turma=diario.turma
-										  where diario.sistema='".$_SESSION['sistema']."' and diario.codigo='".$_GET['codigo']."' and matriculas.status=1 and diario.usuario='".$_SESSION['usuario']."' and diario.turma='".$turma."';";
+										  where diario.sistema='".$_SESSION['sistema']."' and diario.codigo='".$_GET['codigo']."' and matriculas.status in (0,1,3) and diario.usuario='".$_SESSION['usuario']."' and diario.turma='".$turma."';";
 										  $res5 = mysqli_query($db,$sql5); 
 										  $a = 0;
 										  while($row = mysqli_fetch_array($res5))

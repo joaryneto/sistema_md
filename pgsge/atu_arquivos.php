@@ -64,7 +64,7 @@ else if($_GET['ap'] == 3)
 {
 
 		
-		  $SQL = "SELECT data,arquivo FROM arquivos where usuario='".$_SESSION['usuario']."' order by data desc limit 5;";
+		  $SQL = "SELECT data,arquivo FROM arquivos where usuario='".$_SESSION['usuario']."' order by data desc limit 1;";
 		  $res = mysqli_query($db,$SQL); 
 		  while($row = mysqli_fetch_array($res))
 		  {
