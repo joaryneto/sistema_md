@@ -490,7 +490,7 @@ $("#check[]").on('change', function() {
 													 ?>
 													 <div class="checkbox pmd-default-theme">
 										             <label class="pmd-checkbox pmd-checkbox-ripple-effect">
-												     <input type="checkbox" class="pm-ini" name="<? echo $row['codigo'];?>" id="<? echo $row['codigo'];?>" value="<? echo $row['codigo'];?>" <? if($rows1['falta'] == "0"){?> checked <? }else{ ?> <? }?> OnClick="javascript: ajaxLoader('?br=atu_presenca&check='+ this.checked +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $row['coddiario'];?>&disciplina=<? echo $_GET['disciplina'];?>&periodo=<? echo $periodo; ?>&ap=1','<? echo $row['codigo'];?>','GET');" data-color="#009efb" />
+												     <input type="checkbox" class="pm-ini" name="<? echo $row['codigo'];?>" id="<? echo $row['codigo'];?>" value="<? echo $row['codigo'];?>" <? if($rows1['falta'] == "0"){?> checked <? }else{ ?> <? }?> OnClick="javascript: ajaxLoader('?br=atu_presenca&check='+ this.checked +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $row['coddiario'];?>&disciplina=<? echo $disciplina;?>&periodo=<? echo $periodo; ?>&ap=1','<? echo $row['codigo'];?>','GET');" data-color="#009efb" />
 													 <span class="pmd-checkbox-label">&nbsp;</span></div>
 													  
 													   <!--<input type="checkbox" name="check[]" value="<? echo $row['codigo'];?>" <? if($rows1['falta'] == "0"){?> checked <? }else{ ?> <? }?> data-color="#009efb" />-->
