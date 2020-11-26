@@ -220,7 +220,7 @@ else if(@$_GET['load'] == 2)
 		?></div>
 		</td>
 	</tr>
-  <? $a = 1;} 
+  <? $a = 1;
   if($a == 0)
   {
 	  echo "<tr>
@@ -230,8 +230,8 @@ else if(@$_GET['load'] == 2)
 			  <td></td>
 			 </tr>";
   }
-}
 
+}
 if(@$_GET['fechar'] == "3")
 {
 	$SQL1 = "UPDATE diario SET status=0 where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
