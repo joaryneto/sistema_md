@@ -111,7 +111,7 @@ if(@$_GET['load'] == 1)
   inner JOIN turmas on turmas.codigo=diario.turma 
   inner join materias on materias.codigo=diario.materia 
   inner join periodo on periodo.codigo=diario.periodo 
-  where diario.sistema='".$_SESSION['sistema']."' and YEAR(diario.data)=$data and diario.usuario='".$_SESSION['usuario']."' and diario.status=1 $whe order by diario.codigo desc limit 5;";
+  where diario.sistema='".$_SESSION['sistema']."' and YEAR(diario.data)=$data and diario.usuario='".$_SESSION['usuario']."' and diario.status=1 $whe order by diario.codigo desc;";
   $res4 = mysqli_query($db,$sql4); 
   while($row = mysqli_fetch_array($res4))
   {
