@@ -275,6 +275,83 @@ function requestPage2(url, div, tipo, campos, hideLoading)
 }
 
 
+function requestoption(url, div, tipo, campos, hideLoading)
+{
+	
+	//window.alert(tipo);
+	$('#'+div+'').attr("disabled", true);
+	
+    var ajax = null;
+	if(window.ActiveXObject)
+	{
+		ajax = new ActiveXObject('Microsoft.XMLHTTP');
+	    //window.alert(ajax);
+    }
+	else if(window.XMLHttpRequest)
+    {	
+        ajax = new XMLHttpRequest();
+	}   //window.alert(ajax);
+     
+
+	if(ajax != null)
+	{
+	    if (typeof hideLoading === 'undefined' || hideLoading !== true) 
+		{
+			//$(".loader-screen").fadeIn();
+            document.getElementById(div).innerHTML = '<option value="">Carregando...</option>';
+        }
+		
+        lastRequestCache = new Date().getTime();
+		ajax.open(tipo, url /*+ "&cache=" + cache*/ , true);
+		ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		ajax.send();
+		
+		ajax.onreadystatechange = function status()
+		{
+				if(ajax.readyState == 4)
+				{
+					if(ajax.status == 200 || window.location.href.indexOf("http")==-1)
+					{
+						
+						document.getElementById(div).innerHTML = ajax.responseText;
+						var texto=unescape(ajax.responseText);
+						extraiScript(texto);
+						$('#'+div+'').attr("disabled", false);
+						//$('.loader-screen').fadeOut('slow');
+					}
+     		  	}
+				else if(ajax.readyState == 0)
+					//$(".loader-screen").fadeIn();
+					document.getElementById(div).innerHTML = '<option value="">Carregando...</option>';
+                else if(ajax.readyState == 3)
+					//$(".loader-screen").fadeIn();
+                    document.getElementById(div).innerHTML = '<option value="">Carregando...</option>';
+				else
+					//$(".loader-screen").fadeIn();
+					document.getElementById(div).innerHTML = '<option value="">Carregando...</option>';
+		}
+
+		if(tipo == "POST")
+		{
+			ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+			ajax.setRequestHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+			ajax.setRequestHeader("Cache-Control", "post-check=0, pre-check=0");
+			ajax.setRequestHeader("Pragma", "no-cache");
+			ajax.send(campos);
+			
+			window.alert(campos);
+			
+			//$('.loader-screen').fadeOut('slow');
+		}
+    	else 
+		{
+   		  ajax.send(null);
+    	}
+	}
+
+}
+
+
 function requestmodal(url, div, tipo, campos, hideLoading)
 {
 	

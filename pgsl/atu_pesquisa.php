@@ -178,10 +178,6 @@ else if(@$inputb['ap'] == 2)
         $_SESSION['codpro']	= @$inputb['codigo'];
 		
 	?>
-	<div class="form-group pmd-textfield pmd-textfield-floating-label"><label for="first-name">Nome:</label>
-	<input type="text" name="pnome" id="pnome" value="<?=$_SESSION['pnome'];?>" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required" disabled />
-	<input type="hidden" name="pcodigo" id="pcodigo" value="<?=$_SESSION['codpro'];?>" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required">
-	</div>
     <? } ?>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label"><label for="first-name">Data:</label>
 	<input type="text" name="dataagenda" id="dataagenda" value="<?=$_GET['data'];?>" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required" disabled />
@@ -490,6 +486,17 @@ else if(@$inputb['ap'] == 8)
 	$RES = mysqli_query($db3,$SQL);
 	$rows = mysqli_fetch_array($RES);
 	
+	$SQL2 = "SELECT count(produtos.codigo) as qtd, sum(produtos.preco) as total FROM agendamento 
+	inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
+	inner join produtos on produtos.codigo=agendamento_servicos.servico
+	where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.agendamento='".$rows['codigo']."' and agendamento.status=0 ORDER BY agendamento.codigo asc";
+	
+	$RES2 = mysqli_query($db3,$SQL2);
+	$rowds = mysqli_fetch_array($RES2);
+	
+	print('<script> document.getElementById("sv_qtd").innerHTML = "'.$rowds['qtd'].'";</script>');
+	print('<script> document.getElementById("sv_total").innerHTML = "<span style=\'color: green;\'>Total: R$ '.number_format($rowds['total'],2,",",".").'</span>";</script>');
+	
 	?>
 	<div class="modal-header">
 <h2 class="pmd-card-title-text">Agenda - Servicos - <?=formatodata($p_data);?></h2>
@@ -501,6 +508,7 @@ else if(@$inputb['ap'] == 8)
     {
 		var data = document.getElementById('dataagenda').value;
 		var hora = document.getElementById('hora').value;
+		var profissional = document.getElementById('profissional').value;
 		var servico = document.getElementById('servico').value;
 		
 		if(servico == "")
@@ -509,28 +517,54 @@ else if(@$inputb['ap'] == 8)
 		}
 		else
 		{
-		   requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&servico='+ servico +'&data='+ data +'&hora='+ hora +'&addservico=true&load=2','listaservicos','GET');
+		   requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&servico='+ servico +'&profissional='+ profissional +'&data='+ data +'&hora='+ hora +'&addservico=true&load=2','listaservicos','GET');
 		}
 	}
 	
-	function phorario(codigo)
+	jQuery('#dataagenda').datepicker({
+		format: 'dd/mm/yyyy',
+ 		autoclose: true,
+ 		todayHighlight: true,
+		language: "pt-BR",
+		orientation: "bottom left",
+		startDate: "-0d"
+	});
+	
+	function sleep(ms) {
+	   return new Promise(resolve => setTimeout(resolve, ms));
+	}
+
+	async function phorario(dataagenda)
     {
-		var dataagenda = document.getElementById('dataagenda').value;
+		await sleep(500);
 		
-		requestPage2('?br=atu_pesquisa&profissional='+ codigo +'&data='+ dataagenda +'&lhorario=true','hora','GET');
+		var profissional = document.getElementById('profissional').value;
+		
+		if(profissional == null)
+		{
+			swal('Atenção', 'Selecione um profissional.');
+		}
+		else if(dataagenda == "")
+		{
+			swal('Atenção', 'Selecione uma Data.');
+		}
+		else
+		{
+			requestoption('?br=atu_pesquisa&profissional='+ profissional +'&data='+ dataagenda +'&lhorario=true','hora','GET');
+		}
 	}
 	
 	function pservico()
     {
 		var profissional = document.getElementById('profissional').value;
 		
-		requestPage2('?br=atu_pesquisa&profissional='+ profissional +'&lservico=true','servico','GET');
+		requestoption('?br=atu_pesquisa&profissional='+ profissional +'&lservico=true','servico','GET');
 	}
 	
 	</script>
-	<div class="form-group pmd-textfield pmd-textfield-floating-label">
-	<input type="hidden" name="dataagenda" id="dataagenda" value="<?=$p_data;?>" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required">
-	<select name="profissional" id="profissional" class="form-control" onchange="phorario(this.value);" autocomplete="off" required="required">
+	<div class="m-t-40 row" id="forcaixa">
+	<div class="form-group col-md-12 m-t-20">
+	<select name="profissional" id="profissional" class="form-control" autocomplete="off" required="required">
 	<option value="">Selecionar Profissional</option>
 		<?
 		
@@ -543,18 +577,89 @@ else if(@$inputb['ap'] == 8)
      ?>
 	</select>
 	</div>
-	<div class="form-group pmd-textfield pmd-textfield-floating-label"><label for="first-name">Horario:</label>
-	<select name="hora" id="hora" class="form-control" placeholder="Escolha um serviço" onchange="pservico();" autocomplete="off"  style="width: 100%; height:36px;" required="required" >
+	<div class="form-group col-md-12 m-t-20"><label>Data:</label>
+		<input name="dataagenda" id="dataagenda" type="text" onchange="phorario(this.value);" placeholder="00/00/00000" autocomplete="off" class="form-control  form-control-lg" required="required" />
+	</div>
+	<div class="form-group col-md-12 m-t-20"><label>Horario:</label>
+	<select name="hora" id="hora" class="form-control" placeholder="Escolha um serviço" onchange="pservico();" autocomplete="off" required="required" >
 	</select>
 	</div>
-	<div class="form-group pmd-textfield pmd-textfield-floating-label"><label for="first-name">Serviços:</label>
-	<select name="servico" id="servico" class="form-control" placeholder="Escolha um serviço" autocomplete="off"  style="width: 100%; height:36px;" required="required" >
+	<div class="form-group col-md-12 m-t-20"><label>Serviços:</label>
+	<select name="servico" id="servico" class="form-control" placeholder="Escolha um serviço" autocomplete="off"  required="required" >
 	</select>
 	<button class="btn btn-info btnadd-ad" onclick="servico_add(<?=$rows['codigo'];?>);"><i class="fa fa-plus-circle"></i></button>
 	</div>
-	<div class="form-group pmd-textfield pmd-textfield-floating-label">
-	    <a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="proximo_b(<?=$rows['codigo'];?>);"><i class="fa fa-plus-circle"></i> Proximo</a>
+	</div>
+	<div id="dtable" style="display: none;">
+	<h2>Lista de Serviços agendados :</h2>
+	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="s_load">
+	<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+		<table class="table pmd-table">
+			<thead>
+				<tr>
+					<th>Descrição</th>
+					<th>Profissional</th>
+					<th>Data - Hora</th>
+					<th>Valor</th>
+					
+				</tr>
+			</thead>
+			<tbody id="listaservicos">
+			<?
+			    
+	        $SQL = "SELECT usuarios.nome,agendamento.codigo as codagenda, agendamento_servicos.codigo, agendamento_servicos.data,agendamento_servicos.hora, produtos.descricao, produtos.preco FROM agendamento 
+	        inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
+	        inner join produtos on produtos.codigo=agendamento_servicos.servico
+            inner join usuarios on usuarios.codigo=agendamento_servicos.profissional
+	        where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.agendamento='".$_SESSION['agendamento']."' and agendamento.status=0 ORDER BY agendamento.codigo asc";
+	
+	        $RES = mysqli_query($db3,$SQL);
+	        while($row = mysqli_fetch_array($RES))
+	        {
+		    ?>
+		    <tr onclick="a_ex(<? echo $row['codigo']?>)" href="javascript:void(0);">
+		      <td data-title="Descrição">
+		        <?=$row['descricao'];?>
+		     </td>
+			 <td data-title="Data - Hora">
+		        <?=$row['nome'];?>
+		     </td>
+			 <td data-title="Data - Hora">
+		        <?=formatodata($row['data']);?> - <?=formatohora($row['hora']);?>
+		     </td>
+			 <td data-title="Data - Hora">
+		        R$ <?=number_format($row['preco'],2,",",".");?>
+		     </td>
+		   </tr>
+	        <?	} ?>
+			</tbody>
+		</table>
+	 </div>
+	 </div>
+	 </div>
+	 <h2 id="sv_total"><span style="color: green;">Total: R$ 0,00</span></h2>
+	 <div class="form-group pmd-textfield pmd-textfield-floating-label">
+	    <a class="btn pmd-btn-outline pmd-ripple-effect btn-warning" href="javascript: void(0);" onclick="sv_itens();"><b id="sv_qtd"></b> <i class="material-icons">add_shopping_cart</i> Itens</a>
     </div>
+	<div class="form-group pmd-textfield pmd-textfield-floating-label">
+	    <a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="proximo_b(<?=$rows['codigo'];?>);"><i class="material-icons">person_add</i>  Proximo</a>
+    </div>
+<script>
+function sv_itens()
+{
+  if($('#dtable').css('display') == 'none' )
+  {
+	 $("#forcaixa" ).hide( "slow" );
+	 $("#dtable" ).show( "slow" );
+  }
+  else
+  {
+	 $("#forcaixa" ).show( "slow" );
+	 $("#dtable" ).hide( "slow" );
+  }
+}
+
+</script>
 <script>
 function a_ex(codigo)
 {
@@ -564,48 +669,10 @@ function a_ex(codigo)
 	}
 	else
 	{
-		  requestPage2('?br=atu_pesquisa&codigo=<?=$rows["codigo"];?>&servico='+ codigo +'&ap=10&load=2','listaservicos','GET');
+		  requestPage2('?br=atu_pesquisa&codigo=<?=$rows["codigo"];?>&servico='+ codigo +'&excluir=true&load=2','listaservicos','GET');
 	}
 }
 </script>
-	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="s_load">
-	<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
-		<table class="table pmd-table">
-			<thead>
-				<tr>
-					<th>Descrição</th>
-					<th>Data - Hora</th>
-					<th>Excluir</th>
-				</tr>
-			</thead>
-			<tbody id="listaservicos">
-			<?
-			    
-	        $SQL = "SELECT agendamento.codigo as codagenda, agendamento_servicos.codigo, agendamento.nome,agendamento.data,agendamento.hora, produtos.descricao FROM agendamento 
-	        inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
-	        inner join produtos on produtos.codigo=agendamento_servicos.servico
-	        where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.agendamento='".$_SESSION['agendamento']."' and agendamento.status=0 ORDER BY agendamento.codigo asc";
-	
-	        $RES = mysqli_query($db3,$SQL);
-	        while($row = mysqli_fetch_array($RES))
-	        {
-		    ?>
-		    <tr>
-		      <td data-title="Descrição">
-		        <?=$row['descricao'];?>
-		     </td>
-			 <td data-title="Data - Hora">
-		        <?=formatodata($row['data']);?> - <?=formatohora($row['hora']);?>
-		     </td>
-		      <td data-title="Excluir">
-		        <a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir" style="font-size: 150%; color: red;" onclick="a_ex(<? echo $row['codigo']?>)" href="javascript:void(0);"><a>
-		     </td>
-		   </tr>
-	        <?	} ?>
-			</tbody>
-		</table>
-	 </div>
-	 </div>
 	  </div>
      <div class="modal-footer">
     </div>
@@ -628,14 +695,6 @@ else if(@$inputb['ap'] == 9)
 		//mysqli_query($db3,$SQL);
 	}
 }
-else if(@$inputb['ap'] == 10)
-{
-	$servico = $inputb['servico'];
-	
-	$SQL = "DELETE from agendamento_servicos where sistema='".$_SESSION['sistema']."' and codigo='".$servico."'";
-	mysqli_query($db3,$SQL);
-}
-
 
 if(@$inputb['cliente'] == "true")
 {
@@ -739,9 +798,31 @@ if(@$inputb['novo'] == 1)
  <?
 }
 
+if(@$inputb['excluir'] == "true")
+{
+	$codigo = $inputb['codigo'];
+	$servico = $inputb['servico'];
+	
+	$SQL1 = "DELETE from agendamento_servicos where sistema='".$_SESSION['sistema']."' and codigo='".$servico."'";
+	$RES1 = mysqli_query($db3,$SQL1);
+	
+	$SQL2 = "SELECT count(produtos.codigo) as qtd,sum(produtos.preco) as total FROM agendamento 
+	inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
+	inner join produtos on produtos.codigo=agendamento_servicos.servico
+	where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.agendamento='".$codigo."' and agendamento.status=0 ORDER BY agendamento.codigo asc";
+	
+	$RES2 = mysqli_query($db3,$SQL2);
+	$row = mysqli_fetch_array($RES2);
+	
+	print('<script> document.getElementById("sv_total").innerHTML = "<span style=\'color: green;\'>Total: R$ '.number_format($row['total'],2,",",".").'</span>";</script>');
+	print('<script> document.getElementById("sv_qtd").innerHTML = "'.$row['qtd'].'";</script>');
+
+}
+
 if(@$inputb['addservico'] == "true")
 {
 	$servico = $inputb['servico'];
+	$profissional = $inputb['profissional'];
 	$codigo = $inputb['codigo'];
 	$data = $inputb['data'];
 	$hora = $inputb['hora'];
@@ -752,9 +833,20 @@ if(@$inputb['addservico'] == "true")
 	}
 	else
 	{
-		$SQL = "INSERT into agendamento_servicos(sistema,agendamento,servico,data,hora) values('".$_SESSION['sistema']."','".$codigo."','".$servico."','".$data."','".$hora."');";
+		$SQL = "INSERT into agendamento_servicos(sistema,agendamento,servico,profissional,data,hora) values('".$_SESSION['sistema']."','".$codigo."','".$servico."','".$profissional."','".revertedata($data)."','".$hora."');";
 		mysqli_query($db3,$SQL);
 	}
+	
+	$SQL = "SELECT count(produtos.codigo) as qtd,sum(produtos.preco) as total FROM agendamento 
+	inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
+	inner join produtos on produtos.codigo=agendamento_servicos.servico
+	where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.agendamento='".$codigo."' and agendamento.status=0 ORDER BY agendamento.codigo asc";
+	
+	$RES = mysqli_query($db3,$SQL);
+	$row = mysqli_fetch_array($RES);
+	
+	print('<script> document.getElementById("sv_total").innerHTML = "<span style=\'color: green;\'>Total: R$ '.number_format($row['total'],2,",",".").'</span>";</script>');
+	print('<script> document.getElementById("sv_qtd").innerHTML = "'.$row['qtd'].'";</script>');
 }
 
 if(@$inputb['lhorario'] == "true")
@@ -778,7 +870,7 @@ if(@$inputb['lhorario'] == "true")
 		  $x = 0;
 		  $nome = "";
 		  
-		  echo $SQL2 = "SELECT hora,nome FROM agendamento where sistema='".$_SESSION['sistema']."' and data='".$data."' and profissional='".$profissional."' and hora='".$row1['hora']."'";
+		  echo $SQL2 = "SELECT agendamento_servicos.hora,agendamento.nome FROM agendamento inner join agendamento_servicos.agendamento=agendamento.codigo where sistema='".$_SESSION['sistema']."' and data='".$data."' and profissional='".$profissional."' and hora='".$row1['hora']."'";
 		  $RES2 = mysqli_query($db3,$SQL2);
 		  while($row2 = mysqli_fetch_array($RES2))
 		  {
@@ -867,25 +959,29 @@ else if(@$inputb['load'] == 2)
 {
 	$codigo = @$inputb['codigo'];
 	            
-	$SQL = "SELECT agendamento.codigo as codagenda, agendamento_servicos.codigo, agendamento.nome, agendamento.data,agendamento.hora, produtos.descricao FROM agendamento 
+	$SQL = "SELECT usuarios.nome,agendamento.codigo as codagenda, agendamento_servicos.codigo, agendamento_servicos.data,agendamento_servicos.hora, produtos.descricao,produtos.preco FROM agendamento 
 	inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
 	inner join produtos on produtos.codigo=agendamento_servicos.servico
+	inner join usuarios on usuarios.codigo=agendamento_servicos.profissional
 	where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.agendamento='".$codigo."' and agendamento.status=0 ORDER BY agendamento.codigo asc";
 	
 	$RES = mysqli_query($db3,$SQL);
 	while($row = mysqli_fetch_array($RES))
 	{
 		?>
-		<tr>
+		<tr onclick="a_ex(<? echo $row['codigo']?>)" href="javascript:void(0);">
 		 <td data-title="Descrição">
 		  <?=$row['descricao'];?>
 		 </td>
+		 <td data-title="Data - Hora">
+		        <?=$row['nome'];?>
+		     </td>
 		  <td data-title="Data - Hora">
 		        <?=formatodata($row['data']);?> - <?=formatohora($row['hora']);?>
 		     </td>
-		 <td data-title="Excluir">
-		  <a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir" style="font-size: 150%; color: red;" onclick="a_ex(<? echo $row['codigo']?>)" href="javascript:void(0);"><a>
-		 </td>
+	     <td data-title="Data - Hora">
+		        R$ <?=number_format($row['preco'],2,",",".");?>
+		     </td>
 		</tr>
 	    <?	  
 	}

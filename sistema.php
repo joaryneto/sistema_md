@@ -44,8 +44,8 @@ function isMobile()
 .btnadd-ad
 {
 	position: absolute;
-	left: 93.5%;
-	top: 27px;
+	left: 92%;
+	top: 28px;
 	height: 55px;
 	width: 50px;
 	font-size: 18px;

@@ -32,7 +32,7 @@ $('#r_recov').on('click',function()
 	else
 	{
 	   $('#modalform').modal('hide');
-	   requestPage('?br=atu_login&email='+ email  +'&ap=1','r_load','GET');
+	   requestPage('?br=atu_login_recovery&email='+ email  +'&recovery=true','r_load','GET');
 	}
 });
 </script>
