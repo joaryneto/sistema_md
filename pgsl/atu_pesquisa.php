@@ -74,7 +74,7 @@ function proximo_b(codigo)
 	var hora = document.getElementById('hora').value;
 	var profissional = document.getElementById('profissional').value;
 	
-	requestPage2('?br=atu_pesquisa&profissional='+ profissional +'&data='+ data +'&hora='+ hora +'&ap=3','modals','GET');
+	requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&profissional='+ profissional +'&data='+ data +'&hora='+ hora +'&ap=3','modals','GET');
 }
 
 function proximo_c(codigo, nome, agendamento)
@@ -553,7 +553,8 @@ else if(@$inputb['ap'] == 8)
 	<button class="btn btn-info btnadd-ad" onclick="servico_add(<?=$rows['codigo'];?>);"><i class="fa fa-plus-circle"></i></button>
 	</div>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label">
-	</div>
+	    <a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="proximo_b(<?=$rows['codigo'];?>);"><i class="fa fa-plus-circle"></i> Proximo</a>
+    </div>
 <script>
 function a_ex(codigo)
 {
@@ -635,6 +636,81 @@ else if(@$inputb['ap'] == 10)
 	mysqli_query($db3,$SQL);
 }
 
+
+if(@$inputb['cliente'] == "true")
+{
+	$_SESSION['codigo'] = @$inputb['codigo'];
+	
+	?>
+<div class="modal-header">
+<h2 class="pmd-card-title-text">Agenda - Cliente </h2>
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form class="m-t-40 row">
+<div class="modal-body">
+<form class="m-t-40 row">
+    <script>
+	function cliente_r(pesquisa, data, hora , profissional)
+    {
+		if(pesquisa == "")
+		{
+			
+		}
+		else
+		{
+	        requestPage2('?br=atu_pesquisa&pesquisa='+ pesquisa +'&profissional='+ profissional +'&data='+ data +'&hora='+ hora +'&ap=4','inputcliente','GET');
+		}
+    }
+	</script>
+	<div class="form-group pmd-textfield pmd-textfield-floating-label">
+	<input type="text" name="nome" id="nome" value="" placeholder="Buscar cliente por nome" onkeyup="cliente_r(this.value,'<?=$_SESSION['adata'];?>','<?=$_SESSION['ahora'];?>','<?=$_SESSION['aprofissional'];?>');" class="form-control" autocomplete="off"  style="width: 100%; height:36px;" required="required" />
+	</div>
+	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="inputcliente">
+	</div>
+	<div class="form-group pmd-textfield pmd-textfield-floating-label">
+	<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="requestPage2('?br=atu_pesquisa&tipo=1&ap=1','modals','GET');"><i class="fa fa-plus-circle"></i> Novo</a>
+	</div>
+</form>
+		</div>
+		<div class="modal-footer">
+</div>
+	<?
+}
+else if(@$inputb['pesq'] == "true")
+{
+	
+$pesquisa = @$inputb['pesquisa'];
+
+?>
+<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+<table class="table pmd-table">
+<tbody>
+<?
+$SQL = "SELECT * FROM clientes where sistema='".$_SESSION['sistema']."' and nome like '%".$pesquisa."%';";
+$res = mysqli_query($db3,$SQL); 
+$x = 0;
+while($row = mysqli_fetch_array($res))
+{
+?>
+<tr style="cursor: pointer;" onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'" onclick="proximo_c('<?=$row['codigo'];?>','<?=$row['nome'];?>');">
+<td data-title="Cliente"><? echo $row['nome'];?></td>
+</tr>
+<? $x = 1;
+}
+
+
+if($x == 0)
+{
+ echo "<tr><td>Nenhum resultado encontrado.</td><td></td><td></td><td></td></tr>";
+
+}
+?>
+</tbody>	
+</table>
+</div>
+<?
+}
 
 if(@$inputb['novo'] == 1)
 {
