@@ -49,13 +49,11 @@
 
     <!-- Roboto fonts CSS -->
 
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
+	
     <!-- Bootstrap core CSS -->
     <link href="template/vendor/bootstrap-4.4.1/css/bootstrap.min.css" rel="stylesheet">
-	
-	<!-- autocomplete CSS -->
-    <link rel="stylesheet" href="template/vendor/EasyAutocomplete-1.3.5/easy-autocomplete.css" >
-	
+
 	<link href="template/vendor/propeller-master/components/table/css/table.css" type="text/css" rel="stylesheet" /> 
 	
     <!-- Swiper CSS -->
@@ -100,7 +98,6 @@
 	<link href="template/vendor/propeller-master/components/checkbox/css/checkbox.css" type="text/css" rel="stylesheet" />
 	<link href="template/vendor/propeller-master/components/list/css/list.css" type="text/css" rel="stylesheet" />
 	<link href="template/vendor/propeller-master/components/card/css/card.css" type="text/css" rel="stylesheet" />
-	<link href="template/vendor/propeller-master/components/typography/css/typography.css" type="text/css" rel="stylesheet" />
     <link href="template/vendor/propeller-master/components/button/css/button.css" type="text/css" rel="stylesheet" />
     <link href="template/vendor/propeller-master/components/floating-action-button/css/floating-action-button.css" type="text/css" rel="stylesheet" /> 
 	<link href="template/vendor/propeller-master/components/textfield/css/textfield.css" type="text/css" rel="stylesheet" /> 

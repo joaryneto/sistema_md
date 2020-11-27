@@ -34,21 +34,6 @@
 =================================================
 =================================================*/
 
-
-/******************* 
-Global Styles 
-*******************/
-@import url(../scss/icons/font-awesome/css/font-awesome.min.css);
-@import url(../scss/icons/simple-line-icons/css/simple-line-icons.css);
-@import url(../scss/icons/weather-icons/css/weather-icons.min.css);
-@import url(../scss/icons/iconmind/iconmind.css);
-@import url(../scss/icons/themify-icons/themify-icons.css);
-@import url(../scss/icons/flag-icon-css/flag-icon.min.css);
-@import url(../css/spinners.css);
-@import url(../css/animate.css);
-* {
-  outline: none; }
-  
 /* 1. Basic  */
 html {
     height: 100%;
@@ -58,7 +43,7 @@ body {
     min-height: 100%;
     height: auto;
     overflow-y: auto;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
     font-weight: normal;
     line-height: 22px;
@@ -537,28 +522,28 @@ figure {
 }
 
 .btn.btn-link {
-    font-weight: normal !important;
+    font-weight: normal
 }
 
 .btn-lg {
-    padding: 15px 25px !important;
+    padding: 15px 25px;
 }
 
 .btn i {
-    max-width: 24px !important;
-    vertical-align: middle !important;
+    max-width: 24px;
+    vertical-align: middle
 }
 
 .btn i.right-absoute {
-    position: absolute !important;
-    right: 15px !important;
-    top: 10px !important;
+    position: absolute;
+    right: 15px;
+    top: 10px;
 }
 
 .btn-lg i.right-absoute {
-    position: absolute !important;
-    right: 15px !important;
-    top: 15px !important;
+    position: absolute;
+    right: 15px;
+    top: 15px;
 }
 
 .button-fab {
@@ -1235,7 +1220,7 @@ a.h5 {
     background: #3355b4;
     background: -moz-linear-gradient(top, #3355b4 1%, #14379a 100%);
     background: -webkit-linear-gradient(top, #3355b4 1%, #14379a 100%);
-    background: linear-gradient(to bottom, #3355b4 1%, #14379a 100%)
+    background: linear-gradient(to bottom, #3355b4 1%, #14379a 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3355b4', endColorstr='#14379a', GradientType=0);
 }
 
@@ -1312,7 +1297,7 @@ a.h5 {
 .color-theme-blue .sidebar .main-menu .list-group-item.active,
 .color-theme-blue .nav-tabs .nav-item .nav-link,
 .color-theme-blue .bg-template a:not(.btn-light) {
-    color: #ffffff;
+    color: #000000;
 }
 
 .color-theme-blue .footer,
@@ -3156,210 +3141,4 @@ html.theme-dark .form-control.search,
 ::-webkit-scrollbar-track {
     border-radius: 5px;
     background: rgba(230, 230, 230, 0.4);
-}
-
-/*============================================================== 
-Form addons page
-============================================================== */
-/*Bootstrap select*/
-.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
-  width: 100%; }
-
-.bootstrap-select .dropdown-menu li a {
-  display: block;
-  padding: 7px 20px;
-  clear: both;
-  font-weight: 400;
-  line-height: 1.42857143;
-  color: #67757c;
-  white-space: nowrap; }
-  .bootstrap-select .dropdown-menu li a:hover, .bootstrap-select .dropdown-menu li a:focus {
-    color: #20aee3;
-    background: #e9edf2; }
-
-.bootstrap-select .show > .dropdown-menu {
-  display: block; }
-
-.bootstrap-touchspin .input-group-btn-vertical > .btn {
-  padding: 9px 10px; }
-
-.select2-container--default .select2-selection--single {
-  border-color: #b1b8bb;
-  height: 38px; }
-  .select2-container--default .select2-selection--single .select2-selection__rendered {
-    line-height: 38px; }
-  .select2-container--default .select2-selection--single .select2-selection__arrow {
-    height: 33px; }
-
-.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-  float: right;
-  color: #ffffff;
-  margin-right: 0px;
-  margin-left: 4px; }
-
-.select2-container--default .select2-selection--multiple .select2-selection__choice {
-  background: #20aee3;
-  color: #ffffff;
-  border-color: #20aee3; }
-
-.input-form .btn {
-  padding: 8px 12px; }
-  
-  
-/* FIM SELECT */
-
-/*******************
-Form Pickers
-******************/
-.asColorPicker-dropdown {
-  max-width: 260px; }
-
-.asColorPicker-trigger {
-  position: absolute;
-  top: 0;
-  right: -35px;
-  height: 38px;
-  width: 37px;
-  border: 0; }
-
-.asColorPicker-clear {
-  display: none;
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  text-decoration: none; }
-
-table th {
-  font-weight: 400; }
-
-.daterangepicker td.active,
-.daterangepicker td.active:hover {
-  background-color: #20aee3; }
-
-.datepicker table tr td.today,
-.datepicker table tr td.today.disabled,
-.datepicker table tr td.today.disabled:hover,
-.datepicker table tr td.today:hover {
-  background: #20aee3;
-  color: #ffffff; }
-
-.datepicker td,
-.datepicker th {
-  padding: 5px 10px; }
-  
- /* FIM DATAPICKERS */
-
-.fab{
-  position: fixed;
-  bottom:90px;
-  right:10px;
-}
-
-.fab button{
-  cursor: pointer;
-  width: 48px;
-  height: 48px;
-  border-radius: 30px;
-  background-color: #3355b4;
-  border: none;
-  box-shadow: 0 1px 5px rgba(0,0,0,.4);
-  font-size: 24px;
-  color: white;
-    
-  -webkit-transition: .2s ease-out;
-  -moz-transition: .2s ease-out;
-  transition: .2s ease-out;
-}
-
-.fab button:focus{
-  outline: none;
-}
-
-.fab button.main{
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
-  background-color: #3355b4;
-  right: 0;
-  bottom: 0;
-  z-index: 20;
-}
-
-.fab button.main:before{
-  content: '⏚';
-}
-
-.fab ul{
-  position:absolute;
-  bottom: 0;
-  right: 0;
-  padding:0;
-  padding-right:5px;
-  margin:0;
-  list-style:none;
-  z-index:10;
-  
-  -webkit-transition: .2s ease-out;
-  -moz-transition: .2s ease-out;
-  transition: .2s ease-out;
-}
-
-.fab ul li{
-  display: flex;
-  justify-content: flex-start;
-  position: relative;
-  margin-bottom: -10%;
-  opacity: 0;
-  
-  -webkit-transition: .3s ease-out;
-  -moz-transition: .3s ease-out;
-  transition: .3s ease-out;
-}
-
-.fab ul li label{
-  margin-right:10px;
-  white-space: nowrap;
-  display: block;
-  margin-top: 10px;
-  padding: 5px 8px;
-  background-color: white;
-  box-shadow: 0 1px 3px rgba(0,0,0,.2);
-  border-radius:3px;
-  height: 18px;
-  font-size: 16px;
-  pointer-events: none;
-  opacity:0;
-  
-  -webkit-transition: .2s ease-out;
-  -moz-transition: .2s ease-out;
-  transition: .2s ease-out;
-}
-
-.fab.show button.main,
-.fab.show button.main{
-  outline: none;
-  background-color: #3355b4;
-  box-shadow: 0 3px 8px rgba(0,0,0,.5);
- }
- 
-.fab.show button.main:before,
-.fab.show button.main:before{
-  content: '↑';
-}
-
-.fab.show button.main + ul,
-.fab.show button.main + ul{
-  bottom: 70px;
-}
-
-.fab.show button.main + ul li,
-.fab.show button.main + ul li{
-  margin-bottom: 10px;
-  opacity: 1;
-}
-
-.fab.show button.main + ul li:hover label,
-.fab.show button.main + ul li:hover label{
-  opacity: 1;
 }

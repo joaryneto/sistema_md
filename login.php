@@ -120,5 +120,11 @@ if(@$_GET['deslogar']==1)
 	//});
 	</script>
 	<?}?>
+	<script>
+        $(window).on('load', function() {
+            $('body').addClass('header-dark');
+        })
+
+    </script>
 </body>
 </html>

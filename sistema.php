@@ -6,9 +6,9 @@ session_start();
 
 date_default_timezone_set('America/Cuiaba');
 
-if($_SESSION['usuario'] == "")
+if(!isset($_SESSION['usuario']))
 {
-	print("<script>window.location.href='index.php';</script>");
+	print("<script>window.location.href='login.php';</script>");
 }
 else
 {
