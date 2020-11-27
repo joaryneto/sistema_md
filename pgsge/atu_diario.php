@@ -86,6 +86,7 @@ if(@$_GET['ap'] == 3)
 	//$RES->close();
 }
 
+
 if(@$_GET['load'] == 1)
 {
   $whe = "";
@@ -128,7 +129,8 @@ if(@$_GET['load'] == 1)
 ?>
 <?
 }
-else if(@$_GET['load'] == 2)
+
+if(@$_GET['load'] == 2)
 {
 
   $turma = $_GET['turma'];
@@ -149,7 +151,7 @@ else if(@$_GET['load'] == 2)
 		 
   ?>
 	<tr>
-		<td data-title="Foto"><? if(Empty($row['foto'])){echo '<img style="width: 40px" src="template/images/semfoto.png">';}else{echo "TESTE 2";}?></td>
+		<td data-title="Foto"><? if(Empty($row['foto'])){echo '<img style="width: 40px" src="template/images/semfoto.png">';}else{echo "";}?></td>
 		<td data-title="Nome"><? echo $row['nome'];?></td>
 		<td data-title="Presença"><? 
 			 
@@ -182,9 +184,9 @@ else if(@$_GET['load'] == 2)
 			 <label class="pmd-checkbox pmd-checkbox-ripple-effect">
 			 <input type="checkbox" class="pm-ini" name="<? echo $row['codigo'];?>" id="<? echo $row['codigo'];?>" value="<? echo $row['codigo'];?>" <? if($rows1['falta'] == "0"){?> checked <? }else{ ?> <? }?> OnClick="javascript: ajaxLoader('?br=atu_presenca&check='+ this.checked +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $row['coddiario'];?>&disciplina=<? echo $disciplina;?>&periodo=<? echo $periodo; ?>&ap=1','<? echo $row['codigo'];?>','GET');" data-color="#009efb" />
 			 <span class="pmd-checkbox-label">&nbsp;</span></div>
-			 <!--<input type="checkbox" name="check[]" value="< echo $row['codigo'];?>" < if($rows1['falta'] == "0"){?> checked < }else{ ?> <? }?> data-color="#009efb" />-->
+			 <!--<input type="checkbox" name="check[]" value="< echo $row['codigo'];?>" < if($rows1['falta'] == "0"){?> checked < }else{ ?> < }?> data-color="#009efb" />-->
 			 </td>
-		<td data-title="Faltas no Periodo"><div id="<? echo $row['codigo'];?>">
+		     <td data-title="Faltas no Periodo"><div id="<? echo $row['codigo'];?>">
 		<? 
 			 $ano = date('Y');
 			 $SQL7 = "SELECT frequencia.falta as qtd FROM frequencia 
@@ -217,10 +219,9 @@ else if(@$_GET['load'] == 2)
 			 //$RES6->close();
 			 //$RES7->close();
 			 
-		?></div>
-		</td>
-	</tr>
-  <? $a = 1;
+		echo "</div></td></tr>";
+     $a = 1;
+   }
   if($a == 0)
   {
 	  echo "<tr>
@@ -230,7 +231,6 @@ else if(@$_GET['load'] == 2)
 			  <td></td>
 			 </tr>";
   }
-
 }
 if(@$_GET['fechar'] == "3")
 {
