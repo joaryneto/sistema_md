@@ -1,5 +1,11 @@
 <?
 
+$tokenUser = md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+
+if($_SESSION["donoSessao"]  != $tokenUser){
+    header("location:login.php");
+}
+
 if($_GET['ap'] == "1")
 {
    $SQL = "SELECT * FROM responsavel where nome like '%".$_GET['nome']."%'";

@@ -17,13 +17,13 @@ $hora = date('H:i:s');
 $datahora = date('Y-m-d H:i:s');
 
 function revertedata($data){
-
-		if($data != ""){
+	if($data != "")
+	{
 		$sep_data = explode("/",$data);
-		$data = $sep_data[2]."-".$sep_data[1]."-".$sep_data[0];
-		}
-		
-		return $data;
+		$data = @$sep_data[2]."-".@$sep_data[1]."-".@$sep_data[0];
+	}
+	
+	return $data;
 }
 
 require_once("./load/class/mysql.class.php");

@@ -1,5 +1,11 @@
 <?
 
+$tokenUser = md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+
+if($_SESSION["donoSessao"]  != $tokenUser){
+    header("location:login.php");
+}
+
 $SQL1 = "SELECT * FROM internet_usuarios where codigo='".$_GET['codigo']."'";
 $pessoa = mysqli_query($db,$SQL1);
 

@@ -17,6 +17,12 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //}
 //require_once("../load/class/mysql.php");
 
+$tokenUser = md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+
+if($_SESSION["donoSessao"]  != $tokenUser){
+    header("location:login.php");
+}
+
 /*if($_GET['load'] == 1)
 {
 	
@@ -38,38 +44,51 @@ echo json_encode($data);
 }*/
 $inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 
-if(isset($inputb["codigo"]) and $inputb['ap'] == 1)
+if(@$inputb['ap'] == 1)
 {
-  
- //$hora = date('H:i:s');
- $query = "INSERT INTO agendamento (sistema,cliente, profissional, data, hora, nome,status) VALUES ('".$_SESSION['sistema']."','".$inputb['codigo']."','".$inputb['pcodigo']."', '".revertedata($inputb['data'])."','".$inputb['hora']."','".$inputb['nome']."','1')";
- $sucesso = mysqli_query($db3,$query);
- 
- if($sucesso == true)
- {
- ?>
- 
- <script> 
- swal({   
+	$cliente = $inputb['cliente'];
+	$nome = $inputb['nome'];
+	
+	if($cliente == "")
+	{
+		print('<script>
+               swal({   
             title: "Atenção",   
-            text: "Agendado com sucesso.",   
+            text: "Escolha um cliente por favor.",   
             timer: 1000,   
             showConfirmButton: false 
         });
- $('#agenda').modal('hide');
- window.location.href='sistema.php?url=inicio';
- </script>
- 
- <?
- }
- else
- {
-	?>
- <script> 
- swal("Atenção", "Não foi agendado, verifique os campos.");  
- </script>
-<?	
- }
+        </script>');
+		print("<script> requestPage2('?br=atu_pesquisa&ap=1','modals','GET');</script> ");
+		
+	}
+	else if($nome == "")
+	{
+		print('<script>
+               swal({   
+            title: "Atenção",   
+            text: "Escolha um cliente por favor.",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });
+        </script>');
+		print("<script> requestPage2('?br=atu_pesquisa&ap=1','modals','GET');</script> ");
+		
+	}
+	else
+	{
+		print('<script>
+               swal({   
+            title: "Atenção",   
+            text: "Serviços Agendado com sucesso.",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });
+        </script>');
+		
+		$SQL = "UPDATE agendamento SET status=1, cliente='".$cliente."', nome='".$nome."' where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['agendamento']."'";
+		mysqli_query($db3,$SQL);
+	}
 }
 else if($inputb['ap'] == 2)
 {
@@ -92,18 +111,14 @@ else if($inputb['ap'] == 2)
 }
 else if($inputb['ap'] == 3)
 {
-   if(isset($_SESSION['agendamento']))
-   { 
-      $codigo = $_SESSION['agendamento'];
-	  $whe = "and status=0";
-   }
-   else
-   {
-	  $codigo = $inputb['codigo']
-   }
+   $codigo = $inputb['codigo'];
    
-   $SQL = "DELETE from agendamento WHERE sistema='".$_SESSION['sistema']."' and codigo='".$codigo."' $whe";
+   $SQL = "DELETE from agendamento WHERE sistema='".$_SESSION['sistema']."' and codigo='".$codigo."';";
    mysqli_query($db3,$SQL);
+   
+   $SQL = "DELETE from agendamento_servicos WHERE sistema='".$_SESSION['sistema']."' and agendamento='".$codigo."';";
+   mysqli_query($db3,$SQL);
+   
  ?>
  
   <script>
@@ -116,10 +131,6 @@ else if($inputb['ap'] == 3)
   </script>
  
  <?
-}
-else
-{
-	
 }
 
 if($inputb['load'] == 1)

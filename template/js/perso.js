@@ -20,10 +20,10 @@ function pesquisar(pesquisa)
 	requestPage2('?br=atu_pesquisa&pesquisa='+ pesquisa +'&load=1','load','GET');
 }
 
-function agenda(tipo,codigo,cliente,data,hora,nome)
+function agenda(profissional,codigo,cliente,data,hora,nome)
 {
-   $('#editaagenda').modal('show');
-   requestPage2('?br=edit_agendamento&codigo='+ codigo +'&cliente='+ cliente +'&data='+ data +'&hora='+ hora +'&nome='+ nome +'&ap=3','loadagenda','GET');
+   $('#modalusuario').modal('show');
+   requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&profissional='+ profissional +'&cliente='+ cliente +'&data='+ data +'&hora='+ hora +'&nome='+ nome +'&ap=5','modals','GET');
 }
 
 function whats(numero,texto)
@@ -76,9 +76,8 @@ $('#cad_cliente').on('click',function()
 
 $('#reagendarr').on('click',function(){	
 
-    var datav = document.getElementById('dataagenda2').value;
-	var horav = document.getElementById('hora2').value;
-	var codigo = document.getElementById('codagenda').value;
+    var datav = document.getElementById('dataagenda').value;
+	var horav = document.getElementById('hora').value;
 	
 	if(datav == "")
 	{
@@ -88,20 +87,29 @@ $('#reagendarr').on('click',function(){
 	{
 		swal('Atenção', 'Selecione a hora.');
 	}
-	if(codigo == "")
-	{
-		swal('Atenção', 'Selecione um Cliente.');
-	}
 	else
 	{
-	   requestPage2('?br=atu_agendamento&codigo='+ codigo +'&data='+ datav +'&hora='+ horav +'&ap=2&=load=1','loadagenda','GET');
+	   $('#modalusuario').modal('hide');		
+	   requestPage2('?br=atu_pesquisa&data='+ datav +'&hora='+ horav +'&ap=9&=load=1','load','GET');
 	}
 });
 
 
-function agendaex(codigo)
+function agendaex(agendamento)
 {
-	requestPage('?br=atu_agendamento&codigo='+ codigo +'&ap=3&load=1','load','GET');
+	if(agendamento == "")
+	{
+	   swal({   
+            title: "Atenção",   
+            text: "Escolhar um agendamento.",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });
+	}
+	else
+	{
+	   requestPage('?br=atu_pesquisa&codigo='+ agendamento +'&ap=8&load=1','load','GET');
+	}
 }
 
 $('#agendaex').on('click',function(){	

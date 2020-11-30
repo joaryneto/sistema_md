@@ -8,3 +8,13 @@
 
  --------------------
 
+ Login: 1 
+ IP: 192.168.1.6 
+ IP Reverso: sistema.medfacil.local 
+ Data: 2020-11-30 16:24 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0 
+ Pagina: /sistema.php?br=atu_pesquisa&pesquisa=A=&ap=4 
+ Metodo: GET 
+
+ --------------------
+

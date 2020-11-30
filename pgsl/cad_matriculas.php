@@ -1,6 +1,4 @@
 <?
-ob_start();
-session_start();
 
 require_once("phpmailer/class.phpmailer.php");
 require_once("phpmailer/class.smtp.php");
@@ -23,6 +21,12 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //   print("<script>window.location.href='iniciado.php';</script>");
 //   //exit("<strong> Erro: Você não tem permissão. </strong>");
 //}
+
+$tokenUser = md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+
+if($_SESSION["donoSessao"]  != $tokenUser){
+    header("location:login.php");
+}
 
 $mail = new PHPMailer();
 

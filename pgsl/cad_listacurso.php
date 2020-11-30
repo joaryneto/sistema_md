@@ -1,3 +1,13 @@
+<?
+
+$tokenUser = md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+
+if($_SESSION["donoSessao"]  != $tokenUser){
+    header("location:login.php");
+}
+
+?>
+
 <select name="cidade" id="cidade"class="form-control" style="width: 100%; height:36px;">
 <option value=""> Selecionar </option>
 <?

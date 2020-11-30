@@ -21,6 +21,12 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //   //exit("<strong> Erro: Você não tem permissão. </strong>");
 //}
 
+$tokenUser = md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+
+if($_SESSION["donoSessao"]  != $tokenUser){
+    header("location:login.php");
+}
+
 function formatodatahora($data){
     return date("d/m/Y", strtotime($data));
 }

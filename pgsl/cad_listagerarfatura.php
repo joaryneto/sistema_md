@@ -1,9 +1,4 @@
 <?
-ob_start();
-session_start();
-
-?>
-<?
 $PageRequest = strtolower(basename( $_SERVER['REQUEST_URI'] ));
 $PageName = strtolower(basename( __FILE__ ));
 if($PageRequest == $PageName) exit("<strong> Erro: Não é permitido acessar o arquivo diretamente. </strong>");
@@ -19,6 +14,12 @@ if($_SESSION['menu11'] == false)
    print("<script>window.alert('Erro: Você não tem permissão.')</script>");
    print("<script>window.location.href='iniciado.php';</script>");
    //exit("<strong> Erro: Você não tem permissão. </strong>");
+}
+
+$tokenUser = md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+
+if($_SESSION["donoSessao"]  != $tokenUser){
+    header("location:login.php");
 }
 
 function revertedata($data){

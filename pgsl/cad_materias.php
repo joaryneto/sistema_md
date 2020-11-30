@@ -21,6 +21,12 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //   //exit("<strong> Erro: Você não tem permissão. </strong>");
 //}
 
+$tokenUser = md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+
+if($_SESSION["donoSessao"]  != $tokenUser){
+    header("location:login.php");
+}
+
 if(isset($_GET['codigo']))
 {
 	$sucesso = mysqli_query($db,"SELECT descricao FROM materias where codigo='".$_GET['codigo']."'");

@@ -14,6 +14,12 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 	exit();
 }
 
+$tokenUser = md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+
+if($_SESSION["donoSessao"]  != $tokenUser){
+    header("location:login.php");
+}
+
 //if($_SESSION['menu3'] == false)
 //{
 //   print("<script>window.alert('Erro: Você não tem permissão.')</script>");
