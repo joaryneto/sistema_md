@@ -74,27 +74,6 @@ $('#cad_cliente').on('click',function()
 	requestPage2('?br=modal_clientes&modal=3','modals','GET');
 });
 
-$('#reagendarr').on('click',function(){	
-
-    var datav = document.getElementById('dataagenda').value;
-	var horav = document.getElementById('hora').value;
-	
-	if(datav == "")
-	{
-		swal('Atenção', 'Selecione uma data.');
-	}
-	if(horav == "")
-	{
-		swal('Atenção', 'Selecione a hora.');
-	}
-	else
-	{
-	   $('#modalusuario').modal('hide');		
-	   requestPage2('?br=atu_pesquisa&data='+ datav +'&hora='+ horav +'&ap=9&=load=1','load','GET');
-	}
-});
-
-
 function agendaex(agendamento)
 {
 	if(agendamento == "")

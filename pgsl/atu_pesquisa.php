@@ -396,7 +396,7 @@ if($x == 0)
 else if(@$inputb['ap'] == 5)
 {
 	
-  $_SESSION['codagenda'] = $_GET['profissional'];
+  $_SESSION['codagenda'] = $_GET['codigo'];
 ?>
 <div class="modal-header">
 <h2 class="pmd-card-title-text">Agenda - Editar Horario </h2>
@@ -450,6 +450,26 @@ else if(@$inputb['ap'] == 5)
 			requestoption('?br=atu_pesquisa&profissional='+ profissional +'&data='+ dataagenda +'&lhorario=true','hora','GET');
 		}
 	}
+	
+	$('#rr_agenda').on('click',function(){	
+
+    var datav = document.getElementById('dataagenda').value;
+	var horav = document.getElementById('hora').value;
+	
+	if(datav == "")
+	{
+		swal('Atenção', 'Selecione uma data.');
+	}
+	if(horav == "")
+	{
+		swal('Atenção', 'Selecione a hora.');
+	}
+	else
+	{
+	   $('#modalusuario').modal('hide');		
+	   requestPage2('?br=atu_pesquisa&data='+ datav +'&hora='+ horav +'&ap=9&load=1','load','GET');
+	}
+    });
 	</script>
 </div>
 <div class="form-group col-md-4 m-t-20"><label>Horario:</label>
@@ -460,7 +480,7 @@ else if(@$inputb['ap'] == 5)
 </div>
 </div>
 	<div class="modal-footer">
-	<button type="button" id="reagendarr" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Gravar</button>
+	<button type="button" id="rr_agenda" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Gravar</button>
 </div>
 <?	
 }
@@ -557,14 +577,14 @@ else if($inputb['ap'] == 9)
    $data = $inputb['data'];
    $hora = $inputb['hora'];
    
-   $SQL = "UPDATE agendamento_servicos SET data='".$data."',hora='".$hora."' WHERE sistema='".$_SESSION['sistema']."' and agendamento='".$_SESSION['codagenda']."';";
+   $SQL = "UPDATE agendamento_servicos SET data='".revertedata($data)."',hora='".$hora."' WHERE sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['codagenda']."';";
    mysqli_query($db3,$SQL);
    
    ?>
    <script>
    swal({   
             title: "Atenção",   
-            text: "Excluido com sucesso.",   
+            text: "Reagendado com sucesso.",   
             timer: 2000,   
             showConfirmButton: false 
         });
@@ -754,7 +774,7 @@ if(@$inputb['load'] == 1)
                         <div class="col pl-0">
                             <h3><p class="large text-mute" style="font-size: initial;"><? echo $row['nome'];?></p></h3>
                             <p class="large text-mute" style="font-size: initial;">Dia: <? echo formatodata($row['data']);?> às Hora: <? echo formatohora($row['hora']);?>hs</p>
-                            <button type="button" onclick="agenda('<? echo $row['profissional'];?>','<? echo $row['codigo'];?>','<? echo $row['cliente'];?>','<? echo $row['data'];?>','<? echo $row['hora'];?>','<? echo $row['nome'];?>');" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Editar</button>
+                            <button type="button" onclick="agenda('<? echo $row['profissional'];?>','<? echo $row['codservico'];?>','<? echo $row['cliente'];?>','<? echo $row['data'];?>','<? echo $row['hora'];?>','<? echo $row['nome'];?>');" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Editar</button>
 							<button type="button" onclick="agendaex('<? echo $row['codigo'];?>');" class="btn pmd-btn-outline pmd-ripple-effect btn-danger">Excluir</button>
 							<div class="pmd-card-actions">
 								<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" onclick="whats('<? echo str_replace("(","", str_replace(")","", str_replace("-","",$row['celular'])));?>','Bom dia *<? echo $row['nome'];?>*! %0APassando para lembrar que você tem horário agendado hoje às *<? echo formatohora($row['hora']);?>hs*.%0A%0A *Studio KA*');"><i class="fa fa-whatsapp" aria-hidden="true" style="font-size: 210%; color: green;"></i></button>
