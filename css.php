@@ -34,6 +34,8 @@
 <link rel="manifest" href="/manifest1.json">
 <?}else if($_SESSION['tipo'] == 3){?>
 <link rel="manifest" href="/manifest2.json">
+<?}else if($_SESSION['tipo'] == 4){?>
+<link rel="manifest" href="/manifest3.json">
 <?}?>
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">

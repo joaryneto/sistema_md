@@ -292,7 +292,7 @@ if(@$_GET['deslogar']==1)
             <a href="notification.html" class="list-group-item list-group-item-action"><i class="material-icons">notifications</i>Notification <span class="badge badge-dark text-white">2</span></a>
             <a href="elements.html" class="list-group-item list-group-item-action"><i class="material-icons">account_circle</i>Pages & Elements</a>
             <a href="setting.html" class="list-group-item list-group-item-action"><i class="material-icons">account_circle</i>Setting</a>
-            <a href="aboutus.html" class="list-group-item list-group-item-action"><i class="material-icons">business</i>About</a>
+            <a href="aboutus.html" class="list-group-item list-group-item-action"><i class="material-icons">business</i>Instalar App</a>
         </div>
     </div>
     <!-- sidebar ends -->
