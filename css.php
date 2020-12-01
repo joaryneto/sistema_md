@@ -7,10 +7,9 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="template/assets/images/favicon.png">
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <title>EC TECNOLOGIA - Equipe cuiabana de Tecnologia da informação</title>
-	  <meta name="codelab" content="your-first-pwa-v3">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EC TECNOLOGIA - Equipe cuiabana de Tecnologia da informação</title>
+  <meta name="codelab" content="your-first-pwa-v3">
   <!-- CODELAB: Add iOS meta tags and icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
