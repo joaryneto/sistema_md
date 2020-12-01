@@ -172,7 +172,7 @@ if(@$_GET['deslogar']==1)
                         </div>
 						<div id="load"></div>
                         <div class="mb-4">
-                            <a href="javascript:void(0);"  Onclick="logar();" class=" btn btn-lg btn-default default-shadow btn-block">Logar <span class="ml-2 icon arrow_right"></span></a>
+                            <a href="javascript:void(0);"  Onclick="logar();" class=" btn btn-lg btn-default default-shadow btn-block" style="color: #000;">Logar <span class="ml-2 icon arrow_right"></span></a>
                         </div>
                         <div class="mb-4">
                             <p>Ainda não tem conta?<br>Por favor <a href="register.php" class="text-white">Registrar-se</a> aqui.</p>
