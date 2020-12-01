@@ -373,10 +373,7 @@ else
     <!-- template custom js -->
 	<? if($_SESSION['tipo'] == 1 or $_SESSION['tipo'] == 2 or $_SESSION['tipo'] == 3){?>
     <script src="template/js/main.js"></script>
-	<?} else if($_SESSION['tipo'] == 4){?>
-	<script src="template/js/main2.js"></script>
-	<?}?>
-
+	
     <!-- page level script -->
     <script>
         $(window).on('load', function() {
@@ -388,7 +385,8 @@ else
         });
 
     </script>
-	
+	<?} else if($_SESSION['tipo'] == 4){?>
+	<script src="template/js/main2.js"></script>
 	<script>
         "use strict"
         $(document).ready(function() {
@@ -402,5 +400,6 @@ else
         });
 
     </script>
+	<?}?>
 </body>
 </html>
