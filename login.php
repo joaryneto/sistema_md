@@ -156,14 +156,14 @@ if(@$_GET['deslogar']==1)
                         </div>
                         <div class="form-group">
                             <label for="inputPassword" class="sr-only">Senha</label>
-                            <input type="password" id="inputPassword" class="form-control form-control-lg border-0" placeholder="Password" required="">
+                            <input type="password" id="inputPassword" class="form-control form-control-lg border-0" placeholder="Sua senha" required="">
                         </div>
 
                         <div class="my-3 row">
                             <div class="col-6 col-md py-1 text-left">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
-                                    <label class="custom-control-label" for="customCheck1">Remember Me</label>
+                                    <label class="custom-control-label" for="customCheck1">Continuar logado</label>
                                 </div>
                             </div>
                             <div class="col-6 col-md py-1 text-right text-md-right">
