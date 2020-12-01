@@ -86,6 +86,10 @@ else if($_SESSION['tipo'] == 3)
 {
 	$_SESSION['pg'] = "pgsl";
 }
+else if($_SESSION['tipo'] == 4)
+{
+	$_SESSION['pg'] = "pgdel";
+}
 else
 {
 	print("<script>window.location.href='index.php';</script>");

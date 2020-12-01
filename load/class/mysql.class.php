@@ -39,6 +39,20 @@ if(!$db3 = mysqli_connect("mysql669.umbler.com:41890", "sistemasl", "I_Jt{4|p6u"
 
 //mysqli_close($db3);
 }
+else if($_SESSION['tipo'] == 4)
+{	
+
+if(!$db3 = mysqli_connect("mysql741.umbler.com:41890", "sistemadelive", "*XlVz(7-4,9hG"))
+{
+    //print("<script>window.alert('Não conectou com banco...')</script>");
+	echo "Não conectou com banco 4";
+}
+
+@mysqli_select_db($db3, "sistemadelive");
+@mysqli_set_charset($db3,'UTF8');
+
+//mysqli_close($db3);
+}
 
 /*if(!$db2 = mysqli_connect("mysql669.umbler.com:41890","sistemaec","I_Jt{4|p6u"))
 {

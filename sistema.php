@@ -600,6 +600,25 @@ function isMobile()
             <i class="material-icons pmd-sm">add</i> 
         </button> 
         </div>
+		<?}else if($_GET['url'] == "cad_vendas" and $_SESSION['tipo'] == 3){?>
+		<div class="menu pmd-floating-action" role="navigation" style="bottom: 80px;"> 
+		<button class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" type="button" onclick="btn_cliente();" data-toggle="modal" data-target="#modalap" data-title="Clientes">
+		<span class="pmd-floating-hidden">Clientes</span> 
+		<i class="material-icons pmd-sm">person_add</i>
+		</button>
+		<button class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" type="button" onclick="c_desconto();" data-title="[%] Desconto">
+		<span class="pmd-floating-hidden">[%] Desconto</span> 
+		<i class="material-icons pmd-sm">trending_down</i>
+		</button>
+		<a href="javascript:void(0);" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" onclick="slow();" data-title="Itens do Carrinho"> 
+		<span class="pmd-floating-hidden">Itens do Carrinho</span> 
+		<i class="material-icons">add_shopping_cart</i> 
+		</a>  
+		<button type="button" class="pmd-floating-action-btn btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" data-title="Menu"> 
+		<span class="pmd-floating-hidden">Primary</span>
+		<i class="material-icons pmd-sm">extension</i> 
+		</button> 
+		</div>
 		<?}?>
 <!-- footer ends -->
 <? } ?>
@@ -732,25 +751,6 @@ $("#dtable" ).hide( "slow" );
 }
 }
 </script>
-<div class="menu pmd-floating-action" role="navigation"> 
-<button class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" type="button" onclick="btn_cliente();" data-toggle="modal" data-target="#modalap" data-title="Clientes">
-<span class="pmd-floating-hidden">Clientes</span> 
-<i class="material-icons pmd-sm">person_add</i>
-</button>
-<button class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" type="button" onclick="c_desconto();" data-title="[%] Desconto">
-<span class="pmd-floating-hidden">[%] Desconto</span> 
-<i class="material-icons pmd-sm">trending_down</i>
-</button>
-<a href="javascript:void(0);" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" onclick="slow();" data-title="Itens do Carrinho"> 
-<span class="pmd-floating-hidden">Itens do Carrinho</span> 
-<i class="material-icons">add_shopping_cart</i> 
-</a>  
-<button type="button" class="pmd-floating-action-btn btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" data-title="Menu"> 
-<span class="pmd-floating-hidden">Primary</span>
-<i class="material-icons pmd-sm">extension</i> 
-</button> 
-</div>
-
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">

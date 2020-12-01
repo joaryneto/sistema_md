@@ -16,7 +16,11 @@
     <script src="template/vendor/swiper/js/swiper.min.js"></script>
 
     <!-- template custom js -->
+    <? if($_SESSION['tipo'] == 1 or $_SESSION['tipo'] == 2 or $_SESSION['tipo'] == 3){?>
     <script src="template/js/main.js"></script>
+	<?} else if($_SESSION['tipo'] == 4){?>
+	<script src="template/js/main2.js"></script>
+	<?}?>
 
 	<script src="template/js/perso.js"></script>
 	
@@ -99,14 +103,7 @@
 	});
     </script>
 	
-	<!-- autocomplete js--> 
-    <script src="template/vendor/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js"></script> 
-
-    <!-- page specific script -->
-    <script src="template/js/autocomplete.js"></script>
-
-    
-	    <!-- page level script -->
+    <!-- page level script -->
     <script>
         $(window).on('load', function() {
             var swiper = new Swiper('.introduction', {

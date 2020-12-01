@@ -56,7 +56,7 @@ if(@$_GET['deslogar']==1)
             </div>
         </div>
         <!-- Cabeçalho termina -->
-
+        
         <div class="container">
             <!-- Conteúdo da página aqui -->
             <div class="row flex-colum">

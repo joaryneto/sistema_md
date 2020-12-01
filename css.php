@@ -71,8 +71,11 @@
     <link href="template/vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 	
     <!-- Custom styles for this template -->
+	<?if($_SESSION['tipo'] == 1 or $_SESSION['tipo'] == 2 or $_SESSION['tipo'] == 3){?>
     <link href="template/css/style.css" rel="stylesheet">
-	
+	<?}else if($_SESSION['tipo'] == 4){?>
+	<link href="template/css/style-red.css" rel="stylesheet">
+	<? } ?>
 	<!-- Ionic for this template 
 	<script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
   <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
