@@ -204,8 +204,8 @@ if(@$_GET['deslogar']==1)
             </div>
             <div class="col-12 align-self-center text-center">
 			<img style="height:70px" src="template/images/delivery.png" alt="logo">
-            <h1 class="mb-0 mt-3">EC </h1>
-            <p class="text-mute subtitle"> Tecnologia</p>
+            <h1 class="mb-0 mt-3"></h1>
+            <p class="text-mute subtitle"></p>
             <div class="loader-roller">
                 <div></div>
                 <div></div>

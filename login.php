@@ -78,7 +78,7 @@ if(@$_GET['deslogar']==1)
                                     <div class="col pl-0">
                                         <div class="form-group float-label active">
                                             <input type="text" id="inputEmail" autocomplete="off" name="login" class="form-control" required autofocus >
-                                            <label for="inputEmail" autocomplete="off" class="form-control-label">Nome do usuário - <?=$_SESSION['tipo'];?></label>
+                                            <label for="inputEmail" autocomplete="off" class="form-control-label">Nome do usuário</label>
                                         </div>
                                     </div>
                                 </div>
@@ -115,8 +115,8 @@ if(@$_GET['deslogar']==1)
             </div>
             <div class="col-12 align-self-center text-center">
 			<img style="height:70px" src="template/images/delivery.png" alt="logo">
-            <h1 class="mb-0 mt-3">EC </h1>
-            <p class="text-mute subtitle"> Tecnologia</p>
+            <h1 class="mb-0 mt-3"></h1>
+            <p class="text-mute subtitle"></p>
             <div class="loader-roller">
                 <div></div>
                 <div></div>
@@ -151,11 +151,11 @@ if(@$_GET['deslogar']==1)
                         <h3 class="font-weight-normal mb-4">Faça login para continuar</h3>
 
                         <div class="form-group">
-                            <label for="inputEmail" class="sr-only">Email address</label>
+                            <label for="inputEmail" class="sr-only">Nome do usuário</label>
                             <input type="email" id="inputEmail" class="form-control form-control-lg border-0" placeholder="Email address" required="" autofocus="">
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword" class="sr-only">Password</label>
+                            <label for="inputPassword" class="sr-only">Senha</label>
                             <input type="password" id="inputPassword" class="form-control form-control-lg border-0" placeholder="Password" required="">
                         </div>
 
@@ -167,11 +167,11 @@ if(@$_GET['deslogar']==1)
                                 </div>
                             </div>
                             <div class="col-6 col-md py-1 text-right text-md-right">
-                                <a href="forgotpassword.html" class="text-white">Forgot Password?</a>
+                                <a href="javascript: void(0);" Onclick="recovery();" class="text-white">Esqueceu a senha?</a>
                             </div>
                         </div>
                         <div class="mb-4">
-                            <a href="index.html" class=" btn btn-lg btn-default default-shadow btn-block">Logar <span class="ml-2 icon arrow_right"></span></a>
+                            <a href="javascript:void(0);"  Onclick="logar();" class=" btn btn-lg btn-default default-shadow btn-block">Logar <span class="ml-2 icon arrow_right"></span></a>
                         </div>
                         <div class="mb-4">
                             <p>Ainda não tem conta?<br>Por favor <a href="register.php" class="text-white">Registrar-se</a> aqui.</p>
