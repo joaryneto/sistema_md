@@ -238,7 +238,7 @@ if(@$_GET['deslogar']==1)
                     <button class="btn btn-link btn-44" type="submit"><span class="icon_search"></span></button>
                 </form>
                 <button class="btn btn-link search-btn" type="button"><span class="icon_search"></span></button>
-                <a href="profile.html" class=""><span class="avatar avatar-30"><img src="template/images/user1.png" alt=""></span></a>
+                <a href="#" class=""><span class="avatar avatar-30"><img src="template/images/user1.png" alt=""></span></a>
             </div>
         </nav>
     </header>
@@ -282,11 +282,11 @@ if(@$_GET['deslogar']==1)
 				?></p>
             </div>
             <div class="col-auto align-self-center">
-                <a href="login.html" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
+                <a href="login.php" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
             </div>
         </div>
         <div class="list-group main-menu my-4">
-            <a href="index.html" class="list-group-item list-group-item-action active"><i class="material-icons">home</i>Home</a>
+            <a href="delivery.php" class="list-group-item list-group-item-action active"><i class="material-icons">home</i>Home</a>
             <a href="productdetails.html" class="list-group-item list-group-item-action"><i class="material-icons">view_day</i>Product Detail</a>
             <a href="orders.html" class="list-group-item list-group-item-action"><i class="material-icons">insert_emoticon</i>Orders</a>
             <a href="notification.html" class="list-group-item list-group-item-action"><i class="material-icons">notifications</i>Notification <span class="badge badge-dark text-white">2</span></a>

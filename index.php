@@ -4,52 +4,7 @@ ob_start();
 
 session_start();
 
-if(@$_SERVER['SERVER_NAME'] == "app.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.app")
-{
-	$_SESSION['nosistema'] = "app.ectecnologia.com.br/index.php";
-	$_SESSION['nomesoft'] = "Gerenciamento de Sistema";
-	$_SESSION['tipo'] = 1;
-	$_SESSION['manifest'] = "manifest.json";
-	
-	$sistema = "sistema";
-	//print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
-}
-else if(@$_SERVER['SERVER_NAME'] == "sge.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.sge" or @$_SERVER['SERVER_NAME'] == "escolar.ectecnologia.com.br")
-{
-	$_SESSION['nosistema'] = "sge.ectecnologia.com.br/index.php";
-	$_SESSION['nomesoft'] = "A.S.G Escolar";
-	$_SESSION['tipo'] = 2;
-	$_SESSION['manifest'] = "manifest1.json";
-	
-	$sistema = "agsge";
-	//print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
-}
-else if(@$_SERVER['SERVER_NAME'] == "sl.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.sl" or @$_SERVER['SERVER_NAME'] == "spa.ectecnologia.com.br")
-{
-	$_SESSION['nosistema'] = "sl.ectecnologia.com.br/index.php";
-	$_SESSION['nomesoft'] = "A.S.L Spa & Hair";
-	$_SESSION['tipo'] = 3;
-	$_SESSION['manifest'] = "manifest2.json";
-	
-	$sistema = "agsl";
-	print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
-}
-else if(@$_SERVER['SERVER_NAME'] == "delivery.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.delivery")
-{
-	$_SESSION['nosistema'] = "delivery.ectecnologia.com.br/index.php";
-	$_SESSION['nomesoft'] = "A.D.R Delivery";
-	$_SESSION['tipo'] = 4;
-	$_SESSION['manifest'] = "manifest3.json";
-	
-	$sistema = "agd";
-	//print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
-}
-else
-{
-	header('Location: servicos.php');
-}
-
-//require_once("./load/load.php");
+require_once("./load/load.php");
 
 //echo $_SESSION['sistema'];
 ?>
