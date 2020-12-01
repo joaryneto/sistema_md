@@ -170,6 +170,7 @@ if(@$_GET['deslogar']==1)
                                 <a href="javascript: void(0);" Onclick="recovery();" class="text-white">Esqueceu a senha?</a>
                             </div>
                         </div>
+						<div id="load"></div>
                         <div class="mb-4">
                             <a href="javascript:void(0);"  Onclick="logar();" class=" btn btn-lg btn-default default-shadow btn-block">Logar <span class="ml-2 icon arrow_right"></span></a>
                         </div>
