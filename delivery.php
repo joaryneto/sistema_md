@@ -1194,12 +1194,6 @@ if(@$_GET['deslogar']==1)
     <!-- scroll to top button ends-->
 
     <!-- final do invólucro -->
-<div id="modalform" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-<div class="modal-dialog modal-lg">
-<div class="modal-content" id="modals">
-</div>
-</div>
-</div>
 <? include('scripts.php');?>
  <script>
         "use strict"

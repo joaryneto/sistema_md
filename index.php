@@ -12,7 +12,7 @@ if(@$_SERVER['SERVER_NAME'] == "app.ectecnologia.com.br" or @$_SERVER['SERVER_NA
 	$_SESSION['manifest'] = "manifest.json";
 	
 	$sistema = "sistema";
-	print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
+	//print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
 }
 else if(@$_SERVER['SERVER_NAME'] == "sge.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.sge" or @$_SERVER['SERVER_NAME'] == "escolar.ectecnologia.com.br")
 {
@@ -22,7 +22,7 @@ else if(@$_SERVER['SERVER_NAME'] == "sge.ectecnologia.com.br" or @$_SERVER['SERV
 	$_SESSION['manifest'] = "manifest1.json";
 	
 	$sistema = "agsge";
-	print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
+	//print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
 }
 else if(@$_SERVER['SERVER_NAME'] == "sl.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.sl" or @$_SERVER['SERVER_NAME'] == "spa.ectecnologia.com.br")
 {
@@ -42,7 +42,7 @@ else if(@$_SERVER['SERVER_NAME'] == "delivery.ectecnologia.com.br" or @$_SERVER[
 	$_SESSION['manifest'] = "manifest3.json";
 	
 	$sistema = "agd";
-	print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
+	//print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
 }
 else
 {
@@ -54,9 +54,9 @@ else
 //echo $_SESSION['sistema'];
 ?>
 <!doctype html>
-<html lang="pt-br" class="color-theme-blue">
-
+<html lang="en">
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover, user-scalable=no">
     <meta name="description" content="">
@@ -96,7 +96,7 @@ else
   <meta name="description" content="Equipe cuiabana de Tecnologia da informação">
   <!-- CODELAB: Add meta theme-color -->
   <meta name="theme-color" content="#2F3BA2" />
-  
+    
     <!-- Material design icons CSS -->
     <link rel="stylesheet" href="template/vendor/materializeicon/material-icons.css">
 
@@ -113,7 +113,8 @@ else
 	<? if($_SESSION['tipo'] == 1 or $_SESSION['tipo'] == 2 or $_SESSION['tipo'] == 3){?>
     <link href="template/css/style.css" rel="stylesheet">
 	<?} else if($_SESSION['tipo'] == 4){?>
-	<link href="template/css/style-red.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="template/css/style-red.css" rel="stylesheet" id="style">
 	<?}?>
 </head>
 
@@ -355,10 +356,12 @@ else
             </div>
         </div>
     </main>
+	<!-- scroll to top button -->
+    <button type="button" class="btn btn-default default-shadow scrollup bottom-right position-fixed btn-44"><span class="arrow_carrot-up"></span></button>
+    <!-- scroll to top button 
+
 	<?}?>
     <!-- wrapper ends -->
-    
-
     <!-- jquery, popper and bootstrap js -->
     <script src="template/js/jquery-3.3.1.min.js"></script>
     <script src="template/js/popper.min.js"></script>
@@ -369,9 +372,11 @@ else
 
     <!-- swiper js -->
     <script src="template/vendor/swiper/js/swiper.min.js"></script>
+  
+    <? if($_SESSION['tipo'] == 1 or $_SESSION['tipo'] == 2 or $_SESSION['tipo'] == 3){?>
 
     <!-- template custom js -->
-	<? if($_SESSION['tipo'] == 1 or $_SESSION['tipo'] == 2 or $_SESSION['tipo'] == 3){?>
+	
     <script src="template/js/main.js"></script>
 	
     <!-- page level script -->
@@ -386,8 +391,11 @@ else
 
     </script>
 	<?} else if($_SESSION['tipo'] == 4){?>
-	<script src="template/js/main2.js"></script>
-	<script>
+	
+    <!-- Customized jquery file  -->
+    <script src="template/js/main2.js"></script>
+
+    <script>
         "use strict"
         $(document).ready(function() {
             /* Swiper slider */
