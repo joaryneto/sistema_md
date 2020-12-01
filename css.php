@@ -2,10 +2,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="EC Tecnologia">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="template/assets/images/favicon.png">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EC TECNOLOGIA - Equipe cuiabana de Tecnologia da informação</title>
   <meta name="codelab" content="your-first-pwa-v3">
