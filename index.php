@@ -11,7 +11,67 @@ require_once("./load/load.php");
 <!doctype html>
 <html lang="en">
 <head>
-<? include('css.php');?>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="Maxartkiller">
+
+    <title>EC TECNOLOGIA - Equipe cuiabana de Tecnologia da informação</title>
+	<meta name="codelab" content="your-first-pwa-v3">
+  <!-- CODELAB: Add iOS meta tags and icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="EC Tecnologia">
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<?if($_SESSION['tipo'] == 1){?>
+<link rel="manifest" href="/manifest.json">
+<?}else if($_SESSION['tipo'] == 2){?>
+<link rel="manifest" href="/manifest1.json">
+<?}else if($_SESSION['tipo'] == 3){?>
+<link rel="manifest" href="/manifest2.json">
+<?}else if($_SESSION['tipo'] == 4){?>
+<link rel="manifest" href="/manifest3.json">
+<?}?>
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+  <!-- CODELAB: Add description here -->
+  <meta name="description" content="Equipe cuiabana de Tecnologia da informação">
+  <!-- CODELAB: Add meta theme-color -->
+  <meta name="theme-color" content="#2F3BA2" />
+    
+    <!-- Material design icons CSS -->
+    <link rel="stylesheet" href="template/vendor/materializeicon/material-icons.css">
+
+    <!-- Roboto fonts CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="template/vendor/bootstrap-4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Swiper CSS -->
+    <link href="template/vendor/swiper/css/swiper.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+	<? if($_SESSION['tipo'] == 1 or $_SESSION['tipo'] == 2 or $_SESSION['tipo'] == 3){?>
+    <link href="template/css/style.css" rel="stylesheet">
+	<?} else if($_SESSION['tipo'] == 4){?>
+    <!-- Custom styles for this template -->
+    <link href="template/css/style-red.css" rel="stylesheet" id="style">
+	<?}?>
 </head>
 
 <body>
@@ -259,9 +319,22 @@ require_once("./load/load.php");
 	<?}?>
     <!-- wrapper ends -->
     <!-- jquery, popper and bootstrap js -->
-    <? include('scripts.php');?>
+    <script src="template/js/jquery-3.3.1.min.js"></script>
+    <script src="template/js/popper.min.js"></script>
+    <script src="template/vendor/bootstrap-4.4.1/js/bootstrap.min.js"></script>
+
+    <!-- cookie js -->
+    <script src="template/vendor/cookie/jquery.cookie.js"></script>
+
+    <!-- swiper js -->
+    <script src="template/vendor/swiper/js/swiper.min.js"></script>
   
     <? if($_SESSION['tipo'] == 1 or $_SESSION['tipo'] == 2 or $_SESSION['tipo'] == 3){?>
+
+    <!-- template custom js -->
+	
+    <script src="template/js/main.js"></script>
+	
     <!-- page level script -->
     <script>
         $(window).on('load', function() {
@@ -274,6 +347,10 @@ require_once("./load/load.php");
 
     </script>
 	<?} else if($_SESSION['tipo'] == 4){?>
+	
+    <!-- Customized jquery file  -->
+    <script src="template/js/main2.js"></script>
+
     <script>
         "use strict"
         $(document).ready(function() {
@@ -288,6 +365,5 @@ require_once("./load/load.php");
 
     </script>
 	<?}?>
-	
 </body>
 </html>
