@@ -152,7 +152,7 @@ if(@$_GET['deslogar']==1)
 
                         <div class="form-group">
                             <label for="inputEmail" class="sr-only">Nome do usuário</label>
-                            <input type="email" id="inputEmail" class="form-control form-control-lg border-0" placeholder="Email address" required="" autofocus="">
+                            <input type="email" id="inputEmail" class="form-control form-control-lg border-0" placeholder="Nome de Usuário" required="" autofocus="">
                         </div>
                         <div class="form-group">
                             <label for="inputPassword" class="sr-only">Senha</label>
