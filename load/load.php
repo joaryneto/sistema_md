@@ -13,7 +13,7 @@ if(@$_SERVER['SERVER_NAME'] == "app.ectecnologia.com.br" or @$_SERVER['SERVER_NA
 else if(@$_SERVER['SERVER_NAME'] == "sge.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.sge" or @$_SERVER['SERVER_NAME'] == "escolar.ectecnologia.com.br")
 {
 	$_SESSION['nosistema'] = "".$_SERVER['SERVER_NAME']."/login.php";
-	$_SESSION['nomesoft'] = "A.S.G Escolar";
+	$_SESSION['nomesoft'] = "Agencia Escolar";
 	$_SESSION['tipo'] = 2;
 	$_SESSION['manifest'] = "manifest1.json";
 	
@@ -23,7 +23,7 @@ else if(@$_SERVER['SERVER_NAME'] == "sge.ectecnologia.com.br" or @$_SERVER['SERV
 else if(@$_SERVER['SERVER_NAME'] == "sl.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.sl" or @$_SERVER['SERVER_NAME'] == "spa.ectecnologia.com.br")
 {
 	$_SESSION['nosistema'] = "".$_SERVER['SERVER_NAME']."/login.php";
-	$_SESSION['nomesoft'] = "A.S.L Spa & Hair";
+	$_SESSION['nomesoft'] = "Agencia Spa & Hair";
 	$_SESSION['tipo'] = 3;
 	$_SESSION['manifest'] = "manifest2.json";
 	
@@ -33,7 +33,7 @@ else if(@$_SERVER['SERVER_NAME'] == "sl.ectecnologia.com.br" or @$_SERVER['SERVE
 else if(@$_SERVER['SERVER_NAME'] == "delivery.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.delivery")
 {
 	$_SESSION['nosistema'] = "".$_SERVER['SERVER_NAME']."/login.php";
-	$_SESSION['nomesoft'] = "A.D.R Delivery";
+	$_SESSION['nomesoft'] = "Agencia Delivery";
 	$_SESSION['tipo'] = 4;
 	$_SESSION['manifest'] = "manifest3.json";
 	
