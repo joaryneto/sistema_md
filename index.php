@@ -6,10 +6,9 @@ session_start();
 
 require_once("./load/load.php");
 
-//echo $_SESSION['sistema'];
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="pt-br" class="color-theme-blue">
 <head>
 
     <meta charset="utf-8">
@@ -129,16 +128,6 @@ require_once("./load/load.php");
                         </div>
                     </div>
                 </div>
-                <!--<div class="swiper-slide overflow-hidden bg-gradient-red text-white">
-                    <div class="row no-gutters h-100">
-                        <div class="col align-self-center text-center">
-                            <img src="template/images/fruits.png" alt="" class="mw-100 mx-auto mb-4">
-                            <br><br>
-                            <h2 class="text-uppercase font-weight-light">Health is wealth! your presence</h2>
-                            <p class="text-mute">Lorem ipsum dolor sit amet, consect etur adipiscing elit. Sndisse conv allis.</p>
-                        </div>
-                    </div>
-                </div>-->
             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination bullets-white text-left"></div>
@@ -147,20 +136,6 @@ require_once("./load/load.php");
 		<?}else if($_SESSION['tipo'] == 3){?>
         <div class="swiper-container introduction vh-100">
             <div class="swiper-wrapper">
-                <!--<div class="swiper-slide overflow-hidden bg-gradient-red text-white">
-                    <div class="row no-gutters h-100">
-                        <div class="col align-self-center text-center">
-                            <img src="template/images/cabelos.png" alt="" class="mw-100 mx-auto mb-4">
-                            <br><br>
-                            <h2 class="text-uppercase font-weight-light">O que você procura?</h2>
-                             <p class="text-mute">
-							 <div style="marigin: 0px">
-			                   <input type="text" style="width: 300px; position: absolute; left: 50%; right: 50%;" name="cnome" id="cnome" placeholder="Digite sua cidade" value="" class="form-control" required="required">
-		                     </div>
-							</p>
-                        </div>
-                    </div>
-                </div>-->
                 <div class="swiper-slide overflow-hidden bg-gradient-purple text-white">
                     <div class="row no-gutters h-100">
                         <div class="col align-self-center text-center">
@@ -186,52 +161,9 @@ require_once("./load/load.php");
             <div class="swiper-pagination bullets-white text-left">teste</div>
         </div>	
 		<a href="login.php" class="btn btn-light btn-lg button-fab right-bottom text-uppercase">Logar <i class="material-icons vm">arrow_forward</i></a>
-		<?}else if($_SESSION['tipo'] == 4){?>
-        <!--<div class="swiper-container introduction vh-100">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide overflow-hidden bg-gradient-red text-white">
-                    <div class="row no-gutters h-100">
-                        <div class="col align-self-center text-center">
-                            <img src="template/images/cabelos.png" alt="" class="mw-100 mx-auto mb-4">
-                            <br><br>
-                            <h2 class="text-uppercase font-weight-light">O que você procura?</h2>
-                             <p class="text-mute">
-							 <div style="marigin: 0px">
-			                   <input type="text" style="width: 300px; position: absolute; left: 50%; right: 50%;" name="cnome" id="cnome" placeholder="Digite sua cidade" value="" class="form-control" required="required">
-		                     </div>
-							</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide overflow-hidden bg-gradient-purple text-white background" style='background-image: url("template/images/login.jpg");'>
-                    <div class="row no-gutters h-100">
-                        <div class="col align-self-center text-center">
-                            <img src="template/images/hair.png" height="350px" alt="" class="mw-100 mx-auto mb-4">
-                            <br><br>
-                            <h2 class="text-uppercase font-weight-light">Beleza e seu bem estar em suas mãos.</h2>
-                            <p class="text-mute"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide overflow-hidden bg-gradient-purple text-white">
-                    <div class="row no-gutters h-100">
-                        <div class="col align-self-center text-center">
-                            <img src="template/images/cabelos.png" height="350px" alt="" class="mw-100 mx-auto mb-4">
-                            <br><br>
-                            <h2 class="text-uppercase font-weight-light">Uma experiencia unica!</h2>
-                            <p class="text-mute">Encontre os melhores Spa & Cabelereiros.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Add Pagination --
-            <div class="swiper-pagination bullets-white text-left">teste</div>
-        </div>	
-		<a href="login.php" class="btn btn-light btn-lg button-fab right-bottom text-uppercase">Delivery <i class="material-icons vm">add_shopping_cart</i></a>
-		<a href="login.php" class="btn btn-light btn-lg button-fab right-bottom text-uppercase">Logar <i class="material-icons vm">arrow_forward</i></a>-->
 		<?}?>
     </div>
-	<?}else if($_SESSION['tipo'] == 4){?>
+	<? }else if($_SESSION['tipo'] == 4){?>
 	
 	    <div class="container-fluid pageloader">
         <div class="row h-100">
