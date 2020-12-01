@@ -13,12 +13,12 @@ if(!isset($_SESSION['usuario']))
 else
 {
 
-$tokenUser = md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+/*$tokenUser = md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
 
 if($_SESSION["donoSessao"]  != $tokenUser){
     header("location:login.php");
 }
-
+*/
 require_once("./load/load.php");
 
 function isMobile() 
