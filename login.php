@@ -18,10 +18,16 @@ if(@$_GET['deslogar']==1)
 
 <head>
 <? include('css.php');?>
+<style>
+.logo {
+	background-color: transparent !important;
+}
+</style>
 </head>
 
 <body>
     <!-- Loader -->
+	<?if($_SESSION['tipo'] == 1 or $_SESSION['tipo'] == 2 or $_SESSION['tipo'] == 3){?>
     <div class="row no-gutters vh-100 loader-screen">
         <div class="bg-template background-overlay"></div>
         <div class="col align-self-center text-white text-center">
@@ -102,6 +108,86 @@ if(@$_GET['deslogar']==1)
         </div>
 
     </div>
+	<?}else if($_SESSION['tipo'] == 4){?>
+	<div class="container-fluid pageloader">
+        <div class="row h-100">
+            <div class="col-12 align-self-start text-center">
+            </div>
+            <div class="col-12 align-self-center text-center">
+			<img style="height:70px" src="template/images/delivery.png" alt="logo">
+            <h1 class="mb-0 mt-3">EC </h1>
+            <p class="text-mute subtitle"> Tecnologia</p>
+            <div class="loader-roller">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            </div>
+            <div class="col-12 align-self-end text-center">
+                <p class="my-5">Por favor, espere<br><small class="text-mute">Um mundo de maravilhas está carregando...</small></p>
+            </div>
+        </div>
+    </div>
+    <!-- Page laoder ends -->
+
+
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0 main-container">
+        <!-- page content goes here -->
+        <div class="banner-hero vh-100 scroll-y bg-dark">
+            <div class="background opac">
+                <img src="template/images/food1.jpg" alt="">
+            </div>
+            <div class="container h-100 text-white">
+                <div class="row h-100 h-sm-auto">
+                    <div class="col-12 col-md-8 col-lg-5 col-xl-4 mx-auto align-self-center text-center">
+                        <div class="loader-logo">
+                            <div class="logo"><img style="height:100px" src="template/images/delivery.png" alt="" class="header-logo"></div>
+                        </div>
+                        <br>
+                        <br>
+                        <h5 class="font-weight-light mb-1 text-mute">Bem-vindo,</h5>
+                        <h3 class="font-weight-normal mb-4">Faça login para continuar</h3>
+
+                        <div class="form-group">
+                            <label for="inputEmail" class="sr-only">Email address</label>
+                            <input type="email" id="inputEmail" class="form-control form-control-lg border-0" placeholder="Email address" required="" autofocus="">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="sr-only">Password</label>
+                            <input type="password" id="inputPassword" class="form-control form-control-lg border-0" placeholder="Password" required="">
+                        </div>
+
+                        <div class="my-3 row">
+                            <div class="col-6 col-md py-1 text-left">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                                    <label class="custom-control-label" for="customCheck1">Remember Me</label>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md py-1 text-right text-md-right">
+                                <a href="forgotpassword.html" class="text-white">Forgot Password?</a>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <a href="index.html" class=" btn btn-lg btn-default default-shadow btn-block">Logar <span class="ml-2 icon arrow_right"></span></a>
+                        </div>
+                        <div class="mb-4">
+                            <p>Ainda não tem conta?<br>Por favor <a href="register.php" class="text-white">Registrar-se</a> aqui.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- End of page content -->
+
+
+    <!-- scroll to top button -->
+    <button type="button" class="btn btn-default default-shadow scrollup bottom-right position-fixed btn-44"><span class="arrow_carrot-up"></span></button>
+    <!-- scroll to top button ends-->
+	<? } ?>
     <!-- final do invólucro -->
 <div id="modalform" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
 <div class="modal-dialog modal-lg">
@@ -110,21 +196,11 @@ if(@$_GET['deslogar']==1)
 </div>
 </div>
 <? include('scripts.php');?>
-<?if(Empty($_SESSION['nosistema']))
-	{?>
-	<script>
-	//$(window).on('load', function() 
-	//{
-      var sistema = localStorage.getItem('sistema');
-      if(sistema === null){}else{ window.location.href="index.php?sistema=" + sistema;}
-	//});
-	</script>
-	<?}?>
-	<script>
+<script>
         $(window).on('load', function() {
             $('body').addClass('header-dark');
         })
 
-    </script>
+</script>
 </body>
 </html>

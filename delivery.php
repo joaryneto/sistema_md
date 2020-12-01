@@ -203,7 +203,7 @@ if(@$_GET['deslogar']==1)
             <div class="col-12 align-self-start text-center">
             </div>
             <div class="col-12 align-self-center text-center">
-			<img style="height:70px" src="template/images/logo.png" alt="logo">
+			<img style="height:70px" src="template/images/delivery.png" alt="logo">
             <h1 class="mb-0 mt-3">EC </h1>
             <p class="text-mute subtitle"> Tecnologia</p>
             <div class="loader-roller">
@@ -228,17 +228,17 @@ if(@$_GET['deslogar']==1)
                 </button>
             </div>
             <div>
-                <a class="navbar-brand" href="index.html">
-                    <div class="logo"><img style="height:30px" src="template/images/logo.png" alt="" class="header-logo"></div>
+                <a class="navbar-brand" href="delivery.php">
+                    <div class="logo"><img style="height:40px" src="template/images/delivery2.png" alt="" class="header-logo"></div>
                 </a>
             </div>
             <div>
                 <form class="form-inline search">
-                    <input class="form-control w-100" type="text" placeholder="Search..." aria-label="Search">
+                    <input class="form-control w-100" type="text" placeholder="Buscar por item ou loja..." aria-label="Buscar">
                     <button class="btn btn-link btn-44" type="submit"><span class="icon_search"></span></button>
                 </form>
                 <button class="btn btn-link search-btn" type="button"><span class="icon_search"></span></button>
-                <a href="profile.html" class=""><span class="avatar avatar-30"><img src="assets/img/user1.png" alt=""></span></a>
+                <a href="profile.html" class=""><span class="avatar avatar-30"><img src="template/images/user1.png" alt=""></span></a>
             </div>
         </nav>
     </header>
@@ -249,12 +249,37 @@ if(@$_GET['deslogar']==1)
         <div class="row no-gutters">
             <div class="col-auto align-self-center">
                 <figure class="avatar avatar-50">
-                    <img src="assets/img/user1.png" alt="">
+                    <img src="template/images/user1.png" alt="">
                 </figure>
             </div>
             <div class="col pl-3 align-self-center">
-                <p class="my-0">Maxartkiller</p>
-                <p class="text-mute my-0 small">United States</p>
+                <p class="my-0"><?=$_SESSION['nome']?></p>
+                <p class="text-mute my-0 small"><?
+				switch($_SESSION['permissao'])
+			    {
+					case 1:
+					{
+						echo "Atendente";
+					}
+					break;
+					case 2:
+					{
+						echo "Profissional";
+					}
+					break;
+					case 3:
+					{
+						echo "Administrador";
+					}
+					break;
+					default:
+				    {
+						echo "Não definido";
+					}
+					break;
+				}
+				
+				?></p>
             </div>
             <div class="col-auto align-self-center">
                 <a href="login.html" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
@@ -285,25 +310,25 @@ if(@$_GET['deslogar']==1)
                                 <a class="icons icon-60 shadow-sm bg-white">
                                     <i class="material-icons text-default">local_cafe</i>
                                 </a>
-                                <p class="small mt-2 text-mute">Coffee</p>
+                                <p class="small mt-2 text-mute">Café</p>
                             </div>
                             <div class="swiper-slide w-auto p-2">
                                 <a class="icons icon-60 shadow-sm bg-white">
                                     <i class="material-icons text-default">local_bar</i>
                                 </a>
-                                <p class="small mt-2 text-mute">Drinks</p>
+                                <p class="small mt-2 text-mute">Bebidas</p>
                             </div>
                             <div class="swiper-slide w-auto p-2">
                                 <a class="icons icon-60 shadow-sm bg-white">
                                     <i class="material-icons text-default">local_dining</i>
                                 </a>
-                                <p class="small mt-2 text-mute">Dinner</p>
+                                <p class="small mt-2 text-mute">Jantar</p>
                             </div>
                             <div class="swiper-slide w-auto p-2">
                                 <a class="icons icon-60 shadow-sm bg-white">
                                     <i class="material-icons text-default">restaurant</i>
                                 </a>
-                                <p class="small mt-2 text-mute">Starter</p>
+                                <p class="small mt-2 text-mute">Iniciante</p>
                             </div>
                             <div class="swiper-slide w-auto p-2">
                                 <a class="icons icon-60 shadow-sm bg-white">
@@ -315,31 +340,25 @@ if(@$_GET['deslogar']==1)
                                 <a class="icons icon-60 shadow-sm bg-white">
                                     <i class="material-icons text-default">local_offer</i>
                                 </a>
-                                <p class="small mt-2 text-mute">Offer</p>
+                                <p class="small mt-2 text-mute">Oferta</p>
                             </div>
                             <div class="swiper-slide w-auto p-2">
                                 <a class="icons icon-60 shadow-sm bg-white">
                                     <i class="material-icons text-default">local_cafe</i>
                                 </a>
-                                <p class="small mt-2 text-mute">Tea</p>
+                                <p class="small mt-2 text-mute">Chá</p>
                             </div>
                             <div class="swiper-slide w-auto p-2">
                                 <a class="icons icon-60 shadow-sm bg-white">
                                     <i class="material-icons text-default">local_bar</i>
                                 </a>
-                                <p class="small mt-2 text-mute">Softdrink</p>
-                            </div>
-                            <div class="swiper-slide w-auto p-2">
-                                <a class="icons icon-60 shadow-sm bg-white">
-                                    <i class="material-icons text-default">local_dining</i>
-                                </a>
-                                <p class="small mt-2 text-mute">Dinner</p>
+                                <p class="small mt-2 text-mute">Drinque suave</p>
                             </div>
                             <div class="swiper-slide w-auto p-2">
                                 <a class="icons icon-60 shadow-sm bg-white">
                                     <i class="material-icons text-default">restaurant</i>
                                 </a>
-                                <p class="small mt-2 text-mute">Lunch</p>
+                                <p class="small mt-2 text-mute">Almoço</p>
                             </div>
                         </div>
                     </div>
@@ -353,7 +372,7 @@ if(@$_GET['deslogar']==1)
                             <div class="swiper-slide w-auto">
                                 <div class="card w-250 position-relative overflow-hidden bg-default text-white border-0">
                                     <div class="background opacity-60">
-                                        <img src="assets/img/login.jpg" alt="" s>
+                                        <img src="template/images/login.jpg" alt="" s>
                                     </div>
                                     <div class="card-body text-center z-1 h-50"></div>
                                     <div class="card-footer border-0 z-1">
@@ -370,7 +389,7 @@ if(@$_GET['deslogar']==1)
                             <div class="swiper-slide w-auto">
                                 <div class="card w-250 position-relative overflow-hidden bg-dark text-white border-0">
                                     <div class="background opacity-60">
-                                        <img src="assets/img/food1.jpg" alt="" s>
+                                        <img src="template/images/food1.jpg" alt="" s>
                                     </div>
                                     <div class="card-body text-center z-1 h-50"></div>
                                     <div class="card-footer border-0 z-1">
@@ -387,7 +406,7 @@ if(@$_GET['deslogar']==1)
                             <div class="swiper-slide w-auto">
                                 <div class="card w-250 position-relative overflow-hidden bg-primary text-white border-0">
                                     <div class="background opacity-60">
-                                        <img src="assets/img/food2.jpg" alt="" s>
+                                        <img src="template/images/food2.jpg" alt="" s>
                                     </div>
                                     <div class="card-body text-center z-1 h-50"></div>
                                     <div class="card-footer border-0 z-1">
@@ -413,7 +432,7 @@ if(@$_GET['deslogar']==1)
                                     <div class="top-right mt-2"><button class="btn btn-link text-danger p-0"><i class="material-icons text-danger vm">favorite</i></button></div>
                                     <div class="h-100px position-relative overflow-hidden">
                                         <div class="background background-h-100">
-                                            <img src="assets/img/banner.png" alt="">
+                                            <img src="template/images/banner.png" alt="">
                                         </div>
                                     </div>
                                     <h6 class="text-default">Kings Burger</h6>
@@ -433,7 +452,7 @@ if(@$_GET['deslogar']==1)
                                     <div class="top-right mt-2"><button class="btn btn-link text-danger p-0"><i class="material-icons text-danger vm">favorite</i></button></div>
                                     <div class="h-100px position-relative">
                                         <div class="background background-h-100">
-                                            <img src="assets/img/banner2.png" alt="">
+                                            <img src="template/images/banner2.png" alt="">
                                         </div>
                                     </div>
                                     <h6 class="text-default">Pizza Special</h6>
@@ -453,7 +472,7 @@ if(@$_GET['deslogar']==1)
                                     <div class="top-right mt-2"><button class="btn btn-link text-danger p-0"><i class="material-icons text-danger vm">favorite</i></button></div>
                                     <div class="h-100px position-relative">
                                         <div class="background background-h-100">
-                                            <img src="assets/img/banner1.png" alt="">
+                                            <img src="template/images/banner1.png" alt="">
                                         </div>
                                     </div>
                                     <h6 class="text-default">Kings Meal</h6>
@@ -473,7 +492,7 @@ if(@$_GET['deslogar']==1)
                                     <div class="top-right mt-2"><button class="btn btn-link text-danger p-0"><i class="material-icons text-danger vm">favorite</i></button></div>
                                     <div class="h-100px position-relative">
                                         <div class="background background-h-100">
-                                            <img src="assets/img/banner.png" alt="">
+                                            <img src="template/images/banner.png" alt="">
                                         </div>
                                     </div>
                                     <h6 class="text-default">Kings Burger</h6>
@@ -490,14 +509,14 @@ if(@$_GET['deslogar']==1)
                     </div>
                 </div>
                 <div class="container">
-                    <h6 class="page-subtitle">Last ordered</h6>
+                    <h6 class="page-subtitle">Último pedido</h6>
                     <div class="card  border-0 shadow-light mb-4">
                         <div class="card-body position-relative">
                             <div class="row">
                                 <div class="col-auto w-100px pr-0 align-self-center">
                                     <div class="h-80 position-relative">
                                         <div class="background background-h-100">
-                                            <img src="assets/img/banner1.png" alt="">
+                                            <img src="template/images/banner1.png" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -520,7 +539,7 @@ if(@$_GET['deslogar']==1)
                                 <div class="col-auto w-100px pr-0 align-self-center">
                                     <div class="h-80 position-relative">
                                         <div class="background background-h-100">
-                                            <img src="assets/img/banner.png" alt="">
+                                            <img src="template/images/banner.png" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -543,7 +562,7 @@ if(@$_GET['deslogar']==1)
                                 <div class="col-auto w-100px pr-0 align-self-center">
                                     <div class="h-80 position-relative">
                                         <div class="background background-h-100">
-                                            <img src="assets/img/banner2.png" alt="">
+                                            <img src="template/images/banner2.png" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -563,19 +582,19 @@ if(@$_GET['deslogar']==1)
                     </div>
                 </div>
                 <div class="container">
-                    <h6 class="page-subtitle">Best food</h6>
+                    <h6 class="page-subtitle">Melhor comida</h6>
                     <div class="row">
                         <div class="col-12 col-sm-6">
                             <div class="card mb-4 shadow-light border-0">
                                 <div class="card-header text-center h-150 position-relative overflow-hidden">
                                     <div class="background">
-                                        <img src="assets/img/food1.jpg" alt="">
+                                        <img src="template/images/food1.jpg" alt="">
                                     </div>
                                 </div>
                                 <div class="card-footer border-0 z-1">
                                     <div class="media">
                                         <figure class="avatar avatar-40 mr-2">
-                                            <img src="assets/img/user5.png" alt="Generic placeholder image">
+                                            <img src="template/images/user5.png" alt="Generic placeholder image">
                                         </figure>
                                         <div class="media-body">
                                             <h6 class="mb-1">Dieting food stakes</h6>
@@ -589,13 +608,13 @@ if(@$_GET['deslogar']==1)
                             <div class="card mb-4 shadow-light border-0">
                                 <div class="card-header text-center z-1 h-150 position-relative overflow-hidden ">
                                     <div class="background">
-                                        <img src="assets/img/food2.jpg" alt="">
+                                        <img src="template/images/food2.jpg" alt="">
                                     </div>
                                 </div>
                                 <div class="card-footer border-0 z-1">
                                     <div class="media">
                                         <figure class="avatar avatar-40 mr-2">
-                                            <img src="assets/img/user5.png" alt="Generic placeholder image">
+                                            <img src="template/images/user5.png" alt="Generic placeholder image">
                                         </figure>
                                         <div class="media-body">
                                             <h6 class="mb-1">Maxican style food shop</h6>
@@ -666,7 +685,7 @@ if(@$_GET['deslogar']==1)
                                     <div class="top-right mt-2"><button class="btn btn-link text-danger p-0"><i class="material-icons text-danger vm">favorite</i></button></div>
                                     <div class="h-100px position-relative overflow-hidden">
                                         <div class="background background-h-100">
-                                            <img src="assets/img/banner.png" alt="">
+                                            <img src="template/images/banner.png" alt="">
                                         </div>
                                     </div>
                                     <h6 class="text-default">Kings Burger</h6>
@@ -686,7 +705,7 @@ if(@$_GET['deslogar']==1)
                                     <div class="top-right mt-2"><button class="btn btn-link text-danger p-0"><i class="material-icons text-danger vm">favorite</i></button></div>
                                     <div class="h-100px position-relative">
                                         <div class="background background-h-100">
-                                            <img src="assets/img/banner2.png" alt="">
+                                            <img src="template/images/banner2.png" alt="">
                                         </div>
                                     </div>
                                     <h6 class="text-default">Pizza Special</h6>
@@ -707,7 +726,7 @@ if(@$_GET['deslogar']==1)
                                 <div class="col-auto w-100px pr-0 align-self-center">
                                     <div class="h-80 position-relative">
                                         <div class="background background-h-100">
-                                            <img src="assets/img/banner1.png" alt="">
+                                            <img src="template/images/banner1.png" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -730,7 +749,7 @@ if(@$_GET['deslogar']==1)
                                 <div class="col-auto w-100px pr-0 align-self-center">
                                     <div class="h-80 position-relative">
                                         <div class="background background-h-100">
-                                            <img src="assets/img/banner.png" alt="">
+                                            <img src="template/images/banner.png" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -753,7 +772,7 @@ if(@$_GET['deslogar']==1)
                                 <div class="col-auto w-100px pr-0 align-self-center">
                                     <div class="h-80 position-relative">
                                         <div class="background background-h-100">
-                                            <img src="assets/img/banner2.png" alt="">
+                                            <img src="template/images/banner2.png" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -786,7 +805,7 @@ if(@$_GET['deslogar']==1)
                                 <div class="col-auto w-100px pr-0 align-self-center">
                                     <div class="h-80 position-relative">
                                         <div class="background background-h-100">
-                                            <img src="assets/img/banner1.png" alt="">
+                                            <img src="template/images/banner1.png" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -815,7 +834,7 @@ if(@$_GET['deslogar']==1)
                                 <div class="col-auto w-100px pr-0 align-self-center">
                                     <div class="h-80 position-relative">
                                         <div class="background background-h-100">
-                                            <img src="assets/img/banner2.png" alt="">
+                                            <img src="template/images/banner2.png" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -876,7 +895,7 @@ if(@$_GET['deslogar']==1)
                             <div class="row">
                                 <a class="col-auto" data-toggle="modal" data-target="#statusmodal">
                                     <figure class="avatar avatar-40">
-                                        <img src="assets/img/user4.png" alt="">
+                                        <img src="template/images/user4.png" alt="">
                                     </figure>
                                 </a>
                                 <div class="col pl-0 align-self-center">
@@ -890,7 +909,7 @@ if(@$_GET['deslogar']==1)
                             <div class="row">
                                 <div class="col-auto">
                                     <figure class="avatar avatar-40">
-                                        <img src="assets/img/user3.png" alt="">
+                                        <img src="template/images/user3.png" alt="">
                                     </figure>
                                 </div>
                                 <div class="col pl-0 align-self-center">
@@ -903,7 +922,7 @@ if(@$_GET['deslogar']==1)
                             <div class="row">
                                 <div class="col-auto">
                                     <figure class="avatar avatar-40">
-                                        <img src="assets/img/user4.png" alt="">
+                                        <img src="template/images/user4.png" alt="">
                                     </figure>
                                 </div>
                                 <div class="col pl-0 align-self-center">
@@ -916,7 +935,7 @@ if(@$_GET['deslogar']==1)
                             <div class="row">
                                 <div class="col-auto">
                                     <figure class="avatar avatar-40">
-                                        <img src="assets/img/user1.png" alt="">
+                                        <img src="template/images/user1.png" alt="">
                                     </figure>
                                 </div>
                                 <div class="col pl-0 align-self-center">
@@ -929,7 +948,7 @@ if(@$_GET['deslogar']==1)
                             <div class="row">
                                 <div class="col-auto">
                                     <figure class="avatar avatar-40">
-                                        <img src="assets/img/user2.png" alt="">
+                                        <img src="template/images/user2.png" alt="">
                                     </figure>
                                 </div>
                                 <div class="col pl-0 align-self-center">
@@ -943,7 +962,7 @@ if(@$_GET['deslogar']==1)
                             <div class="row">
                                 <div class="col-auto">
                                     <figure class="avatar avatar-40">
-                                        <img src="assets/img/user4.png" alt="">
+                                        <img src="template/images/user4.png" alt="">
                                     </figure>
                                 </div>
                                 <div class="col pl-0 align-self-center">
@@ -956,7 +975,7 @@ if(@$_GET['deslogar']==1)
                             <div class="row">
                                 <div class="col-auto">
                                     <figure class="avatar avatar-40">
-                                        <img src="assets/img/user3.png" alt="">
+                                        <img src="template/images/user3.png" alt="">
                                     </figure>
                                 </div>
                                 <div class="col pl-0 align-self-center">
@@ -972,12 +991,12 @@ if(@$_GET['deslogar']==1)
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="position-relative overflow-hidden h-200">
                     <div class="background">
-                        <img src="assets/img/food1.jpg" alt="">
+                        <img src="template/images/food1.jpg" alt="">
                     </div>
                 </div>
                 <div class="container top-100 text-center mb-4">
                     <figure class="avatar avatar-180 rounded-circle shadow  mx-auto">
-                        <img src="assets/img/user1.png" alt="">
+                        <img src="template/images/user1.png" alt="">
                     </figure>
                 </div>
                 <div class="container-fluid text-center mb-4">
@@ -1027,7 +1046,7 @@ if(@$_GET['deslogar']==1)
                                             <div class="top-right mt-2"><button class="btn btn-link text-danger p-0"><i class="material-icons text-danger vm">favorite</i></button></div>
                                             <div class="h-100px position-relative overflow-hidden">
                                                 <div class="background background-h-100">
-                                                    <img src="assets/img/banner.png" alt="">
+                                                    <img src="template/images/banner.png" alt="">
                                                 </div>
                                             </div>
                                             <h6 class="text-default">Kings Burger</h6>
@@ -1047,7 +1066,7 @@ if(@$_GET['deslogar']==1)
                                             <div class="top-right mt-2"><button class="btn btn-link text-danger p-0"><i class="material-icons text-danger vm">favorite</i></button></div>
                                             <div class="h-100px position-relative">
                                                 <div class="background background-h-100">
-                                                    <img src="assets/img/banner2.png" alt="">
+                                                    <img src="template/images/banner2.png" alt="">
                                                 </div>
                                             </div>
                                             <h6 class="text-default">Pizza Special</h6>
@@ -1067,7 +1086,7 @@ if(@$_GET['deslogar']==1)
                                             <div class="top-right mt-2"><button class="btn btn-link text-danger p-0"><i class="material-icons text-danger vm">favorite</i></button></div>
                                             <div class="h-100px position-relative">
                                                 <div class="background background-h-100">
-                                                    <img src="assets/img/banner1.png" alt="">
+                                                    <img src="template/images/banner1.png" alt="">
                                                 </div>
                                             </div>
                                             <h6 class="text-default">Kings Meal</h6>
@@ -1087,7 +1106,7 @@ if(@$_GET['deslogar']==1)
                                             <div class="top-right mt-2"><button class="btn btn-link text-danger p-0"><i class="material-icons text-danger vm">favorite</i></button></div>
                                             <div class="h-100px position-relative">
                                                 <div class="background background-h-100">
-                                                    <img src="assets/img/banner.png" alt="">
+                                                    <img src="template/images/banner.png" alt="">
                                                 </div>
                                             </div>
                                             <h6 class="text-default">Kings Burger</h6>
@@ -1112,7 +1131,7 @@ if(@$_GET['deslogar']==1)
             <div class="toast-header">
                 <div class="avatar avatar-20 mr-2">
                     <div class="background">
-                        <img src="assets/img/team3.jpg" class="rounded mr-2" alt="...">
+                        <img src="template/images/team3.jpg" class="rounded mr-2" alt="...">
                     </div>
                 </div>
                 <strong class="mr-auto">Maxartkiller</strong>
@@ -1131,22 +1150,19 @@ if(@$_GET['deslogar']==1)
     <!-- Footer -->
     <footer class="footer mt-auto py-3">
         <div class="container section-100">
-            <h1>One<span>UI</span><span>UX</span></h1>
-            <p class="text-mute mt-4">Multipurpose multipages Mobile HTML template with large number of components and ready to use elements sections. This template build with Bootstrap 4, HTML, CSS, SCSS styling and JQuery.</p>
         </div>
         <hr class="mt-0">
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-auto  text-center">
-                    <a href="https://www.facebook.com/maxartkiller/" target="_blank" class="btn btn-link px-2"><span class="social_facebook"></span></a>
-                    <a href="https://twitter.com/maxartkiller" class="btn btn-link px-2" target="_blank"><span class="social_twitter"></span></a>
-                    <a href="https://www.linkedin.com/company/maxartkiller" class="btn btn-link px-2" target="_blank"><span class="social_linkedin"></span></a>
-                    <a href="https://www.instagram.com/maxartkiller/" class="btn btn-link px-2" target="_blank"><span class="social_instagram"></span></a>
-                    <a href="https://dribbble.com/maxartkiller" class="btn btn-link px-2" target="_blank"><span class="social_dribbble"></span></a>
+                    <a href="#" target="_blank" class="btn btn-link px-2"><span class="social_facebook"></span></a>
+                    <a href="#" class="btn btn-link px-2" target="_blank"><span class="social_twitter"></span></a>
+                    <a href="#" class="btn btn-link px-2" target="_blank"><span class="social_linkedin"></span></a>
+                    <a href="#" class="btn btn-link px-2" target="_blank"><span class="social_instagram"></span></a>
+                    <a href="#" class="btn btn-link px-2" target="_blank"><span class="social_dribbble"></span></a>
                 </div>
             </div>
             <hr>
-            <p class="text-center">For the humans by the human, <span class="text-mute">Hand Crafted by <a href="https://maxartkiller.com/" target="_blank">Maxartkiller</a> with </span><span class="text-danger">❤</span></p>
         </div>
     </footer>
     <!-- Footer ends -->
