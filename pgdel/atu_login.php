@@ -35,16 +35,16 @@ if($x == 1)
 else
 {
 	  
-	$_SESSION['usuario'] = "";
-	$_SESSION['login'] = "";
-	$_SESSION['sistema'] = "";
-	$_SESSION['nome'] = "";
-	$_SESSION['permissao'] = "";
+	unset($_SESSION['usuario']);
+	unset($_SESSION['login']);
+	unset($_SESSION['sistema']);
+	unset($_SESSION['nome']);
+	unset($_SESSION['permissao']);
 		
 	print '<script> swal({   
             title: "Atenção",   
             text: "Login ou senha invalido.",   
-            timer: 1000,   
+            timer: 1500,   
             showConfirmButton: false 
         });</script>';
 }

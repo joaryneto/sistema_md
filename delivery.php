@@ -9,6 +9,8 @@ require_once("./load/load.php");
 if(@$_GET['deslogar']==1)
 {
 	unset($_SESSION['usuario']);
+	unset($_SESSION['nome']);
+	
 	print('<script> localStorage.removeItem("token"); </script>');
 	print "<script> window.location='login.php';  </script>";
 }
@@ -58,7 +60,7 @@ if(@$_GET['deslogar']==1)
             </div>
             <div>
                 <form class="form-inline search">
-                    <input class="form-control w-100" type="text" placeholder="Buscar por item ou loja..." aria-label="Buscar">
+                    <input class="form-control w-100" type="text" placeholder="Buscar por itens..." aria-label="Buscar">
                     <button class="btn btn-link btn-44" type="submit"><span class="icon_search"></span></button>
                 </form>
                 <button class="btn btn-link search-btn" type="button"><span class="icon_search"></span></button>
@@ -77,6 +79,7 @@ if(@$_GET['deslogar']==1)
                 </figure>
             </div>
             <div class="col pl-3 align-self-center">
+			    <? if(isset($_SESSION['usuario'])){?>
                 <p class="my-0"><?=$_SESSION['nome']?></p>
                 <p class="text-mute my-0 small"><?
 				switch($_SESSION['permissao'])
@@ -104,10 +107,15 @@ if(@$_GET['deslogar']==1)
 				}
 				
 				?></p>
+				<?}else{?>
+				<a href="login.php" style="color: #fff;"><i class="material-icons">input</i> <span style="position: relative;top: -5px;">Entrar</span></a>
+				<?}?>
             </div>
+			<? if(isset($_SESSION['usuario'])){?>
             <div class="col-auto align-self-center">
-                <a href="login.php" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
+                <a href="delivery.php?deslogar=1" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
             </div>
+			<?}?>
         </div>
         <div class="list-group main-menu my-4">
             <a href="delivery.php" class="list-group-item list-group-item-action active"><i class="material-icons">home</i>Home</a>
@@ -188,7 +196,7 @@ if(@$_GET['deslogar']==1)
                     </div>
                 </div>
                 <div class="container mb-4">
-                    <input type="text" class="form-control border-0 shadow-light" placeholder="Search here...">
+                    <input type="text" class="form-control border-0 shadow-light" placeholder="Buscar por itens...">
                 </div>
                 <div class="container mb-4">
                     <div class="swiper-container swiper-offers">
@@ -618,8 +626,8 @@ if(@$_GET['deslogar']==1)
             </div>
             <div class="tab-pane fade" id="cart" role="tabpanel" aria-labelledby="cart-tab">
                 <div class="container my-4">
-                    <h5 class="page-subtitle">Thats great your cart is ready!<br>
-                        <span class="text-mute small mt-2">Checkout now</span>
+                    <h5 class="page-subtitle">Que bom que seu carrinho está pronto!<br>
+                        <span class="text-mute small mt-2">Checkout agora</span>
                     </h5>
                 </div>
                 <div class="container">
@@ -824,8 +832,8 @@ if(@$_GET['deslogar']==1)
                     </figure>
                 </div>
                 <div class="container-fluid text-center mb-4">
-                    <h4>Maxartkiller</h4>
-                    <p class="text-mute">Vennanya, USA.</p>
+                    <h4><?=$_SESSION['nome'];?></h4>
+                    <p class="text-mute"><?=$_SESSION['nome'];?></p>
                 </div>
                 <div class="container mb-4">
                     <ul class="nav nav-pills nav-fill justift-content-center mb-4" id="myTab" role="tablist">
@@ -950,24 +958,6 @@ if(@$_GET['deslogar']==1)
                 </div>
             </div>
         </div>
-
-        <div class="toast bottom-right position-fixed mb-5" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
-            <div class="toast-header">
-                <div class="avatar avatar-20 mr-2">
-                    <div class="background">
-                        <img src="template/images/team3.jpg" class="rounded mr-2" alt="...">
-                    </div>
-                </div>
-                <strong class="mr-auto">Maxartkiller</strong>
-                <small>Just now</small>
-                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="toast-body">
-                Hello, Welcome to our website.
-            </div>
-        </div>
     </main>
     <!-- End of page content -->
 
@@ -1000,12 +990,6 @@ if(@$_GET['deslogar']==1)
                     <small class="sr-only">Home</small>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" id="search-tab" data-toggle="tab" href="#search" role="tab" aria-controls="search" aria-selected="false">
-                    <i class="material-icons">room</i>
-                    <small class="sr-only">search</small>
-                </a>
-            </li>
             <li class="nav-item centerlarge">
                 <a class="nav-link bg-default" id="cart-tab" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">
                     <i class="material-icons">shopping_basket</i>
@@ -1013,13 +997,7 @@ if(@$_GET['deslogar']==1)
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="false">
-                    <i class="material-icons">star</i>
-                    <small class="sr-only">Best</small>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" <?if(isset($_SESSION['usuario'])){?> href="#profile" <? } ?> role="tab" aria-controls="profile" aria-selected="false">
                     <i class="material-icons">person</i>
                     <small class="sr-only">Account</small>
                 </a>
