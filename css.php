@@ -1,3 +1,21 @@
+    <link rel="preconnect" href="https://gum.criteo.com"/>
+	<link rel="preconnect" href="http://dis.us.criteo.com"/>
+	<link rel="preconnect" href="http://widget.criteo.com"/>
+	<link rel="preconnect" href="http://static.criteo.net"/>
+	<link rel="preconnect" href="https://vars.hotjar.com"/>
+	<link rel="preconnect" href="https://script.hotjar.com"/>
+	<link rel="preconnect" href="http://static.hotjar.com"/>
+	<link rel="preconnect" href="https://usage.trackjs.com"/>
+	<link rel="preconnect" href="https://bat.bing.com"/>
+	<link rel="preconnect" href="https://www.google.com"/>
+	<link rel="preconnect" href="https://www.google.com.br"/>
+	<link rel="preconnect" href="https://www.googleadservices.com"/>
+	<link rel="preconnect" href="https://stats.g.doubleclick.net"/>
+	<link rel="preconnect" href="https://googleads.g.doubleclick.net"/>
+	<link rel="preconnect" href="https://www.google-analytics.com"/>
+	<link rel="preconnect" href="http://7242.xg4ken.com"/>
+	<link rel="preconnect" href="https://services.xg4ken.com"/>
+	<link rel="preconnect" href="https://resources.xg4ken.com"/>    
     <meta charset="iso-8859-1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
@@ -5,46 +23,46 @@
     <meta name="author" content="EC Tecnologia">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="template/assets/images/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EC TECNOLOGIA - Equipe cuiabana de Tecnologia da informação</title>
-  <meta name="codelab" content="your-first-pwa-v3">
-  <!-- CODELAB: Add iOS meta tags and icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="EC Tecnologia">
-<link rel="apple-touch-icon" sizes="57x57" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/<?=$_SESSION['img'];?>/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/icons/<?=$_SESSION['img'];?>/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/images/icons/<?=$_SESSION['img'];?>/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/icons/<?=$_SESSION['img'];?>/favicon-16x16.png">
-<?if($_SESSION['tipo'] == 1){?>
-<link rel="manifest" href="/manifest.json">
-<?}else if($_SESSION['tipo'] == 2){?>
-<link rel="manifest" href="/manifest1.json">
-<?}else if($_SESSION['tipo'] == 3){?>
-<link rel="manifest" href="/manifest2.json">
-<?}else if($_SESSION['tipo'] == 4){?>
-<link rel="manifest" href="/manifest3.json">
-<?}?>
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="/images/icons/<?=$_SESSION['img'];?>/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
-  <!-- CODELAB: Add description here -->
-  <meta name="description" content="Equipe cuiabana de Tecnologia da informação">
-  <!-- CODELAB: Add meta theme-color -->
-  <meta name="theme-color" content="#2F3BA2" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>EC TECNOLOGIA - Equipe cuiabana de Tecnologia da informação</title>
+	<meta name="codelab" content="your-first-pwa-v3">
+	<!-- CODELAB: Add iOS meta tags and icons -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="EC Tecnologia">
+	<link rel="apple-touch-icon" sizes="57x57" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/icons/<?=$_SESSION['img'];?>/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/<?=$_SESSION['img'];?>/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/icons/<?=$_SESSION['img'];?>/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/images/icons/<?=$_SESSION['img'];?>/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/icons/<?=$_SESSION['img'];?>/favicon-16x16.png">
+	<?if($_SESSION['tipo'] == 1){?>
+	<link rel="manifest" href="/manifest.json">
+	<?}else if($_SESSION['tipo'] == 2){?>
+	<link rel="manifest" href="/manifest1.json">
+	<?}else if($_SESSION['tipo'] == 3){?>
+	<link rel="manifest" href="/manifest2.json">
+	<?}else if($_SESSION['tipo'] == 4){?>
+	<link rel="manifest" href="/manifest3.json">
+	<?}?>
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/images/icons/<?=$_SESSION['img'];?>/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	<!-- CODELAB: Add description here -->
+	<meta name="description" content="Equipe cuiabana de Tecnologia da informação">
+	<!-- CODELAB: Add meta theme-color -->
+	<meta name="theme-color" content="#2F3BA2" />
 	
 	
-    <!-- Material design icons CSS -->
-    <link rel="stylesheet" href="template/vendor/materializeicon/material-icons.css">
+	<!-- Material design icons CSS -->
+	<link rel="stylesheet" href="template/vendor/materializeicon/material-icons.css">
 
     <!-- Roboto fonts CSS -->
 
@@ -71,21 +89,11 @@
 	
     <!-- Custom styles for this template -->
 	<?if($_SESSION['tipo'] == 1 or $_SESSION['tipo'] == 2 or $_SESSION['tipo'] == 3){?>
-    <link href="template/css/style.css" rel="stylesheet">
+    <link rel="preload" href="template/css/style.css" rel="stylesheet">
 	<?}else if($_SESSION['tipo'] == 4){?>
-	<link href="template/css/style-red.css" rel="stylesheet">
+	<link rel="preload" href="template/css/style-red.css" rel="stylesheet">
 	<? } ?>
-	<!-- Ionic for this template 
-	<script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
-  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
-  <style>
-    :root {
-      --ion-safe-area-top: 20px;
-      --ion-safe-area-bottom: 22px;
-    }
-  </style>-->
-  
+
 	<!--alerts CSS -->
     <link href="template/vendor/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
 	
