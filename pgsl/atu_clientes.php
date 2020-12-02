@@ -40,7 +40,7 @@ $RES = mysqli_query($db3,$SQL);
 while($row = mysqli_fetch_array($RES))
 {
 ?>
-<tr style="cursor: pointer;" onclick="window.location='sistema.php?url=cad_clientes&cadastro=1&codigo=<? echo $row['codigo'];?>';">
+<tr style="cursor: pointer;" onclick="m_agendamento(<? echo $row['codigo'];?>);">
 <td data-title="Nome"><? echo $row['nome'];?></td>
 <td data-title="Data/Hora"><? echo formatodata($row['data'])." - ".formatohora($row['hora']); ?></td>
 </tr>

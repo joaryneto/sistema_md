@@ -83,11 +83,11 @@
     $_SESSION['qtditens'] = $ROW3['qtd'];		
 	$_SESSION['vtotal'] = number_format($ROW3['total'],2,",",".");
 	
+	$agendamento = @$inputb['codigo'];
 	
-	if()
+	if(isset($agendamento) and $inputb['ch'] == "true")
     {
 	  $data = date("Y-m-d");
-	  $agenndamento = $inputb['codigo']
 	  $SQL5 = "SELECT produtos.preco,agendamento_servicos.codigo, agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
 	  inner join clientes on clientes.codigo=agendamento.cliente 
 	  inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
@@ -101,14 +101,13 @@
 		$SQL = "INSERT vendas_mov(sistema,cliente,produto,venda,caixa,data,preco,total,usuario,status) values('".$_SESSION['sistema']."','".$row['cliente']."','".$row['codigo']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$data."','".$row['preco']."','".$row['preco']."','".$_SESSION['usuario']."',1)";
         $RES = mysqli_query($db3,$SQL);
 		
-		print('
-		<script>
+		print('<script>
 		$("#forcaixa" ).show( "slow" );
 		$("#dtable" ).hide( "slow" );
 		$("#dt" ).show( "slow" );
 		$("#c_nome" ).show( "slow" );    
 		$("#c_codigo").val(codigo);
-	    document.getElementById("nome").innerHTML = "'{$nome}'";
+	    document.getElementById("nome").innerHTML = "'.$nome.'";
 		</script>');
 	  }
 	}
@@ -134,7 +133,7 @@ function m_agendamento(agendamento)
 	{
 		
 		$('#modalap').modal('hide');
-		requestPage('?br=atu_pesquisa&agendamento='+ agendamento +'&cliente='+ cliente +'&nome='+ nome +'&ap=8&load=1','load','GET');
+		requestPage('?br=atu_pesquisa&agendamento='+ agendamento +'&ch=true&load=1','load','GET');
 	}
 }
 
