@@ -373,7 +373,7 @@ else
 			<? } ?>
 			</div></div>
 			<div class="form-group col-md-12 m-t-20">
-			<input type='text' name='pesquisa' id='pesquisa' placeholder="Pesquisar Cliente" class='form-control' onkeyup="javascript: requestPage2('?br=atu_clientes&pesquisa='+ this.value +'&ap=2','clistclientes','GET');">
+			<input type='text' name='pesquisa' id='pesquisa' placeholder="Pesquisar Cliente" class='form-control' onkeyup="javascript: requestPage2('?br=atu_clientes&pesquisa='+ this.value +'&ap=1','clistclientes','GET');">
 			</div>
 			<div class="col-md-12">
 			<div class="component-box">
@@ -402,5 +402,65 @@ else
 <? 
 // --------- FINAL CADASTRO DE CLIENTES -------------//
 
-} 
+}
+else if($inputb['modal'] == 4)
+{	
 ?>
+<div class="modal-header">
+<h2 class="pmd-card-title-text">Lista de Agendamento</h2>
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form class="form-horizontal">
+<div class="form-group ">
+<input name="user" type="text" class="form-control" placeholder="Buscar Clientes agendados." autocomplete="off" onkeyup="javascript: requestPage2('?br=atu_clientes&pesquisa='+ this.value +'&ap=2','listclientes','GET');" />
+</div>
+<div>
+<script>
+function m_cliente(codigo)
+{
+	alert("teste");
+}
+</script>
+<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+<table class="table pmd-table">
+<thead>
+<tr>
+<th>Cliente</th>
+<th>Data/Hora</th>
+</tr>
+</thead>
+<tbody id="listclientes">
+<?
+$m_data = date("Y-m-d");
+
+$SQL = "SELECT agendamento.codigo,agendamento_servicos.codigo as codservico,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
+inner join clientes on clientes.codigo=agendamento.cliente 
+inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
+where agendamento.sistema='".$_SESSION['sistema']."' and agendamento.status=1 and agendamento_servicos.data='$m_data' ORDER BY agendamento.codigo desc";
+$RES = mysqli_query($db3,$SQL);
+while($row = mysqli_fetch_array($RES))
+{
+?>
+<tr style="cursor: pointer;" onclick="m_cliente(<?=$row['codigo'];?>);">
+<td data-title="Nome"><? echo $row['nome'];?></td>
+<td data-title="Data/Hora"><? echo formatodata($row['data'])." - ".formatohora($row['hora']); ?></td>
+</tr>
+<? $x = 1;
+}
+
+if($x == 0)
+{
+ echo "<tr><td>Nenhum resultado encontrado.</td><td></td><td></td><td></td></tr>";
+
+}
+?>
+</tbody>	
+</table>
+</div>
+</div>
+</form>	
+</div>
+<div class="modal-footer">
+</div>
+<?}?>

@@ -1,6 +1,10 @@
 <?
+$inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 
-  $sql = "select * from clientes where sistema='".$_SESSION['sistema']."' and nome like '%".$_GET['pesquisa']."%';";
+if(@$inputb['ap'] == 1){
+	
+  $pesquisa = @$inputb['pesquisa'];
+  $sql = "select * from clientes where sistema='".$_SESSION['sistema']."' and nome like '%".$pesquisa."%';";
   $res = mysqli_query($db3,$sql); 
   while($row = mysqli_fetch_array($res))
   {
@@ -22,5 +26,31 @@
 		<td data-title="Editar"><a class="fa fa-edit" href="javascript:void(0);" onclick="edit_cliente(<?=$row['codigo'];?>);" style="font-size: 150%;"><a></td>
 	</tr>
 <? 
-} 
+  } 
+}else if(@$inputb['ap'] == 2)
+{
+
+$pesquisa = @$inputb['pesquisa'];
+
+$SQL = "SELECT agendamento.codigo,agendamento_servicos.codigo as codservico,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
+inner join clientes on clientes.codigo=agendamento.cliente 
+inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
+where agendamento.sistema='".$_SESSION['sistema']."' and agendamento.status=1 and agendamento.nome like '%".$pesquisa."%' ORDER BY agendamento.codigo desc";
+$RES = mysqli_query($db3,$SQL);
+while($row = mysqli_fetch_array($RES))
+{
+?>
+<tr style="cursor: pointer;" onclick="window.location='sistema.php?url=cad_clientes&cadastro=1&codigo=<? echo $row['codigo'];?>';">
+<td data-title="Nome"><? echo $row['nome'];?></td>
+<td data-title="Data/Hora"><? echo formatodata($row['data'])." - ".formatohora($row['hora']); ?></td>
+</tr>
+<? $x = 1;
+}
+
+if($x == 0)
+{
+ echo "<tr><td>Nenhum resultado encontrado.</td><td></td><td></td><td></td></tr>";
+
+}
+}
 ?>

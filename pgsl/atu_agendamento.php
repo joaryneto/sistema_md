@@ -132,6 +132,29 @@ else if($inputb['ap'] == 3)
  
  <?
 }
+else if($inputb['ap'] == 3)
+{
+   $codigo = $inputb['codigo'];
+   
+   $SQL = "DELETE from agendamento WHERE sistema='".$_SESSION['sistema']."' and codigo='".$codigo."';";
+   mysqli_query($db3,$SQL);
+   
+   $SQL = "DELETE from agendamento_servicos WHERE sistema='".$_SESSION['sistema']."' and agendamento='".$codigo."';";
+   mysqli_query($db3,$SQL);
+   
+ ?>
+ 
+  <script>
+  swal({   
+            title: "Atenção",   
+            text: "Excluido com sucesso.",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });
+  </script>
+ 
+ <?
+}
 
 if($inputb['load'] == 1)
 {

@@ -1,6 +1,6 @@
 {
-  "name": "A.S.L Spa & Hair",
-  "short_name": "A.S.L Spa & Hair",
+  "name": "Agencia Spa & Hair",
+  "short_name": "Agencia Spa & Hair",
   "icons": [{
     "src": "/images/icons/icon-128x128.png",
       "sizes": "128x128",
@@ -30,7 +30,7 @@
       "sizes": "32x32",
       "type": "image/png"
     }],
-  "start_url": "https://sl.ectecnologia.com.br/login.php",
+  "start_url": "https://sistema.sl/login.php",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF"
