@@ -32,7 +32,7 @@ else if(@$_SERVER['SERVER_NAME'] == "sl.ectecnologia.com.br" or @$_SERVER['SERVE
 }
 else if(@$_SERVER['SERVER_NAME'] == "delivery.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.delivery")
 {
-	$_SESSION['nosistema'] = "".$_SERVER['SERVER_NAME']."/login.php";
+	$_SESSION['nosistema'] = "".$_SERVER['SERVER_NAME']."/delivery.php";
 	$_SESSION['nomesoft'] = "Agencia Delivery";
 	$_SESSION['tipo'] = 4;
 	$_SESSION['manifest'] = "manifest3.json";
