@@ -23,7 +23,7 @@
     <meta name="author" content="EC Tecnologia">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="template/assets/images/favicon.png">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1"/>
 	<title>EC TECNOLOGIA - Equipe cuiabana de Tecnologia da informação</title>
 	<meta name="codelab" content="your-first-pwa-v3">
 	<!-- CODELAB: Add iOS meta tags and icons -->
@@ -89,9 +89,9 @@
 	
     <!-- Custom styles for this template -->
 	<?if($_SESSION['tipo'] == 1 or $_SESSION['tipo'] == 2 or $_SESSION['tipo'] == 3){?>
-    <link rel="preload" href="template/css/style.css" rel="stylesheet">
+    <link href="template/css/style.css" rel="stylesheet">
 	<?}else if($_SESSION['tipo'] == 4){?>
-	<link rel="preload" href="template/css/style-red.css" rel="stylesheet">
+	<link href="template/css/style-red.css" rel="stylesheet">
 	<? } ?>
 
 	<!--alerts CSS -->
