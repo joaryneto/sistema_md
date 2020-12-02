@@ -30,7 +30,7 @@
       "sizes": "32x32",
       "type": "image/png"
     }],
-  "start_url": "https://sistema.delivery/login.php",
+  "start_url": "https://sistema.delivery/delivery.php",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF"
