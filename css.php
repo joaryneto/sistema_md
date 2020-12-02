@@ -93,7 +93,7 @@
 	<?}else if($_SESSION['tipo'] == 4){?>
 	<link href="template/css/style-red.css" rel="stylesheet">
 	<? } ?>
-
+   <link href="template/css/custom.css" rel="stylesheet">
 	<!--alerts CSS -->
     <link href="template/vendor/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
 	
