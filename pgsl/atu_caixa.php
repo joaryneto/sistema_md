@@ -193,8 +193,8 @@ else if(@$_GET['ap'] == 2)
 	    $SQL1 = "UPDATE vendas SET status=0, data='".$data."' where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['venda']."'";
 		$RES = mysqli_query($db3,$SQL1);
 		
-		$SQL2 = "UPDATE vendas_recebidos SET status=1 where sistema='".$_SESSION['sistema']."' and venda='".$_SESSION['venda']."'";
-	    $RES = mysqli_query($db3,$SQL2);
+		//$SQL2 = "UPDATE vendas_recebidos SET status=1 where sistema='".$_SESSION['sistema']."' and venda='".$_SESSION['venda']."'";
+	    //$RES = mysqli_query($db3,$SQL2);
 		
 	    print("<script>window.location.href='sistema.php?url=cad_vendas';</script>");
 	}
