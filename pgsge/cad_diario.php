@@ -219,7 +219,7 @@ function gravarrio(sv,codigo)
 		}
 		else
 		{
-		   requestPage('?br=atu_diario&turma='+ turma +'&disciplina='+ disciplina +'&periodo='+ periodo +'&video='+ video +'&txtdata='+ txtdata +'&conteudo='+ conteudo +'&tipo='+ tipo +'&txtobs='+ txtobs +'&ap='+ sv +'&codigo='+ codigo +'&load=1','listdiario','GET');
+		   requestPage('?br=atu_diario&turma='+ turma +'&disciplina='+ disciplina +'&periodo='+ periodo +'&video='+ video +'&txtdata='+ txtdata +'&conteudo='+ conteudo +'&tipo='+ tipo +'&txtobs='+ txtobs +'&ap='+ sv +'&codigo='+ codigo +'&load=1','modals','GET');
 		}
 	}		
 }

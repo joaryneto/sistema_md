@@ -67,7 +67,7 @@ else if(@$_GET['ap'] == "2")
         </script>');
 	}
 }
-if(@$_GET['ap'] == 3)
+else if(@$_GET['ap'] == 3)
 {
 	$SQL1 = "UPDATE diario SET status=2 where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
 	$RES = mysqli_query($db,$SQL1);
