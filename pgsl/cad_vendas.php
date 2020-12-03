@@ -459,6 +459,7 @@ function auto()
 								<div class="input-group col-md-12 m-t-20">
                                 <div class="help-block"></div></div>
 								<div class="form-group col-md-12 m-t-20" style="clear:">
+								
 								<div class="pmd-card pmd-table-card-responsive" id="dtable" style="display:none;">
 						        <div class="pmd-table-card">  
 							    <table class="table pmd-table table-hover">
@@ -471,33 +472,6 @@ function auto()
 								    </tr>
 								 </thead>
 								 <tbody id="itenss">
-									<? 
-										  $d_count = 1;  
-										  $data = date('Y');
-										  $sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.preco) as totals, count(vendas_mov.produto) as quantidade from vendas_mov inner join produtos on produtos.codigo=vendas_mov.produto where vendas_mov.venda='".$_SESSION['venda']."' GROUP BY vendas_mov.total,vendas_mov.produto order by produtos.codigo asc";
-										  $res = mysqli_query($db3,$sql); 
-										  $b = 0;
-										  while($row = mysqli_fetch_array($res))
-										  {
-												 
-										  ?>
-                                            <tr onclick="excluir(<?=$row['produto'];?>,<?=$row['total'];?>)"><!-- color: #20aee3; -->
-											    <td data-title="#"><? echo $row['codigo'];?></td>
-                                                <td data-title="Descrição"><? echo $row['descricao'];?></td>
-												<td data-title="Qtd/C. Uni."><? echo $row['quantidade'];?>x<? echo number_format($row['preco'],2,",",".");?></td>
-												<td data-title="Total">R$ <? echo number_format($row['totals'],2,",",".");?></td>
-                                            </tr>
-										  <? $b = 1;
-										     $d_count ++;
-										  } 
-										  
-										  if($b == 0)
-										  {
-											 echo '<tr ><!-- color: #20aee3; -->
-											    <td colspan="4" class="text-center"> Nenhum registro encontrado.</td>
-                                            </tr>';
-										  }
-										  ?>
 							  	     </tbody>
 							      </table>
 						         </div>

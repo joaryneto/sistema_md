@@ -32,9 +32,10 @@ if(@$inputb['ap'] == 1){
 
 $pesquisa = @$inputb['pesquisa'];
 
-$SQL = "SELECT agendamento_servicos.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
+$SQL = "SELECT produtos.descricao,agendamento_servicos.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
 inner join clientes on clientes.codigo=agendamento.cliente 
 inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
+inner join produtos on produtos.codigo=agendamento_servicos.servico
 where agendamento.sistema='".$_SESSION['sistema']."' and agendamento.status=1 and agendamento.nome like '%".$pesquisa."%' ORDER BY agendamento.codigo desc";
 $RES = mysqli_query($db3,$SQL);
 while($row = mysqli_fetch_array($RES))
@@ -42,6 +43,7 @@ while($row = mysqli_fetch_array($RES))
 ?>
 <tr style="cursor: pointer;" onclick="m_agendamento(<? echo $row['codigo'];?>);">
 <td data-title="Nome"><? echo $row['nome'];?></td>
+<td data-title="Serviço"><? echo $row['descricao'];?></td>
 <td data-title="Data/Hora"><? echo formatodata($row['data'])." - ".formatohora($row['hora']); ?></td>
 </tr>
 <? $x = 1;
