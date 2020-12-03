@@ -76,29 +76,25 @@
 		
 	}
 	
-	$SQL3 = "SELECT sum(preco) as total, count(codigo) as qtd FROM vendas_mov where venda='".$_SESSION['venda']."'";
-	$RES3 = mysqli_query($db3,$SQL3);
-	$ROW3 = mysqli_fetch_array($RES3);
-		
-    $_SESSION['qtditens'] = $ROW3['qtd'];		
-	$_SESSION['vtotal'] = number_format($ROW3['total'],2,",",".");
+	$agendamento = @$inputb['agendamento'];
 	
-	$agendamento = @$inputb['codigo'];
-	
-	if(isset($agendamento) and $inputb['ch'] == "true")
+	if(isset($agendamento))
     {
 	  $data = date("Y-m-d");
-	  $SQL5 = "SELECT produtos.preco,agendamento_servicos.codigo, agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
+	  $SQL5 = "SELECT produtos.preco,produtos.codigo as produto,agendamento_servicos.codigo, agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
 	  inner join clientes on clientes.codigo=agendamento.cliente 
 	  inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
 	  inner join produtos on produtos.codigo=agendamento_servicos.servico
-	  where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.codigo='".$agenndamento."' and agendamento.status=1 ORDER BY agendamento.codigo desc";
+	  where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.codigo='".$agendamento."' and agendamento.status=1 ORDER BY agendamento.codigo desc";
 	  $RESS3 = mysqli_query($db3,$SQL5);
 	  while($row = mysqli_fetch_array($RESS3))
 	  {
 		
+		$SQL = "DELETE FROM vendas_mov where sistema='".$_SESSION['sistema']."' and venda='".$_SESSION['venda']."'";
+		mysqli_query($db3,$SQL);
+		
 		$data = date("Y-m-d");
-		$SQL = "INSERT vendas_mov(sistema,cliente,produto,venda,caixa,data,preco,total,usuario,status) values('".$_SESSION['sistema']."','".$row['cliente']."','".$row['codigo']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$data."','".$row['preco']."','".$row['preco']."','".$_SESSION['usuario']."',1)";
+		$SQL = "INSERT vendas_mov(sistema,cliente,produto,venda,caixa,data,preco,total,usuario,status) values('".$_SESSION['sistema']."','".$row['cliente']."','".$row['produto']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$data."','".$row['preco']."','".$row['preco']."','".$_SESSION['usuario']."',1)";
         $RES = mysqli_query($db3,$SQL);
 		
 		print('<script>
@@ -107,10 +103,18 @@
 		$("#dt" ).show( "slow" );
 		$("#c_nome" ).show( "slow" );    
 		$("#c_codigo").val(codigo);
-	    document.getElementById("nome").innerHTML = "'.$nome.'";
+	    document.getElementById("nome").innerHTML = "'.$row['nome'].'";
 		</script>');
 	  }
 	}
+	
+	$SQL3 = "SELECT sum(preco) as total, count(codigo) as qtd FROM vendas_mov where venda='".$_SESSION['venda']."'";
+	$RES3 = mysqli_query($db3,$SQL3);
+	$ROW3 = mysqli_fetch_array($RES3);
+		
+    $_SESSION['qtditens'] = $ROW3['qtd'];		
+	$_SESSION['vtotal'] = number_format($ROW3['total'],2,",",".");
+
 	?>
 <script>
 function btn_cexit()
@@ -133,7 +137,7 @@ function m_agendamento(agendamento)
 	{
 		
 		$('#modalap').modal('hide');
-		requestPage('?br=atu_pesquisa&agendamento='+ agendamento +'&ch=true&load=1','load','GET');
+		requestPage2('?br=cad_vendas&agendamento='+ agendamento +'&ch=true&load=1','conteudo','GET');
 	}
 }
 
@@ -201,8 +205,6 @@ function lancar()
 	var preco = document.getElementById('preco').value;
 	var total = document.getElementById('totals').value;
 	
-	
-	
 	if(descricao == "")
 	{
 		swal('Atenção', 'Selecione um produto.');
@@ -221,11 +223,8 @@ function lancar()
 	}
 	else
 	{
-		//$("#itenss").append('<tr><td>'+ descricao +'</td><td>1x'+ preco +'</td><td>'+ total +'</td><td>.</td></tr>');
-	
-	    ajaxLoader('?br=atu_caixa&codigo='+ codigo +'&produto='+ coditem +'&desc='+ desc +'&preco='+ preco +'&total='+ total +'&quantidade='+ qtd +'&ap=1','itenss','GET');
-	 
-	     
+	    ajaxLoader('?br=atu_caixa&codigo='+ codigo +'&produto='+ coditem +'&desc='+ desc +'&preco='+ preco +'&total='+ total +'&quantidade='+ qtd +'&ap=1&load=1','itenss','GET');
+
 	    $('#coditem').val('');
 		$('#qtd').val('');
 	    $('#descricao').val('');
@@ -233,11 +232,6 @@ function lancar()
 	    $('#preco').val('');
 	    $('#total').val('');
 		$('#totals').val('');
-		//document.getElementById("descricao").disabled = false;	
-		
-		//localStorage.setItem("total",''+ parseInt(total) +'');
-		
-		//document.getElementById('vtotal').innerHTML = teste;
 	}
 }
 

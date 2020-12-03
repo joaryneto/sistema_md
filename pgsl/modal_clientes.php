@@ -434,7 +434,7 @@ function m_cliente(codigo)
 <?
 $m_data = date("Y-m-d");
 
-$SQL = "SELECT agendamento.codigo,agendamento_servicos.codigo as codservico,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
+$SQL = "SELECT agendamento_servicos.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
 inner join clientes on clientes.codigo=agendamento.cliente 
 inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
 where agendamento.sistema='".$_SESSION['sistema']."' and agendamento.status=1 and agendamento_servicos.data='$m_data' ORDER BY agendamento.codigo desc";
@@ -442,7 +442,7 @@ $RES = mysqli_query($db3,$SQL);
 while($row = mysqli_fetch_array($RES))
 {
 ?>
-<tr style="cursor: pointer;" onclick="m_cliente(<?=$row['codigo'];?>);">
+<tr style="cursor: pointer;" onclick="m_agendamento(<?=$row['codigo'];?>);">
 <td data-title="Nome"><? echo $row['nome'];?></td>
 <td data-title="Data/Hora"><? echo formatodata($row['data'])." - ".formatohora($row['hora']); ?></td>
 </tr>

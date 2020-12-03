@@ -32,7 +32,7 @@ if(@$inputb['ap'] == 1){
 
 $pesquisa = @$inputb['pesquisa'];
 
-$SQL = "SELECT agendamento.codigo,agendamento_servicos.codigo as codservico,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
+$SQL = "SELECT agendamento_servicos.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
 inner join clientes on clientes.codigo=agendamento.cliente 
 inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
 where agendamento.sistema='".$_SESSION['sistema']."' and agendamento.status=1 and agendamento.nome like '%".$pesquisa."%' ORDER BY agendamento.codigo desc";
