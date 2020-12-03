@@ -42,7 +42,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 				$SQL = "SELECT agendamento.codigo,agendamento_servicos.codigo as codservico,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
 				inner join clientes on clientes.codigo=agendamento.cliente 
 				inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
-				where agendamento.sistema='".$_SESSION['sistema']."' and agendamento.status=1 ORDER BY agendamento.codigo desc";
+				where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.status=0 ORDER BY agendamento.codigo desc";
 				$RES = mysqli_query($db3,$SQL);
 				while($row = mysqli_fetch_array($RES))
 				{

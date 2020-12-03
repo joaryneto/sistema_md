@@ -158,13 +158,17 @@ else if($inputb['ap'] == 3)
 
 if($inputb['load'] == 1)
 {
-	$pesquisa = @$inputb['pesquisa'];
+	            $pesquisa = @$inputb['pesquisa'];
 	
-	$SQL = "SELECT agendamento.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento.data,agendamento.hora FROM agendamento inner join clientes on clientes.codigo=agendamento.cliente where agendamento.sistema='".$_SESSION['sistema']."' and clientes.nome like '%".$pesquisa."%' ORDER BY agendamento.codigo asc";
-	$RES = mysqli_query($db3,$SQL);
-	while($row = mysqli_fetch_array($RES))
-	{
+				$SQL = "SELECT agendamento.codigo,agendamento_servicos.codigo as codservico,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
+				inner join clientes on clientes.codigo=agendamento.cliente 
+				inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
+				where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.status=0 ORDER BY agendamento.codigo desc";
+				$RES = mysqli_query($db3,$SQL);
+				while($row = mysqli_fetch_array($RES))
+				{
 				?>
+				
 				<div class="col-12 col-md-6 mb-4">
                     <div class="row">
                         <div class="col-4">
@@ -177,7 +181,7 @@ if($inputb['load'] == 1)
                         <div class="col pl-0">
                             <h3><p class="large text-mute" style="font-size: initial;"><? echo $row['nome'];?></p></h3>
                             <p class="large text-mute" style="font-size: initial;">Dia: <? echo formatodata($row['data']);?> às Hora: <? echo formatohora($row['hora']);?>hs</p>
-                            <button type="button" onclick="agenda(2,'<? echo $row['codigo'];?>','<? echo $row['cliente'];?>','<? echo $row['data'];?>','<? echo $row['hora'];?>','<? echo $row['nome'];?>');" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Editar</button>
+                            <button type="button" onclick="agenda('<? echo $row['profissional'];?>','<? echo $row['codservico'];?>','<? echo $row['cliente'];?>','<? echo $row['data'];?>','<? echo $row['hora'];?>','<? echo $row['nome'];?>');" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Editar</button>
 							<button type="button" onclick="agendaex('<? echo $row['codigo'];?>');" class="btn pmd-btn-outline pmd-ripple-effect btn-danger">Excluir</button>
 							<div class="pmd-card-actions">
 								<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" onclick="whats('<? echo str_replace("(","", str_replace(")","", str_replace("-","",$row['celular'])));?>','Bom dia *<? echo $row['nome'];?>*! %0APassando para lembrar que você tem horário agendado hoje às *<? echo formatohora($row['hora']);?>hs*.%0A%0A *Studio KA*');"><i class="fa fa-whatsapp" aria-hidden="true" style="font-size: 210%; color: green;"></i></button>
@@ -186,10 +190,9 @@ if($inputb['load'] == 1)
 							</div>
                         </div>
                     </div>
+					
                 </div>
-			  <?
-			  
-	}
+				<?
 }
 
 
