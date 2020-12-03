@@ -137,7 +137,7 @@ function m_agendamento(agendamento)
 	{
 		
 		$('#modalap').modal('hide');
-		requestPage2('?br=cad_vendas&agendamento='+ agendamento +'&ch=true&load=1','conteudo','GET');
+		requestPage('?br=cad_vendas&agendamento='+ agendamento +'&ch=true&load=1','conteudo','GET');
 	}
 }
 
