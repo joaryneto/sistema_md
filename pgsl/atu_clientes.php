@@ -31,12 +31,12 @@ if(@$inputb['ap'] == 1){
 {
 
 $pesquisa = @$inputb['pesquisa'];
-
+$x = 0;
 $SQL = "SELECT produtos.descricao,agendamento_servicos.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
 inner join clientes on clientes.codigo=agendamento.cliente 
 inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
 inner join produtos on produtos.codigo=agendamento_servicos.servico
-where agendamento.sistema='".$_SESSION['sistema']."' and agendamento.status=1 and agendamento.nome like '%".$pesquisa."%' ORDER BY agendamento.codigo desc";
+where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.status=0 and agendamento.nome like '%".$pesquisa."%' ORDER BY agendamento.codigo desc";
 $RES = mysqli_query($db3,$SQL);
 while($row = mysqli_fetch_array($RES))
 {
@@ -51,8 +51,7 @@ while($row = mysqli_fetch_array($RES))
 
 if($x == 0)
 {
- echo "<tr><td>Nenhum resultado encontrado.</td><td></td><td></td><td></td></tr>";
-
+   echo "<tr><td colspan='3'>Nenhum resultado encontrado.</td></tr>";
 }
 }
 ?>

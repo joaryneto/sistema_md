@@ -78,6 +78,8 @@
 	
 	$agendamento = @$inputb['agendamento'];
 	
+	$_SESSION['pgtagendamento'] = $agendamento;
+	
 	if(isset($agendamento))
     {
 	  $data = date("Y-m-d");
@@ -94,7 +96,7 @@
 		mysqli_query($db3,$SQL);
 		
 		$data = date("Y-m-d");
-		$SQL = "INSERT vendas_mov(sistema,cliente,produto,venda,caixa,data,preco,total,usuario,status) values('".$_SESSION['sistema']."','".$row['cliente']."','".$row['produto']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$data."','".$row['preco']."','".$row['preco']."','".$_SESSION['usuario']."',1)";
+		$SQL = "INSERT vendas_mov(sistema,cliente,agendamento,produto,venda,caixa,data,preco,total,usuario,status) values('".$_SESSION['sistema']."','".$row['cliente']."','".$row['codigo']."','".$row['produto']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$data."','".$row['preco']."','".$row['preco']."','".$_SESSION['usuario']."',1)";
         $RES = mysqli_query($db3,$SQL);
 		
 		print('<script>
@@ -102,7 +104,8 @@
 		$("#dtable" ).hide( "slow" );
 		$("#dt" ).show( "slow" );
 		$("#c_nome" ).show( "slow" );    
-		$("#c_codigo").val(codigo);
+		$("#c_codigo").val("'.$row['cliente'].'");
+		$("#c_agendamento").val("'.$row['codigo'].'");
 	    document.getElementById("nome").innerHTML = "'.$row['nome'].'";
 		</script>');
 	  }
@@ -242,7 +245,9 @@ function pagar()
 	var ctcredito = document.getElementById('ctcredito').value;
 	var ted = document.getElementById('ted').value;
 	
-	ajaxLoader('?br=atu_caixa&dinheiro='+ dinheiro +'&ctdebito='+ ctdebito +'&ctcredito='+ ctcredito +'&ted='+ ted +'&ap=2','loading','GET');
+	
+	$('#pagamento').modal('hide');
+	requestPage('?br=atu_caixa&dinheiro='+ dinheiro +'&ctdebito='+ ctdebito +'&ctcredito='+ ctcredito +'&ted='+ ted +'&ap=2','loading','GET');
 }
 
 function loadtotal()
@@ -400,6 +405,7 @@ function auto()
 								<div class="input-group mb-3">
 								   <h5><i class="material-icons pmd-sm" style="font-size: 140%;position: relative;top:  3px;">person</i> <span id="nome"></span> <a href="javascript: Web(0);" onclick="btn_cexit();"><i class="fa fa-times-circle" style="font-size: 110%; color: red;"></i></a></h5>  
 								   <input type="hidden" name="c_codigo" id="c_codigo" placeholder="" value="" class="form-control form-control-lg" >
+								   <input type="hidden" name="c_agendamento" id="c_agendamento" placeholder="" value="" class="form-control form-control-lg" >
                                    </div>								   
 								</div>
 								<div class="input-group col-md-12 m-t-20">

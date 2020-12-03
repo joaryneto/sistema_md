@@ -427,16 +427,18 @@ function m_cliente(codigo)
 <thead>
 <tr>
 <th>Cliente</th>
+<th>Serviço</th>
 <th>Data/Hora</th>
 </tr>
 </thead>
 <tbody id="listclientes">
 <?
 $m_data = date("Y-m-d");
-
-$SQL = "SELECT agendamento_servicos.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
+$x = 0;
+$SQL = "SELECT produtos.descricao,agendamento_servicos.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
 inner join clientes on clientes.codigo=agendamento.cliente 
 inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
+inner join produtos on produtos.codigo=agendamento_servicos.servico
 where agendamento.sistema='".$_SESSION['sistema']."' and agendamento.status=1 and agendamento_servicos.data='$m_data' ORDER BY agendamento.codigo desc";
 $RES = mysqli_query($db3,$SQL);
 while($row = mysqli_fetch_array($RES))
@@ -444,6 +446,7 @@ while($row = mysqli_fetch_array($RES))
 ?>
 <tr style="cursor: pointer;" onclick="m_agendamento(<?=$row['codigo'];?>);">
 <td data-title="Nome"><? echo $row['nome'];?></td>
+<td data-title="Serviço"><? echo $row['descricao'];?></td>
 <td data-title="Data/Hora"><? echo formatodata($row['data'])." - ".formatohora($row['hora']); ?></td>
 </tr>
 <? $x = 1;
@@ -451,7 +454,7 @@ while($row = mysqli_fetch_array($RES))
 
 if($x == 0)
 {
- echo "<tr><td>Nenhum resultado encontrado.</td><td></td><td></td><td></td></tr>";
+ echo "<tr><td colspan='3'>Nenhum resultado encontrado.</td></tr>";
 
 }
 ?>

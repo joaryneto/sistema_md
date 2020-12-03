@@ -144,9 +144,11 @@ if(@$_GET['ap'] == 1)
 }
 else if(@$_GET['ap'] == 2)
 {
-    //$SQL = "SELECT sum(total) as total FROM vendas_mov where venda='".$_SESSION['venda']."'";
-	//$RES = mysqli_query($db3,$SQL);
-	//$CREW = mysqli_fetch_array($RES);
+    $SQL = "SELECT sum(total) as total FROM vendas_mov where venda='".$_SESSION['venda']."'";
+	$RES = mysqli_query($db3,$SQL);
+	$CREW = mysqli_fetch_array($RES);
+	
+	$_SESSION['totalvenda'] = $CREW['total'];
 	
 	$dinheiro = str_replace(",",".", str_replace(".","",$_GET['dinheiro']));
 	$ctdebito = str_replace(",",".", str_replace(".","",$_GET['ctdebito']));
@@ -193,10 +195,10 @@ else if(@$_GET['ap'] == 2)
 	    $SQL1 = "UPDATE vendas SET status=0, data='".$data."' where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['venda']."'";
 		$RES = mysqli_query($db3,$SQL1);
 		
-		//$SQL2 = "UPDATE vendas_recebidos SET status=1 where sistema='".$_SESSION['sistema']."' and venda='".$_SESSION['venda']."'";
-	    //$RES = mysqli_query($db3,$SQL2);
+		$SQL2 = "UPDATE agendamento_servicos SET status=1 where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['pgtagendamento']."'";
+	    $RES = mysqli_query($db3,$SQL2);
 		
-	    print("<script>window.location.href='sistema.php?url=cad_vendas';</script>");
+	    print("<script> requestPage('?br=cad_vendas','conteudo','GET'); </script>");
 	}
 }
 else if(@$_GET['ap'] == 3)

@@ -440,7 +440,7 @@ function isMobile()
 		<span class="pmd-floating-hidden">Itens do Carrinho</span> 
 		<i class="material-icons">add_shopping_cart</i> 
 		</a>  
-		<button type="button" class="pmd-floating-action-btn btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" data-title="Menu"> 
+		<button type="button" class="pmd-floating-action-btn btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-info" data-title="Menu"> 
 		<span class="pmd-floating-hidden">Primary</span>
 		<i class="material-icons pmd-sm">extension</i> 
 		</button> 
