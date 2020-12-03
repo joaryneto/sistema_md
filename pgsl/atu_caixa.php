@@ -61,7 +61,7 @@ else if(@$_GET['load'] == 2)
 	
 	$valor = $dinheiro+$debito+$credito+$ted;
 
-	print("<script>swal('Atenção', '".$valor." e ".$totals."');</script>");
+	//print("<script>swal('Atenção', '".$valor." e ".$totals."');</script>");
 	
 	if($valor < $totals)
 	{
