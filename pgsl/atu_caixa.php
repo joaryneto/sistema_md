@@ -47,6 +47,12 @@ if(@$_GET['load'] == 1)
 }
 else if(@$_GET['load'] == 2)
 {
+	$SQL = "SELECT sum(preco) as total, count(codigo) as qtd FROM vendas_mov where sistema='".$_SESSION['sistema']."' and venda='".$_SESSION['venda']."'";
+	$RES = mysqli_query($db3,$SQL);
+	$CREW = mysqli_fetch_array($RES);	 
+	
+	$_SESSION['totalvenda'] = $CREW['total'];
+	
 	$dinheiro = str_replace(",",".", str_replace(".","",$_GET['dinheiro']));
 	$debito = str_replace(",",".", str_replace(".","",$_GET['ctdebito']));
 	$credito = str_replace(",",".", str_replace(".","",$_GET['ctcredito']));
@@ -55,7 +61,9 @@ else if(@$_GET['load'] == 2)
 	
 	$valor = $dinheiro+$debito+$credito+$ted;
 
-	if($valor <= $totals)
+	print("<script>swal('Atenção', '".$valor." e ".$totals."');</script>");
+	
+	if($valor < $totals)
 	{
 		$v = $totals-+$valor;
 		
