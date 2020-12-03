@@ -53,10 +53,10 @@ else if(@$_GET['load'] == 2)
 	
 	$_SESSION['totalvenda'] = $CREW['total'];
 	
-	$dinheiro = str_replace(",",".", str_replace(".","",$_GET['dinheiro']));
-	$debito = str_replace(",",".", str_replace(".","",$_GET['ctdebito']));
-	$credito = str_replace(",",".", str_replace(".","",$_GET['ctcredito']));
-	$ted = str_replace(",",".", str_replace(".","",$_GET['ted']));
+	$dinheiro = str_replace(",",".", str_replace(".","",@$_GET['dinheiro']));
+	$debito = str_replace(",",".", str_replace(".","",@$_GET['ctdebito']));
+	$credito = str_replace(",",".", str_replace(".","",@$_GET['ctcredito']));
+	$ted = str_replace(",",".", str_replace(".","",@$_GET['ted']));
 	$totals = str_replace(",",".", $_SESSION['totalvenda']);
 	
 	$valor = $dinheiro+$debito+$credito+$ted;
@@ -198,7 +198,7 @@ else if(@$_GET['ap'] == 2)
 		$SQL2 = "UPDATE agendamento_servicos SET status=1 where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['pgtagendamento']."'";
 	    $RES = mysqli_query($db3,$SQL2);
 		
-	    print("<script> requestPage('?br=cad_vendas','conteudo','GET'); </script>");
+	    print("<script> requestPage('?br=cad_vendas&comprovante=true&codigo=".$_SESSION['venda']."','conteudo','GET'); </script>");
 	}
 }
 else if(@$_GET['ap'] == 3)
@@ -253,6 +253,59 @@ if(@$_GET['load'] == 1)
 	    echo '<tr><td colspan="4" class="text-center"> Nenhum registro encontrado.</td></tr>';
 		print("<script> slow();</script>");
 	}	
+}
+
+if(@$_GET['load'] == 1)
+{
+    $d_count = 1;			 
+	$data = date('Y');
+	$sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.preco) as totals, count(vendas_mov.produto) as quantidade from vendas_mov inner join produtos on produtos.codigo=vendas_mov.produto where vendas_mov.sistema='".$_SESSION['sistema']."' and vendas_mov.venda='".$_SESSION['venda']."' GROUP BY vendas_mov.total, vendas_mov.produto";
+	$res = mysqli_query($db3,$sql); 
+	$b = 0;
+	while($row = mysqli_fetch_array($res))
+	{
+												 
+	?>
+	<tr onclick="excluir(<?=$row['produto'];?>,<?=$row['total'];?>)"><!-- color: #20aee3; -->
+		<td data-title="#"><?=$d_count;?></td>
+		<td data-title="Descrição">(<? echo $row['codigo'];?>) - <? echo $row['descricao'];?></td>
+		<td data-title="Qtd/C. Uni."><? echo $row['quantidade'];?>x<? echo number_format($row['preco'],2,",",".");?></td>
+		<td data-title="Total">R$ <? echo number_format($row['totals'],2,",",".");?></td>
+	</tr>
+	<? $b = 1;
+	   $d_count ++;
+	} 									  
+	if($b == 0)
+	{
+	    echo '<tr><td colspan="4" class="text-center"> Nenhum registro encontrado.</td></tr>';
+		print("<script> slow();</script>");
+	}	
+	
+}else if(@$_GET['load'] == 2)
+{
+    $d_count = 1;			 
+	$data = date('Y');
+	$sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.preco) as totals, count(vendas_mov.produto) as quantidade from vendas_mov inner join produtos on produtos.codigo=vendas_mov.produto where vendas_mov.sistema='".$_SESSION['sistema']."' and vendas_mov.venda='".$_SESSION['venda']."' GROUP BY vendas_mov.total, vendas_mov.produto";
+	$res = mysqli_query($db3,$sql); 
+	$b = 0;
+	while($row = mysqli_fetch_array($res))
+	{
+												 
+	?>
+	<tr onclick="excluir(<?=$row['produto'];?>,<?=$row['total'];?>)"><!-- color: #20aee3; -->
+		<td data-title="#"><?=$d_count;?></td>
+		<td data-title="Descrição">(<? echo $row['codigo'];?>) - <? echo $row['descricao'];?></td>
+		<td data-title="Qtd/C. Uni."><? echo $row['quantidade'];?>x<? echo number_format($row['preco'],2,",",".");?></td>
+		<td data-title="Total">R$ <? echo number_format($row['totals'],2,",",".");?></td>
+	</tr>
+	<? $b = 1;
+	   $d_count ++;
+	} 									  
+	if($b == 0)
+	{
+	    echo '<tr><td colspan="4" class="text-center"> Nenhum registro encontrado.</td></tr>';
+	}	
+	
 }
 
 ?>	

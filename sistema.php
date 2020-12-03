@@ -407,6 +407,11 @@ function isMobile()
 		{				
 		   requestPage2('?br=modal_clientes&modal=3','modals','GET');
 		}
+		
+		function btn_teste()
+		{				
+		   requestPage2('?br=modal_pagamento&modal=1','modals','GET');
+		}
 		</script>
 		 <div class="menu pmd-floating-action" role="navigation" style="bottom: 80px;"> 
         <a href="javascript:void(0);" onclick="btn_cadcliente();" data-toggle="modal" data-target="#modalusuario" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="Clientes"> 

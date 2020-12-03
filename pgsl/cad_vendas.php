@@ -387,7 +387,22 @@ function auto()
   document.getElementById("codigo").focus();
 }
 
-</script>			
+</script>	
+<?
+				if(@$_GET['comprovante'] == "true")
+				{
+					$codigo = $_GET['codigo'];
+					?>
+					<script> 
+					//window.onload = function ()
+					//{
+					   $('#modalap').modal('show');
+					   requestPage2('?br=modal_pagamento&modal=1&codigo=<?=$codigo;?>','modals','GET'); 
+					//}
+					</script>
+					<?
+				}
+				?>
 <div class="container-fluid bg-template mb-4">
             <div class="row hn-154 position-relative">
                 <!-- use hn-60 if there is no page specific name required as below and remove below container -->
@@ -468,10 +483,9 @@ function auto()
 								<script>
 								window.onload = function ()
 								{
-								   requestPage2('?br=atu_caixa&load=1','itenss','GET');
+								   requestPage2('?br=atu_caixa&load=2','itenss','GET');
 								}
 								</script>
-							
 								<div class="pmd-card pmd-table-card-responsive" id="dtable" style="display:none;">
 						        <div class="pmd-table-card">  
 							    <table class="table pmd-table table-hover">
