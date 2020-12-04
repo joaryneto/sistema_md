@@ -387,6 +387,12 @@ function auto()
   document.getElementById("codigo").focus();
 }
 
+function testepgt()
+{
+	$('#modalap').modal('show');
+	requestPage2('?br=modal_pagamento&modal=1&codigo=3','modals','GET'); 
+}
+
 </script>	
 <?
 				if(@$_GET['comprovante'] == "true")
@@ -407,7 +413,18 @@ function auto()
             <div class="row hn-154 position-relative">
                 <!-- use hn-60 if there is no page specific name required as below and remove below container -->
                 <div class="container align-self-end">
-                    <h3 class="font-weight-light"><? echo $_SESSION["PAGINA"] = "Venda caixa (PDV)"; ?></h3>
+                    <h3 class="font-weight-light"><? echo $_SESSION["PAGINA"] = "Venda caixa (PDV)"; ?> <button class="btn  btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" type="button" onclick="btn_cliente();" data-toggle="modal" data-target="#modalap" data-title="Clientes">
+								<span class="pmd-floating-hidden">Clientes</span> 
+										<i class="material-icons pmd-sm">supervisor_account</i>
+								</button>
+								<button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-success" type="button" onclick="btn_cacliente();" data-toggle="modal" data-target="#modalap" data-title="Cadastrar Cliente"> 
+            <span class="pmd-floating-hidden">Cadastrar</span> 
+            <i class="material-icons">person_add</i> 
+        </button> 
+				    <button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" type="button" onclick="btn_agendamento();" data-toggle="modal" data-target="#modalap" data-title="Agendamento">
+		<span class="pmd-floating-hidden">Agendamento</span> 
+		<i class="material-icons pmd-sm">perm_contact_calendar</i>
+		</button></h3>
                     <p class="text-mute mb-4">List Caixa</p>
                 </div>
             </div>
@@ -416,12 +433,13 @@ function auto()
            <div class="row">			
                     <div class="col-12">
 								<div class="m-t-40 row" style="display: flex;" id="forcaixa">
-								<div class="input-group col-md-12 m-t-20" id="c_nome" style="display: none;">
+								<div class="input-group col-md-9 m-t-20" id="c_nome" style="display: none;">
 								<div class="input-group mb-3">
-								   <h5><i class="material-icons pmd-sm" style="font-size: 140%;position: relative;top:  3px;">person</i> <span id="nome"></span> <a href="javascript: Web(0);" onclick="btn_cexit();"><i class="fa fa-times-circle" style="font-size: 110%; color: red;"></i></a></h5>  
+								   <h5 style="position: relative;top: 15px;left: 0px;"><i class="material-icons pmd-sm" style="font-size: 140%;position: relative;top:  3px;">person</i> <span id="nome"></span> <a href="javascript: Web(0);" onclick="btn_cexit();"><i class="fa fa-times-circle" style="font-size: 110%; color: red;"></i></a></h5>  
 								   <input type="hidden" name="c_codigo" id="c_codigo" placeholder="" value="" class="form-control form-control-lg" >
 								   <input type="hidden" name="c_agendamento" id="c_agendamento" placeholder="" value="" class="form-control form-control-lg" >
-                                   </div>								   
+                                   </div>
+								   
 								</div>
 								<div class="input-group col-md-12 m-t-20">
 								 <div class="input-group mb-3">
@@ -508,6 +526,8 @@ function auto()
 								<h1 style="color: green;font-weight: bold;">Total: R$ <span id="vtotal"><?=$_SESSION['vtotal'];?></span></h1></div>
 								<div class="form-group col-md-12 m-t-20">
 								<button class="btn btn-lg btn pmd-btn-raised btn-primary btn-block pmd-ripple-effect" type="button" onclick="atualizar();" data-toggle="modal" data-target="#pagamento">Confirmar pagamento</button>
+								<?if(isset($_GET['teste'])){?> <button class="btn btn-lg btn pmd-btn-raised btn-primary btn-block pmd-ripple-effect" type="button" onclick="testepgt();" >TESTE pagamento</button> <? } ?>
+								
 								</div>
 								<div class="input-group col-md-10 m-t-20">
 								<div id="gravar"></div></div>

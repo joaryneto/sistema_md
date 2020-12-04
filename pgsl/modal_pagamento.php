@@ -24,17 +24,20 @@ if(@$_SESSION['menu99'] == false)
 if($_GET['modal'] == 1)
 {
 	
-       $SQL = "SELECT agendamento.codigo,agendamento_servicos.codigo as codservico,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
+       $SQL = "SELECT vendas.data as datavenda, vendas_mov.venda, configuracoes.fantasia,usuarios.nome as vendedor,agendamento.codigo,agendamento_servicos.codigo as codservico,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
        inner join clientes on clientes.codigo=agendamento.cliente 
        inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
-	   inner join vendas_mov on vendas_mov.produto=agendamento_servicos.servico
+       inner join vendas_mov on vendas_mov.produto=agendamento_servicos.servico
+       inner join usuarios on usuarios.codigo=vendas_mov.usuario
+       inner join configuracoes on configuracoes.sistema=agendamento_servicos.sistema
+	   inner join vendas on vendas.codigo=vendas_mov.venda
        where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.status=1 and vendas_mov.venda='".@$_GET['codigo']."' ORDER BY agendamento.codigo desc limit 1";
        $RES = mysqli_query($db3,$SQL);
        while($row = mysqli_fetch_array($RES))
 	   {
 ?>
 <div class="modal-header">
-<h2 class="pmd-card-title-text">Comprovante - </h2>
+<h2 class="pmd-card-title-text"><?=$row['fantasia'];?></h2>
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
 <div class="modal-body">
@@ -43,34 +46,66 @@ if($_GET['modal'] == 1)
                 <div class="card-header success-gradient py-4">
                     <div class="row">
                         <div class="col font-weight-bold">Comprovante de Venda - NÃO FISCAL
-                            <br><small>Pago</small>
+                            <br><small><h2>Pago</h2></small>
                         </div>
                         <div class="col text-right">
-                               ID:<b>#123456</b>
+                               ID:<b>#<?=str_pad($row['venda'], 4 , '0' , STR_PAD_LEFT);?></b>
                         </div>
                     </div>
                 </div>
                 <div class="card-body paid-img">
                     <div class="row mb-4">
                         <div class="col-12 col-md-6">
-                            <p class="mb-2 font-weight-bold">Vendido por:</p>
-                            <p class="content-color-secondary">Nome,
+                            <p class="mb-2 font-weight-bold">Vendido por: <?=$row['vendedor'];?></p>
+                            <p class="content-color-secondary">Cliente: <?=$row['nome'];?>,
+                            <!--    <br> #
                                 <br> #
-                                <br> #
-                                <br> #</p>
+                                <br> #--></p>
                         </div>
                     </div>
+					
                     <div class="row mb-4">
                         <div class="col">
                             <p class="mb-2 font-weight-bold">Forma de pagamento:</p>
-                            <p class="content-color-secondary">Visa 
-                                <br>
-                                <a href="">#</a>
-                            </p>
+							 <?
+					            $s_SQL = "SELECT * FROM vendas_recebidos where sistema='".$_SESSION['sistema']."' and venda='".@$_GET['codigo']."'";
+					            $s_RES = mysqli_query($db3,$s_SQL);
+					            while($s_row = mysqli_fetch_array($s_RES))
+								{
+					             ?>
+                                  <p class="content-color-secondary">
+								     <?  
+												switch($s_row['tipo'])
+												{
+													case 1:
+													{
+													   echo "Dinheiro ( A Vista )";
+													}
+													break;
+													case 2:
+													{
+													   echo "Cartão de Débito ( A Vista )";
+													}
+													break;
+													case 3:
+													{
+													   echo "Cartão de Crédito";
+													}
+													break;
+													case 4:
+													{
+													   echo "Trans. ( Ted, doc, tev)";
+													}
+													break;
+												}
+												
+ 								         ?>
+                                  </p>
+	                     <? } ?>
                         </div>
                         <div class="col text-right">
-                            <p class="mb-2 font-weight-bold">Data do pedido:</p>
-                            <p class="content-color-secondary">#
+                            <p class="mb-2 font-weight-bold">Data:</p>
+                            <p class="content-color-secondary"><?=formatodatahora($row['datavenda']);?>
                                 <br><span class="text-danger">#</span></p>
                         </div>
                     </div>
@@ -87,18 +122,20 @@ if($_GET['modal'] == 1)
                         <tbody>
 						    <?
 							$d_count = 1;	
+							$total = "";
 							$sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.preco) as totals, count(vendas_mov.produto) as quantidade from vendas_mov inner join produtos on produtos.codigo=vendas_mov.produto where vendas_mov.sistema='".$_SESSION['sistema']."' and vendas_mov.venda='".@$_GET['codigo']."' GROUP BY vendas_mov.total, vendas_mov.produto";
 							$res = mysqli_query($db3,$sql); 
 							$b = 0;
-							while($row = mysqli_fetch_array($res))
+							while($b_row = mysqli_fetch_array($res))
 							{
+								$total = $total+$b_row['totals'];
 								
 							?>
                             <tr>
-								<td data-title="#"><?=$d_count;?></td>
-								<td data-title="Descrição">(<? echo $row['codigo'];?>) - <? echo $row['descricao'];?></td>
-								<td data-title="Qtd/Preço Uni."><? echo $row['quantidade'];?>x<? echo number_format($row['preco'],2,",",".");?></td>
-								<td class="text-right" data-title="Total">R$ <? echo number_format($row['totals'],2,",",".");?></td>
+								<td data-title="#"><? echo $b_row['codigo'];?></td>
+								<td data-title="Descrição"><? echo $b_row['descricao'];?></td>
+								<td data-title="Qtd/Preço Uni."><? echo $b_row['quantidade'];?>x<? echo number_format($b_row['preco'],2,",",".");?></td>
+								<td class="text-right" data-title="Total">R$ <? echo number_format($b_row['totals'],2,",",".");?></td>
                             </tr>
 							  
 							<? 
@@ -106,31 +143,33 @@ if($_GET['modal'] == 1)
 							} 
 							?>
                             <tr>
-                                <td colspan="2">Delivery Charges</td>
-                                <td colspan="2" class="text-right text-success">FREE</td>
+                                <!--<td colspan="2">Taxas de entrega</td>-->
+                                <td colspan="2" class="text-right text-success"></td>
                             </tr>
 
                         </tbody>
                         <tfoot>
                             <tr class="font-weight-bold bg-light-secondary">
                                 <td colspan="2">Total:</td>
-                                <td colspan="2" class="text-right">R$ 20900.00</td>
+                                <td colspan="2" class="text-right">R$ <?=number_format($total,2,",",".");?></td>
                             </tr>
                         </tfoot>
                     </table>
                     <br>
-                    <p>We recommend power services for our customers</p>
+                    <p></p>
                     <br>
                     <div class="text-right mb-4">
-                        <p class="content-color-secondary">Autorizar assinatura</p>
-                        <p class="mb-2 font-weight-bold">Maxartkiller</p>
+                        <p class="content-color-secondary">_______________________________________</p>
+                        <p class="mb-2 font-weight-bold"><?=$row['nome'];?></p>
                     </div>
                 </div>
                 <div class="card-footer border-top">
                     <a href="#" id="btnPrint" class="btn pink-gradient float-right"><i class="material-icons mr-2">print</i>Imprimir</a>
                 </div>
-				<div style="display: none"><div class="printable"></div></div>
-        <script src="http://leandrolisura.com.br/wp-content/uploads/2017/07/printThis.js"></script>
+				<? } ?>
+				<div style="display: none"><div class="printable"></div>
+	     </div>
+        <script src="template/js/printThis.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#btnPrint").click(function () {
@@ -144,6 +183,6 @@ if($_GET['modal'] == 1)
 </form>										 
 <div class="modal-footer">
 </div>
-  <? }
+  <? 
 }
 ?>

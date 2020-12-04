@@ -18,3 +18,23 @@
 
  --------------------
 
+ Login: 1 
+ IP: 192.168.1.6 
+ IP Reverso: sistema.medfacil.local 
+ Data: 2020-12-04 14:17 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0 
+ Pagina: /sistema.php?br=modal_clientes&codigo=1&nome=JOARY%20TAQUES%20FIGUEIREDO%20NETO&sexo=1&nascimento=29/07/1993&telefone=(65)9999-9910&celular=(65)9.9999-9104&rg=19832800&cpf=05497813151&status=1&modal=3&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 192.168.1.6 
+ IP Reverso: sistema.medfacil.local 
+ Data: 2020-12-04 14:17 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0 
+ Pagina: /sistema.php?br=modal_clientes&codigo=1&nome=JOARY%20TAQUES%20FIGUEIREDO%20NETO&sexo=1&nascimento=29/07/1993&telefone=(65)9999-9910&celular=(65)9.9999-9104&rg=19832800&cpf=05497813151&status=1&modal=3&ap=2 
+ Metodo: GET 
+
+ --------------------
+

@@ -291,6 +291,7 @@ elseif(@$_GET['ap'] == "2")
   <div class="row">
 	<div class="col-md-12 col-sm-12"> 
 		<div class="component-box">
+		                        
 								<form name="laudo" class="form-material m-t-40 row" autocomplete="off" method="post" action="<? if(Empty($_GET['codigo'])){ echo "sistema.php?url=cad_usuarios&ap=1";}else { echo "sistema.php?url=cad_usuarios&codigo=".$_GET['codigo']."&ap=2";} ?>" enctype="multipart/form-data">
 								<div class="form-group col-md-3 m-t-20"><label>CPF :</label>
 								<input type="text" name="cpf" id="cpf" <? if(isset($_GET['codigo'])){ ?> value="<? echo $cpf; ?>" readonly <? } ?> class="form-control" required="required">

@@ -156,7 +156,7 @@ else if(@$_GET['ap'] == 2)
 	$ted = str_replace(",",".", str_replace(".","",$_GET['ted']));
 	$totals = str_replace(",",".", $_SESSION['totalvenda']);
 	
-	$valor = $dinheiro-+$debito+$credito+$ted;
+	$valor = $dinheiro+$ctdebito+$ctcredito+$ted;
 	
 	if($valor < $totals)
 	{
@@ -169,25 +169,25 @@ else if(@$_GET['ap'] == 2)
 		if(0 < $dinheiro)
 		{
 			//print("<script>swal('Atenção', '".$dinheiro."');</script>");
-		    $SQL1 = "INSERT into vendas_recebidos(sistema,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$dinheiro."','1','1');";
+		    $SQL1 = "INSERT into vendas_recebidos(sistema,usuario,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$dinheiro."','1','1');";
 	        mysqli_query($db3,$SQL1);
 		}
 		if(0 < $ctdebito)
 		{
 			//print("<script>swal('Atenção', '".$ctdebito."');</script>");
-		    $SQL1 = "INSERT into vendas_recebidos(sistema,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$ctdebito."','2','1');";
+		    $SQL1 = "INSERT into vendas_recebidos(sistema,usuario,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$ctdebito."','2','1');";
 	        mysqli_query($db3,$SQL1);
 		}
 		if(0 < $ctcredito)
 		{
 			//print("<script>swal('Atenção', '".$dinheiro."');</script>");
-		    $SQL1 = "INSERT into vendas_recebidos(sistema,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$ctcredito."','3','1');";
+		    $SQL1 = "INSERT into vendas_recebidos(sistema,usuario,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$ctcredito."','3','1');";
 	        mysqli_query($db3,$SQL1);
 		}
 		if(0 < $ted)
 		{
 			//print("<script>swal('Atenção', '".$dinheiro."');</script>");
-		    $SQL1 = "INSERT into vendas_recebidos(sistema,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$ted."','4','1');";
+		    $SQL1 = "INSERT into vendas_recebidos(sistema,usuario,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$ted."','4','1');";
 	        mysqli_query($db3,$SQL1);
 		}
 		
