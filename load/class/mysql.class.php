@@ -48,8 +48,8 @@ if(!$db3 = mysqli_connect("mysql741.umbler.com:41890", "sistemadelive", "*XlVz(7
 	echo "Não conectou com banco 4";
 }
 
-@mysqli_select_db($db3, "sistemadelive");
-@mysqli_set_charset($db3,'UTF8');
+@mysqli_select_db($db, "sistemadelive");
+@mysqli_set_charset($db,'UTF8');
 
 //mysqli_close($db3);
 }
