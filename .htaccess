@@ -1,3 +1,6 @@
 RewriteEngine On
-RewriteRule ^/?$ /delivery.php?$ [NC,L]
+RewriteRule  ^/([^/]+)/([^/]+)$ delivery.php?$1=$2 [L]
+RewriteRule  ^/([^/]+)/([^/]+)/([^/]+)/([^/]+)$ delivery.php?$1=$2&$3=$4 [L]
+
+
 ErrorDocument 404 /404.php
