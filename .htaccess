@@ -1,4 +1,4 @@
 RewriteEngine On
-RewriteRule ^/?$1=$2 /delivery.php?$1=$2 [NC,L]
+RewriteRule ^/?$1=$2 /delivery.php [NC,L]
 
 ErrorDocument 404 /404.php
