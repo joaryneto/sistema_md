@@ -15,7 +15,7 @@ if(@$_GET['deslogar']==1)
 	print "<script> window.location='login.php';  </script>";
 }
 
-echo = $_GET['empresa'];
+echo $_GET['empresa'];
 
 $t_SQL = "";
 $t_RES = mysqli_query($db,$t_SQL);
