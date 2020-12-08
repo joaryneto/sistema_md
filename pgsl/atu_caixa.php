@@ -281,7 +281,8 @@ if(@$_GET['load'] == 1)
 		print("<script> slow();</script>");
 	}	
 	
-}else if(@$_GET['load'] == 2)
+}
+else if(@$_GET['load'] == 2)
 {
     $d_count = 1;			 
 	$data = date('Y');

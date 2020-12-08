@@ -107,6 +107,7 @@
 		$("#c_codigo").val("'.$row['cliente'].'");
 		$("#c_agendamento").val("'.$row['codigo'].'");
 	    document.getElementById("nome").innerHTML = "'.$row['nome'].'";
+		requestPage2("?br=atu_caixa&load=2","itenss","GET");
 		</script>');
 	  }
 	}
@@ -140,7 +141,7 @@ function m_agendamento(agendamento)
 	{
 		
 		$('#modalap').modal('hide');
-		requestPage('?br=cad_vendas&agendamento='+ agendamento +'&ch=true&load=1','conteudo','GET');
+		requestPage('?br=cad_vendas&agendamento='+ agendamento +'&ch=true&load=2','conteudo','GET');
 	}
 }
 
@@ -409,19 +410,25 @@ function testepgt()
 					<?
 				}
 				?>
+<script>
+    $(function () 
+	{
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+    </script>
 <div class="container-fluid bg-template mb-4">
             <div class="row hn-154 position-relative">
                 <!-- use hn-60 if there is no page specific name required as below and remove below container -->
                 <div class="container align-self-end">
-                    <h3 class="font-weight-light"><? echo $_SESSION["PAGINA"] = "Venda caixa (PDV)"; ?> <button class="btn  btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" type="button" onclick="btn_cliente();" data-toggle="modal" data-target="#modalap" data-title="Clientes">
+                    <h3 class="font-weight-light"><? echo $_SESSION["PAGINA"] = "Venda caixa (PDV)"; ?> <button class="btn  btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" type="button" onclick="btn_cliente();" data-toggle="modal" data-target="#modalap" data-title="Clientes" title="Lista de Clientes">
 								<span class="pmd-floating-hidden">Clientes</span> 
 										<i class="material-icons pmd-sm">supervisor_account</i>
 								</button>
-								<button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-success" type="button" onclick="btn_cacliente();" data-toggle="modal" data-target="#modalap" data-title="Cadastrar Cliente"> 
+								<button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-success" type="button" onclick="btn_cacliente();" data-toggle="modal" data-target="#modalap" data-title="Cadastrar Cliente" title="Cad. Clientes"> 
             <span class="pmd-floating-hidden">Cadastrar</span> 
             <i class="material-icons">person_add</i> 
         </button> 
-				    <button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" type="button" onclick="btn_agendamento();" data-toggle="modal" data-target="#modalap" data-title="Agendamento">
+				    <button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" type="button" onclick="btn_agendamento();" id="element" data-toggle="modal" data-target="#modalap" data-title="Agendamento" title="Agendamentos">
 		<span class="pmd-floating-hidden">Agendamento</span> 
 		<i class="material-icons pmd-sm">perm_contact_calendar</i>
 		</button></h3>

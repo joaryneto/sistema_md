@@ -38,3 +38,783 @@
 
  --------------------
 
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:47 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:47 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:47 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:47 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:47 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:47 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27o%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:47 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:47 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:47 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:47 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:47 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%201&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%201&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27O&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27OR&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27OR%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27OR%27%20&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27OR%27%20&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27OR%27%20z&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27OR%27%20zi&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27OR%27%20z&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27OR%27%20&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27OR%27%201&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27OR%27%20&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27OR%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27OR%27%20&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27OR%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27OR%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27OR%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27OR%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27O%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27o%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:48 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20c&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20co&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20cod&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20codi&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20codig&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20codigo&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20codig&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20codi&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20cod&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20co&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20c&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27=&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27=1&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27=1&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27=1&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20=1&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27=1&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27=1&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27=1&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27=&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27o&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:49 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:51 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:51 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27o&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:51 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:51 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:51 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:51 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:51 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:51 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:51 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:51 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20%20&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:51 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20%20%20&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:53 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20%20&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:56 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27%20&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:56 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+
+ Login: 1 
+ IP: 127.0.0.1 
+ IP Reverso: mundodosaber.com 
+ Data: 2020-12-08 18:56 
+ Navegador: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0 
+ Pagina: /sistema.php?br=atu_clientes&pesquisa=%27or%27&ap=2 
+ Metodo: GET 
+
+ --------------------
+

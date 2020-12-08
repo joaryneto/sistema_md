@@ -564,7 +564,7 @@ function btn_cacliente()
 }
 
 function btn_agendamento()
-{				
+{
    requestPage2('?br=modal_clientes&codigo=&modal=4','modals','GET');
 }
 

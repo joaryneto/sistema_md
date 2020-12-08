@@ -31,6 +31,7 @@ if(@$inputb['ap'] == 1){
 {
 
 $pesquisa = @$inputb['pesquisa'];
+
 $x = 0;
 $SQL = "SELECT produtos.descricao,agendamento_servicos.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
 inner join clientes on clientes.codigo=agendamento.cliente 

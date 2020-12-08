@@ -16,7 +16,7 @@ class security {
 		$str = @str_replace("/[^a-z0-9]+/i", "", $str);
 		//$str = @str_replace("--dbs", "", $str);
 		//$str = @str_replace(array('.', '/'), "", $str);
-		//$str = @str_replace("'", "", $str);
+		$str = @str_replace("'", "", $str);
 		//$str = @str_replace("\"", "", $str);
 		//$str = @str_replace("\\", "", $str);
 		//$str = @str_replace(":", "", $str);
@@ -48,11 +48,14 @@ class security {
 		$str = @str_replace("html", "", $str);
 		$str = @str_replace("sql", "", $str);
 		$str = @str_replace("http", "", $str);
-		if($str2 <> $str) {
+		
+		//echo $str;
+		if($str2 <> $str) 
+		{
 			security::registrar_tentativa();
-			}
-	return	$str;
-	}
+		}
+	 return	$str;
+   }
    function ReversoInject( $obj ) 
    {
    $obj = preg_replace("/(from|alter table|select|insert|delete|update|where|drop table|show tables|#|*|--|\\)/i", "", $obj);
@@ -103,9 +106,9 @@ class security {
 		$SQL = "INSERT security_logs(sistema,usuario,login,ip,ip_reverso,data,navegador,pagina,metodo) values('".$_SESSION['sistema']."','".$_SESSION['usuario']."','{$ses}','{$ip}','{$host}','{$data}','{$navegador}','{$solicitada}','{$metodo}')";
 		mysqli_query($db4,$SQL);
 		
-		$fp = fopen("load/logs/security_logs.txt", "a");
-		fwrite($fp, $log);
-		fclose($fp);
+		//$fp = fopen("load/logs/security_logs.txt", "a");
+		//fwrite($fp, $log);
+		//fclose($fp);
 	}
 	function checar_strings($str) 
 	{
@@ -114,8 +117,8 @@ class security {
 		{
             $str[$id] = security::checar_strings($value);
         }
-    } 
-	else
+        } 
+	     else
         $str = security::strings_invalidas($str);
 		return $str;
 	}
