@@ -78,7 +78,7 @@ if($_GET['ap'] == 1)
 	 {
 		//print("<script>window.alert('Aluno não esteve presente!');</script>");
 		//echo "<br>";
-		$SQL = "INSERT INTO produtos_usuarios(sistema,usuario,produto,status) values('".$_SESSION['sistema']."','".$codigo."','".$servico."',1);";
+		$SQL = "INSERT INTO produtos_usuarios(sistema,usuario,produto,comissao,status) values('".$_SESSION['sistema']."','".$codigo."','".$comissao."','".$servico."',1);";
 		$sucesso = mysqli_query($db3,$SQL);
 	  }	
 	}
