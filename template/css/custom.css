@@ -27,12 +27,12 @@
 }
 
 .btnadd-sh {
-    position: absolute;
-    left: 76.6%;
-    top: 256px;
     height: 60px;
     width: 50px;
-    font-size: 18px;
+    font-size: 18px !important;
+    position: relative;
+    float: right;
+    top: -35px;
 }
 
 .btnadd-us
@@ -86,14 +86,6 @@
 	width: 50px;
 	font-size: 18px;
   }
-  .btnadd-sh {
-    position: absolute;
-    left: 81.8%;
-    top: 256px;
-    height: 60px;
-    width: 50px;
-    font-size: 18px;
-  }
 }
 
 @media screen and (max-width:767.98px) {
@@ -123,14 +115,6 @@
 	height: 55px;
 	width: 50px;
 	font-size: 18px;
-  }
-  .btnadd-sh {
-    position: absolute;
-    left: 81.8%;
-    top: 256px;
-    height: 60px;
-    width: 50px;
-    font-size: 18px;
   }
 }
 
@@ -163,11 +147,11 @@
 	font-size: 18px;
   }
   .btnadd-sh {
-    position: absolute;
-    left: 81.8%;
-    top: 256px;
     height: 60px;
     width: 50px;
     font-size: 18px;
-  }
+    position: relative;
+    float: right;
+    top: -35px;
+}
 }

@@ -7,6 +7,51 @@ if($PageRequest == $PageName) exit("<strong> Erro: N&atilde;o &eacute; permitido
 
 class security {	
 
+    function input($str) 
+	{
+    	$str2 = $str;
+		$str = preg_replace(sql_regcase("/(from|select|insert|delete|where|drop table|show tables|#|\*|--|\\\\)/"),"",$str);
+		$str = @str_replace(addslashes("'"), "", $str);
+		//$str = @str_replace(addslashes("\""), "", $str);
+		//$str = @str_replace("/[^a-z0-9]+/i", "", $str);
+		//$str = @str_replace("--dbs", "", $str);
+		//$str = @str_replace(array('.', '/'), "", $str);
+		$str = @str_replace("'", "", $str);
+		//$str = @str_replace("\"", "", $str);
+		//$str = @str_replace("\\", "", $str);
+		//$str = @str_replace(":", "", $str);
+		$str = @str_replace("--", "", $str);
+		//$str = @str_replace(";", "", $str);
+		$str = @str_replace("\$", "", $str);
+		$str = @str_replace("gif.php", "", $str);
+		$str = @str_replace("jpg.php", "", $str);
+		$str = @str_replace("png.php", "", $str);
+		$str = @str_replace("*/*", "", $str);
+		$str = @str_replace("1'", "", $str);
+		$str = @str_replace("-u", "", $str);
+		$str = @str_replace("$", "", $str);
+		$str = @str_replace("#", "", $str);
+		$str = @str_replace("(", "", $str);
+		$str = @str_replace(")", "", $str);
+		$str = @str_replace("=", "", $str);
+		$str = @str_replace(";", "", $str);
+		$str = @str_replace("'' OR 1", "", $str);
+		$str = @str_replace("''", "", $str);
+		$str = @str_replace("OR 1", "", $str);
+		$str = @str_replace("OR", "", $str);
+		$str = @str_replace("'1'", "", $str);
+		$str = @str_replace("1'1'", "", $str);
+		$str = @str_replace("/*", "", $str);
+		$str = @str_replace("*", "", $str);
+		$str = @str_replace("'", "", $str);
+		$str = @str_replace("'", "", $str);
+		$str = @str_replace("html", "", $str);
+		$str = @str_replace("sql", "", $str);
+		$str = @str_replace("http", "", $str);
+		
+	   return	$str;
+    }
+
 	function strings_invalidas($str) 
 	{
     	$str2 = $str;
@@ -72,7 +117,7 @@ class security {
     $sql = trim($sql);
     $sql = strip_tags($sql);
     $sql = mysql_escape_string($sql);
-   return preg_replace("@(–|#|*|;|=)@s", "", $sql);
+   return preg_replace("@(â€“|#|*|;|=)@s", "", $sql);
    }
    
    function registrar_tentativa() 
@@ -80,8 +125,8 @@ class security {
 
         if(!$db4 = mysqli_connect("mysql669.umbler.com:41890", "sistemasl", "I_Jt{4|p6u"))
         {
-            //print("<script>window.alert('Não conectou com banco...')</script>");
-        	echo "Não conectou com banco 3";
+            //print("<script>window.alert('NÃ£o conectou com banco...')</script>");
+        	//echo "NÃ£o conectou com banco 3";
         }
 
         @mysqli_select_db($db4, "sistemasl");
@@ -106,6 +151,9 @@ class security {
 		$SQL = "INSERT security_logs(sistema,usuario,login,ip,ip_reverso,data,navegador,pagina,metodo) values('".$_SESSION['sistema']."','".$_SESSION['usuario']."','{$ses}','{$ip}','{$host}','{$data}','{$navegador}','{$solicitada}','{$metodo}')";
 		mysqli_query($db4,$SQL);
 		
+		//echo "<td> Aceito apenas letras e numeros.</td>";
+		//exit();
+		
 		//$fp = fopen("load/logs/security_logs.txt", "a");
 		//fwrite($fp, $log);
 		//fclose($fp);
@@ -125,7 +173,7 @@ class security {
 }	
 	
 
-// Método url
+// MÃ©todo url
 $metodo = array_keys($_GET);
 $i=0;
 while($i < count($metodo)) {
@@ -136,7 +184,7 @@ while($i < count($metodo)) {
 unset($metodo); // apaga os dados da variavel $metodo
 unset($i);	//	apaga a contagem
 	
-// Método formulário
+// MÃ©todo formulÃ¡rio
 $metodo = array_keys($_POST);
 $i=0;
 while($i < count($metodo))

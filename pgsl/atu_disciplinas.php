@@ -36,9 +36,9 @@ function revertedata($data){
 }
 
     
-    $codigo = $_GET['codigo'];
-    $check = $_GET['check'];
-    $materia = $_GET['materia'];
+    $codigo = security::input(@$_GET['codigo']);
+    $check = security::input(@$_GET['check']);
+    $materia = security::input(@$_GET['materia']);
 	
 	//$count = 0;
 	$x = 0;

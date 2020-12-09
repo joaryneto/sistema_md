@@ -154,7 +154,13 @@ if(@$_GET['ap'] == "1")
     $y = 0;
 	$x = 0;
 	
-	$email = @$_POST['email'];
+	$cpf = security::input($_POST['cpf']);
+	$login = security::input($_POST['login']);
+	$nome = security::input($_POST['nome']);
+	$email = security::input($_POST['email']);
+	$senha = security::input($_POST['senha']);
+	$tipo = security::input($_POST['tipo']);
+	$situacao = security::input($_POST['situacao']);
 	
 	//echo "</br>";
 	$SQL2 = "SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and email='".$email."'";
@@ -173,7 +179,7 @@ if(@$_GET['ap'] == "1")
 	{
 	   //echo "</br>";
 	   
-	   $SQL3 = "INSERT into usuarios(sistema,cpf,login,nome,email,senha,tipo,status) values('".$_SESSION['sistema']."','".$_POST['cpf']."','".$_POST['login']."','".$_POST['nome']."','".$_POST['email']."','".$_POST['senha']."','".$_POST['tipo']."','".$_POST['situacao']."')";
+	   $SQL3 = "INSERT into usuarios(sistema,cpf,login,nome,email,senha,tipo,status) values('".$_SESSION['sistema']."','".$cpf."','".$login."','".$nome."','".$email."','".$senha."','".$tipo."','".$situacao."')";
 	   $sucesso = mysqli_query($db3,$SQL3);
 
 	   
@@ -219,7 +225,7 @@ if(@$_GET['ap'] == "1")
 	   
 	   if($sucesso)
 	   {
-		    print("<script>window.alert('Usuario Cadastrado com sucess...')</script>");
+		    //print("<script>window.alert('Usuario Cadastrado com sucess...')</script>");
 		    print("<script>window.location.href='sistema.php?url=cad_usuarios&codigo=".$cod."';</script>");
 	   }
 	   else
@@ -231,6 +237,13 @@ if(@$_GET['ap'] == "1")
 }
 elseif(@$_GET['ap'] == "2")
 {
+	$codigo = security::input($_GET['codigo']);
+	$login = security::input($_POST['login']);
+	$email = security::input($_POST['email']);
+	$senha = security::input($_POST['senha']);
+	$tipo = security::input($_POST['tipo']);
+	$situacao = security::input($_POST['situacao']);
+	
    if(Empty($_POST['nome']))
    {
 		print("<script>window.alert('Campo em branco!');</script>");
@@ -242,13 +255,13 @@ elseif(@$_GET['ap'] == "2")
 	$SQL1 = "DELETE FROM permissoes where sistema='".$_SESSION['sistema']."' and usuario='".$_GET['codigo']."'";
 	$sucesso = mysqli_query($db3,$SQL1);
 	
-	$SQL2 = "UPDATE usuarios SET nome='".$_POST['nome']."',login='".$_POST['login']."',email='".$_POST['email']."',senha='".$_POST['senha']."',tipo='".$_POST['tipo']."', status='".$_POST['situacao']."' where sistema='".$_SESSION['sistema']."' and codigo=".$_GET['codigo']."";
+	$SQL2 = "UPDATE usuarios SET nome='".$_POST['nome']."',login='".$login."',email='".$email."',senha='".$senha."',tipo='".$tipo."', status='".$situacao."' where sistema='".$_SESSION['sistema']."' and codigo=".$codigo."";
 	$sucesso = mysqli_query($db3,$SQL2);
 	
 	$output_dir = "sign/";
-	$fileName = $_FILES["img"]["name"];
-	$arquivo["name"] =  $_POST['cnpj'].".gif";	
-    move_uploaded_file($_FILES["img"]["tmp_name"],$output_dir.$arquivo["name"]);
+	$fileName = @$_FILES["img"]["name"];
+	$arquivo["name"] =  @$_POST['cnpj'].".gif";	
+    move_uploaded_file(@$_FILES["img"]["tmp_name"],$output_dir.$arquivo["name"]);
 	   
 	if(isset($_POST['menu']))
 	{
@@ -263,8 +276,8 @@ elseif(@$_GET['ap'] == "2")
 	
 	if($sucesso)
 	{
-	  print("<script>window.alert('Gravado com sucesso...');</script>");
-	  print("<script>window.location.href='sistema.php?url=cad_usuarios&codigo=".$_GET['codigo']."';</script>");
+	  //print("<script>window.alert('Gravado com sucesso...');</script>");
+	  //print("<script>window.location.href='sistema.php?url=cad_usuarios&codigo=".$_GET['codigo']."';</script>");
 	}
 	else
 	{

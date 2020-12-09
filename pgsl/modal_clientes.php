@@ -413,7 +413,17 @@ else if($inputb['modal'] == 4)
 <div class="modal-body">
 <form class="form-horizontal">
 <div class="form-group ">
-<input name="user" type="text" class="form-control" placeholder="Buscar Clientes agendados." autocomplete="off" onkeyup="javascript: requestPage2('?br=atu_clientes&pesquisa='+ this.value +'&ap=2','listclientes','GET');" />
+<script>
+	
+function m_cbusca()
+{
+	var pesquisa = document.getElementById('user').value;
+	
+	requestPage2('?br=atu_clientes&pesquisa='+ pesquisa +'&ap=2','listclientes','GET');
+}
+
+</script>
+<input name="user" id="user" type="text" class="form-control" placeholder="Buscar Clientes agendados." autocomplete="off" onkeyup="m_cbusca();"  />
 </div>
 <div>
 <script>

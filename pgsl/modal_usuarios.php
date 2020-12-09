@@ -348,7 +348,7 @@ if($x == 0)
 			
 			</script>
 			<div class="form-group col-md-6 m-t-20"><label>Serviço :</label>
-				<select name="servico" id="servico" class="form-control" onclick="m_change();" style="width: 100%; height:36px;" required="required">
+				<select name="servico" id="servico" class="form-control LP" onclick="m_change();" style="width: 100%; height:36px;" required="required">
                 <option value="">Selecionar Serviço</option>
 				 <?
 				 echo $SQL2 = "SELECT produtos.codigo, produtos.descricao, produtos.descricao from produtos where sistema='".$_SESSION['sistema']."' and produtos.tipo=2 order by produtos.descricao ASC";

@@ -1,8 +1,16 @@
 'user strict'
+
+const c_r = (str) => {
+	return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Remove acentos
+		//.replace(''', '') // Substitui espaço e outros caracteres por hífen
+		.replace(/\-\-+/g, '')	// Substitui multiplos hífens por um único hífen
+		.replace(/(^-+|-+$)/, ''); // Remove hífens extras do final ou do inicio da string
+}
+
 function logar()
 {
-    var login = document.getElementById('inputEmail').value;
-	var senha = document.getElementById('inputPassword').value;
+    var login = c_r(document.getElementById('inputEmail').value);
+	var senha = c_r(document.getElementById('inputPassword').value);
 	
 	if(login == "")
 	{
@@ -22,8 +30,9 @@ function pesquisar(pesquisa)
 
 function agenda(profissional,codigo,cliente,data,hora,nome)
 {
+   	
    $('#modalusuario').modal('show');
-   requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&profissional='+ profissional +'&cliente='+ cliente +'&data='+ data +'&hora='+ hora +'&nome='+ nome +'&ap=5','modals','GET');
+   requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&profissional='+ c_r(profissional) +'&cliente='+ c_r(cliente) +'&data='+ c_r(data) +'&hora='+ c_r(hora) +'&nome='+ c_r(nome) +'&ap=5','modals','GET');
 }
 
 function whats(numero,texto)
@@ -33,9 +42,9 @@ function whats(numero,texto)
 
 function agendar()
 {	
-	var datav = document.getElementById('dataagenda').value;
-	var horav = document.getElementById('hora').value;
-	var codigo = document.getElementById('codigo').value;
+	var datav = c_r(document.getElementById('dataagenda').value);
+	var horav = c_r(document.getElementById('hora').value);
+	var codigo = c_r(document.getElementById('codigo').value);
 	
 	if(datav == "")
 	{

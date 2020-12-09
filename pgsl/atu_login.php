@@ -2,8 +2,8 @@
 
 $inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 
-$login = @$inputb['login'];
-$senha = @$inputb['senha'];
+$login = security::input(@$inputb['login']);
+$senha = security::input(@$inputb['senha']);
 
 $x = 0;
 $SQL = "select usuarios.sistema,usuarios.codigo,usuarios.nome,usuarios.tipo from usuarios where usuarios.cpf='".$login."' and usuarios.senha='".$senha."' or usuarios.email='".$login."' and usuarios.senha='".$senha."' or usuarios.login='".$login."' and usuarios.senha='".$senha."'";

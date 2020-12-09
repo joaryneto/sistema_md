@@ -46,8 +46,8 @@ $inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 
 if(@$inputb['ap'] == 1)
 {
-	$cliente = $inputb['cliente'];
-	$nome = $inputb['nome'];
+	$cliente = security::input(@$inputb['cliente']);
+	$nome = security::input(@$inputb['nome']);
 	
 	if($cliente == "")
 	{
@@ -92,7 +92,7 @@ if(@$inputb['ap'] == 1)
 }
 else if($inputb['ap'] == 2)
 {
-
+   
    $SQL = "UPDATE agendamento SET data='".revertedata($inputb['data'])."', hora='".$inputb['hora']."' WHERE sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
    mysqli_query($db3,$SQL);
  ?>
@@ -111,7 +111,7 @@ else if($inputb['ap'] == 2)
 }
 else if($inputb['ap'] == 3)
 {
-   $codigo = $inputb['codigo'];
+   $codigo = security::input(@$inputb['codigo']);
    
    $SQL = "DELETE from agendamento WHERE sistema='".$_SESSION['sistema']."' and codigo='".$codigo."';";
    mysqli_query($db3,$SQL);
@@ -134,7 +134,7 @@ else if($inputb['ap'] == 3)
 }
 else if($inputb['ap'] == 3)
 {
-   $codigo = $inputb['codigo'];
+   $codigo = security::input(@$inputb['codigo']);
    
    $SQL = "DELETE from agendamento WHERE sistema='".$_SESSION['sistema']."' and codigo='".$codigo."';";
    mysqli_query($db3,$SQL);
@@ -158,7 +158,7 @@ else if($inputb['ap'] == 3)
 
 if($inputb['load'] == 1)
 {
-	            $pesquisa = @$inputb['pesquisa'];
+	            $pesquisa = security::input(@$inputb['pesquisa']);
 	
 				$SQL = "SELECT agendamento.codigo,agendamento_servicos.codigo as codservico,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
 				inner join clientes on clientes.codigo=agendamento.cliente 

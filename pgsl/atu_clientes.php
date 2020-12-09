@@ -3,7 +3,7 @@ $inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 
 if(@$inputb['ap'] == 1){
 	
-  $pesquisa = @$inputb['pesquisa'];
+  $pesquisa = security::input(@$inputb['pesquisa']);
   $sql = "select * from clientes where sistema='".$_SESSION['sistema']."' and nome like '%".$pesquisa."%';";
   $res = mysqli_query($db3,$sql); 
   while($row = mysqli_fetch_array($res))
@@ -29,8 +29,8 @@ if(@$inputb['ap'] == 1){
   } 
 }else if(@$inputb['ap'] == 2)
 {
-
-$pesquisa = @$inputb['pesquisa'];
+	
+$pesquisa = security::input(@$inputb['pesquisa']);
 
 $x = 0;
 $SQL = "SELECT produtos.descricao,agendamento_servicos.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 

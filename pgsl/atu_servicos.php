@@ -21,9 +21,9 @@ if($_GET['ap'] == 1)
 	$inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 	
 	$y = 0;
-    $codigo = $inputb['codigo'];
-    $servico = $inputb['servico'];
-	$comissao = $inputb['comissao'];
+    $codigo = security::input(@$inputb['codigo']);
+    $servico = security::input(@$inputb['servico']);
+	$comissao = security::input(@$inputb['comissao']);
 	
 	$SQL = "SELECT * FROM produtos_usuarios where sistema='".$_SESSION['sistema']."' and usuario=".$codigo." and produto=".$servico.";";
 	$RES = mysqli_query($db3,$SQL);
@@ -87,8 +87,8 @@ else if($_GET['ap'] == 2)
 {
 	 $inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 	 
-	 $codigo = $inputb['codigo'];
-     $servico = $inputb['servico'];
+	 $codigo = security::input(@$inputb['codigo']);
+     $servico = security::input(@$inputb['servico']);
 
 	 $x = 0;
 	 $SQL1 = "SELECT * FROM produtos_usuarios where sistema='".$_SESSION['sistema']."' and usuario=".$codigo." and codigo=".$servico.";";
@@ -122,7 +122,7 @@ if($_GET['load'] == 1)
 {
 	 $inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 	 
-	 $codigo = $inputb['codigo'];
+	 $codigo = security::input(@$inputb['codigo']);
 	 
      $b = "";
 	 $SQL2 = "SELECT produtos_usuarios.codigo, produtos.descricao, produtos_usuarios.comissao from produtos inner join produtos_usuarios on produtos_usuarios.produto=produtos.codigo where produtos_usuarios.sistema='".$_SESSION['sistema']."' and produtos_usuarios.usuario='".$codigo."' and produtos.tipo=2 and produtos_usuarios.status=1 order by produtos.descricao ASC";

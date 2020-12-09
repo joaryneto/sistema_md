@@ -19,13 +19,13 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 
 if(@$_GET['load'] == 1)
 {
-	$desc = str_replace('.', "", @$_GET['desc']);
-	$preco = str_replace('.', "", @$_GET['preco']);
-	$total = str_replace('.', "", @$_GET['total']);
+	$desc = str_replace('.', "", security::input(@$_GET['desc']));
+	$preco = str_replace('.', "", security::input(@$_GET['preco']));
+	$total = str_replace('.', "", security::input(@$_GET['total']));
 	
 	$desc = str_replace(',', ".", $desc);
 	$preco = str_replace(',', ".", $preco);
-	$qtd = @$_GET['qtd'];
+	$qtd = security::input((@$_GET['qtd']);
 	$total = str_replace(',', ".", $total);
 	$d = $desc;
 	
@@ -53,10 +53,10 @@ else if(@$_GET['load'] == 2)
 	
 	$_SESSION['totalvenda'] = $CREW['total'];
 	
-	$dinheiro = str_replace(",",".", str_replace(".","",@$_GET['dinheiro']));
-	$debito = str_replace(",",".", str_replace(".","",@$_GET['ctdebito']));
-	$credito = str_replace(",",".", str_replace(".","",@$_GET['ctcredito']));
-	$ted = str_replace(",",".", str_replace(".","",@$_GET['ted']));
+	$dinheiro = str_replace(",",".", str_replace(".","",security::input(@$_GET['dinheiro'])));
+	$debito = str_replace(",",".", str_replace(".","",security::input(@$_GET['ctdebito'])));
+	$credito = str_replace(",",".", str_replace(".","",security::input(@$_GET['ctcredito'])));
+	$ted = str_replace(",",".", str_replace(".","",security::input(@$_GET['ted'])));
 	$totals = str_replace(",",".", $_SESSION['totalvenda']);
 	
 	$valor = $dinheiro+$debito+$credito+$ted;
@@ -97,14 +97,14 @@ if(@$_GET['ap'] == 1)
 	$codigo = @$_GET['codigo'];
 	//$venda = $_GET['venda'];
 	
-	$preco = str_replace('.', "", @$_GET['preco']);
-	$total = str_replace('.', "", @$_GET['total']);
+	$preco = str_replace('.', "", security::input(@$_GET['preco']));
+	$total = str_replace('.', "", security::input(@$_GET['total']));
 	
     $preco = str_replace(',', ".", $preco);
 	$total = str_replace(',', ".", $total);
-	$cliente = @$_GET['codigo'];
-	$produto = @$_GET['produto'];
-	$qtd = @$_GET['quantidade'];
+	$cliente = security::input(@$_GET['codigo']);
+	$produto = security::input(@$_GET['produto'])
+	$qtd = security::input(@$_GET['quantidade']);
 	
 	if(@$_GET['excluir'] == 1)
 	{
@@ -150,10 +150,10 @@ else if(@$_GET['ap'] == 2)
 	
 	$_SESSION['totalvenda'] = $CREW['total'];
 	
-	$dinheiro = str_replace(",",".", str_replace(".","",$_GET['dinheiro']));
-	$ctdebito = str_replace(",",".", str_replace(".","",$_GET['ctdebito']));
-	$ctcredito = str_replace(",",".", str_replace(".","",$_GET['ctcredito']));
-	$ted = str_replace(",",".", str_replace(".","",$_GET['ted']));
+	$dinheiro = str_replace(",",".", str_replace(".","",security::input(@$_GET['dinheiro'])));
+	$ctdebito = str_replace(",",".", str_replace(".","",security::input(@$_GET['ctdebito'])));
+	$ctcredito = str_replace(",",".", str_replace(".","",security::input(@$_GET['ctcredito'])));
+	$ted = str_replace(",",".", str_replace(".","",security::input(@$_GET['ted']));
 	$totals = str_replace(",",".", $_SESSION['totalvenda']);
 	
 	$valor = $dinheiro+$ctdebito+$ctcredito+$ted;
@@ -203,7 +203,7 @@ else if(@$_GET['ap'] == 2)
 }
 else if(@$_GET['ap'] == 3)
 {
-	$dinheiro = str_replace(",",".", str_replace(".","",$_GET['dinheiro']));
+	$dinheiro = str_replace(",",".", str_replace(".","",security::input($_GET['dinheiro'])));
 	
 	$totals = $_SESSION['totalvenda'];
 	$tipo = $_GET['tipo'];
