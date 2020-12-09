@@ -16,6 +16,10 @@
 	background-color: transparent !important;
 }
 
+.btn-info {
+	height: 55px !important;
+}
+
 .btnadd-ad
 {
 	position: absolute;
@@ -27,12 +31,13 @@
 }
 
 .btnadd-sh {
-    height: 60px;
+    height: 60px !important;
     width: 50px;
     font-size: 18px !important;
     position: relative;
     float: right;
     top: -35px;
+	margin-bottom: -45px !important;
 }
 
 .btnadd-us
@@ -43,6 +48,7 @@
 	position: relative;
 	float: right;
 	top: -55px;
+	margin-bottom: -45px !important;
 }
 
 .btnadd-lg {
@@ -145,13 +151,15 @@
 	position: relative;
 	float: right;
 	top: -55px;
+	margin-bottom: -45px !important;
   }
   .btnadd-sh {
-    height: 60px;
+    height: 60px !important;
     width: 50px;
     font-size: 18px;
     position: relative;
     float: right;
     top: -35px;
+	margin-bottom: -45px !important;
   }
 }

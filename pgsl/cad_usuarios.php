@@ -309,7 +309,8 @@ elseif(@$_GET['ap'] == "2")
 								<div class="form-group col-md-3 m-t-20"><label>CPF :</label>
 								<input type="text" name="cpf" id="cpf" <? if(isset($_GET['codigo'])){ ?> value="<? echo $cpf; ?>" readonly <? } ?> class="form-control" required="required">
 								<button type="button" class="btn btn-info btnadd-us" onclick="requestPage2('?br=modal_usuarios&amp;codigo=&amp;modal=1','modals','GET');"  data-toggle="modal" data-target="#modalusuario">
-								<i class="fa fa-search" style="font-size: x-large;"></i></button></div>
+								<i class="fa fa-search"></i></button>
+								</div>
 								<div class="form-group col-md-3 m-t-20"><label>Login :</label>
 								<input type="text" name="login" id="login" <? if(isset($_GET['codigo'])){?> value="<? echo $login;?>" readonly <? } ?>class="form-control" required="required">
 								</div>
@@ -351,7 +352,7 @@ elseif(@$_GET['ap'] == "2")
 								<div class="form-group col-md-12 m-t-20">
 								<div class="form-actions">
 								<button type="submit" class="btn btn-info"><i class="fa fa-plus-circle"></i> <? if(isset($_GET['codigo'])){ echo "Gravar";}else { echo "Cadastrar";} ?></button>
-								<a class="btn btn-info" href="sistema.php?url=cad_usuarios"><i class="fa fa-plus-circle"></i> Novo</a>
+								<button type="button" id="CusuarioNovo" class="btn btn-info"><i class="fa fa-plus-circle"></i> Novo</button>
 								</div></div>
 								
 								</form>

@@ -64,6 +64,17 @@ function agendar()
 	}
 }
 
+$('#CusuarioNovo').on('click',function()
+{	
+	 location='sistema.php?url=cad_usuarios';
+});
+
+$('#btn_cad_produtos').on('click',function()
+{	
+     $('#modalusuario').modal('show');
+	 requestPage2('?br=modal_produtos&modal=1','modals','GET');
+});
+
 $('#aagenda').on('click',function()
 {	
       $('#modalusuario').modal('show');

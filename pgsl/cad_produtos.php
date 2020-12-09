@@ -103,7 +103,7 @@ $input = "";
 if(Empty($inputb['cadastro']))
 {
   $input = "<input type='text' name='pesquisa' id='pesquisa' value='' class='form-control form-control-lg search bottom-25 position-relative border-0' onkeyup=\"javascript: requestPage2('?br=atu_produtos&pesquisa='+ this.value +'&ap=2','listaprodutos','GET');\" required='required'>
-  <button class='btn btn-info btnadd-sh' onclick='window.location=\"sistema.php?url=cad_produtos&cadastro=1\"'><i class='fa fa-plus-circle'></i></button>";
+  <button class='btn btn-info btnadd-sh' id='btn_cad_produtos'><i class='fa fa-plus-circle'></i></button>";
   $valor = 290;
 }
 else
@@ -114,7 +114,7 @@ else
 <div class="container-fluid bg-template mb-4">
             <div class="row hn-<?=$valor;?> position-relative">
 			<div class="background opac heightset">
-                    <i class="fa fa-calendar" style="font-size: 200px;position: absolute;left: 40%;top: 50px;"></i>
+                    <i class="fa fa-calendar" style="font-size: 150px;position: relative;left:50%;top: 50px;"></i>
                 </div>
                 <div class="container align-self-end">
                     <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Produtos";?></h2>
@@ -169,7 +169,8 @@ else
                                             <tr>
                                                 <th>Codigo</th>
                                                 <th>Descrição</th>
-												<!--<th>Valor Total</th>-->
+												<th>Preço</th>
+												<th>Custo</th>
 												<th>X</th>
                                             </tr>
                                         </thead>
@@ -184,6 +185,8 @@ else
                                             <tr>
                                                 <td data-title="Codigo"><? echo $row['codigo'];?></td>
                                                 <td data-title="Descrição"><? echo $row['descricao'];?></td>
+												<td data-title="Preço">R$ <? echo number_format($row['preco'], 2, ',','.');?></td>
+												<td data-title="Custo">R$ <? echo number_format($row['custo'], 2, ',','.');?></td>
 												<!--<td>< echo $numero = number_format($row['valor_padrao']-+$row['valor'], 2, ',','.');?></td>-->
 												<td data-title="Editar"><a class="fa fa-edit" href="sistema.php?url=cad_produtos&codigo=<? echo $row['codigo']?>&cadastro=1" style="font-size: 150%;"><a></td>
                                             </tr>
@@ -198,3 +201,4 @@ else
 					</div>
 				</div>
 			</div>
+		</div>
