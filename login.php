@@ -14,7 +14,7 @@ if(@$_GET['deslogar']==1)
 }
 ?>
 <!doctype html>
-<html lang="pt-br" class="color-theme-blue">
+<html lang="pt-br" class="color-theme-<?=$_SESSION['tema'];?>">
 
 <head>
 <? include('css.php');?>

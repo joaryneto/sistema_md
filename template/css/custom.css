@@ -36,13 +36,13 @@
 }
 
 .btnadd-us
-{
-	position: absolute;
-	left: 77%;
-    top: 31px;
+{  
 	height: 55px;
 	width: 50px;
-	font-size: 18px;
+	font-size: 18px !important;
+	position: relative;
+	float: right;
+	top: -55px;
 }
 
 .btnadd-lg {
@@ -78,13 +78,13 @@
 	font-size: 18px;
   }
   .btnadd-us
-  {
-	position: absolute;
-	left: 89.5%;
-	top: 27px;
+  {  
 	height: 55px;
 	width: 50px;
-	font-size: 18px;
+	font-size: 18px !important;
+	position: relative;
+	float: right;
+	top: -55px;
   }
 }
 
@@ -108,13 +108,13 @@
 	font-size: 18px;
   }
   .btnadd-us
-  {
-	position: absolute;
-	left: 89.5%;
-	top: 27px;
+  {  
 	height: 55px;
 	width: 50px;
-	font-size: 18px;
+	font-size: 18px !important;
+	position: relative;
+	float: right;
+	top: -55px;
   }
 }
 
@@ -138,13 +138,13 @@
 	font-size: 18px;
   }
   .btnadd-us
-  {
-	position: absolute;
-	left: 85%;
-    top: 31px;
+  {  
 	height: 55px;
 	width: 50px;
-	font-size: 18px;
+	font-size: 18px !important;
+	position: relative;
+	float: right;
+	top: -55px;
   }
   .btnadd-sh {
     height: 60px;
@@ -153,5 +153,5 @@
     position: relative;
     float: right;
     top: -35px;
-}
+  }
 }

@@ -397,6 +397,8 @@ else if(@$inputb['ap'] == 5)
 {
 	
   $_SESSION['codagenda'] = $_GET['codigo'];
+  
+  
 ?>
 <div class="modal-header">
 <h2 class="pmd-card-title-text">Agenda - Editar Horario </h2>
@@ -404,10 +406,8 @@ else if(@$inputb['ap'] == 5)
 </div>
 <div class="modal-body">
 <div class="m-t-40 row">
-<div class="row">
-<div class="col-12">
 <div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Cliente:</label>
-<input name="profissional" id="profissional" type="hidden" value="<?=$_GET['profissional'];?>" autocomplete="off" class="form-control">
+<input name="profissional" id="profissional" type="hidden" value="<?=$_GET['profissional'];?>" autocomplete="off" class="form-control" readonly>
 <input name="nome" id="nome" type="text" value="<?=$_GET['nome'];?>" autocomplete="off" class="form-control" readonly>
 </div>
 <div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Data:</label>
@@ -475,8 +475,6 @@ else if(@$inputb['ap'] == 5)
 <div class="form-group col-md-4 m-t-20"><label>Horario:</label>
 	<select name="hora" id="hora" class="form-control" autocomplete="off" required="required">
 	</select>
-</div>
-</div>
 </div>
 </div>
 	<div class="modal-footer">
@@ -755,10 +753,10 @@ if(@$inputb['load'] == 1)
 		$whe = " and clientes.nome like '%".$pesquisa."%'";
 	}else{ $whe = ""; }
 	
-	$SQL = "SELECT agendamento.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora FROM agendamento 
-	inner join clientes on clientes.codigo=agendamento.cliente 
+	$SQL = "SELECT agendamento.codigo,agendamento_servicos.codigo as codservico,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
+    inner join clientes on clientes.codigo=agendamento.cliente 
 	inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
-	where agendamento.sistema='".$_SESSION['sistema']."' $whe and agendamento.status=1 ORDER BY agendamento.codigo asc";
+	where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.status=0 ORDER BY agendamento.codigo desc";
 	$RES = mysqli_query($db3,$SQL);
 	while($row = mysqli_fetch_array($RES))
 	{

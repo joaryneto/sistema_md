@@ -351,10 +351,10 @@ else
 			<div class="form-group col-md-3 m-t-20"><label>Celular :</label>
 			<input type="text" name="celular" id="celular" placeholder="(DD)00000-0000" value="<? if(isset($codigo)){ echo $celular;} ?>" data-mask="(00)00000-0000" class="form-control">
 			</div>
-			<div class="form-group col-md-3 m-t-20"><label>RG :</label>
+			<div class="form-group col-md-3 m-t-20" style="display: none"><label>RG :</label>
 			<input type="text" name="rg" id="rg" value="<? if(isset($codigo)){ echo $rg;} ?>" placeholder="00000000" data-mask="00000000" class="form-control">
 			</div>
-			<div class="form-group col-md-3 m-t-20"><label>CPF :</label>
+			<div class="form-group col-md-3 m-t-20" style="display: none"><label>CPF :</label>
 			<input type="text" name="cpf" id="cpf" value="<? if(isset($codigo)){ echo $cpf;} ?>" placeholder="00000000000" data-mask="00000000000" class="form-control">
 			</div>
 			<div class="form-group col-md-3 m-t-20"><label>Status :</label>
