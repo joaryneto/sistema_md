@@ -136,7 +136,7 @@ else
 
 ?>
 <div class="modal-header">
-<h2 class="pmd-card-title-text">Cadastro de Cliente</h2>
+<h2 class="pmd-card-title-text">Cadastro de Produtos e Serviços</h2>
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
 <div class="modal-body">
