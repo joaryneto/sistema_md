@@ -351,7 +351,7 @@ if($x == 0)
 				<select name="servico" id="servico" class="form-control" onclick="m_change();" style="width: 100%; height:36px;" required="required">
                 <option value="">Selecionar Serviço</option>
 				 <?
-				 $SQL2 = "SELECT produtos.codigo, produtos.descricao, produtos.descricao from produtos where produtos.tipo=2 order by produtos.descricao ASC";
+				 $SQL2 = "SELECT produtos.codigo, produtos.descricao, produtos.descricao from produtos where sistema='".$_SESSION['usuario']."' produtos.tipo=2 order by produtos.descricao ASC";
 				 $RES2 = mysqli_query($db3,$SQL2);
 				 while($row = mysqli_fetch_array($RES2))
 				 {?>
