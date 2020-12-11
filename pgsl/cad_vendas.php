@@ -394,6 +394,37 @@ function testepgt()
 	requestPage2('?br=modal_pagamento&modal=1&codigo=3','modals','GET'); 
 }
 
+function btn_cliente()
+{				
+   requestPage2('?br=modal_clientes&codigo=&modal=1','modals','GET');
+}
+
+function btn_cacliente()
+{				
+   requestPage2('?br=modal_clientes&codigo=&modal=3','modals','GET');
+}
+
+function btn_agendamento()
+{
+   requestPage2('?br=modal_clientes&codigo=&modal=4','modals','GET');
+}
+
+function c_desconto()
+{
+if($('#c_desc').css('display') == 'none' )
+{
+$("#forcaixa" ).show( "slow" );
+$("#dtable" ).hide( "slow" );
+$("#c_desc" ).show( "slow" );
+}
+else
+{
+$("#c_desc" ).hide( "slow" );
+$("#forcaixa" ).show( "slow" );
+$("#dtable" ).hide( "slow" );
+}
+}
+
 </script>	
 <?
 				if(@$_GET['comprovante'] == "true")
@@ -442,7 +473,7 @@ function testepgt()
 								<div class="m-t-40 row" style="display: flex;" id="forcaixa">
 								<div class="input-group col-md-9 m-t-20" id="c_nome" style="display: none;">
 								<div class="input-group mb-3">
-								   <h5 style="position: relative;top: 15px;left: 0px;"><i class="material-icons pmd-sm" style="font-size: 140%;position: relative;top:  3px;">person</i> <span id="nome"></span> <a href="javascript: Web(0);" onclick="btn_cexit();"><i class="fa fa-times-circle" style="font-size: 110%; color: red;"></i></a></h5>  
+								   <h6 style="position: relative;top: 15px;left: 0px;"><i class="material-icons pmd-sm" style="font-size: 140%;position: relative;top:  3px;">person</i> <span id="nome"></span> <a href="javascript: Web(0);" onclick="btn_cexit();"><i class="fa fa-times-circle" style="font-size: 110%; color: red;"></i></a></h6>  
 								   <input type="hidden" name="c_codigo" id="c_codigo" placeholder="" value="" class="form-control form-control-lg" >
 								   <input type="hidden" name="c_agendamento" id="c_agendamento" placeholder="" value="" class="form-control form-control-lg" >
                                    </div>

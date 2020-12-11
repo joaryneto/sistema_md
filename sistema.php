@@ -224,8 +224,8 @@ function isMobile()
                 <ul class="navbar-nav">
 				    <?if(@$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 3  or @$_SESSION['permissao'] == 4){?>
 				    <li class="nav-item dropdown" style="width: 230px;">
-                        <a href="sistema.php?url=agenda" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
-                            <div class="list-group-item list-group-item-action active">
+                        <a href="javascript: void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action t-menu t-agenda">
                                 <i class="material-icons">perm_contact_calendar</i> Agenda
                             </div>
                         </a>
@@ -233,28 +233,39 @@ function isMobile()
 					<? } ?>
 					<?if(@$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 4){?>
 					<li class="nav-item dropdown" style="width: 230px;">
-                        <a href="sistema.php?url=cad_vendas" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
-                            <div class="list-group-item list-group-item-action">
-                                <i class="material-icons">perm_contact_calendar</i> Vendas
+                        <a href="javascript: void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action t-menu t-vendas">
+                                <i class="material-icons">store_mall_directory</i> Vendas
                             </div>
                         </a>
 					</li>
 					<? } ?>
 					<?if(@$_SESSION['permissao'] == 3 or @$_SESSION['permissao'] == 4){?>
+					<script>
+					$(function() {
+					$('.dropdown').find('a').click(function(e) {
+ 					      e.preventDefault();
+					       $(this.hash).show().siblings().hide();
+					       $('.dropdown').find('a').parent().removeClass('active')
+					       $(this).parent().addClass('active')
+ 					  }).filter(':first').click();
+					});
+					</script>
+					
                     <li class="nav-item dropdown" style="width: 230px;">
                         <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="list-group-item list-group-item-action">
                                 <i class="material-icons">home</i> Caixa
                             </div>
                         </a>
-                        <div class="dropdown-menu">
-                            <a href="sistema.php?url=cad_caixaatual" class="sidebar-close dropdown-item menu-right">
+                        <div class="dropdown-menu t-menu">
+                            <a href="javascript: void(0);" class="dropdown-item catual">
 							 Caixa Atual
                             </a>
-                            <a href="sistema.php?url=cad_caixaalteriores" class="sidebar-close dropdown-item menu-right">
+                            <a href="javascript: void(0);" class="dropdown-item canteriores">
                              Caixa Anteriores
                             </a>
-                            <a href="sistema.php?url=cad_cmeiodepagamento" class="sidebar-close dropdown-item popup-open" >
+                            <a href="javascript: void(0);" class="dropdown-item cmpagamento" >
                              Meios de Pagamento
                             </a>
                         </div>
@@ -262,23 +273,15 @@ function isMobile()
 					<? } ?>
 					<?if(@$_SESSION['permissao'] == 4){?>
 					<li class="nav-item dropdown" style="width: 230px;">
-                        <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="list-group-item list-group-item-action">
+                        <a href="javascript:void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action t-menu t-produtos">
                                 <i class="material-icons">card_giftcard</i> Produtos
                             </div>
                         </a>
-						<div class="dropdown-menu">
-                            <a href="sistema.php?url=cad_produtos&cadastro=1" id="catual" class="sidebar-close dropdown-item menu-right">
-							 Cadastrar
-                            </a>
-                            <a href="sistema.php?url=cad_produtos" id="canteriores" class="sidebar-close dropdown-item menu-right">
-                             Lista de Produtos
-                            </a>
-                        </div>
 					</li>
 					<li class="nav-item dropdown" style="width: 230px;">
-                        <a href="sistema.php?url=cad_usuarios" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
-                            <div class="list-group-item list-group-item-action">
+                        <a href="javascript:void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action t-menu t-cadastro">
                                 <i class="material-icons">supervisor_account</i> Usuarios
                             </div>
                         </a>
@@ -386,13 +389,19 @@ function isMobile()
                 <div class="col-auto mx-auto">
                     <div class="row no-gutters justify-content-center">
                         <div class="col-auto">
-                            <a href="sistema.php?url=agenda" class="btn btn-link-default active">
+                            <a href="javascript: void(0);" class="btn btn-link-default t-menu t-agenda">
                                 <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
                                 <span class="text-name">Agenda</span>
                             </a>
                         </div>
+						<div class="col-auto">
+                            <a href="javascript: void(0);" class="btn btn-link-default t-menu t-produtos">
+                                <span class="icon-text"><i class="material-icons">card_giftcard</i></span>
+                                <span class="text-name">Produtos</span>
+                            </a>
+                        </div>
                         <div class="col-auto">
-                            <a href="sistema.php?url=cad_vendas" class="btn btn-link-default">
+                            <a href="javascript: void(0);" class="btn btn-link-default t-menu t-vendas">
                                 <span class="icon-text"><i class="material-icons">store_mall_directory</i></span>
                                 <span class="text-name">Vendas</span>
                             </a>
@@ -401,24 +410,12 @@ function isMobile()
                 </div>
             </div>
         </div>
-		<?if($_GET['url'] == "agenda"){?>
-		<script>
-		function btn_cadcliente()
-		{				
-		   requestPage2('?br=modal_clientes&modal=3','modals','GET');
-		}
-		
-		function btn_teste()
-		{				
-		   requestPage2('?br=modal_pagamento&modal=1','modals','GET');
-		}
-		</script>
-		 <div class="menu pmd-floating-action" role="navigation" style="bottom: 80px;"> 
-        <a href="javascript:void(0);" onclick="btn_cadcliente();" data-toggle="modal" data-target="#modalusuario" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="Clientes"> 
+		<div class="menu pmd-floating-action menu1" role="navigation" style="bottom: 80px; display: none;"> 
+        <a href="javascript:void(0);" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default a-cliente" data-title="Clientes"> 
             <span class="pmd-floating-hidden">Clientes</span> 
             <i class="material-icons">supervisor_account</i> 
         </a> 
-        <a href="javascript:void(0);" id="aagenda" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" data-title="Agendar"> 
+        <a href="javascript:void(0);" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default a-agenda" data-title="Agendar"> 
             <span class="pmd-floating-hidden">Agendar</span> 
             <i class="material-icons">perm_contact_calendar</i> 
         </a> 
@@ -427,8 +424,8 @@ function isMobile()
             <i class="material-icons pmd-sm">add</i> 
         </button> 
         </div>
-		<?}else if($_GET['url'] == "cad_vendas" and $_SESSION['tipo'] == 3){?>
-		<div class="menu pmd-floating-action" role="navigation" style="bottom: 80px;">
+		
+		<div class="menu pmd-floating-action menu2" role="navigation" style="bottom: 80px; display: none;">
 		<button class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" type="button" onclick="c_desconto();" data-title="[%] Desconto">
 		<span class="pmd-floating-hidden">[%] Desconto</span> 
 		<i class="material-icons pmd-sm">trending_down</i>
@@ -442,7 +439,6 @@ function isMobile()
 		<i class="material-icons pmd-sm">extension</i> 
 		</button> 
 		</div>
-		<?}?>
 <!-- footer ends -->
 <? } ?>
 </div>
@@ -524,7 +520,7 @@ function isMobile()
     </div>	
     <!-- wrapper ends -->
 	<? } ?>
-	<? if($_GET['url'] == "cad_caixaalteriores" and $_SESSION['tipo'] == 3){?>
+	<? if($_SESSION['tipo'] == 3){?>
 	<div id="extratocaixaanteriores" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
@@ -551,39 +547,8 @@ function isMobile()
            <!-- /.modal-dialog -->
       </div>
     <? } ?>
-<? if($_GET['url'] == "cad_vendas" and $_SESSION['tipo'] == 3){?>
-<script>
-function btn_cliente()
-{				
-   requestPage2('?br=modal_clientes&codigo=&modal=1','modals','GET');
-}
+<? if($_SESSION['tipo'] == 3){?>
 
-function btn_cacliente()
-{				
-   requestPage2('?br=modal_clientes&codigo=&modal=3','modals','GET');
-}
-
-function btn_agendamento()
-{
-   requestPage2('?br=modal_clientes&codigo=&modal=4','modals','GET');
-}
-
-function c_desconto()
-{
-if($('#c_desc').css('display') == 'none' )
-{
-$("#forcaixa" ).show( "slow" );
-$("#dtable" ).hide( "slow" );
-$("#c_desc" ).show( "slow" );
-}
-else
-{
-$("#c_desc" ).hide( "slow" );
-$("#forcaixa" ).show( "slow" );
-$("#dtable" ).hide( "slow" );
-}
-}
-</script>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -752,7 +717,7 @@ function slow()
 </script>
 <? } ?>
 
-<div id="modalusuario" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+<div id="modalusuario" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
 <div class="modal-dialog modal-lg">
 <div class="modal-content" id="modals">
 <!-- /.modal-content -->

@@ -38,7 +38,7 @@ $status = "";
 if(@$inputb['ap'] == "1")
 {
 	$x = 0;
-	$SQL = "SELECT * FROM clientes where sistema='".$_SESSION['sistema']."' and nome like '%".$inputb['nome']."%';'";
+	$SQL = "SELECT * FROM produtos where sistema='".$_SESSION['sistema']."' and descricao like '%".$inputb['descricao']."%';'";
 	$RES = mysqli_query($db3,$SQL);
 	while($row = mysqli_fetch_array($RES))
 	{
@@ -47,12 +47,19 @@ if(@$inputb['ap'] == "1")
 	
 	if($x == 1)
 	{
-	    print("<script>window.alert('Cliente já foi cadastrada, escolha outro.')</script>");
-		print("<script>window.location.href='sistema.php?url=cad_clientes';</script>");
+		print('
+		<script>
+		swal({   
+ 			   title: "Atenção!",   
+ 			   text: "Produto já foi cadastrada, escolha outro.",   
+ 			   timer: 1500,   
+ 			   showConfirmButton: false 
+ 		});
+		</script>');
 	}
 	else
 	{
-	   $SQL1 = "INSERT into clientes(sistema, nome, nascimento,sexo, telefone, celular, rg, cpf, status) values('".$_SESSION['sistema']."','".$inputb['nome']."','".revertedata($inputb['nascimento'])."','".$inputb['sexo']."','".$inputb['telefone']."','".$inputb['celular']."','".$inputb['rg']."','".$inputb['cpf']."','".$inputb['status']."')";
+	   $SQL1 = "INSERT into produtos(sistema, codigob, descricao,preco, custo, estoque, tipo, status) values('".$_SESSION['sistema']."','".$inputb['codbarra']."','".$inputb['descricao']."','".$inputb['preco']."','".$inputb['custo']."','".$inputb['estoque']."','".$inputb['tipo']."','1')";
 	   $sucesso = mysqli_query($db3,$SQL1);
 	   
 	   if($sucesso)
@@ -60,7 +67,7 @@ if(@$inputb['ap'] == "1")
 		   print('
 		   <script>
 		   swal({   
- 			   title: "Info",   
+ 			   title: "Info!",   
  			   text: "Gravado com sucesso.",   
  			   timer: 1000,   
  			   showConfirmButton: false 
@@ -69,13 +76,21 @@ if(@$inputb['ap'] == "1")
 	   }
 	   else
 	   {
-		   print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-2')</script>");
+		   print('
+		<script>
+		swal({   
+ 			   title: "Atenção!",   
+ 			   text: "Ocorreu um erro, Entre em contato com Suporte! MSG-3",   
+ 			   timer: 1500,   
+ 			   showConfirmButton: false 
+ 		});
+		</script>');
 	   }
 	}
 }
 else if(@$inputb['ap'] == "2")
 {
-	$SQL1 = "UPDATE clientes SET nome='".$inputb['nome']."',nascimento='".revertedata($inputb['nascimento'])."',sexo='".$inputb['sexo']."',telefone='".$inputb['telefone']."',celular='".$inputb['celular']."',rg='".$inputb['rg']."',cpf='".$inputb['cpf']."',status='".$inputb['status']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
+	$SQL1 = "UPDATE produtos SET codigob='".$inputb['codbarra']."',descricao='".$inputb['descricao']."',preco='".$inputb['preco']."',custo='".$inputb['custo']."',estoque='".$inputb['estoque']."',tipo='".$inputb['tipo']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
 	$sucesso = mysqli_query($db3,$SQL1);
 	
 	if($sucesso)
@@ -85,7 +100,7 @@ else if(@$inputb['ap'] == "2")
 		swal({   
  			   title: "Info",   
  			   text: "Gravado com sucesso.",   
- 			   timer: 1000,   
+ 			   timer: 1100,   
  			   showConfirmButton: false 
  		});
 		</script>');
@@ -93,7 +108,15 @@ else if(@$inputb['ap'] == "2")
 	}
 	else
 	{
-		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-3')</script>");
+		print('
+		<script>
+		swal({   
+ 			   title: "Atenção!",   
+ 			   text: "Ocorreu um erro, Entre em contato com Suporte! MSG-3",   
+ 			   timer: 1500,   
+ 			   showConfirmButton: false 
+ 		});
+		</script>');
 	}
 }
 
@@ -116,8 +139,8 @@ if(isset($inputb['codigo']))
 		 $codigo = $row['codigo'];
 		 $codbarra = $row['codigob'];
 		 $descricao = $row['descricao'];
-		 $preco = $row['preco'];
-		 $custo = $row['custo'];
+		 $preco = number_format($row['preco'], 2, ',','.');
+		 $custo = number_format($row['custo'], 2, ',','.');
 		 $estoque = $row['estoque'];
 		 $tipo = $row['tipo'];
 		 
@@ -148,12 +171,31 @@ else
 			
 			$('#btn_gravar').on('click',function()
 		    {
-				swal({   
+				var codbarra = document.getElementById('codbarra').value;
+				var descricao = document.getElementById('descricao').value;
+				var preco = document.getElementById('preco').value;
+				var custo = document.getElementById('custo').value;
+				var estoque = document.getElementById('estoque').value;
+				var tipo = document.getElementById('tipo').value;
+				
+				if(descricao == "")
+				{
+				       swal({   
  			               title: "Atenção",   
- 			               text: "Campo Custo em branco.",   
+ 			               text: "Campo Descrição em branco.",   
  			               timer: 1000,   
  			               showConfirmButton: false 
  			           });
+				}
+				else
+				{
+					<? if(@$inputb['codigo'])
+				   {?>
+				      requestPage2('?br=modal_produtos&codigo=<?=$codigo;?>&codbarra='+ codbarra +'&descricao='+ descricao +'&preco='+ preco +'&custo='+ custo +'&estoque='+ estoque +'&tipo='+ tipo +'&modal=1&ap=2&load=1','modals','GET');
+				   <? } else {?>
+				      requestPage2('?br=modal_produtos&codbarra='+ codbarra +'&descricao='+ descricao +'&preco='+ preco +'&custo='+ custo +'&estoque='+ estoque +'&tipo='+ tipo +'&modal=1&ap=1&load=1','modals','GET');
+				   <? } ?>
+				}
 
 			});
 			
@@ -188,7 +230,7 @@ else
 			<input type="text" name="estoque" id="estoque" value="<? if(isset($inputb['codigo'])){ echo $estoque;} ?>" placeholder="0" class="form-control" required="required">
 			</div>
 			<div class="form-group col-md-3 m-t-20"><label>Tipo :</label>
-			<select name="tipo" class="form-control" style="width: 100%; height:36px;" required="required">
+			<select name="tipo"  id="tipo" class="form-control" style="width: 100%; height:36px;" required="required">
 				<option value="">Selecionar Tipo</option>
 				   <option value="1" <? if(1 == $tipo){ echo "selected"; } ?>>Produtos</option>
 				   <option value="2" <? if(2 == $tipo){ echo "selected"; } ?>>Serviços</option>
@@ -201,7 +243,7 @@ else
 			<? } ?>
 			</div></div>
 			<div class="form-group col-md-12 m-t-20">
-			<input type='text' name='pesquisa' id='pesquisa' placeholder="Pesquisar Produtos e Serviços" class='form-control' onkeyup="javascript: requestPage2('?br=atu_produtos&pesquisa='+ this.value +'&load=1','clistprodutos','GET');">
+			<input type='text' name='pesquisa' id='pesquisa' placeholder="Pesquisar Produtos e Serviços cadastrados..." class='form-control' onkeyup="javascript: requestPage2('?br=atu_produtos&pesquisa='+ this.value +'&load=1','clistprodutos','GET');">
 			</div>
 			<div class="col-md-12">
 			<div class="component-box">
@@ -217,6 +259,22 @@ else
 						</tr>
 					</thead>
 					<tbody id="clistprodutos">
+					<? 
+										  
+										  $sql = "select * from produtos where sistema='".$_SESSION['sistema']."' limit 5";
+										  $res = mysqli_query($db3,$sql); 
+										  while($row = mysqli_fetch_array($res))
+										  {
+										  ?>
+                                            <tr>
+                                                <td data-title="Codigo"><? echo $row['codigo'];?></td>
+                                                <td data-title="Descrição"><? echo $row['descricao'];?></td>
+												<td data-title="Preço">R$ <? echo number_format($row['preco'], 2, ',','.');?></td>
+												<td data-title="Custo">R$ <? echo number_format($row['custo'], 2, ',','.');?></td>
+												<!--<td>< echo $numero = number_format($row['valor_padrao']-+$row['valor'], 2, ',','.');?></td>-->
+												<td data-title="Editar"><a class="fa fa-edit" href="javascript:void(0);" onclick="edit_produtos('<? echo $row['codigo']?>');" style="font-size: 150%;"><a></td>
+                                            </tr>
+										  <? } ?>
 					</tbody>
 				</table>
 			 </div>

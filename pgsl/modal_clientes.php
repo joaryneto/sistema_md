@@ -44,7 +44,7 @@ if($_GET['modal'] == 1)
 </thead>
 <tbody id="listclientes">
 <?
-$sql = "SELECT * FROM clientes limit 10";
+$sql = "SELECT * FROM clientes where sistema='".$_SESSION['sistema']."' limit 10";
 $res = mysqli_query($db3,$sql); 
 $x = 0;
 while($row = mysqli_fetch_array($res))
@@ -108,7 +108,7 @@ else if($_GET['modal'] == 2)
 </thead>
 <tbody id="listclientes">
 <?
-$sql = "SELECT * FROM clientes limit 10";
+$sql = "SELECT * FROM clientes where sistema='".$_SESSION['sistema']."' limit 10";
 $res = mysqli_query($db3,$sql); 
 $x = 0;
 while($row = mysqli_fetch_array($res))
@@ -176,8 +176,15 @@ if(@$inputb['ap'] == "1")
 	
 	if($x == 1)
 	{
-	    print("<script>window.alert('Cliente já foi cadastrada, escolha outro.')</script>");
-		print("<script>window.location.href='sistema.php?url=cad_clientes';</script>");
+	    print('
+		<script>
+		swal({   
+ 			   title: "Atenção!",   
+ 			   text: "Cliente já foi cadastrada, escolha outro.",   
+ 			   timer: 1500,   
+ 			   showConfirmButton: false 
+ 		});
+		</script>');
 	}
 	else
 	{
@@ -198,7 +205,15 @@ if(@$inputb['ap'] == "1")
 	   }
 	   else
 	   {
-		   print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-2')</script>");
+		   print('
+		<script>
+		swal({   
+ 			   title: "Atenção!",   
+ 			   text: "Ocorreu um erro, Entre em contato com Suporte! MSG-3",   
+ 			   timer: 1500,   
+ 			   showConfirmButton: false 
+ 		});
+		</script>');
 	   }
 	}
 }

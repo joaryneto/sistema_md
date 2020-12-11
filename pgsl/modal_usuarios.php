@@ -254,7 +254,7 @@ $x = 0;
 while($row = mysqli_fetch_array($res))
 {
 ?>
-<tr style="cursor: pointer;" onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'" onclick="javascript: window.location='sistema.php?url=cad_usuarios&codigo=<? echo $row['codigo'];?>';">
+<tr style="cursor: pointer;" onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'" onclick="c_clientes('<? echo $row['codigo'];?>');">
 <td data-title="Nome"><? echo $row['nome'];?></td>
 <td data-title="Status"><? Switch($row['status'])
 	 {

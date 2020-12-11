@@ -21,7 +21,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 <div class="container-fluid bg-template mb-4">
             <div class="row hn-290 position-relative">
 			<div class="background opac heightset">
-                    <i class="fa fa-calendar" style="font-size: 200px;position: absolute;left: 40%;top: 50px;"></i>
+                    <i class="fa fa-calendar" style="font-size: 140px;position: absolute;left: 40%;top: 50px;"></i>
                 </div>
                 <div class="container align-self-end">
                     <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Agenda";?></h2>
@@ -29,8 +29,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
                     <input type="text" Onkeyup="pesquisar(this.value);" class="form-control form-control-lg search bottom-25 position-relative border-0" placeholder="Pesquisa">
                 </div>
             </div>
-        </div>   
-				  
+        </div>   	  
 <div class="container pt-5">
   
   <div class="row">

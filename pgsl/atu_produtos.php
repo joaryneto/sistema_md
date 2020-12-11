@@ -67,7 +67,7 @@ if(security::input(@$inputb['load']) == 1)
 	$whe = " and descricao like '%".security::input(@$inputb['pesquisa'])."%'";  
   }
   
-  $sql = "select * from produtos where sistema='".$_SESSION['sistema']."' $whe order by descricao asc;";
+  $sql = "select * from produtos where sistema='".$_SESSION['sistema']."' $whe order by descricao asc limit 5;";
   $res = mysqli_query($db3,$sql); 
   while($row = mysqli_fetch_array($res))
   {

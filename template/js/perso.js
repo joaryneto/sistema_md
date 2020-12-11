@@ -30,8 +30,7 @@ function pesquisar(pesquisa)
 
 function agenda(profissional,codigo,cliente,data,hora,nome)
 {
-   	
-   $('#modalusuario').modal('show');
+   $('#modalap').modal('show');
    requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&profissional='+ c_r(profissional) +'&cliente='+ c_r(cliente) +'&data='+ c_r(data) +'&hora='+ c_r(hora) +'&nome='+ c_r(nome) +'&ap=5','modals','GET');
 }
 
@@ -69,16 +68,16 @@ $('#CusuarioNovo').on('click',function()
 	 location='sistema.php?url=cad_usuarios';
 });
 
-$('#btn_cad_produtos').on('click',function()
-{	
-     $('#modalusuario').modal('show');
-	 requestPage2('?br=modal_produtos&modal=1','modals','GET');
+$('.a-cliente').on('click',function()
+{
+    $('#modalap').modal('show');		
+	requestPage2('?br=modal_clientes&modal=3','modals','GET');
 });
 
-$('#aagenda').on('click',function()
+$('.a-agenda').on('click',function()
 {	
-      $('#modalusuario').modal('show');
-	  requestPage2('?br=atu_pesquisa&tipo=1&ap=1','modals','GET');
+    $('#modalap').modal('show');
+    requestPage2('?br=atu_pesquisa&tipo=1&ap=1','modals','GET');
 });
 
 function recovery()
@@ -149,30 +148,98 @@ $('#btnpagar').on('click',function()
 
 /* MENU VERTICAL  */
 
+function v_menuslow()
+{
+    $(".menu2" ).show( "slow" );
+	$(".menu1" ).hide( "slow" );
+}
+
+function a_menuslow()
+{
+    $(".menu1" ).show( "slow" );
+	$(".menu2" ).hide( "slow" );
+}
+
+function b_menuslow()
+{
+    $(".menu1" ).hide( "slow" );
+	$(".menu2" ).hide( "slow" );
+}
+
 $('#ldata').on('click',function()
-{	
+{
    document.getElementById("btnshow").click();
    requestPage('?br=inicio','conteudo','GET');
 });
 
 /* MENU HORIZONTAL  */
 
-$('#catual').on('click',function()
+$('.catual').on('click',function()
 {	
-   document.getElementById("btnshow").click();
+   b_menuslow();
    requestPage('?br=cad_caixaatual','conteudo','GET');
 });
 
-$('#canteriores').on('click',function()
+$('.canteriores').on('click',function()
 {	
-   document.getElementById("btnshow").click();
+   b_menuslow();
    requestPage('?br=cad_caixaalteriores','conteudo','GET');
 });
 
-$('#cmpagamento').on('click',function()
+$('.cmpagamento').on('click',function()
 {	
-   document.getElementById("btnshow").click();
+   b_menuslow();
    requestPage('?br=cad_cmeiodepagamento','conteudo','GET');
+});
+
+$('.cmpagamento').on('click',function()
+{	
+   b_menuslow();
+   requestPage('?br=cad_cmeiodepagamento','conteudo','GET');
+});
+
+
+$(".t-menu").click(function() { 
+              
+    // Select all list items 
+    var listItems = $(".t-menu"); 
+              
+    // Remove 'active' tag for all list items 
+    for (let i = 0; i < listItems.length; i++) 
+	{ 
+        listItems[i].classList.remove("active"); 
+    } 
+              
+    // Add 'active' tag for currently selected item 
+	document.getElementById("btnshow").click();
+    this.classList.add("active"); 
+}); 
+
+$('.t-agenda').on('click',function()
+{	
+   a_menuslow();
+   $('.t-agenda').addClass('active');
+   requestPage('?br=agenda','conteudo','GET');
+});
+
+$('.t-vendas').on('click',function()
+{	
+   v_menuslow();
+   $('.t-vendas').addClass('active');
+   requestPage('?br=cad_vendas','conteudo','GET');
+});
+
+$('.t-produtos').on('click',function()
+{	
+   b_menuslow();
+   $('.t-produtos').addClass('active');
+   requestPage('?br=cad_produtos','conteudo','GET');
+});
+
+$('.t-cadastro').on('click',function()
+{	
+   b_menuslow();
+   requestPage('?br=cad_usuarios','conteudo','GET');
 });
 
 /* MENU SGE  */
