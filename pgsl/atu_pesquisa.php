@@ -210,11 +210,11 @@ if(@$inputb['ap'] == 1)
 	</select>
 	</div>
 	<div class="form-group col-md-12 m-t-20"><label>Data:</label>
-	<input name="dataagenda" id="dataagenda" type="text" onchange="phorario(this.value);" placeholder="00/00/00000" autocomplete="off" class="form-control  form-control-lg" required="required" />
-	<input name="qtd" id="qtd" value="" type="hidden" value="0" autocomplete="off" class="form-control  form-control-lg" required="required" />
+	<input name="dataagenda" id="dataagenda" type="text" onchange="phorario(this.value);" placeholder="00/00/00000" autocomplete="off" class="form-control  form-control-lg"/>
+	<input name="qtd" id="qtd" value="" type="hidden" value="0" autocomplete="off" class="form-control  form-control-lg" required="required"/>
 	</div>
 	<div class="form-group col-md-12 m-t-20"><label>Horario:</label>
-	<select name="hora" id="hora" class="form-control" placeholder="Escolha um serviço" onchange="pservico();" autocomplete="off" required="required" >
+	<select name="hora" id="hora" class="form-control" placeholder="Escolha um serviço" onchange="pservico();" autocomplete="off">
 	</select>
 	</div>
 	<div class="form-group col-md-12 m-t-20"><label>Serviços:</label>
