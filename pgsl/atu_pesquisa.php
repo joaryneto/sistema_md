@@ -561,29 +561,39 @@ else if($inputb['ap'] == 7)
 else if($inputb['ap'] == 8)
 {
    $codigo = $inputb['codigo'];
-   
-   $SQL = "DELETE from agendamento WHERE sistema='".$_SESSION['sistema']."' and codigo='".$codigo."';";
-   mysqli_query($db3,$SQL);
-   
-   $SQL = "DELETE from agendamento_servicos WHERE sistema='".$_SESSION['sistema']."' and agendamento='".$codigo."';";
-   mysqli_query($db3,$SQL);
-   
    $x = 0;
-   $SQL = "";
-   $RES = mysqli_query();
+   $agendamento = "";
+   $SQL = "SELECT * FROM agendamento_servicos where sistema='".$_SESSION['sistema']."' and codigo='".$codigo."'";
+   $RES = mysqli_query($db3,$SQL);
    while($row = mysqli_fetch_array($RES))
    {
 	   $x = 1;
+	   $agendamento = $row['agendamento'];
    }
    
-   if()
+   if($x == 0)
    {
 	   
    }
    else
    {
-	  $SQL = "DELETE from agendamento WHERE sistema='".$_SESSION['sistema']."' and codigo='".$codigo."';";
-      mysqli_query($db3,$SQL); 
+	   
+    $SQL = "DELETE from agendamento_servicos WHERE sistema='".$_SESSION['sistema']."' and codigo='".$codigo."';";
+    mysqli_query($db3,$SQL);
+	
+    $y = 0;
+    $SQL = "SELECT * FROM agendamento_servicos where sistema='".$_SESSION['sistema']."' and agendamento='".$agendamento."'";
+    $RES = mysqli_query($db3,$SQL);
+    while($row = mysqli_fetch_array($RES))
+    {
+	   $y = 1;
+    }
+   
+    if($x == 0)
+    {
+	   $SQL = "DELETE from agendamento WHERE sistema='".$_SESSION['sistema']."' and codigo='".$agendamento."';";
+       mysqli_query($db3,$SQL); 
+    } 
    }
  ?>
  
