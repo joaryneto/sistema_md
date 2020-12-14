@@ -41,6 +41,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 				window.onload = function ()
 				{
 				   a_menuslow();
+				   $('.t-agenda').addClass('active');
 				}
 				</script>
 				<?
