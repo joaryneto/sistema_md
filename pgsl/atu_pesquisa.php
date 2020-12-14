@@ -224,7 +224,7 @@ if(@$inputb['ap'] == 1)
 	</div>
 	</div>
 	<div id="dtable" style="display: none;">
-	<h2>Lista de Serviços agendados :</h2>
+	<h2>Serviços agendados :</h2>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="s_load">
 	<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
 		<table class="table pmd-table">
