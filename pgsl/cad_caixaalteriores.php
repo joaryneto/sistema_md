@@ -17,7 +17,12 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //}
 
 ?>	
-
+<script>
+function cad_an_pesquisa(texto)
+{
+	
+}
+</script>
 <div class="container-fluid bg-template mb-4">
             <div class="row hn-290 position-relative">
 			<div class="background opac heightset">
@@ -26,7 +31,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
                 <div class="container align-self-end">
                     <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Caixa Alteriores";?></h2>
                     <p class="text-mute mb-2"><? echo $_SESSION["DESCRICAOPG2"] = "Lista";?></p>
-                    <input type="text" Onkeyup="pesquisar(this.value);" class="form-control form-control-lg search bottom-25 position-relative border-0" placeholder="Pesquisa">
+                    <input type="text" Onkeyup="cad_an_pesquisa(this.value);" class="form-control form-control-lg search bottom-25 position-relative border-0 cad-an-caixa" placeholder="Pesquisa">
                 </div>
             </div>
         </div>   
@@ -69,11 +74,11 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 			  {
 					 
 			  ?>
-				<tr onclick="requestPage2('?br=rel_caixaanteriores&codigo=<? echo $row['codigo'];?>','modals','GET');" data-toggle="modal" data-target="#modalusuario" aria-invalid="false"><!-- color: #20aee3; -->
+				<tr onclick="extratocaixaanterior('<? echo $row['codigo'];?>');"><!-- color: #20aee3; -->
 					<td data-title="Cod."><? echo $row['codigo'];?></td>
 					<td data-title="Usuario"><? echo $row['nome'];?></td>
 					<td data-title="Abertura"><? echo formatodata($row['data_ab']);?> <? echo $row['hora_ab'];?></td>
-					<td data-title="Fechamento"><? if(!Empty($row['data_fe'])){ echo formatodatahora($row['data_fe']);}?> <? echo $row['hora_fe'];?></td>
+					<td data-title="Fechamento"><? if(!Empty($row['data_fe'])){ echo formatodata($row['data_fe']);}?> <? echo $row['hora_fe'];?></td>
 					<td data-title="Total R$">R$ <? echo number_format($row['totals'],2,",",".");?></td>
 				</tr>
 			  <? $b = 1;

@@ -45,11 +45,6 @@
         autoclose: true,
         todayHighlight: true
     });
-	jQuery('#nascimento').datepicker({
-		format: 'dd/mm/yyyy',
-        autoclose: true,
-        todayHighlight: true
-    });
 	</script>
 	
     <!-- Sweet-Alert  -->

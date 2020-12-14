@@ -434,19 +434,13 @@ $("#dtable" ).hide( "slow" );
 					<script> 
 					//window.onload = function ()
 					//{
-					   $('#modalap').modal('show');
+					   //$('#modalap').modal('show');
 					   requestPage2('?br=modal_pagamento&modal=1&codigo=<?=$codigo;?>','modals','GET'); 
 					//}
 					</script>
 					<?
 				}
 				?>
-<script>
-    $(function () 
-	{
-      $('[data-toggle="tooltip"]').tooltip()
-    })
-    </script>
 <div class="container-fluid bg-template mb-4">
             <div class="row hn-154 position-relative">
                 <!-- use hn-60 if there is no page specific name required as below and remove below container -->
@@ -537,10 +531,10 @@ $("#dtable" ).hide( "slow" );
                                 <div class="help-block"></div></div>
 								<div class="form-group col-md-12 m-t-20" style="clear:">
 								<script>
-								window.onload = function ()
-								{
+								//window.onload = function ()
+								//{
 								   requestPage2('?br=atu_caixa&load=2','itenss','GET');
-								}
+								//}
 								</script>
 								<div class="pmd-card pmd-table-card-responsive" id="dtable" style="display:none;">
 						        <div class="pmd-table-card">  

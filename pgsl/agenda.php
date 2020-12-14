@@ -37,6 +37,12 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 		<div class="component-box">
 			<!--Tabs with Icon example -->
              <div class="row" id="load">
+			    <script>
+				window.onload = function ()
+				{
+				   a_menuslow();
+				}
+				</script>
 				<?
 				$SQL = "SELECT agendamento.codigo,agendamento_servicos.codigo as codservico,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
 				inner join clientes on clientes.codigo=agendamento.cliente 
@@ -45,6 +51,8 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 				$RES = mysqli_query($db3,$SQL);
 				while($row = mysqli_fetch_array($RES))
 				{
+					
+				 
 				?>
 				
 				<div class="col-12 col-md-6 mb-4">

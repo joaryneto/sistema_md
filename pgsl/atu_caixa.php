@@ -160,9 +160,19 @@ else if(@$_GET['ap'] == 2)
 	
 	if($valor < $totals)
 	{
-		$v = $totals-+$valor;
-		//print("<script>swal('Atenção', '".$dinheiro." e ".$_SESSION['totalvenda']." total: ".number_format($v,2,",",".")."');</script>");
-		print("<script>swal('Atenção', 'Existe uma diferença de valor total R$ ".number_format($v,2,",",".").". Confirme o valor pago.');</script>");
+		     $v = $totals-+$valor;
+			 print("<script>$('#pagamento').modal('show');</script>");
+		     //print("<script>swal('Atenção', '".$dinheiro." e ".$_SESSION['totalvenda']." total: ".number_format($v,2,",",".")."');</script>");
+		     print("<script>swal('Atenção', 'Existe uma diferença de valor total R$ ".number_format($v,2,",",".").". Confirme o valor pago.');</script>");
+			 
+	}
+	else if($valor < $totals)
+	{
+		     $v = $totals-+$valor;
+			 print("<script>$('#pagamento').modal('show');</script>");
+		     //print("<script>swal('Atenção', '".$dinheiro." e ".$_SESSION['totalvenda']." total: ".number_format($v,2,",",".")."');</script>");
+		     print("<script>swal('Atenção', 'Existe uma diferença de valor total R$ ".number_format($v,2,",",".").". Confirme o valor pago.');</script>");
+			 
 	}
 	else
 	{
@@ -198,7 +208,10 @@ else if(@$_GET['ap'] == 2)
 		$SQL2 = "UPDATE agendamento_servicos SET status=1 where sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['pgtagendamento']."'";
 	    $RES = mysqli_query($db3,$SQL2);
 		
-	    print("<script> requestPage('?br=cad_vendas&comprovante=true&codigo=".$_SESSION['venda']."','conteudo','GET'); </script>");
+	    print("<script> 
+		$('#modalap').modal('show');
+		requestPage2('?br=cad_vendas&comprovante=true&codigo=".$_SESSION['venda']."','conteudo','GET');
+		</script>");
 	}
 }
 else if(@$_GET['ap'] == 3)

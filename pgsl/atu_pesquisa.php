@@ -111,6 +111,7 @@ if(@$inputb['ap'] == 1)
 	$RES2 = mysqli_query($db3,$SQL2);
 	$rowds = mysqli_fetch_array($RES2);
 	
+	print('<script> $("#qtd").val("'.$rowds['qtd'].'"); </script>');
 	print('<script> document.getElementById("sv_qtd").innerHTML = "'.$rowds['qtd'].'";</script>');
 	print('<script> document.getElementById("sv_total").innerHTML = "<span style=\'color: green;\'>Total: R$ '.number_format($rowds['total'],2,",",".").'</span>";</script>');
 	
@@ -180,7 +181,16 @@ if(@$inputb['ap'] == 1)
 	
 	function cp_proximo(codigo)
 	{
-		requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&ap=3','modals','GET');
+		var qtd = document.getElementById('qtd').value;
+		
+		if(qtd == 0)
+		{
+			swal('Atenção','Agende um Serviço: Escolha o Profissional -> Data do Agendamento -> Horario e Serviço. Após ter escolhido Clique no Botão Mais(+) depois em Proximo para escolher o Cliente.');
+		}
+		else
+		{
+		    requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&ap=3','modals','GET');
+		}
 	}
 	
 	</script>
@@ -200,7 +210,8 @@ if(@$inputb['ap'] == 1)
 	</select>
 	</div>
 	<div class="form-group col-md-12 m-t-20"><label>Data:</label>
-		<input name="dataagenda" id="dataagenda" type="text" onchange="phorario(this.value);" placeholder="00/00/00000" autocomplete="off" class="form-control  form-control-lg" required="required" />
+	<input name="dataagenda" id="dataagenda" type="text" onchange="phorario(this.value);" placeholder="00/00/00000" autocomplete="off" class="form-control  form-control-lg" required="required" />
+	<input name="qtd" id="qtd" value="" type="hidden" value="0" autocomplete="off" class="form-control  form-control-lg" required="required" />
 	</div>
 	<div class="form-group col-md-12 m-t-20"><label>Horario:</label>
 	<select name="hora" id="hora" class="form-control" placeholder="Escolha um serviço" onchange="pservico();" autocomplete="off" required="required" >
@@ -336,7 +347,7 @@ else if(@$inputb['ap'] == 3)
 		}
 		else
 		{
-			$('#modalusuario').modal('hide');
+			$('#modalap').modal('hide');
 	        requestPage2('?br=atu_pesquisa&cliente='+ cliente +'&nome='+ nome +'&ap=6&load=1','load','GET');
 		}
     }
@@ -466,7 +477,7 @@ else if(@$inputb['ap'] == 5)
 	}
 	else
 	{
-	   $('#modalusuario').modal('hide');		
+	   $('#modalap').modal('hide');		
 	   requestPage2('?br=atu_pesquisa&data='+ datav +'&hora='+ horav +'&ap=9&load=1','load','GET');
 	}
     });
@@ -557,6 +568,23 @@ else if($inputb['ap'] == 8)
    $SQL = "DELETE from agendamento_servicos WHERE sistema='".$_SESSION['sistema']."' and agendamento='".$codigo."';";
    mysqli_query($db3,$SQL);
    
+   $x = 0;
+   $SQL = "";
+   $RES = mysqli_query();
+   while($row = mysqli_fetch_array($RES))
+   {
+	   $x = 1;
+   }
+   
+   if()
+   {
+	   
+   }
+   else
+   {
+	  $SQL = "DELETE from agendamento WHERE sistema='".$_SESSION['sistema']."' and codigo='".$codigo."';";
+      mysqli_query($db3,$SQL); 
+   }
  ?>
  
   <script>
@@ -633,8 +661,10 @@ if(@$inputb['excluir'] == "true")
 	$RES2 = mysqli_query($db3,$SQL2);
 	$row = mysqli_fetch_array($RES2);
 	
+	print('<script> $("#qtd").val("'.$row['qtd'].'"); </script>');
 	print('<script> document.getElementById("sv_total").innerHTML = "<span style=\'color: green;\'>Total: R$ '.number_format($row['total'],2,",",".").'</span>";</script>');
 	print('<script> document.getElementById("sv_qtd").innerHTML = "'.$row['qtd'].'";</script>');
+	
 
 }
 
@@ -665,6 +695,7 @@ if(@$inputb['addservico'] == "true")
 	$row = mysqli_fetch_array($RES);
 	
 	print('<script> $("#dataagenda").val(""); </script>');
+	print('<script> $("#qtd").val("'.$row['qtd'].'"); </script>');
 	print('<script> document.getElementById("hora").innerHTML = "";</script>');
 	print('<script> document.getElementById("sv_total").innerHTML = "<span style=\'color: green;\'>Total: R$ '.number_format($row['total'],2,",",".").'</span>";</script>');
 	print('<script> document.getElementById("sv_qtd").innerHTML = "'.$row['qtd'].'";</script>');

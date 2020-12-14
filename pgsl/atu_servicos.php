@@ -124,18 +124,25 @@ if($_GET['load'] == 1)
 	 
 	 $codigo = security::input(@$inputb['codigo']);
 	 
-     $b = "";
-	 $SQL2 = "SELECT produtos_usuarios.codigo, produtos.descricao, produtos_usuarios.comissao from produtos inner join produtos_usuarios on produtos_usuarios.produto=produtos.codigo where produtos_usuarios.sistema='".$_SESSION['sistema']."' and produtos_usuarios.usuario='".$codigo."' and produtos.tipo=2 and produtos_usuarios.status=1 order by produtos.descricao ASC";
+     $b = 0;
+	 $SQL2 = "SELECT produtos_usuarios.codigo, produtos.preco ,produtos.descricao, produtos_usuarios.comissao from produtos 
+	 inner join produtos_usuarios on produtos_usuarios.produto=produtos.codigo 
+	 where produtos_usuarios.usuario='".$_GET['codigo']."' and produtos.tipo=2 and produtos_usuarios.status=1 order by produtos.descricao ASC";
 	 $RES2 = mysqli_query($db3,$SQL2);
 	 while($row = mysqli_fetch_array($RES2))
-	 {
+	 {			 
+		$valor = $row['preco']; // valor do produto
+		$porcent = $row['comissao'] / 100; // 5%
+		$comissao = $porcent * $valor;
 		 
   ?>
 	<tr><!-- color: #20aee3; -->
 		<td data-title="Cod."><? echo $row['codigo'];?></td>
 		<td data-title="Serviço"><? echo $row['descricao'];?></td>
-		<td data-title="Comissão">R$ <? echo number_format($row['comissao'],2,",",".");?></td>
-		<td><a href="javascript: void(0);" onclick="m_desabilitar(<?=$row['codigo'];?>);"><i class="fa fa-ban" style="font-size: 150%; color: red;"></i></a></td>
+		<td data-title="Preço">R$ <? echo number_format($row['preco'],2,",",".");?> </td>
+		<td data-title="Comissão"><? echo number_format($row['comissao'], 2, ',', ',');?> % </td>
+		<td data-title="Total">R$ <? echo number_format($comissao,2,",","."); ?></td>
+		<td data-title="Opções"><a href="javascript: void(0);" onclick="m_desabilitar(<?=$row['codigo'];?>);"><i class="fa fa-ban" style="font-size: 150%; color: red;"></i></a></td>
 	</tr>
   <? $b = 1;
   

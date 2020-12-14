@@ -335,7 +335,8 @@ if($x == 0)
 				}
 			}
 
-		    $("#comissao").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+		    //$("#comissao").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+			$('#comissao').mask('##0,00%', {reverse: true});
 			
 			</script>
 			<div class="form-group col-md-6 m-t-20"><label>Serviço :</label>
@@ -346,15 +347,17 @@ if($x == 0)
 				 $RES2 = mysqli_query($db3,$SQL2);
 				 while($row = mysqli_fetch_array($RES2))
 				 {?>
-			         <option value="<? echo $row['codigo'];?>"><? echo $row['descricao'];?></option>
-			   <?}?>
+			        <option value="<? echo $row['codigo'];?>"><? echo $row['descricao'];?></option>
+			   <?
+			     }
+			   ?>
             </select>
 			</div>
 			<div class="form-group col-md-3 m-t-20"><label>Comissão :</label>
-			   <input type="text" name="comissao" id="comissao" value="0,00" placeholder="0,00" class="form-control">
+			   <input type="text" name="comissao" id="comissao" value="" placeholder="0" class="form-control">
 			</div>
-			<div class="form-group col-md-3 m-t-20">
-			<br><br>
+			<div class="form-group col-md-3 m-t-20"><label></label>
+			<br>
 			<button type="button" class="btn btn-info" id="m_servicos"><i class="fa fa-plus-circle"></i> Gravar</button>
             </div>
 			<div class="form-group col-md-2 m-t-20">
@@ -367,24 +370,33 @@ if($x == 0)
 					<tr>
 						<th>Cod.</th>
 						<th>Serviço</th>
+						<th>Preço</th>
 						<th>Comissão</th>
-						<th>Op.</th>
+						<th>Total</th>
+						<th>Opções</th>
 					</tr>
 				</thead>
 				<tbody id="u_load">
 				<? 
 			     $b = 0;
-			     $SQL2 = "SELECT produtos_usuarios.codigo, produtos.descricao, produtos_usuarios.comissao from produtos inner join produtos_usuarios on produtos_usuarios.produto=produtos.codigo where produtos_usuarios.usuario='".$_GET['codigo']."' and produtos.tipo=2 and produtos_usuarios.status=1 order by produtos.descricao ASC";
+			     $SQL2 = "SELECT produtos_usuarios.codigo, produtos.preco ,produtos.descricao, produtos_usuarios.comissao from produtos 
+				 inner join produtos_usuarios on produtos_usuarios.produto=produtos.codigo 
+				 where produtos_usuarios.usuario='".$_GET['codigo']."' and produtos.tipo=2 and produtos_usuarios.status=1 order by produtos.descricao ASC";
 				 $RES2 = mysqli_query($db3,$SQL2);
 				 while($row = mysqli_fetch_array($RES2))
-				 {
+				 {			 
+					$valor = $row['preco']; // valor do produto
+					$porcent = $row['comissao'] / 100; // 5%
+					$comissao = $porcent * $valor;
 					 
 			  ?>
 				<tr><!-- color: #20aee3; -->
 					<td data-title="Cod."><? echo $row['codigo'];?></td>
 					<td data-title="Serviço"><? echo $row['descricao'];?></td>
-					<td data-title="Comissão">R$ <? echo number_format($row['comissao'],2,",",".");?></td>
-					<td data-title="Op."><a href="javascript: void(0);" onclick="m_desabilitar(<?=$row['codigo'];?>);"><i class="fa fa-ban" style="font-size: 150%; color: red;"></i></a></td>
+					<td data-title="Preço">R$ <? echo number_format($row['preco'],2,",",".");?> </td>
+					<td data-title="Comissão"><? echo number_format($row['comissao'], 2, ',', ',');?> % </td>
+					<td data-title="Total">R$ <? echo number_format($comissao,2,",","."); ?></td>
+					<td data-title="Opções"><a href="javascript: void(0);" onclick="m_desabilitar(<?=$row['codigo'];?>);"><i class="fa fa-ban" style="font-size: 150%; color: red;"></i></a></td>
 				</tr>
 			  <? $b = 1;
 			  

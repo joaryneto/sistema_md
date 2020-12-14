@@ -57,7 +57,7 @@ if(@$inputb['ap'] == "1")
 	}
 	else
 	{
-	   $SQL1 = "INSERT into usuarios(sistema, cpf, login,senha, nome, email, tipo, status) values('".$_SESSION['sistema']."','".$inputb['cpf']."','".$inputb['login']."','".$inputb['senha']."','".$inputb['nome']."','".$inputb['email']."','".$inputb['tipo']."','".$inputb['situacao']."')";
+	   $SQL1 = "INSERT into usuarios(sistema, cpf, login,senha, nome, email, nascimento , tipo, status, banco,agencia,conta,tipoconta) values('".$_SESSION['sistema']."','".$inputb['cpf']."','".$inputb['login']."','".$inputb['senha']."','".$inputb['nome']."','".$inputb['email']."','".revertdata($inputb['nascimento'])."','".$inputb['tipo']."','".$inputb['situacao']."','".$inputb['banco']."','".$inputb['agencia']."','".$inputb['conta']."','".$inputb['tipoconta']."')";
 	   $sucesso = mysqli_query($db3,$SQL1);
 	   
 	   if($sucesso)
@@ -88,7 +88,7 @@ if(@$inputb['ap'] == "1")
 }
 else if(@$inputb['ap'] == "2")
 {
-	$SQL1 = "UPDATE usuarios SET cpf='".$inputb['cpf']."',login='".$inputb['login']."',senha='".$inputb['senha']."',nome='".$inputb['nome']."',email='".$inputb['email']."',tipo='".$inputb['tipo']."',status='".$inputb['situacao']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
+	$SQL1 = "UPDATE usuarios SET cpf='".$inputb['cpf']."',login='".$inputb['login']."',senha='".$inputb['senha']."',nome='".$inputb['nome']."',email='".$inputb['email']."',nascimento='".revertedata($inputb['nascimento'])."',tipo='".$inputb['tipo']."',status='".$inputb['situacao']."',banco='".$inputb['banco']."',agencia='".$inputb['agencia']."',conta='".$inputb['conta']."',tipoconta='".$inputb['tipoconta']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
 	$sucesso = mysqli_query($db3,$SQL1);
 	
 	if($sucesso)
@@ -124,8 +124,13 @@ if(isset($inputb['codigo']))
 		 $senha = $row['senha'];
 		 $nome = $row['nome'];
 		 $email = $row['email'];
+		 $nascimento = $row['nascimento'];
 		 $tipo = $row['tipo'];
 		 $situacao = $row['status'];
+		 $banco = $row['banco'];
+		 $agencia = $row['agencia'];
+		 $conta = $row['conta'];
+		 $tipoconta = $row['tipoconta'];
 		 
 		 //print("<script>window.alert('TESTE ".$descricao.",".$valor."')</script>");
 	  }
@@ -165,9 +170,14 @@ else
 				var login = document.getElementById('login').value;
 				var nome = document.getElementById('nome').value;
 				var email = document.getElementById('email').value;
+				var nascimento = document.getElementById('nascimento').value;
 				var senha = document.getElementById('senha').value;
 				var tipo = document.getElementById('tipo').value;
 				var situacao = document.getElementById('situacao').value;
+				var banco = document.getElementById('banco').value;
+				var agencia = document.getElementById('agencia').value;
+				var conta = document.getElementById('conta').value;
+				var tipoconta = document.getElementById('tipoconta').value;
 				
 				if(login == "")
 				{
@@ -191,9 +201,9 @@ else
 				{
 					<? if(@$inputb['codigo'])
 				   {?>
-				      requestPage2('?br=cad_usuarios&codigo=<?=$codigo;?>&cpf='+ cpf +'&login='+ login +'&nome='+ nome +'&email='+ email +'&senha='+ senha +'&tipo='+ tipo +'&situacao='+ situacao +'&modal=1&ap=2&load=1','modals','GET');
+				      requestPage2('?br=cad_usuarios&codigo=<?=$codigo;?>&cpf='+ cpf +'&login='+ login +'&nome='+ nome +'&email='+ email +'&nascimento='+ nascimento +'&senha='+ senha +'&tipo='+ tipo +'&situacao='+ situacao +'&banco='+ banco +'&agencia='+ agencia +'&conta='+ conta +'&tipoconta='+ tipoconta +'&modal=1&ap=2&load=1','modals','GET');
 				   <? } else {?>
-				      requestPage2('?br=cad_usuarios&cpf='+ cpf +'&login='+ login +'&nome='+ nome +'&email='+ email +'&senha='+ senha +'&tipo='+ tipo +'&situacao='+ situacao +'&modal=1&ap=1&load=1','modals','GET');
+				      requestPage2('?br=cad_usuarios&cpf='+ cpf +'&login='+ login +'&nome='+ nome +'&email='+ email +'&nascimento='+ nascimento +'&senha='+ senha +'&tipo='+ tipo +'&situacao='+ situacao +'&banco='+ banco +'&agencia='+ agencia +'&conta='+ conta +'&tipoconta='+ tipoconta +'&modal=1&ap=1&load=1','modals','GET');
 				   <? } ?>
 				}
 
@@ -215,6 +225,9 @@ else
 			   $('#modalap').modal('show');
 			   requestPage2('?br=modal_usuarios&modal=1','modals','GET');
 			});
+						
+			$('#nascimento').mask('00/00/0000');
+			
 			</script>
 								<form name="laudo" class="form-material m-t-40 row" autocomplete="off" method="post" action="<? if(Empty($_GET['codigo'])){ echo "sistema.php?url=cad_usuarios&ap=1";}else { echo "sistema.php?url=cad_usuarios&codigo=".$_GET['codigo']."&ap=2";} ?>" enctype="multipart/form-data">
 								<div class="form-group col-md-3 m-t-20"><label>CPF :</label>
@@ -222,11 +235,14 @@ else
 								<button type="button" class="btn btn-info btnadd-us sh-usuarios">
 								<i class="fa fa-search"></i></button>
 								</div>
-								<div class="form-group col-md-3 m-t-20"><label>Login :</label>
+								<div class="form-group col-md-3 m-t-20"><label>Login/Usuário :</label>
 								<input type="text" name="login" id="login" <? if(isset($_GET['codigo'])){?> value="<? echo $login;?>" readonly <? } ?>class="form-control">
 								</div>
 								<div class="form-group col-md-5 m-t-20"><label>Nome :</label>
 								<input type="text" name="nome" id="nome" value="<? if(isset($_GET['codigo'])){ echo $nome;} ?>" class="form-control">
+								</div>
+								<div class="form-group col-md-3 m-t-20"><label>Nascimento :</label>
+								<input type="text" name="nascimento" id="nascimento" value=" <? if(isset($_GET['codigo'])){ echo $nascimento;} ?>" class="form-control">
 								</div>
 								<div class="form-group col-md-3 m-t-20"><label>Email :</label>
 								<input type="email" name="email" id="email" value=" <? if(isset($_GET['codigo'])){ echo $email;} ?>" class="form-control">
@@ -241,8 +257,9 @@ else
 									   <option value="2" <? if(2 == $tipo){ echo "selected"; } ?>>Profissional</option>
 									   <option value="3" <? if(3 == $tipo){ echo "selected"; } ?>>Vendas</option>
 									   <option value="4" <? if(4 == $tipo){ echo "selected"; } ?>>Administrador</option>
-                                </select></div>
-								<div class="form-group col-md-12 m-t-20">
+                                  </select>
+								 </div>
+								 <div class="form-group col-md-12 m-t-20">
 								<div class="form-actions">
 								<!--<a class="btn btn-info" onclick="javascript: ajaxLoader('?br=mexames&codigo=<? echo $_GET['codigo'];?>&list=1','listaexames','GET');" data-toggle="modal" data-target="#exames"><i class="fa fa-plus-circle"></i> Exames Atendidos</a>-->
 								<? if(!Empty($_GET['codigo']) and $tipo == 2 or !Empty($_GET['codigo']) and $tipo == 3 or !Empty($_GET['codigo']) and $tipo == 4){?>
@@ -258,7 +275,25 @@ else
                                            <option value="0" <? if("0" == $situacao){ echo "selected"; } ?>>Inativa</option>
                                 </select>
 								</div>
-									
+								<div class="form-group col-md-12 m-t-20"><label></label>
+								<h4>Conta do Banco</h4>
+								</div>
+								<div class="form-group col-md-3 m-t-20"><label>Banco :</label>
+								<input type="texto" name="banco" id="banco" value="<? if(isset($_GET['codigo'])){ echo $banco;} ?>" class="form-control">
+								</div>
+								<div class="form-group col-md-2 m-t-20"><label>Agencia :</label>
+								<input type="texto" name="agencia" id="agencia" value="<? if(isset($_GET['codigo'])){ echo $agencia;} ?>" class="form-control">
+								</div>
+								<div class="form-group col-md-2 m-t-20"><label>Conta :</label>
+								<input type="texto" name="conta" id="conta" value="<? if(isset($_GET['codigo'])){ echo $conta;} ?>" class="form-control">
+								</div>
+								<div class="form-group col-md-2 m-t-20"><label>Tipo da Conta :</label>
+								<select name="tipoconta" id="tipoconta" class="form-control" style="width: 100%; height:36px;">
+                                 <option value="">Tipo Conta</option>
+								   <option value="1" <? if("1" == $tipoconta){ echo "selected"; } ?>>Poupança</option>
+                                   <option value="0" <? if("0" == $tipoconta){ echo "selected"; } ?>>Corrente</option>
+                                </select>
+								</div>
 								<!--< } ?> -->
 								<div class="form-group col-md-12 m-t-20">
 								<div class="form-actions">

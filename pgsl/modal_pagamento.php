@@ -25,12 +25,12 @@ if($_GET['modal'] == 1)
 {
 	
        $SQL = "SELECT vendas.data as datavenda, vendas_mov.venda, configuracoes.fantasia,usuarios.nome as vendedor,agendamento.codigo,agendamento_servicos.codigo as codservico,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
-       inner join clientes on clientes.codigo=agendamento.cliente 
-       inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
-       inner join vendas_mov on vendas_mov.produto=agendamento_servicos.servico
+       left join clientes on clientes.codigo=agendamento.cliente 
+       left join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
+       left join vendas_mov on vendas_mov.produto=agendamento_servicos.servico
        inner join usuarios on usuarios.codigo=vendas_mov.usuario
        inner join configuracoes on configuracoes.sistema=agendamento_servicos.sistema
-	   inner join vendas on vendas.codigo=vendas_mov.venda
+	   left join vendas on vendas.codigo=vendas_mov.venda
        where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.status=1 and vendas_mov.venda='".@$_GET['codigo']."' ORDER BY agendamento.codigo desc limit 1";
        $RES = mysqli_query($db3,$SQL);
        while($row = mysqli_fetch_array($RES))

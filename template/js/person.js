@@ -82,8 +82,14 @@ $('.a-agenda').on('click',function()
 
 function recovery()
 {	
-      $('#modalform').modal('show');
-	  requestPage2('?br=modal_recovery&modal=1','modals','GET');
+    $('#modalform').modal('show');
+	requestPage2('?br=modal_recovery&modal=1','modals','GET');
+}
+
+function extratocaixaanterior(codigo)
+{		
+    $('#modalap').modal('show');		
+	requestPage2('?br=rel_caixaanteriores&codigo='+ codigo ,'modals','GET');
 }
 
 $('#cad_cliente').on('click',function()

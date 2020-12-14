@@ -77,7 +77,7 @@ while($row = mysqli_fetch_array($res))
 ?>
 <tr>
           <td><? echo $row['codigo'];?></td>
-          <td><? echo formatodatahora($row['data']);?></td>
+          <td><? echo formatodata($row['data']);?></td>
 		  <td><? echo $row['descricao'];?></td>
 		  <td>R$ <? echo number_format($row['total'],2,",",".");?></td>
 </tr>
