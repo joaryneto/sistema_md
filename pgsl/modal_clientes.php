@@ -219,7 +219,7 @@ if(@$inputb['ap'] == "1")
 }
 else if(@$inputb['ap'] == "2")
 {
-	echo $SQL1 = "UPDATE clientes SET nome='".$inputb['nome']."',nascimento='".revertedata($inputb['nascimento'])."',sexo='".$inputb['sexo']."',telefone='".$inputb['telefone']."',celular='".$inputb['celular']."',rg='".$inputb['rg']."',cpf='".$inputb['cpf']."',cep='".$inputb['cep']."',rua='".$inputb['rua']."',bairro='".$inputb['bairro']."',numero='".$inputb['numero']."',cidade='".$inputb['cidade']."',estado='".$inputb['estado']."',status='".$inputb['status']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
+	$SQL1 = "UPDATE clientes SET nome='".$inputb['nome']."',nascimento='".revertedata($inputb['nascimento'])."',sexo='".$inputb['sexo']."',telefone='".$inputb['telefone']."',celular='".$inputb['celular']."',rg='".$inputb['rg']."',cpf='".$inputb['cpf']."',cep='".$inputb['cep']."',rua='".$inputb['rua']."',bairro='".$inputb['bairro']."',numero='".$inputb['numero']."',cidade='".$inputb['cidade']."',estado='".$inputb['estado']."',status='".$inputb['status']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
 	$sucesso = mysqli_query($db3,$SQL1);
 	
 	if($sucesso)
