@@ -219,7 +219,7 @@ if(@$inputb['ap'] == "1")
 }
 else if(@$inputb['ap'] == "2")
 {
-	$SQL1 = "UPDATE clientes SET nome='".$inputb['nome']."',nascimento='".revertedata($inputb['nascimento'])."',sexo='".$inputb['sexo']."',telefone='".$inputb['telefone']."',celular='".$inputb['celular']."',rg='".$inputb['rg']."',cpf='".$inputb['cpf']."',cep='".$inputb['cep']."',rua='".$inputb['rua']."',bairro='".$inputb['bairro']."',numero='".$inputb['numero']."',cidade='".$inputb['cidade']."',estado='".$inputb['estado']."',status='".$inputb['status']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
+	echo $SQL1 = "UPDATE clientes SET nome='".$inputb['nome']."',nascimento='".revertedata($inputb['nascimento'])."',sexo='".$inputb['sexo']."',telefone='".$inputb['telefone']."',celular='".$inputb['celular']."',rg='".$inputb['rg']."',cpf='".$inputb['cpf']."',cep='".$inputb['cep']."',rua='".$inputb['rua']."',bairro='".$inputb['bairro']."',numero='".$inputb['numero']."',cidade='".$inputb['cidade']."',estado='".$inputb['estado']."',status='".$inputb['status']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
 	$sucesso = mysqli_query($db3,$SQL1);
 	
 	if($sucesso)
@@ -407,7 +407,7 @@ else
 			<input type="text" name="cep" id="cep" placeholder="(DD)00000-0000" value="<? if(isset($codigo)){ echo $cep;} ?>" data-mask="(00)00000-0000" class="form-control">
 			</div>
 			<div class="form-group col-md-3 m-t-20"><label>Rua :</label>
-			<input type="text" name="rua" id="rua" placeholder="Exemplo: Rua. Centro oeste" value="<? if(isset($codigo)){ echo $endereco;} ?>" class="form-control">
+			<input type="text" name="rua" id="rua" placeholder="Exemplo: Rua. Centro oeste" value="<? if(isset($codigo)){ echo $rua;} ?>" class="form-control">
 			</div>
 			<div class="form-group col-md-3 m-t-20"><label>Bairro :</label>
 			<input type="text" name="bairro" id="bairro" placeholder="" value="<? if(isset($codigo)){ echo $bairro;} ?>" class="form-control">
