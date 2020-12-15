@@ -243,7 +243,7 @@ else if(@$inputb['ap'] == "2")
 
 if(isset($inputb['codigo']))
 {
-	$sucesso = mysqli_query($db3,"SELECT codigo,nome,nascimento,sexo,telefone,celular,rg,cpf,status FROM clientes where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'");
+	$sucesso = mysqli_query($db3,"SELECT * FROM clientes where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'");
 	
 	if($sucesso)
 	{
