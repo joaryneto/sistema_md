@@ -82,7 +82,16 @@
 	
 	if(isset($agendamento))
     {
+	  $x = 0;  
 	  $data = date("Y-m-d");
+	  $nome = "";
+	  $cliente = "";
+	  $codigoServico = "";
+	  $produto = "";
+	  $venda = "";
+	  $caixa = "";
+	  $preco = "";
+	  
 	  $SQL5 = "SELECT produtos.preco,produtos.codigo as produto,agendamento_servicos.codigo, agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
 	  inner join clientes on clientes.codigo=agendamento.cliente 
 	  inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
@@ -91,12 +100,22 @@
 	  $RESS3 = mysqli_query($db3,$SQL5);
 	  while($row = mysqli_fetch_array($RESS3))
 	  {
-		
+		 $x = 1;
+		 $nome = $row['nome'];
+		 $cliente = $row['cliente'];
+		 $codigoServico = $row['codigo'];
+		 $produto = $row['produto'];
+		 $preco = $row['preco'];
+	  }
+	  
+	  	
+	  if($x == 1)
+	  {
 		$SQL = "DELETE FROM vendas_mov where sistema='".$_SESSION['sistema']."' and venda='".$_SESSION['venda']."'";
 		mysqli_query($db3,$SQL);
 		
 		$data = date("Y-m-d");
-		$SQL = "INSERT vendas_mov(sistema,cliente,agendamento,produto,venda,caixa,data,preco,total,usuario,status) values('".$_SESSION['sistema']."','".$row['cliente']."','".$row['codigo']."','".$row['produto']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$data."','".$row['preco']."','".$row['preco']."','".$_SESSION['usuario']."',1)";
+		$SQL = "INSERT vendas_mov(sistema,cliente,agendamento,produto,venda,caixa,data,preco,total,usuario,status) values('".$_SESSION['sistema']."','".$cliente."','".$codigoServico."','".$produto."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$data."','".$preco."','".$preco."','".$_SESSION['usuario']."',1)";
         $RES = mysqli_query($db3,$SQL);
 		
 		print('<script>
@@ -104,9 +123,9 @@
 		$("#dtable" ).hide( "slow" );
 		$("#dt" ).show( "slow" );
 		$("#c_nome" ).show( "slow" );    
-		$("#c_codigo").val("'.$row['cliente'].'");
-		$("#c_agendamento").val("'.$row['codigo'].'");
-	    document.getElementById("nome").innerHTML = "'.$row['nome'].'";
+		$("#c_codigo").val("'.$cliente.'");
+		$("#c_agendamento").val("'.$codigoServico.'");
+	    document.getElementById("nome").innerHTML = "'.$nome.'";
 		requestPage2("?br=atu_caixa&load=2","itenss","GET");
 		</script>');
 	  }
@@ -292,34 +311,6 @@ function atualizar()
 	$('#ted').val('');
 		
 	ajaxLoader('?br=atu_caixa&load=3','loading','GET');
-}
-
-function quantidadeitem(produto) 
-{
-	
-	$('#quantidade').modal('show');
-	ajaxLoader('?br=atu_caixa&produto='+ produto +'&ap=2','quantidaeitem','GET');
-	
-	//var caixa = document.getElementById('caixa').value;
-	//var codigo = document.getElementById('codigo').value;
-
-	//$("#itenss").append('<tr><td>'+ descricao +'</td><td>1x'+ preco +'</td><td>'+ total +'</td><td>.</td></tr>');
-	
-	/*swal({   
-            title: "Atenção!",   
-            text: "Gostaria de cancelar este item?",   
-            type: "warning",   
-            showCancelButton: true,   
-            //confirmButtonColor: "#DD6B55",   
-            confirmButtonText: "Sim",
-            cancelButtonText: "Não", 			
-            closeOnConfirm: true 
-    }, function()
-    { 
-	      
-		ajaxLoader('?br=atu_caixa&item='+ codigo +'&excluir=1&ap=1','itenss','GET');
-		
-    });*/
 }
 
 function excluir(produto,total) 

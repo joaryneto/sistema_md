@@ -142,13 +142,8 @@ function isMobile()
                         </a>
 						<div class="dropdown-menu">
 						    <?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
-                            <a href="sistema.php?url=cad_alunos&cadastro=1" class="sidebar-close dropdown-item menu-right">
+                            <a href="javascript: void(0);" class="sidebar-close dropdown-item menu-right sge-t-alunos">
 							 Cadastrar
-                            </a>
-                            <? } ?>
-							<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
-                            <a href="sistema.php?url=cad_alunos" class="sidebar-close dropdown-item menu-right">
-							 Lista de Alunos
                             </a>
                             <? } ?>
                         </div>
@@ -231,7 +226,7 @@ function isMobile()
                         </a>
 					</li>
 					<? } ?>
-					<?if(@$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 4){?>
+					<?if(@$_SESSION['permissao'] == 3 or @$_SESSION['permissao'] == 4){?>
 					<li class="nav-item dropdown" style="width: 230px;">
                         <a href="javascript: void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
                             <div class="list-group-item list-group-item-action t-menu t-vendas">
@@ -240,17 +235,17 @@ function isMobile()
                         </a>
 					</li>
 					<? } ?>
+					<?if(@$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 4){?>
+					<li class="nav-item dropdown" style="width: 230px;">
+                        <a href="javascript: void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action t-menu t-comissao,">
+                                <i class="material-icons">store_mall_directory</i> Comissão
+                            </div>
+                        </a>
+					</li>
+					<? } ?>
 					<?if(@$_SESSION['permissao'] == 3 or @$_SESSION['permissao'] == 4){?>
-					<script>
-					$(function() {
-					$('.dropdown').find('a').click(function(e) {
- 					      e.preventDefault();
-					       $(this.hash).show().siblings().hide();
-					       $('.dropdown').find('a').parent().removeClass('active')
-					       $(this).parent().addClass('active')
- 					  }).filter(':first').click();
-					});
-					</script>
+
 					
                     <li class="nav-item dropdown" style="width: 230px;">
                         <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -286,7 +281,7 @@ function isMobile()
                             </div>
                         </a>
 					</li>
-					<? } ?>
+					<?} ?>
 					<? if(isMobile()){?>
 					<li class="nav-item dropdown" style="width: 230px;" id="btninstall">
                         <a href="javascript:void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
@@ -327,9 +322,23 @@ function isMobile()
 
 
         <!-- page content here -->
-        
+		<? if($_SESSION['tipo'] == 2){ ?>
+        <script>
+		//window.onload = function ()
+		/{
+		//	requestPage('?br=linhadotempo','conteudo','GET');
+		//}
+		</script>
+		<? }else if($_SESSION['tipo'] == 3){ ?>
+	    <script>
+		window.onload = function ()
+		{
+			requestPage('?br=agenda','conteudo','GET');
+		}
+		</script>
+		<? } ?>
         <div id="conteudo">
-		<?php
+		<? if($_SESSION['tipo'] == 2){
 		if(Empty($_SESSION['manutencao']))
 		{
 			$_SESSION['manutencao'] = 0;
@@ -343,6 +352,7 @@ function isMobile()
 		{
 			include("url2.php");
 		} 
+		}
 		?>
         <!-- page content ends -->
         </div>
@@ -388,24 +398,30 @@ function isMobile()
             <div class="no-gutters">
                 <div class="col-auto mx-auto">
                     <div class="row no-gutters justify-content-center">
+					   <? if(@$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 3 or @$_SESSION['permissao'] == 4){?>
                         <div class="col-auto">
                             <a href="javascript: void(0);" class="btn btn-link-default t-menu t-agenda">
                                 <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
                                 <span class="text-name">Agenda</span>
                             </a>
                         </div>
+						<? } ?>
+						<? if(@$_SESSION['permissao'] == 3 or @$_SESSION['permissao'] == 4){?>
 						<div class="col-auto">
                             <a href="javascript: void(0);" class="btn btn-link-default t-menu t-produtos">
                                 <span class="icon-text"><i class="material-icons">card_giftcard</i></span>
                                 <span class="text-name">Produtos</span>
                             </a>
                         </div>
+						<? } ?>
+						<? if(@$_SESSION['permissao'] == 3 or @$_SESSION['permissao'] == 4){?>
                         <div class="col-auto">
                             <a href="javascript: void(0);" class="btn btn-link-default t-menu t-vendas">
                                 <span class="icon-text"><i class="material-icons">store_mall_directory</i></span>
                                 <span class="text-name">Vendas</span>
                             </a>
                         </div>
+						<? } ?>
                     </div>
                 </div>
             </div>
@@ -687,16 +703,6 @@ function isMobile()
 		</div>
 	</div>
 </div>
-<div id="modalap" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-<div class="modal-dialog modal-lg">
-<div class="modal-content" id="modals">
-<!-- /.modal-content -->
-
-</div>
-
-<!-- /.modal-dialog -->
-</div>
-</div>
 <script>
 function slow()
 {
@@ -716,11 +722,11 @@ function slow()
 
 </script>
 <? } ?>
-
-<div id="modalusuario" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+<div id="modalap" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
 <div class="modal-dialog modal-lg">
 <div class="modal-content" id="modals">
 <!-- /.modal-content -->
+
 </div>
 
 <!-- /.modal-dialog -->

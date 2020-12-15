@@ -30,7 +30,7 @@ if($x == 1)
 {
 	$_SESSION["donoSessao"] =  md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
 	
-	print "<script> window.location='sistema.php?url=agenda'; </script>"; 
+	print "<script> window.location='sistema.php'; </script>"; 
 }
 else
 {

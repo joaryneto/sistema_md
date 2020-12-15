@@ -38,11 +38,11 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 			<!--Tabs with Icon example -->
              <div class="row" id="load">
 			    <script>
-				window.onload = function ()
-				{
+				//window.onload = function ()
+				//{
 				   a_menuslow();
 				   $('.t-agenda').addClass('active');
-				}
+				//}
 				</script>
 				<?
 				$SQL = "SELECT agendamento.codigo,agendamento_servicos.codigo as codservico,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 

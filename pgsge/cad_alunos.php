@@ -127,92 +127,6 @@ else
 	<div class="col-md-12 col-sm-12"> 
 		<div class="component-box">
 		                        <form class="m-t-40 row" name="alunoform" id="alunoform" method="post">
-								<?if($_GET['cadastro'] == 1){?>
-								<?
-								  
-								   $d = date('YdHis');
-								   $matri = $d;
-								   $_SESSION['matricula'] = $matri;
-								?>
-								<div class="form-group col-md-3 m-t-20"><label>Matricula :</label>
-								<!--onKeyPress="return(MascaraMoeda(this,'.','.',event)); "-->
-								<input type="text" name="matricula" id="matricula" value="<? if(isset($_GET['matricula'])){ echo $matricula;}else{ echo $_SESSION['matricula'];} ?>" readonly class="form-control" required="required">
-								</div>
-		                        <div class="form-group col-md-3 m-t-20"><label>Nome :</label>
-								<!--onKeyPress="return(MascaraMoeda(this,'.','.',event)); "-->
-								<input type="text" name="cnome" id="cnome" value="<? if(isset($_GET['matricula'])){ echo $nome;} ?>" class="form-control" required="required">
-								</div>
-								<div class="form-group col-md-2 m-t-20"><label>Estado :</label>
-								<select name="estado" id="estado" class="form-control" onChange="javascript: ajaxLoader('?br=cad_listacidades&estado='+ this.value ,'cidades','GET');" style="width: 100%; height:36px;" required="required">
-                                    <option value="">Selecionar</option>
-									<? 
-										  $sql = "select id_ibge,estado from estados";
-										  $res = mysqli_query($db,$sql); 
-										  while($row = mysqli_fetch_array($res))
-										  {
-										  ?>
-                                           <option value="<? echo $row['id_ibge']?>" <? if($estado == $row['id_ibge']){ echo "selected"; } ?>><? echo $row['estado']?></option>
-										  <? } ?>
-                                </select></div>
-								<div class="form-group col-md-2 m-t-20"><label>Cidade :</label>
-								<div id="cidades">
-								<select name="cidade" id="cidade"class="form-control" style="width: 100%; height:36px;" required="required">
-                                    <option value="">Selecionar</option>
-									<? 
-									if(!Empty($cidade))
-								    {
-										  $sql = "select cod_municipio,municipio from municipios";
-										  $res = mysqli_query($db,$sql); 
-										  while($row = mysqli_fetch_array($res))
-										  {
-										  ?>
-                                           <option value="<? echo $row['cod_municipio']?>" <? if($cidade == $row['cod_municipio']){ echo "selected"; } ?>><? echo $row['municipio']?></option>
-									<? } } ?>
-                                </select>
-								</div>
-								</div>
-								<div class="form-group col-md-2 m-t-20"><label>Ensino :</label>
-								<select name="ensino" id="ensino" class="form-control" onChange="javascript: ajaxLoader('?br=cad_listacurso&curso='+ this.value ,'cursar','GET');"  style="width: 100%; height:36px;">
-                                  <option value="">Selecionar</option>
-								  <option value="0" <? if($ensino == 0 and isset($_GET['matricula'])){ echo "selected"; } ?>>Infantil</option>
-								  <option value="1" <? if($ensino == 1 and isset($_GET['matricula'])){ echo "selected"; } ?>>Fundamental</option>
-								  <option value="2" <? if($ensino == 2 and isset($_GET['matricula'])){ echo "selected"; } ?>>Médio</option>
-                                </select></div>
-								<div class="form-group col-md-2 m-t-20"><label>Turma :</label>
-								<div id="cursar">
-								<select name="turma" id="turma" class="form-control" style="width: 100%; height:36px;" required="required">
-                                    <option value="">Selecionar</option>
-									<? 
-									      if(isset($_GET['matricula']))
-										  {
-										  $sql = "select turmas.codigo,turmas.descricao from turmas inner join turmas_professor on turmas_professor.turma=turmas.codigo where turmas.curso='".$_GET['curso']."' and turmas_professor.usuario='".$_SESSION['usuario']."'";
-										  $res = mysqli_query($db,$sql); 
-										  while($row = mysqli_fetch_array($res))
-										  {
-										  ?>
-                                           <option value="<? echo $row['codigo']?>" <? if($turma == $row['codigo']){ echo "selected"; } ?>><? echo $row['descricao']?></option>
-										  <? 
-										  } 
-										  } 
-										  ?>
-                                </select></div>
-								</div>
-								<div class="form-group col-md-2 m-t-20"><label>Situação :</label>
-								<select name="situacao" id="situacao" class="form-control" style="width: 100%; height:36px;" required="required">
-                                    <option>Selecionar Situação</option>
-                                           <option value="0" <? if(0 == $situacao and isset($_GET['matricula'])){ echo "selected"; } ?>>Inativa</option>
-										   <option value="1" <? if(1 == $situacao and isset($_GET['matricula'])){ echo "selected"; } ?>>Ativa</option>
-										   <option value="2" <? if(2 == $situacao and isset($_GET['matricula'])){ echo "selected"; } ?>>Pre-Ativa</option>
-										   <option value="3" <? if(3 == $situacao and isset($_GET['matricula'])){ echo "selected"; } ?>>Transferido</option>
-                                </select>
-								</div>
-								<div class="form-group col-md-12 m-t-20" id="load">
-								</div>
-								<div class="form-group col-md-12 m-t-20">
-								<button type="button" onclick="gravar();" class="btn btn-info"><i class="fa fa-plus-circle"></i> Gravar</button>
-								<button type="button" onclick="window.location='sistema.php?url=cad_alunos';" class="btn btn-info"><i class="fa fa-plus-circle"></i> voltar</button>
-								</div>
-								<?}else{?>
 								<div class="col-md-12">
 					            <div class="component-box" id="listaalunos">
                                 <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
@@ -262,7 +176,9 @@ else
 												 break;
 												}
 																		 ?></td>
-												<td data-title="Editar"><a class="fa fa-edit" href="sistema.php?url=cad_alunos&cadastro=1&matricula=<? echo $row['matricula']?>" style="font-size: 150%;"><a></td>
+												<td data-title="Editar">
+												<a class="fa fa-edit" href="javascript: void(0);" onclick="edit_alunos(<?=$row['matricula'];?>);" style="font-size: 150%;"><a>
+												</td>
                                             </tr>
 										  <? } ?>
                                         </tbody>
@@ -270,8 +186,7 @@ else
                                 </div>
 								</div>
 								</div>
-								<?}?>
-								</form>
+							  </form>
                             </div>
                         </div>
 					</div>

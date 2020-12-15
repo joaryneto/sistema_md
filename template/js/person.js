@@ -248,6 +248,19 @@ $('.t-cadastro').on('click',function()
    requestPage('?br=cad_usuarios','conteudo','GET');
 });
 
+
+function edit_alunos(codigo)
+{				
+    $('#modalap').modal('show');
+	requestPage2('?br=modal_alunos&codigo=' + codigo +'&modal=1','modals','GET');
+}
+			
+$('.sge-t-alunos').on('click',function()
+{	
+   //b_menuslow();
+   requestPage('?br=cad_alunos','conteudo','GET');
+});
+
 /* MENU SGE  */
 
 $('#ldotempo').on('click',function()

@@ -67,8 +67,6 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 										  $b = 0;
 										  while($row = mysqli_fetch_array($res))
 										  {
-											  
-											
 												 
 										  ?>
                                             <tr ><!-- color: #20aee3; -->

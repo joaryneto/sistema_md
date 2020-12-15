@@ -593,8 +593,7 @@ else if($inputb['ap'] == 8)
     {
 	   $SQL = "DELETE from agendamento WHERE sistema='".$_SESSION['sistema']."' and codigo='".$agendamento."';";
        mysqli_query($db3,$SQL); 
-    } 
-   }
+    }
  ?>
  
   <script>
@@ -606,7 +605,8 @@ else if($inputb['ap'] == 8)
         });
   </script>
  
- <?
+ <?	
+   }
 }
 else if($inputb['ap'] == 9)
 {
@@ -757,9 +757,7 @@ if(@$inputb['lhorario'] == "true")
 		  }
 		  else
 		  {
-			   
-			   
-			   echo "<option value='".$row1['hora']."' ".$selectd.">".$row1['hora']." - ".$nome." </option>";
+			   //echo "<option value='".$row1['hora']."' ".$selectd.">".$row1['hora']." - ".$nome." </option>";
 		  }
 		}
 
@@ -814,7 +812,7 @@ if(@$inputb['load'] == 1)
                             <h3><p class="large text-mute" style="font-size: initial;"><? echo $row['nome'];?></p></h3>
                             <p class="large text-mute" style="font-size: initial;">Dia: <? echo formatodata($row['data']);?> às Hora: <? echo formatohora($row['hora']);?>hs</p>
                             <button type="button" onclick="agenda('<? echo $row['profissional'];?>','<? echo $row['codservico'];?>','<? echo $row['cliente'];?>','<? echo $row['data'];?>','<? echo $row['hora'];?>','<? echo $row['nome'];?>');" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Editar</button>
-							<button type="button" onclick="agendaex('<? echo $row['codigo'];?>');" class="btn pmd-btn-outline pmd-ripple-effect btn-danger">Excluir</button>
+							<button type="button" onclick="agendaex('<? echo $row['codservico'];?>');" class="btn pmd-btn-outline pmd-ripple-effect btn-danger">Excluir</button>
 							<div class="pmd-card-actions">
 								<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" onclick="whats('<? echo str_replace("(","", str_replace(")","", str_replace("-","",$row['celular'])));?>','Bom dia *<? echo $row['nome'];?>*! %0APassando para lembrar que você tem horário agendado hoje às *<? echo formatohora($row['hora']);?>hs*.%0A%0A *Studio KA*');"><i class="fa fa-whatsapp" aria-hidden="true" style="font-size: 210%; color: green;"></i></button>
 								<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">thumb_up</i></button>
@@ -846,13 +844,13 @@ else if(@$inputb['load'] == 2)
 		 <td data-title="Descrição">
 		  <?=$row['descricao'];?>
 		 </td>
-		 <td data-title="Data - Hora">
+		 <td data-title="Nome">
 		        <?=$row['nome'];?>
 		     </td>
 		  <td data-title="Data - Hora">
 		        <?=formatodata($row['data']);?> - <?=formatohora($row['hora']);?>
 		     </td>
-	     <td data-title="Data - Hora">
+	     <td data-title="Preço">
 		        R$ <?=number_format($row['preco'],2,",",".");?>
 		     </td>
 		</tr>

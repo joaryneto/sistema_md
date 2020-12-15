@@ -188,7 +188,7 @@ if(@$inputb['ap'] == "1")
 	}
 	else
 	{
-	   $SQL1 = "INSERT into clientes(sistema, nome, nascimento,sexo, telefone, celular, rg, cpf, status) values('".$_SESSION['sistema']."','".$inputb['nome']."','".revertedata($inputb['nascimento'])."','".$inputb['sexo']."','".$inputb['telefone']."','".$inputb['celular']."','".$inputb['rg']."','".$inputb['cpf']."','".$inputb['status']."')";
+	   $SQL1 = "INSERT into clientes(sistema, nome, nascimento,sexo, telefone, celular, rg, cpf, cep,rua,bairro,numero,cidade,estado, status) values('".$_SESSION['sistema']."','".$inputb['nome']."','".revertedata($inputb['nascimento'])."','".$inputb['sexo']."','".$inputb['telefone']."','".$inputb['celular']."','".$inputb['rg']."','".$inputb['cpf']."','".$inputb['cep']."','".$inputb['rua']."','".$inputb['bairro']."','".$inputb['numero']."','".$inputb['cidade']."','".$inputb['estado']."','".$inputb['status']."')";
 	   $sucesso = mysqli_query($db3,$SQL1);
 	   
 	   if($sucesso)
@@ -219,7 +219,7 @@ if(@$inputb['ap'] == "1")
 }
 else if(@$inputb['ap'] == "2")
 {
-	$SQL1 = "UPDATE clientes SET nome='".$inputb['nome']."',nascimento='".revertedata($inputb['nascimento'])."',sexo='".$inputb['sexo']."',telefone='".$inputb['telefone']."',celular='".$inputb['celular']."',rg='".$inputb['rg']."',cpf='".$inputb['cpf']."',status='".$inputb['status']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
+	$SQL1 = "UPDATE clientes SET nome='".$inputb['nome']."',nascimento='".revertedata($inputb['nascimento'])."',sexo='".$inputb['sexo']."',telefone='".$inputb['telefone']."',celular='".$inputb['celular']."',rg='".$inputb['rg']."',cpf='".$inputb['cpf']."',cep='".$inputb['cep']."',rua='".$inputb['rua']."',bairro='".$inputb['bairro']."',numero='".$inputb['numero']."',cidade='".$inputb['cidade']."',estado='".$inputb['estado']."',status='".$inputb['status']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
 	$sucesso = mysqli_query($db3,$SQL1);
 	
 	if($sucesso)
@@ -293,6 +293,12 @@ else
 				var celular = document.getElementById('celular').value;
 				var rg = document.getElementById('rg').value;
 				var cpf = document.getElementById('cpf').value;
+				var cep = document.getElementById('cep').value;
+				var rua = document.getElementById('rua').value;
+				var bairro = document.getElementById('bairro').value;
+				var numero = document.getElementById('numero').value;
+				var cidade = document.getElementById('cidade').value;
+				var estado = document.getElementById('estado').value;
 				var status = document.getElementById('status').value;
 				
 				if(nome == "")
@@ -326,9 +332,9 @@ else
 				{
 				   <? if(@$inputb['codigo'])
 				   {?>
-				      requestPage2('?br=modal_clientes&codigo=<?=$codigo;?>&nome='+ nome +'&sexo='+ sexo +'&nascimento='+ nascimento +'&telefone='+ telefone +'&celular='+ celular +'&rg='+ rg +'&cpf='+ cpf +'&status='+ status +'&modal=3&ap=2','modals','GET');
+				      requestPage2('?br=modal_clientes&codigo=<?=$codigo;?>&nome='+ nome +'&sexo='+ sexo +'&nascimento='+ nascimento +'&telefone='+ telefone +'&celular='+ celular +'&rg='+ rg +'&cpf='+ cpf +'&cep='+ cep +'&rua='+ rua +'&bairro='+ bairro +'&numero='+ numero +'&cidade='+ cidade +'&estado='+ estado +'&status='+ status +'&modal=3&ap=2','modals','GET');
 				   <? } else {?>
-				      requestPage2('?br=modal_clientes&nome='+ nome +'&sexo='+ sexo +'&nascimento='+ nascimento +'&telefone='+ telefone +'&celular='+ celular +'&rg='+ rg +'&cpf='+ cpf +'&status='+ status +'&modal=3&ap=1','modals','GET');
+				      requestPage2('?br=modal_clientes&nome='+ nome +'&sexo='+ sexo +'&nascimento='+ nascimento +'&telefone='+ telefone +'&celular='+ celular +'&rg='+ rg +'&cpf='+ cpf +'&cep='+ cep +'&rua='+ rua +'&bairro='+ bairro +'&numero='+ numero +'&cidade='+ cidade +'&estado='+ estado +'&status='+ status +'&modal=3&ap=1','modals','GET');
 				   <? } ?>
 				}
 			}
@@ -354,27 +360,70 @@ else
 			<div class="form-group col-md-3 m-t-20"><label>Data de Nasc. :</label>
 			<input type="text" name="nascimento" id="nascimento" value="<? if(isset($codigo)){ echo $nascimento;} ?>" placeholder="00/00/0000" class="form-control">
 			</div>
-			<div class="form-group col-md-3 m-t-20"><label>Sexo :</label>
+			<div class="form-group col-md-2 m-t-20"><label>Sexo :</label>
 			<select name="sexo" id="sexo" class="form-control" style="width: 100%; height:36px;" required="required">
-				<option value="">Selecionar Sexo</option>
-				   <option value="1" <? if(1 == $sexo){ echo "selected"; } ?>>Masculino</option>
-				   <option value="2" <? if(2 == $sexo){ echo "selected"; } ?>>Feminino</option>
+				<option value=""></option>
+				   <option value="1" <? if(1 == $sexo){ echo "selected"; } ?>>M</option>
+				   <option value="2" <? if(2 == $sexo){ echo "selected"; } ?>>F</option>
 			</select></div>
 			<div class="form-group col-md-3 m-t-20"><label>Telefone. :</label>
-			<input type="text" name="telefone" id="telefone" placeholder="(DD)0000-0000" value="<? if(isset($codigo)){ echo $telefone;} ?>" data-mask="(00)0000-0000" class="form-control">
+			<input type="text" name="telefone" id="telefone" placeholder="(00)0000-0000" value="<? if(isset($codigo)){ echo $telefone;} ?>" class="form-control">
 			</div>
 			<div class="form-group col-md-3 m-t-20"><label>Celular :</label>
-			<input type="text" name="celular" id="celular" placeholder="(DD)00000-0000" value="<? if(isset($codigo)){ echo $celular;} ?>" data-mask="(00)00000-0000" class="form-control">
+			<input type="text" name="celular" id="celular" placeholder="(00)00000-0000" value="<? if(isset($codigo)){ echo $celular;} ?>" class="form-control">
+			</div>
+			<script>
+			$(document).ready( function() {
+   /* Executa a requisição quando o campo CEP perder o foco */
+   $('#cep').blur(function(){
+           /* Configura a requisição AJAX */
+           $.ajax({
+                url : 'pgsl/atu_endereco.php', /* URL que será chamada */ 
+                type : 'POST', /* Tipo da requisição */ 
+                data: 'cep=' + $('#cep').val(), /* dado que será enviado via POST */
+                dataType: 'json', /* Tipo de transmissão */
+                success: function(data){
+                    if(data.sucesso == 1){
+                        $('#rua').val(data.rua);
+                        $('#bairro').val(data.bairro);
+                        $('#cidade').val(data.cidade);
+                        $('#estado').val(data.estado);
+ 
+                        $('#numero').focus();
+                    }
+                }
+           });   
+   return false;    
+   })
+});
+</script>
+			<div class="form-group col-md-3 m-t-20"><label>CEP :</label>
+			<input type="text" name="cep" id="cep" placeholder="(DD)00000-0000" value="<? if(isset($codigo)){ echo $cep;} ?>" data-mask="(00)00000-0000" class="form-control">
+			</div>
+			<div class="form-group col-md-3 m-t-20"><label>Rua :</label>
+			<input type="text" name="rua" id="rua" placeholder="Exemplo: Rua. Centro oeste" value="<? if(isset($codigo)){ echo $endereco;} ?>" class="form-control">
+			</div>
+			<div class="form-group col-md-3 m-t-20"><label>Bairro :</label>
+			<input type="text" name="bairro" id="bairro" placeholder="" value="<? if(isset($codigo)){ echo $bairro;} ?>" class="form-control">
+			</div>
+			<div class="form-group col-md-3 m-t-20"><label>Cidade :</label>
+			<input type="text" name="cidade" id="cidade" placeholder="" value="<? if(isset($codigo)){ echo $cidade;} ?>" class="form-control">
+			</div>
+			<div class="form-group col-md-3 m-t-20"><label>Estado :</label>
+			<input type="text" name="estado" id="estado" placeholder="" value="<? if(isset($codigo)){ echo $estado;} ?>" class="form-control">
+			</div>
+			<div class="form-group col-md-3 m-t-20"><label>N° :</label>
+			<input type="text" name="numero" id="numero" placeholder="" value="<? if(isset($codigo)){ echo $numero;} ?>" class="form-control">
 			</div>
 			<div class="form-group col-md-3 m-t-20" style="display: none"><label>RG :</label>
-			<input type="text" name="rg" id="rg" value="<? if(isset($codigo)){ echo $rg;} ?>" placeholder="00000000" data-mask="00000000" class="form-control">
+			<input type="text" name="rg" id="rg" value="<? if(isset($codigo)){ echo $rg;} ?>" placeholder="00000000" class="form-control">
 			</div>
 			<div class="form-group col-md-3 m-t-20" style="display: none"><label>CPF :</label>
-			<input type="text" name="cpf" id="cpf" value="<? if(isset($codigo)){ echo $cpf;} ?>" placeholder="00000000000" data-mask="00000000000" class="form-control">
+			<input type="text" name="cpf" id="cpf" value="<? if(isset($codigo)){ echo $cpf;} ?>" placeholder="00000000000" class="form-control">
 			</div>
 			<div class="form-group col-md-3 m-t-20"><label>Status :</label>
 			<select name="status" id="status" class="form-control" style="width: 100%; height:36px;" required="required">
-				<option value="">Selecionar Status</option>
+				<option value="">Status</option>
 				   <option value="1" <? if("1" == $status){ echo "selected"; } ?>>Ativo</option>
 				   <option value="0" <? if("0" == $status){ echo "selected"; } ?>>Inativo</option>
 			</select></div>
@@ -384,7 +433,7 @@ else
 			<button type="button" onclick="c_gravar();" class="btn btn-info"><i class="fa fa-plus-circle"></i> <? if(isset($codigo)){ echo "Gravar";}else { echo "Cadastrar";} ?></button>
 
 			<? if(!Empty($codigo)) { ?>
-			<button class="btn btn-info" type="button" id="c_novo"><i class="fa fa-plus-circle"></i> Novo</button>
+			<button  type="button" class="btn btn-info" id="c_novo"><i class="fa fa-plus-circle"></i> Novo</button>
 			<? } ?>
 			</div></div>
 			<div class="form-group col-md-12 m-t-20">
@@ -464,7 +513,7 @@ $SQL = "SELECT produtos.descricao,agendamento_servicos.codigo,agendamento.client
 inner join clientes on clientes.codigo=agendamento.cliente 
 inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
 inner join produtos on produtos.codigo=agendamento_servicos.servico
-where agendamento.sistema='".$_SESSION['sistema']."' and agendamento.status=1 and agendamento_servicos.data='$m_data' ORDER BY agendamento.codigo desc";
+where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.status=0 and agendamento_servicos.data='$m_data' ORDER BY agendamento.codigo desc";
 $RES = mysqli_query($db3,$SQL);
 while($row = mysqli_fetch_array($RES))
 {

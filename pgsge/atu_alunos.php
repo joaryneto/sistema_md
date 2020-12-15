@@ -104,7 +104,7 @@ else if($_GET['ap'] == 3)
 				 break;
 				}
 										 ?></td>
-				<td data-title="Editar"><a class="fa fa-edit" href="sistema.php?url=cad_alunos&cadastro=1&matricula=<? echo $row['matricula']?>" style="font-size: 150%;"><a></td>
+				<td data-title="Editar"><a class="fa fa-edit" href="javascript: void(0);" onclick="edit_alunos(<?=$row['matricula'];?>);" style="font-size: 150%;"><a></td>
 			</tr>
 		  <? } ?>
 		</tbody>
