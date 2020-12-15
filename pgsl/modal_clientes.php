@@ -257,6 +257,12 @@ if(isset($inputb['codigo']))
 		 $celular = $row['celular'];
 		 $rg = $row['rg'];
 		 $cpf = $row['cpf'];
+		 $cep = $row['cep'];
+		 $rua = $row['rua'];
+		 $bairro = $row['bairro'];
+		 $numero = $row['numero'];
+		 $cidade = $row['cidade'];
+		 $estado = $row['estado'];
 		 $status = $row['status'];
 		 
 		 //print("<script>window.alert('TESTE ".$descricao.",".$valor."')</script>");
