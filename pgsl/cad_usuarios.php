@@ -16,13 +16,6 @@ if(@$_SESSION['menu99'] == false)
    //exit("<strong> Erro: Você não tem permissão. </strong>");
 }
 
-function filtro($nome) 
-{ 
-	$array1 = array(" ","/","ç","ã","é","í","@","#",); 
-	$array2 = array("_","_","c","a","e","i","_","_",);
-	return str_replace($array1, $array2, $nome); 
-}
-
 $inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 
 $cpf = "";
@@ -36,7 +29,7 @@ $situacao = "";
 if(@$inputb['ap'] == "1")
 {
 	$x = 0;
-	$SQL = "SELECT * FROM usuarios where nome like '%".$inputb['nome']."%';'";
+	$SQL = "SELECT * FROM usuarios where login like '%".$inputb['login']."%' or nome like '%".$inputb['nome']."%';'";
 	$RES = mysqli_query($db3,$SQL);
 	while($row = mysqli_fetch_array($RES))
 	{
@@ -57,7 +50,7 @@ if(@$inputb['ap'] == "1")
 	}
 	else
 	{
-	   $SQL1 = "INSERT into usuarios(sistema, cpf, login,senha, nome, email, nascimento , tipo, status, banco,agencia,conta,tipoconta) values('".$_SESSION['sistema']."','".$inputb['cpf']."','".$inputb['login']."','".$inputb['senha']."','".$inputb['nome']."','".$inputb['email']."','".revertdata($inputb['nascimento'])."','".$inputb['tipo']."','".$inputb['situacao']."','".$inputb['banco']."','".$inputb['agencia']."','".$inputb['conta']."','".$inputb['tipoconta']."')";
+	   $SQL1 = "INSERT into usuarios(sistema, cpf, login,senha, nome, email, nascimento , tipo, status, banco,agencia,conta,tipoconta) values('".$_SESSION['sistema']."','".$inputb['cpf']."','".$inputb['login']."','".$inputb['senha']."','".$inputb['nome']."','".$inputb['email']."','".revertedata($inputb['nascimento'])."','".$inputb['tipo']."','".$inputb['situacao']."','".$inputb['banco']."','".$inputb['agencia']."','".$inputb['conta']."','".$inputb['tipoconta']."')";
 	   $sucesso = mysqli_query($db3,$SQL1);
 	   
 	   if($sucesso)
@@ -199,7 +192,7 @@ else
 				}
 				else
 				{
-					<? if(@$inputb['codigo'])
+					<? if(isset($inputb['codigo']))
 				   {?>
 				      requestPage2('?br=cad_usuarios&codigo=<?=$codigo;?>&cpf='+ cpf +'&login='+ login +'&nome='+ nome +'&email='+ email +'&nascimento='+ nascimento +'&senha='+ senha +'&tipo='+ tipo +'&situacao='+ situacao +'&banco='+ banco +'&agencia='+ agencia +'&conta='+ conta +'&tipoconta='+ tipoconta +'&modal=1&ap=2&load=1','modals','GET');
 				   <? } else {?>

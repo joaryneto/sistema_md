@@ -107,7 +107,7 @@ if(@$_GET['load'] == 1)
   }
 
   $data = date('Y');
-  $sql4 = "select diario.codigo,diario.conteudo,turmas.descricao as a,materias.descricao as b,diario.conteudo as c,diario.data from diario 
+  $sql4 = "select periodo.descricao,diario.codigo,diario.conteudo,turmas.descricao as a,materias.descricao as b,diario.conteudo as c,diario.data from diario 
   inner JOIN turmas on turmas.codigo=diario.turma 
   inner join materias on materias.codigo=diario.materia 
   inner join periodo on periodo.codigo=diario.periodo 
@@ -120,6 +120,7 @@ if(@$_GET['load'] == 1)
 		<td data-title="Turma"><? echo $row['a'];?></td>
 		<td data-title="Disciplina"><? echo $row['b'];?></td>
 		<td data-title="Conteudo"><? echo $row['c'];?></td>
+		<td data-title="Bimestre"><? echo $row['descricao'];?></td>
 		<td data-title="Data"><? echo formatodata($row['data']);?></td>
 		<td data-title="Editar"><a class="fa fa-edit" href="sistema.php?url=cad_diario&codigo=<? echo $row['codigo']?>" style="font-size: 150%;"><a></td>
 		<td data-title="Excluir"><a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir exame" style="font-size: 150%; color: red;" onclick="excluir(<? echo $row['codigo']?>)" href="javascript:void(0);"><a></td>
@@ -232,6 +233,85 @@ if(@$_GET['load'] == 2)
 			 </tr>";
   }
 }
+
+if(@$_GET['load'] == 3)
+{
+	?>
+	<table class="table pmd-table table-hover">
+    <tbody>
+	<?
+	echo '<tr>';
+	//echo '<td>Matricula</td>';
+	echo '<td>Aluno</td>';
+	$SQL2 = "select diario.data,materias.descricao  from diario 
+    inner join turmas_professor on turmas_professor.turma=diario.turma 
+	inner join materias on materias.codigo=diario.materia
+    where YEAR(diario.data)='2020' and turmas_professor.usuario='6' and diario.turma='3' and diario.tipo=2  and diario.periodo='3'  and diario.status=1";
+    $RES2 = mysqli_query($db,$SQL2);
+    while($row = mysqli_fetch_assoc($RES2)) 
+    {
+       echo '<td>'.substr($row['descricao'], 0, 1).'-'.date("d/m", strtotime($row['data'])).'</td>';
+    }
+	
+	echo '</tr>';
+	echo '<tr>';
+	
+   	$SQL3 = "select matriculas.codigo,matriculas.matricula,matriculas.nome from matriculas 
+    inner join turmas_professor on turmas_professor.turma=matriculas.turma where turmas_professor.usuario='6' and matriculas.turma='3'";
+    $RES3 = mysqli_query($db,$SQL3);
+    while($row = mysqli_fetch_assoc($RES3)) 
+    {
+        //echo '<td>'.$row['matricula'].'</td>';
+        echo '<td style="text-align: left;">'.$row['nome'].'</td>';
+		
+		$RSQL1 = "select diario.data, diario.codigo from diario 
+		inner join turmas_professor on turmas_professor.turma=diario.turma 
+		where YEAR(diario.data)='2020' and turmas_professor.usuario='6' and diario.turma='3' and tipo=2 and diario.periodo='3' and diario.status=1";
+		$RRES1 = mysqli_query($db,$RSQL1);
+		while($rrow2 = mysqli_fetch_assoc($RRES1)) 
+		{
+              $DDSQL1 = "select codigo,nota from frequencia 
+			  where matricula=".$row['codigo']." and diario=".$rrow2['codigo'].";";
+              $DDRES1 = mysqli_query($db,$DDSQL1);
+              $ddrow = mysqli_fetch_assoc($DDRES1);
+                 
+	          if(Empty($ddrow['nota']))
+			  {
+                  echo '<td><input type="text" name="nota" id="nota" value="'.$ddrow['nota'].'" onkeyup="requestPage2(\'?br=atu_diario&nota=\'+ this.value +\'&codigo='.$ddrow['codigo'].'&atnota=true\',\''.$row['codigo'].'\',\'GET\');" class="form-control"></td>';
+				   
+			  }
+			  else
+			  {
+		         
+				 echo '<td><input type="text" name="nota" id="nota" value="'.$ddrow['nota'].'" onkeyup="requestPage2(\'?br=atu_diario&nota=\'+ this.value +\'&codigo='.$ddrow['codigo'].'&atnota=true\',\''.$row['codigo'].'\',\'GET\');" class="form-control"></td>';
+				 //$falta ++;
+			  }
+		}
+		echo '<td id="'.$row['codigo'].'"></td>';
+		echo '</tr>';
+	}
+	
+	?>
+	</tbody>
+   </table><?
+}
+
+if(@$_GET['atnota'] == "true")
+{
+	$SQL1 = "UPDATE frequencia SET nota='".$_GET['nota']."' where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."';";
+	$sucesso = mysqli_query($db,$SQL1);
+	
+	if($sucesso)
+	{
+        //print("<script>window.alert('Bimestre fechado com sucesso.');</script>");
+		//print("<script>window.location.href='sistema.php?url=cad_diario&codigo=".$_GET['codigo']."';</script>");
+	}
+	else
+	{
+		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-3')</script>");
+	}
+}
+
 if(@$_GET['fechar'] == "3")
 {
 	$SQL1 = "UPDATE diario SET status=0 where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
