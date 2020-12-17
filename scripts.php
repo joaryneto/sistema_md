@@ -40,7 +40,7 @@
     <script src="template/vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
 	<script src="template/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js"></script>
 	<script>
-	jQuery('#txtdata').datepicker({
+	jQuery('#txtdata23').datepicker({
 		format: 'dd/mm/yyyy',
         autoclose: true,
         todayHighlight: true
@@ -60,15 +60,6 @@
     <script type="text/javascript" src="template/vendor/html5-editor/bootstrap-wysihtml5.js"></script>
 	<script src="template/vendor/html5-editor/wysihtml5-0.3.0.js"></script>
     <script src="template/vendor/html5-editor/bootstrap-wysihtml5.js"></script>
-	<script>
-    $(function() {
-
-        $('.textarea_editor').wysihtml5();
-
-
-    });
-    </script>
-	
 	<!-- Propeller textfield js -->
 	<script type="text/javascript" src="template/vendor/propeller-master/components/textfield/js/textfield.js"></script>
 

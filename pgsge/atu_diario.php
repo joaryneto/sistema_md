@@ -28,11 +28,20 @@ if(@$_GET['ap'] == "1")
 		   $row = mysqli_fetch_array($RES1);
 		   
 		   
-		   print("<script>window.location.href='sistema.php?url=cad_diario&codigo=".$row['codigo']."';</script>");
+		   print("<script>
+		      requestPage('?br=cad_diario&codigo=".$row['codigo']."','conteudo','GET');
+		   </script>");
 	   }
 	   else
 	   {
-		   print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-2')</script>");
+		   print('<script>
+         swal({   
+            title: "Atenção!",   
+            text: "Ocorreu um erro, Entre em contato com Suporte! MSG-2",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });
+        </script>');
 	   }
 	   
 	   //$RES1->close();
@@ -54,6 +63,9 @@ else if(@$_GET['ap'] == "2")
             showConfirmButton: false 
         });
         </script>');
+		print("<script>
+		      //requestPage('?br=cad_diario&codigo=".$row['codigo']."','conteudo','GET');
+		   </script>");
 	}
 	else
 	{
@@ -65,6 +77,9 @@ else if(@$_GET['ap'] == "2")
             showConfirmButton: false 
         });
         </script>');
+		print("<script>
+		      //requestPage('?br=cad_diario&codigo=".$row['codigo']."','conteudo','GET');
+		   </script>");
 	}
 }
 else if(@$_GET['ap'] == 3)
@@ -122,8 +137,8 @@ if(@$_GET['load'] == 1)
 		<td data-title="Conteudo"><? echo $row['c'];?></td>
 		<td data-title="Bimestre"><? echo $row['descricao'];?></td>
 		<td data-title="Data"><? echo formatodata($row['data']);?></td>
-		<td data-title="Editar"><a class="fa fa-edit" href="sistema.php?url=cad_diario&codigo=<? echo $row['codigo']?>" style="font-size: 150%;"><a></td>
-		<td data-title="Excluir"><a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir exame" style="font-size: 150%; color: red;" onclick="excluir(<? echo $row['codigo']?>)" href="javascript:void(0);"><a></td>
+		<td data-title="Editar"><a class="fa fa-edit" href="javascript: void(0);" onclick="sg_diario('<? echo $row['codigo']?>');" style="font-size: 150%;"><a></td>
+		<td data-title="Excluir"><a class="fa fa-ban" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir exame" style="font-size: 150%; color: red;" onclick="excluir(<? echo $row['codigo']?>)" href="javascript:void(0);"><a></td>
 	</tr>
   <? }
   $res4->close();
@@ -139,7 +154,7 @@ if(@$_GET['load'] == 2)
   $periodo = $_GET['periodo'];
 
   $cano = date('Y');
-  $sql5 = "select diario.codigo as coddiario,diario.data,matriculas.codigo,matriculas.nome,turmas.descricao as turma,matriculas.foto from diario 
+  $sql5 = "select diario.codigo as coddiario,diario.tipo,diario.data,matriculas.codigo,matriculas.nome,turmas.descricao as turma,matriculas.foto from diario 
   inner JOIN turmas on turmas.codigo=diario.turma 
   inner join materias on materias.codigo=diario.materia 
   inner join periodo on periodo.codigo=diario.periodo
@@ -174,7 +189,7 @@ if(@$_GET['load'] == 2)
 			 }
 			 
 			 
-			 $SQL = "SELECT frequencia.codigo,frequencia.falta FROM frequencia 
+			 $SQL = "SELECT frequencia.codigo,frequencia.nota, frequencia.falta FROM frequencia 
 			 inner join diario on diario.codigo=frequencia.diario
 			 where frequencia.sistema='".$_SESSION['sistema']."' and frequencia.status=1 and frequencia.matricula=".$row['codigo']." and frequencia.diario=".$_GET['codigo']."";
 			 $RES6 = mysqli_query($db,$SQL);
@@ -183,11 +198,24 @@ if(@$_GET['load'] == 2)
 			 ?>
 			 <div class="checkbox pmd-default-theme">
 			 <label class="pmd-checkbox pmd-checkbox-ripple-effect">
-			 <input type="checkbox" class="pm-ini" name="<? echo $row['codigo'];?>" id="<? echo $row['codigo'];?>" value="<? echo $row['codigo'];?>" <? if($rows1['falta'] == "0"){?> checked <? }else{ ?> <? }?> OnClick="javascript: ajaxLoader('?br=atu_presenca&check='+ this.checked +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $row['coddiario'];?>&disciplina=<? echo $disciplina;?>&periodo=<? echo $periodo; ?>&ap=1','<? echo $row['codigo'];?>','GET');" data-color="#009efb" />
+			 <input type="checkbox" class="pm-ini" name="<? echo $row['codigo'];?>" id="<? echo $row['codigo'];?>" value="<? echo $row['codigo'];?>" <? if($rows1['falta'] == "0"){?> checked <? }else{ ?> <? }?> OnClick="javascript: ajaxLoader('?br=atu_presenca&check='+ this.checked +'&data=<? echo $row['data'];?>&matricula=<? echo $row['codigo'];?>&diario=<? echo $row['coddiario'];?>&disciplina=<? echo $disciplina;?>&periodo=<? echo $periodo; ?>&ap=1','f<? echo $row['codigo'];?>','GET');" data-color="#009efb" />
 			 <span class="pmd-checkbox-label">&nbsp;</span></div>
 			 <!--<input type="checkbox" name="check[]" value="< echo $row['codigo'];?>" < if($rows1['falta'] == "0"){?> checked < }else{ ?> < }?> data-color="#009efb" />-->
 			 </td>
-		     <td data-title="Faltas no Periodo"><div id="<? echo $row['codigo'];?>">
+			 <?if($row['tipo'] == 2){?>
+			 <td data-title="Nota">
+			 <script>
+			    $(".notas").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+				
+				function c_notas(nota,matricula,codigo)
+				{
+					ajaxLoader('?br=atu_diario&nota='+ nota +'&codigo='+ codigo +'&matricula='+ matricula +'&atnota=true','n'+ matricula +'','GET');
+				}
+				
+			 </script>
+			 <input type="text" class="form-control notas" name="nota" id="nota" value="<?=number_format($rows1['nota'],2,",",".");?>" onkeyup="c_notas(''+ this.value + '','<?=$row['codigo'];?>','<?=$rows1['codigo'];?>');" max="10"></td>
+             <?}?>
+			 <td data-title="Faltas no Periodo"><div id="f<? echo $row['codigo'];?>">
 		<? 
 			 $ano = date('Y');
 			 $SQL7 = "SELECT frequencia.falta as qtd FROM frequencia 
@@ -220,7 +248,10 @@ if(@$_GET['load'] == 2)
 			 //$RES6->close();
 			 //$RES7->close();
 			 
-		echo "</div></td></tr>";
+		echo "</div></td>";
+		?>
+		<td data-title="N. Total"><div id="n<? echo $row['codigo'];?>"></td>
+		<?
      $a = 1;
    }
   if($a == 0)
@@ -298,17 +329,36 @@ if(@$_GET['load'] == 3)
 
 if(@$_GET['atnota'] == "true")
 {
-	$SQL1 = "UPDATE frequencia SET nota='".$_GET['nota']."' where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."';";
-	$sucesso = mysqli_query($db,$SQL1);
+	$matricula = $_GET['matricula'];
+	$nota = str_replace(',', ".", security::input(@$_GET['nota']));
 	
-	if($sucesso)
+	if($nota > 10.00)
 	{
-        //print("<script>window.alert('Bimestre fechado com sucesso.');</script>");
-		//print("<script>window.location.href='sistema.php?url=cad_diario&codigo=".$_GET['codigo']."';</script>");
+		echo "menos";
 	}
 	else
 	{
+	
+	  $SQL1 = "UPDATE frequencia SET nota='".$nota."' where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."';";
+	  $sucesso = mysqli_query($db,$SQL1);
+	
+	  if($sucesso)
+	  {
+        //print("<script>window.alert('Bimestre fechado com sucesso.');</script>");
+		//print("<script>window.location.href='sistema.php?url=cad_diario&codigo=".$_GET['codigo']."';</script>");
+		
+        $SQL = "SELECT sum(frequencia.nota) as nota from frequencia 
+		inner join diario on diario.codigo=frequencia.diario
+		where frequencia.sistema='".$_SESSION['sistema']."' and frequencia.periodo='".$_SESSION['periodo']."' and frequencia.disciplina='".$_SESSION['disciplina']."' and frequencia.matricula='".$matricula."' and diario.tipo=2;";
+		$RES = mysqli_query($db,$SQL);
+		$row = mysqli_fetch_array($RES);
+		
+		echo $row['nota'];
+	  }
+	  else
+	  {
 		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-3')</script>");
+	  }
 	}
 }
 

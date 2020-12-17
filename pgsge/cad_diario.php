@@ -16,6 +16,9 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //   //exit("<strong> Erro: Você não tem permissão. </strong>");
 //}
 
+
+
+
 $turma = "";
 $disciplina = "";
 $periodo = "";
@@ -55,6 +58,10 @@ if(isset($_GET['codigo']))
 		 $mdescricao = $row['mdescricao'];
 		 $tipo = $row['tipo'];
 		 
+		 $_SESSION['turma'] = $turma;
+		 $_SESSION['disciplina'] = $disciplina;
+		 $_SESSION['periodo'] = $periodo;
+		 
 		 //print("<script>window.alert('TESTE ".$descricao.",".$valor."')</script>");
 	  }
 	}
@@ -68,66 +75,6 @@ if(isset($_GET['codigo']))
 
 ?>	
 <script>
-
-<? if(!Empty($_GET['frequencia'])){?>
-/*function ppresenca(){
-        swal({   
-            title: "Atenção!",   
-            text: "Você esta iniciando a gravação de presença dos alunos.",   
-            type: "warning",   
-            showCancelButton: true,   
-            //confirmButtonColor: "#DD6B55",   
-            confirmButtonText: "Sim, Gravar!",
-            cancelButtonText: "Não, Cancelar!", 			
-            closeOnConfirm: true 
-        }, function()
-		{   
-		
-		    var i = 0;
-			var o = 0;
-			
-		    var matriculas = [];
-		    $.each($("input[name='check[]']:checked"),function()
-		    {
-		    	  matriculas.push($(this).val());
-				  o++;
-		    });
-			
-			var nots = [];
-		    $.each($("input[name='check[]']:not(:checked)"),function()
-		    {
-		    	  nots.push($(this).val());
-				  i++;
-		    });
-	   
-	        var not = "";
-	        if(i === 0)
-			{
-		       not = "";
-			}
-			else
-			{
-			   not = nots.join(",");
-			}
-			
-			var matricula = "";
-			if(o === 0)
-			{
-			   matricula = "";
-			}
-			else
-			{
-			   matricula = matriculas.join(",");
-			}
-			
-			var vdiario = "<? echo $_GET['codigo'];?>";
-			var vdisciplina = "<? echo $_GET['disciplina'];?>";
-			
-		    requestPage('?br=atu_presenca&matricula='+ matricula +'&nots='+ nots +'&data=<? echo $data;?>&diario='+ vdiario +'&disciplina='+ vdisciplina +'&periodo=&gravar=1','gravarpresenca','GET');
-			
-	});
-}*/
-<? } ?>
 
 function psdiario(texto)
 {
@@ -170,7 +117,7 @@ function excluir(codigo)
         });
 }
 
-function gravarrio(sv,codigo)
+$('.sge-t-gravar').on('click',function()
 {
     var turma = document.getElementById('turma').value;
 	var disciplina = document.getElementById('disciplina').value;
@@ -213,16 +160,13 @@ function gravarrio(sv,codigo)
 	}
     else
 	{
-		if(sv == 1)
-		{
-		   requestPage('?br=atu_diario&turma='+ turma +'&disciplina='+ disciplina +'&periodo='+ periodo +'&video='+ video +'&txtdata='+ txtdata +'&conteudo='+ conteudo +'&tipo='+ tipo +'&txtobs='+ txtobs +'&ap='+ sv +'&codigo='+ codigo +'&load=1','listdiario','GET');
-		}
-		else
-		{
-		   requestPage('?br=atu_diario&turma='+ turma +'&disciplina='+ disciplina +'&periodo='+ periodo +'&video='+ video +'&txtdata='+ txtdata +'&conteudo='+ conteudo +'&tipo='+ tipo +'&txtobs='+ txtobs +'&ap='+ sv +'&codigo='+ codigo +'&load=1','modals','GET');
-		}
+		<?if(isset($_GET['codigo'])){?>
+		   requestPage('?br=atu_diario&turma='+ turma +'&disciplina='+ disciplina +'&periodo='+ periodo +'&video='+ video +'&txtdata='+ txtdata +'&conteudo='+ conteudo +'&tipo='+ tipo +'&txtobs='+ txtobs +'&codigo=<?=$codigo?>&ap=2','conteudo','GET');
+		<?}else{?>
+		   requestPage('?br=atu_diario&turma='+ turma +'&disciplina='+ disciplina +'&periodo='+ periodo +'&video='+ video +'&txtdata='+ txtdata +'&conteudo='+ conteudo +'&tipo='+ tipo +'&txtobs='+ txtobs +'&ap=1','conteudo','GET');
+		<?}?>
 	}		
-}
+});
 
 
 $("#check[]").on('change', function() {
@@ -255,17 +199,8 @@ $("#check[]").on('change', function() {
 	<div class="col-md-12 col-sm-12"> 
 		<div class="component-box">
 			<!--Tabs with Icon example -->
-							    
-								
-							    <? if(Empty($_GET['codigo']) and Empty($_GET['frequencia']) and Empty($_GET['nota']) or Empty($_GET['codigo']) and Empty($_GET['nota']) and Empty($_GET['frequencia']) or !Empty($_GET['codigo']) and Empty($_GET['frequencia']) and Empty($_GET['nota']) or !Empty($_GET['codigo']) and Empty($_GET['nota']) and Empty($_GET['frequencia'])) { ?>
-                                <?
-								if(Empty($_GET['codigo']) and Empty($_GET['frequencia']))
-								{  $action = "sistema.php?url=cad_diario&ap=1";}
-							    if(!Empty($_GET['codigo']))
-								{  $action = "sistema.php?url=cad_diario&codigo=".$_GET['codigo']."&ap=2";}
-							
-								?>
-								<form class="m-t-40 row" name="laudo" method="post" action="<? echo $action;?>">
+			                    
+								<div class="m-t-40 row">
 								<input type="hidden" name="diario" id="diario" class="form-control"  value="<? echo $_SESSION['diario']; ?>">
 								<div class="form-group col-md-4 m-t-20"><label>Turma :</label>
 								<select name="turma" id="turma" style="width: 100%; height:36px;" class="select2 form-control custom-select" required="required">
@@ -336,57 +271,50 @@ $("#check[]").on('change', function() {
 								<div class="form-group col-md-12 m-t-20"><label><b>Texto :</b></label>                               
 								<textarea class="textarea_editor form-control" name="txtobs"  autocomplete="off" id="txtobs" rows="10" placeholder="Escreva aqui ..." required="required"><? if(!Empty($_GET['codigo'])){ echo $texto;} ?></textarea>
 								</div>
-								<? }else{ ?>
-								<div class="col-md-12">
-								<h2>Turma : <? echo $tdescricao;?></h2>
-								<h2>Disciplina : <? echo $mdescricao;?></h2>
-								<h2>Bimestre : <? echo $pdescricao;?></h2>
-								<h2>Conteudo : <? echo $conteudo;?></h2>
-								</div>
-								<? } ?>
+								<script>
+								$('#txtdata').mask('00/00/0000', {'translation': {0: {pattern: /[0-9*]/}}});
+								
+								jQuery('#txtdata').datepicker({
+									format: 'dd/mm/yyyy',
+								    autoclose: true,
+								    todayHighlight: true
+								});
+								$(function() {
+
+								    $('.textarea_editor').wysihtml5();
+
+
+								 });
+								 
+								 
+								</script>
 								<div class="form-group col-md-12 m-t-20">
 								<br>
-								<? if(Empty($_GET['codigo']))
+								<script>
+								$('.sge-t-dnovo').on('click',function()
+								{	
+								   //b_menuslow();
+								   requestPage('?br=cad_diario','conteudo','GET');
+								});
+								
+								function sg_diario(codigo)
 								{
+									requestPage('?br=cad_diario&codigo='+ codigo +'','conteudo','GET');
+								}
 								
-								?>
-								<button type="button" OnClick="gravarrio(1);" class="btn btn-info"><i class="fa fa-plus-circle"></i> Cadastrar </button>
-								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario"><i class="fa fa-plus-circle"></i> Novo</a>
-								<?}else{?>
-								<?if(Empty($_GET['frequencia']) and Empty($_GET['nota'])){?>
-								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" onclick="excluir(<? echo $_GET['codigo'];?>)" href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Bloquear </a>
-								<?}?>
-								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota'])){?>
-								<button class="btn pmd-btn-outline pmd-ripple-effect btn-primary" type="button" OnClick="gravarrio(2,<? echo $_GET['codigo']; ?>);" ><i class="fa fa-plus-circle"></i> Gravar </button>
-								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario<?if(Empty($_GET['codigo'])){?>&codigo=<? echo $_GET['codigo']; ?><?}?>"><i class="fa fa-plus-circle"></i> Voltar</a>
-								<? }else{ ?>
-								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario<?if(!Empty($_GET['codigo'])){?>&codigo=<? echo $_GET['codigo']; ?><?}?>"><i class="fa fa-plus-circle"></i> Voltar</a>
-								<?if(!Empty($_GET['frequencia']) and Empty($_GET['nota'])){?>
-								<!--<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: WEB(0)" onClick="ppresenca();"><i class="fa fa-plus-circle"></i> Gravar</a>-->
-								<? }?><?}?>
-								
-								
-								<?}?>
-								<? if(!Empty($_GET['codigo']) and !Empty($_GET['frequencia']) && Empty($_GET['nota'])) { ?>
-								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario&codigo=<? echo $_GET['codigo']; ?>&frequencia=1&disciplina=<? echo $disciplina;?>"><i class="fa fa-plus-circle"></i> Registrar Frequencia</a>
-								<? } ?>
-								<? if(!Empty($_GET['codigo']) and Empty($_GET['nota']) && Empty($_GET['frequencia'])) { ?>
-								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="sistema.php?url=cad_diario&codigo=<? echo $_GET['codigo']; ?>&nota=1&disciplina=<? echo $disciplina;?>"><i class="fa fa-plus-circle"></i> Inserir Nota</a>
-								<? } ?>
-								<? if(!Empty($_GET['codigo']) and !Empty($_GET['nota']) && Empty($_GET['frequencia'])) { ?>
-								<a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus-circle"></i> Fechar Bimestre</a>
-								<? } ?>
-								
+								</script>
+								<button type="button" class="btn btn-info sge-t-gravar"><i class="fa fa-plus-circle"></i> Gravar </button>
+								<button class="btn btn-info sge-t-dnovo"><i class="fa fa-plus-circle"></i> Novo</button>
 								</div>
 								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota']) && Empty($_GET['codigo']) && Empty($_GET['cadastro'])){?>
 								<div class="form-group col-md-12 m-t-20">
                                 <input type="text" name="pesquisa" id="pesquisa" onkeyup="psdiario(this.value);" class="form-control"  autocomplete="off"  value="" placeholder="Pesquisar conteúdo">
 								</div>
 								<script>
-								window.onload = function ()
-								{
+								//window.onload = function ()
+								//{
 									requestPage2('?br=atu_diario&load=1','listdiario','GET');
-								}
+								//}
 								</script>
                                  <div class="col-md-12">
 					              <div class="component-box">
@@ -417,10 +345,10 @@ $("#check[]").on('change', function() {
 								<div class="col-md-12">
 					            <div class="component-box">
 								<script>
-								window.onload = function ()
-								{
+								//window.onload = function ()
+								//{
 								     requestPage2('?br=atu_diario&codigo=<?=$codigo;?>&disciplina=<?=$disciplina;?>&periodo=<?=$periodo;?>&turma=<?=$turma;?>&load=2','listpresenca','GET');
-								}
+								//}
 								</script>
 							    <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
 							    <table class="table pmd-table">
@@ -429,7 +357,9 @@ $("#check[]").on('change', function() {
                                                 <th>Foto</th>
                                                 <th>Nome</th>
 												<th>Presença</th>
-												<th>Faltas no Periodo</th>
+												<th>Nota</th>
+												<th>T. Faltas</th>
+												<th>N. Total</th>
                                             </tr>
                                         </thead>
                                         <tbody id="listpresenca">
@@ -528,41 +458,7 @@ $("#check[]").on('change', function() {
                                     </table>
                                 </div> </div> </div>
 								<?}?>
-								</form>
-								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="exampleModalLabel1">Atenção!</h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div id="gravarpresenca"></div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                                <a href="sistema.php?url=cad_diario&fechar=1" class="btn btn-primary">Continuar</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="exampleModalLabel1">Atenção!</h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <h4>Você tem certeza que gostaria de fechar o Bimestre de <? echo $mdescricao; ?></h4>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                                <a href="sistema.php?url=cad_diario&fechar=1" class="btn btn-primary">Continuar</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+								</div>
                             </div>
                         </div>
 					</div>

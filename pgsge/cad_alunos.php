@@ -102,7 +102,7 @@ $input = "";
 
 if(Empty($_GET['cadastro']))
 {
-  $input = "<input type='text' name='pesquisa' id='pesquisa' value='' class='form-control form-control-lg search bottom-25 position-relative border-0' onkeyup=\"javascript: requestPage2('?br=atu_alunos&pesquisa='+ this.value +'&ap=3','listaalunos','GET');\" required='required'>";
+  $input = "";
   $valor = 290;
 }
 else
@@ -117,7 +117,8 @@ else
                 <div class="container align-self-end">
                     <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Cadastro de Alunos";?></h2>
                     <p class="text-mute mb-2"><? echo $_SESSION["DESCRICAOPG2"] = "Lista";?></p>
-					<?=$input;?>
+					<input type="text" name="pesquisa" id="pesquisa" value="" class="form-control form-control-lg search bottom-25 position-relative border-0" onkeyup="javascript: requestPage2('?br=atu_alunos&pesquisa='+ this.value +'&ap=3','listaalunos','GET');" required='required'>
+                    <button class="btn btn-info btnadd-sh" onclick="requestPage2('?br=modal_alunos&modal=1','modals','GET');" data-toggle="modal" data-target="#modalap" data-title="Alunos"><i class='fa fa-plus-circle'></i></button>
                 </div>
         </div>
 </div>   

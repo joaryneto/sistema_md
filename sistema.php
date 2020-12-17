@@ -140,7 +140,7 @@ function isMobile()
                                 <i class="material-icons">perm_contact_calendar</i> Alunos
                             </div>
                         </a>
-						<div class="dropdown-menu">
+						<div class="dropdown-menu t-menu">
 						    <?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
                             <a href="javascript: void(0);" class="sidebar-close dropdown-item menu-right sge-t-alunos">
 							 Cadastrar
@@ -157,9 +157,9 @@ function isMobile()
                             </div>
                         </a>
 						
-                        <div class="dropdown-menu">
+                        <div class="dropdown-menu t-menu">
 						    <?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
-                            <a href="sistema.php?url=cad_diario" class="sidebar-close dropdown-item menu-right">
+                            <a href="javascript: void(0);" class="sidebar-close dropdown-item menu-right sge-t-diario">
 							 Conteúdo Lecionado
                             </a>
                             <? } ?>
@@ -181,7 +181,7 @@ function isMobile()
                                 <i class="material-icons">perm_contact_calendar</i> Relatorio
                             </div>
                         </a>
-						<div class="dropdown-menu">
+						<div class="dropdown-menu t-menu">
 						    <?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
                             <a href="javascript:void(0);" id="relatorio_diario" class="sidebar-close dropdown-item menu-right" class="btn btn-info" data-toggle="modal" data-target="#modalusuario">
 							 Diario de Classe

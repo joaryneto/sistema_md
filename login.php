@@ -70,15 +70,15 @@ if(@$_GET['deslogar']==1)
                     <div class="row h-100">
                         <div class="col-12 align-self-center">
                             <h1 class="font-weight-light mb-5 text-center"><small class="font-weight-light">Bem-vindo</small>,<br><span class="text-mute">Faça login para continuar</span></h1>
-                            <form class="form-signin" method="post" action="login.php">
+                            <form class="form-signin" method="post" action="login.php" autocomplete="off">
                                 <div class="row">
                                     <div class="col-auto align-self-center">
                                         <i class="material-icons text-mute mt-2">account_circle</i>
                                     </div>
                                     <div class="col pl-0">
                                         <div class="form-group float-label active">
-                                            <input type="text" id="inputEmail" autocomplete="off" name="login" class="form-control" required autofocus >
-                                            <label for="inputEmail" autocomplete="off" class="form-control-label">Nome do usuário</label>
+                                            <input type="text" id="inputEmail" name="login" class="form-control" required autofocus >
+                                            <label for="inputEmail" class="form-control-label">Nome do usuário</label>
                                         </div>
                                     </div>
                                 </div>

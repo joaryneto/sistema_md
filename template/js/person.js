@@ -261,6 +261,12 @@ $('.sge-t-alunos').on('click',function()
    requestPage('?br=cad_alunos','conteudo','GET');
 });
 
+$('.sge-t-diario').on('click',function()
+{	
+   //b_menuslow();
+   requestPage('?br=cad_diario','conteudo','GET');
+});
+
 /* MENU SGE  */
 
 $('#ldotempo').on('click',function()
