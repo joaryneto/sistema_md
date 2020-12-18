@@ -46,7 +46,7 @@ if(@$_GET['ap'] == "1")
 		   $codigo = $row['codigo'];
 		   
 		   print("<script>
-		      requestPage('?br=cad_diario&codigo=".$row['codigo']."','conteudo','GET');
+		      //requestPage('?br=cad_diario&codigo=".$row['codigo']."','conteudo','GET');
 		   </script>");
 	   }
 	   else
@@ -99,24 +99,6 @@ else if(@$_GET['ap'] == "2")
 		   </script>");
 	}
 }
-else if(@$_GET['ap'] == 3)
-{
-	$SQL1 = "UPDATE diario SET status=2 where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
-	$RES = mysqli_query($db,$SQL1);
-	
-	
-	print('<script>
-         swal({   
-            title: "Atenção!",   
-            text: "Bloqueado com sucesso.",   
-            timer: 1000,   
-            showConfirmButton: false 
-        });
-    </script>');
-	
-	print("<script>window.location.href='sistema.php?url=cad_diario';</script>");
-	//$RES->close();
-}
 
 
 $turma = "";
@@ -132,14 +114,19 @@ $mdescricao = "";
 $tipo = "";
 
 
-		 
 if(isset($_GET['codigo']))
 {
+	$codigo = $_GET['codigo'];
+}
+	 
+if(isset($codigo))
+{
+	
 	$SQL = "SELECT diario.codigo, diario.tipo,diario.turma,diario.video,diario.materia,diario.periodo,diario.data,diario.conteudo,diario.texto,materias.descricao as mdescricao,turmas.descricao as tdescricao,periodo.descricao as pdescricao FROM diario 
 	inner join materias on materias.codigo=diario.materia 
 	inner join turmas on turmas.codigo=diario.turma
 	inner join periodo on periodo.codigo=diario.periodo
-	where diario.sistema='".$_SESSION['sistema']."' and diario.codigo='".$_GET['codigo']."'";
+	where diario.sistema='".$_SESSION['sistema']."' and diario.codigo='".$codigo."'";
 	
 	$sucesso = mysqli_query($db,$SQL);
 	
@@ -408,7 +395,7 @@ $("#check[]").on('change', function() {
 								<button type="button" class="btn btn-info sge-t-gravar"><i class="fa fa-plus-circle"></i> Gravar </button>
 								<button class="btn btn-info sge-t-dnovo"><i class="fa fa-plus-circle"></i> Novo</button>
 								</div>
-								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota']) && Empty($_GET['codigo']) && Empty($_GET['cadastro'])){?>
+								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota']) && Empty($codigo) && Empty($_GET['cadastro'])){?>
 								<div class="form-group col-md-12 m-t-20">
                                 <input type="text" name="pesquisa" id="pesquisa" onkeyup="psdiario(this.value);" class="form-control"  autocomplete="off"  value="" placeholder="Pesquisar conteúdo">
 								</div>

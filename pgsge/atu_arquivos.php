@@ -64,13 +64,16 @@ else if($_GET['ap'] == 3)
 {
 
 		
-		  $SQL = "SELECT data,arquivo FROM arquivos where usuario='".$_SESSION['usuario']."' order by data desc limit 1;";
+		  $SQL = "SELECT arquivos.data,arquivos.arquivo,materias.descricao FROM arquivos 
+		  inner join materias on materias.codigo=arquivos.disciplina
+		  where arquivos.usuario='".$_SESSION['usuario']."' order by arquivos.data desc;";
 		  $res = mysqli_query($db,$SQL); 
 		  while($row = mysqli_fetch_array($res))
 		  {
 		  ?>
 			<tr>
 				<td data-title="Data"><? echo formatodatahora($row['data']);?></td>
+				<td data-title="Disciplina"><? echo $row['descricao'];?></td>
 				<td data-title="Link"><a class="fa fa-edit" target="_brank" href="<? echo $row['arquivo']?>" style="font-size: 150%;"><a></td>
 			</tr>
 		  <? } 

@@ -174,7 +174,7 @@ function isMobile()
                         </div>
 						<? } ?>
                     </li>
-					<?if($_SESSION['permissao'] == 3){?>
+					<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
 					<li class="nav-item dropdown" style="width: 230px;">
                         <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="list-group-item list-group-item-action">
@@ -183,7 +183,7 @@ function isMobile()
                         </a>
 						<div class="dropdown-menu t-menu">
 						    <?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
-                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right t-menu r-diario" class="btn btn-info" data-toggle="modal" data-target="#modalusuario">
+                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right r-diario" class="btn btn-info">
 							 Diario de Classe
                             </a>
 							<?}?>

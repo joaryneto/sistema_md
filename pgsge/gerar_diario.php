@@ -224,7 +224,7 @@ $cnpj = $_GET['cnpj'];
   $vb .='<td colspan="3">&nbsp;</td>';
   $vb .='<th><b>Mês</b></th>';
   
-  $RES1->close();
+  //$RES1->close();
    
   $SQL1 = "select diario.data from diario 
   inner join turmas_professor on turmas_professor.turma=diario.turma 
@@ -234,7 +234,7 @@ $cnpj = $_GET['cnpj'];
   {
       $vb .='<td>'.date("m", strtotime($row['data'])).'</td>';
   }
-  $RES1->close();
+  //$RES1->close();
   $vb .='<th rowspan="2">T. F.</th>';
   
   $SQL1 = "select diario.data from diario 
@@ -245,7 +245,7 @@ $cnpj = $_GET['cnpj'];
   {
       $vb .='<td>'.date("m", strtotime($row['data'])).'</td>';
   }
-  $RES1->close();
+  //$RES1->close();
   
   $vb .='<th colspan="2">Total</th>';
   $vb .='</tr>';
@@ -262,7 +262,7 @@ $cnpj = $_GET['cnpj'];
   {
      $vb .='<td>'.date("d", strtotime($row['data'])).'</td>';
   }
-  $RES2->close();
+  //$RES2->close();
   
   $SQL2 = "select diario.data from diario 
   inner join turmas_professor on turmas_professor.turma=diario.turma 
@@ -272,7 +272,7 @@ $cnpj = $_GET['cnpj'];
   {
      $vb .='<td>'.date("d", strtotime($row['data'])).'</td>';
   }
-  $RES2->close();
+  //$RES2->close();
   
   $vb .='<td>N</td>';
   $vb .='<td>F</td>';
@@ -280,44 +280,46 @@ $cnpj = $_GET['cnpj'];
   $vb .='<tr>';
    
   $count = 1;
-  $SQL3 = "select matriculas.codigo,matriculas.matricula,matriculas.nome from matriculas 
-  inner join turmas_professor on turmas_professor.turma=matriculas.turma where turmas_professor.usuario=".$professor." and matriculas.turma=".$turmas."";
+  $SQL3 = "select matriculas.codigo,matriculas.matricula,matriculas.nome,turmas_professor.usuario,turmas_professor.turma from matriculas 
+  inner join turmas_professor on turmas_professor.turma=matriculas.turma where turmas_professor.usuario='".$professor."' and matriculas.turma='".$turmas."'";
   $RES3 = mysqli_query($db,$SQL3);
-  while($row = mysqli_fetch_assoc($RES3)) 
+  while($row3 = mysqli_fetch_assoc($RES3)) 
   {
 	     
          $vb .='<td style="font-size: 8px">'.str_pad($count, 4 , '0' , STR_PAD_LEFT).'</td>';
-         $vb .='<td style=" font-size: 8px">'.$row['matricula'].'</td>';
-         $vb .='<td style="width: 130px; text-align: left; font-size: 8px" colspan="2">'.$row['nome'].'</td>';
+         $vb .='<td style=" font-size: 8px">'.$row3['matricula'].'</td>';
+         $vb .='<td style="width: 130px; text-align: left; font-size: 8px" colspan="2">'.$row3['nome'].'</td>';
    
          $falta = 0;
 		 $SQL1 = "select diario.data, diario.codigo from diario 
 		 inner join turmas_professor on turmas_professor.turma=diario.turma 
-		 where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and diario.periodo=".$periodo."  and diario.status=1";
+		 where YEAR(diario.data)='".$ano."' and turmas_professor.usuario='".$row3['usuario']."' and diario.materia='".$disciplina."' and diario.turma='".$row3['turma']."' and diario.periodo='".$periodo."'  and diario.status='1'";
 		 $RES1 = mysqli_query($db,$SQL1);
 		 while($rrow2 = mysqli_fetch_assoc($RES1)) 
 		 {
               
-              $DSQL1 = "select data,nota from frequencia 
-			  where data='".$rrow2['data']."' and matricula=".$row['codigo']." and diario=".$rrow2['codigo']." and YEAR(data)=".$ano." and falta=0;";
+              $DSQL1 = "select falta,data,nota from frequencia
+			  where matricula='".$row3['codigo']."' and diario='".$rrow2['codigo']."';";
               $DRES1 = mysqli_query($db,$DSQL1);
               $drow = mysqli_fetch_assoc($DRES1);
-                 
-	          if(!Empty($drow['data']))
-			  {
-                   $vb .='<td style="font-size: 6px">P</td>';
-				   
+
+	          if($drow['falta'] == "1")
+			  { 
+                   $vb .='<td style="font-size: 6px">F</td>';
+				   $falta ++;
 			  }
 			  else
 			  {
-		         $vb .='<td style="font-size: 6px">F</td>'; 
-				 $falta ++;
+		           $vb .='<td style="font-size: 6px">P</td>'; 
+				 
 			  }
 			  
-			  $DRES1->close();
+			  
+			  
+			  //$DRES1->close();
 		 }
 		 
-		 $RES1->close();
+		 //$RES1->close();
 		 
          $vb .='<td>'.$falta.'</td>';
 		 
@@ -328,7 +330,7 @@ $cnpj = $_GET['cnpj'];
 		 while($rrow2 = mysqli_fetch_assoc($RRES1)) 
 		 {
               $DDSQL1 = "select nota from frequencia 
-			  where data='".$rrow2['data']."' and matricula=".$row['codigo']." and diario=".$rrow2['codigo']." and YEAR(data)=".$ano." and falta=0;";
+			  where matricula=".$row3['codigo']." and diario=".$rrow2['codigo']." and falta=0;";
               $DDRES1 = mysqli_query($db,$DDSQL1);
               $ddrow = mysqli_fetch_assoc($DDRES1);
                  
@@ -343,10 +345,10 @@ $cnpj = $_GET['cnpj'];
 				 //$falta ++;
 			  }
 			  
-			  $DDRES1->close();
+			  //$DDRES1->close();
 		 }
 		 
-		 $RRES1->close();
+		 //$RRES1->close();
 		 
 		 $vb .='<td>&nbsp;</td>';
 		 $vb .='<td>&nbsp;</td>';
@@ -356,7 +358,7 @@ $cnpj = $_GET['cnpj'];
 		 $count ++;
    }
    
-   $RES3->close();
+   //$RES3->close();
 	
    $vb .='</tbody>';
    $vb .='</table>';
@@ -424,7 +426,7 @@ $cnpj = $_GET['cnpj'];
 	  
       $aucount ++;
   }
-  $RES1->close();
+  //$RES1->close();
   
   $vb .='</tbody>';
   $vb .='</table>';
@@ -449,7 +451,7 @@ $lnk = './arquivos/diario/'.$nome.'.pdf';
 // Load content from html file 
 //$vb = file_get_contents("pgsge/rel_producao.php"); 
 
-$SQL = "INSERT INTO arquivos (sistema,usuario,arquivo,data,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$lnk."','".$datahora."',1);";
+$SQL = "INSERT INTO arquivos (sistema,usuario,professor,disciplina,arquivo,data,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$professor."','".$disciplina."','".$lnk."','".$datahora."',1);";
 $RES = mysqli_query($db,$SQL);
 
 //$RES->Close();
