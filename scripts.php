@@ -22,7 +22,7 @@
 	<script src="template/js/main2.js"></script>
 	<?}?>
 
-	<script src="template/js/person.js.php"></script>
+	<script type="text/javascript" src="template/js/person.js.php"></script>
 	
     <!-- Plugin JavaScript -->
     <script src="template/vendor/moment/moment.js"></script>
