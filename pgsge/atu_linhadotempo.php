@@ -4,6 +4,15 @@ if(@$_GET['load'] == 1)
 $mes = $_GET['mes'];
 $ano=date("Y");
 
+if($_SESSION['permissao'] == 1)
+{
+	$whe = " and matriculas.matricula='".$_SESSION['matricula']."'";
+}
+else
+{
+	$whe = " and turmas_professor.usuario='".$_SESSION['usuario']."'";
+}
+
 $count = 0; 
 $SQL = "select usuarios.nome,diario.data,diario.conteudo,diario.video,diario.texto,matriculas.codigo,turmas.descricao as turma,materias.descricao as disciplina,matriculas.foto from diario 
 inner JOIN turmas on turmas.codigo=diario.turma 
@@ -11,7 +20,8 @@ inner join materias on materias.codigo=diario.materia
 inner join matriculas on matriculas.turma=diario.turma  
 inner join usuarios on usuarios.codigo=diario.usuario 
 inner join turmas_professor on turmas_professor.turma=diario.turma and turmas_professor.usuario=diario.usuario
-where matriculas.status=1 and matriculas.matricula='".$_SESSION['matricula']."' and month(diario.data)=".$mes." and YEAR(diario.data)=".$ano."";
+where matriculas.status=1 $whe and month(diario.data)=".$mes." and YEAR(diario.data)=".$ano."";
+
 $RES = mysqli_query($db,$SQL);
 while($row = mysqli_fetch_array($RES))
 {
