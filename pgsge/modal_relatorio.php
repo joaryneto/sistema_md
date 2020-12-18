@@ -65,7 +65,7 @@ function gravar()
 <div class="modal-body">
 <form class="m-t-40 row">
 <div class="form-group col-md-9 m-t-20"><label>Professor :</label>
-<select name="professor" id="r_professor" class="form-control" style="width: 100%; height:36px;" onChange="javascript: ajaxLoader('?br=atu_relatorio&codigo='+ this.value +'&ap=1','r_turmas','GET');" required="required">
+<select name="professor" id="r_professor" class="form-control" style="width: 100%; height:36px;" onChange="javascript: requestoption('?br=atu_relatorio&codigo='+ this.value +'&ap=1','r_turmas','GET');" required="required">
 	<option value="">Escolher</option>
 	<? 
 	   $SQL = "Select * from usuarios where tipo=2";
@@ -77,7 +77,7 @@ function gravar()
 </select>
 </div>
 <div class="form-group col-md-5 m-t-20"><label>Turma :</label>
-<select name="turmas" id="r_turmas" class="form-control" style="width: 100%; height:36px;" onChange="javascript: ajaxLoader('?br=atu_relatorio&codigo='+ document.getElementById('r_professor').value +'&ap=2','r_disciplina','GET');" required="required">
+<select name="turmas" id="r_turmas" class="form-control" style="width: 100%; height:36px;" onChange="javascript: requestoption('?br=atu_relatorio&codigo='+ document.getElementById('r_professor').value +'&ap=2','r_disciplina','GET');" required="required">
 	<option value="">Escolher</option>
 </select>
 </div>
