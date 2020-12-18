@@ -127,8 +127,8 @@ function isMobile()
 			<nav class="navbar" style="padding: .1rem 0rem;">
                 <ul class="navbar-nav">
 				    <li class="nav-item dropdown" style="width: 230px;">
-                        <a href="sistema.php?url=linhadotempo" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
-                            <div class="list-group-item list-group-item-action active">
+                        <a href="javascript:void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action t-menu t-linhadotempo">
                                 <i class="material-icons">perm_contact_calendar</i> Linha do tempo
                             </div>
                         </a>
@@ -159,15 +159,15 @@ function isMobile()
 						
                         <div class="dropdown-menu t-menu">
 						    <?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
-                            <a href="javascript: void(0);" class="sidebar-close dropdown-item menu-right sge-t-diario">
+                            <a href="javascript: void(0);" class="dropdown-item m-diario">
 							 Conteúdo Lecionado
                             </a>
                             <? } ?>
 							<?if($_SESSION['permissao'] == 3){?>
-							<a href="sistema.php?url=cad_fechar" class="sidebar-close dropdown-item menu-right">
+							<a href="sistema.php?url=cad_fechar" class="dropdown-item">
                              Fechar Bimestre
                             </a>
-                            <a href="sistema.php?url=cad_abrir" class="sidebar-close dropdown-item popup-open" >
+                            <a href="sistema.php?url=cad_abrir" class="dropdown-item" >
                              Abrir Bimestre
                             </a>
 		                    <?}?>
@@ -324,10 +324,10 @@ function isMobile()
         <!-- page content here -->
 		<? if($_SESSION['tipo'] == 2){ ?>
         <script>
-		//window.onload = function ()
-		/{
-		//	requestPage('?br=linhadotempo','conteudo','GET');
-		//}
+		window.onload = function ()
+		{
+			requestPage('?br=linhadotempo','conteudo','GET');
+		}
 		</script>
 		<? }else if($_SESSION['tipo'] == 3){ ?>
 	    <script>
@@ -364,13 +364,13 @@ function isMobile()
                 <div class="col-auto mx-auto">
                     <div class="row no-gutters justify-content-center">
                         <div class="col-auto">
-                            <a href="javascript:void(0)" id="ldotempo" class="btn btn-link-default active">
+                            <a href="javascript:void(0);" id="ldotempo" class="btn btn-link-default t-menu t-linhadotempo">
                                 <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
                                 <span class="text-name">Linha do tempo</span>
                             </a>
                         </div>
 						<div class="col-auto">
-                            <a href="sistema.php?url=cad_diario" class="btn btn-link-default">
+                            <a href="javascript: void(0);" class="btn btn-link-default t-menu t-diario">
                                 <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
                                 <span class="text-name">Diario</span>
                             </a>

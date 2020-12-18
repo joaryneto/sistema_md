@@ -261,10 +261,24 @@ $('.sge-t-alunos').on('click',function()
    requestPage('?br=cad_alunos','conteudo','GET');
 });
 
-$('.sge-t-diario').on('click',function()
+$('.m-diario').on('click',function()
+{	
+   $('.t-diario').addClass('active');
+   requestPage('?br=cad_diario','conteudo','GET');
+});
+
+$('.t-diario').on('click',function()
+{	
+   $('.m-diario').addClass('active');
+   $('.t-diario').addClass('active');
+   requestPage('?br=cad_diario','conteudo','GET');
+});
+
+$('.t-linhadotempo').on('click',function()
 {	
    //b_menuslow();
-   requestPage('?br=cad_diario','conteudo','GET');
+   $('.t-linhadotempo').addClass('active');
+   requestPage('?br=linhadotempo','conteudo','GET');
 });
 
 /* MENU SGE  */
