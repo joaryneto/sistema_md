@@ -16,7 +16,106 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 //   //exit("<strong> Erro: Você não tem permissão. </strong>");
 //}
 
-
+if(@$_GET['ap'] == "1")
+{
+	$x = 0;
+	$RES1 = mysqli_query($db,"SELECT * FROM diario where sistema='".$_SESSION['sistema']."' and turma='".$_GET['turma']."' and materia='".$_GET['disciplina']."' and periodo='".$_GET['periodo']."' and data='".revertedata($_GET['txtdata'])."' and conteudo like '%'".$_GET['conteudo']."'%'");
+	while($row = mysqli_fetch_array($RES1))
+	{
+		$x = 1;
+	}
+	
+	
+	if($x == 1)
+	{
+	    print("<script>window.alert('Conteudo ja cadastrada!')</script>");
+		print("<script>window.location.href='sistema.php?url=cad_diario';</script>");
+	}
+	else
+	{
+	   $SQL2 = "INSERT into diario(sistema,usuario,turma,materia,periodo,video,data,conteudo,texto,tipo) values('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$_GET['turma']."','".$_GET['disciplina']."','".$_GET['periodo']."','".$_GET['video']."','".revertedata($_GET['txtdata'])."','".$_GET['conteudo']."','".$_GET['txtobs']."','".$_GET['tipo']."')";
+	   $RES2 = mysqli_query($db,$SQL2);
+	   
+	   if($RES2)
+	   {
+		   //print("<script>window.alert('Conteudo Cadastrada com sucesso...')</script>");
+		   
+		   $RES1 = mysqli_query($db,"SELECT max(diario.codigo) as codigo FROM diario inner join turmas_professor on turmas_professor.turma=diario.turma where turmas_professor.usuario='".$_SESSION['usuario']."'");
+		   $row = mysqli_fetch_array($RES1);
+		   
+		   
+		   print("<script>
+		      //requestPage('?br=cad_diario&codigo=".$row['codigo']."','conteudo','GET');
+		   </script>");
+	   }
+	   else
+	   {
+		   print('<script>
+         swal({   
+            title: "Atenção!",   
+            text: "Ocorreu um erro, Entre em contato com Suporte! MSG-2",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });
+        </script>');
+	   }
+	   
+	   //$RES1->close();
+	   //$RES2->close();
+	}
+}
+else if(@$_GET['ap'] == "2")
+{
+	$SQL1 = "UPDATE diario SET turma='".$_GET['turma']."',materia='".$_GET['disciplina']."',periodo='".$_GET['periodo']."', conteudo='".$_GET['conteudo']."',data='".revertedata($_GET['txtdata'])."', texto='".$_GET['txtobs']."',tipo='".$_GET['tipo']."' where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
+	$sucesso = mysqli_query($db,$SQL1);
+	
+	if($sucesso)
+	{
+        print('<script>
+         swal({   
+            title: "Atenção!",   
+            text: "Atualizado com sucesso.",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });
+        </script>');
+		print("<script>
+		      //requestPage('?br=cad_diario&codigo=".$row['codigo']."','conteudo','GET');
+		   </script>");
+	}
+	else
+	{
+		print('<script>
+         swal({   
+            title: "Atenção!",   
+            text: "Ocorreu um erro, Entre em contato com Suporte! MSG-3",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });
+        </script>');
+		print("<script>
+		      //requestPage('?br=cad_diario&codigo=".$row['codigo']."','conteudo','GET');
+		   </script>");
+	}
+}
+else if(@$_GET['ap'] == 3)
+{
+	$SQL1 = "UPDATE diario SET status=2 where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
+	$RES = mysqli_query($db,$SQL1);
+	
+	
+	print('<script>
+         swal({   
+            title: "Atenção!",   
+            text: "Bloqueado com sucesso.",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });
+    </script>');
+	
+	print("<script>window.location.href='sistema.php?url=cad_diario';</script>");
+	//$RES->close();
+}
 
 
 $turma = "";
@@ -161,9 +260,9 @@ $('.sge-t-gravar').on('click',function()
     else
 	{
 		<?if(isset($_GET['codigo'])){?>
-		   requestPage('?br=atu_diario&turma='+ turma +'&disciplina='+ disciplina +'&periodo='+ periodo +'&video='+ video +'&txtdata='+ txtdata +'&conteudo='+ conteudo +'&tipo='+ tipo +'&txtobs='+ txtobs +'&codigo=<?=$codigo?>&ap=2','conteudo','GET');
+		   requestPage('?br=cad_diario&turma='+ turma +'&disciplina='+ disciplina +'&periodo='+ periodo +'&video='+ video +'&txtdata='+ txtdata +'&conteudo='+ conteudo +'&tipo='+ tipo +'&txtobs='+ txtobs +'&codigo=<?=$codigo?>&ap=2','conteudo','GET');
 		<?}else{?>
-		   requestPage('?br=atu_diario&turma='+ turma +'&disciplina='+ disciplina +'&periodo='+ periodo +'&video='+ video +'&txtdata='+ txtdata +'&conteudo='+ conteudo +'&tipo='+ tipo +'&txtobs='+ txtobs +'&ap=1','conteudo','GET');
+		   requestPage('?br=cad_diario&turma='+ turma +'&disciplina='+ disciplina +'&periodo='+ periodo +'&video='+ video +'&txtdata='+ txtdata +'&conteudo='+ conteudo +'&tipo='+ tipo +'&txtobs='+ txtobs +'&ap=1','conteudo','GET');
 		<?}?>
 	}		
 });
