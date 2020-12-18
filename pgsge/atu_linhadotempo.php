@@ -10,11 +10,11 @@ if($_SESSION['permissao'] == 1)
 }
 else
 {
-	$whe = " and turmas_professor.usuario='".$_SESSION['usuario']."'";
+	$whe = " and usuarios.codigo='".$_SESSION['usuario']."'";
 }
 
 $count = 0; 
-$SQL = "select usuarios.nome,diario.data,diario.conteudo,diario.video,diario.texto,matriculas.codigo,turmas.descricao as turma,materias.descricao as disciplina,matriculas.foto from diario 
+echo $SQL = "select usuarios.nome,diario.data,diario.conteudo,diario.video,diario.texto,matriculas.codigo,turmas.descricao as turma,materias.descricao as disciplina,matriculas.foto from diario 
 inner JOIN turmas on turmas.codigo=diario.turma 
 inner join materias on materias.codigo=diario.materia 
 inner join matriculas on matriculas.turma=diario.turma  
