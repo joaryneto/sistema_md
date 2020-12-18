@@ -277,9 +277,9 @@ $('#ldotempo').on('click',function()
 });
 
 
-$('#relatorio_diario').on('click',function()
+$('.r-diario').on('click',function()
 {	
-    document.getElementById("btnshow").click();
+    $('#modalap').modal('show');
 	requestmodal('?br=modal_relatorio&modal=1','modals','GET');
 	//$('#modalusuario').modal('show');
 });

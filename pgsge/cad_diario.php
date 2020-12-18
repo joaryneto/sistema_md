@@ -43,9 +43,10 @@ if(@$_GET['ap'] == "1")
 		   $RES1 = mysqli_query($db,"SELECT max(diario.codigo) as codigo FROM diario inner join turmas_professor on turmas_professor.turma=diario.turma where turmas_professor.usuario='".$_SESSION['usuario']."'");
 		   $row = mysqli_fetch_array($RES1);
 		   
+		   $codigo = $row['codigo'];
 		   
 		   print("<script>
-		      //requestPage('?br=cad_diario&codigo=".$row['codigo']."','conteudo','GET');
+		      requestPage('?br=cad_diario&codigo=".$row['codigo']."','conteudo','GET');
 		   </script>");
 	   }
 	   else
@@ -129,6 +130,8 @@ $pdescricao = "";
 $tdescricao = "";
 $mdescricao = "";
 $tipo = "";
+
+
 		 
 if(isset($_GET['codigo']))
 {
@@ -211,7 +214,7 @@ function excluir(codigo)
 	        }
 	        else
 	        {
-	        	  requestPage('?br=atu_diario&ap=3&codigo='+ codigo +'&load=1','listdiario','GET');
+	        	  requestPage('?br=atu_diario&ap=1&codigo='+ codigo +'&load=1','listdiario','GET');
 	        }
         });
 }
@@ -440,7 +443,7 @@ $("#check[]").on('change', function() {
 								//{
 								//	echo '<div id="listdiario"> </div>';
 								//}
-								if(@$_GET['frequencia'] == 1 || !Empty($_GET['codigo'] ) and Empty($_GET['nota'])){?>
+								if(@$_GET['frequencia'] == 1 || !Empty($codigo) and Empty($_GET['nota'])){?>
 								<div class="col-md-12">
 					            <div class="component-box">
 								<script>

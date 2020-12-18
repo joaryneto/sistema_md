@@ -1,4 +1,22 @@
 <?
+if(@$_GET['ap'] == 1)
+{
+	$SQL1 = "UPDATE diario SET status=2 where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
+	$RES = mysqli_query($db,$SQL1);
+	
+	
+	print('<script>
+         swal({   
+            title: "Atenção!",   
+            text: "Bloqueado com sucesso.",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });
+    </script>');
+	
+	//print("<script>window.location.href='sistema.php?url=cad_diario';</script>");
+	//$RES->close();
+}
 
 if(@$_GET['load'] == 1)
 {

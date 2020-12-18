@@ -183,7 +183,7 @@ function isMobile()
                         </a>
 						<div class="dropdown-menu t-menu">
 						    <?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
-                            <a href="javascript:void(0);" id="relatorio_diario" class="sidebar-close dropdown-item menu-right" class="btn btn-info" data-toggle="modal" data-target="#modalusuario">
+                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right t-menu r-diario" class="btn btn-info" data-toggle="modal" data-target="#modalusuario">
 							 Diario de Classe
                             </a>
 							<?}?>
