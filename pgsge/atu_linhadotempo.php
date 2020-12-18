@@ -14,7 +14,7 @@ else
 }
 
 $count = 0; 
-echo $SQL = "select usuarios.nome,diario.data,diario.conteudo,diario.video,diario.texto,matriculas.codigo,turmas.descricao as turma,materias.descricao as disciplina,matriculas.foto from diario 
+$SQL = "select usuarios.nome,diario.data,diario.conteudo,diario.video,diario.texto,matriculas.codigo,turmas.descricao as turma,materias.descricao as disciplina,matriculas.foto from diario 
 inner JOIN turmas on turmas.codigo=diario.turma 
 inner join materias on materias.codigo=diario.materia 
 inner join matriculas on matriculas.turma=diario.turma  
