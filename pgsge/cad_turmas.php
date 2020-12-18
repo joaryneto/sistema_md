@@ -87,63 +87,85 @@ elseif($_GET['ap'] == "2")
 }
 
 ?>		
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
 
-								<h4 class="card-title"><? echo $_SESSION["PAGINA"] = "Cadastro de Turmas";?></h4>
-								<form class="form-material m-t-40 row" name="laudo" method="post" action="<? if($_GET['codigo'] ==""){ echo "iniciado.php?url=cad_turmas&ap=1";}else { echo "iniciado.php?url=cad_turmas&ap=2&codigo=".$_GET['codigo']."";} ?>">
-							    <? if(Empty($_GET['codigo'])){?>
-								<div class="form-group col-md-2 m-t-20"><label>Curso :</label>
-								<select name="curso" class="form-control" style="width: 100%; height:36px;">
-                                  <option></option>
-								  <option value="0">Educação Infantil</option>
-								  <option value="1">Ensino Fundamental</option>
-								  <option value="2">Ensino Médio</option>
-                                </select></div>
-								<? } ?>
-								<div class="form-group col-md-2 m-t-20"><label>Descrição :</label>
-								<!--onKeyPress="return(MascaraMoeda(this,'.','.',event)); "-->
-								<input type="text" name="descricao" id="descricao" value="<? if(isset($_GET['codigo'])){ echo $descricao;} ?>" class="form-control" required="required">
-								</div>
-								<div class="form-group col-md-4 m-t-20">
-								<br>
-								<div class="form-actions">
-								<button type="submit" class="btn btn-info"><i class="fa fa-plus-circle"></i> <? if(isset($_GET['codigo'])){ echo "Alterar";}else { echo "Cadastrar";} ?></button>
-								<? if(!Empty($_GET['codigo'])) { ?><a class="btn btn-info" href="iniciado.php?url=cad_turmas"><i class="fa fa-plus-circle"></i> Novo Cadastro</a><? } ?>
-								</div></div>
-								
-								<div class="form-group col-md-12 m-t-20" style="overflow: auto;height: 400px;">
-                                    <table class="display nowrap table table-hover table-striped table-bordered">
+<div class="container-fluid bg-template mb-4">
+            <div class="row hn-290 position-relative">
+			<div class="background opac heightset">
+                </div>
+                <div class="container align-self-end">
+                    <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Cadastro de Turmas";?></h2>
+                    <p class="text-mute mb-2"><? echo $_SESSION["DESCRICAOPG2"] = "Lista";?></p>
+					<input type="text" name="pesquisa" id="pesquisa" value="" class="form-control form-control-lg search bottom-25 position-relative border-0" onkeyup="javascript: requestPage2('?br=atu_turmas&pesquisa='+ this.value +'&load=1','listaturmas','GET');" required='required'>
+                    <button class="btn btn-info btnadd-sh" onclick="requestPage2('?br=modal_turmas&modal=1','modals','GET');" data-toggle="modal" data-target="#modalap" data-title="Turmas"><i class='fa fa-plus-circle'></i></button>
+                </div>
+        </div>
+</div>   
+<div class="container pt-5">
+  
+  <div class="row">
+	<div class="col-md-12 col-sm-12"> 
+		<div class="component-box">
+		                        <form class="m-t-40 row" name="alunoform" id="alunoform" method="post">
+								<div class="col-md-12">
+					            <div class="component-box">
+                                <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+							        <table class="table pmd-table">
                                         <thead>
                                             <tr>
-                                                <th>Codigo</th>
                                                 <th>Descrição</th>
-												<!--<th>Valor Total</th>-->
-												<th>X</th>
+												<th>Status</th>
+												<th>Opções</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-										<? 
-										  
-										  $sql = "select * from turmas where sistema='".$_SESSION['sistema']."'";
+                                        <tbody id="listaturmas">
+										<?
+										  							
+                                          $x = 0;																	
+										  $sql = "select * from turmas where sistema='".$_SESSION['sistema']."';";
 										  $res = mysqli_query($db,$sql); 
 										  while($row = mysqli_fetch_array($res))
 										  {
+											   $x = 1;
 										  ?>
                                             <tr>
-                                                <td><? echo $row['codigo'];?></td>
-                                                <td><? echo $row['descricao'];?></td>
-												<!--<td>< echo $numero = number_format($row['valor_padrao']-+$row['valor'], 2, ',','.');?></td>-->
-												<td><a class="fa fa-edit" href="iniciado.php?url=cad_turmas&codigo=<? echo $row['codigo']?>" style="font-size: 150%;"><a></td>
+                                                <td data-title="Descrição"><? echo $row['descricao'];?></td>
+												<td data-title="Status"><? 
+												Switch($row['status'])
+												{
+												 case 0:
+												 { echo "Inativo";}
+												 break;
+												 case 1:
+												 { echo "Ativo";}
+												 break;
+												 case 2:
+												 { echo "Pre-Ativa";}
+												 break;
+												 case 3:
+												 { echo "Transferido";}
+												 break;
+												}
+																		 ?></td>
+												<td data-title="Editar">
+												<a class="fa fa-edit" href="javascript: void(0);" onclick="edit_turmas('<?=$row['codigo'];?>');" style="font-size: 150%;"><a>
+												</td>
                                             </tr>
-									   <? } ?>
+										  <? }
+										    if($x == 0)
+											{
+											?>
+										    <tr>
+                                                <td data-title="Descrição">Nenhum registro encontrado.</td>
+											<tr>
+											<?
+											}
+  										  ?>
                                         </tbody>
                                     </table>
-                                
+                                </div>
 								</div>
-								</form>
+								</div>
+							  </form>
                             </div>
                         </div>
 					</div>

@@ -254,6 +254,12 @@ function edit_alunos(codigo)
     $('#modalap').modal('show');
 	requestPage2('?br=modal_alunos&codigo=' + codigo +'&modal=1','modals','GET');
 }
+
+function edit_turmas(codigo)
+{				
+    $('#modalap').modal('show');
+	requestPage2('?br=modal_turmas&codigo=' + codigo +'&modal=1','modals','GET');
+}
 			
 $('.sge-t-alunos').on('click',function()
 {	
@@ -264,6 +270,7 @@ $('.sge-t-alunos').on('click',function()
 $('.m-diario').on('click',function()
 {	
    $('.t-diario').addClass('active');
+   $('.m-diario').addClass('active');
    requestPage('?br=cad_diario','conteudo','GET');
 });
 
@@ -274,11 +281,21 @@ $('.t-diario').on('click',function()
    requestPage('?br=cad_diario','conteudo','GET');
 });
 
+$('.s-turmas').on('click',function()
+{	
+   requestPage('?br=cad_turmas','conteudo','GET');
+});
+
 $('.t-linhadotempo').on('click',function()
 {	
    //b_menuslow();
    $('.t-linhadotempo').addClass('active');
    requestPage('?br=linhadotempo','conteudo','GET');
+});
+
+$('.u-cadastro').on('click',function()
+{	
+   requestPage('?br=cad_usuarios','conteudo','GET');
 });
 
 /* MENU SGE  */

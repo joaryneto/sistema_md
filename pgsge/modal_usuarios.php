@@ -228,6 +228,7 @@ else
 	$situacao = 1;
 }
 ?>
+
 <div class="modal-header">
 <h2 class="pmd-card-title-text">Lista de Usuarios :</h2>
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -254,7 +255,7 @@ $x = 0;
 while($row = mysqli_fetch_array($res))
 {
 ?>
-<tr style="cursor: pointer;" onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'" onclick="javascript: window.location='sistema.php?url=cad_usuarios&codigo=<? echo $row['codigo'];?>';">
+<tr style="cursor: pointer;" onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'" onclick="edit_usuarios('<?=$row['codigo'];?>');">
 <td data-title="Nome"><? echo $row['nome'];?></td>
 <td data-title="Status"><? Switch($row['status'])
 	 {
@@ -321,7 +322,7 @@ if($x == 0)
 					
 					
 			?>
-						<br><input type="checkbox" name="<? echo $rowex['codigo'];?>" id="<? echo $rowex['codigo'];?>" OnClick="javascript: requestPage2('?br=atu_turmas&codigo=<? echo $_GET['codigo'];?>&check='+ document.getElementById('<? echo $rowex['codigo'];?>').checked +'&turma='+ this.value ,'listaexames','GET');" value="<? echo $rowex['codigo'];?>" <? if($rowex['codigo'] == $row['turma']) { echo 'checked="checked"'; } ?> data-color="#009efb"  /> <b><? echo $rowex['descricao']; ?> </b>
+						<br><input type="checkbox" name="<? echo $rowex['codigo'];?>" id="<? echo $rowex['codigo'];?>" OnClick="javascript: requestPage2('?br=atu_turmas&codigo=<? echo $_GET['codigo'];?>&check='+ document.getElementById('<? echo $rowex['codigo'];?>').checked +'&turma='+ this.value+'&ap=1','listaexames','GET');" value="<? echo $rowex['codigo'];?>" <? if($rowex['codigo'] == $row['turma']) { echo 'checked="checked"'; } ?> data-color="#009efb"  /> <b><? echo $rowex['descricao']; ?> </b>
 				 <? //}
 				 }
 			   }

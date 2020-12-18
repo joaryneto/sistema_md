@@ -46,7 +46,7 @@ if(@$_GET['ap'] == "1")
 		   $codigo = $row['codigo'];
 		   
 		   print("<script>
-		      //requestPage('?br=cad_diario&codigo=".$row['codigo']."','conteudo','GET');
+		      requestPage('?br=cad_diario&codigo=".$row['codigo']."','conteudo','GET');
 		   </script>");
 	   }
 	   else

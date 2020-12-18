@@ -26,6 +26,11 @@ $email = "";
 $tipo = "";
 $situacao = "";
 
+if(isset($inputb['codigo']))
+{
+	$codigo = $inputb['codigo'];
+}
+
 if(@$inputb['ap'] == "1")
 {
 	$x = 0;
@@ -59,11 +64,20 @@ if(@$inputb['ap'] == "1")
 		   <script>
 		   swal({   
  			   title: "Info",   
- 			   text: "Gravado com sucesso.",   
+ 			   text: "Cadastrado com sucesso.",   
  			   timer: 1000,   
  			   showConfirmButton: false 
 		   });
 		   </script>');
+		   
+		   $RES = mysqli_query($db3,"SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and login='".$inputb['login']."'");
+		   $ROW = mysqli_fetch_array($RES);
+		   $codigo = $ROW['codigo'];
+		   
+		   print("<script>
+		      //requestPage('?br=cad_usuarios&codigo=".$row['codigo']."','conteudo','GET');
+		   </script>");
+		   
 	   }
 	   else
 	   {
@@ -103,9 +117,9 @@ else if(@$inputb['ap'] == "2")
 	}
 }
 
-if(isset($inputb['codigo']))
+if(isset($codigo))
 {
-	$sucesso = mysqli_query($db3,"SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'");
+	$sucesso = mysqli_query($db3,"SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and codigo='".$codigo."'");
 	
 	if($sucesso)
 	{
@@ -132,10 +146,6 @@ if(isset($inputb['codigo']))
 	{
 		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-1')</script>");
 	}
-}
-else
-{
-	$codigo = "";
 }
 
 ?>		

@@ -153,7 +153,7 @@ function isMobile()
                     <li class="nav-item dropdown" style="width: 230px;">
                         <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="list-group-item list-group-item-action">
-                                <i class="material-icons">home</i> Aulas
+                                <i class="material-icons">home</i> Diário de Classe
                             </div>
                         </a>
 						
@@ -163,14 +163,11 @@ function isMobile()
 							 Conteúdo Lecionado
                             </a>
                             <? } ?>
-							<?if($_SESSION['permissao'] == 3){?>
-							<a href="sistema.php?url=cad_fechar" class="dropdown-item">
-                             Fechar Bimestre
+							<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
+                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right r-diario" class="btn btn-info">
+							 Relatorio
                             </a>
-                            <a href="sistema.php?url=cad_abrir" class="dropdown-item" >
-                             Abrir Bimestre
-                            </a>
-		                    <?}?>
+							<?}?>
                         </div>
 						<? } ?>
                     </li>
@@ -178,13 +175,28 @@ function isMobile()
 					<li class="nav-item dropdown" style="width: 230px;">
                         <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="list-group-item list-group-item-action">
-                                <i class="material-icons">perm_contact_calendar</i> Relatorio
+                                <i class="material-icons">perm_contact_calendar</i> Secretaria
                             </div>
                         </a>
 						<div class="dropdown-menu t-menu">
 						    <?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
-                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right r-diario" class="btn btn-info">
-							 Diario de Classe
+                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right t-menu s-turmas" class="btn btn-info">
+							 Turmas
+                            </a>
+							<?}?>
+							<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
+                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right t-menu s-disciplinas" class="btn btn-info">
+							 Disciplinas
+                            </a>
+							<?}?>
+							<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
+                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right t-menu s-alunos" class="btn btn-info">
+							 Alunos
+                            </a>
+							<?}?>
+							<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
+                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right t-menu s-matriculas" class="btn btn-info">
+							 Matriculas
                             </a>
 							<?}?>
                         </div>
@@ -192,11 +204,27 @@ function isMobile()
 					<? } ?>
 					<?if($_SESSION['permissao'] == 3){?>
 					<li class="nav-item dropdown" style="width: 230px;">
-                        <a href="sistema.php?url=cad_usuarios" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
-                            <div class="list-group-item list-group-item-action">
+                        <a href="javascript: void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action t-menu u-cadastro">
                                 <i class="material-icons">supervisor_account</i> Usuarios
                             </div>
                         </a>
+					</li>
+					<? } ?>
+					<?if($_SESSION['permissao'] == 3){?>
+					<li class="nav-item dropdown" style="width: 230px;">
+                        <a href="#" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="list-group-item list-group-item-action">
+                                <i class="material-icons">supervisor_account</i> Administração
+                            </div>
+                        </a>
+						<div class="dropdown-menu t-menu">
+						    <?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
+                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right r-config" class="btn btn-info">
+							 Configurações
+                            </a>
+							<?}?>
+                        </div>
 					</li>
 					<? } ?>
 					<? if(isMobile()){?>
