@@ -54,10 +54,12 @@ if($_GET['ap'] == 1)
 	   //echo "<br>";
        $SQL = "UPDATE frequencia SET falta='$valor' where diario='".$diario."' and periodo=".$periodo." and matricula=".$matricula." and disciplina=".$disciplina."";
        $sucesso = mysqli_query($db,$SQL);
+	   
+	   //$SQL 
 
      }
 }
-if($_GET['gravar'] == 1)
+/*if($_GET['gravar'] == 1)
 {
 	
     $diario = $_GET['diario'];
@@ -205,5 +207,5 @@ else
 		}
 	}
 
-}
+}*/
 ?>	
