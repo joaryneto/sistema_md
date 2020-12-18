@@ -154,7 +154,7 @@ $cnpj = $_GET['cnpj'];
   $vb .='<table>';
   $vb .='<tbody>';
   $vb .='<tr>';
-  $vb .='<td><img src="https://app.ectecnologia.com.br/template/images/logo.png" class="logo"/></td>';
+  $vb .='<td><img src="https://escolar.ectecnologia.com.br/template/images/logo.png" class="logo"/></td>';
   $vb .='<td><div class="tituloh">Escola Mundo do Saber</div></td>';
   $vb .='</tr>';
   $vb .='</tbody>';
