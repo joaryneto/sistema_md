@@ -180,22 +180,22 @@ function isMobile()
                         </a>
 						<div class="dropdown-menu t-menu">
 						    <?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
-                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right t-menu s-turmas" class="btn btn-info">
+                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right s-turmas" class="btn btn-info">
 							 Turmas
                             </a>
 							<?}?>
 							<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
-                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right t-menu s-disciplinas" class="btn btn-info">
+                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right s-disciplinas" class="btn btn-info">
 							 Disciplinas
                             </a>
 							<?}?>
 							<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
-                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right t-menu s-alunos" class="btn btn-info">
+                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right s-alunos" class="btn btn-info">
 							 Alunos
                             </a>
 							<?}?>
 							<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
-                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right t-menu s-matriculas" class="btn btn-info">
+                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right s-matriculas" class="btn btn-info">
 							 Matriculas
                             </a>
 							<?}?>
