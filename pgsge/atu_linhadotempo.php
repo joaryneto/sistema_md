@@ -20,7 +20,7 @@ inner join materias on materias.codigo=diario.materia
 inner join matriculas on matriculas.turma=diario.turma  
 inner join usuarios on usuarios.codigo=diario.usuario 
 inner join turmas_professor on turmas_professor.turma=diario.turma and turmas_professor.usuario=diario.usuario
-where matriculas.status=1 $whe and month(diario.data)=".$mes." and YEAR(diario.data)=".$ano."";
+where matriculas.status=1 $whe and month(diario.data)=".$mes." and YEAR(diario.data)=".$ano." GROUP BY diario.codigo ORDER BY diario.data asc";
 
 $RES = mysqli_query($db,$SQL);
 while($row = mysqli_fetch_array($RES))
