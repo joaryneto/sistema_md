@@ -52,9 +52,16 @@ if($_GET['ap'] == 1)
 		$valor = 1; 
 	 }
 	   //echo "<br>";
-       $SQL = "UPDATE frequencia SET falta='$valor' where diario='".$diario."' and periodo=".$periodo." and matricula=".$matricula." and disciplina=".$disciplina."";
-       $sucesso = mysqli_query($db,$SQL);
+        $SQL = "UPDATE frequencia SET falta='$valor' where diario='".$diario."' and periodo=".$periodo." and matricula=".$matricula." and disciplina=".$disciplina."";
+        $sucesso = mysqli_query($db,$SQL);
 	   
+	    $SQL = "SELECT count(frequencia.nota) as qtd from frequencia 
+		inner join diario on diario.codigo=frequencia.diario
+		where frequencia.sistema='".$_SESSION['sistema']."' and frequencia.periodo='".$_SESSION['periodo']."' and frequencia.disciplina='".$_SESSION['disciplina']."' and frequencia.matricula='".$matricula."' and frequencia.falta=1;";
+		$RES = mysqli_query($db,$SQL);
+		$row = mysqli_fetch_array($RES);
+		
+		echo $row['qtd'];
 	   //$SQL 
 
      }

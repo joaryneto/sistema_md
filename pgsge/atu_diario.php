@@ -64,7 +64,7 @@ else if(@$_GET['ap'] == "2")
         });
         </script>');
 		print("<script>
-		      //requestPage('?br=cad_diario&codigo=".$row['codigo']."','conteudo','GET');
+		      requestPage('?br=cad_diario&codigo=".$row['codigo']."','conteudo','GET');
 		   </script>");
 	}
 	else
@@ -78,7 +78,7 @@ else if(@$_GET['ap'] == "2")
         });
         </script>');
 		print("<script>
-		      //requestPage('?br=cad_diario&codigo=".$row['codigo']."','conteudo','GET');
+		      requestPage('?br=cad_diario&codigo=".$row['codigo']."','conteudo','GET');
 		   </script>");
 	}
 }
