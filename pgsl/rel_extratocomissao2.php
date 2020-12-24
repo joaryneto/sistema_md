@@ -223,6 +223,8 @@ $RES = mysqli_query($db3,$SQL);
 $ROWC = mysqli_fetch_array($RES);
 
 if(isset($_GET['aprovar']) and $ROWC['status'] == 1){?>
+<br>
+<br>
 <div class="form-group col-md-12 m-t-20">
 <div class="checkbox pmd-default-theme">
 <label class="pmd-checkbox pmd-checkbox-ripple-effect">
