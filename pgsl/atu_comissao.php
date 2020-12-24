@@ -165,7 +165,7 @@ else if(@$inputb['load'] == 2){
   $x = 0;
   $sql = "select comissao.codigo,usuarios.nome,comissao.profissional,comissao.data_inicio,comissao.data_final,comissao.valor,comissao.status from comissao 
   inner join usuarios on usuarios.codigo=comissao.profissional
-  where comissao.sistema='".$_SESSION['sistema']."' and comissao.status in (0,1,2);";
+  where comissao.sistema='".$_SESSION['sistema']."' and comissao.profissional='".$_SESSION['usuario']."' and comissao.status in (0,1,2);";
   $res = mysqli_query($db3,$sql); 
   while($row = mysqli_fetch_array($res))
   {
