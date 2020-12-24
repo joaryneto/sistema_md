@@ -16,13 +16,6 @@ if(@$_SESSION['menu99'] == false)
    //exit("<strong> Erro: Você não tem permissão. </strong>");
 }
 
-function filtro($nome) 
-{ 
-	$array1 = array(" ","/","ç","ã","é","í","@","#",); 
-	$array2 = array("_","_","c","a","e","i","_","_",);
-	return str_replace($array1, $array2, $nome); 
-}
-
 if(isset($_GET['codigo']))
 {
    $codigo = $_GET['codigo'];
@@ -152,9 +145,10 @@ elseif(@$_GET['ap'] == "4")
 	}
 }
 
-if(!Empty($codigo))
+if(isset($codigo))
 {
-	$res = mysqli_query($db,"SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'");
+	$SQL = "SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and codigo='".$codigo."'";
+	$res = mysqli_query($db,$SQL);
 	
 	if($res)
 	{
@@ -179,15 +173,6 @@ if(!Empty($codigo))
 	{
 		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-1')</script>");
 	}
-}
-else
-{
-	$cpf = "";
-	$nome = "";
-	$senha = "";
-	$email = "";
-	$tipo = "";
-	$situacao = 1;
 }
 ?>		
 <div class="container-fluid bg-template mb-4">

@@ -40,7 +40,6 @@ function mess(mes)
 requestPage2('?br=atu_linhadotempo&mes=<?=$mes?>&load=1','load','GET');	
 </script>
 <script>
-a_menuslow();
 $('.t-agenda').addClass('active');
 </script>
 <div class="container-fluid bg-template mb-4">

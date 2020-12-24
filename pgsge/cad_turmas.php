@@ -42,7 +42,7 @@ if(isset($_GET['codigo']))
 if($_GET['ap'] == "1")
 {
 	$x = 0;
-	$RES = mysqli_query($db,"SELECT * FROM turmas where sistema='".$_SESSION['sistema']."' and laudador like '%".$_POST['descricao']."%'");
+	$RES = mysqli_query($db,"SELECT * FROM turmas where sistema='".$_SESSION['sistema']."' and descricao like '%".$_POST['descricao']."%'");
 	while($row = mysql_fetch_array($RES))
 	{
 		$x = 1;

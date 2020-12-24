@@ -28,8 +28,12 @@ $situacao = "";
 
 if(@$inputb['ap'] == "1")
 {
+	
+	$credito = str_replace(',', ".", security::input(@$inputb['credito']));
+	$debito = str_replace(',', ".", security::input(@$inputb['debito']));
+	
 	$x = 0;
-	$SQL = "SELECT * FROM usuarios where login like '%".$inputb['login']."%' or nome like '%".$inputb['nome']."%';'";
+	$SQL = "SELECT * FROM configuracoes where sistema='".$_SESSION['sistema']."';";
 	$RES = mysqli_query($db3,$SQL);
 	while($row = mysqli_fetch_array($RES))
 	{
@@ -38,11 +42,14 @@ if(@$inputb['ap'] == "1")
 	
 	if($x == 1)
 	{
+		$SQL1 = "UPDATE configuracoes SET razao='".$inputb['razao']."', maquina='".$inputb['maquina']."',credito='".$credito."',debito='".$debito."' where sistema='".$_SESSION['sistema']."'";
+	    $sucesso = mysqli_query($db3,$SQL1);
+	
 	    print('
 		<script>
 		swal({   
- 			   title: "Atenção!",   
- 			   text: "Usuario já foi cadastrada, escolha outro nome.",   
+ 			   title: "Info!",   
+ 			   text: "Gravado com sucesso.",   
  			   timer: 1500,   
  			   showConfirmButton: false 
  		});
@@ -50,7 +57,7 @@ if(@$inputb['ap'] == "1")
 	}
 	else
 	{
-	   $SQL1 = "INSERT into usuarios(sistema, cpf, login,senha, nome, email, nascimento , tipo, status, banco,agencia,conta,tipoconta) values('".$_SESSION['sistema']."','".$inputb['cpf']."','".$inputb['login']."','".$inputb['senha']."','".$inputb['nome']."','".$inputb['email']."','".revertedata($inputb['nascimento'])."','".$inputb['tipo']."','".$inputb['situacao']."','".$inputb['banco']."','".$inputb['agencia']."','".$inputb['conta']."','".$inputb['tipoconta']."')";
+	   $SQL1 = "INSERT into configuracoes(sistema, razao, maquina,credito, debito) values('".$_SESSION['sistema']."','".$inputb['razao']."','".$inputb['maquina']."','".$credito."','".$debito."')";
 	   $sucesso = mysqli_query($db3,$SQL1);
 	   
 	   if($sucesso)
@@ -79,63 +86,21 @@ if(@$inputb['ap'] == "1")
 	   }
 	}
 }
-else if(@$inputb['ap'] == "2")
-{
-	$SQL1 = "UPDATE usuarios SET cpf='".$inputb['cpf']."',login='".$inputb['login']."',senha='".$inputb['senha']."',nome='".$inputb['nome']."',email='".$inputb['email']."',nascimento='".revertedata($inputb['nascimento'])."',tipo='".$inputb['tipo']."',status='".$inputb['situacao']."',banco='".$inputb['banco']."',agencia='".$inputb['agencia']."',conta='".$inputb['conta']."',tipoconta='".$inputb['tipoconta']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
-	$sucesso = mysqli_query($db3,$SQL1);
 	
-	if($sucesso)
-	{
-        print('
-		<script>
-		swal({   
- 			   title: "Info",   
- 			   text: "Gravado com sucesso.",   
- 			   timer: 1000,   
- 			   showConfirmButton: false 
- 		});
-		</script>');
-		//print("<script>window.location.href='sistema.php?url=cad_clientes';</script>");
-	}
-	else
-	{
-		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-3')</script>");
-	}
-}
+$sucesso = mysqli_query($db3,"SELECT * FROM configuracoes where sistema='".$_SESSION['sistema']."'");
 
-if(isset($inputb['codigo']))
+if($sucesso)
 {
-	$sucesso = mysqli_query($db3,"SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'");
-	
-	if($sucesso)
-	{
-      while($row = mysqli_fetch_array($sucesso))
-	  {
-		 $codigo = $row['codigo'];
-		 $cpf = $row['cpf'];
-		 $login = $row['login'];
-		 $senha = $row['senha'];
-		 $nome = $row['nome'];
-		 $email = $row['email'];
-		 $nascimento = $row['nascimento'];
-		 $tipo = $row['tipo'];
-		 $situacao = $row['status'];
-		 $banco = $row['banco'];
-		 $agencia = $row['agencia'];
-		 $conta = $row['conta'];
-		 $tipoconta = $row['tipoconta'];
-		 
-		 //print("<script>window.alert('TESTE ".$descricao.",".$valor."')</script>");
-	  }
-	}
-	else
-	{
-		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-1')</script>");
-	}
-}
-else
-{
-	$codigo = "";
+  while($row = mysqli_fetch_array($sucesso))
+  {
+	 $cnpj = $row['cnpj'];
+	 $razao = $row['razao'];
+	 $maquina = $row['maquina'];
+	 $credito = $row['credito'];
+	 $debito = $row['debito'];
+	 
+	 //print("<script>window.alert('TESTE ".$descricao.",".$valor."')</script>");
+  }
 }
 
 ?>		
@@ -145,7 +110,7 @@ else
 					<i class="material-icons" style="font-size: 100px;position: absolute;left: 45%;top: 50px;">supervisor_account</i> 
                 </div>
                 <div class="container align-self-end">
-                    <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Usuarios";?></h2>
+                    <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Configurações";?></h2>
                     <p class="text-mute mb-2"><? echo $_SESSION["DESCRICAOPG2"] = "Lista";?></p>
                 </div>
             </div>
@@ -159,120 +124,53 @@ else
 			$('.t-gravar').on('click',function()
 		    {
 	   
-				var cpf = document.getElementById('cpf').value;
-				var login = document.getElementById('login').value;
-				var nome = document.getElementById('nome').value;
-				var email = document.getElementById('email').value;
-				var nascimento = document.getElementById('nascimento').value;
-				var senha = document.getElementById('senha').value;
-				var tipo = document.getElementById('tipo').value;
-				var situacao = document.getElementById('situacao').value;
-				var banco = document.getElementById('banco').value;
-				var agencia = document.getElementById('agencia').value;
-				var conta = document.getElementById('conta').value;
-				var tipoconta = document.getElementById('tipoconta').value;
+				var razao = document.getElementById('razao').value;
+				var maquina = document.getElementById('maquina').value;
+				var credito = document.getElementById('credito').value;
+				var debito = document.getElementById('debito').value;
 				
-				if(login == "")
+				if(razao == "")
 				{
 				       swal({   
  			               title: "Atenção",   
- 			               text: "Campo Login em branco.",   
- 			               timer: 1000,   
- 			               showConfirmButton: false 
- 			           });
-				}
-				else if(senha == "")
-				{
-				       swal({   
- 			               title: "Atenção",   
- 			               text: "Campo Senha em branco.",   
+ 			               text: "Campo Razão/Nome em branco.",   
  			               timer: 1000,   
  			               showConfirmButton: false 
  			           });
 				}
 				else
 				{
-					<? if(isset($inputb['codigo']))
-				   {?>
-				      requestPage2('?br=cad_usuarios&codigo=<?=$codigo;?>&cpf='+ cpf +'&login='+ login +'&nome='+ nome +'&email='+ email +'&nascimento='+ nascimento +'&senha='+ senha +'&tipo='+ tipo +'&situacao='+ situacao +'&banco='+ banco +'&agencia='+ agencia +'&conta='+ conta +'&tipoconta='+ tipoconta +'&modal=1&ap=2&load=1','models','GET');
-				   <? } else {?>
-				      requestPage2('?br=cad_usuarios&cpf='+ cpf +'&login='+ login +'&nome='+ nome +'&email='+ email +'&nascimento='+ nascimento +'&senha='+ senha +'&tipo='+ tipo +'&situacao='+ situacao +'&banco='+ banco +'&agencia='+ agencia +'&conta='+ conta +'&tipoconta='+ tipoconta +'&modal=1&ap=1&load=1','conteudo','GET');
-				   <? } ?>
+				      requestPage2('?br=cad_configuracoes&razao='+ razao +'&maquina='+ maquina +'&credito='+ credito +'&debito='+ debito +'&ap=1','conteudo','GET');
 				}
 
 			});
-			
-			function c_clientes(codigo)
-			{
-			   $('#modalap').modal('hide');
-			   requestPage('?br=cad_usuarios&codigo='+ codigo +'','conteudo','GET');
-			}
-			
-			$('.t-novous').on('click',function()
-			{
-			   requestPage('?br=cad_usuarios','conteudo','GET');
-			});
-			
-			$('.sh-usuarios').on('click',function()
-			{
-			   $('#modalap').modal('show');
-			   requestPage2('?br=modal_usuarios&modal=1','modals','GET');
-			});
 						
-			$('#nascimento').mask('00/00/0000');
+			$('#credito').mask('##0,00', {reverse: true});
+			$('#debito').mask('##0,00', {reverse: true});
 			
 			</script>
 								<form name="laudo" class="form-material m-t-40 row" autocomplete="off" method="post" action="<? if(Empty($_GET['codigo'])){ echo "sistema.php?url=cad_usuarios&ap=1";}else { echo "sistema.php?url=cad_usuarios&codigo=".$_GET['codigo']."&ap=2";} ?>" enctype="multipart/form-data">
 								<div class="form-group col-md-3 m-t-20"><label>CPF/CNPJ :</label>
-								<input type="text" name="cnpj" id="cnpj" <? if(isset($_GET['codigo'])){ ?> value="<? echo $cnpj; ?>" readonly <? } ?> class="form-control">
-								<button type="button" class="btn btn-info btnadd-us sh-usuarios">
-								<i class="fa fa-search"></i></button>
+								<input type="text" name="cnpj" id="cnpj" value="<? echo $_SESSION['sistema']; ?>" readonly class="form-control">
 								</div>
-								<div class="form-group col-md-3 m-t-20"><label>Nome :</label>
-								<input type="text" name="login" id="login" <? if(isset($_GET['codigo'])){?> value="<? echo $login;?>" readonly <? } ?>class="form-control">
+								<div class="form-group col-md-6 m-t-20"><label>Nome da Empresa :</label>
+								<input type="text" name="razao" id="razao" value="<? echo $razao; ?>" class="form-control">
 								</div>
-								<div class="form-group col-md-5 m-t-20"><label>Nome :</label>
-								<input type="text" name="nome" id="nome" value="<? if(isset($_GET['codigo'])){ echo $nome;} ?>" class="form-control">
+								<div class="form-group col-md-12 m-t-20"><h2>Taxas Maquininha :</h2>
 								</div>
-								<div class="form-group col-md-3 m-t-20"><label>Nascimento :</label>
-								<input type="text" name="nascimento" id="nascimento" value=" <? if(isset($_GET['codigo'])){ echo $nascimento;} ?>" class="form-control">
+								<div class="form-group col-md-3 m-t-20"><label>Maquina :</label>
+								<input type="text" name="maquina" id="maquina" value="<? echo $maquina; ?>" class="form-control">
 								</div>
-								<div class="form-group col-md-3 m-t-20"><label>Email :</label>
-								<input type="email" name="email" id="email" value=" <? if(isset($_GET['codigo'])){ echo $email;} ?>" class="form-control">
+								<div class="form-group col-md-2 m-t-20"><label>Crédito :</label>
+								<input type="text" name="credito" id="credito" value="<? echo $credito; ?>" class="form-control">
 								</div>
-								<div class="form-group col-md-3 m-t-20"><label>Senha :</label>
-								<input type="password" name="senha" id="senha" value="<? if(isset($_GET['codigo'])){ echo $senha;} ?>" class="form-control">
-								</div>
-								<div class="form-group col-md-3 m-t-20"><label>Tipo :</label>
-								<select name="tipo" id="tipo" class="form-control" style="width: 100%; height:36px;">
-                                    <option value="">Selecionar Tipo</option>
-                                       <option value="1" <? if(1 == $tipo){ echo "selected"; } ?>>Normal</option>
-									   <option value="2" <? if(2 == $tipo){ echo "selected"; } ?>>Profissional</option>
-									   <option value="3" <? if(3 == $tipo){ echo "selected"; } ?>>Vendas</option>
-									   <option value="4" <? if(4 == $tipo){ echo "selected"; } ?>>Administrador</option>
-                                  </select>
-								 </div>
-								 <div class="form-group col-md-12 m-t-20">
-								<div class="form-actions">
-								<!--<a class="btn btn-info" onclick="javascript: ajaxLoader('?br=mexames&codigo=<? echo $_GET['codigo'];?>&list=1','listaexames','GET');" data-toggle="modal" data-target="#exames"><i class="fa fa-plus-circle"></i> Exames Atendidos</a>-->
-								<? if(!Empty($_GET['codigo']) and $tipo == 2 or !Empty($_GET['codigo']) and $tipo == 3 or !Empty($_GET['codigo']) and $tipo == 4){?>
-								<button type="button" class="btn btn-info" onclick="requestPage2('?br=modal_usuarios&codigo=<?=$_GET['codigo'];?>&modal=2','modals','GET');" data-toggle="modal" data-target="#modalap"><i class="fa fa-plus-circle"></i> Serviços </button>
-								<!--<button type="button" class="btn btn-info" onclick="requestPage2('?br=modal_usuarios&codigo=<=$_GET['codigo'];?>&modal=3','modals','GET');" data-toggle="modal" data-target="#modalusuario"><i class="fa fa-plus-circle"></i> Permissões</button>-->
-								<!--<a href="" class="btn btn-info" data-toggle="modal" data-target="#assinatura"><i class="fa fa-plus-circle"></i> Assinatura</a>-->
-								<?  }   ?>
-								</div></div>
-								<div class="form-group col-md-3 m-t-20"><label>Situação :</label>
-								<select name="situacao" id="situacao" class="form-control" style="width: 100%; height:36px;">
-                                    <option>Selecionar Situação</option>
-									       <option value="1" <? if("1" == $situacao){ echo "selected"; } ?>>Ativa</option>
-                                           <option value="0" <? if("0" == $situacao){ echo "selected"; } ?>>Inativa</option>
-                                </select>
+								<div class="form-group col-md-2 m-t-20"><label>Débito :</label>
+								<input type="text" name="debito" id="debito" value="<? echo $debito; ?>" class="form-control">
 								</div>
 								<!--< } ?> -->
 								<div class="form-group col-md-12 m-t-20">
 								<div class="form-actions">
-								<button type="button" class="btn btn-info t-gravar"><i class="fa fa-plus-circle"></i> <? if(isset($_GET['codigo'])){ echo "Gravar";}else { echo "Cadastrar";} ?></button>
-								<button type="button" class="btn btn-info t-novous"><i class="fa fa-plus-circle"></i> Novo</button>
+								<button type="button" class="btn btn-info t-gravar"><i class="fa fa-plus-circle"></i> Gravar</button>
 								</div></div>
 								
 								</form>

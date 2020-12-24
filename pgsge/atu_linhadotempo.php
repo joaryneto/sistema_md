@@ -46,8 +46,8 @@ $video = $row['video'];
 <h2>Dia <? echo $dia;?></h2>
 </div>
 <div class="media-body media-middle">
-<h3 class="pmd-card-title-text"><?=$professor?></h3>
-<span class="pmd-card-subtitle-text"><?=$disciplina?></span>
+<h5 class="pmd-card-title-text">Prof.: <?=$professor?></h5>
+<span class="pmd-card-subtitle-text">Disciplina: <?=$disciplina?></span>
 </div>
 </div>
 
@@ -59,7 +59,7 @@ $video = $row['video'];
 <?}?>
 <!-- Card body -->
 <div class="pmd-card-title">
-<h2 class="pmd-card-title-text"><?=$conteudo?></h2>
+<h4 class="pmd-card-title-text"><?=$conteudo?></h4>
 </div>	
 
 <div class="pmd-card-body">

@@ -57,7 +57,7 @@ if(@$_GET['deslogar']==1)
                     </div>
                 </div>
                 <div class="col-auto">
-                    <a href="registrar.php" class="btn btn-link">Registrar</a>
+                    <a href="login.php" class="btn btn-link">Entrar</a>
                 </div>
             </div>
         </div>
@@ -69,7 +69,7 @@ if(@$_GET['deslogar']==1)
                 <div class="col-12 col-md-6 col-lg-5 mx-auto login-row">
                     <div class="row h-100">
                         <div class="col-12 align-self-center">
-                            <h1 class="font-weight-light mb-5 text-center"><small class="font-weight-light">Bem-vindo</small>,<br><span class="text-mute">Faça login para continuar</span></h1>
+                            <h1 class="font-weight-light mb-5 text-center"><small class="font-weight-light">Bem-vindo</small>,<br><span class="text-mute">Registrar-se agora</span></h1>
                             <form class="form-signin" method="post" action="login.php" autocomplete="off">
                                 <div class="row">
                                     <div class="col-auto align-self-center">
@@ -77,19 +77,30 @@ if(@$_GET['deslogar']==1)
                                     </div>
                                     <div class="col pl-0">
                                         <div class="form-group float-label active">
-                                            <input type="text" id="inputEmail" name="login" class="form-control" required autofocus >
-                                            <label for="inputEmail" class="form-control-label">Nome do usuário</label>
+                                            <input type="text" id="login" autocomplete="off" name="login" class="form-control" required autofocus >
+                                            <label for="login" class="form-control-label">Nome do usuário</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-auto align-self-center">
+                                        <i class="material-icons text-mute mt-1">email</i>
+                                    </div>
+                                    <div class="col pl-0">
+                                        <div class="form-group float-label">
+                                            <input type="password" autocomplete="off" id="email" name="email" class="form-control" required>
+                                            <label for="email" class="form-control-label">Email</label>
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="row">
+                                    <div class="col-auto align-self-center">
                                         <i class="material-icons text-mute mt-1">lock</i>
                                     </div>
                                     <div class="col pl-0">
                                         <div class="form-group float-label">
-                                            <input type="password" autocomplete="off" id="inputPassword" name="senha" class="form-control" required>
-                                            <label for="inputPassword" class="form-control-label">Senha</label>
+                                            <input type="password" autocomplete="off" id="senha" name="senha" class="form-control" required>
+                                            <label for="senha" class="form-control-label">Senha</label>
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +110,7 @@ if(@$_GET['deslogar']==1)
                 </div>
                 <div class="w-100"></div>
                 <div class="col-12 mt-auto pb-4 col-md-6 col-lg-5 mx-auto login-footer">
-                    <a href="javascript: Web(0);" Onclick="logar();" class="btn btn-lg btn-block btn-default text-uppercase position-relative"><span>Logar</span><i class="material-icons right-absoute">arrow_forward</i></a>
+                    <a href="javascript: Web(0);" Onclick="logar();" class="btn btn-lg btn-block btn-default text-uppercase position-relative"><span>Registrar</span><i class="material-icons right-absoute">arrow_forward</i></a>
 					<a href="javascript: Web(0);" Onclick="recovery();" class="btn btn-lg btn-block btn-link text-secondary text-uppercase">Esqueceu a senha?</a>
                     <br></form>
                 </div>
@@ -151,21 +162,18 @@ if(@$_GET['deslogar']==1)
                         <h3 class="font-weight-normal mb-4">Faça login para continuar</h3>
 
                         <div class="form-group">
-                            <label for="inputEmail" class="sr-only">Nome do usuário</label>
-                            <input type="email" id="inputEmail" class="form-control form-control-lg border-0" placeholder="Nome de Usuário" required="" autofocus="">
+                            <label for="login" class="sr-only">Nome do usuário</label>
+                            <input type="text" id="login" name="login" autocomplete="off" class="form-control form-control-lg border-0" placeholder="Nome de Usuário" required="" autofocus="">
+                        </div>
+						<div class="form-group">
+                            <label for="email" class="sr-only">Email</label>
+                            <input type="email" id="email" name="email" autocomplete="off" class="form-control form-control-lg border-0" placeholder="Nome de Usuário" required="" autofocus="">
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword" class="sr-only">Senha</label>
-                            <input type="password" id="inputPassword" class="form-control form-control-lg border-0" placeholder="Sua senha" required="">
+                            <label for="senha" class="sr-only">Senha</label>
+                            <input type="password" id="senha" name="senha" autocomplete="off" class="form-control form-control-lg border-0" placeholder="Sua senha" required="">
                         </div>
-
                         <div class="my-3 row">
-                            <div class="col-6 col-md py-1 text-left">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
-                                    <label class="custom-control-label" for="customCheck1">Continuar logado</label>
-                                </div>
-                            </div>
                             <div class="col-6 col-md py-1 text-right text-md-right">
                                 <a href="javascript: void(0);" Onclick="recovery();" class="text-white">Esqueceu a senha?</a>
                             </div>
@@ -175,7 +183,7 @@ if(@$_GET['deslogar']==1)
                             <a href="javascript:void(0);"  Onclick="logar();" class=" btn btn-lg btn-default default-shadow btn-block" style="color: #000;">Logar <span class="ml-2 icon arrow_right"></span></a>
                         </div>
                         <div class="mb-4">
-                            <p>Ainda não tem conta?<br>Por favor <a href="registrar.php" class="text-white">Registrar-se</a> aqui.</p>
+                            <p>Ainda não tem conta?<br>Por favor <a href="register.php" class="text-white">Registrar-se</a> aqui.</p>
                         </div>
                     </div>
                 </div>

@@ -6,7 +6,8 @@ $login = security::input(@$inputb['login']);
 $senha = security::input(@$inputb['senha']);
 
 $x = 0;
-$SQL = "select usuarios.sistema,usuarios.codigo,usuarios.nome,usuarios.tipo from usuarios where usuarios.cpf='".$login."' and usuarios.senha='".$senha."' or usuarios.email='".$login."' and usuarios.senha='".$senha."' or usuarios.login='".$login."' and usuarios.senha='".$senha."'";
+$SQL = "select usuarios.sistema,usuarios.codigo,usuarios.nome,usuarios.tipo from usuarios 
+where usuarios.cpf='".$login."' and usuarios.senha='".$senha."' or usuarios.email='".$login."' and usuarios.senha='".$senha."' or usuarios.login='".$login."' and usuarios.senha='".$senha."'";
 $ress = mysqli_query($db3,$SQL);
 
 while($res = @mysqli_fetch_array($ress))

@@ -176,6 +176,10 @@ else if(@$_GET['ap'] == 2)
 	}
 	else
 	{
+		$SQL = "SELECT * FROM configuracoes where sistema='".$_SESSION['sistema']."'";
+		$RES = mysqli_query($db3,$SQL);
+		$rowt = mysqli_fetch_array($RES);
+		
 		if(0 < $dinheiro)
 		{
 			//print("<script>swal('Atenção', '".$dinheiro."');</script>");
@@ -185,13 +189,13 @@ else if(@$_GET['ap'] == 2)
 		if(0 < $ctdebito)
 		{
 			//print("<script>swal('Atenção', '".$ctdebito."');</script>");
-		    $SQL1 = "INSERT into vendas_recebidos(sistema,usuario,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$ctdebito."','2','1');";
+		    $SQL1 = "INSERT into vendas_recebidos(sistema,usuario,venda,caixa,taxa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$rowt['debito']."','".$ctdebito."','2','1');";
 	        mysqli_query($db3,$SQL1);
 		}
 		if(0 < $ctcredito)
 		{
 			//print("<script>swal('Atenção', '".$dinheiro."');</script>");
-		    $SQL1 = "INSERT into vendas_recebidos(sistema,usuario,venda,caixa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$ctcredito."','3','1');";
+		    $SQL1 = "INSERT into vendas_recebidos(sistema,usuario,venda,caixa,taxa,total,tipo,status) VALUES('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$rowt['credito']."','".$ctcredito."','3','1');";
 	        mysqli_query($db3,$SQL1);
 		}
 		if(0 < $ted)

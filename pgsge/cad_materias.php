@@ -23,7 +23,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 
 if(isset($_GET['codigo']))
 {
-	$sucesso = mysqli_query($db,"SELECT descricao FROM materias where codigo='".$_GET['codigo']."'");
+	$sucesso = mysqli_query($db,"SELECT descricao FROM materias where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'");
 	
 	if($sucesso)
 	{
@@ -41,22 +41,27 @@ if(isset($_GET['codigo']))
 
 if($_GET['ap'] == "1")
 {
-	$sucesso = mysqli_query($db,"SELECT * FROM materias where laudador like '%".$_POST['descricao']."%'");
-	
-	if($sucesso)
+	$x = 0;
+	$RES = mysqli_query($db,"SELECT * FROM materias where sistema='".$_SESSION['sistema']."' and descricao like '%".$_POST['descricao']."%'");
+	while($row = mysql_fetch_array($RES))
 	{
-	    print("<script>window.alert('Matéria ja cadastrada!')</script>");
-		print("<script>window.location.href='iniciado.php?url=cad_materias';</script>");
+		$x = 1;
+	}
+	
+	if($x == 1)
+	{
+	    print("<script>window.alert('Disciplina ja cadastrada!')</script>");
+		print("<script>window.location.href='sistema.php?url=cad_turmas';</script>");
 	}
 	else
 	{
-	   $SQL1 = "INSERT into materias(descricao) values('".$_POST['descricao']."')";
+	   $SQL1 = "INSERT into turmas(sistema,curso,descricao) values('".$_SESSION['sistema']."','".$_POST['curso']."','".$_POST['descricao']."')";
 	   $sucesso = mysqli_query($db,$SQL1);
 	   
 	   if($sucesso)
 	   {
-		   print("<script>window.alert('Matéria cadastrada com sucesso...')</script>");
-		   print("<script>window.location.href='iniciado.php?url=cad_materias';</script>");
+		   print("<script>window.alert('Turma Cadastrada com sucesso...')</script>");
+		   print("<script>window.location.href='sistema.php?url=cad_turmas';</script>");
 	   }
 	   else
 	   {
@@ -66,13 +71,13 @@ if($_GET['ap'] == "1")
 }
 elseif($_GET['ap'] == "2")
 {
-	$SQL1 = "UPDATE materias SET descricao=".$_POST['descricao']." where codigo='".$_GET['codigo']."'";
+	$SQL1 = "UPDATE turmas SET descricao=".$_POST['descricao']." where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
 	$sucesso = mysqli_query($db,$SQL1);
 	
 	if($sucesso)
 	{
         print("<script>window.alert('Alterado com sucesso.');</script>");
-		print("<script>window.location.href='iniciado.php?url=cad_materias';</script>");
+		print("<script>window.location.href='iniciado.php?url=cad_turmas';</script>");
 	}
 	else
 	{
@@ -82,53 +87,85 @@ elseif($_GET['ap'] == "2")
 }
 
 ?>		
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
 
-								<h4 class="card-title"><? echo $_SESSION["PAGINA"] = "Cadastro de Matérias";?></h4>
-								<form class="form-material m-t-40 row" name="laudo" method="post" action="<? if($_GET['codigo'] ==""){ echo "iniciado.php?url=cad_materias&ap=1";}else { echo "iniciado.php?url=cad_materias&ap=2&codigo=".$_GET['codigo']."";} ?>">
-							
-								<div class="form-group col-md-2 m-t-20"><label>Nome da Matéria :</label>
-								<!--onKeyPress="return(MascaraMoeda(this,'.','.',event)); "-->
-								<input type="text" name="descricao" id="descricao" value="<? if(isset($_GET['codigo'])){ echo $descricao;} ?>" class="form-control" required="required">
-								</div>
-								<div class="form-group col-md-4 m-t-20">
-								<br>
-								<div class="form-actions">
-								<button type="submit" class="btn btn-info"><i class="fa fa-plus-circle"></i> <? if(isset($_GET['codigo'])){ echo "Alterar";}else { echo "Cadastrar";} ?></button>
-								<? if(!Empty($_GET['codigo'])) { ?><a class="btn btn-info" href="iniciado.php?url=cad_turmas"><i class="fa fa-plus-circle"></i> Novo Cadastro</a><? } ?>
-								</div></div>
-                                <div class="form-group col-md-12 m-t-20">
-                                    <table class="display nowrap table table-hover table-striped table-bordered">
+<div class="container-fluid bg-template mb-4">
+            <div class="row hn-290 position-relative">
+			<div class="background opac heightset">
+                </div>
+                <div class="container align-self-end">
+                    <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Cadastro de Turmas";?></h2>
+                    <p class="text-mute mb-2"><? echo $_SESSION["DESCRICAOPG2"] = "Lista";?></p>
+					<input type="text" name="pesquisa" id="pesquisa" value="" class="form-control form-control-lg search bottom-25 position-relative border-0" onkeyup="javascript: requestPage2('?br=atu_turmas&pesquisa='+ this.value +'&load=1','listaturmas','GET');" required='required'>
+                    <button class="btn btn-info btnadd-sh" onclick="requestPage2('?br=modal_turmas&modal=1','modals','GET');" data-toggle="modal" data-target="#modalap" data-title="Turmas"><i class='fa fa-plus-circle'></i></button>
+                </div>
+        </div>
+</div>   
+<div class="container pt-5">
+  
+  <div class="row">
+	<div class="col-md-12 col-sm-12"> 
+		<div class="component-box">
+		                        <form class="m-t-40 row" name="alunoform" id="alunoform" method="post">
+								<div class="col-md-12">
+					            <div class="component-box">
+                                <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+							        <table class="table pmd-table">
                                         <thead>
                                             <tr>
-                                                <th>Codigo</th>
                                                 <th>Descrição</th>
-												<!--<th>Valor Total</th>-->
-												<th>X</th>
+												<th>Status</th>
+												<th>Opções</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-										<? 
-										  
-										  $sql = "select * from materias";
+                                        <tbody id="listaturmas">
+										<?
+										  							
+                                          $x = 0;																	
+										  $sql = "select * from turmas where sistema='".$_SESSION['sistema']."';";
 										  $res = mysqli_query($db,$sql); 
 										  while($row = mysqli_fetch_array($res))
 										  {
+											   $x = 1;
 										  ?>
                                             <tr>
-                                                <td><? echo $row['codigo'];?></td>
-                                                <td><? echo $row['descricao'];?></td>
-												<!--<td>< echo $numero = number_format($row['valor_padrao']-+$row['valor'], 2, ',','.');?></td>-->
-												<td><a class="fa fa-edit" href="iniciado.php?url=cad_materias&codigo=<? echo $row['codigo']?>" style="font-size: 150%;"><a></td>
+                                                <td data-title="Descrição"><? echo $row['descricao'];?></td>
+												<td data-title="Status"><? 
+												Switch($row['status'])
+												{
+												 case 0:
+												 { echo "Inativo";}
+												 break;
+												 case 1:
+												 { echo "Ativo";}
+												 break;
+												 case 2:
+												 { echo "Pre-Ativa";}
+												 break;
+												 case 3:
+												 { echo "Transferido";}
+												 break;
+												}
+																		 ?></td>
+												<td data-title="Editar">
+												<a class="fa fa-edit" href="javascript: void(0);" onclick="edit_turmas('<?=$row['codigo'];?>');" style="font-size: 150%;"><a>
+												</td>
                                             </tr>
-										  <? } ?>
+										  <? }
+										    if($x == 0)
+											{
+											?>
+										    <tr>
+                                                <td data-title="Descrição">Nenhum registro encontrado.</td>
+											<tr>
+											<?
+											}
+  										  ?>
                                         </tbody>
                                     </table>
                                 </div>
-								</form>
+								</div>
+								</div>
+							  </form>
                             </div>
                         </div>
 					</div>

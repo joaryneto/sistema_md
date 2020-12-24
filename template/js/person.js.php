@@ -7,6 +7,24 @@ const c_r = (str) => {
 		.replace(/(^-+|-+$)/, ''); // Remove hífens extras do final ou do inicio da string
 }
 
+$('.registrar').on('click',function()
+{
+    var login = c_r(document.getElementById('login').value);
+	var login = c_r(document.getElementById('email').value);
+	var senha = c_r(document.getElementById('senha').value);
+	
+	if(login == "")
+	{
+		swal('Atenção', 'Preencha os campos login e senha.');
+		//window.alert('teste');
+	}
+    else
+	{
+		requestPage('?br=atu_login&login='+ login +'&senha='+ senha +'&ap=2','load','GET');
+	}		
+});
+
+
 function logar()
 {
     var login = c_r(document.getElementById('inputEmail').value);
@@ -66,6 +84,12 @@ function agendar()
 $('#CusuarioNovo').on('click',function()
 {	
 	 location='sistema.php?url=cad_usuarios';
+});
+
+$('.registrar').on('click',function()
+{
+    $('#modalform').modal('show');		
+	requestPage2('?br=modal_clientes&modal=3','modals','GET');
 });
 
 $('.a-cliente').on('click',function()
@@ -221,6 +245,18 @@ $(".t-menu").click(function() {
     this.classList.add("active"); 
 }); 
 
+$('.t-gcomissao').on('click',function()
+{	
+   b_menuslow();
+   requestPage('?br=cad_comissao','conteudo','GET');
+});
+
+$('.t-pcomissao').on('click',function()
+{	
+   b_menuslow();
+   requestPage('?br=cad_comissaopro','conteudo','GET');
+});
+
 $('.t-agenda').on('click',function()
 {	
    a_menuslow();
@@ -296,6 +332,11 @@ $('.t-linhadotempo').on('click',function()
 $('.u-cadastro').on('click',function()
 {	
    requestPage('?br=cad_usuarios','conteudo','GET');
+});
+
+$('.r-config').on('click',function()
+{	
+   requestPage('?br=cad_configuracoes','conteudo','GET');
 });
 
 /* MENU SGE  */

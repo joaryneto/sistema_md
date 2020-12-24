@@ -265,11 +265,23 @@ function isMobile()
 					<? } ?>
 					<?if(@$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 4){?>
 					<li class="nav-item dropdown" style="width: 230px;">
-                        <a href="javascript: void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
-                            <div class="list-group-item list-group-item-action t-menu t-comissao,">
+                        <a href="" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="list-group-item list-group-item-action">
                                 <i class="material-icons">store_mall_directory</i> Comissão
                             </div>
                         </a>
+						<div class="dropdown-menu t-menu">
+						    <?if(@$_SESSION['permissao'] == 4){?>
+                            <a href="javascript: void(0);" class="dropdown-item t-gcomissao">
+							 Gerar Comissão
+                            </a>
+							<? } ?>
+							<?if(@$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 4){?>
+                            <a href="javascript: void(0);" class="dropdown-item t-pcomissao">
+                             Comissão Geradas
+                            </a>
+							<? } ?>
+                        </div>
 					</li>
 					<? } ?>
 					<?if(@$_SESSION['permissao'] == 3 or @$_SESSION['permissao'] == 4){?>
@@ -306,6 +318,13 @@ function isMobile()
                         <a href="javascript:void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
                             <div class="list-group-item list-group-item-action t-menu t-cadastro">
                                 <i class="material-icons">supervisor_account</i> Usuarios
+                            </div>
+                        </a>
+					</li>
+					<li class="nav-item dropdown" style="width: 230px;">
+                        <a href="javascript:void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action t-menu r-config">
+                                <i class="material-icons">supervisor_account</i> Configurações
                             </div>
                         </a>
 					</li>
@@ -565,7 +584,7 @@ function isMobile()
     <!-- wrapper ends -->
 	<? } ?>
 	<? if($_SESSION['tipo'] == 3){?>
-	<div id="extratocaixaanteriores" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+	<div id="extrato" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -575,7 +594,7 @@ function isMobile()
                                             <div class="modal-body">
 											<div class="row">
 											<div class="col-12">
-											<div id="loadanteriores">											 
+											<div id="loadextrato">											 
 											</div>
 											</div>
 											</div>

@@ -21,18 +21,7 @@ if(@$_GET['ap'] == 1)
 if(@$_GET['load'] == 1)
 {
   $whe = "";
-  if(Empty($_GET['pesquisa']))
-  {
-	/*print('<script>
-         swal({   
-            title: "Atenção!",   
-            text: "Pesquisa em branco.",   
-            timer: 1000,   
-            showConfirmButton: false 
-        });
-    </script>');*/
-  }
-  else
+  if(isset($_GET['pesquisa']))
   {
 	  $whe = " and diario.conteudo like '%".$_GET['pesquisa']."%'";
   }
