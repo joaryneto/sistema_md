@@ -144,13 +144,16 @@ if(@$inputb['load'] == 1){
   {
 	  $x = 1;
   ?>
-	<tr onclick="viewer('<?=$row['profissional'];?>','<?=$row['data_inicio'];?>','<?=$row['data_final'];?>');">
+	<tr onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'">
 		<td data-title="Codigo"><? echo $row['codigo'];?></td>
 		<td data-title="Profissional"><? echo $row['nome'];?></td>
 		<td data-title="Periodo"><? echo formatodata($row['data_inicio'])." - ".formatodata($row['data_final']);?></td>
 		<td data-title="Valor"><? echo number_format($row['valor'], 2, ',','.');?></td>
 		<!--<td>< echo $numero = number_format($row['valor_padrao']-+$row['valor'], 2, ',','.');?></td>-->
-		<td data-title="Editar"><a class="fa fa-ban" href="javascript:void(0);" onclick="co_excluir(<?=$row['codigo'];?>);" style="font-size: 150%;"><a></td>
+		<td data-title="Opções">
+		<a class="fa fa-ban" href="javascript:void(0);" alt="Excluir" onclick="co_excluir(<?=$row['codigo'];?>);" style="font-size: 150%;"><a>
+		<a class="fa fa-eye" href="javascript:void(0);" alt="Visualizar" onclick="viewer('<?=$row['profissional'];?>','<?=$row['data_inicio'];?>','<?=$row['data_final'];?>');" style="font-size: 150%;"><a>
+		</td>
 	</tr>
 <? 
   } 
@@ -171,7 +174,7 @@ else if(@$inputb['load'] == 2){
   {
 	  $x = 1;
   ?>
-	<tr onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'" onclick="viewer('<?=$row['codigo'];?>','<?=$row['profissional'];?>','<?=$row['data_inicio'];?>','<?=$row['data_final'];?>');">
+	<tr onMouseOver="this.style.color='#C0C0C0'" onMouseOut="this.style.color='#67757c'">
 		<td data-title="Codigo"><? echo $row['codigo'];?></td>
 		<td data-title="Profissional"><? echo $row['nome'];?></td>
 		<td data-title="Periodo"><? echo formatodata($row['data_inicio'])." - ".formatodata($row['data_final']);?></td>
@@ -188,6 +191,9 @@ else if(@$inputb['load'] == 2){
 		 }
          
 		 ?></td>
+		 <td data-title="Opções">
+		<a class="fa fa-eye" href="javascript:void(0);" onclick="viewer('<?=$row['codigo'];?>','<?=$row['profissional'];?>','<?=$row['data_inicio'];?>','<?=$row['data_final'];?>');" style="font-size: 150%;"><a>
+		</td>
 	</tr>
 <? 
   } 

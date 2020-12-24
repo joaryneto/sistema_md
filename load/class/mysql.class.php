@@ -16,7 +16,8 @@ if($_SESSION['tipo'] == 2)
 if(!$db = mysqli_connect("mysql669.umbler.com:41890", "sistemasge", "I_Jt{4|p6u"))
 {
     //print("<script>window.alert('Não conectou com banco...')</script>");
-	echo "Não conectou com banco 1";
+	//echo "Não conectou com banco 1";
+	exit();
 }
 
 @mysqli_select_db($db, "sistemasge");
@@ -31,7 +32,8 @@ else if($_SESSION['tipo'] == 3)
 if(!$db3 = mysqli_connect("mysql669.umbler.com:41890", "sistemasl", "I_Jt{4|p6u"))
 {
     //print("<script>window.alert('Não conectou com banco...')</script>");
-	echo "Não conectou com banco 3";
+	//echo "Não conectou com banco 3";
+	exit();
 }
 
 @mysqli_select_db($db3, "sistemasl");
@@ -42,10 +44,11 @@ if(!$db3 = mysqli_connect("mysql669.umbler.com:41890", "sistemasl", "I_Jt{4|p6u"
 else if($_SESSION['tipo'] == 4)
 {	
 
-if(!$db3 = mysqli_connect("mysql741.umbler.com:41890", "sistemadelive", "*XlVz(7-4,9hG"))
+if(!$db = mysqli_connect("mysql741.umbler.com:41890", "sistemadelive", "*XlVz(7-4,9hG"))
 {
     //print("<script>window.alert('Não conectou com banco...')</script>");
-	echo "Não conectou com banco 4";
+	//echo "Não conectou com banco 4";
+	exit();
 }
 
 @mysqli_select_db($db, "sistemadelive");

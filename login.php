@@ -32,7 +32,7 @@ if(@$_GET['deslogar']==1)
         <div class="bg-template background-overlay"></div>
         <div class="col align-self-center text-white text-center">
             <img style="height:50px" src="template/images/logo.png" alt="logo">
-            <h1 class="mb-0 mt-3">EC</h1><p class="text-mute subtitle">Tecnologia</p>
+            <h1 class="mb-0 mt-3"></h1><p class="text-mute subtitle"></p>
             <div class="loader-ractangls">
                 <div></div>
                 <div></div>
@@ -53,7 +53,7 @@ if(@$_GET['deslogar']==1)
                 <div class="col text-left">
                     <div class="header-logo">
                         <img style="height:50px" src="template/images/logo.png" alt="" class="header-logo">
-                        <h4>EC<br><small class="text-mute">Tecnologia</small></h4>
+                        <h4><br><small class="text-mute"></small></h4>
                     </div>
                 </div>
                 <div class="col-auto">
