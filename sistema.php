@@ -492,11 +492,7 @@ function isMobile()
 		<button class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" type="button" onclick="c_desconto();" data-title="[%] Desconto">
 		<span class="pmd-floating-hidden">[%] Desconto</span> 
 		<i class="material-icons pmd-sm">trending_down</i>
-		</button>
-		<button class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" type="button"  onclick="slow();" data-title="Itens do Carrinho"> 
-		<span class="pmd-floating-hidden">Itens do Carrinho</span> 
-		<i class="material-icons">add_shopping_cart</i> 
-		</button>  
+		</button> 
 		<button type="button" class="pmd-floating-action-btn btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-info" data-title="Menu"> 
 		<span class="pmd-floating-hidden">Primary</span>
 		<i class="material-icons pmd-sm">extension</i> 

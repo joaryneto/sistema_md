@@ -72,7 +72,7 @@ table
 		font-size: 60%;
 		margin-bottom:10px;
 		font-family: 'Roboto', sans-serif !important;
-		background: #20aee3 !important;
+		background: #67757c; !important;
 }
 
 .table-stripedd tbody td 
@@ -119,6 +119,7 @@ $ROWF = mysqli_fetch_array($RES);
 <tr>
         <th>Codigo</th>
 		<th>Cliente</th>
+		<th>Serviço</th>
 		<th>Data</th>
 		<th>Total R$</th>
 </tr>
@@ -126,7 +127,7 @@ $ROWF = mysqli_fetch_array($RES);
 <tbody>
 <? 
 
-$sql = "SELECT clientes.nome as cliente , count(agendamento_servicos.codigo) as qtd, agendamento_servicos.data, agendamento_servicos.codigo, usuarios.nome, produtos.preco, sum(((produtos_usuarios.comissao)/100)*vendas_recebidos.total) as TotalTaxa , sum(((produtos_usuarios.comissao)/100)*(vendas_recebidos.total-(((vendas_recebidos.taxa)/100)*vendas_recebidos.total))) as total FROM produtos_usuarios
+$sql = "SELECT clientes.nome as cliente , count(agendamento_servicos.codigo) as qtd, agendamento_servicos.data, agendamento_servicos.codigo, usuarios.nome, produtos.preco, produtos.descricao ,sum(((produtos_usuarios.comissao)/100)*vendas_recebidos.total) as TotalTaxa , sum(((produtos_usuarios.comissao)/100)*(vendas_recebidos.total-(((vendas_recebidos.taxa)/100)*vendas_recebidos.total))) as total FROM produtos_usuarios
 inner join agendamento_servicos on agendamento_servicos.profissional=produtos_usuarios.usuario 
 and agendamento_servicos.servico=produtos_usuarios.produto
 inner join produtos on produtos.codigo=produtos_usuarios.produto
@@ -143,6 +144,7 @@ while($row = mysqli_fetch_array($res))
 <tr>
   <td><? echo $row['codigo'];?></td>
   <td><? echo $row['cliente'];?></td>
+  <td><? echo $row['descricao'];?></td>
   <td><? echo formatodata($row['data']);?></td>
   <td style="width:70px;">R$ <? echo number_format($row['total'],2,",",".");?></td>
 </tr>
@@ -152,7 +154,7 @@ while($row = mysqli_fetch_array($res))
 <table style="top: 20px;" class="table-stripedd">
 <thead>
 <tr>
-    <th>Qt / Valor</th>
+    <th style="width: 100px;">Qt / Valor</th>
 	<th>Tipo do Produto</th>
 	<th>Total R$</th>
 </tr>
@@ -160,7 +162,7 @@ while($row = mysqli_fetch_array($res))
 <tbody>
 <? 
 
-$SQL2 = "SELECT clientes.nome as cliente , count(agendamento_servicos.codigo) as qtd, agendamento_servicos.data, agendamento_servicos.codigo, usuarios.nome, produtos.preco, produtos.descricao, sum(((produtos_usuarios.comissao)/100)*vendas_recebidos.total) as TotalTaxa , sum(((produtos_usuarios.comissao)/100)*(vendas_recebidos.total-(((vendas_recebidos.taxa)/100)*vendas_recebidos.total))) as total FROM produtos_usuarios
+$SQL2 = "SELECT clientes.nome as cliente , count(agendamento_servicos.codigo) as qtd, agendamento_servicos.data, agendamento_servicos.codigo, usuarios.nome, vendas_recebidos.total as preco , produtos.descricao sum(((produtos_usuarios.comissao)/100)*vendas_recebidos.total) as TotalTaxa , sum(((produtos_usuarios.comissao)/100)*(vendas_recebidos.total-(((vendas_recebidos.taxa)/100)*vendas_recebidos.total))) as total FROM produtos_usuarios
 inner join agendamento_servicos on agendamento_servicos.profissional=produtos_usuarios.usuario 
 and agendamento_servicos.servico=produtos_usuarios.produto
 inner join produtos on produtos.codigo=produtos_usuarios.produto
@@ -235,12 +237,13 @@ if(isset($_GET['aprovar']) and $ROWC['status'] == 1){?>
 <div class="form-group col-md-12 m-t-20">
 <button type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-primary t-aprova">Aprovar</button>
 </div>
-
+<? } ?>
+<div class="form-group col-md-12 m-t-20">
+<button type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-primary" onclick="printToFile('#print');">PDF</button>
 </div>
 </div>
-<? 
-}
-
+</div>
+<?
 if(isset($_GET['aprovar']) and $ROWC['status'] == 1){?>
 <script>
 $('.t-aprova').on('click',function()
@@ -262,9 +265,33 @@ $('.t-aprova').on('click',function()
        requestPage2('?br=atu_comissao&codigo=<?=$inputb['codigo'];?>&ap=3&load=2','u_load','GET');
 	}
 });
+
+//Creating dynamic link that automatically click
+function downloadURI(uri, name) {
+    var link = document.createElement("a");
+    link.download = name;
+    link.href = uri;
+    link.click();
+    //after creating link you should delete dynamic link
+    //clearDynamicLink(link); 
+}
+
+//Your modified code.
+function printToFile(div) {
+    html2canvas(div, {
+        onrendered: function (canvas) {
+            var myImage = canvas.toDataURL("image/png");
+            //create your own dialog with warning before saving file
+            //beforeDownloadReadMessage();
+            //Then download file
+            downloadURI("data:" + myImage, "yourImage.png");
+        }
+    });
+}
 </script>
 <? } ?>
 <div class="modal-footer">
+
 </div>
 <?
 if(@$_GET['imprimir'] == 1)

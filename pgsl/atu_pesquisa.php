@@ -127,6 +127,7 @@ if(@$inputb['ap'] == 1)
 		var data = document.getElementById('dataagenda').value;
 		var hora = document.getElementById('hora').value;
 		var profissional = document.getElementById('profissional').value;
+		var obs = document.getElementById('obs').value;
 		var servico = document.getElementById('servico').value;
 		
 		if(servico == "")
@@ -135,7 +136,7 @@ if(@$inputb['ap'] == 1)
 		}
 		else
 		{
-		   requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&servico='+ servico +'&profissional='+ profissional +'&data='+ data +'&hora='+ hora +'&addservico=true&load=2','listaservicos','GET');
+		   requestPage2('?br=atu_pesquisa&codigo='+ codigo +'&servico='+ servico +'&profissional='+ profissional +'&data='+ data +'&hora='+ hora +'&obs='+ obs +'&addservico=true&load=2','listaservicos','GET');
 		}
 	}
 	
@@ -216,6 +217,9 @@ if(@$inputb['ap'] == 1)
 	<div class="form-group col-md-12 m-t-20"><label>Horario:</label>
 	<select name="hora" id="hora" class="form-control" placeholder="Escolha um serviço" onchange="pservico();" autocomplete="off">
 	</select>
+	</div>
+	<div class="form-group col-md-12 m-t-20"><label>Observação:</label>
+	<textarea id="obs" name="obs" class="form-control" rows="2" cols="3"></textarea>
 	</div>
 	<div class="form-group col-md-12 m-t-20"><label>Serviços:</label>
 	<select name="servico" id="servico" class="form-control" placeholder="Escolha um serviço" autocomplete="off"  required="required" >
@@ -685,6 +689,7 @@ if(@$inputb['addservico'] == "true")
 	$codigo = $inputb['codigo'];
 	$data = $inputb['data'];
 	$hora = $inputb['hora'];
+	$obs = $inputb['obs'];
 	
 	if($inputb['servico'] == "")
 	{
@@ -692,7 +697,7 @@ if(@$inputb['addservico'] == "true")
 	}
 	else
 	{
-		$SQL = "INSERT into agendamento_servicos(sistema,agendamento,servico,profissional,data,hora) values('".$_SESSION['sistema']."','".$codigo."','".$servico."','".$profissional."','".revertedata($data)."','".$hora."');";
+		$SQL = "INSERT into agendamento_servicos(sistema,agendamento,servico,profissional,data,hora,obs) values('".$_SESSION['sistema']."','".$codigo."','".$servico."','".$profissional."','".revertedata($data)."','".$hora."','".$obs."');";
 		mysqli_query($db3,$SQL);
 	}
 	

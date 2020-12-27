@@ -244,6 +244,33 @@ else if(@$_GET['ap'] == 3)
 	    print('<script> document.getElementById("vtroco").innerHTML = "<span style=\'color: red;\'>Falta: R$ '.number_format($v,2,",",".").'</span>";</script>');
 	}
 }
+else if(@$_GET['ap'] == 4)
+{
+	$codigo = $_GET['codigo'];
+	
+	$SQL = "SELECT vendas_recebidos.codigo,vendas_mov.agendamento FROM vendas_recebidos 
+	inner join vendas_mov on vendas_mov.venda=vendas_recebidos.venda
+	where vendas_recebidos.sistema='".$_SESSION['sistema']."' and vendas_recebidos.venda='".$_GET['codigo']."' limit 1;";
+	$RES = mysqli_query($db3,$SQL);
+	while($row = mysqli_fetch_array($RES))
+	{
+		$SQL1 = "UPDATE vendas_recebidos SET status=3 where sistema='".$_SESSION['sistema']."' and venda='".$_GET['codigo']."'";
+		$RES = mysqli_query($db3,$SQL1);
+		
+		$SQL2 = "UPDATE agendamento_servicos SET status=0 where sistema='".$_SESSION['sistema']."' and codigo='".$row['agendamento']."'";
+		$RES = mysqli_query($db3,$SQL2);
+		
+		print('
+		<script>
+		swal({   
+ 			   title: "Info!",   
+ 			   text: "Cancelado com sucesso.",   
+ 			   timer: 1500,   
+ 			   showConfirmButton: false 
+ 		});
+		</script>');
+	}
+}
 
 if(@$_GET['load'] == 1)
 {
@@ -300,6 +327,49 @@ else if(@$_GET['load'] == 2)
 	{
 	    echo '<tr><td colspan="4" class="text-center"> Nenhum registro encontrado.</td></tr>';
 	}	
+	
+}
+else if(@$_GET['load'] == 3)
+{
+									  
+	  $data = date('Y');
+	  $sql = "select clientes.nome, vendas_mov.venda , vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.total) as totals, count(vendas_mov.produto) as quantidade from vendas 
+	  inner join vendas_mov on vendas_mov.venda=vendas.codigo
+	  inner join produtos on produtos.codigo=vendas_mov.produto
+	  left join agendamento_servicos on agendamento_servicos.codigo=vendas_mov.agendamento
+	  left join agendamento on agendamento.codigo=agendamento_servicos.agendamento
+	  left join clientes on clientes.codigo=agendamento.cliente	
+	  inner join vendas_recebidos on vendas_recebidos.venda=vendas_mov.venda										  
+	  where vendas_mov.sistema='".$_SESSION['sistema']."' and vendas_mov.caixa='".$_SESSION['caixa']."' GROUP BY vendas_mov.total, vendas_recebidos.codigo, produtos.descricao ";
+	  $res = mysqli_query($db3,$sql); 
+	  $b = 0;
+	  while($row = mysqli_fetch_array($res))
+	  {
+		  
+		
+			 
+	  ?>
+		<tr ><!-- color: #20aee3; -->
+			<td data-title="#"><? echo $row['codigo'];?></td>
+			<td data-title="Cliente"><? echo $row['nome'];?></td>
+			<td data-title="Descrição"><? echo $row['descricao'];?></td>
+			<td data-title="Qtd/C. Uni."><? echo $row['quantidade'];?>x<? echo $row['preco'];?></td>
+			<td data-title="Total">R$ <? echo number_format($row['totals'],2,",",".");?></td>
+			<td data-title="Opções">
+			<a class="fa fa-window-close" href="javascript:void(0);" alt="Visualizar" onclick="cx_cancelar('<?=$row['venda'];?>');" style="font-size: 150%; color: red;"><a>
+</td>
+		</tr>
+	  <? $b = 1;
+	  
+	  } 
+	  
+	  if($b == 0)
+	  {
+		 echo '<tr ><!-- color: #20aee3; -->
+			<td colspan="4" class="text-center"> Nenhum registro encontrado.</td>
+		</tr>';
+	  }
+	  
 	
 }
 

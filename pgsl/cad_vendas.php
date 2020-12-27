@@ -111,7 +111,7 @@
 	  	
 	  if($x == 1)
 	  {
-		$SQL = "DELETE FROM vendas_mov where sistema='".$_SESSION['sistema']."' and venda='".$_SESSION['venda']."'";
+		$SQL = "DELETE FROM vendas_mov where sistema='".$_SESSION['sistema']."' and venda='".$_SESSION['venda']."' or agendamento='".$agendamento."'";
 		mysqli_query($db3,$SQL);
 		
 		$data = date("Y-m-d");
@@ -546,7 +546,11 @@ $("#dtable" ).hide( "slow" );
 								</div>
 								<div class="input-group col-md-12 m-t-20">
 								<input type="hidden" class="form-control" name="totalvenda" id="totalvenda" value="" required="" aria-invalid="false">
-								<h1 style="color: green;font-weight: bold;">Total: R$ <span id="vtotal"><?=$_SESSION['vtotal'];?></span></h1></div>
+								<h1 style="color: green;font-weight: bold;">Total: R$ <span id="vtotal"><?=$_SESSION['vtotal'];?></span></h1>
+								<button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" type="button"  onclick="slow();" data-title="Itens do Carrinho"> 
+								<span class="pmd-floating-hidden">Itens do Carrinho</span> 
+								<i class="material-icons">add_shopping_cart</i> 
+								</button> </div>
 								<div class="form-group col-md-12 m-t-20">
 								<button class="btn btn-lg btn pmd-btn-raised btn-primary btn-block pmd-ripple-effect" type="button" onclick="atualizar();" data-toggle="modal" data-target="#pagamento">Confirmar pagamento</button>
 								<?if(isset($_GET['teste'])){?> <button class="btn btn-lg btn pmd-btn-raised btn-primary btn-block pmd-ripple-effect" type="button" onclick="testepgt();" >TESTE pagamento</button> <? } ?>
