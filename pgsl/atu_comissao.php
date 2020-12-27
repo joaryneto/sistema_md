@@ -151,8 +151,8 @@ if(@$inputb['load'] == 1){
 		<td data-title="Valor"><? echo number_format($row['valor'], 2, ',','.');?></td>
 		<!--<td>< echo $numero = number_format($row['valor_padrao']-+$row['valor'], 2, ',','.');?></td>-->
 		<td data-title="Opções">
-		<a class="fa fa-ban" href="javascript:void(0);" alt="Excluir" onclick="co_excluir(<?=$row['codigo'];?>);" style="font-size: 150%;"><a>
-		<a class="fa fa-eye" href="javascript:void(0);" alt="Visualizar" onclick="viewer('<?=$row['profissional'];?>','<?=$row['data_inicio'];?>','<?=$row['data_final'];?>');" style="font-size: 150%;"><a>
+		<a class="fa fa-eye" href="javascript:void(0);" title="Visualizar" onclick="viewer('<?=$row['profissional'];?>','<?=$row['data_inicio'];?>','<?=$row['data_final'];?>');" style="font-size: 150%; color: blue;"><a>
+		<a class="fa fa-window-close" href="javascript:void(0);" title="Excluir" onclick="co_excluir(<?=$row['codigo'];?>);" style="font-size: 150%; color: red;"><a>
 		</td>
 	</tr>
 <? 
@@ -192,7 +192,7 @@ else if(@$inputb['load'] == 2){
          
 		 ?></td>
 		 <td data-title="Opções">
-		<a class="fa fa-eye" href="javascript:void(0);" onclick="viewer('<?=$row['codigo'];?>','<?=$row['profissional'];?>','<?=$row['data_inicio'];?>','<?=$row['data_final'];?>');" style="font-size: 150%;"><a>
+		<a class="fa fa-eye" href="javascript:void(0);" onclick="viewer('<?=$row['codigo'];?>','<?=$row['profissional'];?>','<?=$row['data_inicio'];?>','<?=$row['data_final'];?>');" style="font-size: 150%; color: blue;"><a>
 		</td>
 	</tr>
 <? 

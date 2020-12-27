@@ -238,9 +238,9 @@ if(isset($_GET['aprovar']) and $ROWC['status'] == 1){?>
 <button type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-primary t-aprova">Aprovar</button>
 </div>
 <? } ?>
-<div class="form-group col-md-12 m-t-20">
+<!--<div class="form-group col-md-12 m-t-20">
 <button type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-primary" onclick="printToFile('#print');">PDF</button>
-</div>
+</div>-->
 </div>
 </div>
 <?
