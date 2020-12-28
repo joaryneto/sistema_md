@@ -140,6 +140,8 @@ if(@$inputb['ap'] == 1)
 		}
 	}
 	
+	$('.data').mask('00/00/0000');
+	
 	jQuery('#dataagenda').datepicker({
 		format: 'dd/mm/yyyy',
  		autoclose: true,
@@ -210,21 +212,23 @@ if(@$inputb['ap'] == 1)
      ?>
 	</select>
 	</div>
-	<div class="form-group col-md-12 m-t-20"><label>Data:</label>
-	<input name="dataagenda" id="dataagenda" type="text" onchange="phorario(this.value);" placeholder="00/00/00000" autocomplete="off" class="form-control  form-control-lg"/>
+	<div class="form-group col-md-12 m-t-20">
+	<input name="dataagenda" id="dataagenda" type="text" onchange="phorario(this.value);" placeholder="Ex: Data 00/00/00000" autocomplete="off" class="form-control  form-control-lg data"/>
 	<input name="qtd" id="qtd" value="" type="hidden" value="0" autocomplete="off" class="form-control  form-control-lg" required="required"/>
 	</div>
-	<div class="form-group col-md-12 m-t-20"><label>Horario:</label>
+	<div class="form-group col-md-12 m-t-20">
 	<select name="hora" id="hora" class="form-control" placeholder="Escolha um serviço" onchange="pservico();" autocomplete="off">
+	<option value="">Selecionar Hora</option>
 	</select>
 	</div>
-	<div class="form-group col-md-12 m-t-20"><label>Observação:</label>
-	<textarea id="obs" name="obs" class="form-control" rows="2" cols="3"></textarea>
+	<div class="form-group col-md-12 m-t-20">
+	<textarea id="obs" name="obs" class="form-control" rows="2" cols="3" placeholder="Observação"></textarea>
 	</div>
-	<div class="form-group col-md-12 m-t-20"><label>Serviços:</label>
-	<select name="servico" id="servico" class="form-control" placeholder="Escolha um serviço" autocomplete="off"  required="required" >
+	<div class="form-group col-md-12 m-t-20">
+	<select name="servico" id="servico" class="form-control" placeholder="Escolha um serviço" autocomplete="off"  required="required">
+	<option value="">Selecionar Serviço</option>
 	</select>
-	<button class="btn btn-info btnadd-ad" onclick="servico_add(<?=$rows['codigo'];?>);"><i class="fa fa-plus-circle"></i></button>
+	<button class="btn btn-info btnadd-us" onclick="servico_add(<?=$rows['codigo'];?>);"><i class="fa fa-plus-circle"></i></button>
 	</div>
 	</div>
 	<div id="dtable" style="display: none;">
@@ -277,8 +281,7 @@ if(@$inputb['ap'] == 1)
 	 <h2 id="sv_total"><span style="color: green;">Total: R$ 0,00</span></h2>
 	 <div class="form-group pmd-textfield pmd-textfield-floating-label">
 	    <a class="btn pmd-btn-outline pmd-ripple-effect btn-warning" href="javascript: void(0);" onclick="sv_itens();"><b id="sv_qtd"></b> <i class="material-icons">add_shopping_cart</i> Itens</a>
-    </div>
-	<div class="form-group pmd-textfield pmd-textfield-floating-label">
+
 	    <a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="cp_proximo(<?=$_SESSION['agendamento'];?>);"><i class="material-icons">person_add</i>  Proximo</a>
     </div>
 <script>
@@ -413,6 +416,10 @@ else if(@$inputb['ap'] == 5)
 	
   $_SESSION['codagenda'] = $_GET['codigo'];
   
+  $SQL = "SELECT * FROM agendamento_servicos where codigo='".$_SESSION['codagenda']."'";
+  $RES = mysqli_query($db3,$SQL);
+  while($row = mysqli_fetch_array($RES))
+  {
   
 ?>
 <div class="modal-header">
@@ -421,11 +428,11 @@ else if(@$inputb['ap'] == 5)
 </div>
 <div class="modal-body">
 <div class="m-t-40 row">
-<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Cliente:</label>
+<div class="form-group col-md-12 m-t-20" id="inputcliente">
 <input name="profissional" id="profissional" type="hidden" value="<?=$_GET['profissional'];?>" autocomplete="off" class="form-control" readonly>
 <input name="nome" id="nome" type="text" value="<?=$_GET['nome'];?>" autocomplete="off" class="form-control" readonly>
 </div>
-<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Data:</label>
+<div class="form-group col-md-12 m-t-20" id="inputcliente">
 	<div class="input-group">
 			<input type="text" name="dataagenda" id="dataagenda" onchange="phorario(this.value);" value="<?=formatodata($_GET['data']);?>" class="form-control" placeholder="00/00/0000">
 			<div class="input-group-append">
@@ -470,6 +477,7 @@ else if(@$inputb['ap'] == 5)
 
     var datav = document.getElementById('dataagenda').value;
 	var horav = document.getElementById('hora').value;
+	var obs = document.getElementById('obs').value;
 	
 	if(datav == "")
 	{
@@ -482,20 +490,24 @@ else if(@$inputb['ap'] == 5)
 	else
 	{
 	   $('#modalap').modal('hide');		
-	   requestPage2('?br=atu_pesquisa&data='+ datav +'&hora='+ horav +'&ap=9&load=1','load','GET');
+	   requestPage2('?br=atu_pesquisa&data='+ datav +'&hora='+ horav +'&obs='+ obs +'&ap=9&load=1','load','GET');
 	}
     });
 	</script>
 </div>
-<div class="form-group col-md-4 m-t-20"><label>Horario:</label>
+<div class="form-group col-md-4 m-t-20">
 	<select name="hora" id="hora" class="form-control" autocomplete="off" required="required">
 	</select>
 </div>
+<div class="form-group col-md-12 m-t-20">
+	<textarea id="obs" name="obs" class="form-control" rows="2" cols="3" placeholder="Observação"><?=$row['obs'];?></textarea>
+	</div>
 </div>
 	<div class="modal-footer">
 	<button type="button" id="rr_agenda" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Gravar</button>
 </div>
 <?	
+  }
 }
 else if(@$inputb['ap'] == 6)
 {
@@ -616,8 +628,10 @@ else if($inputb['ap'] == 9)
 {
    $data = $inputb['data'];
    $hora = $inputb['hora'];
+   $obs = $inputb['obs'];
    
-   $SQL = "UPDATE agendamento_servicos SET data='".revertedata($data)."',hora='".$hora."' WHERE sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['codagenda']."';";
+   
+   $SQL = "UPDATE agendamento_servicos SET data='".revertedata($data)."',hora='".$hora."',obs='".$obs."' WHERE sistema='".$_SESSION['sistema']."' and codigo='".$_SESSION['codagenda']."';";
    mysqli_query($db3,$SQL);
    
    ?>
