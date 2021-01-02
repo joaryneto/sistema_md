@@ -130,7 +130,19 @@ if(@$inputb['ap'] == 1)
 		var obs = document.getElementById('obs').value;
 		var servico = document.getElementById('servico').value;
 		
-		if(servico == "")
+		if(profissional == "")
+		{
+			swal('Atenção', 'Selecione um Profissional.');
+		}
+		else if(data == "")
+		{
+			swal('Atenção', 'Selecione uma Data.');
+		}
+		else if(hora == "")
+		{
+			swal('Atenção', 'Selecione um Horario.');
+		}
+		else if(servico == "")
 		{
 			swal('Atenção', 'Selecione um serviço.');
 		}
@@ -179,7 +191,14 @@ if(@$inputb['ap'] == 1)
     {
 		var profissional = document.getElementById('profissional').value;
 		
-		requestoption('?br=atu_pesquisa&profissional='+ profissional +'&lservico=true','servico','GET');
+		if(profissional == null)
+		{
+			swal('Atenção', 'Selecione um profissional.');
+		}
+		else
+		{
+		    requestoption('?br=atu_pesquisa&profissional='+ profissional +'&lservico=true','servico','GET');
+	    }
 	}
 	
 	function cp_proximo(codigo)
@@ -196,11 +215,31 @@ if(@$inputb['ap'] == 1)
 		}
 	}
 	
+	function pdata()
+	{
+		var profissional = document.getElementById('profissional').value;
+		
+		if(profissional == 0)
+		{
+			 $('.dataagenda').val('');
+			 document.getElementById('hora').innerHTML = '<option value="">Escolher Horario<option>';
+			 $('.dataagenda').attr('disabled', true);
+			 $('.hora').attr('disabled', true);
+			 $('.servico').attr('disabled', true);
+		}
+		else
+		{
+			 $('.dataagenda').attr('disabled', false);
+			 $('.hora').attr('disabled', false);
+			 $('.servico').attr('disabled', false);
+		}
+	}
+	
 	</script>
 	<div class="m-t-40 row" id="forcaixa">
 	<div class="form-group col-md-12 m-t-20">
-	<select name="profissional" id="profissional" class="form-control" autocomplete="off" required="required">
-	<option value="">Selecionar Profissional</option>
+	<select name="profissional" id="profissional" class="form-control" onchange="pdata()" autocomplete="off">
+	<option value="">Escolher Profissional</option>
 		<?
 		
 		$SQL1 = "SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and tipo in (2,3,4) and status=1;";
@@ -213,26 +252,26 @@ if(@$inputb['ap'] == 1)
 	</select>
 	</div>
 	<div class="form-group col-md-12 m-t-20">
-	<input name="dataagenda" id="dataagenda" type="text" onchange="phorario(this.value);" placeholder="Ex: Data 00/00/00000" autocomplete="off" class="form-control  form-control-lg data"/>
+	<input name="dataagenda" id="dataagenda" type="text" onchange="phorario(this.value);" disabled placeholder="Data" autocomplete="off" class="form-control  form-control-lg data dataagenda"/>
 	<input name="qtd" id="qtd" value="" type="hidden" value="0" autocomplete="off" class="form-control  form-control-lg" required="required"/>
 	</div>
 	<div class="form-group col-md-12 m-t-20">
-	<select name="hora" id="hora" class="form-control" placeholder="Escolha um serviço" onchange="pservico();" autocomplete="off">
-	<option value="">Selecionar Hora</option>
+	<select name="hora" id="hora" class="form-control hora" placeholder="Escolha um serviço" disabled onchange="pservico();" autocomplete="off">
+	<option value="">Escolher Horario</option>
 	</select>
 	</div>
 	<div class="form-group col-md-12 m-t-20">
 	<textarea id="obs" name="obs" class="form-control" rows="2" cols="3" placeholder="Observação"></textarea>
 	</div>
 	<div class="form-group col-md-12 m-t-20">
-	<select name="servico" id="servico" class="form-control" placeholder="Escolha um serviço" autocomplete="off"  required="required">
-	<option value="">Selecionar Serviço</option>
+	<select name="servico" id="servico" class="form-control servico" placeholder="Escolha um serviço" disabled autocomplete="off">
+	<option value="">Escolher Serviço</option>
 	</select>
 	<button class="btn btn-info btnadd-us" onclick="servico_add(<?=$rows['codigo'];?>);"><i class="fa fa-plus-circle"></i></button>
 	</div>
 	</div>
 	<div id="dtable" style="display: none;">
-	<h2>Serviços agendados :</h2>
+	<h4>Serviços agendados :</h4>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label" id="s_load">
 	<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
 		<table class="table pmd-table">
@@ -689,6 +728,11 @@ if(@$inputb['excluir'] == "true")
 	$RES2 = mysqli_query($db3,$SQL2);
 	$row = mysqli_fetch_array($RES2);
 	
+	if($row['qtd'] == 0)
+	{
+		print('<script> sv_itens(); </script>');
+	}
+	
 	print('<script> $("#qtd").val("'.$row['qtd'].'"); </script>');
 	print('<script> document.getElementById("sv_total").innerHTML = "<span style=\'color: green;\'>Total: R$ '.number_format($row['total'],2,",",".").'</span>";</script>');
 	print('<script> document.getElementById("sv_qtd").innerHTML = "'.$row['qtd'].'";</script>');
@@ -725,7 +769,9 @@ if(@$inputb['addservico'] == "true")
 	
 	print('<script> $("#dataagenda").val(""); </script>');
 	print('<script> $("#qtd").val("'.$row['qtd'].'"); </script>');
-	print('<script> document.getElementById("hora").innerHTML = "";</script>');
+	print('<script> document.getElementById("hora").innerHTML = "<option value=\'\'>Escolher Horario</option>";</script>');
+	print('<script> document.getElementById("servico").innerHTML = "<option value=\'\'>Escolher Serviço</option>";</script>');
+	
 	print('<script> document.getElementById("sv_total").innerHTML = "<span style=\'color: green;\'>Total: R$ '.number_format($row['total'],2,",",".").'</span>";</script>');
 	print('<script> document.getElementById("sv_qtd").innerHTML = "'.$row['qtd'].'";</script>');
 }
@@ -736,9 +782,7 @@ if(@$inputb['lhorario'] == "true")
 	$profissional = @$inputb['profissional'];
 	
 	?>
-	<label for="first-name">Horario:</label>
-	<select name="hora" id="hora" class="form-control" placeholder="Escolha um horario" autocomplete="off" required="required">
-	<option value=""></option>
+	<option value="">Escolher Horario</option>
 		<?
 		
 		$data = revertedata($inputb['data']);
@@ -781,7 +825,6 @@ if(@$inputb['lhorario'] == "true")
 		}
 
 		?>
-	</select>
 	<?
 }
 
@@ -789,7 +832,7 @@ if(@$inputb['lservico'] == "true")
 { 
     $p_codigo = @$inputb['profissional'];
     ?>
-    <option value=""></option>
+    <option value="">Escolher Serviço</option>
 	<?  
 	
 	$SQL = "SELECT produtos.codigo, produtos.descricao FROM produtos 
@@ -798,7 +841,7 @@ if(@$inputb['lservico'] == "true")
 	$RES = mysqli_query($db3,$SQL);
 	while($row = mysqli_fetch_array($RES))
 	{
-		echo "<option value='".$row['codigo']."'>".$row['descricao']." - ".$nome." </option>";
+		echo "<option value='".$row['codigo']."'>".$row['descricao']."</option>";
 	}
 }
 
