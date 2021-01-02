@@ -267,7 +267,6 @@ if(@$inputb['ap'] == 1)
 	<select name="servico" id="servico" class="form-control servico" placeholder="Escolha um serviço" disabled autocomplete="off">
 	<option value="">Escolher Serviço</option>
 	</select>
-	<button class="btn btn-info btnadd-us" onclick="servico_add(<?=$rows['codigo'];?>);"><i class="fa fa-plus-circle"></i></button>
 	</div>
 	</div>
 	<div id="dtable" style="display: none;">
@@ -315,11 +314,14 @@ if(@$inputb['ap'] == 1)
 			</tbody>
 		</table>
 	 </div>
+	 </div> 
 	 </div>
-	 </div>
-	 <h2 id="sv_total"><span style="color: green;">Total: R$ 0,00</span></h2>
 	 <div class="form-group pmd-textfield pmd-textfield-floating-label">
-	    <a class="btn pmd-btn-outline pmd-ripple-effect btn-warning" href="javascript: void(0);" onclick="sv_itens();"><b id="sv_qtd"></b> <i class="material-icons">add_shopping_cart</i> Itens</a>
+	 <a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="servico_add(<?=$rows['codigo'];?>);"><i class="material-icons">add_shopping_cart</i>  Adicionar Item ao Carrinho</a>
+	 </div>
+	 <h2 id="sv_total"><span style="color: green;">Valor Total: R$ 0,00</span></h2>
+	 <div class="form-group pmd-textfield pmd-textfield-floating-label">
+	    <a class="btn pmd-btn-outline pmd-ripple-effect btn-warning" href="javascript: void(0);" onclick="sv_itens();"><b id="sv_qtd"></b> <i class="material-icons">add_shopping_cart</i> Itens Pré-Agendados</a>
 
 	    <a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="cp_proximo(<?=$_SESSION['agendamento'];?>);"><i class="material-icons">person_add</i>  Proximo</a>
     </div>
@@ -772,7 +774,7 @@ if(@$inputb['addservico'] == "true")
 	print('<script> document.getElementById("hora").innerHTML = "<option value=\'\'>Escolher Horario</option>";</script>');
 	print('<script> document.getElementById("servico").innerHTML = "<option value=\'\'>Escolher Serviço</option>";</script>');
 	
-	print('<script> document.getElementById("sv_total").innerHTML = "<span style=\'color: green;\'>Total: R$ '.number_format($row['total'],2,",",".").'</span>";</script>');
+	print('<script> document.getElementById("sv_total").innerHTML = "<span style=\'color: green;\'>Valor Total: R$ '.number_format($row['total'],2,",",".").'</span>";</script>');
 	print('<script> document.getElementById("sv_qtd").innerHTML = "'.$row['qtd'].'";</script>');
 }
 
