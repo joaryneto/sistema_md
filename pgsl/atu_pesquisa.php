@@ -423,7 +423,7 @@ else if(@$inputb['ap'] == 5)
   
 ?>
 <div class="modal-header">
-<h2 class="pmd-card-title-text">Agenda - Editar Horario </h2>
+<h2 class="pmd-card-title-text">Agenda - Editar Agendamento </h2>
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
 <div class="modal-body">
@@ -811,9 +811,10 @@ if(@$inputb['load'] == 1)
 		$whe = " and clientes.nome like '%".$pesquisa."%'";
 	}else{ $whe = ""; }
 	
-	$SQL = "SELECT agendamento.codigo,agendamento_servicos.codigo as codservico,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
-    inner join clientes on clientes.codigo=agendamento.cliente 
+	$SQL = "SELECT produtos.descricao,agendamento.codigo,agendamento_servicos.codigo as codservico,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
+    inner join clientes on clientes.codigo=agendamento.cliente
 	inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
+	inner join produtos on produtos.codigo=agendamento_servicos.servico
 	where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.status=0 ORDER BY agendamento.codigo desc";
 	$RES = mysqli_query($db3,$SQL);
 	while($row = mysqli_fetch_array($RES))
@@ -829,7 +830,8 @@ if(@$inputb['load'] == 1)
                         </div>
                         <div class="col pl-0">
                             <h3><p class="large text-mute" style="font-size: initial;"><? echo $row['nome'];?></p></h3>
-                            <p class="large text-mute" style="font-size: initial;">Dia: <? echo formatodata($row['data']);?> às Hora: <? echo formatohora($row['hora']);?>hs</p>
+                            <p class="large text-mute" style="font-size: initial;">Serviço: <? echo $row['descricao'];?></p>
+							<p class="large text-mute" style="font-size: initial;">Dia: <? echo formatodata($row['data']);?> às Hora: <? echo formatohora($row['hora']);?>hs</p>
                             <button type="button" onclick="agenda('<? echo $row['profissional'];?>','<? echo $row['codservico'];?>','<? echo $row['cliente'];?>','<? echo $row['data'];?>','<? echo $row['hora'];?>','<? echo $row['nome'];?>');" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Editar</button>
 							<button type="button" onclick="agendaex('<? echo $row['codservico'];?>');" class="btn pmd-btn-outline pmd-ripple-effect btn-danger">Excluir</button>
 							<div class="pmd-card-actions">

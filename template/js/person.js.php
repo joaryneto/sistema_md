@@ -46,6 +46,11 @@ function pesquisar(pesquisa)
 	requestPage2('?br=atu_pesquisa&pesquisa='+ pesquisa +'&load=1','load','GET');
 }
 
+function p_agenda(pesquisa)
+{
+	requestPage2('?br=atu_pesquisa&pesquisa='+ pesquisa +'&load=1','load','GET');
+}
+
 function agenda(profissional,codigo,cliente,data,hora,nome)
 {
    $('#modalap').modal('show');
