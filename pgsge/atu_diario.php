@@ -20,10 +20,16 @@ if(@$_GET['ap'] == 1)
 
 if(@$_GET['load'] == 1)
 {
-  $whe = "";
+  $whe1 = "";
+  $whe2 = "";
+  if(isset($_GET['ano']))
+  {
+	  $whe1 = " and YEAR(diario.data)='".$_GET['ano']."'";
+  }
+  
   if(isset($_GET['pesquisa']))
   {
-	  $whe = " and diario.conteudo like '%".$_GET['pesquisa']."%'";
+	  $whe2 = " and diario.conteudo like '%".$_GET['pesquisa']."%'";
   }
 
   $data = date('Y');
@@ -31,7 +37,7 @@ if(@$_GET['load'] == 1)
   inner JOIN turmas on turmas.codigo=diario.turma 
   inner join materias on materias.codigo=diario.materia 
   inner join periodo on periodo.codigo=diario.periodo 
-  where diario.sistema='".$_SESSION['sistema']."' and YEAR(diario.data)=$data and diario.usuario='".$_SESSION['usuario']."' and diario.status=1 $whe order by diario.codigo desc;";
+  where diario.sistema='".$_SESSION['sistema']."' $whe1 and diario.usuario='".$_SESSION['usuario']."' and diario.status=1 $whe2 order by diario.codigo desc limit 20;";
   $res4 = mysqli_query($db,$sql4); 
   while($row = mysqli_fetch_array($res4))
   {

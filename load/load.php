@@ -64,6 +64,7 @@ function formatohora($horas){
 
 $data = date('Y-m-d');
 $hora = date('H:i:s');
+$ano = date('Y');
 $datahora = date('Y-m-d H:i:s');
 
 function revertedata($data){

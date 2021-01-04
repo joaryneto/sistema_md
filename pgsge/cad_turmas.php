@@ -1,9 +1,4 @@
 <?
-ob_start();
-session_start();
-
-?>
-<?
 $PageRequest = strtolower(basename( $_SERVER['REQUEST_URI'] ));
 $PageName = strtolower(basename( __FILE__ ));
 if($PageRequest == $PageName) exit("<strong> Erro: Não é permitido acessar o arquivo diretamente. </strong>");
@@ -39,7 +34,7 @@ if(isset($_GET['codigo']))
 	}
 }
 
-if($_GET['ap'] == "1")
+if(@$_GET['ap'] == "1")
 {
 	$x = 0;
 	$RES = mysqli_query($db,"SELECT * FROM turmas where sistema='".$_SESSION['sistema']."' and descricao like '%".$_POST['descricao']."%'");
@@ -69,7 +64,7 @@ if($_GET['ap'] == "1")
 	   }
 	}
 }
-elseif($_GET['ap'] == "2")
+elseif(@$_GET['ap'] == "2")
 {
 	$SQL1 = "UPDATE turmas SET descricao=".$_POST['descricao']." where sistema='".$_SESSION['sistema']."' and codigo='".$_GET['codigo']."'";
 	$sucesso = mysqli_query($db,$SQL1);

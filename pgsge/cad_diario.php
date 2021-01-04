@@ -167,19 +167,16 @@ if(isset($codigo))
 
 function psdiario(texto)
 {
-  if(texto == "")
-  {
-        /* swal({   
-            title: "Atenção!",   
-            text: "Pesquisa em branco.",   
-            timer: 1000,   
-            showConfirmButton: false 
-        });*/
-  }
-  else
-  {
-	  requestPage2('?br=atu_diario&pesquisa='+ texto +'&load=1','listdiario','GET');
-  }
+	var ano = document.getElementById('ano').value;
+	
+	requestPage2('?br=atu_diario&pesquisa='+ texto +'&ano='+ ano +'&load=1','listdiario','GET');
+}
+
+function psano(ano)
+{
+	var texto = document.getElementById('pesquisa').value;
+	
+	requestPage2('?br=atu_diario&pesquisa='+ texto +'&ano='+ ano +'&load=1','listdiario','GET');
 }
 
 function excluir(codigo)
@@ -398,11 +395,16 @@ $("#check[]").on('change', function() {
 								<? if(Empty($_GET['frequencia']) && Empty($_GET['nota']) && Empty($codigo) && Empty($_GET['cadastro'])){?>
 								<div class="form-group col-md-12 m-t-20">
                                 <input type="text" name="pesquisa" id="pesquisa" onkeyup="psdiario(this.value);" class="form-control"  autocomplete="off"  value="" placeholder="Pesquisar conteúdo">
+								<select name="ano" id="ano" class="form-control btnadd-us" onchange="psano(this.value);" style="width: 30%; height: calc(2.3em + .75rem + 2px) !important;" required="required">
+                                      <option value="">Ano</option>
+                                      <option value="2020" <? if(2020 == $ano){ echo "selected"; } ?>>2020</option>
+									  <option value="2021" <? if(2021 == $ano){ echo "selected"; } ?>>2021</option>
+                                </select>
 								</div>
 								<script>
 								//window.onload = function ()
 								//{
-									requestPage2('?br=atu_diario&load=1','listdiario','GET');
+									requestPage2('?br=atu_diario&ano=<?=$ano;?>&load=1','listdiario','GET');
 								//}
 								</script>
                                  <div class="col-md-12">

@@ -596,7 +596,7 @@ else if(@$inputb['ap'] == 6)
 		mysqli_query($db3,$SQL);
 	}
 }
-else if($inputb['ap'] == 7)
+else if(@$inputb['ap'] == 7)
 {
 
    $SQL = "UPDATE agendamento SET data='".revertedata($inputb['data'])."', hora='".$inputb['hora']."' WHERE sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
@@ -615,7 +615,7 @@ else if($inputb['ap'] == 7)
  
  <?
 }
-else if($inputb['ap'] == 8)
+else if(@$inputb['ap'] == 8)
 {
    $codigo = $inputb['codigo'];
    $x = 0;
@@ -665,7 +665,7 @@ else if($inputb['ap'] == 8)
  <?	
    }
 }
-else if($inputb['ap'] == 9)
+else if(@$inputb['ap'] == 9)
 {
    $data = $inputb['data'];
    $hora = $inputb['hora'];

@@ -88,7 +88,7 @@ if(@$_GET['deslogar']==1)
                                     </div>
                                     <div class="col pl-0">
                                         <div class="form-group float-label">
-                                            <input type="password" autocomplete="off" id="inputPassword" name="senha" class="form-control" required>
+                                            <input type="password" autocomplete="off" id="inputPassword" name="senha" class="form-control" onkeypress="if (event.keyCode === 13) {logar();}" required>
                                             <label for="inputPassword" class="form-control-label">Senha</label>
                                         </div>
                                     </div>
