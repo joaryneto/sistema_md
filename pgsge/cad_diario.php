@@ -396,7 +396,7 @@ $("#check[]").on('change', function() {
 								<div class="form-group col-md-12 m-t-20">
                                 <input type="text" name="pesquisa" id="pesquisa" onkeyup="psdiario(this.value);" class="form-control"  autocomplete="off"  value="" placeholder="Pesquisar conteúdo">
 								<select name="ano" id="ano" class="form-control btnadd-us" onchange="psano(this.value);" style="width: 30%; height: calc(2.3em + .75rem + 2px) !important;" required="required">
-                                      <option value="">Ano</option>
+                                      <option value="">Escolher Ano</option>
                                       <option value="2020" <? if(2020 == $ano){ echo "selected"; } ?>>2020</option>
 									  <option value="2021" <? if(2021 == $ano){ echo "selected"; } ?>>2021</option>
                                 </select>
