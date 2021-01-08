@@ -128,13 +128,12 @@ if(isset($codigo))
 	if($x == 0)
 	{
 		print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-1')</script>");
-		print("<script>window.location.href='sistema.php?url=cad_alunos';</script>");
 	}
 }
 
 ?>
 <div class="modal-header">
-<h2 class="pmd-card-title-text">Cadastro de Turmas</h2>
+<h2 class="pmd-card-title-text">Cadastro de Disciplinas</h2>
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
 <div class="modal-body">
@@ -146,10 +145,6 @@ if(isset($codigo))
 			
 			$('.c_gravar').on('click',function()
 		    {
-				<? if(!isset($codigo))
-				{?>
-				var curso = document.getElementById('curso').value;
-				<?}?>
 				var descricao = document.getElementById('descricao').value;
 				var status = document.getElementById('situacao').value;
 				
@@ -196,15 +191,7 @@ if(isset($codigo))
 			   $matri = $d;
 			   $_SESSION['matricula'] = $matri;
 			?>
-			<? if(Empty($_GET['codigo'])){?>
-			<div class="form-group col-md-4 m-t-20"><label>Curso :</label>
-			<select name="curso" id="curso" class="form-control" style="width: 100%; height:36px;">
-			  <option></option>
-			  <option value="0">Educação Infantil</option>
-			  <option value="1">Ensino Fundamental</option>
-			  <option value="2">Ensino Médio</option>
-			</select></div>
-			<? } ?>
+
 			<div class="form-group col-md-5 m-t-20"><label>Descrição :</label>
 			<!--onKeyPress="return(MascaraMoeda(this,'.','.',event)); "-->
 			<input type="text" name="descricao" id="descricao" value="<? if(isset($_GET['codigo'])){ echo $descricao;} ?>" class="form-control" required="required">

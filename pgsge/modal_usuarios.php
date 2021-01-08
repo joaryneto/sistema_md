@@ -353,7 +353,7 @@ if($x == 0)
 					
 					
 			?>
-						<br><input type="checkbox" name="<? echo $rowex['codigo'];?>" id="<? echo $rowex['codigo'];?>" OnClick="javascript: ajaxLoader('?br=atu_disciplinas&codigo=<? echo $_GET['codigo'];?>&check='+ document.getElementById('<? echo $rowex['codigo'];?>').checked +'&materia='+ this.value ,'listamaterias','GET');" value="<? echo $rowex['codigo'];?>" <? if($rowex['codigo'] == $row['materia']) { echo 'checked="checked"'; } ?> data-color="#009efb"  /> <b><? echo $rowex['descricao']; ?> </b>
+						<br><input type="checkbox" name="<? echo $rowex['codigo'];?>" id="<? echo $rowex['codigo'];?>" OnClick="javascript: ajaxLoader('?br=atu_disciplinas&codigo=<? echo $_GET['codigo'];?>&check='+ document.getElementById('<? echo $rowex['codigo'];?>').checked +'&materia='+ this.value +'&ap=1','listamaterias','GET');" value="<? echo $rowex['codigo'];?>" <? if($rowex['codigo'] == $row['materia']) { echo 'checked="checked"'; } ?> data-color="#009efb"  /> <b><? echo $rowex['descricao']; ?> </b>
 				 <? //}
 				 }
 			   }

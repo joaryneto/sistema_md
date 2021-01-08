@@ -301,6 +301,12 @@ function edit_turmas(codigo)
     $('#modalap').modal('show');
 	requestPage2('?br=modal_turmas&codigo=' + codigo +'&modal=1','modals','GET');
 }
+
+function edit_disciplinas(codigo)
+{				
+    $('#modalap').modal('show');
+	requestPage2('?br=modal_materias&codigo=' + codigo +'&modal=1','modals','GET');
+}
 			
 $('.sge-t-alunos').on('click',function()
 {	
@@ -325,6 +331,16 @@ $('.t-diario').on('click',function()
 $('.s-turmas').on('click',function()
 {	
    requestPage('?br=cad_turmas','conteudo','GET');
+});
+
+$('.s-disciplinas').on('click',function()
+{	
+   requestPage('?br=cad_materias','conteudo','GET');
+});
+
+$('.s-matriculas').on('click',function()
+{	
+   requestPage('?br=cad_matriculas','conteudo','GET');
 });
 
 $('.t-linhadotempo').on('click',function()

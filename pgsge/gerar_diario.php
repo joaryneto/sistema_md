@@ -325,7 +325,7 @@ $cnpj = $_GET['cnpj'];
 		 
 		 $RSQL1 = "select diario.data, diario.codigo from diario 
 		 inner join turmas_professor on turmas_professor.turma=diario.turma 
-		 where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and tipo=2 and diario.periodo=".$periodo."  and diario.status=1";
+		 where YEAR(diario.data)=".$ano." and turmas_professor.usuario=".$professor." and diario.materia=".$disciplina." and diario.turma=".$turmas." and tipo=2 and diario.periodo=".$periodo."  and diario.status=7";
 		 $RRES1 = mysqli_query($db,$RSQL1);
 		 while($rrow2 = mysqli_fetch_assoc($RRES1)) 
 		 {
