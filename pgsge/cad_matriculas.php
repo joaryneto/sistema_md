@@ -179,7 +179,7 @@ elseif(@$inputb['ap'] == 2)
     $telefonepai = @$inputb['telefonepai'];
     $celularpai = @$inputb['telefonepai'];
     $localtrabpai = @$inputb['localtrabpai'];
-    echo $situacao = $_GET['situacao'];
+    $situacao = $_GET['situacao'];
 	
 	if(@$inputb['situacao'] == 2)
 	{
@@ -190,7 +190,7 @@ elseif(@$inputb['ap'] == 2)
 		$situacao = @$inputb['situacao'];
 	}
 	
-	echo $SQL1 = "UPDATE matriculas SET nome = '".@$inputb['nome']."',cpf='".@$inputb['cpf']."',sexo = '".@$inputb['sexo']."',txtNascimento = '".revertedata(@$inputb['txtNascimento'])."',endereco = '".@$inputb['endereco']."',numero = '".@$inputb['numero']."',bairro = '".@$inputb['bairro']."',cep = '".@$inputb['cep']."',complemento = '".@$inputb['complemento']."',estado = '".@$inputb['estado']."',cidade = '".@$inputb['cidade']."',ensino = '".@$inputb['ensino']."',turma = '".@$inputb['turma']."',email = '".@$inputb['email']."',nomemae = '".@$inputb['nomemae']."',cpfmae = '".@$inputb['cpfmae']."',rgmae = '".@$inputb['rgmae']."',emissormae = '".@$inputb['emissormae']."',telefonemae = '".@$inputb['telefonemae']."',celularmae = '".@$inputb['celularmae']."',localtrabmae = '".@$inputb['localtrabmae']."',nomepai = '".@$inputb['nomepai']."',cpfpai = '".@$inputb['cpfpai']."',rgpai = '".@$inputb['rgpai']."',emissorpai = '".@$inputb['emissorpai']."',telefonepai = '".@$inputb['telefonepai']."',celularpai = '".@$inputb['telefonepai']."',localtrabpai = '".@$inputb['localtrabpai']."',status = '".$inputb['situacao']."' where sistema='".$_SESSION['sistema']."' and codigo='".@$inputb['codigo']."'";
+	$SQL1 = "UPDATE matriculas SET nome = '".@$inputb['nome']."',cpf='".@$inputb['cpf']."',sexo = '".@$inputb['sexo']."',txtNascimento = '".revertedata(@$inputb['txtNascimento'])."',endereco = '".@$inputb['endereco']."',numero = '".@$inputb['numero']."',bairro = '".@$inputb['bairro']."',cep = '".@$inputb['cep']."',complemento = '".@$inputb['complemento']."',estado = '".@$inputb['estado']."',cidade = '".@$inputb['cidade']."',ensino = '".@$inputb['ensino']."',turma = '".@$inputb['turma']."',email = '".@$inputb['email']."',nomemae = '".@$inputb['nomemae']."',cpfmae = '".@$inputb['cpfmae']."',rgmae = '".@$inputb['rgmae']."',emissormae = '".@$inputb['emissormae']."',telefonemae = '".@$inputb['telefonemae']."',celularmae = '".@$inputb['celularmae']."',localtrabmae = '".@$inputb['localtrabmae']."',nomepai = '".@$inputb['nomepai']."',cpfpai = '".@$inputb['cpfpai']."',rgpai = '".@$inputb['rgpai']."',emissorpai = '".@$inputb['emissorpai']."',telefonepai = '".@$inputb['telefonepai']."',celularpai = '".@$inputb['telefonepai']."',localtrabpai = '".@$inputb['localtrabpai']."',status = '".$inputb['situacao']."' where sistema='".$_SESSION['sistema']."' and codigo='".@$inputb['codigo']."'";
 	
 	$sucesso = mysqli_query($db,$SQL1);
 	
