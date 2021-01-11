@@ -190,7 +190,7 @@ elseif(@$inputb['ap'] == 2)
 		$situacao = @$inputb['situacao'];
 	}
 	
-	$SQL1 = "UPDATE matriculas SET nome = '".@$inputb['nome']."',cpf='".@$inputb['cpf']."',sexo = '".@$inputb['sexo']."',txtNascimento = '".revertedata(@$inputb['txtNascimento'])."',endereco = '".@$inputb['endereco']."',numero = '".@$inputb['numero']."',bairro = '".@$inputb['bairro']."',cep = '".@$inputb['cep']."',complemento = '".@$inputb['complemento']."',estado = '".@$inputb['estado']."',cidade = '".@$inputb['cidade']."',ensino = '".@$inputb['ensino']."',turma = '".@$inputb['turma']."',email = '".@$inputb['email']."',nomemae = '".@$inputb['nomemae']."',cpfmae = '".@$inputb['cpfmae']."',rgmae = '".@$inputb['rgmae']."',emissormae = '".@$inputb['emissormae']."',telefonemae = '".@$inputb['telefonemae']."',celularmae = '".@$inputb['celularmae']."',localtrabmae = '".@$inputb['localtrabmae']."',nomepai = '".@$inputb['nomepai']."',cpfpai = '".@$inputb['cpfpai']."',rgpai = '".@$inputb['rgpai']."',emissorpai = '".@$inputb['emissorpai']."',telefonepai = '".@$inputb['telefonepai']."',celularpai = '".@$inputb['telefonepai']."',localtrabpai = '".@$inputb['localtrabpai']."',status = '".$inputb['situacao']."' where sistema='".$_SESSION['sistema']."' and codigo='".@$inputb['codigo']."'";
+    $SQL1 = "UPDATE matriculas SET nome = '".@$inputb['nome']."',cpf='".@$inputb['cpf']."',sexo = '".@$inputb['sexo']."',txtNascimento = '".revertedata(@$inputb['txtNascimento'])."',endereco = '".@$inputb['endereco']."',numero = '".@$inputb['numero']."',bairro = '".@$inputb['bairro']."',cep = '".@$inputb['cep']."',complemento = '".@$inputb['complemento']."',estado = '".@$inputb['estado']."',cidade = '".@$inputb['cidade']."',ensino = '".@$inputb['ensino']."',turma = '".@$inputb['turma']."',email = '".@$inputb['email']."',nomemae = '".@$inputb['nomemae']."',cpfmae = '".@$inputb['cpfmae']."',rgmae = '".@$inputb['rgmae']."',emissormae = '".@$inputb['emissormae']."',telefonemae = '".@$inputb['telefonemae']."',celularmae = '".@$inputb['celularmae']."',localtrabmae = '".@$inputb['localtrabmae']."',nomepai = '".@$inputb['nomepai']."',cpfpai = '".@$inputb['cpfpai']."',rgpai = '".@$inputb['rgpai']."',emissorpai = '".@$inputb['emissorpai']."',telefonepai = '".@$inputb['telefonepai']."',celularpai = '".@$inputb['telefonepai']."',localtrabpai = '".@$inputb['localtrabpai']."',status = '".$inputb['situacao']."' where sistema='".$_SESSION['sistema']."' and codigo='".@$inputb['codigo']."'";
 	
 	$sucesso = mysqli_query($db,$SQL1);
 	
@@ -200,7 +200,7 @@ elseif(@$inputb['ap'] == 2)
 		<script>
 		swal({   
  			   title: "Info",   
- 			   text: "Gravado com sucesso.",   
+ 			   text: "Gravado com sucesso. '.$SQL1.'",   
  			   timer: 1000,   
  			   showConfirmButton: false 
  		});
@@ -327,7 +327,23 @@ if(isset($inputb['codigo']))
 								
 								<script>
 								
-								var matricula = document.getElementById('matricula').value;
+								
+								function responsavel(codigo)
+								{
+									$('#modalap').modal('show');
+									requestPage2('?br=modal_matriculas&codigo='+ codigo +'&modal=2','modals','GET');
+								}
+								
+								function valunos()
+								{
+									$('#modalap').modal('show');
+									requestPage2('?br=modal_matriculas&modal=1','modals','GET');
+								}
+								
+								$('.gravar').on('click',function()
+								{	
+								
+								    var matricula = document.getElementById('matricula').value;
 								var nome = document.getElementById('nome').value;
 								var cpf = document.getElementById('cpf').value;
 								var sexo = document.getElementById('sexo').value;
@@ -357,21 +373,6 @@ if(isset($inputb['codigo']))
 								var celularpai = document.getElementById('celularpai').value;
 								var localtrabpai = document.getElementById('localtrabpai').value;
 								var situacao = document.getElementById('situacao').value;
-								
-								function responsavel(codigo)
-								{
-									$('#modalap').modal('show');
-									requestPage2('?br=modal_matriculas&codigo='+ codigo +'&modal=2','modals','GET');
-								}
-								
-								function valunos()
-								{
-									$('#modalap').modal('show');
-									requestPage2('?br=modal_matriculas&modal=1','modals','GET');
-								}
-								
-								$('.gravar').on('click',function()
-								{	
 								
 								    if(matricula == "")
 								    {
@@ -412,7 +413,7 @@ if(isset($inputb['codigo']))
 								    else
 								    {
 								        <? if(isset($codigo)){ ?>
-										requestPage2('?br=cad_matriculas&codigo=<?=$codigo;?>&matricula='+ matricula +'&nome='+ nome +'&cpf='+ cpf +'&sexo='+ sexo +'&txtNascimento='+ txtNascimento +'&endereco='+ endereco +'&numero='+ numero +'&bairro='+ bairro +'&cep='+ cep +'&complemento='+ complemento +'&estado='+ estado +'&cidade='+ cidade +'&ensino='+ ensino +'&turma='+ turma +'&email='+ email +'&nomemae='+ nomemae +'&cpfmae='+ cpfmae +'&rgmae='+ rgmae +'&emissormae='+ emissormae +'&telefonemae='+ telefonemae +'&celularmae='+ celularmae +'&localtrabmae='+ localtrabmae +'&nomepai='+ nomepai +'&cpfpai='+ cpfpai +'&rgpai='+ rgpai +'&emissorpai='+ emissorpai +'&telefonepai='+ telefonepai +'&celularpai='+ celularpai +'&localtrabpai='+ localtrabpai +'&situacao='+ situacao +'&ap=2','modals','GET');
+										requestPage2('?br=cad_matriculas&codigo=<?=$codigo;?>&matricula='+ matricula +'&nome='+ nome +'&cpf='+ cpf +'&sexo='+ sexo +'&txtNascimento='+ txtNascimento +'&endereco='+ endereco +'&numero='+ numero +'&bairro='+ bairro +'&cep='+ cep +'&complemento='+ complemento +'&estado='+ estado +'&cidade='+ cidade +'&ensino='+ ensino +'&turma='+ turma +'&email='+ email +'&nomemae='+ nomemae +'&cpfmae='+ cpfmae +'&rgmae='+ rgmae +'&emissormae='+ emissormae +'&telefonemae='+ telefonemae +'&celularmae='+ celularmae +'&localtrabmae='+ localtrabmae +'&nomepai='+ nomepai +'&cpfpai='+ cpfpai +'&rgpai='+ rgpai +'&emissorpai='+ emissorpai +'&telefonepai='+ telefonepai +'&celularpai='+ celularpai +'&localtrabpai='+ localtrabpai +'&situacao='+ situacao +'&ap=2','conteudo','GET');
 										<?}else{?>
 										requestPage2('?br=cad_matriculas&matricula='+ matricula +'&nome='+ nome +'&cpf='+ cpf +'&sexo='+ sexo +'&txtNascimento='+ txtNascimento +'&endereco='+ endereco +'&numero='+ numero +'&bairro='+ bairro +'&cep='+ cep +'&complemento='+ complemento +'&estado='+ estado +'&cidade='+ cidade +'&ensino='+ ensino +'&turma='+ turma +'&email='+ email +'&nomemae='+ nomemae +'&cpfmae='+ cpfmae +'&rgmae='+ rgmae +'&emissormae='+ emissormae +'&telefonemae='+ telefonemae +'&celularmae='+ celularmae +'&localtrabmae='+ localtrabmae +'&nomepai='+ nomepai +'&cpfpai='+ cpfpai +'&rgpai='+ rgpai +'&emissorpai='+ emissorpai +'&telefonepai='+ telefonepai +'&celularpai='+ celularpai +'&localtrabpai='+ localtrabpai +'&situacao='+ situacao +'&ap=1','conteudo','GET');
 										<?}?>
@@ -520,6 +521,7 @@ if(isset($inputb['codigo']))
 								<div class="form-group col-md-4 m-t-20"><label>Email :</label>
 								<input type="text" name="email" id="email" <? if(isset($inputb['codigo'])){ ?> value="<? echo $email; ?>"  <? } ?> class="form-control" required="required">
 								</div>
+								<div class="form-group col-md-12 m-t-20"><h4>Informações da Mãe</h4></div>
 								<div class="form-group col-md-3 m-t-20"><label>Nome Mãe :</label>
 								<input type="text" name="nomemae" id="nomemae" <? if(isset($inputb['codigo'])){ ?> value="<? echo $nomemae; ?>" <? } ?> class="form-control" required="required">
 								</div>
@@ -541,6 +543,7 @@ if(isset($inputb['codigo']))
 								<div class="form-group col-md-12 m-t-20"><label>Local de Trabalho Mãe :</label>
 								<input type="text" name="localtrabmae" id="localtrabmae" <? if(isset($inputb['codigo'])){ ?> value="<? echo $localtrabmae; ?>"  <? } ?> class="form-control" required="required">
 								</div>	
+								<div class="form-group col-md-12 m-t-20"><h4>Informações do Pai</h4></div>
 								<div class="form-group col-md-3 m-t-20"><label>Nome Pai :</label>
 								<input type="text" name="nomepai" id="nomepai" <? if(isset($inputb['codigo'])){ ?> value="<? echo $nomepai; ?>" <? } ?> class="form-control" required="required">
 								</div>
