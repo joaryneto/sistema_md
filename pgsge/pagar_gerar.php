@@ -41,11 +41,11 @@ $items =  [
 //    'metadata' => $metadata
 // ];
 
-//$metadata = array('notification_url'=>'http://sua_url_aqui');
+$metadata = array('notification_url'=>'http://escola.ectecnologia.com.br/notificacao.php');
 
 $body  =  [
     'items' => $items
-	//'metadata' => $metadata
+	'metadata' => $metadata
 ];
 
 try {

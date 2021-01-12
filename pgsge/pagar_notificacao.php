@@ -18,9 +18,10 @@ $options = [
 * Este token será recebido em sua variável que representa os parâmetros do POST
 * Ex.: $_POST['notification']
 */
-//$token = '$_POST["notification"];
 
-$token = "019f69e5-5b75-4a35-8b08-581a742f0d27";
+$token = $_POST["notification"];
+
+//$token = "019f69e5-5b75-4a35-8b08-581a742f0d27";
  
 $params = [
   'token' => $token

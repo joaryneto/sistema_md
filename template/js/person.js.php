@@ -359,6 +359,11 @@ $('.f-notificacao').on('click',function()
    requestPage('?br=pagarnotificacao','conteudo','GET');
 });
 
+$('.f-fatura').on('click',function()
+{	
+   requestPage('?br=cad_fatura','conteudo','GET');
+});
+
 $('.f-relatorio').on('click',function()
 {	
    requestPage('?br=cad_matriculas','conteudo','GET');
