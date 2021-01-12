@@ -16,7 +16,7 @@ $options = [
 
 // $charge_id refere-se ao ID da transação gerada anteriormente
 
-$charge_id = '1226531';
+//$charge_id = "1226531";
 
 $params = [
   'id' => $charge_id

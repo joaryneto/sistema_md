@@ -354,6 +354,10 @@ $('.f-pagar').on('click',function()
    requestPage('?br=pagartransacao','conteudo','GET');
 });
 
+$('.f-notificacao').on('click',function()
+{	
+   requestPage('?br=pagarnotificacao','conteudo','GET');
+});
 
 $('.f-relatorio').on('click',function()
 {	
