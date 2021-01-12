@@ -41,8 +41,11 @@ $items =  [
 //    'metadata' => $metadata
 // ];
 
+//$metadata = array('notification_url'=>'http://sua_url_aqui');
+
 $body  =  [
     'items' => $items
+	//'metadata' => $metadata
 ];
 
 try {
