@@ -349,6 +349,12 @@ $('.f-receber').on('click',function()
    requestPage('?br=pagarteste','conteudo','GET');
 });
 
+$('.f-pagar').on('click',function()
+{	
+   requestPage('?br=pagartransacao','conteudo','GET');
+});
+
+
 $('.f-relatorio').on('click',function()
 {	
    requestPage('?br=cad_matriculas','conteudo','GET');

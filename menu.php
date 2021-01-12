@@ -93,6 +93,11 @@
                             </a>
 							<?}?>
 							<? if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
+                            <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right f-pagar" class="btn btn-info">
+							 Pagar
+                            </a>
+							<?}?>
+							<? if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
                             <a href="javascript:void(0);" class="sidebar-close dropdown-item menu-right f-relatorio" class="btn btn-info">
 							 Relatorio
                             </a>
