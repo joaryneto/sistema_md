@@ -323,8 +323,17 @@ if(isset($inputb['codigo']))
   <div class="row">
 	<div class="col-md-12 col-sm-12"> 
 		<div class="component-box">
-								<form name="laudo" class="m-t-40 row" method="post">
-								
+		<div class="pmd-card pmd-z-depth">
+					  <div class="pmd-tabs pmd-tabs-bg" style="line-height: 52px;">
+						  <div class="pmd-tab-active-bar" style="width: 279px; left: 0px;"></div><ul role="tablist" class="nav nav-tabs nav-justified" style="width: 100%;">
+							<li class="active" role="presentation"><a data-toggle="tab" role="tab" aria-controls="home" href="#home-fixed" aria-expanded="true">Informações do Aluno</a></li>
+							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="profile" href="#about-fixed" aria-expanded="false">Responsaveis</a></li>
+						  </ul>
+					  </div>
+					  <div class="pmd-card-body">
+						  <div class="tab-content">
+						  	<div role="tabpanel" class="tab-pane active" id="home-fixed">
+								<div class="m-t-40 row">
 								<script>
 								
 								
@@ -520,8 +529,33 @@ if(isset($inputb['codigo']))
                                 </select></div></div>
 								<div class="form-group col-md-4 m-t-20"><label>Email :</label>
 								<input type="text" name="email" id="email" <? if(isset($inputb['codigo'])){ ?> value="<? echo $email; ?>"  <? } ?> class="form-control" required="required">
+								</div>								
+								<div class="form-group col-md-2 m-t-20"><label>Situação :</label>
+								<select name="situacao" id="situacao" class="select2 form-control custom-select" style="width: 100%; height:36px;">
+                                    <option></option>
+									<option value="0" <? if($situacao == 0 ){ echo "selected"; } ?>>Inativa</option>
+									<option value="1" <? if($situacao == 1 or Empty($inputb['codigo'])){ echo "selected"; } ?>>Ativa</option>
+									<option value="2" <? if($situacao == 2){ echo "selected"; } ?>>Pre-Matricula</option>
+                                </select></div>
+								<div class="form-group col-md-12 m-t-20">
+								<div class="form-actions">
+								<button type="button" class="btn btn-info gravar"><i class="fa fa-plus-circle"></i> 
+								<? if(@$situacao==0 or @@$inputb['codigo'] and @$situacao==1)
+								   { echo "Gravar";
+							       }
+								   elseif(@$situacao==2)
+								   { echo "Aprovar"; }
+								   else 
+								   { echo "Cadastrar";} 
+							       ?>
+								</button>
+								<button class="btn btn-info s-matriculas" type="button"><i class="fa fa-plus-circle"></i> Novo</button>
+								</div></div>
 								</div>
-								<div class="form-group col-md-12 m-t-20"><h4>Informações da Mãe</h4></div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="about-fixed">
+							    <div class="m-t-40 row">
+							    <div class="form-group col-md-12 m-t-20"><h4>Informações da Mãe</h4></div>
 								<div class="form-group col-md-3 m-t-20"><label>Nome Mãe :</label>
 								<input type="text" name="nomemae" id="nomemae" <? if(isset($inputb['codigo'])){ ?> value="<? echo $nomemae; ?>" <? } ?> class="form-control" required="required">
 								</div>
@@ -570,29 +604,15 @@ if(isset($inputb['codigo']))
 								<button type="button" class="btn btn-info" onclick="responsavel(<?=@@$inputb['codigo'];?>);">
 								<i class="fa fa-plus-circle"></i> Responsaveis </button>
 								</div>
-								<?  }   ?>								
-								<div class="form-group col-md-2 m-t-20"><label>Situação :</label>
-								<select name="situacao" id="situacao" class="select2 form-control custom-select" style="width: 100%; height:36px;">
-                                    <option></option>
-									<option value="0" <? if($situacao == 0 ){ echo "selected"; } ?>>Inativa</option>
-									<option value="1" <? if($situacao == 1 or Empty($inputb['codigo'])){ echo "selected"; } ?>>Ativa</option>
-									<option value="2" <? if($situacao == 2){ echo "selected"; } ?>>Pre-Matricula</option>
-                                </select></div>
-								<div class="form-group col-md-12 m-t-20">
-								<div class="form-actions">
-								<button type="button" class="btn btn-info gravar"><i class="fa fa-plus-circle"></i> 
-								<? if(@$situacao==0 or @@$inputb['codigo'] and @$situacao==1)
-								   { echo "Gravar";
-							       }
-								   elseif(@$situacao==2)
-								   { echo "Aprovar"; }
-								   else 
-								   { echo "Cadastrar";} 
-							       ?>
-								</button>
-								<button class="btn btn-info s-matriculas" type="button"><i class="fa fa-plus-circle"></i> Novo</button>
-								</div></div>
-								</form>
+								<?  }   ?>
+								</div>
+							</div>
+							<!--<div role="tabpanel" class="tab-pane" id="work-fixed">
+							</div>-->
+						  </div>
+					  </div>
+					</div>
+
                             </div>
                         </div>
 					</div>

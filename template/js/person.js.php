@@ -343,6 +343,17 @@ $('.s-matriculas').on('click',function()
    requestPage('?br=cad_matriculas','conteudo','GET');
 });
 
+
+$('.f-receber').on('click',function()
+{	
+   requestPage('?br=pagarteste','conteudo','GET');
+});
+
+$('.f-relatorio').on('click',function()
+{	
+   requestPage('?br=cad_matriculas','conteudo','GET');
+});
+
 $('.t-linhadotempo').on('click',function()
 {	
    //b_menuslow();
