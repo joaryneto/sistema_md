@@ -23,10 +23,10 @@ $params = [
 ];
 
 $body = [
-  'billet_discount' => 5000, // desconto, em reais, caso o pagador escolha boleto (5000 equivale a R$ 50,00)
-  'card_discount' => 3000, // desconto, em reais, caso o pagador escolha cartão (3000 equivale a R$ 30,00)
+  'billet_discount' => 1000, // desconto, em reais, caso o pagador escolha boleto (5000 equivale a R$ 50,00)
+  'card_discount' => 1000, // desconto, em reais, caso o pagador escolha cartão (3000 equivale a R$ 30,00)
   'message' => '', // mensagem para o pagador com até 80 caracteres
-  'expire_at' => '2018-12-20', // data de vencimento da tela de pagamento e do próprio boleto
+  'expire_at' => '2021-01-20', // data de vencimento da tela de pagamento e do próprio boleto
   'request_delivery_address' => false, // solicitar endereço de entrega do comprador?
   'payment_method' => 'all' // formas de pagamento disponíveis
 ];
