@@ -229,7 +229,7 @@ if(@$_SESSION['menu12'] == false)
 								<div class="form-group col-md-3 m-t-20"><label>Qtd Mensalidade :</label>
 								<select name="qtd" id="qtd" class="form-control"  style="width: 100%; height:36px;">
                                   <option value="">Escolher Qtd</option>
-								  <option value="0">01</option>
+								  <option value="1">01</option>
 								  <option value="2">02</option>
 								  <option value="3">03</option>
 								  <option value="4">04</option>
