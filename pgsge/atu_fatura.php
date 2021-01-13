@@ -120,7 +120,7 @@ $customer = [
 $body = [
   'items' => $items,
   'customer' => $customer,
-  'expire_at' => $faturavenc, // data de vencimento da primeira parcela do carnê
+  'expire_at' => $faturavenc."05", // data de vencimento da primeira parcela do carnê
   'repeats' => $qtd, // número de parcelas do carnê
   'split_items' => false
 ];
