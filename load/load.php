@@ -77,6 +77,16 @@ function revertedata($data){
 	return $data;
 }
 
+function revertemes($data){
+	if($data != "")
+	{
+		$sep_data = explode("/",$data);
+		$data = @$sep_data[1]."-".@$sep_data[0];
+	}
+	
+	return $data;
+}
+
 require_once("./load/class/mysql.class.php");
 require_once("./load/class/security.class.php");
 
