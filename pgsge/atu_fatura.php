@@ -73,13 +73,15 @@ $teste = explode(",",$_GET['codigo']);
 foreach($teste as $i)
 {
 	
-$clientId = 'Client_Id_1d8fb8f88da5df061405de8f9d9b4972f324f624'; // insira seu Client_Id, conforme o ambiente (Des ou Prod)
-$clientSecret = 'Client_Secret_61e5960ca320869c108e7cf3f68037bf34fffe40'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
- 
 $faturavenc = revertemes($_GET['faturavenc']);
 $faturames = revertemes($_GET['faturames']);
 $qtd = $_GET['qtd'];
-$tipo = $_GET['tipo'];
+$tipo = $_GET['tipo'];	
+
+$clientId = 'Client_Id_1d8fb8f88da5df061405de8f9d9b4972f324f624'; // insira seu Client_Id, conforme o ambiente (Des ou Prod)
+$clientSecret = 'Client_Secret_61e5960ca320869c108e7cf3f68037bf34fffe40'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
+ 
+
 
 $options = [
   'client_id' => $clientId,
@@ -97,9 +99,9 @@ $options = [
    ];
    $metadata = array('notification_url'=>'http://escolar.ectecnologia.com.br'); //Url de notificações
    $customer = [
-       'name' => 'Gorbadoc Oldbuck', // nome do cliente
-       'cpf' => '94271564656', // cpf válido do cliente
-       'phone_number' => '5144916523', // telefone do cliente
+       'name' => 'Joary Taques', // nome do cliente
+       'cpf' => '05497813151', // cpf válido do cliente
+       'phone_number' => '65999999104', // telefone do cliente
    ];
    $discount = [ // configuração de descontos
        'type' => 'currency', // tipo de desconto a ser aplicado
