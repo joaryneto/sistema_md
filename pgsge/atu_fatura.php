@@ -116,6 +116,7 @@ $customer = [
 // 'split_items' => false,
 // 'metadata' => $metadata
 // ];
+echo $data = $faturavenc.'-28';
 
 $body = [
   'items' => $items,
