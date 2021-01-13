@@ -95,7 +95,7 @@ $options = [
    $items = [
        $item_1
    ];
-   $metadata = array('notification_url'=>'sua_url_de_notificacao_.com.br'); //Url de notificações
+   $metadata = array('notification_url'=>'http://escolar.ectecnologia.com.br'); //Url de notificações
    $customer = [
        'name' => 'Gorbadoc Oldbuck', // nome do cliente
        'cpf' => '94271564656', // cpf válido do cliente
@@ -112,10 +112,10 @@ $options = [
    $conditional_discount = [ // configurações de desconto condicional
        'type' => 'percentage', // seleção do tipo de desconto 
        'value' => 500, // porcentagem de desconto
-       'until_date' => '2019-08-30' // data máxima para aplicação do desconto
+       'until_date' => $faturavenc.'-30' // data máxima para aplicação do desconto
    ];
    $bankingBillet = [
-       'expire_at' => $faturavenc, // data de vencimento do titulo
+       'expire_at' => $faturavenc.'-28', // data de vencimento do titulo
        'message' => 'teste\nteste\nteste\nteste', // mensagem a ser exibida no boleto
        'customer' => $customer,
        'discount' =>$discount,
