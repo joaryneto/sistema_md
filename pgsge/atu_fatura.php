@@ -68,27 +68,25 @@ else if(@$_GET['ap'] == "2")
 else if(@$_GET['ap'] == "3")
 {
 
-$teste = explode(",",$_GET['codigo']);
+//$teste = explode(",",$_GET['codigo']);
 	
-foreach($teste as $i)
-{
+//foreach($teste as $i)
+//{
 	
 $faturavenc = revertemes($_GET['faturavenc']);
 $faturames = revertemes($_GET['faturames']);
 $qtd = $_GET['qtd'];
 $tipo = $_GET['tipo'];	
 
-$clientId = 'Client_Id_1d8fb8f88da5df061405de8f9d9b4972f324f624'; // insira seu Client_Id, conforme o ambiente (Des ou Prod)
-$clientSecret = 'Client_Secret_61e5960ca320869c108e7cf3f68037bf34fffe40'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
- 
+   $clientId = 'informe_seu_client_id';// insira seu Client_Id, conforme o ambiente (Des ou Prod)
+   $clientSecret = 'informe_seu_client_secret'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
 
-
-$options = [
-  'client_id' => $clientId,
-  'client_secret' => $clientSecret,
-  'sandbox' => true // altere conforme o ambiente (true = desenvolvimento e false = producao)
-];
- 
+    $options = [
+        'client_id' => $clientId,
+        'client_secret' => $clientSecret,
+        'sandbox' => true // altere conforme o ambiente (true = desenvolvimento e false = producao)
+    ];
+    
    $item_1 = [
        'name' => 'Item 1', // nome do item, produto ou serviço
        'amount' => 1, // quantidade
@@ -97,11 +95,11 @@ $options = [
    $items = [
        $item_1
    ];
-   $metadata = array('notification_url'=>'http://escolar.ectecnologia.com.br'); //Url de notificações
+   $metadata = array('notification_url'=>'sua_url_de_notificacao_.com.br'); //Url de notificações
    $customer = [
-       'name' => 'Joary Taques', // nome do cliente
-       'cpf' => '05497813151', // cpf válido do cliente
-       'phone_number' => '65999999104', // telefone do cliente
+       'name' => 'Gorbadoc Oldbuck', // nome do cliente
+       'cpf' => '94271564656', // cpf válido do cliente
+       'phone_number' => '5144916523', // telefone do cliente
    ];
    $discount = [ // configuração de descontos
        'type' => 'currency', // tipo de desconto a ser aplicado
@@ -114,10 +112,10 @@ $options = [
    $conditional_discount = [ // configurações de desconto condicional
        'type' => 'percentage', // seleção do tipo de desconto 
        'value' => 500, // porcentagem de desconto
-       'until_date' => $faturavenc.'-30' // data máxima para aplicação do desconto
+       'until_date' => '2021-08-30' // data máxima para aplicação do desconto
    ];
    $bankingBillet = [
-       'expire_at' => $faturavenc.'-28', // data de vencimento do titulo
+       'expire_at' => '2021-07-01', // data de vencimento do titulo
        'message' => 'teste\nteste\nteste\nteste', // mensagem a ser exibida no boleto
        'customer' => $customer,
        'discount' =>$discount,
@@ -146,7 +144,7 @@ $options = [
        print_r($e->getMessage());
    }
 
- }
+ //}
 }
 
 
