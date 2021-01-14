@@ -78,8 +78,8 @@ $faturames = revertemes($_GET['faturames']);
 $qtd = $_GET['qtd'];
 $tipo = $_GET['tipo'];	
 
-   $clientId = 'informe_seu_client_id';// insira seu Client_Id, conforme o ambiente (Des ou Prod)
-   $clientSecret = 'informe_seu_client_secret'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
+   $clientId = 'Client_Id_1d8fb8f88da5df061405de8f9d9b4972f324f624';// insira seu Client_Id, conforme o ambiente (Des ou Prod)
+   $clientSecret = 'Client_Secret_61e5960ca320869c108e7cf3f68037bf34fffe40'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
 
     $options = [
         'client_id' => $clientId,
