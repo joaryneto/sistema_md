@@ -101,8 +101,8 @@ $customer = [
 ];
  
 $bankingBillet = [
-  'expire_at' => '2021-01-17', // data de vencimento do boleto (formato: YYYY-MM-DD)
-  'customer' => $customer
+  'expire_at' => '2021-01-17' // data de vencimento do boleto (formato: YYYY-MM-DD)
+  //'customer' => $customer
 ];
  
 $payment = [
