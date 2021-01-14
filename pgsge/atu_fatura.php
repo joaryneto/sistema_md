@@ -101,7 +101,7 @@ $customer = [
 ];
  
 $bankingBillet = [
-  'expire_at' => '2021-01-17', // data de vencimento do boleto (formato: YYYY-MM-DD)
+  'expire_at' => '2021-01-18', // data de vencimento do boleto (formato: YYYY-MM-DD)
   'customer' => $customer
 ];
  
@@ -116,8 +116,12 @@ $body = [
 try {
     $api = new Gerencianet($options);
     $charge = $api->payCharge($params, $body);
- 
-    print_r($charge);
+    
+	
+	echo $charge->data->barcode;
+    
+	//print_r($charge);
+
 } catch (GerencianetException $e) {
     print_r($e->code);
     print_r($e->error);
