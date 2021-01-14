@@ -270,7 +270,7 @@ if(@$_SESSION['menu12'] == false)
 								   }
 								   else								   
 								   {
-								       requestPage2('?br=atu_fatura&pesquisa='+ nome +'&load=1','list','GET');
+								       requestPage2('?br=atu_fatura&pesquisa='+ nome +'&mes='+ mes +'&load=1','list','GET');
 								   }
 								   
 								});

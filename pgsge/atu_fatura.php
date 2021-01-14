@@ -77,7 +77,6 @@ $teste = explode(",",$_GET['codigo']);
 	
 foreach($teste as $i)
 {
-
 $clientId = 'Client_Id_1d8fb8f88da5df061405de8f9d9b4972f324f624'; // insira seu Client_Id, conforme o ambiente (Des ou Prod)
 $clientSecret = 'Client_Secret_61e5960ca320869c108e7cf3f68037bf34fffe40'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
  
@@ -150,8 +149,8 @@ try {
    {
        print_r($e->getMessage());
    }
-  }
   
+  }
 }
 else if(@$_GET['ap'] == "4")
 {
@@ -223,33 +222,45 @@ try {
 
 if($_GET['load'] == 1)
 {
-	      if(isset($_GET['pesquisa']))
-		  {
+	$mes = $_GET['mes'];
+	
+	if(isset($_GET['pesquisa']))
+	{
 			  $whe1 = " and matriculas.nome like '%".$_GET['pesquisa']."%'";
-		  }
+	}
 		  
-		  if(isset($_GET['ano']))
-		  {
+	if(isset($_GET['mes']))
+	{
 			  $whe2 = " and YEAR(matriculas.ano)='".$_GET['ano']."'";
-		  }
+	}
 		  
-		  $sql = "select matriculas.codigo, matriculas.matricula,matriculas.ano,matriculas.nome,matriculas.nome,turmas.descricao,matriculas.status from matriculas 
-		  inner join  turmas on turmas.codigo=matriculas.turma  
-		  where matriculas.status=1 and YEAR(matriculas.ano)='2020' $whe1 $whe1 limit 20";
-		  $res = mysqli_query($db,$sql); 
-		  while($row = mysqli_fetch_array($res))
-		  {
-			  
+	$sql = "select matriculas.codigo, matriculas.matricula,matriculas.ano,matriculas.nome,matriculas.nome,turmas.descricao,matriculas.status from matriculas 
+	inner join  turmas on turmas.codigo=matriculas.turma  
+	where matriculas.status=1 and YEAR(matriculas.ano)='2020' $whe1 $whe1 limit 20";
+	$res = mysqli_query($db,$sql); 
+	while($row = mysqli_fetch_array($res))
+	{  
+		$x = 0;
+		echo $SQL = "SELECT * FROM faturas where cliente='".$row['codigo']."' and YEAR(data)='2021' and MONTH(data)='".$mes."'";
+		$RES = mysqli_query($db,$SQL);
+		while($row2 = mysqli_fetch_array($RES))
+		{
+			$x = 1;
+		}
 
+        if($x == 0)
+		{
 		  ?>
 		    <tr>
-			  <td data-title="CheckBox"><input type="checkbox" name="check[]" id="check[]" class="all" value=""></td>
+			  <td data-title="CheckBox"><input type="checkbox" name="check[]" id="check[]" class="all" value="<?=$row['codigo'];?>"></td>
               <td data-title="Matricula"><?=$row['matricula'];?></td>
               <td data-title="Nome do Aluno"><?=$row['nome'];?></td>
 			  <td data-title="Turma"><?=$row['descricao'];?></td>
 			  <td data-title="Ano Letivo"><?=date('Y', strtotime($row['ano']));?></td>
 			</tr>
-	<? } ?>
+    <? 
+		}	
+	} ?>
 <?
 }
 
