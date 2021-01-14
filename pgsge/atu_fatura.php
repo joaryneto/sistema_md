@@ -95,7 +95,7 @@ $params = [
 ];
  
 $customer = [
-  'name' => 'Joary', // nome do cliente
+  'name' => 'Joary Taques', // nome do cliente
   'cpf' => '05497813151' , // cpf válido do cliente
   'phone_number' => '65999999104' // telefone do cliente
 ];
