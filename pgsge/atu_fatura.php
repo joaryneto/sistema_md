@@ -95,14 +95,14 @@ $params = [
 ];
  
 $customer = [
-  'name' => 'Joary', // nome do cliente
-  'cpf' => '05497813151' , // cpf válido do cliente
-  'phone_number' => '65999999104' // telefone do cliente
+  'name' => 'Gorbadoc Oldbuck', // nome do cliente
+  'cpf' => '94271564656', // cpf válido do cliente
+  'phone_number' => '5144916523', // telefone do cliente
 ];
  
 $bankingBillet = [
   'expire_at' => '2021-01-17' // data de vencimento do boleto (formato: YYYY-MM-DD)
-  //'customer' => $customer
+  'customer' => $customer
 ];
  
 $payment = [
