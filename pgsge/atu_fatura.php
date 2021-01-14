@@ -68,6 +68,11 @@ else if(@$_GET['ap'] == "2")
 else if(@$_GET['ap'] == "3")
 {
 
+$teste = explode(",",$_GET['codigo']);
+	
+foreach($teste as $i)
+{
+	
 $clientId = 'Client_Id_1d8fb8f88da5df061405de8f9d9b4972f324f624'; // insira seu Client_Id, conforme o ambiente (Des ou Prod)
 $clientSecret = 'Client_Secret_61e5960ca320869c108e7cf3f68037bf34fffe40'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
  
@@ -105,19 +110,22 @@ $body  =  [
 ];
 
 try {
+	
     $api = new Gerencianet($options);
     $charge = $api->createCharge([], $body);
 
 	echo $charge["data"]["charge_id"];
 	
-} catch (GerencianetException $e) {
-    print_r($e->code);
-    print_r($e->error);
-    print_r($e->errorDescription);
-} catch (Exception $e) {
-    print_r($e->getMessage());
+   } catch (GerencianetException $e) 
+   {
+       print_r($e->code);
+       print_r($e->error);
+       print_r($e->errorDescription);
+   } catch (Exception $e) 
+   {
+       print_r($e->getMessage());
+   }
 }
-	
 }
 else if(@$_GET['ap'] == "4")
 {
