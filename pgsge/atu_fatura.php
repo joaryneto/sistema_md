@@ -110,7 +110,7 @@ try {
  
 	foreach($charge as $item)
     {
-       echo $item->data;
+       echo $item->code;
     }
 	
     echo "<br>";
