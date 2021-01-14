@@ -95,9 +95,9 @@ $params = [
 ];
  
 $customer = [
-  'name' => 'Gorbadoc Oldbuck', // nome do cliente
-  'cpf' => '94271564656', // cpf válido do cliente
-  'phone_number' => '5144916523' // telefone do cliente
+  'name' => 'Joary', // nome do cliente
+  'cpf' => '05497813151' , // cpf válido do cliente
+  'phone_number' => '5565999999104' // telefone do cliente
 ];
  
 $bankingBillet = [
