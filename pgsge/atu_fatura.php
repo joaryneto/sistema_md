@@ -110,7 +110,7 @@ try {
  
 	foreach($charge as $item)
     {
-       echo $item->charge_id;
+       echo $item->data->charge_id;
     }
 
     //print_r($charge);
