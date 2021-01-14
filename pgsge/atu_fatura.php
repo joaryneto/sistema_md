@@ -87,7 +87,7 @@ $tipo = $_GET['tipo'];
         'sandbox' => true // altere conforme o ambiente (true = desenvolvimento e false = producao)
     ];
     
-$charge_id = '1226863';
+$charge_id = '1226580';
 
 // $charge_id refere-se ao ID da transação gerada anteriormente
 $params = [
