@@ -100,7 +100,7 @@ $items =  [
 $metadata = array('notification_url'=>'http://escola.ectecnologia.com.br/notificacao.php');
 
 $body  =  [
-    'items' => $items
+    'items' => $items,
 	'metadata' => $metadata
 ];
 
