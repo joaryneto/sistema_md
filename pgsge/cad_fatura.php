@@ -179,6 +179,81 @@ if(@$_SESSION['menu12'] == false)
 								   
 								});
 								
+								
+								$('.fc-fatura').on('click',function()
+								{	
+				                   var faturavenc = document.getElementById('faturavenc').value;
+								   var faturames = document.getElementById('faturame').value;
+								   var qtd = document.getElementById('qtd').value;
+								   var tipo = document.getElementById('tipo').value;
+								   
+								   var i = 0;
+								   $.each($("input[name='check[]']:checked"),function()
+								   {
+								       //swal("Cancelled", $(this).val());
+								   	   i++;
+								   });
+								   
+								   if(i == 0)
+								   {
+									   swal({   
+									       title: "Atenção",   
+									       text: "Selecione a fatura para visualizar os itens em cobrança.",   
+									       timer: 2000,   
+									        showConfirmButton: false 
+									   });
+								   }
+								   else if(faturavenc == "")
+								   {
+									   swal({   
+									       title: "Atenção",   
+									       text: "Campo Vencimento de Fatura em branco.",   
+									       timer: 1500,   
+									        showConfirmButton: false 
+									   });
+								   }
+								   else if(faturames == "")
+								   {
+									   swal({   
+									       title: "Atenção",   
+									       text: "Campo Mês Faturado em branco.",   
+									       timer: 1500,   
+									        showConfirmButton: false 
+									   });
+								   }
+								   else if(qtd == "")
+								   {
+									   swal({   
+									       title: "Atenção",   
+									       text: "Campo Qtd em branco.",   
+									       timer: 1500,   
+									        showConfirmButton: false 
+									   });
+								   }
+								   else if(tipo == "")
+								   {
+									   swal({   
+									       title: "Atenção",   
+									       text: "Campo Tipo de Fatura em branco.",   
+									       timer: 1500,   
+									        showConfirmButton: false 
+									   });
+								   }
+								   else								   
+								   {
+									   var alunos = [];
+									   $.each($("input[name='check[]']:checked"),function()
+									   {
+									        alunos.push($(this).val());
+									   });
+	   
+									   var codigo = alunos.join(",");
+									   
+								       requestPage2('?br=atu_fatura&codigo='+ codigo +'&faturavenc='+ faturavenc +'&faturames='+ faturames +'&qtd='+ qtd +'&tipo='+ tipo +'&ap=3','list','GET');
+								   }
+								   
+								});
+								
 								$('.fc-filtrar').on('keypress',function()
 								{	
 								   var nome = document.getElementById('nome').value;
@@ -256,6 +331,7 @@ if(@$_SESSION['menu12'] == false)
 								<div class="form-actions">
 								<button type="button" class="btn btn-info"><i class="fa fa-plus-circle" ></i> Link de Pagamento</button>
 								<button type="button" class="btn btn-info fc-gerar"><i class="fa fa-plus-circle"></i> Gerar Avulsas</button>
+								<button type="button" class="btn btn-info fc-fatura"><i class="fa fa-plus-circle"></i> Gerar</button>
 								<button type="button" class="btn btn-info fc-gerartodos"><i class="fa fa-plus-circle"></i> Gerar Todas</button>
 								</div></div>
 								<div class="form-group col-md-12 m-t-20">
