@@ -105,18 +105,14 @@ $body  =  [
 ];
 
 try {
+	$charge = []
     $api = new Gerencianet($options);
     $charge = $api->createCharge([], $body);
  
 	foreach($charge as $item)
     {
-       echo $item->code;
+       echo $item->charge_id;
     }
-	
-    echo "<br>";
-	echo $charge[0]->charge_id;
-	echo "<br>";
-    print_r($charge);
 	
 } catch (GerencianetException $e) {
     print_r($e->code);
