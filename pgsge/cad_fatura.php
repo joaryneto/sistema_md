@@ -346,11 +346,16 @@ if(@$_SESSION['menu12'] == false)
                                 </select>
 								</div>
 								<div class="form-group col-md-12 m-t-20">
+								<script>
+								$('.checkall').change(function () {
+								    $('#check[]').prop('checked',this.checked);
+								});
+								</script>
                                 <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
                                    <table class="table pmd-table">
                                          <thead>
                                               <tr>
-											    <th><input type="checkbox" value="" disabled></th>
+											    <th><input type="checkbox" value="" class="checkall" disabled></th>
                                                 <th>Matricula</th>
                                                 <th>Nome</th>
 												<th>Turma</th>
