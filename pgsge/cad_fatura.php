@@ -174,7 +174,7 @@ if(@$_SESSION['menu12'] == false)
 	   
 									   var codigo = alunos.join(",");
 									   
-								       requestPage2('?br=atu_fatura&codigo='+ codigo +'&faturavenc='+ faturavenc +'&faturames='+ faturames +'&qtd='+ qtd +'&tipo='+ tipo +'&ap=3','list','GET');
+								       requestPage2('?br=atu_fatura&codigo='+ codigo +'&faturavenc='+ faturavenc +'&faturames='+ faturames +'&qtd='+ qtd +'&tipo='+ tipo +'&ap=4','list','GET');
 								   }
 								   
 								});
