@@ -114,7 +114,7 @@ try {
     $api = new Gerencianet($options);
     $charge = $api->createCharge([], $body);
 
-	echo $charge["data"]["charge_id"];
+	echo $charge["data"]["charge_id"]."<br>";
 	
    } catch (GerencianetException $e) 
    {
