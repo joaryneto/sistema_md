@@ -112,7 +112,9 @@ try {
     {
        echo $item->data->charge_id;
     }
-
+     
+	echo $charge[1]->charge_id;
+	
     //print_r($charge);
 	
 } catch (GerencianetException $e) {
