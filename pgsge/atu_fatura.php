@@ -241,7 +241,7 @@ if($_GET['load'] == 1)
 	while($row = mysqli_fetch_array($res))
 	{  
 		$x = 0;
-		echo $SQL = "SELECT * FROM faturas where cliente='".$row['codigo']."' and YEAR(data)='2021' and MONTH(data)='".$mes."'";
+		$SQL = "SELECT * FROM faturas where cliente='".$row['codigo']."' and YEAR(data)='2021' and MONTH(data)='".$mes."'";
 		$RES = mysqli_query($db,$SQL);
 		while($row2 = mysqli_fetch_array($RES))
 		{
