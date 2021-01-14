@@ -108,7 +108,7 @@ try {
     $api = new Gerencianet($options);
     $charge = $api->createCharge([], $body);
  
-    echo $charge->barcode;
+    echo $charge->charge_id;
 	
     print_r($charge);
 } catch (GerencianetException $e) {
