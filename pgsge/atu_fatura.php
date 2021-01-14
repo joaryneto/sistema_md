@@ -110,12 +110,13 @@ try {
  
 	foreach($charge as $item)
     {
-       echo $item->data->charge_id;
+       echo $item->charge_id;
     }
-     
-	echo $charge[0]->charge_id;
 	
-    //print_r($charge);
+    echo "<br>";
+	echo $charge[0]->charge_id;
+	echo "<br>";
+    print_r($charge);
 	
 } catch (GerencianetException $e) {
     print_r($e->code);
