@@ -122,24 +122,24 @@ try {
 else if(@$_GET['ap'] == "4")
 {
 
-//$teste = explode(",",$_GET['codigo']);
+$teste = explode(",",$_GET['codigo']);
 	
-//foreach($teste as $i)
-//{
+foreach($teste as $i)
+{
 	
 $faturavenc = revertemes($_GET['faturavenc']);
 $faturames = revertemes($_GET['faturames']);
 $qtd = $_GET['qtd'];
 $tipo = $_GET['tipo'];	
 
-   $clientId = 'Client_Id_1d8fb8f88da5df061405de8f9d9b4972f324f624';// insira seu Client_Id, conforme o ambiente (Des ou Prod)
-   $clientSecret = 'Client_Secret_61e5960ca320869c108e7cf3f68037bf34fffe40'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
+$clientId = 'Client_Id_1d8fb8f88da5df061405de8f9d9b4972f324f624';// insira seu Client_Id, conforme o ambiente (Des ou Prod)
+$clientSecret = 'Client_Secret_61e5960ca320869c108e7cf3f68037bf34fffe40'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
 
-    $options = [
+$options = [
         'client_id' => $clientId,
         'client_secret' => $clientSecret,
         'sandbox' => true // altere conforme o ambiente (true = desenvolvimento e false = producao)
-    ];
+];
     
 $charge_id = '1226580';
 
@@ -170,21 +170,19 @@ $body = [
 try {
     $api = new Gerencianet($options);
     $charge = $api->payCharge($params, $body);
-    
-	
-	echo $charge->data->barcode;
-    
-	//print_r($charge);
 
-} catch (GerencianetException $e) {
+    echo $charge["data"]["charge_id"]."<br>";
+
+  } catch (GerencianetException $e) {
     print_r($e->code);
     print_r($e->error);
     print_r($e->errorDescription);
-} catch (Exception $e) {
+  } catch (Exception $e) 
+  {
     print_r($e->getMessage());
-}
+  }
 
- //}
+ }
 }
 
 
