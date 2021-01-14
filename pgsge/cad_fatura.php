@@ -254,18 +254,19 @@ if(@$_SESSION['menu12'] == false)
 								   
 								});
 								
-								$('.fc-filtrar').on('keypress',function()
+								$('.fc-filtrar').on('keydown',function()
 								{	
 								   var nome = document.getElementById('nome').value;
+								   var mes = document.getElementById('mes').value;
 								   
-								   if(nome.lenght < 3)
+								   if(mes == "")
 								   {
-									   /*swal({   
+									   swal({   
 									       title: "Atenção",   
-									       text: "Campo Nome em branco.",   
+									       text: "Escolha o mês.",   
 									       timer: 1500,   
 									        showConfirmButton: false 
-									   });*/
+									   });
 								   }
 								   else								   
 								   {
@@ -339,23 +340,32 @@ if(@$_SESSION['menu12'] == false)
 								</div>
 								<div class="form-group col-md-12 m-t-20">
 								<input type="text" name="nome" id="nome" value="" placeholder="Pesquisar alunos" class="form-control fc-filtrar">
-								<select name="tipo" id="tipo" class="form-control btnadd-us" style="width: 20%; height: calc(2.3em + .75rem + 2px) !important;">
-                                  <option value="">Escolher Tipo</option>
-								  <option value="2020">2020</option>
-								  <option value="2021">2021</option>
-                                </select>
+								<select name="mes" id="mes" class="form-control btnadd-us" style="width: 30%; height: calc(2.3em + .75rem + 2px) !important;">
+								   <option value="01">Janeiro</option>
+								   <option value="02">Fevereiro</option>
+								   <option value="03">Março</option>
+								   <option value="04">Abril</option>
+								   <option value="05">Maio</option>
+								   <option value="06">Junho</option>
+								   <option value="07">Julho</option>
+								   <option value="08">Agosto</option>
+								   <option value="09">Setembro</option>
+								   <option value="10">Outubro</option>
+								   <option value="11">Novembro</option>
+								   <option value="12">Dezembro</option>
+								</select> 
 								</div>
 								<div class="form-group col-md-12 m-t-20">
 								<script>
-								$('.checkall').change(function () {
-								    $('#check[]').prop('checked',this.checked);
+								$('#checkall').change(function () {
+								    $('.all').prop('checked',this.checked);
 								});
 								</script>
                                 <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
                                    <table class="table pmd-table">
                                          <thead>
                                               <tr>
-											    <th><input type="checkbox" value="" class="checkall" disabled></th>
+											    <th><input type="checkbox" value="" id="checkall"></th>
                                                 <th>Matricula</th>
                                                 <th>Nome</th>
 												<th>Turma</th>

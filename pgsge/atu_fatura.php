@@ -68,11 +68,16 @@ else if(@$_GET['ap'] == "2")
 else if(@$_GET['ap'] == "3")
 {
 
+$faturavenc = revertemes($_GET['faturavenc']);
+$faturames = revertemes($_GET['faturames']);
+$qtd = $_GET['qtd'];
+$tipo = $_GET['tipo'];	
+
 $teste = explode(",",$_GET['codigo']);
 	
 foreach($teste as $i)
 {
-	
+
 $clientId = 'Client_Id_1d8fb8f88da5df061405de8f9d9b4972f324f624'; // insira seu Client_Id, conforme o ambiente (Des ou Prod)
 $clientSecret = 'Client_Secret_61e5960ca320869c108e7cf3f68037bf34fffe40'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
  
@@ -114,8 +119,28 @@ try {
     $api = new Gerencianet($options);
     $charge = $api->createCharge([], $body);
 
-	echo $charge["data"]["charge_id"]."<br>";
+    if($charge["code"] == "200")
+	{
+	    $id = $charge["data"]["charge_id"];
+	    $status = $charge["data"]["status"];
+	    $criado = $charge["data"]["created_at"];
+
+	    switch($status)
+	    {
+		    case "new":
+		    $st = 1; // Novo
+	    	break;
+		    case "waiting":
+	     	$st = 2; // Aguardando
+		    break;
+		    default:
+	    	break;
+     	}
 	
+	   // '".."',
+	   $SQL = "insert into faturas(sistema,usuario,cliente,valor,data,charge_id,status) values('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$i."',5000,'".$criado."','".$id."','".$st."');";
+	   $RES = mysqli_query($db,$SQL);
+	}
    } catch (GerencianetException $e) 
    {
        print_r($e->code);
@@ -125,7 +150,8 @@ try {
    {
        print_r($e->getMessage());
    }
-}
+  }
+  
 }
 else if(@$_GET['ap'] == "4")
 {
@@ -163,7 +189,7 @@ $customer = [
 ];
  
 $bankingBillet = [
-  'expire_at' => '2021-01-18', // data de vencimento do boleto (formato: YYYY-MM-DD)
+  'expire_at' => $faturavenc.'-18', // data de vencimento do boleto (formato: YYYY-MM-DD)
   'customer' => $customer
 ];
  
@@ -214,10 +240,10 @@ if($_GET['load'] == 1)
 		  while($row = mysqli_fetch_array($res))
 		  {
 			  
-			  
+
 		  ?>
 		    <tr>
-			  <td data-title="CheckBox"><input type="checkbox" name="check[]" id="check[]" value=""></td>
+			  <td data-title="CheckBox"><input type="checkbox" name="check[]" id="check[]" class="all" value=""></td>
               <td data-title="Matricula"><?=$row['matricula'];?></td>
               <td data-title="Nome do Aluno"><?=$row['nome'];?></td>
 			  <td data-title="Turma"><?=$row['descricao'];?></td>
