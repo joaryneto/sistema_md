@@ -220,7 +220,7 @@ try {
 
 
 
-if($_GET['load'] == 1)
+if(@$_GET['load'] == 1)
 {
 	$mes = $_GET['mes'];
 	
@@ -229,9 +229,9 @@ if($_GET['load'] == 1)
 			  $whe1 = " and matriculas.nome like '%".$_GET['pesquisa']."%'";
 	}
 		  
-	if(isset($_GET['mes']))
+	if(isset($_GET['ano']))
 	{
-			  $whe2 = " and YEAR(matriculas.ano)='".$_GET['ano']."'";
+		$whe2 = " and YEAR(matriculas.ano)='".$_GET['ano']."'";
 	}
 		  
 	$sql = "select matriculas.codigo, matriculas.matricula,matriculas.ano,matriculas.nome,matriculas.nome,turmas.descricao,matriculas.status from matriculas 
