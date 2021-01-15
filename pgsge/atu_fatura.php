@@ -321,9 +321,9 @@ if(@$_GET['load'] == 1)
 			  $whe1 = " and matriculas.nome like '%".$_GET['pesquisa']."%'";
 	}
 		  
-	if(isset($_GET['ano']))
+	if(isset($_GET['mes']))
 	{
-		$whe2 = " and YEAR(matriculas.ano)='".$_GET['ano']."'";
+		$whe2 = " and month(matriculas.ano)='".$_GET['mes']."' and YEAR(matriculas.ano)='".$ano."'";
 	}
 		  
 	$sql = "select matriculas.codigo, matriculas.matricula,matriculas.ano,matriculas.nome,matriculas.nome,turmas.descricao,matriculas.status from matriculas 
@@ -364,15 +364,15 @@ else if(@$_GET['load'] == 2)
 			  $whe1 = " and matriculas.nome like '%".$_GET['pesquisa']."%'";
 	}
 		  
-	if(isset($_GET['ano']))
+	if(isset($_GET['mes']))
 	{
-		$whe2 = " and YEAR(matriculas.ano)='".$_GET['ano']."'";
+		$whe2 = " and month(faturas.data)='".$_GET['mes']."' and YEAR(faturas.data)='".$ano."'";
 	}
   
 	$sql = "select faturas.codigo,faturas.charge_id, faturas.data, faturas.vencimento, faturas.valor, matriculas.nome, matriculas.matricula,turmas.descricao, matriculas.ano from faturas 
 	inner join matriculas on matriculas.codigo=faturas.cliente 
 	inner join turmas on turmas.codigo=matriculas.turma  
-	where matriculas.nome like '%".$_GET['pesquisa']."%'";
+	where matriculas.nome like '%".$_GET['pesquisa']."%' $whe1 $whe2";
 	$res = mysqli_query($db,$sql); 
 	while($row = mysqli_fetch_array($res))
 	{  

@@ -36,137 +36,6 @@ if(@$_SESSION['menu12'] == false)
 		<div class="component-box">
 <script>
 								
-								$('.fc-gerar').on('click',function()
-								{	
-								   var nome = document.getElementById('nome').value;
-								   var nome = document.getElementById('nome').value;
-								   var nome = document.getElementById('nome').value;
-								   
-								   var i = 0;
-								   $.each($("input[name='check[]']:checked"),function()
-								   {
-								       //swal("Cancelled", $(this).val());
-								   	   i++;
-								   });
-								   
-								   if(i == 0)
-								   {
-									   swal({   
-									       title: "Atenção",   
-									       text: "Selecione a fatura para visualizar os itens em cobrança.",   
-									       timer: 2000,   
-									        showConfirmButton: false 
-									   });
-								   }
-								   else if(nome == "")
-								   {
-									   swal({   
-									       title: "Atenção",   
-									       text: "Campo Nome em branco.",   
-									       timer: 1500,   
-									        showConfirmButton: false 
-									   });
-								   }
-								   else if(nome == "")
-								   {
-									   swal({   
-									       title: "Atenção",   
-									       text: "Campo Nome em branco.",   
-									       timer: 1500,   
-									        showConfirmButton: false 
-									   });
-								   }
-								   else								   
-								   {
-									   var alunos = [];
-									   $.each($("input[name='check[]']:checked"),function()
-									   {
-									        alunos.push($(this).val());
-									   });
-	   
-									   var codigo = alunos.join(",");
-									   
-								       requestPage2('?br=atu_fatura&codigo='+ codigo +'&','list','GET');
-								   }
-								   
-								});
-								
-								
-								$('.fc-gerartodos').on('click',function()
-								{	
-				                   var faturavenc = document.getElementById('faturavenc').value;
-								   var faturames = document.getElementById('faturame').value;
-								   var qtd = document.getElementById('qtd').value;
-								   var tipo = document.getElementById('tipo').value;
-								   
-								   var i = 0;
-								   $.each($("input[name='check[]']:checked"),function()
-								   {
-								       //swal("Cancelled", $(this).val());
-								   	   i++;
-								   });
-								   
-								   if(i == 0)
-								   {
-									   swal({   
-									       title: "Atenção",   
-									       text: "Selecione a fatura para visualizar os itens em cobrança.",   
-									       timer: 2000,   
-									        showConfirmButton: false 
-									   });
-								   }
-								   else if(faturavenc == "")
-								   {
-									   swal({   
-									       title: "Atenção",   
-									       text: "Campo Vencimento de Fatura em branco.",   
-									       timer: 1500,   
-									        showConfirmButton: false 
-									   });
-								   }
-								   else if(faturames == "")
-								   {
-									   swal({   
-									       title: "Atenção",   
-									       text: "Campo Mês Faturado em branco.",   
-									       timer: 1500,   
-									        showConfirmButton: false 
-									   });
-								   }
-								   else if(qtd == "")
-								   {
-									   swal({   
-									       title: "Atenção",   
-									       text: "Campo Qtd em branco.",   
-									       timer: 1500,   
-									        showConfirmButton: false 
-									   });
-								   }
-								   else if(tipo == "")
-								   {
-									   swal({   
-									       title: "Atenção",   
-									       text: "Campo Tipo de Fatura em branco.",   
-									       timer: 1500,   
-									        showConfirmButton: false 
-									   });
-								   }
-								   else								   
-								   {
-									   var alunos = [];
-									   $.each($("input[name='check[]']:checked"),function()
-									   {
-									        alunos.push($(this).val());
-									   });
-	   
-									   var codigo = alunos.join(",");
-									   
-								       requestPage2('?br=atu_fatura&codigo='+ codigo +'&faturavenc='+ faturavenc +'&faturames='+ faturames +'&qtd='+ qtd +'&tipo='+ tipo +'&ap=4','list','GET');
-								   }
-								   
-								});
-								
-								
 								$('.fc-fatura').on('click',function()
 								{	
 				                   var faturavenc = document.getElementById('faturavenc').value;
@@ -285,10 +154,10 @@ if(@$_SESSION['menu12'] == false)
 								   
 								});
 								
-								$('.fc-filtrar').on('keydown',function()
+								$('.cc-f').on('keydown',function()
 								{	
 								   var texto = document.getElementById('pesquisa2').value;
-								   var mes = document.getElementById('mes').value;
+								   var mes = document.getElementById('mes2').value;
 								   
 								   if(mes == "")
 								   {
@@ -301,7 +170,28 @@ if(@$_SESSION['menu12'] == false)
 								   }
 								   else								   
 								   {
-								       requestPage2('?br=atu_fatura&pesquisa='+ texto +'&mes='+ mes +'&load=1','list','GET');
+								       requestPage2('?br=atu_fatura&pesquisa='+ texto +'&mes='+ mes +'&load=1','list2','GET');
+								   }
+								   
+								});
+								
+								$('.cc-m').on('change',function()
+								{	
+								   var texto = document.getElementById('pesquisa2').value;
+								   var mes = document.getElementById('mes2').value;
+								   
+								   if(mes == "")
+								   {
+									   swal({   
+									       title: "Atenção",   
+									       text: "Escolha o mês.",   
+									       timer: 1500,   
+									        showConfirmButton: false 
+									   });
+								   }
+								   else								   
+								   {
+								       requestPage2('?br=atu_fatura&pesquisa='+ texto +'&mes='+ mes +'&load=1','list2','GET');
 								   }
 								   
 								});
@@ -309,7 +199,7 @@ if(@$_SESSION['menu12'] == false)
 								$('.gc-filtrar').on('keydown',function()
 								{	
 								   var texto = document.getElementById('pesquisa1').value;
-								   var mes = document.getElementById('mes').value;
+								   var mes = document.getElementById('mes1').value;
 								   
 								   if(mes == "")
 								   {
@@ -322,7 +212,28 @@ if(@$_SESSION['menu12'] == false)
 								   }
 								   else								   
 								   {
-								       requestPage2('?br=atu_fatura&pesquisa='+ texto +'&mes='+ mes +'&load=2','list','GET');
+								       requestPage2('?br=atu_fatura&pesquisa='+ texto +'&mes='+ mes +'&load=2','list1','GET');
+								   }
+								   
+								});
+								
+								$('.ms-filtrar').on('change',function()
+								{	
+								   var texto = document.getElementById('pesquisa1').value;
+								   var mes = document.getElementById('mes1').value;
+								   
+								   if(mes == "")
+								   {
+									   swal({   
+									       title: "Atenção",   
+									       text: "Escolha o mês.",   
+									       timer: 1500,   
+									        showConfirmButton: false 
+									   });
+								   }
+								   else								   
+								   {
+								       requestPage2('?br=atu_fatura&pesquisa='+ texto +'&mes='+ mes +'&load=2','list1','GET');
 								   }
 								   
 								});
@@ -349,24 +260,24 @@ if(@$_SESSION['menu12'] == false)
 					  <div class="pmd-tabs" style="line-height: 52px;">
 						  <div class="pmd-tab-active-bar" style="width: 279px; left: 0px;"></div><ul role="tablist" class="nav nav-tabs nav-justified" style="width: 100%;">
 							<li class="active" role="presentation"><a data-toggle="tab" role="tab" aria-controls="home" href="#vfaturas" aria-expanded="true">Contas a Receber</a></li>
-							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="profile" href="#gfaturas" aria-expanded="false">Gerar Fatura</a></li>
+							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="profile" href="#gfaturas" aria-expanded="false">Gerar Faturas</a></li>
 						  </ul>
 					  </div>
 					  <div class="pmd-card-body">
 					  <div class="tab-content">
 						  	<div role="tabpanel" class="tab-pane active" id="vfaturas"> <!-- TAB 1 -->
-							
-							<div class="form-group col-md-12 m-t-20"><label>&nbsp;&nbsp;</label>
+							    <div class="form-material m-t-40 row">
+							    <div class="form-group col-md-12 m-t-20"><label>&nbsp;&nbsp;</label>
 								<div class="form-actions">
 								<button type="button" class="btn btn-info fc-boleto" style="margin: 2px;"><i class="fa fa-plus-circle" ></i> Boleto</button>
 								<button type="button" class="btn btn-info fc-bxboleto" style="margin: 2px;"><i class="fa fa-plus-circle" ></i> Informar como Pago</button>
 								</div></div>
 								<div class="form-group col-md-12 m-t-20">
-								<h4>Lista de Alunos</h4>
+								<h4>Lista de Faturas</h4>
 								</div>
 								<div class="form-group col-md-12 m-t-20">
 								<input type="text" name="pesquisa1" id="pesquisa1" value="" placeholder="Pesquisar alunos" class="form-control gc-filtrar">
-								<select name="mes" id="mes" class="form-control btnadd-us" style="width: 30%; height: calc(2.3em + .75rem + 2px) !important;">
+								<select name="mes1" id="mes1" class="form-control btnadd-us ms-filtrar" style="width: 30%; height: calc(2.3em + .75rem + 2px) !important;">
 								   <option value="01">Janeiro</option>
 								   <option value="02">Fevereiro</option>
 								   <option value="03">Março</option>
@@ -400,12 +311,13 @@ if(@$_SESSION['menu12'] == false)
                                              </tr>
                                         </thead>
                                    <tbody>
-                                        <tbody id="list">
+                                        <tbody id="list1">
                                         </tbody>
                                     </table>
                                    </div>
 								  </div>
-                                </div> <!-- FIM TAB 1 -->
+                                </div> 
+								</div> <!-- FIM TAB 1 -->
 								
 								<div role="tabpanel" class="tab-pane" id="gfaturas"> <!-- TAB 2 -->
 								
@@ -444,17 +356,16 @@ if(@$_SESSION['menu12'] == false)
 							    <div class="form-actions">
 								 <button type="button" class="btn btn-info" Onclick=""><i class="fa fa-plus-circle"></i> Filtrar</button>
 								</div></div>-->
-								<div class="form-group col-md-12 m-t-20"><label>&nbsp;&nbsp;</label>
+								<div class="form-group col-md-2 m-t-20"><label>&nbsp;&nbsp;</label>
 								<div class="form-actions">
 								<button type="button" class="btn btn-info fc-fatura" style="margin: 2px;"><i class="fa fa-plus-circle"></i> Gerar</button>
-								<button type="button" class="btn btn-info fc-gerartodos" style="margin: 2px;"><i class="fa fa-plus-circle"></i> Gerar Todas</button>
 								</div></div>
 								<div class="form-group col-md-12 m-t-20">
-								<h4>Lista de Alunos</h4>
+								<h4>Lista de Clientes</h4>
 								</div>
 								<div class="form-group col-md-12 m-t-20">
-								<input type="text" name="pesquisa2" id="pesquisa2" value="" placeholder="Pesquisar alunos" class="form-control fc-filtrar">
-								<select name="mes" id="mes" class="form-control btnadd-us" style="width: 30%; height: calc(2.3em + .75rem + 2px) !important;">
+								<input type="text" name="pesquisa2" id="pesquisa2" value="" placeholder="Pesquisar alunos" class="form-control cc-f">
+								<select name="mes2" id="mes2" class="form-control btnadd-us cc-m" style="width: 30%; height: calc(2.3em + .75rem + 2px) !important;">
 								   <option value="01">Janeiro</option>
 								   <option value="02">Fevereiro</option>
 								   <option value="03">Março</option>
@@ -487,7 +398,7 @@ if(@$_SESSION['menu12'] == false)
                                              </tr>
                                         </thead>
                                    <tbody>
-                                        <tbody id="list">
+                                        <tbody id="list2">
                                         </tbody>
                                     </table>
                                 </div>
