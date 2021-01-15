@@ -238,11 +238,19 @@ try {
 	    	break;
      	}
 	
-	echo $SQL = "UPDATE faturas SET linkboleto='".$link."', pdfboleto='".$pdf."', status='".$st."' where sistema='".$_SESSION['sistema']."' and charge_id='".$charge_id."'";
+	$SQL = "UPDATE faturas SET linkboleto='".$link."', pdfboleto='".$pdf."', status='".$st."' where sistema='".$_SESSION['sistema']."' and charge_id='".$charge_id."'";
 	$RES = mysqli_query($db,$SQL);
 	
 	?>
-	   <script> window.open("<?=$link;?>"); </script>
+	   <script> 
+	   swal({   
+			title: "Atenção",   
+			text: "Selecione apenas uma fatura para visualização.",   
+			timer: 2000,   
+			showConfirmButton: false 
+	   });
+	   open("<?=$link;?>"); 
+	   </script>
     <?
 
   } catch (GerencianetException $e) {
