@@ -160,7 +160,7 @@ $teste = explode(",",$_GET['codigo']);
 foreach($teste as $i)
 {
 
-$SQL = "SELECT faturas.linkboleto,faturas.vencimento, matriculas.cpf, matriculas.nome,faturas.charge_id FROM faturas 
+$SQL = "SELECT faturas.linkboleto,faturas.pdfboleto,faturas.vencimento, matriculas.cpf, matriculas.nome,faturas.charge_id FROM faturas 
 inner join matriculas on matriculas.codigo=faturas.cliente
 where faturas.sistema='".$_SESSION['sistema']."' and faturas.charge_id='".$i."'";
 $RES = mysqli_query($db,$SQL);
@@ -168,10 +168,38 @@ $RESS = mysqli_fetch_array($RES);
 
 if(isset($RESS['linkboleto']))
 {
-	   
-?>
-	<script> window.open("<?=$RESS['linkboleto'];?>"); </script>
-<?
+	$link = $RESS["linkboleto"];
+    $pdf = $RESS["pdfboleto"];
+	
+	?>
+<script>
+$('.bl-abrir').on('click',function()
+{
+   open("<?=$link;?>");
+});
+
+$('.bl-baixar').on('click',function()
+{
+   open("<?=$pdf;?>");
+});
+</script>
+<div class="modal-header">
+<h2 class="pmd-card-title-text">Boleto </h2>
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form class="form-horizontal">
+<div class="form-group col-md-12 m-t-20">
+<button type="button" class="btn btn-info bl-abrir" style="margin: 2px;"><i class="fa fa-plus-circle" ></i> Visualizar Boleto</button>
+<button type="button" class="btn btn-info bl-baixar" style="margin: 2px;"><i class="fa fa-plus-circle" ></i> Baixar Boleto</button>
+</div>
+<div>
+</div>
+</form>										 
+<div class="modal-footer">
+</div>
+	
+	<?
 
 }
 else
