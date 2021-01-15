@@ -160,7 +160,7 @@ $teste = explode(",",$_GET['codigo']);
 foreach($teste as $i)
 {
 
-echo $SQL = "SELECT faturas.linkboleto,faturas.vencimento, matriculas.cpf, matriculas.nome,faturas.charge_id FROM faturas 
+$SQL = "SELECT faturas.linkboleto,faturas.vencimento, matriculas.cpf, matriculas.nome,faturas.charge_id FROM faturas 
 inner join matriculas on matriculas.codigo=faturas.cliente
 where faturas.sistema='".$_SESSION['sistema']."' and faturas.codigo='".$i."'";
 $RES = mysqli_query($db,$SQL);
@@ -176,6 +176,7 @@ if(isset($RESS['linkboleto']))
 }
 else
 {
+	
 $faturavenc = revertemes($_GET['faturavenc']);
 $faturames = revertemes($_GET['faturames']);
 $qtd = $_GET['qtd'];
@@ -190,7 +191,7 @@ $options = [
         'sandbox' => true // altere conforme o ambiente (true = desenvolvimento e false = producao)
 ];
     
-$charge_id = ''.$RESS['charge_id'].'';
+echo $charge_id = ''.$RESS['charge_id'].'';
 
 // $charge_id refere-se ao ID da transação gerada anteriormente
 $params = [
