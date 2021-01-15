@@ -279,7 +279,7 @@ if(@$_SESSION['menu12'] == false)
 	   
 									   var codigo = alunos.join(",");
 									   
-								       requestPage2('?br=atu_fatura&codigo='+ codigo +'&boleto=1','list','GET');
+								       requestPage2('?br=atu_fatura&codigo='+ codigo +'&ap=4','list','GET');
 								   }
 								   
 								});
