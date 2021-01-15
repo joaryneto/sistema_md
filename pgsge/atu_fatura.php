@@ -238,7 +238,7 @@ try {
 	    	break;
      	}
 	
-	echo $SQL = "UPDATE faturas from linkboleto='".$link."', pdfboleto='".$pdf."', status='".$st."' where sistema='".$_SESSION['sistema']."' and charge_id='".$charge_id."'";
+	echo $SQL = "UPDATE faturas SET linkboleto='".$link."', pdfboleto='".$pdf."', status='".$st."' where sistema='".$_SESSION['sistema']."' and charge_id='".$charge_id."'";
 	$RES = mysqli_query($db,$SQL);
 	
 	?>
