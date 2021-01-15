@@ -160,7 +160,7 @@ $teste = explode(",",$_GET['codigo']);
 foreach($teste as $i)
 {
 
-$SQL = "SELECT faturas.linkboleto,faturas.vencimento, matriculas.cpf, matriculas.nome,faturas.charge_id FROM faturas 
+echo $SQL = "SELECT faturas.linkboleto,faturas.vencimento, matriculas.cpf, matriculas.nome,faturas.charge_id FROM faturas 
 inner join matriculas on matriculas.codigo=faturas.cliente
 where faturas.sistema='".$_SESSION['sistema']."' and faturas.codigo='".$i."'";
 $RES = mysqli_query($db,$SQL);
