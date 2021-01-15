@@ -245,7 +245,7 @@ try {
 	   <script> 
 	   swal({   
 			title: "Atenção",   
-			text: "Selecione apenas uma fatura para visualização.",   
+			text: "Gerando o boleto. Aguarder...",   
 			timer: 2000,   
 			showConfirmButton: false 
 	   });
