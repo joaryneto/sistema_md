@@ -171,29 +171,6 @@ else if(@$inputb['modal'] == 2)
 </div>
 <div class="modal-body">
 <div class="row">
-
-<div class="form-group col-md-5 m-t-20"><label>Nome :</label>
-<input type="text" name="rnome" id="rnome" class="form-control" required="required">
-</div>
-<div class="form-group col-md-3 m-t-20"><label>CPF :</label>
-<input type="text" name="rcpf" id="rcpf" class="form-control" required="required">
-</div>
-<div class="form-group col-md-2 m-t-20"><label>RG :</label>
-<input type="text" name="rrg" id="rrg" class="form-control" required="required">
-</div>
-<div class="form-group col-md-2 m-t-20"><label>Telefone :</label>
-<input type="text" name="rtelefone" id="rtelefone" class="form-control" required="required">
-</div>
-<div class="form-group col-md-5 m-t-20"><label>Parentesco :</label>
-<input type="text" name="parentesco" id="parentesco" class="form-control" required="required">
-</div>
-<div class="form-group col-md-5 m-t-20"><label>Autorização para buscar :</label>
-<select class="form-control" name="autorizacao" id="autorizacao" required="required">
-	 <option value="">Selecionar</option>
-	 <option value="0">NÃO</option>
-	 <option value="1">SIM</option>
-</select>
-</div>
 <script>
 $('.gravar').on('click',function()
 {	
@@ -260,10 +237,32 @@ $('.gravar').on('click',function()
 	}
     else
     {
-	   requestPage('?br=cad_listaresponsavel&codigo=<? echo $_GET['codigo'];?>&nome='+ rnome +'&cpf='+ rcpf +'&rg='+ rrg +'&telefone='+ rtelefone +'&parentesco='+ parentesco +'&autorizacao='+ autorizacao +'&ap=1&list=1','listb','GET');
+	   requestPage('?br=modal_matriculas&codigo=<? echo $_GET['codigo'];?>&nome='+ rnome +'&cpf='+ rcpf +'&rg='+ rrg +'&telefone='+ rtelefone +'&parentesco='+ parentesco +'&autorizacao='+ autorizacao +'&modal=3&load=2','listb','GET');
 	}
 });
 </script>
+<div class="form-group col-md-5 m-t-20"><label>Nome :</label>
+<input type="text" name="rnome" id="rnome" class="form-control" required="required">
+</div>
+<div class="form-group col-md-3 m-t-20"><label>CPF :</label>
+<input type="text" name="rcpf" id="rcpf" class="form-control" required="required">
+</div>
+<div class="form-group col-md-2 m-t-20"><label>RG :</label>
+<input type="text" name="rrg" id="rrg" class="form-control" required="required">
+</div>
+<div class="form-group col-md-2 m-t-20"><label>Telefone :</label>
+<input type="text" name="rtelefone" id="rtelefone" class="form-control" required="required">
+</div>
+<div class="form-group col-md-5 m-t-20"><label>Parentesco :</label>
+<input type="text" name="parentesco" id="parentesco" class="form-control" required="required">
+</div>
+<div class="form-group col-md-5 m-t-20"><label>Autorização para buscar :</label>
+<select class="form-control" name="autorizacao" id="autorizacao" required="required">
+	 <option value="">Selecionar</option>
+	 <option value="0">NÃO</option>
+	 <option value="1">SIM</option>
+</select>
+</div>
 <div class="form-group col-md-2 m-t-20"><label>&nbsp;</label>
 <button class="btn btn-info gravar" type="button"> Adicionar </button>
 </div>
@@ -273,24 +272,34 @@ $('.gravar').on('click',function()
 <thead>
    <tr>
 	<th>Responsavel</th>
-	<th>Aluno</th>
+	<th>Autorização para Buscar</th>
 	<th>X</th>
    </tr>
  </thead>
 <tbody id="listb">
 <? 
-  $SQL = "SELECT responsavel.codigo,responsavel.nome as resp,matriculas.nome as aluno FROM responsavel inner join matriculas on matriculas.codigo=responsavel.matricula 
+  $SQL = "SELECT responsavel.codigo,responsavel.nome as resp,responsavel.autorizacao,matriculas.nome as aluno FROM responsavel 
+  inner join matriculas on matriculas.codigo=responsavel.matricula 
   where responsavel.sistema='".$_SESSION['sistema']."' and responsavel.matricula='".$_GET['codigo']."'"; 
   $RESB = mysqli_query($db,$SQL);
   $b = 0;
   while($rowb = mysqli_fetch_array($RESB))
   {
+	  switch($rowb['autorizacao'])
+	  {
+		  case 0:
+		  $sim = "Não";
+		  break;
+		  case 1:
+		  $sim = "Sim";
+		  break;
+	  }
 	  
 ?>
    <tr>
-	<td><? echo $rowb['resp'];?></td>
-	<td><? echo $rowb['aluno'];?></td>
-	<td><a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir" style="font-size: 150%; color: red;" href="javascript: WEB(0);" Onclick="javascript: ajaxLoader('?br=cad_listaresponsavel&codigo=<? echo $_GET['codigo'];?>&codres=<? echo $rowb['codigo'];?>&excluir=1&list=1','ltresponsavel','GET');"><a></td>
+	<td data-title="Responsavel"><? echo $rowb['resp'];?></td>
+	<td data-title="Autorização para Buscar"><? echo $sim;?></td>
+	<td data-title="Opções"><a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir" style="font-size: 150%; color: red;" href="javascript: WEB(0);" Onclick="javascript: ajaxLoader('?br=cad_listaresponsavel&codigo=<? echo $_GET['codigo'];?>&codres=<? echo $rowb['codigo'];?>&excluir=1&list=1','ltresponsavel','GET');"><a></td>
 </tr>
 	   
 <? $b = 1; }
@@ -371,5 +380,39 @@ if($res == false)
 	
 ?>
 <?
+}
+else if(@$_GET['load'] == 2)
+{
+    $SQL = "SELECT responsavel.codigo,responsavel.nome as resp,responsavel.autorizacao,matriculas.nome as aluno FROM responsavel inner join matriculas on matriculas.codigo=responsavel.matricula where responsavel.matricula='".$_GET['codigo']."'"; 
+    $RESB = mysqli_query($db,$SQL);
+	$b = 0;
+	while($rowb = mysqli_fetch_array($RESB))
+	{
+	  switch($rowb['autorizacao'])
+	  {
+		  case 0:
+		  $sim = "Não";
+		  break;
+		  case 1:
+		  $sim = "Sim";
+		  break;
+	  }									  
+	?>
+	  <tr>
+          <td data-title="Responsavel"><? echo $rowb['resp'];?></td>
+          <td data-title="Autorização para Buscar"><? echo $sim;?></td>
+		  <td data-title="Opções"><a class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir exame" style="font-size: 150%; color: red;" href="javascript: WEB(0);" Onclick="javascript: ajaxLoader('?br=cad_listaresponsavel&codigo=<? echo $_GET['codigo'];?>&codres=<? echo $rowb['codigo'];?>&excluir=1&list=1','ltresponsavel','GET');"></a></td>
+      </tr>
+<?    $b = 1;
+    } ?>
+<?
+if($b == 0)
+{
+	echo "<tr>
+          <td>Nenhum encontrado</td>
+          <td>.</td>
+		  <td>.</td>
+      </tr>";
+}
 }
 ?>

@@ -326,13 +326,14 @@ if(isset($inputb['codigo']))
 		<div class="pmd-card pmd-z-depth">
 					  <div class="pmd-tabs pmd-tabs-bg" style="line-height: 52px;">
 						  <div class="pmd-tab-active-bar" style="width: 279px; left: 0px;"></div><ul role="tablist" class="nav nav-tabs nav-justified" style="width: 100%;">
-							<li class="active" role="presentation"><a data-toggle="tab" role="tab" aria-controls="home" href="#home-fixed" aria-expanded="true">Informações do Aluno</a></li>
-							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="profile" href="#about-fixed" aria-expanded="false">Responsaveis</a></li>
+							<li class="active" role="presentation"><a data-toggle="tab" role="tab" aria-controls="home" href="#informacoes" aria-expanded="true">Informações do Aluno</a></li>
+							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="profile" href="#responsaveis" aria-expanded="false">Responsaveis</a></li>
+							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="profile" href="#financeiro" aria-expanded="false">Financeiro</a></li>
 						  </ul>
 					  </div>
 					  <div class="pmd-card-body">
 						  <div class="tab-content">
-						  	<div role="tabpanel" class="tab-pane active" id="home-fixed">
+						  	<div role="tabpanel" class="tab-pane active" id="informacoes">
 								<div class="m-t-40 row">
 								<script>
 								
@@ -479,7 +480,7 @@ if(isset($inputb['codigo']))
 								<input type="text" name="complemento" id="complemento" <? if(isset($inputb['codigo'])){ ?> value="<? echo $complemento; ?>"  <? } ?> class="form-control" >
 								</div>
 								<div class="form-group col-md-2 m-t-20"><label>Estado :</label>
-								<select name="estado" id="estado" class="form-control" onChange="javascript: ajaxLoader('?br=cad_listacidades&estado='+ this.value ,'cidades','GET');" style="width: 100%; height:36px;" required="required">
+								<select name="estado" id="estado" class="form-control" onChange="javascript: requestPage2('?br=cad_listacidades&estado='+ this.value ,'cidades','GET');" style="width: 100%; height:36px;" required="required">
                                     <option value="">Selecionar</option>
 									<? 
 										  $sql = "select id_ibge,estado from estados";
@@ -507,26 +508,30 @@ if(isset($inputb['codigo']))
                                 </select>
 								</div>
 								</div>
-								<div class="form-group col-md-2 m-t-20"><label>Ensino :</label>
-								<select name="ensino" id="ensino" class="form-control" onChange="javascript: ajaxLoader('?br=cad_listacurso&curso='+ this.value ,'cursar','GET');"  style="width: 100%; height:36px;">
-                                  <option value="">Escolher Situação</option>
-								  <option value="0" <? if($ensino == 0){ echo "selected"; } ?>>Infantil</option>
-								  <option value="1" <? if($ensino == 1){ echo "selected"; } ?>>Fundamental</option>
-								  <option value="2" <? if($ensino == 2){ echo "selected"; } ?>>Médio</option>
+								<div class="form-group col-md-3 m-t-20"><label>Ensino :</label>
+								<select name="ensino" id="ensino" class="form-control" onChange="javascript: requestoption('?br=atu_curso&curso='+ this.value+'&load=1','turma','GET');"  style="width: 100%; height:36px;">
+                                  <option value="">Escolher Ensino</option>
+								  <option value="0" <? if($ensino == "0"){ echo "selected"; } ?>>Ensino Infantil</option>
+								  <option value="1" <? if($ensino == "1"){ echo "selected"; } ?>>Ensino Fundamental</option>
+								  <option value="2" <? if($ensino == "2"){ echo "selected"; } ?>>Ensino Médio</option>
                                 </select></div>
-								<div class="form-group col-md-2 m-t-20"><label>Turma :</label>
-								<div id="cursar">
+								<div class="form-group col-md-3 m-t-20"><label>Turma :</label>
 								<select name="turma" id="turma" class="form-control" style="width: 100%; height:36px;" required="required">
                                     <option value="">Selecionar</option>
 									<? 
-										  $sql = "select codigo,descricao from turmas";
-										  $res = mysqli_query($db,$sql); 
-										  while($row = mysqli_fetch_array($res))
+									      if(isset($turma))
 										  {
+										   $sql = "select codigo,descricao from turmas where sistema='".$_SESSION['sistema']."'";
+										   $res = mysqli_query($db,$sql); 
+										   while($row = mysqli_fetch_array($res))
+										   {
 										  ?>
                                            <option value="<? echo $row['codigo']?>" <? if($turma == $row['codigo']){ echo "selected"; } ?>><? echo $row['descricao']?></option>
-										  <? } ?>
-                                </select></div></div>
+										  <? 
+										   }
+										  }
+ 										  ?>
+                                </select></div>
 								<div class="form-group col-md-4 m-t-20"><label>Email :</label>
 								<input type="text" name="email" id="email" <? if(isset($inputb['codigo'])){ ?> value="<? echo $email; ?>"  <? } ?> class="form-control" required="required">
 								</div>								
@@ -553,7 +558,7 @@ if(isset($inputb['codigo']))
 								</div></div>
 								</div>
 							</div>
-							<div role="tabpanel" class="tab-pane" id="about-fixed">
+							<div role="tabpanel" class="tab-pane" id="responsaveis">
 							    <div class="m-t-40 row">
 							    <div class="form-group col-md-12 m-t-20"><h4>Informações da Mãe</h4></div>
 								<div class="form-group col-md-3 m-t-20"><label>Nome Mãe :</label>
@@ -607,8 +612,21 @@ if(isset($inputb['codigo']))
 								<?  }   ?>
 								</div>
 							</div>
-							<!--<div role="tabpanel" class="tab-pane" id="work-fixed">
-							</div>-->
+							<div role="tabpanel" class="tab-pane" id="financeiro">
+							<div class="form-material m-t-40 row">
+							    <script> $(".valor").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false}); </script>
+							    <div class="form-group col-md-12 m-t-20"><h4>Informações de Financeiro</h4></div>
+								<div class="form-group col-md-3 m-t-20">
+                                <label for="message-text" class="control-label">Valor da Matricula R$ :</label>
+                                    <input type="text" name="vmatricula" id="vmatricula" value="" autocomplete="off" class="form-control valor">
+                                </div>
+								<div class="form-group col-md-3 m-t-20">
+                                <label for="message-text" class="control-label">Valor da Rematricula R$ :</label>
+                                    <input type="text" name="vrmatricula" id="vrmatricula" value="" autocomplete="off" class="form-control valor">
+                                </div>
+								</div>
+								</div>
+							</div>
 						  </div>
 					  </div>
 					</div>

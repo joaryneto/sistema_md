@@ -2,8 +2,8 @@
 <option value=""> Selecionar </option>
 <?
 
-		echo $SQL2 = "select turmas.codigo,turmas.descricao from turmas inner join turmas_professor on turmas_professor.turma=turmas.codigo where turmas.curso='".$_GET['curso']."' and turmas_professor.usuario='".$_SESSION['usuario']."'";	
-		$res_pc = mysqli_query($db,$SQL2);
+  $SQL2 = "select turmas.codigo,turmas.descricao from turmas inner join turmas_professor on turmas_professor.turma=turmas.codigo where turmas.curso='".$_GET['curso']."' and turmas_professor.usuario='".$_SESSION['usuario']."'";	
+ $res_pc = mysqli_query($db,$SQL2);
 
 		if($res_pc)
 		{

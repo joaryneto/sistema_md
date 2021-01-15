@@ -276,7 +276,7 @@ if(@$_SESSION['menu12'] == false)
 								<h4>Lista de Faturas</h4>
 								</div>
 								<div class="form-group col-md-12 m-t-20">
-								<input type="text" name="pesquisa1" id="pesquisa1" value="" placeholder="Pesquisar alunos" class="form-control gc-filtrar">
+								<input type="text" name="pesquisa1" id="pesquisa1" value="" placeholder="Pesquisar Faturas" class="form-control gc-filtrar">
 								<select name="mes1" id="mes1" class="form-control btnadd-us ms-filtrar" style="width: 30%; height: calc(2.3em + .75rem + 2px) !important;">
 								   <option value="01">Janeiro</option>
 								   <option value="02">Fevereiro</option>
@@ -330,7 +330,7 @@ if(@$_SESSION['menu12'] == false)
                                 <label for="message-text" class="control-label">Mês Faturado :</label>
                                     <input type="text" name="faturame" id="faturame" value="" autocomplete="off" class="form-control  data">
                                 </div>
-								<div class="form-group col-md-3 m-t-20"><label>Qtd Mensalidade :</label>
+								<!--<div class="form-group col-md-3 m-t-20"><label>Qtd Mensalidade :</label>
 								<select name="qtd" id="qtd" class="form-control"  style="width: 100%; height:36px;">
                                   <option value="">Escolher Qtd</option>
 								  <option value="1">01</option>
@@ -345,7 +345,7 @@ if(@$_SESSION['menu12'] == false)
 								  <option value="10">10</option>
 								  <option value="11">11</option>
 								  <option value="12">12</option>
-                                </select></div>
+                                </select></div>-->
 								<div class="form-group col-md-3 m-t-20"><label>Tipo :</label>
 								<select name="tipo" id="tipo" class="form-control" style="width: 100%; height:36px;">
                                   <option value="">Escolher Tipo</option>
@@ -358,13 +358,13 @@ if(@$_SESSION['menu12'] == false)
 								</div></div>-->
 								<div class="form-group col-md-2 m-t-20"><label>&nbsp;&nbsp;</label>
 								<div class="form-actions">
-								<button type="button" class="btn btn-info fc-fatura" style="margin: 2px;"><i class="fa fa-plus-circle"></i> Gerar</button>
+								<button type="button" class="btn btn-info fc-fatura" style="margin: 2px;"><i class="fa fa-plus-circle"></i> Gerar Faturas</button>
 								</div></div>
 								<div class="form-group col-md-12 m-t-20">
 								<h4>Lista de Clientes</h4>
 								</div>
 								<div class="form-group col-md-12 m-t-20">
-								<input type="text" name="pesquisa2" id="pesquisa2" value="" placeholder="Pesquisar alunos" class="form-control cc-f">
+								<input type="text" name="pesquisa2" id="pesquisa2" value="" placeholder="Pesquisar Clientes" class="form-control cc-f">
 								<select name="mes2" id="mes2" class="form-control btnadd-us cc-m" style="width: 30%; height: calc(2.3em + .75rem + 2px) !important;">
 								   <option value="01">Janeiro</option>
 								   <option value="02">Fevereiro</option>
