@@ -24,7 +24,7 @@ if(@$_SESSION['menu12'] == false)
                     <i class="fa fa-calendar" style="font-size: 200px;position: absolute;left: 40%;top: 50px;"></i>
                 </div>
                 <div class="container align-self-end">
-                    <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Usuarios";?></h2>
+                    <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Contas a Receber";?></h2>
                     <p class="text-mute mb-2"><? echo $_SESSION["DESCRICAOPG2"] = "Lista";?></p>
                 </div>
             </div>
@@ -34,20 +34,7 @@ if(@$_SESSION['menu12'] == false)
   <div class="row">
 	<div class="col-md-12 col-sm-12"> 
 		<div class="component-box">
-
-                     <div class="pmd-card pmd-z-depth">
-					  <div class="pmd-tabs" style="line-height: 52px;">
-						  <div class="pmd-tab-active-bar" style="width: 279px; left: 0px;"></div><ul role="tablist" class="nav nav-tabs nav-justified" style="width: 100%;">
-							<li class="active" role="presentation"><a data-toggle="tab" role="tab" aria-controls="home" href="#vfaturas" aria-expanded="true">Contas a Receber</a></li>
-							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="profile" href="#gfaturas" aria-expanded="false">Gerar Fatura</a></li>
-						  </ul>
-					  </div>
-					  <div class="pmd-card-body">
-					  <div class="tab-content">
-						  	<div role="tabpanel" class="tab-pane active" id="vfaturas">
-                                </div>
-								<div role="tabpanel" class="tab-pane" id="gfaturas">
-								<script>
+<script>
 								
 								$('.fc-gerar').on('click',function()
 								{	
@@ -254,9 +241,52 @@ if(@$_SESSION['menu12'] == false)
 								   
 								});
 								
+								$('.fc-boleto').on('click',function()
+								{	
+								   
+								   var i = 0;
+								   $.each($("input[name='check[]']:checked"),function()
+								   {
+								       //swal("Cancelled", $(this).val());
+								   	   i++;
+								   });
+								   
+								   if(i == 0)
+								   {
+									   swal({   
+									       title: "Atenção",   
+									       text: "Selecione a fatura para visualizar os itens em cobrança.",   
+									       timer: 2000,   
+									        showConfirmButton: false 
+									   });
+								   }
+								   else if(i > 1)
+								   {
+									   swal({   
+									       title: "Atenção",   
+									       text: "Selecione apenas uma fatura para visualização.",   
+									       timer: 2000,   
+									        showConfirmButton: false 
+									   });
+								   }
+								   else								   
+								   {
+									   var alunos = [];
+									   $.each($("input[name='check[]']:checked"),function()
+									   {
+									        alunos.push($(this).val());
+									   });
+	   
+									   var codigo = alunos.join(",");
+									   
+								       requestPage2('?br=atu_fatura&codigo='+ codigo +'&boleto=1','list','GET');
+								   }
+								   
+								});
+								
 								$('.fc-filtrar').on('keydown',function()
 								{	
-								   var nome = document.getElementById('nome').value;
+								   var texto = document.getElementById('pesquisa2').value;
 								   var mes = document.getElementById('mes').value;
 								   
 								   if(mes == "")
@@ -270,7 +300,28 @@ if(@$_SESSION['menu12'] == false)
 								   }
 								   else								   
 								   {
-								       requestPage2('?br=atu_fatura&pesquisa='+ nome +'&mes='+ mes +'&load=1','list','GET');
+								       requestPage2('?br=atu_fatura&pesquisa='+ texto +'&mes='+ mes +'&load=1','list','GET');
+								   }
+								   
+								});
+								
+								$('.gc-filtrar').on('keydown',function()
+								{	
+								   var texto = document.getElementById('pesquisa1').value;
+								   var mes = document.getElementById('mes').value;
+								   
+								   if(mes == "")
+								   {
+									   swal({   
+									       title: "Atenção",   
+									       text: "Escolha o mês.",   
+									       timer: 1500,   
+									        showConfirmButton: false 
+									   });
+								   }
+								   else								   
+								   {
+								       requestPage2('?br=atu_fatura&pesquisa='+ texto +'&mes='+ mes +'&load=2','list','GET');
 								   }
 								   
 								});
@@ -293,6 +344,69 @@ if(@$_SESSION['menu12'] == false)
 								});
 								
 								</script>
+                     <div class="pmd-card pmd-z-depth">
+					  <div class="pmd-tabs" style="line-height: 52px;">
+						  <div class="pmd-tab-active-bar" style="width: 279px; left: 0px;"></div><ul role="tablist" class="nav nav-tabs nav-justified" style="width: 100%;">
+							<li class="active" role="presentation"><a data-toggle="tab" role="tab" aria-controls="home" href="#vfaturas" aria-expanded="true">Contas a Receber</a></li>
+							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="profile" href="#gfaturas" aria-expanded="false">Gerar Fatura</a></li>
+						  </ul>
+					  </div>
+					  <div class="pmd-card-body">
+					  <div class="tab-content">
+						  	<div role="tabpanel" class="tab-pane active" id="vfaturas"> <!-- TAB 1 -->
+							
+							<div class="form-group col-md-12 m-t-20"><label>&nbsp;&nbsp;</label>
+								<div class="form-actions">
+								<button type="button" class="btn btn-info fc-boleto" style="margin: 2px;"><i class="fa fa-plus-circle" ></i> Visualizar Boleto</button>
+								</div></div>
+								<div class="form-group col-md-12 m-t-20">
+								<h4>Lista de Alunos</h4>
+								</div>
+								<div class="form-group col-md-12 m-t-20">
+								<input type="text" name="pesquisa1" id="pesquisa1" value="" placeholder="Pesquisar alunos" class="form-control gc-filtrar">
+								<select name="mes" id="mes" class="form-control btnadd-us" style="width: 30%; height: calc(2.3em + .75rem + 2px) !important;">
+								   <option value="01">Janeiro</option>
+								   <option value="02">Fevereiro</option>
+								   <option value="03">Março</option>
+								   <option value="04">Abril</option>
+								   <option value="05">Maio</option>
+								   <option value="06">Junho</option>
+								   <option value="07">Julho</option>
+								   <option value="08">Agosto</option>
+								   <option value="09">Setembro</option>
+								   <option value="10">Outubro</option>
+								   <option value="11">Novembro</option>
+								   <option value="12">Dezembro</option>
+								</select> 
+								</div>
+								<div class="form-group col-md-12 m-t-20">
+								<script>
+								$('#checkall').change(function () {
+								    $('.all').prop('checked',this.checked);
+								});
+								</script>
+                                <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+                                   <table class="table pmd-table">
+                                         <thead>
+                                              <tr>
+											    <th><input type="checkbox" value="" id="checkall"></th>
+                                                <th>Fatura</th>
+                                                <th>Nome</th>
+												<th>Turma</th>
+												<th>Valor</th>
+												<th>Data</th>
+                                             </tr>
+                                        </thead>
+                                   <tbody>
+                                        <tbody id="list">
+                                        </tbody>
+                                    </table>
+                                   </div>
+								  </div>
+                                </div> <!-- FIM TAB 1 -->
+								
+								<div role="tabpanel" class="tab-pane" id="gfaturas"> <!-- TAB 2 -->
+								
 								<div class="form-material m-t-40 row">
 								<div class="form-group col-md-2 m-t-20">
                                 <label for="message-text" class="control-label">Mês de Vencimento :</label>
@@ -330,16 +444,14 @@ if(@$_SESSION['menu12'] == false)
 								</div></div>-->
 								<div class="form-group col-md-12 m-t-20"><label>&nbsp;&nbsp;</label>
 								<div class="form-actions">
-								<button type="button" class="btn btn-info"><i class="fa fa-plus-circle" ></i> Link de Pagamento</button>
-								<button type="button" class="btn btn-info fc-gerar"><i class="fa fa-plus-circle"></i> Gerar Avulsas</button>
-								<button type="button" class="btn btn-info fc-fatura"><i class="fa fa-plus-circle"></i> Gerar</button>
-								<button type="button" class="btn btn-info fc-gerartodos"><i class="fa fa-plus-circle"></i> Gerar Todas</button>
+								<button type="button" class="btn btn-info fc-fatura" style="margin: 2px;"><i class="fa fa-plus-circle"></i> Gerar</button>
+								<button type="button" class="btn btn-info fc-gerartodos" style="margin: 2px;"><i class="fa fa-plus-circle"></i> Gerar Todas</button>
 								</div></div>
 								<div class="form-group col-md-12 m-t-20">
 								<h4>Lista de Alunos</h4>
 								</div>
 								<div class="form-group col-md-12 m-t-20">
-								<input type="text" name="nome" id="nome" value="" placeholder="Pesquisar alunos" class="form-control fc-filtrar">
+								<input type="text" name="pesquisa2" id="pesquisa2" value="" placeholder="Pesquisar alunos" class="form-control fc-filtrar">
 								<select name="mes" id="mes" class="form-control btnadd-us" style="width: 30%; height: calc(2.3em + .75rem + 2px) !important;">
 								   <option value="01">Janeiro</option>
 								   <option value="02">Fevereiro</option>
@@ -374,11 +486,6 @@ if(@$_SESSION['menu12'] == false)
                                         </thead>
                                    <tbody>
                                         <tbody id="list">
-                                            <tr>
-                                                <td></td>
-												<td></td>
-                                                <td></td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

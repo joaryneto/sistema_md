@@ -87,6 +87,12 @@ function revertemes($data){
 	return $data;
 }
 
+function valor($numero)
+{
+   $numero = number_format($numero, 2, ',', '.');
+   return $numero;
+}
+	
 require_once("./load/class/mysql.class.php");
 require_once("./load/class/security.class.php");
 

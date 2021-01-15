@@ -159,7 +159,23 @@ $teste = explode(",",$_GET['codigo']);
 	
 foreach($teste as $i)
 {
-	
+
+$SQL = "SELECT faturas.linkboleto,faturas.vencimento, matriculas.cpf, matriculas.nome,faturas.charge_id FROM faturas 
+inner join matriculas on matriculas.codigo=faturas.cliente
+where faturas.sistema='".$_SESSION['sistema']."' and faturas.codigo='".$i."'";
+$RES = mysqli_query($db,$SQL);
+$RESS = mysqli_fetch_array($RES);
+
+if(isset($RESS['linkboleto']))
+{
+	   
+?>
+	<script> window.open("<?=$RESS['linkboleto'];?>"); </script>
+<?
+
+}
+else
+{
 $faturavenc = revertemes($_GET['faturavenc']);
 $faturames = revertemes($_GET['faturames']);
 $qtd = $_GET['qtd'];
@@ -174,7 +190,7 @@ $options = [
         'sandbox' => true // altere conforme o ambiente (true = desenvolvimento e false = producao)
 ];
     
-$charge_id = '1226580';
+$charge_id = $RESS['charge_id'];
 
 // $charge_id refere-se ao ID da transação gerada anteriormente
 $params = [
@@ -182,13 +198,13 @@ $params = [
 ];
  
 $customer = [
-  'name' => 'Joary Taques', // nome do cliente
-  'cpf' => '05497813151' , // cpf válido do cliente
+  'name' => $RESS['nome'], // nome do cliente
+  'cpf' => $RESS['cpf'], // cpf válido do cliente
   'phone_number' => '65999999104' // telefone do cliente
 ];
  
 $bankingBillet = [
-  'expire_at' => $faturavenc.'-18', // data de vencimento do boleto (formato: YYYY-MM-DD)
+  'expire_at' => $RESS['vencimento'], // data de vencimento do boleto (formato: YYYY-MM-DD)
   'customer' => $customer
 ];
  
@@ -204,7 +220,29 @@ try {
     $api = new Gerencianet($options);
     $charge = $api->payCharge($params, $body);
 
-    echo $charge["data"]["charge_id"]."<br>";
+	$charge_id = $charge["data"]["charge_id"];
+	$status = $charge["data"]["status"];
+	$link = $charge["data"]["link"];
+	$pdf = $charge["data"]["pdf"]["charge"];
+	
+	switch($status)
+	    {
+		    case "new":
+		    $st = 1; // Novo
+	    	break;
+		    case "waiting":
+	     	$st = 2; // Aguardando
+		    break;
+		    default:
+	    	break;
+     	}
+	
+	$SQL = "UPDATE faturas from linkboleto='".$link."', pdfboleto='".$pdf."', status='".$st."' where sistema='".$_SESSION['sistema']."' and charge_id='".$charge_id."'";
+	$RES = mysqli_query($db,$SQL);
+	
+	?>
+	   <script> window.open("<?=$link;?>"); </script>
+    <?
 
   } catch (GerencianetException $e) {
     print_r($e->code);
@@ -215,10 +253,9 @@ try {
     print_r($e->getMessage());
   }
 
+  }
  }
 }
-
-
 
 if(@$_GET['load'] == 1)
 {
@@ -260,6 +297,45 @@ if(@$_GET['load'] == 1)
 			</tr>
     <? 
 		}	
+	} ?>
+<?
+}
+else if(@$_GET['load'] == 2)
+{
+	$mes = $_GET['mes'];
+	
+	if(isset($_GET['pesquisa']))
+	{
+			  $whe1 = " and matriculas.nome like '%".$_GET['pesquisa']."%'";
+	}
+		  
+	if(isset($_GET['ano']))
+	{
+		$whe2 = " and YEAR(matriculas.ano)='".$_GET['ano']."'";
+	}
+  
+	$sql = "select faturas.codigo,faturas.charge_id, faturas.data, faturas.vencimento, faturas.valor, matriculas.nome, matriculas.matricula,turmas.descricao, matriculas.ano from faturas 
+	inner join matriculas on matriculas.codigo=faturas.cliente 
+	inner join turmas on turmas.codigo=matriculas.turma  
+	where matriculas.nome like '%".$_GET['pesquisa']."%'";
+	$res = mysqli_query($db,$sql); 
+	while($row = mysqli_fetch_array($res))
+	{  
+		
+		  ?>
+		    <tr>
+			  <td data-title="CheckBox"><input type="checkbox" name="check[]" id="check[]" class="all" value="<?=$row['charge_id'];?>"></td>
+              <td data-title="Fatura"><?=$row['codigo'];?></td>
+              <td data-title="Nome do Aluno"><?=$row['nome'];?></td>
+			  <td data-title="Turma"><?=$row['descricao'];?></td>
+			  <td data-title="Valor R$"><? 
+			  echo valor($row['valor']/100,2);
+			  ?></td>
+			  <td data-title="Vencimento"><?=formatodata($row['vencimento']);?></td>
+			  <td data-title="Data Criado"><?=formatodata($row['data']);?></td>
+			</tr>
+    <? 
+		
 	} ?>
 <?
 }
