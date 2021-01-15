@@ -190,7 +190,7 @@ $options = [
         'sandbox' => true // altere conforme o ambiente (true = desenvolvimento e false = producao)
 ];
     
-$charge_id = $RESS['charge_id'];
+$charge_id = ''.$RESS['charge_id'].'';
 
 // $charge_id refere-se ao ID da transação gerada anteriormente
 $params = [
