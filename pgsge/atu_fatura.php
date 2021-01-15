@@ -270,18 +270,34 @@ try {
 	$RES = mysqli_query($db,$SQL);
 	
 	?>
-	   <script> 
-	   swal({   
-			title: "Atenção",   
-			text: "Gerando o boleto. Aguarder...",   
-			timer: 2000,   
-			showConfirmButton: false 
-	   });
-	   
-	   open("<?=$link;?>"); 
-	   
-	   </script>
-    <?
+<script>
+$('.bl-abrir').on('click',function()
+{
+   open("<?=$link;?>");
+});
+
+$('.bl-baixar').on('click',function()
+{
+   open("<?=$pdf;?>");
+});
+</script>
+<div class="modal-header">
+<h2 class="pmd-card-title-text">Boleto </h2>
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form class="form-horizontal">
+<div class="form-group col-md-12 m-t-20">
+<button type="button" class="btn btn-info bl-abrir" style="margin: 2px;"><i class="fa fa-plus-circle" ></i> Visualizar Boleto</button>
+<button type="button" class="btn btn-info bl-baixar" style="margin: 2px;"><i class="fa fa-plus-circle" ></i> Baixar Boleto</button>
+</div>
+<div>
+</div>
+</form>										 
+<div class="modal-footer">
+</div>
+	
+	<?
 
   } catch (GerencianetException $e) {
     print_r($e->code);

@@ -359,7 +359,7 @@ if(@$_SESSION['menu12'] == false)
 							<div class="form-group col-md-12 m-t-20"><label>&nbsp;&nbsp;</label>
 								<div class="form-actions">
 								<button type="button" class="btn btn-info fc-boleto" style="margin: 2px;"><i class="fa fa-plus-circle" ></i> Boleto</button>
-								<button type="button" class="btn btn-info fc-boleto" style="margin: 2px;"><i class="fa fa-plus-circle" ></i> Informar como Pago</button>
+								<button type="button" class="btn btn-info fc-bxboleto" style="margin: 2px;"><i class="fa fa-plus-circle" ></i> Informar como Pago</button>
 								</div></div>
 								<div class="form-group col-md-12 m-t-20">
 								<h4>Lista de Alunos</h4>
