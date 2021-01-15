@@ -249,7 +249,9 @@ try {
 			timer: 2000,   
 			showConfirmButton: false 
 	   });
+	   
 	   open("<?=$link;?>"); 
+	   
 	   </script>
     <?
 
