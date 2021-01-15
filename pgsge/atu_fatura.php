@@ -162,7 +162,7 @@ foreach($teste as $i)
 
 $SQL = "SELECT faturas.linkboleto,faturas.vencimento, matriculas.cpf, matriculas.nome,faturas.charge_id FROM faturas 
 inner join matriculas on matriculas.codigo=faturas.cliente
-where faturas.sistema='".$_SESSION['sistema']."' and faturas.codigo='".$i."'";
+where faturas.sistema='".$_SESSION['sistema']."' and faturas.charge_id='".$i."'";
 $RES = mysqli_query($db,$SQL);
 $RESS = mysqli_fetch_array($RES);
 
