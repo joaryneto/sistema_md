@@ -97,7 +97,7 @@ while($row = mysqli_fetch_array($RES))
 	
 	    $faturavenc = $faturavenc."-".$diavcm;
 	    // '".."',
-	    $SQL = "insert into faturas(sistema,usuario,cliente,valor,data,vencimento,charge_id,status) values('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$i."',5000,'".$criado."','".$faturavenc."','".$id."','".$st. "');";
+	    $SQL = "insert into faturas(sistema,usuario,cliente,valor,data,vencimento,charge_id,status) values('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$i."','".$valor."','".$criado."','".$faturavenc."','".$id."','".$st. "');";
 	    $RES = mysqli_query($db,$SQL);
 	 }
     } catch (GerencianetException $e) 

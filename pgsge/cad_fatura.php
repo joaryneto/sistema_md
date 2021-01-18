@@ -67,15 +67,6 @@ if(@$_SESSION['menu12'] == false)
 									        showConfirmButton: false 
 									   });
 								   }
-								   else if(faturames == "")
-								   {
-									   swal({   
-									       title: "Atenção",   
-									       text: "Campo Mês Faturado em branco.",   
-									       timer: 1500,   
-									        showConfirmButton: false 
-									   });
-								   }
 								   else if(tipo == "")
 								   {
 									   swal({   
@@ -95,7 +86,7 @@ if(@$_SESSION['menu12'] == false)
 	   
 									   var codigo = alunos.join(",");
 									   
-								       requestPage2('?br=atu_fatura&codigo='+ codigo +'&faturavenc='+ faturavenc +'&faturames='+ faturames +'&tipo='+ tipo +'&ap=3','list2','GET');
+								       requestPage2('?br=atu_fatura&codigo='+ codigo +'&faturavenc='+ faturavenc +'&tipo='+ tipo +'&ap=3','list2','GET');
 								   }
 								   
 								});
@@ -249,19 +240,14 @@ if(@$_SESSION['menu12'] == false)
                      <div class="pmd-card pmd-z-depth">
 					  <div class="pmd-tabs" style="line-height: 52px;">
 						  <div class="pmd-tab-active-bar" style="width: 279px; left: 0px;"></div><ul role="tablist" class="nav nav-tabs nav-justified" style="width: 100%;">
-							<li class="active" role="presentation"><a data-toggle="tab" role="tab" aria-controls="home" href="#vfaturas" aria-expanded="true">Contas a Receber</a></li>
-							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="profile" href="#gfaturas" aria-expanded="false">Gerar Faturas</a></li>
+							<li class="active" role="presentation"><a data-toggle="tab" role="tab" aria-controls="home" href="#vfaturas" aria-expanded="true">Cobranças</a></li>
+							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="profile" href="#gfaturas" aria-expanded="false">Emitir Cobranças</a></li>
 						  </ul>
 					  </div>
 					  <div class="pmd-card-body">
 					  <div class="tab-content">
 						  	<div role="tabpanel" class="tab-pane active" id="vfaturas"> <!-- TAB 1 -->
 							    <div class="form-material m-t-40 row">
-							    <div class="form-group col-md-12 m-t-20"><label>&nbsp;&nbsp;</label>
-								<div class="form-actions">
-								<button type="button" class="btn btn-info fc-boleto" style="margin: 2px;"><i class="fa fa-plus-circle" ></i> Boleto</button>
-								<button type="button" class="btn btn-info fc-bxboleto" style="margin: 2px;"><i class="fa fa-plus-circle" ></i> Informar como Pago</button>
-								</div></div>
 								<div class="form-group col-md-12 m-t-20">
 								<h4>Lista de Faturas</h4>
 								</div>
@@ -313,14 +299,14 @@ if(@$_SESSION['menu12'] == false)
 								
 								<div class="form-material m-t-40 row">
 								<div class="form-group col-md-2 m-t-20">
-                                <label for="message-text" class="control-label">Mês de Vencimento :</label>
+                                <label for="message-text" class="control-label">* Quando irá vencer? :</label>
                                     <input type="text" name="faturavenc" id="faturavenc" value="" autocomplete="off" class="form-control  data">
                                 </div>
-								<div class="form-group col-md-2 m-t-20">
+								<!--<div class="form-group col-md-2 m-t-20">
                                 <label for="message-text" class="control-label">Mês Faturado :</label>
                                     <input type="text" name="faturame" id="faturame" value="" autocomplete="off" class="form-control  data">
                                 </div>
-								<!--<div class="form-group col-md-3 m-t-20"><label>Qtd Mensalidade :</label>
+								<div class="form-group col-md-3 m-t-20"><label>Qtd Mensalidade :</label>
 								<select name="qtd" id="qtd" class="form-control"  style="width: 100%; height:36px;">
                                   <option value="">Escolher Qtd</option>
 								  <option value="1">01</option>
@@ -346,9 +332,9 @@ if(@$_SESSION['menu12'] == false)
 							    <div class="form-actions">
 								 <button type="button" class="btn btn-info" Onclick=""><i class="fa fa-plus-circle"></i> Filtrar</button>
 								</div></div>-->
-								<div class="form-group col-md-2 m-t-20"><label>&nbsp;&nbsp;</label>
+								<div class="form-group col-md-3 m-t-20"><label>&nbsp;&nbsp;</label>
 								<div class="form-actions">
-								<button type="button" class="btn btn-info fc-fatura" style="margin: 2px;"><i class="fa fa-plus-circle"></i> Gerar Faturas</button>
+								<button type="button" class="btn btn-info fc-fatura" style="margin: 2px;"><i class="fa fa-plus-circle"></i> Emitir Cobranças</button>
 								</div></div>
 								<div class="form-group col-md-12 m-t-20">
 								<h4>Lista de Clientes</h4>
