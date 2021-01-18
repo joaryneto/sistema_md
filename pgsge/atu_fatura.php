@@ -9,8 +9,6 @@ if(@$_GET['ap'] == "3")
 {
 
 $faturavenc = revertemes($_GET['faturavenc']);
-$faturames = revertemes($_GET['faturames']);
-$qtd = @$_GET['qtd'];
 $tipo = @$_GET['tipo'];	
 
 $teste = explode(",",$_GET['codigo']);
@@ -48,7 +46,7 @@ while($row = mysqli_fetch_array($RES))
   $item_1 = [
      'name' => $descri, // nome do item, produto ou serviço
      'amount' => 1, // quantidade
-     'value' => $valor // valor (1000 = R$ 10,00) (Obs: É possível a criação de itens com valores negativos. Porém, o valor total da fatura deve ser superior ao valor mínimo para geração de transações.)
+     'value' => ''.$valor.'' // valor (1000 = R$ 10,00) (Obs: É possível a criação de itens com valores negativos. Porém, o valor total da fatura deve ser superior ao valor mínimo para geração de transações.)
   ];
  
   $items =  [
