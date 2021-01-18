@@ -39,7 +39,6 @@ if(@$_SESSION['menu12'] == false)
 								$('.fc-fatura').on('click',function()
 								{	
 				                   var faturavenc = document.getElementById('faturavenc').value;
-								   var faturames = document.getElementById('faturame').value;
 								   var tipo = document.getElementById('tipo').value;
 								   
 								   var i = 0;
