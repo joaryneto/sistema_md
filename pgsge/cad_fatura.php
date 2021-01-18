@@ -248,7 +248,7 @@ if(@$_SESSION['menu12'] == false)
 						  	<div role="tabpanel" class="tab-pane active" id="vfaturas"> <!-- TAB 1 -->
 							    <div class="form-material m-t-40 row">
 								<div class="form-group col-md-12 m-t-20">
-								<h4>Lista de Faturas</h4>
+								<h4>Lista de Cobranças</h4>
 								</div>
 								<div class="form-group col-md-12 m-t-20">
 								<input type="text" name="pesquisa1" id="pesquisa1" value="" placeholder="Pesquisar Faturas" class="form-control gc-filtrar">
@@ -268,16 +268,11 @@ if(@$_SESSION['menu12'] == false)
 								</select> 
 								</div>
 								<div class="form-group col-md-12 m-t-20">
-								<script>
-								$('#checkall').change(function () {
-								    $('.all1').prop('checked',this.checked);
-								});
-								</script>
                                 <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
                                    <table class="table pmd-table">
                                          <thead>
                                               <tr>
-											    <th><input type="checkbox" value="" id="checkall"></th>
+											    <th><input type="checkbox" value="" disabled></th>
                                                 <th>Fatura</th>
                                                 <th>Nome</th>
 												<th>Turma</th>
@@ -357,7 +352,7 @@ if(@$_SESSION['menu12'] == false)
 								</div>
 								<div class="form-group col-md-12 m-t-20">
 								<script>
-								$('#checkall').change(function () {
+								$('#checkal2').change(function () {
 								    $('.all2').prop('checked',this.checked);
 								});
 								</script>
@@ -365,7 +360,7 @@ if(@$_SESSION['menu12'] == false)
                                    <table class="table pmd-table">
                                          <thead>
                                               <tr>
-											    <th><input type="checkbox" value="" id="checkall"></th>
+											    <th><input type="checkbox" value="" id="checkal2"></th>
                                                 <th>Matricula</th>
                                                 <th>Nome</th>
 												<th>Turma</th>
