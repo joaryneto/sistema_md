@@ -37,12 +37,12 @@ while($row = mysqli_fetch_array($RES))
   if(@$_GET['tipo'] == 1)
   {
 	  $descri = "Matrícula";
-	  $valor = $row['v_matricula'];
+	  $valor = ''.$row['v_matricula'].'';
   }
   else if(@$_GET['tipo'] == 2)
   {
 	  $descri = "Rematricula";
-	  $valor = $row['v_rematricula'];
+	  $valor = ''.$row['v_rematricula'].'';
   }
  
   $item_1 = [
@@ -174,7 +174,7 @@ $options = [
         'sandbox' => true // altere conforme o ambiente (true = desenvolvimento e false = producao)
 ];
     
-echo $charge_id = ''.$RESS['charge_id'].'';
+$charge_id = ''.$RESS['charge_id'].'';
 
 // $charge_id refere-se ao ID da transação gerada anteriormente
 $params = [
