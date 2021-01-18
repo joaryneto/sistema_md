@@ -357,13 +357,13 @@ else if(@$_GET['load'] == 2)
 		  Switch($row['status'])
 		  {
 			  case 1:
-			  $status = "Novo";
+			  $status = '<span style="color:blue;">Novo</span>';
 			  break;
 			  case 2:
-			  $status = "Aguardando";
+			  $status = '<span style="color:blue;">Aguardando</span>';
 			  break;
 			  case 3:
-			  $status = "Pago";
+			  $status = '<span style="color:green;">Pago</span>';
 			  break;
 			  case 4:
 			  $status = "Não Pago";
@@ -417,13 +417,13 @@ else if(@$_GET['load'] == 3)
 		  Switch($row['status'])
 		  {
 			  case 1:
-			  $status = "Novo";
+			  $status = '<span style="color:blue;">Novo</span>';
 			  break;
 			  case 2:
-			  $status = "Aguardando";
+			  $status = '<span style="color:blue;">Aguardando</span>';
 			  break;
 			  case 3:
-			  $status = "Pago";
+			  $status = '<span style="color:green;">Pago</span>';
 			  break;
 			  case 4:
 			  $status = "Não Pago";
