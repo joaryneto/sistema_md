@@ -40,7 +40,6 @@ if(@$_SESSION['menu12'] == false)
 								{	
 				                   var faturavenc = document.getElementById('faturavenc').value;
 								   var faturames = document.getElementById('faturame').value;
-								   var qtd = document.getElementById('qtd').value;
 								   var tipo = document.getElementById('tipo').value;
 								   
 								   var i = 0;
@@ -77,15 +76,6 @@ if(@$_SESSION['menu12'] == false)
 									        showConfirmButton: false 
 									   });
 								   }
-								   else if(qtd == "")
-								   {
-									   swal({   
-									       title: "Atenção",   
-									       text: "Campo Qtd em branco.",   
-									       timer: 1500,   
-									        showConfirmButton: false 
-									   });
-								   }
 								   else if(tipo == "")
 								   {
 									   swal({   
@@ -105,7 +95,7 @@ if(@$_SESSION['menu12'] == false)
 	   
 									   var codigo = alunos.join(",");
 									   
-								       requestPage2('?br=atu_fatura&codigo='+ codigo +'&faturavenc='+ faturavenc +'&faturames='+ faturames +'&qtd='+ qtd +'&tipo='+ tipo +'&ap=3','list','GET');
+								       requestPage2('?br=atu_fatura&codigo='+ codigo +'&faturavenc='+ faturavenc +'&faturames='+ faturames +'&tipo='+ tipo +'&ap=3','list2','GET');
 								   }
 								   
 								});
@@ -349,8 +339,8 @@ if(@$_SESSION['menu12'] == false)
 								<div class="form-group col-md-3 m-t-20"><label>Tipo :</label>
 								<select name="tipo" id="tipo" class="form-control" style="width: 100%; height:36px;">
                                   <option value="">Escolher Tipo</option>
-								  <option value="0">Rematricula</option>
-								  <option value="1">Mensalidade</option>
+								  <option value="1">Rematricula</option>
+								  <option value="2">Mensalidade</option>
                                 </select></div>
 								<!--<div class="form-group col-md-2 m-t-20"><label>&nbsp;&nbsp;</label>
 							    <div class="form-actions">
