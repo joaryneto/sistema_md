@@ -138,6 +138,7 @@ if(@$_SESSION['menu12'] == false)
 								{	
 								   var texto = document.getElementById('pesquisa2').value;
 								   var mes = document.getElementById('mes2').value;
+								   var tipo = document.getElementById('tipo').value;
 								   
 								   if(mes == "")
 								   {
@@ -148,9 +149,18 @@ if(@$_SESSION['menu12'] == false)
 									        showConfirmButton: false 
 									   });
 								   }
+								   else if(tipo == "")
+								   {
+									   swal({   
+									       title: "Atenção",   
+									       text: "Escolha o tipo ( Matricula ou Rematricula)",   
+									       timer: 1500,   
+									        showConfirmButton: false 
+									   });
+								   }
 								   else								   
 								   {
-								       requestPage2('?br=atu_fatura&pesquisa='+ texto +'&mes='+ mes +'&load=1','list2','GET');
+								       requestPage2('?br=atu_fatura&pesquisa='+ texto +'&mes='+ mes +'&tipo='+ tipo +'&load=1','list2','GET');
 								   }
 								   
 								});
@@ -159,6 +169,7 @@ if(@$_SESSION['menu12'] == false)
 								{	
 								   var texto = document.getElementById('pesquisa2').value;
 								   var mes = document.getElementById('mes2').value;
+								   var tipo = document.getElementById('tipo').value;
 								   
 								   if(mes == "")
 								   {
@@ -169,9 +180,18 @@ if(@$_SESSION['menu12'] == false)
 									        showConfirmButton: false 
 									   });
 								   }
+								   else if(tipo == "")
+								   {
+									   swal({   
+									       title: "Atenção",   
+									       text: "Escolha o tipo ( Matricula ou Rematricula)",   
+									       timer: 1500,   
+									        showConfirmButton: false 
+									   });
+								   }
 								   else								   
 								   {
-								       requestPage2('?br=atu_fatura&pesquisa='+ texto +'&mes='+ mes +'&load=1','list2','GET');
+								       requestPage2('?br=atu_fatura&pesquisa='+ texto +'&mes='+ mes +'&tipo='+ tipo +'&load=1','list2','GET');
 								   }
 								   
 								});

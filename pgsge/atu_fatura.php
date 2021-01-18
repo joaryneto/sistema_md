@@ -22,6 +22,7 @@ $RES = mysqli_query($db,$SQL);
 while($row = mysqli_fetch_array($RES))
 {
   $diavcm = $row['f_vencimento'];
+  $tipo = $_GET['tipo'];
   
   $clientId = 'Client_Id_1d8fb8f88da5df061405de8f9d9b4972f324f624'; // insira seu Client_Id, conforme o ambiente (Des ou Prod)
   $clientSecret = 'Client_Secret_61e5960ca320869c108e7cf3f68037bf34fffe40'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
@@ -32,12 +33,12 @@ while($row = mysqli_fetch_array($RES))
     'sandbox' => true // altere conforme o ambiente (true = desenvolvimento e false = producao)
   ];
   
-  if(@$_GET['tipo'] == 1)
+  if($tipo == 1)
   {
 	  $descri = "Matrícula";
 	  $valor = ''.$row['v_matricula'].'';
   }
-  else if(@$_GET['tipo'] == 2)
+  else if($tipo == 2)
   {
 	  $descri = "Rematricula";
 	  $valor = ''.$row['v_rematricula'].'';
@@ -95,7 +96,7 @@ while($row = mysqli_fetch_array($RES))
 	
 	    $faturavenc = $faturavenc."-".$diavcm;
 	    // '".."',
-	    $SQL = "insert into faturas(sistema,usuario,cliente,valor,data,vencimento,charge_id,status) values('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$i."','".$valor."','".$criado."','".$faturavenc."','".$id."','".$st. "');";
+	    $SQL = "insert into faturas(sistema,usuario,cliente,valor,data,vencimento,charge_id,tipo,status) values('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$i."','".$valor."','".$criado."','".$faturavenc."','".$id."','".$tipo."','".$st. "');";
 	    $RES = mysqli_query($db,$SQL);
 	 }
     } catch (GerencianetException $e) 
@@ -268,6 +269,7 @@ $('.bl-baixar').on('click',function()
 if(@$_GET['load'] == 1)
 {
 	$mes = $_GET['mes'];
+	$tipo = $_GET['tipo'];
 	
 	if(isset($_GET['pesquisa']))
 	{
@@ -286,7 +288,7 @@ if(@$_GET['load'] == 1)
 	while($row = mysqli_fetch_array($res))
 	{  
 		$x = 0;
-		$SQL = "SELECT * FROM faturas where cliente='".$row['codigo']."' and YEAR(data)='2021' and MONTH(data)='".$mes."'";
+		$SQL = "SELECT * FROM faturas where cliente='".$row['codigo']."' and YEAR(data)='".$ano."' and MONTH(data)='".$mes."' and tipo='".$tipo."'";
 		$RES = mysqli_query($db,$SQL);
 		while($row2 = mysqli_fetch_array($RES))
 		{
