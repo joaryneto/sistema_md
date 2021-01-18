@@ -344,7 +344,7 @@ else if(@$_GET['load'] == 2)
 			  <td data-title="Opções">
 			  <button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-success" type="button" onclick="viwer(<?=$row['charge_id'];?>);" title="Boleto"> 
               <span class="pmd-floating-hidden">Cadastrar</span> 
-                 <i class="material-icons">account_balance</i> 
+                 <i class="material-icons">payment</i> 
              </button></td>
 			</tr>
     <? 
@@ -378,7 +378,7 @@ else if(@$_GET['load'] == 3)
 			  <td data-title="Opções">
 			  <button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-success" type="button" onclick="viwer(<?=$row['charge_id'];?>);" title="Boleto"> 
                 <span class="pmd-floating-hidden">Cadastrar</span> 
-                   <i class="material-icons">account_balance</i> 
+                   <i class="material-icons">payment</i> 
               </button></td>
 			</tr>
     <? 
