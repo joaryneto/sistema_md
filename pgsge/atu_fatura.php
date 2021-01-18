@@ -19,11 +19,12 @@ foreach($teste as $i)
 {
 	
 	
-$SQL = "SELECT v_matricula,v_rematricula FROM matriculas where sistema='".$_SESSION['sistema']."' and codigo='".$i."'";
+$SQL = "SELECT v_matricula,v_rematricula,f_vencimento FROM matriculas where sistema='".$_SESSION['sistema']."' and codigo='".$i."'";
 $RES = mysqli_query($db,$SQL);
 while($row = mysqli_fetch_array($RES))
 {
-	
+  $diavcm = $row['f_vencimento'];
+  
   $clientId = 'Client_Id_1d8fb8f88da5df061405de8f9d9b4972f324f624'; // insira seu Client_Id, conforme o ambiente (Des ou Prod)
   $clientSecret = 'Client_Secret_61e5960ca320869c108e7cf3f68037bf34fffe40'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
  
@@ -94,6 +95,7 @@ while($row = mysqli_fetch_array($RES))
 	    	break;
      	}
 	
+	    $faturavenc = $faturavenc."-".$diavcm;
 	    // '".."',
 	    $SQL = "insert into faturas(sistema,usuario,cliente,valor,data,vencimento,charge_id,status) values('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$i."',5000,'".$criado."','".$faturavenc."','".$id."','".$st. "');";
 	    $RES = mysqli_query($db,$SQL);
@@ -162,11 +164,6 @@ $('.bl-baixar').on('click',function()
 }
 else
 {
-	
-$faturavenc = revertemes($_GET['faturavenc']);
-$faturames = revertemes($_GET['faturames']);
-$qtd = $_GET['qtd'];
-$tipo = $_GET['tipo'];	
 
 $clientId = 'Client_Id_1d8fb8f88da5df061405de8f9d9b4972f324f624';// insira seu Client_Id, conforme o ambiente (Des ou Prod)
 $clientSecret = 'Client_Secret_61e5960ca320869c108e7cf3f68037bf34fffe40'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
@@ -346,6 +343,40 @@ else if(@$_GET['load'] == 2)
 			  ?></td>
 			  <td data-title="Vencimento"><?=formatodata($row['vencimento']);?></td>
 			  <td data-title="Data Criado"><?=formatodata($row['data']);?></td>
+			</tr>
+    <? 
+		
+	} ?>
+<?
+}
+else if(@$_GET['load'] == 3)
+{
+
+	$sql = "select faturas.codigo,faturas.charge_id, faturas.data, faturas.vencimento, faturas.valor, matriculas.nome, matriculas.matricula,turmas.descricao, matriculas.ano from faturas 
+	inner join matriculas on matriculas.codigo=faturas.cliente 
+	inner join turmas on turmas.codigo=matriculas.turma  
+	where faturas.cliente='".$_GET['codigo']."'";
+	$res = mysqli_query($db,$sql); 
+	while($row = mysqli_fetch_array($res))
+	{  
+		
+		  ?>
+		    <tr>
+			  <td data-title="CheckBox"><input type="checkbox" name="check[]" id="check[]" class="all" value="<?=$row['charge_id'];?>"></td>
+              <td data-title="Fatura"><?=$row['codigo'];?></td>
+              <td data-title="Nome do Aluno"><?=$row['nome'];?></td>
+			  <td data-title="Turma"><?=$row['descricao'];?></td>
+			  <td data-title="Valor R$"><? 
+			  echo valor($row['valor']/100,2);
+			  ?></td>
+			  <td data-title="Vencimento"><?=formatodata($row['vencimento']);?></td>
+			  <td data-title="Data Criado"><?=formatodata($row['data']);?></td>
+			  <td data-title="Status"><?=formatodata($row['data']);?></td>
+			  <td data-title="Opções">
+			  <button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-success" type="button" onclick="viwer(<?=$row['charge_id'];?>);" title="Boleto"> 
+                 <span class="pmd-floating-hidden">Cadastrar</span> 
+                 <i class="material-icons">person_add</i> 
+             </button></td>
 			</tr>
     <? 
 		

@@ -57,6 +57,9 @@ if(@$inputb['ap'] == "1")
     $celularpai = @$inputb['telefonepai'];
     $localtrabpai = @$inputb['localtrabpai'];
     $situacao = @$inputb['situacao'];
+	$vmatricula =  str_replace('.', "", str_replace(',', "",$row['vmatricula']));
+	$vrmatricula = str_replace('.', "", str_replace(',', "",$row['vrmatricula']));;
+	$diavcm = $row['diavcm'];
 	
 	$res = mysqli_query($db,"SELECT * FROM matriculas where sistema='".$_SESSION['sistema']."' and nome like '%".@$inputb['nome']."%'");
 	$x = 0;
@@ -86,7 +89,7 @@ if(@$inputb['ap'] == "1")
 		   }
 	   }
 	   
-	   $SQL1 = "INSERT INTO matriculas(sistema,matricula,nome,cpf,sexo,txtNascimento,endereco,numero,bairro,cep,complemento,estado,cidade,ensino,turma,email,nomemae,cpfmae,rgmae,emissormae,telefonemae,celularmae,localtrabmae,nomepai,cpfpai,rgpai,emissorpai,telefonepai,celularpai,localtrabpai,situacao) VALUES('".$_SESSION['sistema']."','".$_SESSION['matricula']."','".$nome."','".$cpf."','".$sexo."','".revertedata($txtNascimento)."','".$endereco."','".$numero."','".$bairro."','".$cep."','".$complemento."','".$estado."','".$cidade."','".$ensino."','".$turma."','".$email."','".$nomemae."','".$cpfmae."','".$rgmae."','".$emissormae."','".$telefonemae."','".$celularmae."','".$localtrabmae."','".$nomepai."','".$cpfpai."','".$rgpai."','".$emissorpai."','".$telefonepai."','".$celularpai."','".$localtrabpai."','".$situacao."');";
+	   $SQL1 = "INSERT INTO matriculas(sistema,matricula,nome,cpf,sexo,txtNascimento,endereco,numero,bairro,cep,complemento,estado,cidade,ensino,turma,email,nomemae,cpfmae,rgmae,emissormae,telefonemae,celularmae,localtrabmae,nomepai,cpfpai,rgpai,emissorpai,telefonepai,celularpai,localtrabpai,situacao,v_matricula,v_rematricula,f_vencimento) VALUES('".$_SESSION['sistema']."','".$_SESSION['matricula']."','".$nome."','".$cpf."','".$sexo."','".revertedata($txtNascimento)."','".$endereco."','".$numero."','".$bairro."','".$cep."','".$complemento."','".$estado."','".$cidade."','".$ensino."','".$turma."','".$email."','".$nomemae."','".$cpfmae."','".$rgmae."','".$emissormae."','".$telefonemae."','".$celularmae."','".$localtrabmae."','".$nomepai."','".$cpfpai."','".$rgpai."','".$emissorpai."','".$telefonepai."','".$celularpai."','".$localtrabpai."','".$situacao."','".$vmatricula."','".$vrmatricula."','".$diavcm."');";
 	   
 	   $sucesso = mysqli_query($db,$SQL1);
 	   
@@ -180,6 +183,9 @@ elseif(@$inputb['ap'] == 2)
     $celularpai = @$inputb['telefonepai'];
     $localtrabpai = @$inputb['localtrabpai'];
     $situacao = $_GET['situacao'];
+	$vmatricula =  str_replace('.', "", str_replace(',', "",@$inputb['vmatricula']));
+	$vrmatricula = str_replace('.', "", str_replace(',', "",@$inputb['vrmatricula']));;
+	$diavcm = @$inputb['diavcm'];
 	
 	if(@$inputb['situacao'] == 2)
 	{
@@ -190,7 +196,7 @@ elseif(@$inputb['ap'] == 2)
 		$situacao = @$inputb['situacao'];
 	}
 	
-    $SQL1 = "UPDATE matriculas SET nome = '".@$inputb['nome']."',cpf='".@$inputb['cpf']."',sexo = '".@$inputb['sexo']."',txtNascimento = '".revertedata(@$inputb['txtNascimento'])."',endereco = '".@$inputb['endereco']."',numero = '".@$inputb['numero']."',bairro = '".@$inputb['bairro']."',cep = '".@$inputb['cep']."',complemento = '".@$inputb['complemento']."',estado = '".@$inputb['estado']."',cidade = '".@$inputb['cidade']."',ensino = '".@$inputb['ensino']."',turma = '".@$inputb['turma']."',email = '".@$inputb['email']."',nomemae = '".@$inputb['nomemae']."',cpfmae = '".@$inputb['cpfmae']."',rgmae = '".@$inputb['rgmae']."',emissormae = '".@$inputb['emissormae']."',telefonemae = '".@$inputb['telefonemae']."',celularmae = '".@$inputb['celularmae']."',localtrabmae = '".@$inputb['localtrabmae']."',nomepai = '".@$inputb['nomepai']."',cpfpai = '".@$inputb['cpfpai']."',rgpai = '".@$inputb['rgpai']."',emissorpai = '".@$inputb['emissorpai']."',telefonepai = '".@$inputb['telefonepai']."',celularpai = '".@$inputb['telefonepai']."',localtrabpai = '".@$inputb['localtrabpai']."',status = '".$inputb['situacao']."' where sistema='".$_SESSION['sistema']."' and codigo='".@$inputb['codigo']."'";
+    $SQL1 = "UPDATE matriculas SET nome = '".@$inputb['nome']."',cpf='".@$inputb['cpf']."',sexo = '".@$inputb['sexo']."',txtNascimento = '".revertedata(@$inputb['txtNascimento'])."',endereco = '".@$inputb['endereco']."',numero = '".@$inputb['numero']."',bairro = '".@$inputb['bairro']."',cep = '".@$inputb['cep']."',complemento = '".@$inputb['complemento']."',estado = '".@$inputb['estado']."',cidade = '".@$inputb['cidade']."',ensino = '".@$inputb['ensino']."',turma = '".@$inputb['turma']."',email = '".@$inputb['email']."',nomemae = '".@$inputb['nomemae']."',cpfmae = '".@$inputb['cpfmae']."',rgmae = '".@$inputb['rgmae']."',emissormae = '".@$inputb['emissormae']."',telefonemae = '".@$inputb['telefonemae']."',celularmae = '".@$inputb['celularmae']."',localtrabmae = '".@$inputb['localtrabmae']."',nomepai = '".@$inputb['nomepai']."',cpfpai = '".@$inputb['cpfpai']."',rgpai = '".@$inputb['rgpai']."',emissorpai = '".@$inputb['emissorpai']."',telefonepai = '".@$inputb['telefonepai']."',celularpai = '".@$inputb['telefonepai']."',localtrabpai = '".@$inputb['localtrabpai']."',status = '".$inputb['situacao']."',v_matricula = '".$vrmatricula."',v_rematricula = '".$vrmatricula."',f_vencimento = '".$diavcm."' where sistema='".$_SESSION['sistema']."' and codigo='".@$inputb['codigo']."'";
 	
 	$sucesso = mysqli_query($db,$SQL1);
 	
@@ -200,7 +206,7 @@ elseif(@$inputb['ap'] == 2)
 		<script>
 		swal({   
  			   title: "Info",   
- 			   text: "Gravado com sucesso. '.$SQL1.'",   
+ 			   text: "Gravado com sucesso.",   
  			   timer: 1000,   
  			   showConfirmButton: false 
  		});
@@ -243,6 +249,9 @@ elseif(@$inputb['ap'] == 2)
        $celularpai = "";
        $localtrabpai = "";
        $situacao = "";
+	   $vmatricula = "";
+	   $vrmatricula = "";
+	   $diavcm = "";
 	   
 if(isset($inputb['codigo']))
 {
@@ -285,6 +294,9 @@ if(isset($inputb['codigo']))
        $celularpai = $row['telefonepai'];
        $localtrabpai = $row['localtrabpai'];
        $situacao = $row['status'];
+	   $vmatricula = $row['v_matricula'];
+	   $vrmatricula = $row['v_rematricula'];
+	   $diavcm = $row['f_vencimento'];
 	   
 	   if(Empty($cpf))
 	   {
@@ -383,6 +395,10 @@ if(isset($inputb['codigo']))
 								var celularpai = document.getElementById('celularpai').value;
 								var localtrabpai = document.getElementById('localtrabpai').value;
 								var situacao = document.getElementById('situacao').value;
+								var vmatricula = document.getElementById('vmatricula').value;
+								var vrmatricula = document.getElementById('vrmatricula').value;
+								var diavcm = document.getElementById('diavcm').value;
+								
 								
 								    if(matricula == "")
 								    {
@@ -423,9 +439,9 @@ if(isset($inputb['codigo']))
 								    else
 								    {
 								        <? if(isset($codigo)){ ?>
-										requestPage2('?br=cad_matriculas&codigo=<?=$codigo;?>&matricula='+ matricula +'&nome='+ nome +'&cpf='+ cpf +'&sexo='+ sexo +'&txtNascimento='+ txtNascimento +'&endereco='+ endereco +'&numero='+ numero +'&bairro='+ bairro +'&cep='+ cep +'&complemento='+ complemento +'&estado='+ estado +'&cidade='+ cidade +'&ensino='+ ensino +'&turma='+ turma +'&email='+ email +'&nomemae='+ nomemae +'&cpfmae='+ cpfmae +'&rgmae='+ rgmae +'&emissormae='+ emissormae +'&telefonemae='+ telefonemae +'&celularmae='+ celularmae +'&localtrabmae='+ localtrabmae +'&nomepai='+ nomepai +'&cpfpai='+ cpfpai +'&rgpai='+ rgpai +'&emissorpai='+ emissorpai +'&telefonepai='+ telefonepai +'&celularpai='+ celularpai +'&localtrabpai='+ localtrabpai +'&situacao='+ situacao +'&ap=2','conteudo','GET');
+										requestPage('?br=cad_matriculas&codigo=<?=$codigo;?>&matricula='+ matricula +'&nome='+ nome +'&cpf='+ cpf +'&sexo='+ sexo +'&txtNascimento='+ txtNascimento +'&endereco='+ endereco +'&numero='+ numero +'&bairro='+ bairro +'&cep='+ cep +'&complemento='+ complemento +'&estado='+ estado +'&cidade='+ cidade +'&ensino='+ ensino +'&turma='+ turma +'&email='+ email +'&nomemae='+ nomemae +'&cpfmae='+ cpfmae +'&rgmae='+ rgmae +'&emissormae='+ emissormae +'&telefonemae='+ telefonemae +'&celularmae='+ celularmae +'&localtrabmae='+ localtrabmae +'&nomepai='+ nomepai +'&cpfpai='+ cpfpai +'&rgpai='+ rgpai +'&emissorpai='+ emissorpai +'&telefonepai='+ telefonepai +'&celularpai='+ celularpai +'&localtrabpai='+ localtrabpai +'&situacao='+ situacao +'&vmatricula='+ vmatricula +'&vrmatricula='+ vrmatricula +'&diavcm='+ diavcm +'&ap=2','conteudo','GET');
 										<?}else{?>
-										requestPage2('?br=cad_matriculas&matricula='+ matricula +'&nome='+ nome +'&cpf='+ cpf +'&sexo='+ sexo +'&txtNascimento='+ txtNascimento +'&endereco='+ endereco +'&numero='+ numero +'&bairro='+ bairro +'&cep='+ cep +'&complemento='+ complemento +'&estado='+ estado +'&cidade='+ cidade +'&ensino='+ ensino +'&turma='+ turma +'&email='+ email +'&nomemae='+ nomemae +'&cpfmae='+ cpfmae +'&rgmae='+ rgmae +'&emissormae='+ emissormae +'&telefonemae='+ telefonemae +'&celularmae='+ celularmae +'&localtrabmae='+ localtrabmae +'&nomepai='+ nomepai +'&cpfpai='+ cpfpai +'&rgpai='+ rgpai +'&emissorpai='+ emissorpai +'&telefonepai='+ telefonepai +'&celularpai='+ celularpai +'&localtrabpai='+ localtrabpai +'&situacao='+ situacao +'&ap=1','conteudo','GET');
+										requestPage('?br=cad_matriculas&matricula='+ matricula +'&nome='+ nome +'&cpf='+ cpf +'&sexo='+ sexo +'&txtNascimento='+ txtNascimento +'&endereco='+ endereco +'&numero='+ numero +'&bairro='+ bairro +'&cep='+ cep +'&complemento='+ complemento +'&estado='+ estado +'&cidade='+ cidade +'&ensino='+ ensino +'&turma='+ turma +'&email='+ email +'&nomemae='+ nomemae +'&cpfmae='+ cpfmae +'&rgmae='+ rgmae +'&emissormae='+ emissormae +'&telefonemae='+ telefonemae +'&celularmae='+ celularmae +'&localtrabmae='+ localtrabmae +'&nomepai='+ nomepai +'&cpfpai='+ cpfpai +'&rgpai='+ rgpai +'&emissorpai='+ emissorpai +'&telefonepai='+ telefonepai +'&celularpai='+ celularpai +'&localtrabpai='+ localtrabpai +'&situacao='+ situacao +'&vmatricula='+ vmatricula +'&vrmatricula='+ vrmatricula +'&diavcm='+ diavcm +'&ap=1','conteudo','GET');
 										<?}?>
 									}
 								});
@@ -606,7 +622,7 @@ if(isset($inputb['codigo']))
 								</div>
                                 <? if(!Empty($inputb['codigo'])){?>
 								<div class="form-group col-md-12 m-t-20">
-								<button type="button" class="btn btn-info" onclick="responsavel(<?=@@$inputb['codigo'];?>);">
+								<button type="button" class="btn btn-info" onclick="responsavel(<?=@$inputb['codigo'];?>);">
 								<i class="fa fa-plus-circle"></i> Responsaveis </button>
 								</div>
 								<?  }   ?>
@@ -615,15 +631,85 @@ if(isset($inputb['codigo']))
 							<div role="tabpanel" class="tab-pane" id="financeiro">
 							<div class="form-material m-t-40 row">
 							    <script> $(".valor").maskMoney({prefix:'', allowNegative: true, thousands:'.', decimal:',', affixesStay: false}); </script>
-							    <div class="form-group col-md-12 m-t-20"><h4>Informações de Financeiro</h4></div>
+							    <div class="form-group col-md-12 m-t-20"><h4>Informações de Faturamento</h4></div>
 								<div class="form-group col-md-3 m-t-20">
                                 <label for="message-text" class="control-label">Valor da Matricula R$ :</label>
-                                    <input type="text" name="vmatricula" id="vmatricula" value="" autocomplete="off" class="form-control valor">
+                                    <input type="text" name="vmatricula" id="vmatricula" <? if(isset($inputb['codigo'])){ ?> value="<? echo number_format($vmatricula/100,2,",","."); ?>" <? } ?> autocomplete="off" class="form-control valor">
                                 </div>
 								<div class="form-group col-md-3 m-t-20">
                                 <label for="message-text" class="control-label">Valor da Rematricula R$ :</label>
-                                    <input type="text" name="vrmatricula" id="vrmatricula" value="" autocomplete="off" class="form-control valor">
+                                    <input type="text" name="vrmatricula" id="vrmatricula" <? if(isset($inputb['codigo'])){ ?> value="<? echo number_format($vrmatricula/100,2,",","."); ?>" <? } ?> autocomplete="off" class="form-control valor">
                                 </div>
+								<div class="form-group col-md-3 m-t-20"><label>Dia de Vencimento :</label>
+								<select name="diavcm" id="diavcm" class="form-control"  style="width: 100%; height:36px;">
+                                  <option value="">Escolher Vencimento</option>
+								  <option value="01" <? if($diavcm == "01"){ echo "selected"; } ?>>01</option>
+								  <option value="02" <? if($diavcm == "02"){ echo "selected"; } ?>>02</option>
+								  <option value="03" <? if($diavcm == "03"){ echo "selected"; } ?>>03</option>
+								  <option value="04" <? if($diavcm == "04"){ echo "selected"; } ?>>04</option>
+								  <option value="05" <? if($diavcm == "05"){ echo "selected"; } ?>>05</option>
+								  <option value="06" <? if($diavcm == "06"){ echo "selected"; } ?>>06</option>
+								  <option value="07" <? if($diavcm == "07"){ echo "selected"; } ?>>07</option>
+								  <option value="08" <? if($diavcm == "08"){ echo "selected"; } ?>>08</option>
+								  <option value="09" <? if($diavcm == "09"){ echo "selected"; } ?>>09</option>
+								  <option value="10" <? if($diavcm == "10"){ echo "selected"; } ?>>10</option>
+								  <option value="11" <? if($diavcm == "11"){ echo "selected"; } ?>>11</option>
+								  <option value="12" <? if($diavcm == "12"){ echo "selected"; } ?>>12</option>
+								  <option value="13" <? if($diavcm == "13"){ echo "selected"; } ?>>13</option>
+								  <option value="14" <? if($diavcm == "14"){ echo "selected"; } ?>>14</option>
+								  <option value="15" <? if($diavcm == "15"){ echo "selected"; } ?>>15</option>
+                                </select></div>
+								<div class="form-group col-md-12 m-t-20">
+								<h4>Faturas</h4>
+								</div>
+								<div class="form-group col-md-12 m-t-20">
+								<script>
+								
+								function viwer(codigo)
+								{	
+								   
+								   if(codigo == "")
+								   {
+									   swal({   
+									       title: "Atenção",   
+									       text: "Selecione apenas uma fatura para visualização.",   
+									       timer: 2000,   
+									        showConfirmButton: false 
+									   });
+								   }
+								   else								   
+								   {
+									   $('#modalap').modal('show');
+								       requestPage2('?br=atu_fatura&codigo='+ codigo +'&ap=4','modals','GET');
+								   }
+								   
+								}
+								
+								$('#checkall').change(function () {
+								    $('.all').prop('checked',this.checked);
+								});
+								
+								requestPage2('?br=atu_fatura&codigo=<?=$codigo;?>&load=3','list3','GET');
+								
+								</script>
+                                <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+                                   <table class="table pmd-table">
+                                         <thead>
+                                              <tr>
+											    <th><input type="checkbox" value="" disabled id="checkall"></th>
+                                                <th>Fatura</th>
+                                                <th>Nome</th>
+												<th>Turma</th>
+												<th>Valor</th>
+												<th>Data</th>
+                                             </tr>
+                                        </thead>
+                                   <tbody>
+                                        <tbody id="list3">
+                                        </tbody>
+                                    </table>
+                                   </div>
+								  </div>
 								</div>
 								</div>
 							</div>
