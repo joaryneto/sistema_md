@@ -98,6 +98,19 @@ while($row = mysqli_fetch_array($RES))
 	    // '".."',
 	    $SQL = "insert into faturas(sistema,usuario,cliente,valor,data,vencimento,charge_id,tipo,status) values('".$_SESSION['sistema']."','".$_SESSION['usuario']."','".$i."','".$valor."','".$criado."','".$faturavenc."','".$id."','".$tipo."','".$st. "');";
 	    $RES = mysqli_query($db,$SQL);
+		
+		?>
+		<script>
+		swal({   
+			title: "Atenção",   
+			text: "Faturas geradas com sucesso...",   
+			timer: 1500,   
+			showConfirmButton: false 
+		});
+		
+		requestPage2('?br=atu_fatura&load=1','list1','GET');
+		</script>
+		<?
 	 }
     } catch (GerencianetException $e) 
     {
