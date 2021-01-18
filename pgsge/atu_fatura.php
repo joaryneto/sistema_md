@@ -108,7 +108,7 @@ while($row = mysqli_fetch_array($RES))
 			showConfirmButton: false 
 		});
 		
-		requestPage2('?br=atu_fatura&load=1','list1','GET');
+		requestPage2('?br=atu_fatura&load=2','list1','GET');
 		</script>
 		<?
 	 }
@@ -337,14 +337,39 @@ else if(@$_GET['load'] == 2)
 		$whe2 = " and month(faturas.data)='".$_GET['mes']."' and YEAR(faturas.data)='".$ano."'";
 	}
   
-	$sql = "select faturas.codigo,faturas.charge_id, faturas.data, faturas.vencimento, faturas.valor, matriculas.nome, matriculas.matricula,turmas.descricao, matriculas.ano from faturas 
+	$sql = "select faturas.codigo,faturas.charge_id, faturas.data, faturas.vencimento, faturas.valor, faturas.status, faturas.tipo, matriculas.nome, matriculas.matricula,turmas.descricao, matriculas.ano from faturas 
 	inner join matriculas on matriculas.codigo=faturas.cliente 
 	inner join turmas on turmas.codigo=matriculas.turma  
 	where matriculas.nome like '%".$_GET['pesquisa']."%' $whe1 $whe2";
 	$res = mysqli_query($db,$sql); 
 	while($row = mysqli_fetch_array($res))
 	{  
-		
+		  Switch($row['tipo'])
+		  {
+			  case 1:
+			  $tipo = "Matrícula";
+			  break;
+			  case 2:
+			  $tipo = "Rematricula";
+			  break;
+		  }
+		  
+		  Switch($row['status'])
+		  {
+			  case 1:
+			  $status = "Novo";
+			  break;
+			  case 2:
+			  $status = "Aguardando";
+			  break;
+			  case 3:
+			  $status = "Pago";
+			  break;
+			  case 4:
+			  $status = "Não Pago";
+			  break;
+		  }
+		  
 		  ?>
 		    <tr>
 			  <td data-title="CheckBox"><input type="checkbox" name="check[]" id="check[]" class="all1" value="<?=$row['charge_id'];?>"></td>
@@ -356,6 +381,8 @@ else if(@$_GET['load'] == 2)
 			  ?></td>
 			  <td data-title="Vencimento"><?=formatodata($row['vencimento']);?></td>
 			  <td data-title="Data Criado"><?=formatodata($row['data']);?></td>
+			  <td data-title="Tipo"><?=$tipo;?></td>
+			  <td data-title="Status"><?=$status;?></td>
 			  <td data-title="Opções">
 			  <button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-success" type="button" onclick="viwer(<?=$row['charge_id'];?>);" title="Boleto"> 
               <span class="pmd-floating-hidden">Cadastrar</span> 
@@ -370,14 +397,38 @@ else if(@$_GET['load'] == 2)
 else if(@$_GET['load'] == 3)
 {
 
-	$sql = "select faturas.codigo,faturas.charge_id, faturas.data, faturas.vencimento, faturas.valor, matriculas.nome, matriculas.matricula,turmas.descricao, matriculas.ano from faturas 
+	$sql = "select faturas.codigo,faturas.charge_id, faturas.data, faturas.vencimento, faturas.valor, faturas.status, faturas.tipo, matriculas.nome, matriculas.matricula,turmas.descricao, matriculas.ano from faturas 
 	inner join matriculas on matriculas.codigo=faturas.cliente 
 	inner join turmas on turmas.codigo=matriculas.turma  
 	where faturas.cliente='".$_GET['codigo']."'";
 	$res = mysqli_query($db,$sql); 
 	while($row = mysqli_fetch_array($res))
 	{  
-		
+		  Switch($row['tipo'])
+		  {
+			  case 1:
+			  $tipo = "Todos";
+			  break;
+			  case 2:
+			  $tipo = "";
+			  break;
+		  }
+		  
+		  Switch($row['status'])
+		  {
+			  case 1:
+			  $status = "Novo";
+			  break;
+			  case 2:
+			  $status = "Aguardando";
+			  break;
+			  case 3:
+			  $status = "Pago";
+			  break;
+			  case 4:
+			  $status = "Não Pago";
+			  break;
+		  }
 		  ?>
 		    <tr>
 			  <td data-title="CheckBox"><input type="checkbox" name="check[]" id="check[]" class="all" value="<?=$row['charge_id'];?>"></td>
@@ -389,7 +440,8 @@ else if(@$_GET['load'] == 3)
 			  ?></td>
 			  <td data-title="Vencimento"><?=formatodata($row['vencimento']);?></td>
 			  <td data-title="Data Criado"><?=formatodata($row['data']);?></td>
-			  <td data-title="Status"><?=formatodata($row['data']);?></td>
+			  <td data-title="Tipo"><?=$tipo;?></td>
+			  <td data-title="Status"><?=$status;?></td>
 			  <td data-title="Opções">
 			  <button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-success" type="button" onclick="viwer(<?=$row['charge_id'];?>);" title="Boleto"> 
                 <span class="pmd-floating-hidden">Cadastrar</span> 

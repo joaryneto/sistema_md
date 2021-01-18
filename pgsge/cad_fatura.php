@@ -273,6 +273,7 @@ if(@$_SESSION['menu12'] == false)
 								<div class="form-group col-md-12 m-t-20">
 								<input type="text" name="pesquisa1" id="pesquisa1" value="" placeholder="Pesquisar Faturas" class="form-control gc-filtrar">
 								<select name="mes1" id="mes1" class="form-control btnadd-us ms-filtrar" style="width: 30%; height: calc(2.3em + .75rem + 2px) !important;">
+								   <option value="">Escolher Mês</option>
 								   <option value="01">Janeiro</option>
 								   <option value="02">Fevereiro</option>
 								   <option value="03">Março</option>
@@ -297,7 +298,11 @@ if(@$_SESSION['menu12'] == false)
                                                 <th>Nome</th>
 												<th>Turma</th>
 												<th>Valor</th>
+												<th>Vencimento</th>
 												<th>Data</th>
+												<th>Tipo</th>
+												<th>Status</th>
+												<th>Opções</th>
                                              </tr>
                                         </thead>
                                    <tbody>
