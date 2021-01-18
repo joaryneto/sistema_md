@@ -297,7 +297,7 @@ if(@$_GET['load'] == 1)
 		{
 		  ?>
 		    <tr>
-			  <td data-title="CheckBox"><input type="checkbox" name="check[]" id="check[]" class="all" value="<?=$row['codigo'];?>"></td>
+			  <td data-title="CheckBox"><input type="checkbox" name="check[]" id="check[]" class="all2" value="<?=$row['codigo'];?>"></td>
               <td data-title="Matricula"><?=$row['matricula'];?></td>
               <td data-title="Nome do Aluno"><?=$row['nome'];?></td>
 			  <td data-title="Turma"><?=$row['descricao'];?></td>
@@ -332,7 +332,7 @@ else if(@$_GET['load'] == 2)
 		
 		  ?>
 		    <tr>
-			  <td data-title="CheckBox"><input type="checkbox" name="check[]" id="check[]" class="all" value="<?=$row['charge_id'];?>"></td>
+			  <td data-title="CheckBox"><input type="checkbox" name="check[]" id="check[]" class="all1" value="<?=$row['charge_id'];?>"></td>
               <td data-title="Fatura"><?=$row['codigo'];?></td>
               <td data-title="Nome do Aluno"><?=$row['nome'];?></td>
 			  <td data-title="Turma"><?=$row['descricao'];?></td>

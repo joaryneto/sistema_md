@@ -270,7 +270,7 @@ if(@$_SESSION['menu12'] == false)
 								<div class="form-group col-md-12 m-t-20">
 								<script>
 								$('#checkall').change(function () {
-								    $('.all').prop('checked',this.checked);
+								    $('.all1').prop('checked',this.checked);
 								});
 								</script>
                                 <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
@@ -358,7 +358,7 @@ if(@$_SESSION['menu12'] == false)
 								<div class="form-group col-md-12 m-t-20">
 								<script>
 								$('#checkall').change(function () {
-								    $('.all').prop('checked',this.checked);
+								    $('.all2').prop('checked',this.checked);
 								});
 								</script>
                                 <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
