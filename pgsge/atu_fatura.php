@@ -341,6 +341,11 @@ else if(@$_GET['load'] == 2)
 			  ?></td>
 			  <td data-title="Vencimento"><?=formatodata($row['vencimento']);?></td>
 			  <td data-title="Data Criado"><?=formatodata($row['data']);?></td>
+			  <td data-title="Opções">
+			  <button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-success" type="button" onclick="viwer(<?=$row['charge_id'];?>);" title="Boleto"> 
+              <span class="pmd-floating-hidden">Cadastrar</span> 
+                 <i class="material-icons">account_balance</i> 
+             </button></td>
 			</tr>
     <? 
 		
@@ -372,9 +377,9 @@ else if(@$_GET['load'] == 3)
 			  <td data-title="Status"><?=formatodata($row['data']);?></td>
 			  <td data-title="Opções">
 			  <button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-success" type="button" onclick="viwer(<?=$row['charge_id'];?>);" title="Boleto"> 
-                 <span class="pmd-floating-hidden">Cadastrar</span> 
-                 <i class="material-icons">person_add</i> 
-             </button></td>
+                <span class="pmd-floating-hidden">Cadastrar</span> 
+                   <i class="material-icons">account_balance</i> 
+              </button></td>
 			</tr>
     <? 
 		
