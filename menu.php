@@ -12,18 +12,11 @@
 					</li>
 					<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
 					<li class="nav-item dropdown" style="width: 230px;">
-                        <a class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="list-group-item list-group-item-action">
+                        <a href="javascript:void(0);" class="item-link item-content dropdown-toggle" id="navbarDropdown" role="button">
+                            <div class="list-group-item list-group-item-action t-menu sge-t-alunos">
                                 <i class="material-icons">perm_contact_calendar</i> Alunos
                             </div>
                         </a>
-						<div class="dropdown-menu t-menu">
-						    <?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
-                            <a href="javascript: void(0);" class="sidebar-close dropdown-item menu-right sge-t-alunos">
-							 Cadastrar
-                            </a>
-                            <? } ?>
-                        </div>
 					</li>
 					<? } ?>
 					<?if($_SESSION['permissao'] == 2 or $_SESSION['permissao'] == 3){?>
