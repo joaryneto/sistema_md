@@ -238,6 +238,26 @@ if(@$_SESSION['menu12'] == false)
 								   
 								});
 								
+								function viwer(codigo)
+								{	
+								   
+								   if(codigo == "")
+								   {
+									   swal({   
+									       title: "Atenção",   
+									       text: "Selecione apenas uma fatura para visualização.",   
+									       timer: 2000,   
+									        showConfirmButton: false 
+									   });
+								   }
+								   else								   
+								   {
+									   $('#modalap').modal('show');
+								       requestPage2('?br=atu_fatura&codigo='+ codigo +'&ap=4','modals','GET');
+								   }
+								   
+								}
+								
 								jQuery('.data').datepicker({
 									format: 'mm/yyyy',
 								    autoclose: true,
