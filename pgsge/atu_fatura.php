@@ -296,8 +296,8 @@ while($row = mysqli_fetch_array($RES))
 	$x = 1;
 }
 
-if($x == 0)
-{
+ if($x == 0)
+ {
 
 $clientId = 'Client_Id_1d8fb8f88da5df061405de8f9d9b4972f324f624';// insira seu Client_Id, conforme o ambiente (Des ou Prod)
 $clientSecret = 'Client_Secret_61e5960ca320869c108e7cf3f68037bf34fffe40'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
@@ -331,6 +331,22 @@ try {
     } catch (Exception $e) {
       print_r($e->getMessage());
     }
+ }
+ else
+ {
+	 ?>
+	 <script>
+		swal({   
+			title: "Atenção",   
+			text: "Data de vencimento não pode ser antes do vencimento atual...",   
+			timer: 1500,   
+			showConfirmButton: false 
+		});
+		
+		requestPage2('?br=atu_fatura&load=2','list1','GET');
+		</script>
+	 <?
+ }
 }
 else
 {
