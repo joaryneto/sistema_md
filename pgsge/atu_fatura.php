@@ -284,8 +284,14 @@ else if(@$_GET['ap'] == "5")
 if(@$_GET['alter'] == 1)
 {
 	
+	
 $_SESSION['vencimento'] = revertedata(@$_GET['venc']); 
 $charge_id = intval($_SESSION['charge_id']);
+
+$SQL = "SELECT * FROM faturas where sistema='".$_SESSION['sistema']."' and charge_id='".$charge_id."' and vencimento > '".$_SESSION['vencimento']."'";
+$RES = mysqli_query($db,$SQL);
+if()
+{
 
 $clientId = 'Client_Id_1d8fb8f88da5df061405de8f9d9b4972f324f624';// insira seu Client_Id, conforme o ambiente (Des ou Prod)
 $clientSecret = 'Client_Secret_61e5960ca320869c108e7cf3f68037bf34fffe40'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
@@ -305,8 +311,8 @@ $body = [
   'expire_at' => ''.$_SESSION['vencimento'].''
 ];
 
-    $SQL = "UPDATE faturas SET vencimento='".$_SESSION['vencimento']."' where sistema='".$_SESSION['sistema']."' and charge_id='".$charge_id."'";
-	mysqli_query($db,$SQL);
+      $SQL = "UPDATE faturas SET vencimento='".$_SESSION['vencimento']."' where sistema='".$_SESSION['sistema']."' and charge_id='".$charge_id."'";
+	  mysqli_query($db,$SQL);
 
 try {
       $api = new Gerencianet($options);
