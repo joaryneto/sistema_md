@@ -244,7 +244,7 @@ if(@$_SESSION['menu12'] == false)
 								   requestPage2('?br=atu_fatura&mes='+ mes +'&load=2','list1','GET');
 								}
 								
-								function viwer(codigo)
+								function viwer(codigo, tipo)
 								{	
 								   
 								   if(codigo == "")
@@ -259,7 +259,7 @@ if(@$_SESSION['menu12'] == false)
 								   else								   
 								   {
 									   $('#modalap').modal('show');
-								       requestPage2('?br=atu_fatura&codigo='+ codigo +'&ap=4','modals','GET');
+								       requestPage2('?br=atu_fatura&codigo='+ codigo +'&ap='+ tipo +'','modals','GET');
 								   }
 								   
 								}

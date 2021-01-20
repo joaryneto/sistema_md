@@ -254,7 +254,7 @@ $('.bl-baixar').on('click',function()
 </div>
 <div class="modal-body">
 <form class="form-horizontal">
-<div class="form-group col-md-12 m-t-20">
+<div class="form-group col-md-5 m-t-20">
 <button type="button" class="btn btn-info bl-abrir" style="margin: 2px;"><i class="fa fa-plus-circle" ></i> Visualizar Boleto</button>
 <button type="button" class="btn btn-info bl-baixar" style="margin: 2px;"><i class="fa fa-plus-circle" ></i> Baixar Boleto</button>
 </div>
@@ -276,6 +276,107 @@ $('.bl-baixar').on('click',function()
   }
 
   }
+ }
+}
+else if(@$_GET['ap'] == "5")
+{
+
+$_SESSION['charge_id'] = @$_GET['codigo'];
+
+if(@$_GET['alter'] == 1)
+{
+	
+$_SESSION['vencimento'] = revertedata(@$_GET['venc']); 
+$charge_id = $_SESSION['charge_id'];
+
+$clientId = 'Client_Id_1d8fb8f88da5df061405de8f9d9b4972f324f624';// insira seu Client_Id, conforme o ambiente (Des ou Prod)
+$clientSecret = 'Client_Secret_61e5960ca320869c108e7cf3f68037bf34fffe40'; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
+
+$options = [
+  'client_id' => $clientId,
+  'client_secret' => $clientSecret,
+  'sandbox' => true // altere conforme o ambiente (true = desenvolvimento e false = producao)
+];
+ 
+// $charge_id refere-se ao ID da transação gerada anteriormente
+$params = [
+  'id' => $charge_id
+];
+
+$body = [
+  'expire_at' => ''.$_SESSION['vencimento'].''
+];
+
+    $SQL = "UPDATE faturas SET vencimento='".$_SESSION['vencimento']."' where sistema='".$_SESSION['sistema']."' and charge_id='".$charge_id."'";
+	mysqli_query($db,$SQL);
+
+try {
+      $api = new Gerencianet($options);
+      $charge = $api->updateBillet($params, $body);
+      print_r($charge);
+    } catch (GerencianetException $e) {
+      print_r($e->code);
+      print_r($e->error);
+      print_r($e->errorDescription);
+    } catch (Exception $e) {
+      print_r($e->getMessage());
+    }
+}
+else
+{
+?>
+<div class="modal-header">
+<h2 class="pmd-card-title-text">Alterar vencimento </h2>
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<script>
+
+$('.at-vcm').on('click',function()
+{	
+   var venc = document.getElementById('venc').value;
+   var mes = document.getElementById('mes1').value;
+   
+   if(venc == "")
+   {
+	   swal({   
+		   title: "Atenção",   
+		   text: "Informe uma data de vencimento.",   
+		   timer: 2000,   
+			showConfirmButton: false 
+	   });
+   }
+   else								   
+   {
+	   $('#modalap').modal('hide');
+	   requestPage2('?br=atu_fatura&venc='+ venc +'&mes='+ mes +'&ap=5&alter=1&load=2','list1','GET');
+   }
+});
+								
+$('.data').mask('00/00/0000');
+
+jQuery('.data').datepicker({
+      format: 'dd/mm/yyyy',
+	  autoclose: true,
+	  todayHighlight: true,
+	  orientation: "bottom left",
+	  startDate: "-0d"
+});
+</script>
+<form class="form-horizontal">
+<div class="form-group col-md-6 m-t-20">
+<label for="message-text" class="control-label">* Quando irá vencer? :</label>
+   <input type="text" name="venc" id="venc" value="" autocomplete="off" class="form-control  data">
+</div>
+<div class="form-group col-md-12 m-t-20">
+<button type="button" class="btn btn-info at-vcm" style="margin: 2px;"><i class="fa fa-plus-circle" ></i> Confirmar</button>
+</div>
+<div>
+</div>
+</form>										 
+<div class="modal-footer">
+</div>
+ <?
  }
 }
 
@@ -329,7 +430,7 @@ else if(@$_GET['load'] == 2)
 	$whe2 = "";
 
 	$mes = $_GET['mes'];
-	
+
 	if(isset($_GET['pesquisa']))
 	{
 		$whe1 = " and matriculas.nome like '%".$_GET['pesquisa']."%'";
@@ -394,11 +495,13 @@ else if(@$_GET['load'] == 2)
              </button>
                  <span class="caret"></span>
                       <ul class="dropdown-menu" aria-labelledby="dLabel">
-                       <li><a class="dropdown-item" href="javascript:void(0);" onclick="viwer(<?=$row['charge_id'];?>);"> Visualizar Boleto</a></li>
+					  <li><div class="dropdown-divider"><?=$row['codigo'];?></div></li>
+                       <li><a class="dropdown-item" href="javascript:void(0);" onclick="viwer(<?=$row['charge_id'];?>,4);"> Visualizar Boleto</a></li>
                        <li><a class="dropdown-item" href="javascript:void(0);"> Cancelar Cobrança</a></li>
 					   <li><div class="dropdown-divider"></div></li>
                        <li><a class="dropdown-item" href="javascript:void(0);"> Reenviar cobrança por Email</a></li>
                        <li><div class="dropdown-divider"></div></li>
+					   <li><a class="dropdown-item" href="javascript:void(0);" onclick="viwer(<?=$row['charge_id'];?>,5);"> Emitir nova cobrança</a></li>
                        <li><a class="dropdown-item" href="javascript:void(0);"> Marcar como Paga</a></li>
                      </ul>
                </div></td>
