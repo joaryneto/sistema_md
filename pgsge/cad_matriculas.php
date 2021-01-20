@@ -335,15 +335,15 @@ if(isset($inputb['codigo']))
   <div class="row">
 	<div class="col-md-12 col-sm-12"> 
 		<div class="component-box">
-		<div class="pmd-card pmd-z-depth">
-					  <div class="pmd-tabs pmd-tabs-bg" style="line-height: 52px;">
+		             <div class="pmd-card pmd-z-depth">
+					  <div class="pmd-tabs pmd-tabs-bg" style="height: 50px;padding: 13px;">
 						  <div class="pmd-tab-active-bar" style="width: 279px; left: 0px;"></div><ul role="tablist" class="nav nav-tabs nav-justified" style="width: 100%;">
-							<li class="active" role="presentation"><a data-toggle="tab" role="tab" aria-controls="home" href="#informacoes" aria-expanded="true">Informações do Aluno</a></li>
-							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="profile" href="#responsaveis" aria-expanded="false">Responsaveis</a></li>
-							<li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="profile" href="#financeiro" aria-expanded="false">Financeiro</a></li>
+							<li class="active" role="presentation"><a data-toggle="tab" role="tab" aria-controls="home" href="#informacoes">Informações</a></li>
+							<li role="presentation"><a data-toggle="tab" role="tab" aria-controls="profile" href="#responsaveis">Pais</a></li>
+							<li role="presentation"><a data-toggle="tab" role="tab" aria-controls="messages" href="#financeiro">Faturas</a></li>
 						  </ul>
 					  </div>
-					  <div class="pmd-card-body">
+						<div class="pmd-card-body">
 						  <div class="tab-content">
 						  	<div role="tabpanel" class="tab-pane active" id="informacoes">
 								<div class="m-t-40 row">

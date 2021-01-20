@@ -251,6 +251,8 @@ if(isset($codigo))
 			   requestPage2('?br=modal_usuarios&modal=1','modals','GET');
 			});
 			
+			$('.data').mask('00/00/0000');
+			
 			</script>
 								<form name="laudo" class="form-material m-t-40 row" autocomplete="off" method="post" action="<? if(Empty($_GET['codigo'])){ echo "sistema.php?url=cad_usuarios&ap=1";}else { echo "sistema.php?url=cad_usuarios&codigo=".$_GET['codigo']."&ap=2";} ?>" enctype="multipart/form-data">
 								<div class="form-group col-md-3 m-t-20"><label>CPF :</label>
@@ -264,7 +266,7 @@ if(isset($codigo))
 								<input type="text" name="nome" id="nome" value="<? if(isset($_GET['codigo'])){ echo $nome;} ?>" class="form-control" required="required">
 								</div>
 								<div class="form-group col-md-3 m-t-20"><label>Nascimento :</label>
-								<input type="text" name="nascimento" id="nascimento" value=" <? if(isset($_GET['codigo'])){ echo $nascimento;} ?>" class="form-control">
+								<input type="text" name="nascimento" id="nascimento" value=" <? if(isset($_GET['codigo'])){ echo $nascimento;} ?>" class="form-control data">
 								</div>
 								<div class="form-group col-md-3 m-t-20"><label>Email :</label>
 								<input type="email" name="email" id="email" value=" <? if(isset($_GET['codigo'])){ echo $email;} ?>" class="form-control" required="required">

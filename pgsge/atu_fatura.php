@@ -325,22 +325,25 @@ if(@$_GET['load'] == 1)
 }
 else if(@$_GET['load'] == 2)
 {
+	$whe1 = "";
+	$whe2 = "";
+
 	$mes = $_GET['mes'];
 	
 	if(isset($_GET['pesquisa']))
 	{
-			  $whe1 = " and matriculas.nome like '%".$_GET['pesquisa']."%'";
+		$whe1 = " and matriculas.nome like '%".$_GET['pesquisa']."%'";
 	}
 		  
 	if(isset($_GET['mes']))
 	{
-		$whe2 = " and month(faturas.data)='".$_GET['mes']."' and YEAR(faturas.data)='".$ano."'";
+		$whe2 = " month(faturas.data)='".$_GET['mes']."' and YEAR(faturas.data)='".$ano."'";
 	}
   
 	$sql = "select faturas.codigo,faturas.charge_id, faturas.data, faturas.vencimento, faturas.valor, faturas.status, faturas.tipo, matriculas.nome, matriculas.matricula,turmas.descricao, matriculas.ano from faturas 
 	inner join matriculas on matriculas.codigo=faturas.cliente 
 	inner join turmas on turmas.codigo=matriculas.turma  
-	where matriculas.nome like '%".$_GET['pesquisa']."%' $whe1 $whe2";
+	where $whe2 $whe1";
 	$res = mysqli_query($db,$sql); 
 	while($row = mysqli_fetch_array($res))
 	{  

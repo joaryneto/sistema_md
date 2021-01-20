@@ -238,6 +238,12 @@ if(@$_SESSION['menu12'] == false)
 								   
 								});
 								
+								function load()
+								{
+								   var mes = document.getElementById('mes1').value;
+								   requestPage2('?br=atu_fatura&mes='+ mes +'&load=2','list1','GET');
+								}
+								
 								function viwer(codigo)
 								{	
 								   
@@ -291,21 +297,24 @@ if(@$_SESSION['menu12'] == false)
 								<h4>Lista de Cobranças</h4>
 								</div>
 								<div class="form-group col-md-12 m-t-20">
+								<script>
+								load();
+								</script>
+								<? $mes = date('m'); ?>
 								<input type="text" name="pesquisa1" id="pesquisa1" value="" placeholder="Pesquisar Faturas" class="form-control gc-filtrar">
 								<select name="mes1" id="mes1" class="form-control btnadd-us ms-filtrar" style="width: 30%; height: calc(2.3em + .75rem + 2px) !important;">
-								   <option value="">Escolher Mês</option>
-								   <option value="01">Janeiro</option>
-								   <option value="02">Fevereiro</option>
-								   <option value="03">Março</option>
-								   <option value="04">Abril</option>
-								   <option value="05">Maio</option>
-								   <option value="06">Junho</option>
-								   <option value="07">Julho</option>
-								   <option value="08">Agosto</option>
-								   <option value="09">Setembro</option>
-								   <option value="10">Outubro</option>
-								   <option value="11">Novembro</option>
-								   <option value="12">Dezembro</option>
+								   <option value="01" <? if($mes == 01){ ?> selected <?}?>>Janeiro</option>
+								   <option value="02" <? if($mes == 02){ ?> selected <?}?>>Fevereiro</option>
+								   <option value="03" <? if($mes == 03){ ?> selected <?}?>>Março</option>
+								   <option value="04" <? if($mes == 04){ ?> selected <?}?>>Abril</option>
+								   <option value="05" <? if($mes == 05){ ?> selected <?}?>>Maio</option>
+								   <option value="06" <? if($mes == 06){ ?> selected <?}?>>Junho</option>
+								   <option value="07" <? if($mes == 07){ ?> selected <?}?>>Julho</option>
+								   <option value="08" <? if($mes == 08){ ?> selected <?}?>>Agosto</option>
+								   <option value="09" <? if($mes == 09){ ?> selected <?}?>>Setembro</option>
+								   <option value="10" <? if($mes == 10){ ?> selected <?}?>>Outubro</option>
+								   <option value="11" <? if($mes == 11){ ?> selected <?}?>>Novembro</option>
+								   <option value="12" <? if($mes == 12){ ?> selected <?}?>>Dezembro</option>
 								</select> 
 								</div>
 								<div class="form-group col-md-12 m-t-20">
@@ -379,20 +388,21 @@ if(@$_SESSION['menu12'] == false)
 								<h4>Lista de Clientes</h4>
 								</div>
 								<div class="form-group col-md-12 m-t-20">
+								<? $mes = date('m'); ?>
 								<input type="text" name="pesquisa2" id="pesquisa2" value="" placeholder="Pesquisar Clientes" class="form-control cc-f">
 								<select name="mes2" id="mes2" class="form-control btnadd-us cc-m" style="width: 30%; height: calc(2.3em + .75rem + 2px) !important;">
-								   <option value="01">Janeiro</option>
-								   <option value="02">Fevereiro</option>
-								   <option value="03">Março</option>
-								   <option value="04">Abril</option>
-								   <option value="05">Maio</option>
-								   <option value="06">Junho</option>
-								   <option value="07">Julho</option>
-								   <option value="08">Agosto</option>
-								   <option value="09">Setembro</option>
-								   <option value="10">Outubro</option>
-								   <option value="11">Novembro</option>
-								   <option value="12">Dezembro</option>
+								   <option value="01" <? if($mes == 01){ ?> selected <?}?>>Janeiro</option>
+								   <option value="02" <? if($mes == 02){ ?> selected <?}?>>Fevereiro</option>
+								   <option value="03" <? if($mes == 03){ ?> selected <?}?>>Março</option>
+								   <option value="04" <? if($mes == 04){ ?> selected <?}?>>Abril</option>
+								   <option value="05" <? if($mes == 05){ ?> selected <?}?>>Maio</option>
+								   <option value="06" <? if($mes == 06){ ?> selected <?}?>>Junho</option>
+								   <option value="07" <? if($mes == 07){ ?> selected <?}?>>Julho</option>
+								   <option value="08" <? if($mes == 08){ ?> selected <?}?>>Agosto</option>
+								   <option value="09" <? if($mes == 09){ ?> selected <?}?>>Setembro</option>
+								   <option value="10" <? if($mes == 10){ ?> selected <?}?>>Outubro</option>
+								   <option value="11" <? if($mes == 11){ ?> selected <?}?>>Novembro</option>
+								   <option value="12" <? if($mes == 12){ ?> selected <?}?>>Dezembro</option>
 								</select> 
 								</div>
 								<div class="form-group col-md-12 m-t-20">
