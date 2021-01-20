@@ -112,6 +112,8 @@
     <link href="template/vendor/propeller-master/components/floating-action-button/css/floating-action-button.css" type="text/css" rel="stylesheet" /> 
 	<link href="template/vendor/propeller-master/components/textfield/css/textfield.css" type="text/css" rel="stylesheet" /> 
 	<link href="template/vendor/propeller-master/components/tab/css/tab.css" type="text/css" rel="stylesheet" /> 
+	<link href="template/vendor/propeller-master/components/dropdown/css/dropdown.css" type="text/css" rel="stylesheet" /> 
+	
 	
 	<!-- Propeller Accordion -->
 	<link href="template/vendor/propeller-master/components/alert/css/alert.css" type="text/css" rel="stylesheet" />

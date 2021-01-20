@@ -387,10 +387,21 @@ else if(@$_GET['load'] == 2)
 			  <td data-title="Tipo"><?=$tipo;?></td>
 			  <td data-title="Status"><?=$status;?></td>
 			  <td data-title="Opções">
-			  <button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-success" type="button" onclick="viwer(<?=$row['charge_id'];?>);" title="Boleto"> 
+			  <div class="dropdown">
+                  <button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary pmd-dropdown-hover" type="button" title="Boleto" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
               <span class="pmd-floating-hidden">Cadastrar</span> 
-                 <i class="material-icons">payment</i> 
-             </button></td>
+                 <i class="material-icons">view_column</i> 
+             </button>
+                 <span class="caret"></span>
+                      <ul class="dropdown-menu" aria-labelledby="dLabel">
+                       <li><a class="dropdown-item" href="javascript:void(0);" onclick="viwer(<?=$row['charge_id'];?>);"> Visualizar Boleto</a></li>
+                       <li><a class="dropdown-item" href="javascript:void(0);"> Cancelar Cobrança</a></li>
+					   <li><div class="dropdown-divider"></div></li>
+                       <li><a class="dropdown-item" href="javascript:void(0);"> Reenviar cobrança por Email</a></li>
+                       <li><div class="dropdown-divider"></div></li>
+                       <li><a class="dropdown-item" href="javascript:void(0);"> Marcar como Paga</a></li>
+                     </ul>
+               </div></td>
 			</tr>
     <? 
 		
@@ -446,7 +457,7 @@ else if(@$_GET['load'] == 3)
 			  <td data-title="Tipo"><?=$tipo;?></td>
 			  <td data-title="Status"><?=$status;?></td>
 			  <td data-title="Opções">
-			  <button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-success" type="button" onclick="viwer(<?=$row['charge_id'];?>);" title="Boleto"> 
+			  <button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" type="button" onclick="viwer(<?=$row['charge_id'];?>);" title="Boleto"> 
                 <span class="pmd-floating-hidden">Cadastrar</span> 
                    <i class="material-icons">payment</i> 
               </button></td>
