@@ -317,13 +317,15 @@ $body = [
   'expire_at' => ''.$_SESSION['vencimento'].''
 ];
 
-      $SQL = "UPDATE faturas SET vencimento='".$_SESSION['vencimento']."' where sistema='".$_SESSION['sistema']."' and charge_id='".$charge_id."'";
-	  mysqli_query($db,$SQL);
 
 try {
       $api = new Gerencianet($options);
       $charge = $api->updateBillet($params, $body);
-      print_r($charge);
+	  
+	  $SQL = "UPDATE faturas SET vencimento='".$_SESSION['vencimento']."' where sistema='".$_SESSION['sistema']."' and charge_id='".$charge_id."'";
+	  mysqli_query($db,$SQL);
+	  
+      //print_r($charge);
     } catch (GerencianetException $e) {
       print_r($e->code);
       print_r($e->error);
@@ -342,8 +344,6 @@ try {
 			timer: 1500,   
 			showConfirmButton: false 
 		});
-		
-		requestPage2('?br=atu_fatura&load=2','list1','GET');
 		</script>
 	 <?
  }
@@ -465,7 +465,7 @@ else if(@$_GET['load'] == 2)
 		$whe1 = " and matriculas.nome like '%".$_GET['pesquisa']."%'";
 	}
 		  
-	if(isset($_GET['mes']))
+	if(isset($mes)
 	{
 		$whe2 = " month(faturas.data)='".$_GET['mes']."' and YEAR(faturas.data)='".$ano."'";
 	}
