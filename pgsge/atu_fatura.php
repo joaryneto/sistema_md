@@ -458,6 +458,7 @@ else if(@$_GET['load'] == 2)
 	$whe1 = "";
 	$whe2 = "";
 
+
 	$mes = $_GET['mes'];
 
 	if(isset($_GET['pesquisa']))
@@ -465,11 +466,10 @@ else if(@$_GET['load'] == 2)
 		$whe1 = " and matriculas.nome like '%".$_GET['pesquisa']."%'";
 	}
 		  
-	if(isset($mes)
+	if(isset($_GET['mes']))
 	{
 		$whe2 = " month(faturas.data)='".$_GET['mes']."' and YEAR(faturas.data)='".$ano."'";
 	}
-
   
 	$sql = "select faturas.codigo,faturas.charge_id, faturas.data, faturas.vencimento, faturas.valor, faturas.status, faturas.tipo, matriculas.nome, matriculas.matricula,turmas.descricao, matriculas.ano from faturas 
 	inner join matriculas on matriculas.codigo=faturas.cliente 
