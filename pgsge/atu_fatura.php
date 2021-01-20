@@ -317,15 +317,13 @@ $body = [
   'expire_at' => ''.$_SESSION['vencimento'].''
 ];
 
+      $SQL = "UPDATE faturas SET vencimento='".$_SESSION['vencimento']."' where sistema='".$_SESSION['sistema']."' and charge_id='".$charge_id."'";
+	  mysqli_query($db,$SQL);
 
 try {
       $api = new Gerencianet($options);
       $charge = $api->updateBillet($params, $body);
-	  
-	  $SQL = "UPDATE faturas SET vencimento='".$_SESSION['vencimento']."' where sistema='".$_SESSION['sistema']."' and charge_id='".$charge_id."'";
-	  mysqli_query($db,$SQL);
-	  
-      //print_r($charge);
+      print_r($charge);
     } catch (GerencianetException $e) {
       print_r($e->code);
       print_r($e->error);
