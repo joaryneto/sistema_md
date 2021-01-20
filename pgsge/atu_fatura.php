@@ -342,7 +342,8 @@ try {
 			timer: 1500,   
 			showConfirmButton: false 
 		});
-
+		
+		requestPage2('?br=atu_fatura&load=2','list1','GET');
 		</script>
 	 <?
  }
@@ -468,6 +469,7 @@ else if(@$_GET['load'] == 2)
 	{
 		$whe2 = " month(faturas.data)='".$_GET['mes']."' and YEAR(faturas.data)='".$ano."'";
 	}
+
   
 	$sql = "select faturas.codigo,faturas.charge_id, faturas.data, faturas.vencimento, faturas.valor, faturas.status, faturas.tipo, matriculas.nome, matriculas.matricula,turmas.descricao, matriculas.ano from faturas 
 	inner join matriculas on matriculas.codigo=faturas.cliente 
