@@ -288,9 +288,15 @@ if(@$_GET['alter'] == 1)
 $_SESSION['vencimento'] = revertedata(@$_GET['venc']); 
 $charge_id = intval($_SESSION['charge_id']);
 
+$x = 0;
 $SQL = "SELECT * FROM faturas where sistema='".$_SESSION['sistema']."' and charge_id='".$charge_id."' and vencimento > '".$_SESSION['vencimento']."'";
 $RES = mysqli_query($db,$SQL);
-if()
+while($row = mysqli_fetch_array($RES))
+{
+	$x = 1;
+}
+
+if($x == 0)
 {
 
 $clientId = 'Client_Id_1d8fb8f88da5df061405de8f9d9b4972f324f624';// insira seu Client_Id, conforme o ambiente (Des ou Prod)
