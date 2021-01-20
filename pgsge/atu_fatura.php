@@ -323,7 +323,7 @@ $body = [
 try {
       $api = new Gerencianet($options);
       $charge = $api->updateBillet($params, $body);
-      print_r($charge);
+      //print_r($charge);
     } catch (GerencianetException $e) {
       print_r($e->code);
       print_r($e->error);
