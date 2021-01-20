@@ -281,7 +281,10 @@ $('.bl-baixar').on('click',function()
 else if(@$_GET['ap'] == "5")
 {
 
-$_SESSION['charge_id'] = @$_GET['codigo'];
+if(isset($_GET['codigo']))
+{
+  $_SESSION['charge_id'] = @$_GET['codigo'];
+}
 
 if(@$_GET['alter'] == 1)
 {
