@@ -281,11 +281,6 @@ $('.bl-baixar').on('click',function()
 else if(@$_GET['ap'] == "5")
 {
 
-if(isset($_GET['codigo']))
-{
-  $_SESSION['charge_id'] = @$_GET['codigo'];
-}
-
 if(@$_GET['alter'] == 1)
 {
 	
@@ -327,6 +322,9 @@ try {
 }
 else
 {
+	
+$_SESSION['charge_id'] = @$_GET['codigo'];
+
 ?>
 <div class="modal-header">
 <h2 class="pmd-card-title-text">Alterar vencimento </h2>
