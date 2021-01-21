@@ -525,14 +525,14 @@ if(isset($inputb['codigo']))
 								</div>
 								</div>
 								<div class="form-group col-md-3 m-t-20"><label>Ensino :</label>
-								<select name="ensino" id="ensino" class="form-control" onChange="javascript: requestoption('?br=atu_curso&curso='+ this.value+'&load=1','turma','GET');"  style="width: 100%; height:36px;">
+								<select name="ensino" id="ensino" class="form-control" onChange="javascript: requestoption('?br=atu_curso&curso='+ this.value+'&load=1','turma','GET');" <? if(isset($inputb['codigo'])){ ?> disabled  <? } ?> style="width: 100%; height:36px;">
                                   <option value="">Escolher Ensino</option>
 								  <option value="0" <? if($ensino == "0"){ echo "selected"; } ?>>Ensino Infantil</option>
 								  <option value="1" <? if($ensino == "1"){ echo "selected"; } ?>>Ensino Fundamental</option>
 								  <option value="2" <? if($ensino == "2"){ echo "selected"; } ?>>Ensino Médio</option>
                                 </select></div>
 								<div class="form-group col-md-3 m-t-20"><label>Turma :</label>
-								<select name="turma" id="turma" class="form-control" style="width: 100%; height:36px;" required="required">
+								<select name="turma" id="turma" class="form-control" style="width: 100%; height:36px;" <? if(isset($inputb['codigo'])){ ?> disabled  <? } ?> required="required">
                                     <option value="">Selecionar</option>
 									<? 
 									      if(isset($turma))
