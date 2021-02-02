@@ -45,6 +45,16 @@ else if(@$_SERVER['SERVER_NAME'] == "delivery.ectecnologia.com.br" or @$_SERVER[
 	$_SESSION['img'] = "agd";
 	//print('<script> localStorage.setItem("sistema", "'.$_SESSION['img'].'"); </script>');
 }
+else if(@$_SERVER['SERVER_NAME'] == "sociodbv.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.sociodbv")
+{
+	$_SESSION['nosistema'] = "".$_SERVER['SERVER_NAME']."/delivery.php";
+	$_SESSION['nomesoft'] = "Socio DBV";
+	$_SESSION['tipo'] = 4;
+	$_SESSION['manifest'] = "manifest4.json";
+	$_SESSION['cor'] = "#F58634";
+	$_SESSION['img'] = "sdbv";
+	//print('<script> localStorage.setItem("sistema", "'.$_SESSION['img'].'"); </script>');
+}
 else
 {
 	header('Location: servicos.php');
@@ -160,6 +170,10 @@ else if($_SESSION['tipo'] == 3)
 else if($_SESSION['tipo'] == 4)
 {
 	$_SESSION['pg'] = "pgdel";
+}
+else if($_SESSION['tipo'] == 5)
+{
+	$_SESSION['pg'] = "pgdbv";
 }
 else
 {
