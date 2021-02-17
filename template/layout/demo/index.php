@@ -102,7 +102,7 @@
             <p class="text-center small text-mute username-text">Cuiabá, Brasil</p>
 
             <div class="list-group list-group-flush nav-list">
-                <a href="index.html" class="list-group-item list-group-item-action active"><i class="material-icons">store</i> <span class="text-link">Home</span></a>
+                <a href="index.php" class="list-group-item list-group-item-action active"><i class="material-icons">store</i> <span class="text-link">Home</span></a>
                 <a href="#" class="list-group-item text-danger"><i class="material-icons">exit_to_app</i> <span class="text-link">Deslogar</span></a>
             </div>
         </div>
@@ -1077,7 +1077,7 @@
                         <div class="container-fluid px-0">
                             <div class="has-background h-200px">
                                 <div class="background">
-                                    <img src="template/layout/demo/assets/img/image8.jpg" alt="">
+                                    <img src="template/layout/demo/assets/images/161.jpg" alt="">
                                 </div>
                             </div>
                         </div>
