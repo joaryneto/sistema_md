@@ -2,16 +2,35 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-    <meta name="description" content="Bootstrap UI UX, Bootstrap theme, Bootstrap HTML, Bootstrap template, Bootstrap mobile app, multipurpose mobile app template. get bootstrap template, mobile app">
+    <link rel="preconnect" href="https://gum.criteo.com"/>
+	<link rel="preconnect" href="http://dis.us.criteo.com"/>
+	<link rel="preconnect" href="http://widget.criteo.com"/>
+	<link rel="preconnect" href="http://static.criteo.net"/>
+	<link rel="preconnect" href="https://vars.hotjar.com"/>
+	<link rel="preconnect" href="https://script.hotjar.com"/>
+	<link rel="preconnect" href="http://static.hotjar.com"/>
+	<link rel="preconnect" href="https://usage.trackjs.com"/>
+	<link rel="preconnect" href="https://bat.bing.com"/>
+	<link rel="preconnect" href="https://www.google.com"/>
+	<link rel="preconnect" href="https://www.google.com.br"/>
+	<link rel="preconnect" href="https://www.googleadservices.com"/>
+	<link rel="preconnect" href="https://stats.g.doubleclick.net"/>
+	<link rel="preconnect" href="https://googleads.g.doubleclick.net"/>
+	<link rel="preconnect" href="https://www.google-analytics.com"/>
+	<link rel="preconnect" href="http://7242.xg4ken.com"/>
+	<link rel="preconnect" href="https://services.xg4ken.com"/>
+	<link rel="preconnect" href="https://resources.xg4ken.com"/>    
+    <meta charset="iso-8859-1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="description" content="">
     <meta name="author" content="EC Tecnologia">
-    <link rel=icon href="template/layout/demo/assets/img/logo-small.png" sizes="any">
-
-    <title>CERRADUS Peneus</title>
-
-
-<!-- CODELAB: Add iOS meta tags and icons -->
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="template/assets/images/favicon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1"/>
+	<title>EC TECNOLOGIA - Equipe cuiabana de Tecnologia da informação</title>
+	<meta name="codelab" content="your-first-pwa-v3">
+	<!-- CODELAB: Add iOS meta tags and icons -->
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-title" content="EC Tecnologia">
