@@ -1,9 +1,9 @@
 <?
 
-if(@$_SERVER['SERVER_NAME'] == "app.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.app")
+if(@$_SERVER['SERVER_NAME'] == "ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "app.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.ec")
 {
 	$_SESSION['nosistema'] = "".$_SERVER['SERVER_NAME']."/login.php";
-	$_SESSION['nomesoft'] = "Gerenciamento de Sistema";
+	$_SESSION['nomesoft'] = "EC Tecnologia";
 	$_SESSION['tipo'] = 1;
 	$_SESSION['manifest'] = "manifest.json";
 	$_SESSION['cor'] = "#FFFFFF";
@@ -53,6 +53,16 @@ else if(@$_SERVER['SERVER_NAME'] == "sociodbv.ectecnologia.com.br" or @$_SERVER[
 	$_SESSION['manifest'] = "manifest4.json";
 	$_SESSION['cor'] = "#F58634";
 	$_SESSION['img'] = "sdbv";
+	//print('<script> localStorage.setItem("sistema", "'.$_SESSION['img'].'"); </script>');
+}
+else if(@$_SERVER['SERVER_NAME'] == "demo.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.demo")
+{
+	$_SESSION['nosistema'] = "".$_SERVER['SERVER_NAME']."/index.php";
+	$_SESSION['nomesoft'] = "Loja Demo";
+	$_SESSION['tipo'] = 6;
+	$_SESSION['manifest'] = "manifest6.json";
+	$_SESSION['cor'] = "#00a451";
+	$_SESSION['img'] = "agsge";
 	//print('<script> localStorage.setItem("sistema", "'.$_SESSION['img'].'"); </script>');
 }
 else
@@ -150,9 +160,9 @@ $string = '{
 
 if(!Empty($_SESSION['manifest']))
 {
-$fp = fopen(''.$_SESSION['manifest'].'', 'w');
-fwrite($fp, $string);
-fclose($fp);
+   $fp = fopen(''.$_SESSION['manifest'].'', 'w');
+   fwrite($fp, $string);
+   fclose($fp);
 }
 
 if($_SESSION['tipo'] == 1)
@@ -174,6 +184,10 @@ else if($_SESSION['tipo'] == 4)
 else if($_SESSION['tipo'] == 5)
 {
 	$_SESSION['pg'] = "pgdbv";
+}
+else if($_SESSION['tipo'] == 6)
+{
+	$_SESSION['pg'] = "demo";
 }
 else
 {
