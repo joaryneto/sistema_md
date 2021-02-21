@@ -27,6 +27,8 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
                     <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Agenda";?></h2>
                     <p class="text-mute mb-2"><? echo $_SESSION["DESCRICAOPG2"] = "Lista";?></p>
                     <input type="text" Onkeyup="pesquisar(this.value);" class="form-control form-control-lg search bottom-25 position-relative border-0" placeholder="Pesquisa">
+					<button class='btn btn-info btnadd-sh a-agenda2'><i class='fa fa-plus-circle'></i></button>
+					
                 </div>
             </div>
         </div>   	  
@@ -38,6 +40,12 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 			<!--Tabs with Icon example -->
              <div class="row" id="load">
 			    <script>
+				   $('.a-agenda2').on('click',function()
+				   {	
+				       $('#modalap').modal('show');
+				       requestPage2('?br=atu_pesquisa&tipo=1&ap=1','modals','GET');
+				   });
+
 				   a_menuslow();
 				   $('.t-agenda').addClass('active');
 				   requestPage2('?br=atu_pesquisa&load=1','load','GET');

@@ -1,0 +1,165 @@
+.tableFixHead          { 
+  overflow-y: auto; 
+  height: auto;
+  border: 1px solid;
+  border-color: lightgray;
+  }
+.tableFixHead thead th { position: sticky; top: 0; }
+.tableFixHead thead th { background:#fff; }
+
+.form-control 
+{
+    height: calc(2.5em + .75rem + 2px) !important;
+}
+
+.logo {
+	background-color: transparent !important;
+}
+
+.btn-info {
+	height: 55px !important;
+}
+
+.btnadd-ad
+{
+	position: absolute;
+	left: 92%;
+	top: 28px;
+	height: 55px;
+	width: 50px;
+	font-size: 18px;
+}
+
+.btnadd-sh {
+    height: 60px !important;
+    width: 50px;
+    font-size: 18px !important;
+    position: relative;
+    float: right;
+    top: -35px;
+	margin-bottom: -45px !important;
+}
+
+.btnadd-us
+{  
+	height: 55px;
+	width: 50px;
+	font-size: 18px !important;
+	position: relative;
+	float: right;
+	top: -55px;
+	margin-bottom: -45px !important;
+}
+
+.btnadd-lg {
+    position: absolute;
+    left: 90.5%;
+    top: 31px;
+    height: 55px;
+    width: 50px;
+    font-size: 18px;
+}
+
+@media screen and (max-width:575.98px) {
+  .modal-dialog {
+    margin: -0.1rem !important;
+  }
+  
+  .btnadd-lg {
+    position: absolute;
+    left: 90.5%;
+    top: 31px;
+    height: 55px;
+    width: 50px;
+    font-size: 18px;
+  }
+  
+  .btnadd-ad
+  {
+	position: absolute;
+	left: 89.5%;
+	top: 27px;
+	height: 55px;
+	width: 50px;
+	font-size: 18px;
+  }
+  .btnadd-us
+  {  
+	height: 55px;
+	width: 50px;
+	font-size: 18px !important;
+	position: relative;
+	float: right;
+	top: -55px;
+  }
+}
+
+@media screen and (max-width:767.98px) {
+  
+  .btnadd-lg {
+    position: absolute;
+    left: 90.5%;
+    top: 31px;
+    height: 55px;
+    width: 50px;
+    font-size: 18px;
+  }
+  .btnadd-ad
+  {
+	position: absolute;
+	left: 86.5%;
+	top: 27px;
+	height: 55px;
+	width: 50px;
+	font-size: 18px;
+  }
+  .btnadd-us
+  {  
+	height: 55px;
+	width: 50px;
+	font-size: 18px !important;
+	position: relative;
+	float: right;
+	top: -55px;
+  }
+}
+
+@media screen and (max-width:991.98px) {
+
+  .btnadd-lg {
+    position: absolute;
+    left: 90.5%;
+    top: 31px;
+    height: 55px;
+    width: 50px;
+    font-size: 18px;
+  }
+  .btnadd-ad
+  {
+	position: absolute;
+	left: 88.5%;
+	top: 27px;
+	height: 55px;
+	width: 50px;
+	font-size: 18px;
+  }
+  .btnadd-us
+  {  
+	height: 55px;
+	width: 50px;
+	font-size: 18px !important;
+	position: relative;
+	float: right;
+	top: -55px;
+	margin-bottom: -45px !important;
+  }
+  .btnadd-sh {
+    height: 60px !important;
+    width: 50px;
+    font-size: 18px;
+    position: relative;
+    float: right;
+    top: -35px;
+	margin-bottom: -45px !important;
+  }
+}
