@@ -44,7 +44,7 @@ if(!$db3 = mysqli_connect("mysql669.umbler.com:41890", "sistemasl", "I_Jt{4|p6u"
 else if($_SESSION['tipo'] == 4)
 {	
 
-if(!$db = mysqli_connect("mysql741.umbler.com:41890", "sistemadelive", "*XlVz(7-4,9hG"))
+if(!$db = mysqli_connect("mysql743.umbler.com:41890", "sistemadelive", "*XlVz(7-4,9hG"))
 {
     //print("<script>window.alert('Não conectou com banco...')</script>");
 	//echo "Não conectou com banco 4";

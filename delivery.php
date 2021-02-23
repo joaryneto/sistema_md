@@ -15,12 +15,12 @@ if(@$_GET['deslogar']==1)
 	print "<script> window.location='login.php';  </script>";
 }
 
-$t_SQL = "";
-$t_RES = mysqli_query($db,$t_SQL);
-while($row = mysqli_fetch_array($t_RES))
-{
+//$t_SQL = "";
+//$t_RES = mysqli_query($db,$t_SQL);
+//while($row = mysqli_fetch_array($t_RES))
+//{
 	
-}
+//}
 
 ?>
 <!doctype html>
