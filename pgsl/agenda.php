@@ -77,7 +77,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 										</div>
 										<h6 class="font-weight-normal mb-1">'.$row['nome'].'</h6>';
 										
-										$data = revertedata(date('d-m-Y'));
+										$datad = date('Y-m-d');
 		
 										$SQL2 = "SELECT horarios.hora FROM horarios ORDER BY horarios.hora asc";
 										$RES2 = mysqli_query($db3,$SQL2);
@@ -89,20 +89,20 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 		  
 										$SQL3 = "SELECT agendamento_servicos.hora,agendamento.nome FROM agendamento 
 										inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo 
-										where agendamento_servicos.sistema='".$_SESSION['sistema']."' and agendamento_servicos.data='".$data."' and agendamento_servicos.profissional='".$row['codigo']."' and agendamento_servicos.hora='".$row1['hora']."'";
+										where agendamento_servicos.sistema='".$_SESSION['sistema']."' and agendamento_servicos.data='".$datad."' and agendamento_servicos.profissional='".$row['codigo']."' and agendamento_servicos.hora='".$row1['hora']."'";
 										$RES3 = mysqli_query($db3,$SQL3);
 										while($row3 = mysqli_fetch_array($RES3))
 										{
-													 $nome = $row2['nome'];
+													 $nome = $row3['nome'];
 													 $x = 1;
 										}
 												  if($x == 0)
 												  {
-													   echo '<p><span class="dot-notification mr-1"></span> <span class="text-mute">'.$row1['hora'].'</span></p>';
+													   echo '<p><span class="dot-notification mr-1"></span> <span class="text-mute" style="color: green;">'.$row1['hora'].'</span></p>';
 												  }
 												  else
 												  {
-													   echo '<p><span class="dot-notification mr-1"></span> <span class="text-mute">'.$row1['hora'].' - '.$nome.'</span></p>';
+													   echo '<p><span class="dot-notification mr-1"></span> <span class="text-mute" style="color: red;">'.$row1['hora'].' - '.$nome.'</span></p>';
 												  }
 										}
 								}
