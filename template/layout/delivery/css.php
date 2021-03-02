@@ -73,7 +73,8 @@
 
 	<link href="template/vendor/propeller-master/components/table/css/table.css" type="text/css" rel="stylesheet" /> 
 	
-
+    <!-- Swiper CSS -->
+    <link href="template/vendor/swiper/css/swiper.min.css" rel="stylesheet">
 	
     <link href="template/vendor/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
     <!-- Page plugins css -->
@@ -113,8 +114,6 @@
 	<link href="template/vendor/propeller-master/components/tab/css/tab.css" type="text/css" rel="stylesheet" /> 
 	<link href="template/vendor/propeller-master/components/dropdown/css/dropdown.css" type="text/css" rel="stylesheet" /> 
 	
-    <!-- Swiper CSS -->
-    <link href="template/vendor/swiper/css/swiper.min.css" rel="stylesheet">
 	
 	<!-- Propeller Accordion -->
 	<link href="template/vendor/propeller-master/components/alert/css/alert.css" type="text/css" rel="stylesheet" />

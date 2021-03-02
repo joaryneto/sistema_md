@@ -1,5 +1,9 @@
 <?
 
+ob_start();
+
+session_start();
+
 date_default_timezone_set('America/Cuiaba');
 
 if(!isset($_SESSION['usuario']))
@@ -8,6 +12,8 @@ if(!isset($_SESSION['usuario']))
 }
 else
 {
+
+require_once("./load/load.php");
 
 function isMobile() 
 {
@@ -19,7 +25,7 @@ function isMobile()
 <html lang="pt-br" class="color-theme-<?=$_SESSION['tema'];?>">
 
 <head>
-<? include 'template/layout/spa/css.php';?>
+<? include 'css.php';?>
 </head>
 
 <body>
@@ -143,13 +149,21 @@ function isMobile()
 
 
         <!-- page content here -->
+		<? if($_SESSION['tipo'] == 2){ ?>
+        <script>
+		window.onload = function ()
+		{
+			requestPage('?br=linhadotempo','conteudo','GET');
+		}
+		</script>
+		<? }else if($_SESSION['tipo'] == 3){ ?>
 	    <script>
 		window.onload = function ()
 		{
 			requestPage('?br=agenda','conteudo','GET');
 		}
 		</script>
-		
+		<? } ?>
         <div id="conteudo">
 		<? if($_SESSION['tipo'] == 2){
 		if(Empty($_SESSION['manutencao']))
@@ -169,8 +183,43 @@ function isMobile()
 		?>
         <!-- page content ends -->
         </div>
-		
-        <? if($_SESSION['tipo'] == 3){?>
+
+<? if($_SESSION['tipo'] == 2){?>
+        <!-- footer -->
+        <div class="footer">
+            <div class="no-gutters">
+                <div class="col-auto mx-auto">
+                    <div class="row no-gutters justify-content-center">
+                        <div class="col-auto">
+                            <a href="javascript:void(0);" id="ldotempo" class="btn btn-link-default t-menu t-linhadotempo">
+                                <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
+                                <span class="text-name">Linha do tempo</span>
+                            </a>
+                        </div>
+						<div class="col-auto">
+                            <a href="javascript: void(0);" class="btn btn-link-default t-menu t-diario">
+                                <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
+                                <span class="text-name">Diario</span>
+                            </a>
+                        </div>
+						<!--<div class="col-auto">
+                            <a href="javascript:void(0)" class="btn btn-link-default ">
+                                <span class="icon-text"><i class="material-icons">perm_contact_calendar</i></span>
+                                <span class="text-name">Finalizado</span>
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <a href="caixa.php" class="btn btn-link-default">
+                                <span class="icon-text"><i class="material-icons">store_mall_directory</i></span>
+                                <span class="text-name">Vendas</span>
+                            </a>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+<? } ?>
+<? if($_SESSION['tipo'] == 3){?>
         <!-- footer -->
         <div class="footer">
             <div class="no-gutters">
@@ -515,7 +564,7 @@ function slow()
 <!-- /.modal-dialog -->
 </div>
 </div>
-<? include 'template/layout/spa/scripts.php'?>
+<? include 'scripts.php'?>
 </body>
 
 </html>

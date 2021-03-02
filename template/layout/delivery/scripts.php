@@ -76,52 +76,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 	
-		<script>
-        $(window).on('load', function() {
-            $(".sparklinechart").sparkline([5, 6, -7, 2, 0, -4, -2, 4], {
-                type: 'bar',
-                zeroAxis: false,
-                barColor: '#00bf00',
-                height: '30',
-            });
-            $(".sparklinechart2").sparkline([-5, -6, 4, -2, 0, 4, 2, -4], {
-                type: 'bar',
-                zeroAxis: false,
-                barColor: '#00bf00',
-                height: '30',
-            });
-
-            /* Swiper slider */
-            var swiper = new Swiper('.swiper-prices', {
-                slidesPerView: 'auto',
-                spaceBetween: 0,
-                pagination: false,
-            });
-            var swiper = new Swiper('.swiper-categories', {
-                slidesPerView: 'auto',
-                spaceBetween: 20,
-                pagination: false,
-            });
-            var swiper = new Swiper('.swiper-shares', {
-                slidesPerView: 5,
-                spaceBetween: 0,
-                pagination: false,
-                breakpoints: {
-                    640: {
-                        slidesPerView: 2,
-                    },
-                    768: {
-                        slidesPerView: 2,
-                    },
-                    1024: {
-                        slidesPerView: 3,
-                    },
-                }
-            });
-        })
-
-    </script>
-	
 	<!-- MASK INPUT -->
     <script src="template/vendor/mask.money/jquery.maskMoney.js"></script>
     <script>
