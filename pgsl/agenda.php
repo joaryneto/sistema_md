@@ -74,7 +74,8 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 										     <div class="background">
 										      <img src="template/images/beautiful-2150881_640%402x.png" alt="">
 										   </div>
-										</div>';
+										</div>
+										<h6 class="font-weight-normal mb-1">'.$row['nome'].'</h6>';
 										
 										$data = revertedata(date('d-m-Y'));
 		
@@ -97,11 +98,11 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 										}
 												  if($x == 0)
 												  {
-													   echo '<h6 class="font-weight-normal mb-1">'.$row1['hora'].'</h6>';
+													   echo '<p><span class="dot-notification mr-1"></span> <span class="text-mute">'.$row1['hora'].'</span></p>';
 												  }
 												  else
 												  {
-													   echo '<h6 class="font-weight-normal mb-1">'.$row1['hora'].' - '.$nome.'</h6>';
+													   echo '<p><span class="dot-notification mr-1"></span> <span class="text-mute">'.$row1['hora'].' - '.$nome.'</span></p>';
 												  }
 										}
 								}
