@@ -12,7 +12,7 @@ require_once("./load/load.php");
     }
 	else if($_SESSION['tipo'] == 2)
 	{
-		
+		include ('template/layout/escolar/index.php');
 	}
 	else if($_SESSION['tipo'] == 3)
 	{

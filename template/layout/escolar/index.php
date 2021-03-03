@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="pt-br" class="color-theme-<?=$_SESSION['tema'];?>">
 <head>
@@ -26,7 +25,15 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<?if($_SESSION['tipo'] == 1){?>
+	<link rel="manifest" href="/manifest.json">
+	<?}else if($_SESSION['tipo'] == 2){?>
 	<link rel="manifest" href="/manifest1.json">
+	<?}else if($_SESSION['tipo'] == 3){?>
+	<link rel="manifest" href="/manifest2.json">
+	<?}else if($_SESSION['tipo'] == 4){?>
+	<link rel="manifest" href="/manifest3.json">
+	<?}?>
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
@@ -48,11 +55,17 @@
     <link href="template/vendor/swiper/css/swiper.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+	<? if($_SESSION['tipo'] == 1 or $_SESSION['tipo'] == 2 or $_SESSION['tipo'] == 3){?>
     <link href="template/css/style.css" rel="stylesheet">
+	<?} else if($_SESSION['tipo'] == 4){?>
+    <!-- Custom styles for this template -->
+    <link href="template/css/style-red.css" rel="stylesheet" id="style">
+	<?}?>
 </head>
 
 <body>
     <!-- Loader -->
+	<? if($_SESSION['tipo'] == 1 or $_SESSION['tipo'] == 2 or $_SESSION['tipo'] == 3){?>
     <div class="row no-gutters vh-100 loader-screen">
         <div class="bg-template background-overlay"></div>
         <div class="col align-self-center text-white text-center">
@@ -82,6 +95,8 @@
             </div>
         </div>
         <!-- header ends -->
+		<?if($_SESSION['tipo'] == 1){?>
+		<?} else if($_SESSION['tipo'] == 2){?>
         <div class="swiper-container introduction vh-100">
             <div class="swiper-wrapper">
                 <div class="swiper-slide overflow-hidden bg-gradient-cyan text-white">
@@ -109,7 +124,121 @@
             <div class="swiper-pagination bullets-white text-left"></div>
         </div>
 		<a href="login.php" class="btn btn-light btn-lg button-fab right-bottom text-uppercase">Logar <i class="material-icons vm">arrow_forward</i></a>
+		<?}else if($_SESSION['tipo'] == 3){?>
+        <div class="swiper-container introduction vh-100">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide overflow-hidden bg-gradient-purple text-white">
+                    <div class="row no-gutters h-100">
+                        <div class="col align-self-center text-center">
+                            <img src="template/images/hair.png" height="350px" alt="" class="mw-100 mx-auto mb-4">
+                            <br><br>
+                            <h2 class="text-uppercase font-weight-light">Beleza e seu bem estar em suas mãos.</h2>
+                            <p class="text-mute"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide overflow-hidden bg-gradient-purple text-white">
+                    <div class="row no-gutters h-100">
+                        <div class="col align-self-center text-center">
+                            <img src="template/images/cabelos.png" height="350px" alt="" class="mw-100 mx-auto mb-4">
+                            <br><br>
+                            <h2 class="text-uppercase font-weight-light">Uma experiencia unica!</h2>
+                            <p class="text-mute">Encontre os melhores Spa & Cabelereiros.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination bullets-white text-left">teste</div>
+        </div>	
+		<a href="login.php" class="btn btn-light btn-lg button-fab right-bottom text-uppercase">Logar <i class="material-icons vm">arrow_forward</i></a>
+		<?}?>
     </div>
+	<? }else if($_SESSION['tipo'] == 4){?>
+	
+	    <div class="container-fluid pageloader">
+        <div class="row h-100">
+            <div class="col-12 align-self-start text-center">
+            </div>
+            <div class="col-12 align-self-center text-center">
+			<img style="height:70px" src="template/images/delivery.png" alt="logo">
+            <h1 class="mb-0 mt-3">EC </h1>
+            <p class="text-mute subtitle"> Tecnologia</p>
+            <div class="loader-roller">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            </div>
+            <div class="col-12 align-self-end text-center">
+                <p class="my-5">Por favor, espere<br><small class="text-mute">Um mundo de maravilhas está carregando...</small></p>
+            </div>
+        </div>
+    </div>
+    <!-- Page laoder ends -->
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0 main-container py-0">
+        <div class="container-fluid vh-100 bg-dark position-relative overflow-hidden">
+            <div class="background opac">
+                <img src="template/images/food1.jpg" alt="">
+            </div>
+            <div class="row h-100">
+                <div class="container h-100">
+                    <div class="row h-100">
+                        <div class="col-12 align-self-start text-center">
+                        </div>
+                        <div class="col-12 align-self-center text-center px-0">
+                            <!-- Swiper -->
+                            <div class="swiper-container introslider text-white">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide px-3 py-4 ">
+                                        <div class="card bg-none border-0 mb-4">
+                                            <div class="card-body p-5">
+                                                <div class="row">
+                                                    <div class="mx-auto col-12 col-sm-8 col-md-6">
+                                                        <i class="material-icons icons icon-100 text-white bg-danger mb-4">room_service</i><br>
+                                                        <h4>Melhores serviços de alimentação</h4>
+                                                        <p>Encontre o melhor da culinaria brasileiro aqui.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide px-3 py-4 ">
+                                        <div class="card bg-none border-0 mb-4">
+                                            <div class="card-body p-5">
+                                                <div class="row">
+                                                    <div class="mx-auto col-12 col-sm-8 col-md-6">
+                                                        <i class="material-icons icons icon-100 text-white bg-warning mb-4">directions_bike</i><br>
+                                                        <h4>Entrega rápida em casa</h4>
+                                                        <p></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Add Pagination -->
+                                <div class="swiper-pagination bottom-10"></div>
+                            </div>
+                        </div>
+                        <div class="col-12 py-4 align-self-end text-center">
+                            <div class="row no-gutters">
+                                <div class="col"><a href="login.php" class="btn btn-lg btn-link text-white btn-block">Logar <i class="material-icons vm">arrow_forward</i></a></div>
+                                <div class="col"><a href="delivery.php" class=" btn btn-lg btn-default default-shadow btn-block">Delivery <i class="material-icons vm">add_shopping_cart</i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+	<!-- scroll to top button -->
+    <button type="button" class="btn btn-default default-shadow scrollup bottom-right position-fixed btn-44"><span class="arrow_carrot-up"></span></button>
+    <!-- scroll to top button 
+
+	<?}?>
     <!-- wrapper ends -->
     <!-- jquery, popper and bootstrap js -->
     <script src="template/js/jquery-3.3.1.min.js"></script>
@@ -122,6 +251,8 @@
     <!-- swiper js -->
     <script src="template/vendor/swiper/js/swiper.min.js"></script>
   
+    <? if($_SESSION['tipo'] == 1 or $_SESSION['tipo'] == 2 or $_SESSION['tipo'] == 3){?>
+
     <!-- template custom js -->
 	
     <script src="template/js/main.js"></script>
@@ -137,5 +268,24 @@
         });
 
     </script>
+	<?} else if($_SESSION['tipo'] == 4){?>
+	
+    <!-- Customized jquery file  -->
+    <script src="template/js/main2.js"></script>
+
+    <script>
+        "use strict"
+        $(document).ready(function() {
+            /* Swiper slider */
+            var swiper = new Swiper('.introslider', {
+                autoplay: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+            });
+        });
+
+    </script>
+	<?}?>
 </body>
 </html>
