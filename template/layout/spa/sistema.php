@@ -1,5 +1,6 @@
 <?
 
+
 date_default_timezone_set('America/Cuiaba');
 
 if(!isset($_SESSION['usuario']))

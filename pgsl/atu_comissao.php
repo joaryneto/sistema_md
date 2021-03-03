@@ -106,7 +106,7 @@ else if(@$inputb['ap'] == 2)
 		</script>');
   }
 }
-else if($inputb['ap'] == 3)
+else if(@$inputb['ap'] == 3)
 {
   $sql = "select comissao.codigo,usuarios.nome, comissao.valor from comissao 
   inner join usuarios on usuarios.codigo=comissao.profissional
@@ -151,7 +151,7 @@ if(@$inputb['load'] == 1){
 		<td data-title="Valor"><? echo number_format($row['valor'], 2, ',','.');?></td>
 		<!--<td>< echo $numero = number_format($row['valor_padrao']-+$row['valor'], 2, ',','.');?></td>-->
 		<td data-title="Opções">
-		<a class="fa fa-eye" href="javascript:void(0);" title="Visualizar" onclick="viewer('<?=$row['profissional'];?>','<?=$row['data_inicio'];?>','<?=$row['data_final'];?>');" style="font-size: 150%; color: blue;"><a>
+		<a class="fa fa-eye" href="javascript:void(0);" title="Visualizar" onclick="viewer('<?=$row['codigo'];?>');" style="font-size: 150%; color: blue;"><a>
 		<a class="fa fa-window-close" href="javascript:void(0);" title="Excluir" onclick="co_excluir(<?=$row['codigo'];?>);" style="font-size: 150%; color: red;"><a>
 		</td>
 	</tr>

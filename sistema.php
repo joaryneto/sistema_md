@@ -1,8 +1,8 @@
 <?
 
-//ob_start();
+ob_start();
 
-//session_start();
+session_start();
 
 require_once("./load/load.php");
 
@@ -12,7 +12,7 @@ require_once("./load/load.php");
     }
 	else if($_SESSION['tipo'] == 2)
 	{
-		
+		include ('template/layout/escolar/sistema.php');
 	}
 	else if($_SESSION['tipo'] == 3)
 	{

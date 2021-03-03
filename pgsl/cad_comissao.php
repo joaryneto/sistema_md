@@ -106,8 +106,9 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 									}
 									else
 									{
-										  $('#modalap').modal('show');
-									      requestPage2('?br=rel_extratocomissao&profissional='+ profissional +'&inicio='+ inicio +'&final='+ cfinal +'','modals','GET');
+										  //$('#modalap').modal('show');
+									      //requestPage2('?br=rel_extratocomissao3&profissional='+ profissional +'&inicio='+ inicio +'&final='+ cfinal +'','modals','GET');
+										  open('relatorio.php?url=rel_extratocomissao3&profissional='+ profissional +'&inicio='+ inicio +'&final='+ cfinal +'');
 									}
 								});
 								
@@ -115,11 +116,12 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 								{
 									 requestPage2('?br=atu_comissao&codigo='+ codigo +'&ap=2&load=1','u_load','GET');
 								}
-								
-								function viewer(profissional,inicio,cfinal)
+									
+								function viewer(codigo)
 								{
-									$('#modalap').modal('show');
-									requestPage2('?br=rel_extratocomissao2&profissional='+ profissional +'&inicio='+ inicio +'&final='+ cfinal +'','modals','GET');
+									//$('#modalap').modal('show');
+									//requestPage2('?br=rel_pagamento&codigo='+ codigo +'','modals','GET');
+									open('relatorio.php?url=rel_pagamento&codigo='+ codigo +'');
 								}
 								
 								$('.t-buscar').on('click',function()
