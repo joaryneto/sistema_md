@@ -55,6 +55,7 @@ if(@$inputb['ap'] == "1")
 	}
 	else
 	{
+	   
 	   $SQL1 = "INSERT into usuarios(sistema, cpf, login,senha, nome, email, nascimento , tipo, status, banco,agencia,conta,tipoconta) values('".$_SESSION['sistema']."','".$inputb['cpf']."','".$inputb['login']."','".$inputb['senha']."','".$inputb['nome']."','".$inputb['email']."','".revertedata($inputb['nascimento'])."','".$inputb['tipo']."','".$inputb['situacao']."','".$inputb['banco']."','".$inputb['agencia']."','".$inputb['conta']."','".$inputb['tipoconta']."')";
 	   $sucesso = mysqli_query($db3,$SQL1);
 	   
@@ -95,7 +96,20 @@ if(@$inputb['ap'] == "1")
 }
 else if(@$inputb['ap'] == "2")
 {
-	$SQL1 = "UPDATE usuarios SET cpf='".$inputb['cpf']."',login='".$inputb['login']."',senha='".$inputb['senha']."',nome='".$inputb['nome']."',email='".$inputb['email']."',nascimento='".revertedata($inputb['nascimento'])."',tipo='".$inputb['tipo']."',status='".$inputb['situacao']."',banco='".$inputb['banco']."',agencia='".$inputb['agencia']."',conta='".$inputb['conta']."',tipoconta='".$inputb['tipoconta']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
+	//$hashed_password = password_hash($inputb['senha'], PASSWORD_DEFAULT);
+	
+	//$senha = $inputb['senha'];
+	
+	if()
+	{
+		
+	}
+	
+	$senha = $inputb['senha'];
+	
+	$senha = password_hash($senha, PASSWORD_DEFAULT, ['cost' => 12]);
+	
+	$SQL1 = "UPDATE usuarios SET cpf='".$inputb['cpf']."',login='".$inputb['login']."',senha='".$senha."',nome='".$inputb['nome']."',email='".$inputb['email']."',nascimento='".revertedata($inputb['nascimento'])."',tipo='".$inputb['tipo']."',status='".$inputb['situacao']."',banco='".$inputb['banco']."',agencia='".$inputb['agencia']."',conta='".$inputb['conta']."',tipoconta='".$inputb['tipoconta']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
 	$sucesso = mysqli_query($db3,$SQL1);
 	
 	if($sucesso)
@@ -129,6 +143,7 @@ if(isset($codigo))
 		 $cpf = $row['cpf'];
 		 $login = $row['login'];
 		 $senha = $row['senha'];
+		 $_SESSION['pwe'] = $senha;
 		 $nome = $row['nome'];
 		 $email = $row['email'];
 		 $nascimento = $row['nascimento'];

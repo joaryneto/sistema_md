@@ -215,17 +215,31 @@ if(@$inputb['ap'] == 1)
 		}
 	}
 	
+	function dataAtualFormatada(){
+    var data = new Date(),
+        dia  = data.getDate().toString(),
+        diaF = (dia.length == 1) ? '0'+dia : dia,
+        mes  = (data.getMonth()+1).toString(), //+1 pois no getMonth Janeiro começa com zero.
+        mesF = (mes.length == 1) ? '0'+mes : mes,
+        anoF = data.getFullYear();
+    return diaF+"/"+mesF+"/"+anoF;
+    }
+
 	function pdata()
 	{
 		var profissional = document.getElementById('profissional').value;
+		var data = document.getElementById('dataagenda').value;
+		phorario(data);
 		
 		if(profissional == 0)
 		{
-			 $('.dataagenda').val('');
+			 $('.dataagenda').val(dataAtualFormatada);
 			 document.getElementById('hora').innerHTML = '<option value="">Escolher Horario<option>';
 			 $('.dataagenda').attr('disabled', true);
 			 $('.hora').attr('disabled', true);
 			 $('.servico').attr('disabled', true);
+			 
+			 
 		}
 		else
 		{
@@ -252,7 +266,7 @@ if(@$inputb['ap'] == 1)
 	</select>
 	</div>
 	<div class="form-group col-md-12 m-t-20">
-	<input name="dataagenda" id="dataagenda" type="text" onchange="phorario(this.value);" disabled placeholder="Data" autocomplete="off" class="form-control  form-control-lg data dataagenda"/>
+	<input name="dataagenda" id="dataagenda" type="text" onchange="phorario(this.value);" disabled placeholder="Data" value="<? echo date('d-m-Y');?>" autocomplete="off" class="form-control  form-control-lg data dataagenda"/>
 	<input name="qtd" id="qtd" value="" type="hidden" value="0" autocomplete="off" class="form-control  form-control-lg" required="required"/>
 	</div>
 	<div class="form-group col-md-12 m-t-20">
@@ -317,12 +331,12 @@ if(@$inputb['ap'] == 1)
 	 </div> 
 	 </div>
 	 <div class="form-group pmd-textfield pmd-textfield-floating-label">
-	 <a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="servico_add(<?=$rows['codigo'];?>);"><i class="material-icons">add_shopping_cart</i>  Adicionar Item ao Carrinho</a>
+	 <a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="servico_add(<?=$rows['codigo'];?>);"><i class="material-icons">add_shopping_cart</i>  Adicionar Serviço</a>
 	 </div>
-	 <h2 id="sv_total"><span style="color: green;">Valor Total: R$ 0,00</span></h2>
+	 
+	 <a class="btn pmd-btn-outline pmd-ripple-effect btn-warning" href="javascript: void(0);" onclick="sv_itens();"><b id="sv_qtd"></b> <i class="material-icons">add_shopping_cart</i> Serviços Pré-Agendados</a><h2 id="sv_total"><span style="color: green;">Valor Total: R$ 0,00</span></h2>
+	 <br>
 	 <div class="form-group pmd-textfield pmd-textfield-floating-label">
-	    <a class="btn pmd-btn-outline pmd-ripple-effect btn-warning" href="javascript: void(0);" onclick="sv_itens();"><b id="sv_qtd"></b> <i class="material-icons">add_shopping_cart</i> Itens Pré-Agendados</a>
-
 	    <a class="btn pmd-btn-outline pmd-ripple-effect btn-primary" href="javascript: void(0);" onclick="cp_proximo(<?=$_SESSION['agendamento'];?>);"><i class="material-icons">person_add</i>  Proximo</a>
     </div>
 <script>

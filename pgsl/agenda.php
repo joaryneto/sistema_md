@@ -69,13 +69,14 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 								$RES1 = mysqli_query($db3,$SQL1);
 								while($row = mysqli_fetch_array($RES1))
 								{
-										echo '<a class="swiper-slide">
+										$primeiroNome = explode(" ", $row['nome']);
+										echo '<a class="swiper-slide" style="width: 130px;">
 										<div class="mb-3 h-100px w-100px rounded overflow-hidden position-relative">
 										     <div class="background">
 										      <img src="template/images/beautiful-2150881_640%402x.png" alt="">
 										   </div>
 										</div>
-										<h6 class="font-weight-normal mb-1">'.$row['nome'].'</h6>';
+										<h6 class="font-weight-normal mb-1">'.current($primeiroNome).'</h6>';
 										
 										$datad = date('Y-m-d');
 		
@@ -95,6 +96,8 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 										{
 													 $nome = $row3['nome'];
 													 $x = 1;
+													 
+													 
 										}
 												  if($x == 0)
 												  {
@@ -102,7 +105,9 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 												  }
 												  else
 												  {
-													   echo '<p><span class="dot-notification mr-1"></span> <span class="text-mute" style="color: red;">'.$row1['hora'].' - '.$nome.'</span></p>';
+													 
+													  
+													  echo '<p><span class="dot-notification mr-1"></span> <span class="text-mute" style="color: red;">'.$row1['hora'].' - '.$nome.'</span></p>';
 												  }
 										}
 								}
