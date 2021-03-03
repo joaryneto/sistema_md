@@ -12,8 +12,9 @@ if($_SESSION['tipo'] == 1)
     }
 	else if($_SESSION['tipo'] == 2)
 	{
-		
-	}else if($_SESSION['tipo'] == 3)
+		include ('template/layout/escolar/login.php');
+	}
+	else if($_SESSION['tipo'] == 3)
 	{
 	  
 	  include ('template/layout/spa/login.php');
