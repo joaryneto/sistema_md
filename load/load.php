@@ -1,6 +1,6 @@
 <?
 
-if(@$_SERVER['SERVER_NAME'] == "ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "app.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.ec")
+if(@$_SERVER['SERVER_NAME'] == "www.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "app.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.ec")
 {
 	$_SESSION['nosistema'] = "".$_SERVER['SERVER_NAME']."/login.php";
 	$_SESSION['nomesoft'] = "EC Tecnologia";
