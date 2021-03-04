@@ -295,6 +295,6 @@ while($row = mysqli_fetch_array($res2))
 
     <script>
         window.print();
-        window.onafterprint = function () { window.close() };
+        //window.onafterprint = function () { window.close() };
     </script>
 
