@@ -5,7 +5,7 @@ $inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 $login = security::input(@$inputb['login']);
 $senha = security::input(@$inputb['senha']);
 
-echo $pwe = password_hash($senha, PASSWORD_DEFAULT);
+$pwe = password_hash($senha, PASSWORD_DEFAULT);
 
 $x = 0;
 $senhad = "";

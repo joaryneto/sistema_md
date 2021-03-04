@@ -10,12 +10,12 @@ setlocale(LC_MONETARY,"pt_BR", "ptb");
 
 if(!Empty($inputb['inicio']) and !Empty($inputb['final']))
 {
-	$_SESSION['inicio'] = $inputb['inicio'];
-	$_SESSION['final'] = $inputb['final'];
+	$_SESSION['inicio'] = revertedata($inputb['inicio']);
+	$_SESSION['final'] = revertedata($inputb['final']);
 	$_SESSION['profissional'] = $inputb['profissional'];
 }
 
-$sql = "SELECT clientes.nome as cliente , count(agendamento_servicos.codigo) as qtd, agendamento_servicos.data, agendamento_servicos.codigo, usuarios.nome, produtos.preco, sum(((produtos_usuarios.comissao)/100)*vendas_recebidos.total) as TotalTaxa , sum(((produtos_usuarios.comissao)/100)*(vendas_recebidos.total-(((vendas_recebidos.taxa)/100)*vendas_recebidos.total))) as total FROM produtos_usuarios
+$sqlc = "SELECT clientes.nome as cliente , count(agendamento_servicos.codigo) as qtd, agendamento_servicos.data, agendamento_servicos.codigo, usuarios.nome, produtos.preco, sum(((produtos_usuarios.comissao)/100)*vendas_recebidos.total) as TotalTaxa , sum(((produtos_usuarios.comissao)/100)*(vendas_recebidos.total-(((vendas_recebidos.taxa)/100)*vendas_recebidos.total))) as total FROM produtos_usuarios
 inner join agendamento_servicos on agendamento_servicos.profissional=produtos_usuarios.usuario 
 and agendamento_servicos.servico=produtos_usuarios.produto
 inner join produtos on produtos.codigo=produtos_usuarios.produto
@@ -25,10 +25,10 @@ inner join vendas_recebidos on vendas_recebidos.venda=vendas_mov.venda
 left join clientes on clientes.codigo=vendas_mov.cliente
 where produtos_usuarios.sistema='".$_SESSION['sistema']."' and produtos_usuarios.usuario='".$_SESSION['profissional']."' and vendas_mov.`status`=1 and agendamento_servicos.status=1 and agendamento_servicos.data >= CAST('".$_SESSION['inicio']."' AS DATE) AND agendamento_servicos.data <= CAST('".$_SESSION['final']."' AS DATE) GROUP BY agendamento_servicos.codigo ORDER BY agendamento_servicos.data asc ";
 										  
-$res = mysqli_query($db3,$sql); 
-$row = mysqli_fetch_array($res);
+$resc = mysqli_query($db3,$sqlc); 
+$rowc = mysqli_fetch_array($resc);
 
-if(isset($row['codigo']))
+if(isset($rowc['codigo']))
 {
 
 ?>
@@ -133,7 +133,7 @@ if(isset($row['codigo']))
         
     </style>
 </head>
-<body>
+
 <div style="text-align: center;margin-bottom:75px;">
     <h1 style="margin:20px 0 40px;font-size: 12pt;">Ayme</h1>
     <h1>RESUMO FINANCEIRO</h1>
@@ -273,6 +273,5 @@ else
 
     <script>
         javascript: window.print();
+		window.onafterprint = function () { window.close() };
     </script>
-</body>
-</html>

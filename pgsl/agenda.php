@@ -55,7 +55,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
     </div>
   </div>
 </div>
-
+<? if(@$_GET['sdas'] == "teste"){?>
         <div class="container my-5">
             <div class="row">
                 <div class="col-12">
@@ -165,3 +165,4 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
         
 
     </script>
+<?} ?>
