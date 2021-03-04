@@ -15,7 +15,7 @@ if(!Empty($inputb['inicio']) and !Empty($inputb['final']))
 	$_SESSION['profissional'] = $inputb['profissional'];
 }
 
-$SQLc = "SELECT clientes.nome as cliente , count(agendamento_servicos.codigo) as qtd, agendamento_servicos.data, agendamento_servicos.codigo, usuarios.nome, produtos.preco, produtos.descricao, sum(((produtos_usuarios.comissao)/100)*vendas_recebidos.total) as TotalTaxa , sum(((produtos_usuarios.comissao)/100)*(vendas_recebidos.total-(((vendas_recebidos.taxa)/100)*vendas_recebidos.total))) as total FROM produtos_usuarios
+$sql = "SELECT clientes.nome as cliente , count(agendamento_servicos.codigo) as qtd, agendamento_servicos.data, agendamento_servicos.codigo, usuarios.nome, produtos.preco, sum(((produtos_usuarios.comissao)/100)*vendas_recebidos.total) as TotalTaxa , sum(((produtos_usuarios.comissao)/100)*(vendas_recebidos.total-(((vendas_recebidos.taxa)/100)*vendas_recebidos.total))) as total FROM produtos_usuarios
 inner join agendamento_servicos on agendamento_servicos.profissional=produtos_usuarios.usuario 
 and agendamento_servicos.servico=produtos_usuarios.produto
 inner join produtos on produtos.codigo=produtos_usuarios.produto
@@ -23,10 +23,13 @@ inner join usuarios on usuarios.codigo=produtos_usuarios.usuario
 inner join vendas_mov on vendas_mov.agendamento=agendamento_servicos.codigo
 inner join vendas_recebidos on vendas_recebidos.venda=vendas_mov.venda
 left join clientes on clientes.codigo=vendas_mov.cliente
-where produtos_usuarios.sistema='".$_SESSION['sistema']."' and produtos_usuarios.usuario='".$_SESSION['profissional']."' and vendas_mov.`status`=1 and agendamento_servicos.status=1 and agendamento_servicos.data >= CAST('".revertedata($_SESSION['inicio'])."' AS DATE) AND agendamento_servicos.data <= CAST('".revertedata($_SESSION['final'])."' AS DATE) GROUP BY produtos.descricao ORDER BY agendamento_servicos.data asc ";
-	
-$resc = mysqli_query($db3,$SQLc); 
-$rowc = mysqli_fetch_array($resc);
+where produtos_usuarios.sistema='".$_SESSION['sistema']."' and produtos_usuarios.usuario='".$_SESSION['profissional']."' and vendas_mov.`status`=1 and agendamento_servicos.status=1 and agendamento_servicos.data >= CAST('".$_SESSION['inicio']."' AS DATE) AND agendamento_servicos.data <= CAST('".$_SESSION['final']."' AS DATE) GROUP BY agendamento_servicos.codigo ORDER BY agendamento_servicos.data asc ";
+										  
+$res = mysqli_query($db3,$sql); 
+$row = mysqli_fetch_array($res);
+
+if(isset($row['codigo']))
+{
 
 ?>
 
@@ -377,7 +380,16 @@ while($row = mysqli_fetch_array($res2))
     </tr>
 </table>
 
+<?
+}
+else
+{
+	echo "Nenhuma informação encontrado para esse periodo ou ja foi gerado a comissão.";
+}
 
+?>
 
-
-
+    <script>
+        window.print();
+        window.onafterprint = function () { window.close() };
+    </script>
