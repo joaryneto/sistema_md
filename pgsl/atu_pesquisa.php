@@ -229,7 +229,7 @@ if(@$inputb['ap'] == 1)
 	{
 		var profissional = document.getElementById('profissional').value;
 		var data = document.getElementById('dataagenda').value;
-		phorario(data);
+		//phorario(data);
 		
 		if(profissional == 0)
 		{
