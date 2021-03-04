@@ -272,8 +272,7 @@ else
 ?>
 
     <script>
-        window.print();
-        window.onafterprint = function () { window.close() };
+        javascript: window.print();
     </script>
 </body>
 </html>
