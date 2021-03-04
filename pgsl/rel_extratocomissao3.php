@@ -133,125 +133,7 @@ if(isset($row['codigo']))
         
     </style>
 </head>
-
-
-
-<!DOCTYPE html>
-<head>
-    <title>Trinks.com</title>
-    <style type="text/css">
-        body {
-            font-family: sans-serif;
-        }
-
-        body, table, h1, h2, h3 {
-            font-size: 10pt;
-        }
-
-        h1 {
-            margin: 0;
-        }
-
-        h2 {
-            margin: 0;
-            font-weight: normal;
-        }
-
-        h3 {
-            font-weight: bold;
-            margin-top: 1cm;
-            margin-bottom: 3mm;
-            border-bottom: 0px solid #000;
-            padding-bottom: 1mm;
-            text-transform: uppercase
-        }
-
-        h4 {
-            font-style: italic;
-            font-size: 1em;
-            margin-top: 0.5cm;
-            margin-bottom: 0;
-            font-weight: normal;
-        }
-
-        .observacao {
-            text-align: right;
-            font-style: italic;
-            font-size: /*0.8em*/35px;
-        }
-
-        .grid .totais td {
-            font-weight: bold;
-            border-top: 1.5px solid #000 !important;
-        }
-
-        .totais td:first-child {
-            text-align: right;
-        }
-
-        .grid {
-            border-collapse: collapse;
-        }
-
-            .grid td, .grid th {
-                border: 1px solid #000;
-                padding: 0.1cm 0.2cm;
-            }
-
-            .grid th {
-                border-bottom: 1px solid #000;
-                background-color: #20aee3
-            }
-
-            .grid td.valorGrande {
-                text-align: right;
-            }
-
-        .valorGrande {
-            width: 7em;
-        }
-
-        .valorQuantidade {
-            width: 5em;
-            text-align: center;
-        }
-
-        @media print {
-            .break {
-                page-break-before: always;
-            }
-        }
-
-        @media screen {
-            .break {
-                border-top: 1px dashed #AAA;
-                margin: 2cm 0;
-            }
-        }
-
-        #MensagemImpressaoRelatorioComissoes{
-            margin-top: 10px;
-            white-space:pre-line;
-        }
-        
-    </style>
-</head>
-
-
-
-<style>
-    td.detalhes {
-        vertical-align: top;
-    }
-
-        td.detalhes .linha {
-            padding: 2px 0;
-            display: flex;
-            justify-content: space-between;
-        }
-</style>
-
-
+<body>
 <div style="text-align: center;margin-bottom:75px;">
     <h1 style="margin:20px 0 40px;font-size: 12pt;">Ayme</h1>
     <h1>RESUMO FINANCEIRO</h1>
@@ -393,3 +275,5 @@ else
         window.print();
         window.onafterprint = function () { window.close() };
     </script>
+</body>
+</html>
