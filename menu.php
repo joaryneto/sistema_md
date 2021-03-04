@@ -168,7 +168,7 @@
 							 Gerar Comissão
                             </a>
 							<? } ?>
-							<?if(@$_SESSION['permissao'] == 2 or @$_SESSION['permissao'] == 4){?>
+							<?if(@$_SESSION['permissa5454o'] == 2 or @$_SESSION['permissao'] == 4){?>
                             <a href="javascript: void(0);" class="dropdown-item t-pcomissao">
                              Comissão Geradas
                             </a>
