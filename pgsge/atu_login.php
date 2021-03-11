@@ -1,15 +1,16 @@
 <?
 
-$login = $_GET['login'];
-$senha = $_GET['senha'];
+$inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 
-$_SESSION['login'] = $login;
-$_SESSION['senha'] = $senha;
+$login = security::input(@$inputb['login']);
+$senha = security::input(@$inputb['senha']);
+
+$pwe = password_hash($senha, PASSWORD_DEFAULT);
 
 $x = 0;
 
 
-$SQL = "select usuarios.sistema,usuarios.codigo,usuarios.nome,usuarios.tipo, usuarios.matricula,matriculas.turma from usuarios 
+$SQL = "select usuarios.sistema,usuarios.codigo,usuarios.nome,usuarios.tipo, usuarios.matricula,matriculas.turma,usuarios.senha from usuarios 
 left join matriculas on matriculas.matricula=usuarios.matricula
 where usuarios.cpf='".$_SESSION['login']."' and usuarios.senha='".$_SESSION['senha']."' or usuarios.email='".$_SESSION['login']."' and usuarios.senha='".$_SESSION['senha']."' or usuarios.login='".$_SESSION['login']."' and usuarios.senha='".$_SESSION['senha']."'";
 
@@ -22,6 +23,7 @@ while($res = mysqli_fetch_array($ress))
 	$x = 1;
     $_SESSION['usuario'] = $res['codigo'];
 	$_SESSION['sistema'] = $res['sistema'];
+	$senhad = $res['senha'];
 	$_SESSION['nome'] = $res['nome'];
 	$_SESSION['permissao'] = $res['tipo'];
 	$_SESSION['matricula'] = $res['matricula'];
@@ -29,22 +31,42 @@ while($res = mysqli_fetch_array($ress))
 	
 	//$_SESSION['menu'] = 3;
 	//$_SESSION['pages'] = 3;
-	
-	$token = mb_strtoupper(strval(bin2hex(openssl_random_pseudo_bytes(16))));
-	print('<script> localStorage.setItem("token", "'.$token.'"); </script>');
+
 }
 
 
 //mysqli_close($db2);
 
-if($x == 1)
+if(password_verify($inputb['senha'], $senhad))
 {
-	$_SESSION["donoSessao"] =  md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
-	print "<script> window.location='sistema.php';  </script>";
+	$x = 1;
 }
 else
 {
-	print "<script> swal('Atenção', 'Login ou senha invalido.'); </script>";
-    //print "<script> window.location='login.php'; </script>";
+	$x = 0;
 }
+
+if($x == 1)
+{
+	$_SESSION["donoSessao"] =  md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+	
+	print "<script> window.location='sistema.php'; </script>"; 
+}
+else
+{
+	  
+	$_SESSION['usuario'] = "";
+	$_SESSION['login'] = "";
+	$_SESSION['sistema'] = "";
+	$_SESSION['nome'] = "";
+	$_SESSION['permissao'] = "";
+		
+	print '<script> swal({   
+            title: "Atenção",   
+            text: "Login ou senha invalido.",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });</script>';
+}
+
 ?>

@@ -6,7 +6,8 @@ session_start();
 
 require_once("./load/load.php");
 
-    if($_SESSION['tipo'] == 1)
+
+if($_SESSION['tipo'] == 1)
     {
 	    include ('template/layout/ecweb/sistema.php');
     }
@@ -16,7 +17,14 @@ require_once("./load/load.php");
 	}
 	else if($_SESSION['tipo'] == 3)
 	{
-	    include ('template/layout/spa/sistema.php');  
+		if(isset($_GET['empresa']))
+        {
+	      include ('template/layout/spa/agendamento.php');  
+		}
+		else
+		{
+		  
+		}
 	}
 	else if($_SESSION['tipo'] == 4)
 	{
@@ -29,5 +37,5 @@ require_once("./load/load.php");
 	else if($_SESSION['tipo'] == 6)
 	{
 	   include ('template/layout/demo/sistema.php');
-	}
+}	
 ?>
