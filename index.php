@@ -16,7 +16,18 @@ require_once("./load/load.php");
 	}
 	else if($_SESSION['tipo'] == 3)
 	{
-	    include ('template/layout/spa/index.php');  
+		if(@$_GET['sl'] == "login")
+		{
+	       include ('template/layout/spa/login.php');  
+		}
+		else if(@$_GET['sl'] == "sistema")
+		{
+	       include ('template/layout/spa/sistema.php');  
+		}
+		else
+		{
+		   include ('template/layout/spa/index.php');
+		}
 	}
 	else if($_SESSION['tipo'] == 4)
 	{

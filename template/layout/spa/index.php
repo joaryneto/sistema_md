@@ -108,7 +108,7 @@
             <!-- Add Pagination -->
             <div class="swiper-pagination bullets-white text-left">teste</div>
         </div>	
-		<a href="login.php" class="btn btn-light btn-lg button-fab right-bottom text-uppercase">Logar <i class="material-icons vm">arrow_forward</i></a>
+		<a href="/?sl=login" class="btn btn-light btn-lg button-fab right-bottom text-uppercase">Logar <i class="material-icons vm">arrow_forward</i></a>
     </div>
 
     <!-- wrapper ends -->

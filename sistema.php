@@ -17,13 +17,13 @@ if($_SESSION['tipo'] == 1)
 	}
 	else if($_SESSION['tipo'] == 3)
 	{
-		if(isset($_GET['empresa']))
+		if(isset($_GET['sl']))
         {
 	      include ('template/layout/spa/agendamento.php');  
 		}
 		else
 		{
-		  
+		  include ('template/layout/spa/sistema.php');  
 		}
 	}
 	else if($_SESSION['tipo'] == 4)

@@ -41,9 +41,16 @@ else
 
 if($x == 1)
 {
-	$_SESSION["donoSessao"] =  md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+	//$_SESSION["donoSessao"] =  md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
 	
-	print "<script> window.location='sistema.php'; </script>"; 
+	print '<script> swal({   
+            title: "Atenção",   
+            text: "Logado com Sucesso.",   
+            timer: 1000,   
+            showConfirmButton: false 
+        });</script>';
+
+	print "<script> window.location='/?sl=sistema'; </script>"; 
 }
 else
 {
