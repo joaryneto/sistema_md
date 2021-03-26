@@ -31,7 +31,18 @@ require_once("./load/load.php");
 	}
 	else if($_SESSION['tipo'] == 4)
 	{
-	    include ('template/layout/delivery/index.php');
+		if(@$_GET['dl'] == "login")
+		{
+	       include ('template/layout/delivery/login.php');  
+		}
+		else if(@$_GET['dl'] == "sistema")
+		{
+	       include ('template/layout/delivery/delivery.php');  
+		}
+		else
+		{
+		   include ('template/layout/delivery/index.php');
+		}
 	}
 	else if($_SESSION['tipo'] == 5)
 	{
