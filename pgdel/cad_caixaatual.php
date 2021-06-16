@@ -32,13 +32,40 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 				
 							    <?
 								
-								$SQL3 = "SELECT sum(total) as total FROM vendas_mov where sistema='".$_SESSION['sistema']."' and caixa='".$_SESSION['caixa']."'";
+								$SQL3 = "SELECT sum(vendas_mov.total) as total FROM vendas_mov 
+								inner join vendas_recebidos on vendas_recebidos.venda=vendas_mov.venda
+								where vendas_mov.sistema='".$_SESSION['sistema']."' and vendas_mov.caixa='".$_SESSION['caixa']."' and vendas_recebidos.status=1;";
 								$RES3 = mysqli_query($db3,$SQL3);
 								$ROW3 = mysqli_fetch_array($RES3);
 								
 								$vtotal = number_format($ROW3['total'],2,",",".");
 								
 								?>
+								<script>
+								function cx_cancelar(codigo)
+								{
+									if(codigo == "")
+									{
+										
+									}
+									else
+									{
+										swal({   
+										    title: "Atenção!",   
+										     text: "Gostaria de cancelar este item?",   
+										    type: "warning",   
+										    showCancelButton: true,   
+										    //confirmButtonColor: "#DD6B55",   
+ 										     confirmButtonText: "Sim",
+										    cancelButtonText: "Não", 			
+										    closeOnConfirm: true 
+										}, function()
+										{
+										    requestPage2('?br=atu_caixa&codigo='+ codigo +'&ap=4&load=3','u_load','GET');
+										});
+									}
+								}
+							    </script>
 								<div class="col-md-12">
 					            <div class="component-box">
                                 <div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
@@ -46,30 +73,61 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
+													<th>Cliente</th>
                                                     <th>Descrição</th>
                                                     <th>Qtd/C. Uni.</th>
+													<th>Status</th>
                                                     <th>Total</th>
+													<?if($row['status'] == 1){?>
+													<th>Opções</th>
+													<? } ?> 
                                                 </tr>
                                             </thead>
-                                            <tbody id="itenss">
+                                            <tbody id="u_load">
                                                 <? 
 										  
 										  $data = date('Y');
-										  $sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.total) as totals, count(vendas_mov.produto) as quantidade from vendas 
+										  $sql = "select vendas_recebidos.status,clientes.nome, vendas_mov.venda , vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.total) as totals, count(vendas_mov.produto) as quantidade from vendas 
 										  inner join vendas_mov on vendas_mov.venda=vendas.codigo
-										  inner join produtos on produtos.codigo=vendas_mov.produto 
-										  where vendas_mov.sistema='".$_SESSION['sistema']."' and vendas_mov.caixa='".$_SESSION['caixa']."' GROUP BY vendas_mov.total,vendas_mov.codigo";
+										  inner join produtos on produtos.codigo=vendas_mov.produto
+										  left join agendamento_servicos on agendamento_servicos.codigo=vendas_mov.agendamento
+										  left join agendamento on agendamento.codigo=agendamento_servicos.agendamento
+                                          left join clientes on clientes.codigo=agendamento.cliente	
+                                          inner join vendas_recebidos on vendas_recebidos.venda=vendas_mov.venda										  
+										  where vendas_mov.sistema='".$_SESSION['sistema']."' and vendas_mov.caixa='".$_SESSION['caixa']."' GROUP BY vendas_mov.total, vendas_recebidos.codigo, produtos.descricao ";
 										  $res = mysqli_query($db3,$sql); 
 										  $b = 0;
 										  while($row = mysqli_fetch_array($res))
 										  {
+											  
+											
 												 
 										  ?>
                                             <tr ><!-- color: #20aee3; -->
 											    <td data-title="#"><? echo $row['codigo'];?></td>
+												<td data-title="Cliente"><? echo $row['nome'];?></td>
                                                 <td data-title="Descrição"><? echo $row['descricao'];?></td>
 												<td data-title="Qtd/C. Uni."><? echo $row['quantidade'];?>x<? echo $row['preco'];?></td>
 												<td data-title="Total">R$ <? echo number_format($row['totals'],2,",",".");?></td>
+												<td data-title="Status"><?
+												 Switch($row['status'])
+												 {
+													 case 1:
+													 echo '<span style="color: green;">Aprovado</span>';
+													 break;
+													 case 2:
+													 echo '<span style="color: blue;">Estorno</span>';
+													 break;
+													 case 3:
+													 echo '<span style="color: red;">Cancelado</span>';
+													 break;
+												 }
+												?></td>
+												<?if($row['status'] == 1){?>
+												<td data-title="Opções">
+												<a class="fa fa-window-close" href="javascript:void(0);" alt="Visualizar" onclick="cx_cancelar('<?=$row['venda'];?>');" style="font-size: 150%; color: red;"><a>
+		                                        </td>
+												<? } ?>
                                             </tr>
 										  <? $b = 1;
 										  

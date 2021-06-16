@@ -21,16 +21,17 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 <div class="container-fluid bg-template mb-4">
             <div class="row hn-290 position-relative">
 			<div class="background opac heightset">
-                    <i class="fa fa-calendar" style="font-size: 200px;position: absolute;left: 40%;top: 50px;"></i>
+                    <i class="fa fa-calendar" style="font-size: 140px;position: absolute;left: 40%;top: 50px;"></i>
                 </div>
                 <div class="container align-self-end">
                     <h2 class="font-weight-light text-uppercase"><? echo $_SESSION["DESCRICAOPG"] = "Agenda";?></h2>
                     <p class="text-mute mb-2"><? echo $_SESSION["DESCRICAOPG2"] = "Lista";?></p>
                     <input type="text" Onkeyup="pesquisar(this.value);" class="form-control form-control-lg search bottom-25 position-relative border-0" placeholder="Pesquisa">
+					<button class='btn btn-info btnadd-sh a-agenda2'><i class='fa fa-plus-circle'></i></button>
+					
                 </div>
             </div>
-        </div>   
-				  
+        </div>   	  
 <div class="container pt-5">
   
   <div class="row">
@@ -38,43 +39,130 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 		<div class="component-box">
 			<!--Tabs with Icon example -->
              <div class="row" id="load">
-				<?
-				$SQL = "SELECT agendamento.codigo,agendamento_servicos.codigo as codservico,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
-				inner join clientes on clientes.codigo=agendamento.cliente 
-				inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
-				where agendamento.sistema='".$_SESSION['sistema']."' and agendamento.status=1 ORDER BY agendamento.codigo desc";
-				$RES = mysqli_query($db3,$SQL);
-				while($row = mysqli_fetch_array($RES))
-				{
-				?>
-				
-				<div class="col-12 col-md-6 mb-4">
-                    <div class="row">
-                        <div class="col-4">
-                            <figure class="m-0 h-150 w-100 rounded overflow-hidden">
-                                <div class="background" style='background-image: url("template/images/escova-inteligente.jpg");'>
-                                    
-                                </div>
-                            </figure>
-                        </div>
-                        <div class="col pl-0">
-                            <h3><p class="large text-mute" style="font-size: initial;"><? echo $row['nome'];?></p></h3>
-                            <p class="large text-mute" style="font-size: initial;">Dia: <? echo formatodata($row['data']);?> às Hora: <? echo formatohora($row['hora']);?>hs</p>
-                            <button type="button" onclick="agenda('<? echo $row['profissional'];?>','<? echo $row['codservico'];?>','<? echo $row['cliente'];?>','<? echo $row['data'];?>','<? echo $row['hora'];?>','<? echo $row['nome'];?>');" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Editar</button>
-							<button type="button" onclick="agendaex('<? echo $row['codigo'];?>');" class="btn pmd-btn-outline pmd-ripple-effect btn-danger">Excluir</button>
-							<div class="pmd-card-actions">
-								<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" onclick="whats('<? echo str_replace("(","", str_replace(")","", str_replace("-","",$row['celular'])));?>','Bom dia *<? echo $row['nome'];?>*! %0APassando para lembrar que você tem horário agendado hoje às *<? echo formatohora($row['hora']);?>hs*.%0A%0A *Studio KA*');"><i class="fa fa-whatsapp" aria-hidden="true" style="font-size: 210%; color: green;"></i></button>
-								<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">thumb_up</i></button>
-								<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">drafts</i></button>
-							</div>
-                        </div>
-                    </div>
-					
-                </div>
-				
-			  <?}?>
+			    <script>
+				   $('.a-agenda2').on('click',function()
+				   {	
+				       $('#modalap').modal('show');
+				       requestPage2('?br=atu_pesquisa&tipo=1&ap=1','modals','GET');
+				   });
+
+				   a_menuslow();
+				   $('.t-agenda').addClass('active');
+				   requestPage2('?br=atu_pesquisa&load=1','load','GET');
+				</script>
 		   </div>
 	   </div>
     </div>
   </div>
 </div>
+<? if(@$_GET['sdas'] == "teste"){?>
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Swiper -->
+                    <div class="swiper-container swiper-categories">
+                        <div class="swiper-wrapper">
+						    
+								<?
+		
+								$SQL1 = "SELECT * FROM usuarios where sistema='".$_SESSION['sistema']."' and tipo in (2,3,4) and status=1;";
+								$RES1 = mysqli_query($db3,$SQL1);
+								while($row = mysqli_fetch_array($RES1))
+								{
+										$primeiroNome = explode(" ", $row['nome']);
+										echo '<a class="swiper-slide" style="width: 130px;">
+										<div class="mb-3 h-100px w-100px rounded overflow-hidden position-relative">
+										     <div class="background">
+										      <img src="template/images/beautiful-2150881_640%402x.png" alt="">
+										   </div>
+										</div>
+										<h6 class="font-weight-normal mb-1">'.current($primeiroNome).'</h6>';
+										
+										$datad = date('Y-m-d');
+		
+										$SQL2 = "SELECT horarios.hora FROM horarios ORDER BY horarios.hora asc";
+										$RES2 = mysqli_query($db3,$SQL2);
+										while($row1 = mysqli_fetch_array($RES2))
+										{
+			
+										$x = 0;
+										$nome = "";
+		  
+										$SQL3 = "SELECT agendamento_servicos.hora,agendamento.nome FROM agendamento 
+										inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo 
+										where agendamento_servicos.sistema='".$_SESSION['sistema']."' and agendamento_servicos.data='".$datad."' and agendamento_servicos.profissional='".$row['codigo']."' and agendamento_servicos.hora='".$row1['hora']."'";
+										$RES3 = mysqli_query($db3,$SQL3);
+										while($row3 = mysqli_fetch_array($RES3))
+										{
+													 $nome = $row3['nome'];
+													 $x = 1;
+													 
+													 
+										}
+												  if($x == 0)
+												  {
+													   echo '<p><span class="dot-notification mr-1"></span> <span class="text-mute" style="color: green;">'.$row1['hora'].'</span></p>';
+												  }
+												  else
+												  {
+													 
+													  
+													  echo '<p><span class="dot-notification mr-1"></span> <span class="text-mute" style="color: red;">'.$row1['hora'].' - '.$nome.'</span></p>';
+												  }
+										}
+								}
+	                              ?>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		<!-- page level script -->
+        <script>
+        
+            $(".sparklinechart").sparkline([5, 6, -7, 2, 0, -4, -2, 4], {
+                type: 'bar',
+                zeroAxis: false,
+                barColor: '#00bf00',
+                height: '30',
+            });
+            $(".sparklinechart2").sparkline([-5, -6, 4, -2, 0, 4, 2, -4], {
+                type: 'bar',
+                zeroAxis: false,
+                barColor: '#00bf00',
+                height: '30',
+            });
+
+            /* Swiper slider */
+            var swiper = new Swiper('.swiper-prices', {
+                slidesPerView: 'auto',
+                spaceBetween: 0,
+                pagination: false,
+            });
+            var swiper = new Swiper('.swiper-categories', {
+                slidesPerView: 'auto',
+                spaceBetween: 20,
+                pagination: false,
+            });
+            var swiper = new Swiper('.swiper-shares', {
+                slidesPerView: 5,
+                spaceBetween: 0,
+                pagination: false,
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                    },
+                }
+            });
+        
+
+    </script>
+<?} ?>

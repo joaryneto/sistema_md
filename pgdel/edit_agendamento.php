@@ -28,13 +28,13 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 									<div class="form-group col-md-12 m-t-20" id="inputcliente"><label>Data:</label>
 										<input name="codagenda" id="codagenda" type="hidden" autocomplete="off" value="<?=$_GET['codigo'];?>" class="form-control">
 										<div class="input-group">
-                                                <input type="text" name="dataagenda2" id="dataagenda2" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
+                                                <input type="text" name="dataagenda" id="dataagenda" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                 </div>
                                             </div>
 										<script>
-										jQuery('#dataagenda2').datepicker({
+										jQuery('#dataagenda').datepicker({
 												format: 'dd/mm/yyyy',
  										        autoclose: true,
 										        todayHighlight: true,
@@ -44,7 +44,7 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 							
 										
 										$(function() {
-										  $("#dataagenda2").datepicker();
+										  $("#dataagenda").datepicker();
 										});
 										
 										//function changedata(datavv)
@@ -54,11 +54,11 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 										//	requestPage2('?br=atu_pesquisa&data='+ datavv +'&ap=3','horario2','GET');
 										//}
 										
-										$('#dataagenda2').on('change', function() 
+										$('#dataagenda').on('change', function() 
 										{
-											jQuery('#dataagenda2').datepicker({autoclose: true});
-											var datav = document.getElementById('dataagenda2').value;
-										    requestPage2('?br=atu_pesquisa&data='+ datav +'&ap=5','horario2','GET');
+											jQuery('#dataagenda').datepicker({autoclose: true});
+											var datav = document.getElementById('dataagenda').value;
+										    requestPage2('?br=atu_pesquisa&data='+ datav +'&ap=5','horario','GET');
 										});
 										
 										
@@ -66,8 +66,8 @@ if (basename($_SERVER["REQUEST_URI"]) === basename(__FILE__))
 									</div>
 									<div class="form-group col-md-4 m-t-20">
 									  <label>Horario:</label>
-									    <div id="horario2">
-										<select name="hora2" id="hora2" class="form-control" autocomplete="off" required="required">
+									    <div id="horario">
+										<select name="hora" id="hora" class="form-control" autocomplete="off" required="required">
 										<option>Selecionar Horario</option>
 										</select>
 										</div>

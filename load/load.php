@@ -9,6 +9,7 @@ if(@$_SERVER['SERVER_NAME'] == "www.ectecnologia.com.br" or @$_SERVER['SERVER_NA
 	$_SESSION['cor'] = "#FFFFFF";
 	$_SESSION['img'] = "sistema";
 	$_SESSION['tema'] = "blue";
+	$_SESSION['pg'] = "pages";
 	//print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
 }
 else if(@$_SERVER['SERVER_NAME'] == "sge.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.sge" or @$_SERVER['SERVER_NAME'] == "escolar.ectecnologia.com.br")
@@ -19,8 +20,8 @@ else if(@$_SERVER['SERVER_NAME'] == "sge.ectecnologia.com.br" or @$_SERVER['SERV
 	$_SESSION['manifest'] = "manifest1.json";
 	$_SESSION['cor'] = "#FFFFFF";
 	$_SESSION['tema'] = "blue";
-	
 	$_SESSION['img'] = "agsge";
+	$_SESSION['pg'] = "pgsge";
 	//print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
 }
 else if(@$_SERVER['SERVER_NAME'] == "sl.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.sl" or @$_SERVER['SERVER_NAME'] == "spa.ectecnologia.com.br")
@@ -31,8 +32,8 @@ else if(@$_SERVER['SERVER_NAME'] == "sl.ectecnologia.com.br" or @$_SERVER['SERVE
 	$_SESSION['manifest'] = "manifest2.json";
 	$_SESSION['cor'] = "#FFFFFF";
 	$_SESSION['tema'] = "deeppurple";
-	
 	$_SESSION['img'] = "agsl";
+	$_SESSION['pg'] = "pgsl";
 	//print('<script> localStorage.setItem("sistema", "'.$sistema.'"); </script>');
 }
 else if(@$_SERVER['SERVER_NAME'] == "delivery.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.delivery")
@@ -43,6 +44,7 @@ else if(@$_SERVER['SERVER_NAME'] == "delivery.ectecnologia.com.br" or @$_SERVER[
 	$_SESSION['manifest'] = "manifest3.json";
 	$_SESSION['cor'] = "#F58634";
 	$_SESSION['img'] = "agd";
+	$_SESSION['pg'] = "pgdel";
 }
 else if(@$_SERVER['SERVER_NAME'] == "sociodbv.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.sociodbv")
 {
@@ -52,6 +54,7 @@ else if(@$_SERVER['SERVER_NAME'] == "sociodbv.ectecnologia.com.br" or @$_SERVER[
 	$_SESSION['manifest'] = "manifest4.json";
 	$_SESSION['cor'] = "#F58634";
 	$_SESSION['img'] = "sdbv";
+	$_SESSION['pg'] = "pgdbv";
 	//print('<script> localStorage.setItem("sistema", "'.$_SESSION['img'].'"); </script>');
 }
 else if(@$_SERVER['SERVER_NAME'] == "demo.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.demo")
@@ -62,6 +65,18 @@ else if(@$_SERVER['SERVER_NAME'] == "demo.ectecnologia.com.br" or @$_SERVER['SER
 	$_SESSION['manifest'] = "manifest6.json";
 	$_SESSION['cor'] = "#00a451";
 	$_SESSION['img'] = "agsge";
+	$_SESSION['pg'] = "demo";
+	//print('<script> localStorage.setItem("sistema", "'.$_SESSION['img'].'"); </script>');
+}
+else if(@$_SERVER['SERVER_NAME'] == "sites.ectecnologia.com.br" or @$_SERVER['SERVER_NAME'] == "sistema.site")
+{
+	$_SESSION['nosistema'] = "".$_SERVER['SERVER_NAME']."/index.php";
+	$_SESSION['nomesoft'] = "Templates";
+	$_SESSION['tipo'] = 7;
+	$_SESSION['manifest'] = "manifest7.json";
+	$_SESSION['cor'] = "#00a451";
+	$_SESSION['img'] = "agsge";
+	$_SESSION['pg'] = "site";
 	//print('<script> localStorage.setItem("sistema", "'.$_SESSION['img'].'"); </script>');
 }
 else
@@ -162,35 +177,6 @@ if(!Empty($_SESSION['manifest']))
    $fp = fopen(''.$_SESSION['manifest'].'', 'w');
    fwrite($fp, $string);
    fclose($fp);
-}
-
-if($_SESSION['tipo'] == 1)
-{
-	$_SESSION['pg'] = "pages";
-}
-else if($_SESSION['tipo'] == 2)
-{
-	$_SESSION['pg'] = "pgsge";
-}
-else if($_SESSION['tipo'] == 3)
-{
-	$_SESSION['pg'] = "pgsl";
-}
-else if($_SESSION['tipo'] == 4)
-{
-	$_SESSION['pg'] = "pgdel";
-}
-else if($_SESSION['tipo'] == 5)
-{
-	$_SESSION['pg'] = "pgdbv";
-}
-else if($_SESSION['tipo'] == 6)
-{
-	$_SESSION['pg'] = "demo";
-}
-else
-{
-	print("<script>window.location.href='index.php';</script>");
 }
 
 //$_SESSION['pg'] = "pgsl";

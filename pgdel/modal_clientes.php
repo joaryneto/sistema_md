@@ -44,7 +44,7 @@ if($_GET['modal'] == 1)
 </thead>
 <tbody id="listclientes">
 <?
-$sql = "SELECT * FROM clientes limit 10";
+$sql = "SELECT * FROM clientes where sistema='".$_SESSION['sistema']."' limit 10";
 $res = mysqli_query($db3,$sql); 
 $x = 0;
 while($row = mysqli_fetch_array($res))
@@ -108,7 +108,7 @@ else if($_GET['modal'] == 2)
 </thead>
 <tbody id="listclientes">
 <?
-$sql = "SELECT * FROM clientes limit 10";
+$sql = "SELECT * FROM clientes where sistema='".$_SESSION['sistema']."' limit 10";
 $res = mysqli_query($db3,$sql); 
 $x = 0;
 while($row = mysqli_fetch_array($res))
@@ -176,12 +176,19 @@ if(@$inputb['ap'] == "1")
 	
 	if($x == 1)
 	{
-	    print("<script>window.alert('Cliente já foi cadastrada, escolha outro.')</script>");
-		print("<script>window.location.href='sistema.php?url=cad_clientes';</script>");
+	    print('
+		<script>
+		swal({   
+ 			   title: "Atenção!",   
+ 			   text: "Cliente já foi cadastrada, escolha outro.",   
+ 			   timer: 1500,   
+ 			   showConfirmButton: false 
+ 		});
+		</script>');
 	}
 	else
 	{
-	   $SQL1 = "INSERT into clientes(sistema, nome, nascimento,sexo, telefone, celular, rg, cpf, status) values('".$_SESSION['sistema']."','".$inputb['nome']."','".revertedata($inputb['nascimento'])."','".$inputb['sexo']."','".$inputb['telefone']."','".$inputb['celular']."','".$inputb['rg']."','".$inputb['cpf']."','".$inputb['status']."')";
+	   $SQL1 = "INSERT into clientes(sistema, nome, nascimento,sexo, telefone, celular, rg, cpf, cep,rua,bairro,numero,cidade,estado, status) values('".$_SESSION['sistema']."','".$inputb['nome']."','".revertedata($inputb['nascimento'])."','".$inputb['sexo']."','".$inputb['telefone']."','".$inputb['celular']."','".$inputb['rg']."','".$inputb['cpf']."','".$inputb['cep']."','".$inputb['rua']."','".$inputb['bairro']."','".$inputb['numero']."','".$inputb['cidade']."','".$inputb['estado']."','".$inputb['status']."')";
 	   $sucesso = mysqli_query($db3,$SQL1);
 	   
 	   if($sucesso)
@@ -198,13 +205,21 @@ if(@$inputb['ap'] == "1")
 	   }
 	   else
 	   {
-		   print("<script>window.alert('Ocorreu um erro, Entre em contato com Suporte! MSG-2')</script>");
+		   print('
+		<script>
+		swal({   
+ 			   title: "Atenção!",   
+ 			   text: "Ocorreu um erro, Entre em contato com Suporte! MSG-3",   
+ 			   timer: 1500,   
+ 			   showConfirmButton: false 
+ 		});
+		</script>');
 	   }
 	}
 }
 else if(@$inputb['ap'] == "2")
 {
-	$SQL1 = "UPDATE clientes SET nome='".$inputb['nome']."',nascimento='".revertedata($inputb['nascimento'])."',sexo='".$inputb['sexo']."',telefone='".$inputb['telefone']."',celular='".$inputb['celular']."',rg='".$inputb['rg']."',cpf='".$inputb['cpf']."',status='".$inputb['status']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
+	$SQL1 = "UPDATE clientes SET nome='".$inputb['nome']."',nascimento='".revertedata($inputb['nascimento'])."',sexo='".$inputb['sexo']."',telefone='".$inputb['telefone']."',celular='".$inputb['celular']."',rg='".$inputb['rg']."',cpf='".$inputb['cpf']."',cep='".$inputb['cep']."',rua='".$inputb['rua']."',bairro='".$inputb['bairro']."',numero='".$inputb['numero']."',cidade='".$inputb['cidade']."',estado='".$inputb['estado']."',status='".$inputb['status']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
 	$sucesso = mysqli_query($db3,$SQL1);
 	
 	if($sucesso)
@@ -228,7 +243,7 @@ else if(@$inputb['ap'] == "2")
 
 if(isset($inputb['codigo']))
 {
-	$sucesso = mysqli_query($db3,"SELECT codigo,nome,nascimento,sexo,telefone,celular,rg,cpf,status FROM clientes where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'");
+	$sucesso = mysqli_query($db3,"SELECT * FROM clientes where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'");
 	
 	if($sucesso)
 	{
@@ -242,6 +257,12 @@ if(isset($inputb['codigo']))
 		 $celular = $row['celular'];
 		 $rg = $row['rg'];
 		 $cpf = $row['cpf'];
+		 $cep = $row['cep'];
+		 $rua = $row['rua'];
+		 $bairro = $row['bairro'];
+		 $numero = $row['numero'];
+		 $cidade = $row['cidade'];
+		 $estado = $row['estado'];
 		 $status = $row['status'];
 		 
 		 //print("<script>window.alert('TESTE ".$descricao.",".$valor."')</script>");
@@ -278,6 +299,12 @@ else
 				var celular = document.getElementById('celular').value;
 				var rg = document.getElementById('rg').value;
 				var cpf = document.getElementById('cpf').value;
+				var cep = document.getElementById('cep').value;
+				var rua = document.getElementById('rua').value;
+				var bairro = document.getElementById('bairro').value;
+				var numero = document.getElementById('numero').value;
+				var cidade = document.getElementById('cidade').value;
+				var estado = document.getElementById('estado').value;
 				var status = document.getElementById('status').value;
 				
 				if(nome == "")
@@ -311,9 +338,9 @@ else
 				{
 				   <? if(@$inputb['codigo'])
 				   {?>
-				      requestPage2('?br=modal_clientes&codigo=<?=$codigo;?>&nome='+ nome +'&sexo='+ sexo +'&nascimento='+ nascimento +'&telefone='+ telefone +'&celular='+ celular +'&rg='+ rg +'&cpf='+ cpf +'&status='+ status +'&modal=3&ap=2','modals','GET');
+				      requestPage2('?br=modal_clientes&codigo=<?=$codigo;?>&nome='+ nome +'&sexo='+ sexo +'&nascimento='+ nascimento +'&telefone='+ telefone +'&celular='+ celular +'&rg='+ rg +'&cpf='+ cpf +'&cep='+ cep +'&rua='+ rua +'&bairro='+ bairro +'&numero='+ numero +'&cidade='+ cidade +'&estado='+ estado +'&status='+ status +'&modal=3&ap=2','modals','GET');
 				   <? } else {?>
-				      requestPage2('?br=modal_clientes&nome='+ nome +'&sexo='+ sexo +'&nascimento='+ nascimento +'&telefone='+ telefone +'&celular='+ celular +'&rg='+ rg +'&cpf='+ cpf +'&status='+ status +'&modal=3&ap=1','modals','GET');
+				      requestPage2('?br=modal_clientes&nome='+ nome +'&sexo='+ sexo +'&nascimento='+ nascimento +'&telefone='+ telefone +'&celular='+ celular +'&rg='+ rg +'&cpf='+ cpf +'&cep='+ cep +'&rua='+ rua +'&bairro='+ bairro +'&numero='+ numero +'&cidade='+ cidade +'&estado='+ estado +'&status='+ status +'&modal=3&ap=1','modals','GET');
 				   <? } ?>
 				}
 			}
@@ -339,27 +366,70 @@ else
 			<div class="form-group col-md-3 m-t-20"><label>Data de Nasc. :</label>
 			<input type="text" name="nascimento" id="nascimento" value="<? if(isset($codigo)){ echo $nascimento;} ?>" placeholder="00/00/0000" class="form-control">
 			</div>
-			<div class="form-group col-md-3 m-t-20"><label>Sexo :</label>
+			<div class="form-group col-md-2 m-t-20"><label>Sexo :</label>
 			<select name="sexo" id="sexo" class="form-control" style="width: 100%; height:36px;" required="required">
-				<option value="">Selecionar Sexo</option>
-				   <option value="1" <? if(1 == $sexo){ echo "selected"; } ?>>Masculino</option>
-				   <option value="2" <? if(2 == $sexo){ echo "selected"; } ?>>Feminino</option>
+				<option value=""></option>
+				   <option value="1" <? if(1 == $sexo){ echo "selected"; } ?>>M</option>
+				   <option value="2" <? if(2 == $sexo){ echo "selected"; } ?>>F</option>
 			</select></div>
 			<div class="form-group col-md-3 m-t-20"><label>Telefone. :</label>
-			<input type="text" name="telefone" id="telefone" placeholder="(DD)0000-0000" value="<? if(isset($codigo)){ echo $telefone;} ?>" data-mask="(00)0000-0000" class="form-control">
+			<input type="text" name="telefone" id="telefone" placeholder="(00)0000-0000" value="<? if(isset($codigo)){ echo $telefone;} ?>" class="form-control">
 			</div>
 			<div class="form-group col-md-3 m-t-20"><label>Celular :</label>
-			<input type="text" name="celular" id="celular" placeholder="(DD)00000-0000" value="<? if(isset($codigo)){ echo $celular;} ?>" data-mask="(00)00000-0000" class="form-control">
+			<input type="text" name="celular" id="celular" placeholder="(00)00000-0000" value="<? if(isset($codigo)){ echo $celular;} ?>" class="form-control">
 			</div>
-			<div class="form-group col-md-3 m-t-20"><label>RG :</label>
-			<input type="text" name="rg" id="rg" value="<? if(isset($codigo)){ echo $rg;} ?>" placeholder="00000000" data-mask="00000000" class="form-control">
+			<script>
+			$(document).ready( function() {
+   /* Executa a requisição quando o campo CEP perder o foco */
+   $('#cep').blur(function(){
+           /* Configura a requisição AJAX */
+           $.ajax({
+                url : 'pgsl/atu_endereco.php', /* URL que será chamada */ 
+                type : 'POST', /* Tipo da requisição */ 
+                data: 'cep=' + $('#cep').val(), /* dado que será enviado via POST */
+                dataType: 'json', /* Tipo de transmissão */
+                success: function(data){
+                    if(data.sucesso == 1){
+                        $('#rua').val(data.rua);
+                        $('#bairro').val(data.bairro);
+                        $('#cidade').val(data.cidade);
+                        $('#estado').val(data.estado);
+ 
+                        $('#numero').focus();
+                    }
+                }
+           });   
+   return false;    
+   })
+});
+</script>
+			<div class="form-group col-md-3 m-t-20"><label>CEP :</label>
+			<input type="text" name="cep" id="cep" placeholder="(DD)00000-0000" value="<? if(isset($codigo)){ echo $cep;} ?>" data-mask="(00)00000-0000" class="form-control">
 			</div>
-			<div class="form-group col-md-3 m-t-20"><label>CPF :</label>
-			<input type="text" name="cpf" id="cpf" value="<? if(isset($codigo)){ echo $cpf;} ?>" placeholder="00000000000" data-mask="00000000000" class="form-control">
+			<div class="form-group col-md-3 m-t-20"><label>Rua :</label>
+			<input type="text" name="rua" id="rua" placeholder="Exemplo: Rua. Centro oeste" value="<? if(isset($codigo)){ echo $rua;} ?>" class="form-control">
+			</div>
+			<div class="form-group col-md-3 m-t-20"><label>Bairro :</label>
+			<input type="text" name="bairro" id="bairro" placeholder="" value="<? if(isset($codigo)){ echo $bairro;} ?>" class="form-control">
+			</div>
+			<div class="form-group col-md-3 m-t-20"><label>Cidade :</label>
+			<input type="text" name="cidade" id="cidade" placeholder="" value="<? if(isset($codigo)){ echo $cidade;} ?>" class="form-control">
+			</div>
+			<div class="form-group col-md-3 m-t-20"><label>Estado :</label>
+			<input type="text" name="estado" id="estado" placeholder="" value="<? if(isset($codigo)){ echo $estado;} ?>" class="form-control">
+			</div>
+			<div class="form-group col-md-3 m-t-20"><label>N° :</label>
+			<input type="text" name="numero" id="numero" placeholder="" value="<? if(isset($codigo)){ echo $numero;} ?>" class="form-control">
+			</div>
+			<div class="form-group col-md-3 m-t-20" style="display: none"><label>RG :</label>
+			<input type="text" name="rg" id="rg" value="<? if(isset($codigo)){ echo $rg;} ?>" placeholder="00000000" class="form-control">
+			</div>
+			<div class="form-group col-md-3 m-t-20" style="display: none"><label>CPF :</label>
+			<input type="text" name="cpf" id="cpf" value="<? if(isset($codigo)){ echo $cpf;} ?>" placeholder="00000000000" class="form-control">
 			</div>
 			<div class="form-group col-md-3 m-t-20"><label>Status :</label>
 			<select name="status" id="status" class="form-control" style="width: 100%; height:36px;" required="required">
-				<option value="">Selecionar Status</option>
+				<option value="">Status</option>
 				   <option value="1" <? if("1" == $status){ echo "selected"; } ?>>Ativo</option>
 				   <option value="0" <? if("0" == $status){ echo "selected"; } ?>>Inativo</option>
 			</select></div>
@@ -369,11 +439,11 @@ else
 			<button type="button" onclick="c_gravar();" class="btn btn-info"><i class="fa fa-plus-circle"></i> <? if(isset($codigo)){ echo "Gravar";}else { echo "Cadastrar";} ?></button>
 
 			<? if(!Empty($codigo)) { ?>
-			<button class="btn btn-info" type="button" id="c_novo"><i class="fa fa-plus-circle"></i> Novo</button>
+			<button  type="button" class="btn btn-info" id="c_novo"><i class="fa fa-plus-circle"></i> Novo</button>
 			<? } ?>
 			</div></div>
 			<div class="form-group col-md-12 m-t-20">
-			<input type='text' name='pesquisa' id='pesquisa' placeholder="Pesquisar Cliente" class='form-control' onkeyup="javascript: requestPage2('?br=atu_clientes&pesquisa='+ this.value +'&ap=2','clistclientes','GET');">
+			<input type='text' name='pesquisa' id='pesquisa' placeholder="Pesquisar Cliente" class='form-control' onkeyup="javascript: requestPage2('?br=atu_clientes&pesquisa='+ this.value +'&ap=1','clistclientes','GET');">
 			</div>
 			<div class="col-md-12">
 			<div class="component-box">
@@ -402,5 +472,78 @@ else
 <? 
 // --------- FINAL CADASTRO DE CLIENTES -------------//
 
-} 
+}
+else if($inputb['modal'] == 4)
+{	
 ?>
+<div class="modal-header">
+<h2 class="pmd-card-title-text">Lista de Agendamento</h2>
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form class="form-horizontal">
+<div class="form-group ">
+<script>
+	
+function m_cbusca()
+{
+	var pesquisa = document.getElementById('user').value;
+	
+	requestPage2('?br=atu_clientes&pesquisa='+ pesquisa +'&ap=2','listclientes','GET');
+}
+
+</script>
+<input name="user" id="user" type="text" class="form-control" placeholder="Buscar Clientes agendados." autocomplete="off" onkeyup="m_cbusca();"  />
+</div>
+<div>
+<script>
+function m_cliente(codigo)
+{
+	alert("teste");
+}
+</script>
+<div class="pmd-table-card pmd-card pmd-z-depth pmd-card-custom-view">
+<table class="table pmd-table">
+<thead>
+<tr>
+<th>Cliente</th>
+<th>Serviço</th>
+<th>Data/Hora</th>
+</tr>
+</thead>
+<tbody id="listclientes">
+<?
+$m_data = date("Y-m-d");
+$x = 0;
+$SQL = "SELECT produtos.descricao,agendamento_servicos.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
+inner join clientes on clientes.codigo=agendamento.cliente 
+inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
+inner join produtos on produtos.codigo=agendamento_servicos.servico
+where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.status=0 and agendamento_servicos.data='$m_data' ORDER BY agendamento.codigo desc";
+$RES = mysqli_query($db3,$SQL);
+while($row = mysqli_fetch_array($RES))
+{
+?>
+<tr style="cursor: pointer;" onclick="m_agendamento(<?=$row['codigo'];?>);">
+<td data-title="Nome"><? echo $row['nome'];?></td>
+<td data-title="Serviço"><? echo $row['descricao'];?></td>
+<td data-title="Data/Hora"><? echo formatodata($row['data'])." - ".formatohora($row['hora']); ?></td>
+</tr>
+<? $x = 1;
+}
+
+if($x == 0)
+{
+ echo "<tr><td colspan='3'>Nenhum resultado encontrado.</td></tr>";
+
+}
+?>
+</tbody>	
+</table>
+</div>
+</div>
+</form>	
+</div>
+<div class="modal-footer">
+</div>
+<?}?>

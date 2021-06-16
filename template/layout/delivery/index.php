@@ -121,8 +121,8 @@
                         </div>
                         <div class="col-12 py-4 align-self-end text-center">
                             <div class="row no-gutters">
-                                <div class="col"><a href="login.php" class="btn btn-lg btn-link text-white btn-block">Logar <i class="material-icons vm">arrow_forward</i></a></div>
-                                <div class="col"><a href="delivery.php" class=" btn btn-lg btn-default default-shadow btn-block">Delivery <i class="material-icons vm">add_shopping_cart</i></a></div>
+                                <div class="col"><a href="?dl=l" class="btn btn-lg btn-link text-white btn-block">Logar <i class="material-icons vm">arrow_forward</i></a></div>
+                                <div class="col"><a href="?dl=produtos" class=" btn btn-lg btn-default default-shadow btn-block">Delivery <i class="material-icons vm">add_shopping_cart</i></a></div>
                             </div>
                         </div>
                     </div>

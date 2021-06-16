@@ -1,6 +1,10 @@
 <?
+$inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 
-  $sql = "select * from clientes where sistema='".$_SESSION['sistema']."' and nome like '%".$_GET['pesquisa']."%';";
+if(@$inputb['ap'] == 1){
+	
+  $pesquisa = security::input(@$inputb['pesquisa']);
+  $sql = "select * from clientes where sistema='".$_SESSION['sistema']."' and nome like '%".$pesquisa."%';";
   $res = mysqli_query($db3,$sql); 
   while($row = mysqli_fetch_array($res))
   {
@@ -22,5 +26,33 @@
 		<td data-title="Editar"><a class="fa fa-edit" href="javascript:void(0);" onclick="edit_cliente(<?=$row['codigo'];?>);" style="font-size: 150%;"><a></td>
 	</tr>
 <? 
-} 
+  } 
+}else if(@$inputb['ap'] == 2)
+{
+	
+$pesquisa = security::input(@$inputb['pesquisa']);
+
+$x = 0;
+$SQL = "SELECT produtos.descricao,agendamento_servicos.codigo,agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
+inner join clientes on clientes.codigo=agendamento.cliente 
+inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
+inner join produtos on produtos.codigo=agendamento_servicos.servico
+where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.status=0 and agendamento.nome like '%".$pesquisa."%' ORDER BY agendamento.codigo desc";
+$RES = mysqli_query($db3,$SQL);
+while($row = mysqli_fetch_array($RES))
+{
+?>
+<tr style="cursor: pointer;" onclick="m_agendamento(<? echo $row['codigo'];?>);">
+<td data-title="Nome"><? echo $row['nome'];?></td>
+<td data-title="Serviço"><? echo $row['descricao'];?></td>
+<td data-title="Data/Hora"><? echo formatodata($row['data'])." - ".formatohora($row['hora']); ?></td>
+</tr>
+<? $x = 1;
+}
+
+if($x == 0)
+{
+   echo "<tr><td colspan='3'>Nenhum resultado encontrado.</td></tr>";
+}
+}
 ?>

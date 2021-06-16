@@ -50,7 +50,7 @@ echo json_encode($data);
 
 if(isset($_GET["title"]) and $_GET['ap'] == 1)
 {
-	
+  
  $query = "INSERT INTO agendamento (titulo, inicio, termino) VALUES ('".$_GET['title']."', '".$_GET['start']."', '".$_GET['end']."')";
  //mysqli_query($db3,$query);
  

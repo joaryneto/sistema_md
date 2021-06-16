@@ -37,7 +37,7 @@
                 </button>
             </div>
             <div>
-                <a class="navbar-brand" href="delivery.php">
+                <a class="navbar-brand" href="?dl=produtos">
                     <div class="logo"><img style="height:40px" src="template/images/delivery2.png" alt="" class="header-logo"></div>
                 </a>
             </div>
@@ -91,7 +91,7 @@
 				
 				?></p>
 				<?}else{?>
-				<a href="login.php" style="color: #fff;"><i class="material-icons">input</i> <span style="position: relative;top: -5px;">Entrar</span></a>
+				<a href="?dl=login" style="color: #fff;"><i class="material-icons">input</i> <span style="position: relative;top: -5px;">Entrar</span></a>
 				<?}?>
             </div>
 			<? if(isset($_SESSION['usuario'])){?>
@@ -100,11 +100,7 @@
             </div>
 			<?}?>
         </div>
-        <div class="list-group main-menu my-4">
-            <a href="delivery.php" class="list-group-item list-group-item-action active"><i class="material-icons">home</i>Sacola</a>
-            <a href="productdetails.html" class="list-group-item list-group-item-action"><i class="material-icons">view_day</i>Promoção</a>
-            <a href="javascript: void(0);" id="btninstall" class="list-group-item list-group-item-action"><i class="material-icons">business</i>Instalar App</a>
-        </div>
+        <? include('template/layout/delivery/menu.php');?>
     </div>
     <!-- sidebar ends -->
 
@@ -113,8 +109,8 @@
         <!-- page content goes here -->
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <div class="container-fluid py-2 mb-4">
-                    <!-- Swiper -->
+                <!-- <div class="container-fluid py-2 mb-4">
+                    <!-- Swiper ->
                     <div class="swiper-container swiper-categories text-center">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide w-auto p-2">
@@ -173,152 +169,23 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <div class="container mb-4">
                     <input type="text" class="form-control border-0 shadow-light" placeholder="Buscar por itens...">
                 </div>
-                <div class="container mb-4">
-                    <div class="swiper-container swiper-offers">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide w-auto">
-                                <div class="card w-250 position-relative overflow-hidden bg-default text-white border-0">
-                                    <div class="background opacity-60">
-                                        <img src="template/images/login.jpg" alt="" s>
-                                    </div>
-                                    <div class="card-body text-center z-1 h-50"></div>
-                                    <div class="card-footer border-0 z-1">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <h4 class="my-0 font-weight-bold">50% Off</h4>
-                                                <h6 class="mb-1">Dominooz</h6>
-                                                <p>Code: <span class="badge badge-success">OfferTX01</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide w-auto">
-                                <div class="card w-250 position-relative overflow-hidden bg-dark text-white border-0">
-                                    <div class="background opacity-60">
-                                        <img src="template/images/food1.jpg" alt="" s>
-                                    </div>
-                                    <div class="card-body text-center z-1 h-50"></div>
-                                    <div class="card-footer border-0 z-1">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <h4 class="my-0 font-weight-bold">20% Off</h4>
-                                                <h6 class="mb-1">MarcDs</h6>
-                                                <p>Code: <span class="badge badge-success">OfferTC09</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide w-auto">
-                                <div class="card w-250 position-relative overflow-hidden bg-primary text-white border-0">
-                                    <div class="background opacity-60">
-                                        <img src="template/images/food2.jpg" alt="" s>
-                                    </div>
-                                    <div class="card-body text-center z-1 h-50"></div>
-                                    <div class="card-footer border-0 z-1">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <h4 class="my-0 font-weight-bold">50% Off</h4>
-                                                <h6 class="mb-1">Pizza</h6>
-                                                <p>Code: <span class="badge badge-success">OfferPZZ1</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <h6 class="page-subtitle">Popular food <a href="#" class="btn btn-sm float-right px-0">View all</a></h6>
-                    <div class="row">
-                        <div class="col-6 col-md-3">
-                            <div class="card border-0 shadow-light text-center mb-4">
-                                <div class="card-body position-relative">
-                                    <div class="top-right mt-2"><button class="btn btn-link text-danger p-0"><i class="material-icons text-danger vm">favorite</i></button></div>
-                                    <div class="h-100px position-relative overflow-hidden">
-                                        <div class="background background-h-100">
-                                            <img src="template/images/banner.png" alt="">
-                                        </div>
-                                    </div>
-                                    <h6 class="text-default">Kings Burger</h6>
-                                    <p class="small">Delicious Taste <br><span class="text-warning icon_star"></span><span class="text-warning icon_star"></span><span class="text-warning icon_star"></span><span class="text-warning icon_star"></span><span class="text-warning icon_star"></span></p>
-                                    <div class="row">
-                                        <div class="col text-left">
-                                            <p class="text-success my-0">$ 28<sup>.00</sup></p>
-                                        </div>
-                                        <div class="col-auto"><button class="btn btn-sm btn-link text-default p-0"><i class="material-icons">shopping_basket</i></button></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="card  border-0 shadow-light text-center mb-4">
-                                <div class="card-body position-relative">
-                                    <div class="top-right mt-2"><button class="btn btn-link text-danger p-0"><i class="material-icons text-danger vm">favorite</i></button></div>
-                                    <div class="h-100px position-relative">
-                                        <div class="background background-h-100">
-                                            <img src="template/images/banner2.png" alt="">
-                                        </div>
-                                    </div>
-                                    <h6 class="text-default">Pizza Special</h6>
-                                    <p class="small">Hand Tosted <br><span class="text-warning icon_star"></span><span class="text-warning icon_star"></span><span class="text-warning icon_star"></span><span class="text-warning icon_star"></span><span class="text-warning icon_star"></span></p>
-                                    <div class="row">
-                                        <div class="col text-left">
-                                            <p class="text-success my-0">$ 47<sup>.00</sup></p>
-                                        </div>
-                                        <div class="col-auto"><button class="btn btn-sm btn-link text-default p-0"><i class="material-icons">shopping_basket</i></button></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="card border-0 shadow-light text-center mb-4">
-                                <div class="card-body position-relative">
-                                    <div class="top-right mt-2"><button class="btn btn-link text-danger p-0"><i class="material-icons text-danger vm">favorite</i></button></div>
-                                    <div class="h-100px position-relative">
-                                        <div class="background background-h-100">
-                                            <img src="template/images/banner1.png" alt="">
-                                        </div>
-                                    </div>
-                                    <h6 class="text-default">Kings Meal</h6>
-                                    <p class="small">Amzaing Spices <br><span class="text-warning icon_star"></span><span class="text-warning icon_star"></span><span class="text-warning icon_star"></span><span class="text-warning icon_star"></span><span class="text-warning icon_star"></span></p>
-                                    <div class="row">
-                                        <div class="col text-left">
-                                            <p class="text-success my-0">$ 36<sup>.00</sup></p>
-                                        </div>
-                                        <div class="col-auto"><button class="btn btn-sm btn-link text-default p-0"><i class="material-icons">shopping_basket</i></button></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="card border-0 shadow-light text-center mb-4">
-                                <div class="card-body position-relative">
-                                    <div class="top-right mt-2"><button class="btn btn-link text-danger p-0"><i class="material-icons text-danger vm">favorite</i></button></div>
-                                    <div class="h-100px position-relative">
-                                        <div class="background background-h-100">
-                                            <img src="template/images/banner.png" alt="">
-                                        </div>
-                                    </div>
-                                    <h6 class="text-default">Kings Burger</h6>
-                                    <p class="small">Delicious Taste <br><span class="text-warning icon_star"></span><span class="text-warning icon_star"></span><span class="text-warning icon_star"></span><span class="text-warning icon_star"></span><span class="text-warning icon_star"></span></p>
-                                    <div class="row">
-                                        <div class="col text-left">
-                                            <p class="text-success my-0">$ 12<sup>.00</sup></p>
-                                        </div>
-                                        <div class="col-auto"><button class="btn btn-sm btn-link text-default p-0"><i class="material-icons">shopping_basket</i></button></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
+				<!-- Menu de descontos Inicio -->
+				
+				<? include('template/layout/delivery/offs.php');?>
+				
+				<!-- Menu de descontos Final -->
+                
+				<!-- Menu de Produtos Inicio -->
+				
+				<? include('template/layout/delivery/produtos.php');?>
+				
+				<!-- Menu de Produtos Final -->
+				
                 <div class="container">
                     <h6 class="page-subtitle">Último pedido</h6>
                     <div class="card  border-0 shadow-light mb-4">

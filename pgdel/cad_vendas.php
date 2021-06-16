@@ -17,7 +17,8 @@
 //}
 
 			
-					
+	$inputb = filter_input_array(INPUT_GET, FILTER_DEFAULT);
+	
 	$data = date('Y-m-d');
     $hora = date('H:i:s');
     $datatime = date('Y-m-d H:i:s');
@@ -75,13 +76,68 @@
 		
 	}
 	
+	$agendamento = @$inputb['agendamento'];
+	
+	$_SESSION['pgtagendamento'] = $agendamento;
+	
+	if(isset($agendamento))
+    {
+	  $x = 0;  
+	  $data = date("Y-m-d");
+	  $nome = "";
+	  $cliente = "";
+	  $codigoServico = "";
+	  $produto = "";
+	  $venda = "";
+	  $caixa = "";
+	  $preco = "";
+	  
+	  $SQL5 = "SELECT produtos.preco,produtos.codigo as produto,agendamento_servicos.codigo, agendamento.cliente,clientes.nome, clientes.celular,agendamento_servicos.data,agendamento_servicos.hora,agendamento_servicos.profissional FROM agendamento 
+	  inner join clientes on clientes.codigo=agendamento.cliente 
+	  inner join agendamento_servicos on agendamento_servicos.agendamento=agendamento.codigo
+	  inner join produtos on produtos.codigo=agendamento_servicos.servico
+	  where agendamento.sistema='".$_SESSION['sistema']."' and agendamento_servicos.codigo='".$agendamento."' and agendamento.status=1 ORDER BY agendamento.codigo desc";
+	  $RESS3 = mysqli_query($db3,$SQL5);
+	  while($row = mysqli_fetch_array($RESS3))
+	  {
+		 $x = 1;
+		 $nome = $row['nome'];
+		 $cliente = $row['cliente'];
+		 $codigoServico = $row['codigo'];
+		 $produto = $row['produto'];
+		 $preco = $row['preco'];
+	  }
+	  
+	  	
+	  if($x == 1)
+	  {
+		$SQL = "DELETE FROM vendas_mov where sistema='".$_SESSION['sistema']."' and venda='".$_SESSION['venda']."' or agendamento='".$agendamento."'";
+		mysqli_query($db3,$SQL);
+		
+		$data = date("Y-m-d");
+		$SQL = "INSERT vendas_mov(sistema,cliente,agendamento,produto,venda,caixa,data,preco,total,usuario,status) values('".$_SESSION['sistema']."','".$cliente."','".$codigoServico."','".$produto."','".$_SESSION['venda']."','".$_SESSION['caixa']."','".$data."','".$preco."','".$preco."','".$_SESSION['usuario']."',1)";
+        $RES = mysqli_query($db3,$SQL);
+		
+		print('<script>
+		$("#forcaixa" ).show( "slow" );
+		$("#dtable" ).hide( "slow" );
+		$("#dt" ).show( "slow" );
+		$("#c_nome" ).show( "slow" );    
+		$("#c_codigo").val("'.$cliente.'");
+		$("#c_agendamento").val("'.$codigoServico.'");
+	    document.getElementById("nome").innerHTML = "'.$nome.'";
+		requestPage2("?br=atu_caixa&load=2","itenss","GET");
+		</script>');
+	  }
+	}
+	
 	$SQL3 = "SELECT sum(preco) as total, count(codigo) as qtd FROM vendas_mov where venda='".$_SESSION['venda']."'";
 	$RES3 = mysqli_query($db3,$SQL3);
 	$ROW3 = mysqli_fetch_array($RES3);
 		
     $_SESSION['qtditens'] = $ROW3['qtd'];		
 	$_SESSION['vtotal'] = number_format($ROW3['total'],2,",",".");
-								
+
 	?>
 <script>
 function btn_cexit()
@@ -91,6 +147,20 @@ function btn_cexit()
 		$("#c_nome" ).hide( "slow" );
 		$('#c_codigo').val("");
 	    document.getElementById('nome').innerHTML = '';
+	}
+}
+
+function m_agendamento(agendamento)
+{
+	if(codigo == "" && nome == "")
+	{
+		swal('Atenção', 'Escolha um cliente');
+	}
+	else
+	{
+		
+		$('#modalap').modal('hide');
+		requestPage('?br=cad_vendas&agendamento='+ agendamento +'&ch=true&load=2','conteudo','GET');
 	}
 }
 
@@ -158,8 +228,6 @@ function lancar()
 	var preco = document.getElementById('preco').value;
 	var total = document.getElementById('totals').value;
 	
-	
-	
 	if(descricao == "")
 	{
 		swal('Atenção', 'Selecione um produto.');
@@ -178,11 +246,8 @@ function lancar()
 	}
 	else
 	{
-		//$("#itenss").append('<tr><td>'+ descricao +'</td><td>1x'+ preco +'</td><td>'+ total +'</td><td>.</td></tr>');
-	
-	    ajaxLoader('?br=atu_caixa&codigo='+ codigo +'&produto='+ coditem +'&desc='+ desc +'&preco='+ preco +'&total='+ total +'&quantidade='+ qtd +'&ap=1','itenss','GET');
-	 
-	     
+	    ajaxLoader('?br=atu_caixa&codigo='+ codigo +'&produto='+ coditem +'&desc='+ desc +'&preco='+ preco +'&total='+ total +'&quantidade='+ qtd +'&ap=1&load=1','itenss','GET');
+
 	    $('#coditem').val('');
 		$('#qtd').val('');
 	    $('#descricao').val('');
@@ -190,11 +255,6 @@ function lancar()
 	    $('#preco').val('');
 	    $('#total').val('');
 		$('#totals').val('');
-		//document.getElementById("descricao").disabled = false;	
-		
-		//localStorage.setItem("total",''+ parseInt(total) +'');
-		
-		//document.getElementById('vtotal').innerHTML = teste;
 	}
 }
 
@@ -205,7 +265,9 @@ function pagar()
 	var ctcredito = document.getElementById('ctcredito').value;
 	var ted = document.getElementById('ted').value;
 	
-	ajaxLoader('?br=atu_caixa&dinheiro='+ dinheiro +'&ctdebito='+ ctdebito +'&ctcredito='+ ctcredito +'&ted='+ ted +'&ap=2','loading','GET');
+	
+	$('#pagamento').modal('hide');
+	requestPage('?br=atu_caixa&dinheiro='+ dinheiro +'&ctdebito='+ ctdebito +'&ctcredito='+ ctcredito +'&ted='+ ted +'&ap=2','loading','GET');
 }
 
 function loadtotal()
@@ -249,34 +311,6 @@ function atualizar()
 	$('#ted').val('');
 		
 	ajaxLoader('?br=atu_caixa&load=3','loading','GET');
-}
-
-function quantidadeitem(produto) 
-{
-	
-	$('#quantidade').modal('show');
-	ajaxLoader('?br=atu_caixa&produto='+ produto +'&ap=2','quantidaeitem','GET');
-	
-	//var caixa = document.getElementById('caixa').value;
-	//var codigo = document.getElementById('codigo').value;
-
-	//$("#itenss").append('<tr><td>'+ descricao +'</td><td>1x'+ preco +'</td><td>'+ total +'</td><td>.</td></tr>');
-	
-	/*swal({   
-            title: "Atenção!",   
-            text: "Gostaria de cancelar este item?",   
-            type: "warning",   
-            showCancelButton: true,   
-            //confirmButtonColor: "#DD6B55",   
-            confirmButtonText: "Sim",
-            cancelButtonText: "Não", 			
-            closeOnConfirm: true 
-    }, function()
-    { 
-	      
-		ajaxLoader('?br=atu_caixa&item='+ codigo +'&excluir=1&ap=1','itenss','GET');
-		
-    });*/
 }
 
 function excluir(produto,total) 
@@ -345,12 +379,75 @@ function auto()
   document.getElementById("codigo").focus();
 }
 
-</script>			
+function testepgt()
+{
+	$('#modalap').modal('show');
+	requestPage2('?br=modal_pagamento&modal=1&codigo=3','modals','GET'); 
+}
+
+function btn_cliente()
+{				
+   requestPage2('?br=modal_clientes&codigo=&modal=1','modals','GET');
+}
+
+function btn_cacliente()
+{				
+   requestPage2('?br=modal_clientes&codigo=&modal=3','modals','GET');
+}
+
+function btn_agendamento()
+{
+   requestPage2('?br=modal_clientes&codigo=&modal=4','modals','GET');
+}
+
+function c_desconto()
+{
+if($('#c_desc').css('display') == 'none' )
+{
+$("#forcaixa" ).show( "slow" );
+$("#dtable" ).hide( "slow" );
+$("#c_desc" ).show( "slow" );
+}
+else
+{
+$("#c_desc" ).hide( "slow" );
+$("#forcaixa" ).show( "slow" );
+$("#dtable" ).hide( "slow" );
+}
+}
+
+</script>	
+<?
+				if(@$_GET['comprovante'] == "true")
+				{
+					$codigo = $_GET['codigo'];
+					?>
+					<script> 
+					//window.onload = function ()
+					//{
+					   //$('#modalap').modal('show');
+					   requestPage2('?br=modal_pagamento&modal=1&codigo=<?=$codigo;?>','modals','GET'); 
+					//}
+					</script>
+					<?
+				}
+				?>
 <div class="container-fluid bg-template mb-4">
             <div class="row hn-154 position-relative">
                 <!-- use hn-60 if there is no page specific name required as below and remove below container -->
                 <div class="container align-self-end">
-                    <h3 class="font-weight-light"><? echo $_SESSION["PAGINA"] = "Venda caixa (PDV)"; ?></h3>
+                    <h3 class="font-weight-light"><? echo $_SESSION["PAGINA"] = "Venda caixa (PDV)"; ?> <button class="btn  btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" type="button" onclick="btn_cliente();" data-toggle="modal" data-target="#modalap" data-title="Clientes" title="Lista de Clientes">
+								<span class="pmd-floating-hidden">Clientes</span> 
+										<i class="material-icons pmd-sm">supervisor_account</i>
+								</button>
+								<button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-success" type="button" onclick="btn_cacliente();" data-toggle="modal" data-target="#modalap" data-title="Cadastrar Cliente" title="Cad. Clientes"> 
+            <span class="pmd-floating-hidden">Cadastrar</span> 
+            <i class="material-icons">person_add</i> 
+        </button> 
+				    <button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" type="button" onclick="btn_agendamento();" id="element" data-toggle="modal" data-target="#modalap" data-title="Agendamento" title="Agendamentos">
+		<span class="pmd-floating-hidden">Agendamento</span> 
+		<i class="material-icons pmd-sm">perm_contact_calendar</i>
+		</button></h3>
                     <p class="text-mute mb-4">List Caixa</p>
                 </div>
             </div>
@@ -359,11 +456,13 @@ function auto()
            <div class="row">			
                     <div class="col-12">
 								<div class="m-t-40 row" style="display: flex;" id="forcaixa">
-								<div class="input-group col-md-12 m-t-20" id="c_nome" style="display: none;">
+								<div class="input-group col-md-9 m-t-20" id="c_nome" style="display: none;">
 								<div class="input-group mb-3">
-								   <h5><i class="material-icons pmd-sm" style="font-size: 140%;position: relative;top:  3px;">person</i> <span id="nome"></span> <a href="javascript: Web(0);" onclick="btn_cexit();"><i class="fa fa-times-circle" style="font-size: 110%; color: red;"></i></a></h5>  
+								   <h6 style="position: relative;top: 15px;left: 0px;"><i class="material-icons pmd-sm" style="font-size: 140%;position: relative;top:  3px;">person</i> <span id="nome"></span> <a href="javascript: Web(0);" onclick="btn_cexit();"><i class="fa fa-times-circle" style="font-size: 110%; color: red;"></i></a></h6>  
 								   <input type="hidden" name="c_codigo" id="c_codigo" placeholder="" value="" class="form-control form-control-lg" >
-                                   </div>								   
+								   <input type="hidden" name="c_agendamento" id="c_agendamento" placeholder="" value="" class="form-control form-control-lg" >
+                                   </div>
+								   
 								</div>
 								<div class="input-group col-md-12 m-t-20">
 								 <div class="input-group mb-3">
@@ -422,6 +521,12 @@ function auto()
 								<div class="input-group col-md-12 m-t-20">
                                 <div class="help-block"></div></div>
 								<div class="form-group col-md-12 m-t-20" style="clear:">
+								<script>
+								//window.onload = function ()
+								//{
+								   requestPage2('?br=atu_caixa&load=2','itenss','GET');
+								//}
+								</script>
 								<div class="pmd-card pmd-table-card-responsive" id="dtable" style="display:none;">
 						        <div class="pmd-table-card">  
 							    <table class="table pmd-table table-hover">
@@ -434,33 +539,6 @@ function auto()
 								    </tr>
 								 </thead>
 								 <tbody id="itenss">
-									<? 
-										  $d_count = 1;  
-										  $data = date('Y');
-										  $sql = "select vendas_mov.codigo,vendas_mov.produto,produtos.descricao,vendas_mov.preco,vendas_mov.total as total, sum(vendas_mov.preco) as totals, count(vendas_mov.produto) as quantidade from vendas_mov inner join produtos on produtos.codigo=vendas_mov.produto where vendas_mov.venda='".$_SESSION['venda']."' GROUP BY vendas_mov.total,vendas_mov.produto order by produtos.codigo asc";
-										  $res = mysqli_query($db3,$sql); 
-										  $b = 0;
-										  while($row = mysqli_fetch_array($res))
-										  {
-												 
-										  ?>
-                                            <tr onclick="excluir(<?=$row['produto'];?>,<?=$row['total'];?>)"><!-- color: #20aee3; -->
-											    <td data-title="#"><? echo $row['codigo'];?></td>
-                                                <td data-title="Descrição"><? echo $row['descricao'];?></td>
-												<td data-title="Qtd/C. Uni."><? echo $row['quantidade'];?>x<? echo number_format($row['preco'],2,",",".");?></td>
-												<td data-title="Total">R$ <? echo number_format($row['totals'],2,",",".");?></td>
-                                            </tr>
-										  <? $b = 1;
-										     $d_count ++;
-										  } 
-										  
-										  if($b == 0)
-										  {
-											 echo '<tr ><!-- color: #20aee3; -->
-											    <td colspan="4" class="text-center"> Nenhum registro encontrado.</td>
-                                            </tr>';
-										  }
-										  ?>
 							  	     </tbody>
 							      </table>
 						         </div>
@@ -468,9 +546,15 @@ function auto()
 								</div>
 								<div class="input-group col-md-12 m-t-20">
 								<input type="hidden" class="form-control" name="totalvenda" id="totalvenda" value="" required="" aria-invalid="false">
-								<h1 style="color: green;font-weight: bold;">Total: R$ <span id="vtotal"><?=$_SESSION['vtotal'];?></span></h1></div>
+								<h1 style="color: green;font-weight: bold;">Total: R$ <span id="vtotal"><?=$_SESSION['vtotal'];?></span></h1>
+								<button class="btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" type="button"  onclick="slow();" data-title="Itens do Carrinho"> 
+								<span class="pmd-floating-hidden">Itens do Carrinho</span> 
+								<i class="material-icons">add_shopping_cart</i> 
+								</button> </div>
 								<div class="form-group col-md-12 m-t-20">
 								<button class="btn btn-lg btn pmd-btn-raised btn-primary btn-block pmd-ripple-effect" type="button" onclick="atualizar();" data-toggle="modal" data-target="#pagamento">Confirmar pagamento</button>
+								<?if(isset($_GET['teste'])){?> <button class="btn btn-lg btn pmd-btn-raised btn-primary btn-block pmd-ripple-effect" type="button" onclick="testepgt();" >TESTE pagamento</button> <? } ?>
+								
 								</div>
 								<div class="input-group col-md-10 m-t-20">
 								<div id="gravar"></div></div>

@@ -1,7 +1,7 @@
 ﻿<?
-$PageRequest = strtolower(basename( $_SERVER['REQUEST_URI'] ));
-$PageName = strtolower(basename( __FILE__ ));
-if($PageRequest == $PageName) exit("<strong> Erro: Não é permitido acessar o arquivo diretamente. </strong>");
+//$PageRequest = strtolower(basename( $_SERVER['REQUEST_URI'] ));
+//$PageName = strtolower(basename( __FILE__ ));
+//if($PageRequest == $PageName) exit("<strong> Erro: Não é permitido acessar o arquivo diretamente. </strong>");
 
 
 //if(!$db = mysqli_connect("robb0478.publiccloud.com.br:3306", "netin_sge", "vxkD128!"))

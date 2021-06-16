@@ -1,7 +1,7 @@
 <?
-$PageRequest = strtolower(basename( $_SERVER['REQUEST_URI'] ));
-$PageName = strtolower(basename( __FILE__ ));
-if($PageRequest == $PageName) exit("<strong> Erro: N&atilde;o &eacute; permitido acessar o arquivo diretamente. </strong>");
+//$PageRequest = strtolower(basename( $_SERVER['REQUEST_URI'] ));
+//$PageName = strtolower(basename( __FILE__ ));
+//if($PageRequest == $PageName) exit("<strong> Erro: N&atilde;o &eacute; permitido acessar o arquivo diretamente. </strong>");
 
 
 

@@ -35,13 +35,13 @@ require_once("./load/load.php");
 		{
 	       include ('template/layout/delivery/login.php');  
 		}
-		else if(@$_GET['dl'] == "sistema")
+		else if(@$_GET['dl'] == "intruducao")
 		{
-	       include ('template/layout/delivery/delivery.php');  
+	       include ('template/layout/delivery/index.php');  
 		}
 		else
 		{
-		   include ('template/layout/delivery/index.php');
+		   include ('template/layout/delivery/delivery.php');
 		}
 	}
 	else if($_SESSION['tipo'] == 5)
@@ -51,6 +51,10 @@ require_once("./load/load.php");
 	else if($_SESSION['tipo'] == 6)
 	{
 	   include ('template/layout/demo/index.php');
+	}
+	else if($_SESSION['tipo'] == 7)
+	{
+	   include ('template/layout/sites/01/index.php');
 	}
 ?>
 
