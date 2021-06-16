@@ -32,12 +32,3 @@
 					<? } ?>
                  </div>
              </div>
-			 <?
-
-
-$handle = printer_open("\\192.168.0.8\Canon MF4320-4350");
-printer_set_option($handle, PRINTER_MODE, "RAW");
-printer_write($handle, "TEXT To print");
-printer_close($handle);
-
-			 ?>
