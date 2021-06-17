@@ -11,7 +11,7 @@ $x = 0;
 $senhad = "";
 $SQL = "select usuarios.sistema,usuarios.codigo,usuarios.nome,usuarios.tipo, usuarios.senha from usuarios 
 where usuarios.cpf='".$login."' or usuarios.email='".$login."' or usuarios.login='".$login."'";
-$ress = mysqli_query($db3,$SQL);
+$ress = mysqli_query($db,$SQL);
 
 while($res = @mysqli_fetch_array($ress))
 {

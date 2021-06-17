@@ -200,6 +200,79 @@ function requestPage(url, div, tipo, campos, hideLoading)
 
 }
 
+function Page(url, div, tipo, campos, hideLoading)
+{
+	
+	//window.alert(tipo);
+	
+    var ajax = null;
+	if(window.ActiveXObject)
+	{
+		ajax = new ActiveXObject('Microsoft.XMLHTTP');
+	    //window.alert(ajax);
+    }
+	else if(window.XMLHttpRequest)
+    {	
+        ajax = new XMLHttpRequest();
+	}   //window.alert(ajax);
+     
+
+	if(ajax != null)
+	{
+	    if (typeof hideLoading === 'undefined' || hideLoading !== true) 
+		{
+			$(".loader-screen").fadeIn();
+            //document.getElementById(div).innerHTML = '<div style="text-align: center;"><img src="https://images.muaway.net/site/images/loader.gif" /></div>';
+        }
+		
+        lastRequestCache = new Date().getTime();
+		ajax.open(tipo,"?br=" + url /*+ "&cache=" + cache*/ , true);
+		ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		ajax.send();
+		
+		ajax.onreadystatechange = function status()
+		{
+				if(ajax.readyState == 4)
+				{
+					if(ajax.status == 200 || window.location.href.indexOf("http")==-1)
+					{
+						document.getElementById(div).innerHTML = ajax.responseText;
+						var texto=unescape(ajax.responseText);
+						extraiScript(texto);
+						$('.loader-screen').fadeOut('slow');
+					}
+     		  	}
+				else if(ajax.readyState == 0)
+					$(".loader-screen").fadeIn();
+					//document.getElementById(div).innerHTML = '<div style="text-align: center;"><img src="https://images.muaway.net/site/images/loader.gif" /></div>';
+                else if(ajax.readyState == 3)
+					$(".loader-screen").fadeIn();
+                    //document.getElementById(div).innerHTML = '<div style="text-align: center;"><img src="https://images.muaway.net/site/images/loader.gif" /></div>';
+				else
+					$(".loader-screen").fadeIn();
+					//document.getElementById(div).innerHTML = '<div style="text-align: center;"><img src="https://images.muaway.net/site/images/loader.gif" /></div>';
+		}
+
+		if(tipo == "POST")
+		{
+			ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+			ajax.setRequestHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+			ajax.setRequestHeader("Cache-Control", "post-check=0, pre-check=0");
+			ajax.setRequestHeader("Pragma", "no-cache");
+			ajax.send(campos);
+			
+			window.alert(campos);
+			
+			$('.loader-screen').fadeOut('slow');
+		}
+    	else 
+		{
+   		  ajax.send(null);
+    	}
+	}
+
+}
+
 
 function requestPage2(url, div, tipo, campos, hideLoading)
 {

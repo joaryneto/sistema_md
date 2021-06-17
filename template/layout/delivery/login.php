@@ -59,13 +59,13 @@
 
                         <div class="form-group">
                             <label for="inputEmail" class="sr-only">Email address</label>
-                            <input type="email" id="inputEmail" class="form-control form-control-lg border-0" placeholder="Email address" required="" autofocus="">
+                            <input type="email" id="inputEmail" name="login" class="form-control form-control-lg border-0" placeholder="Email address" required="" autofocus="">
                         </div>
                         <div class="form-group">
                             <label for="inputPassword" class="sr-only">Password</label>
-                            <input type="password" id="inputPassword" class="form-control form-control-lg border-0" placeholder="Password" required="">
+                            <input type="password" id="inputPassword" name="senha" class="form-control form-control-lg border-0" placeholder="Password" onkeypress="if (event.keyCode === 13) {logar();}" required="">
                         </div>
-
+                        <div id="load"></div>
                         <div class="my-3 row">
                             <div class="col-6 col-md py-1 text-left">
                                 <div class="custom-control custom-checkbox">
@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <div class="mb-4">
-                            <a href="#" class=" btn btn-lg btn-default default-shadow btn-block" Onclick="logar();">Sign In <span class="ml-2 icon arrow_right"></span></a>
+                            <a href="javascript: Web(0);" class=" btn btn-lg btn-default default-shadow btn-block" Onclick="logar();">Logar <span class="ml-2 icon arrow_right"></span></a>
                         </div>
                         <div class="mb-4">
                             <p>Do not have account yet?<br>Please <a href="#" class="text-white" Onclick="recovery();">Sign up</a> here.</p>

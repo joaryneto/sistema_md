@@ -39,6 +39,10 @@ require_once("./load/load.php");
 		{
 	       include ('template/layout/delivery/index.php');  
 		}
+		else if(@$_GET['dl'] == "painel")
+		{
+		   include ('template/layout/delivery/admin.php');  
+		}
 		else
 		{
 		   include ('template/layout/delivery/delivery.php');

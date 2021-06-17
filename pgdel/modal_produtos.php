@@ -39,7 +39,7 @@ if(@$inputb['ap'] == "1")
 {
 	$x = 0;
 	$SQL = "SELECT * FROM produtos where sistema='".$_SESSION['sistema']."' and descricao like '%".$inputb['descricao']."%';'";
-	$RES = mysqli_query($db3,$SQL);
+	$RES = mysqli_query($db,$SQL);
 	while($row = mysqli_fetch_array($RES))
 	{
 		$x = 1;
@@ -60,7 +60,7 @@ if(@$inputb['ap'] == "1")
 	else
 	{
 	   $SQL1 = "INSERT into produtos(sistema, codigob, descricao,preco, custo, estoque, tipo, status) values('".$_SESSION['sistema']."','".$inputb['codbarra']."','".$inputb['descricao']."','".$inputb['preco']."','".$inputb['custo']."','".$inputb['estoque']."','".$inputb['tipo']."','1')";
-	   $sucesso = mysqli_query($db3,$SQL1);
+	   $sucesso = mysqli_query($db,$SQL1);
 	   
 	   if($sucesso)
 	   {
@@ -91,7 +91,7 @@ if(@$inputb['ap'] == "1")
 else if(@$inputb['ap'] == "2")
 {
 	$SQL1 = "UPDATE produtos SET codigob='".$inputb['codbarra']."',descricao='".$inputb['descricao']."',preco='".$inputb['preco']."',custo='".$inputb['custo']."',estoque='".$inputb['estoque']."',tipo='".$inputb['tipo']."' where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'";
-	$sucesso = mysqli_query($db3,$SQL1);
+	$sucesso = mysqli_query($db,$SQL1);
 	
 	if($sucesso)
 	{
@@ -130,7 +130,7 @@ $tipo = "";
 		 
 if(isset($inputb['codigo']))
 {
-	$sucesso = mysqli_query($db3,"SELECT * FROM produtos where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'");
+	$sucesso = mysqli_query($db,"SELECT * FROM produtos where sistema='".$_SESSION['sistema']."' and codigo='".$inputb['codigo']."'");
 	
 	if($sucesso)
 	{
@@ -262,7 +262,7 @@ else
 					<? 
 										  
 										  $sql = "select * from produtos where sistema='".$_SESSION['sistema']."' limit 5";
-										  $res = mysqli_query($db3,$sql); 
+										  $res = mysqli_query($db,$sql); 
 										  while($row = mysqli_fetch_array($res))
 										  {
 										  ?>

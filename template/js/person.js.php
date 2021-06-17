@@ -9,9 +9,9 @@ const c_r = (str) => {
 
 $('.registrar').on('click',function()
 {
-    var login = c_r(document.getElementById('login').value);
-	var login = c_r(document.getElementById('email').value);
-	var senha = c_r(document.getElementById('senha').value);
+    var login = document.getElementById('login').value;
+	var login = document.getElementById('email').value;
+	var senha = document.getElementById('senha').value;
 	
 	if(login == "")
 	{
@@ -27,8 +27,8 @@ $('.registrar').on('click',function()
 
 function logar()
 {
-    var login = c_r(document.getElementById('inputEmail').value);
-	var senha = c_r(document.getElementById('inputPassword').value);
+    var login = document.getElementById('inputEmail').value;
+	var senha = document.getElementById('inputPassword').value;
 	
 	if(login == "")
 	{
