@@ -22,13 +22,8 @@
 	<script src="template/js/main2.js"></script>
 	<?}?>
 
-<script><?php
-require 'template/js/Packer.php';
-error_reporting(E_ALL);
-$js = file_get_contents(__DIR__ . '/' . 'template/js/person.js.php');
-$packer = new Tholu\Packer\Packer($js, 'Normal', true, false, true);
-$packed_js = $packer->pack();
-echo $packed_js; ?>;</script>
+    <script src="template/js/person.js"></script>
+	
     <!-- Plugin JavaScript -->
     <script src="template/vendor/moment/moment.js"></script>
     <script src="template/vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>

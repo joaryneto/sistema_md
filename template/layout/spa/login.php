@@ -1,3 +1,10 @@
+<?
+
+ob_start();
+
+session_start();
+
+?>
 <!doctype html>
 <html lang="pt-br" class="color-theme-<?=$_SESSION['tema'];?>">
 <head>

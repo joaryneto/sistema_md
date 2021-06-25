@@ -1,4 +1,3 @@
-'user strict'
 
 const c_r = (str) => {
 	return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Remove acentos
